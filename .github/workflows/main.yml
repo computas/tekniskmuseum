@@ -33,7 +33,6 @@ jobs:
         node-version: ${{ env.NODE_VERSION }}
     - name: npm install, build, and test
       run: |
-        ng test
-        #npm install
+        npm install
         #npm run build --if-present
         #npm run test --browsers=ChromeHeadlessCI
