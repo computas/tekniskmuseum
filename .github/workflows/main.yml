@@ -1,6 +1,6 @@
 name: Azure Web Apps CI/CD
 
-end:
+env:
   NODE_VERSION: '12.x'
 
 on:
@@ -17,7 +17,6 @@ jobs:
     name: Login
     runs-on: ubuntu-latest
     steps
-    - name: Login
     - uses: azure/login@v1.1
       with:
         creds: ${{ secrets.AZURE_CREDENTIALS }}
