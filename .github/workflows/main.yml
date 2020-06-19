@@ -35,4 +35,4 @@ jobs:
       run: |
         npm install
         #npm run build --if-present
-        #npm run test --browsers=ChromeHeadlessCI
+        npm run test
