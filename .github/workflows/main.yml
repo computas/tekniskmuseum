@@ -1,8 +1,5 @@
 name: Azure Web Apps CI/CD
 
-env:
-  NODE_VERSION: '12.x'
-
 on:
   push:
     branches:
@@ -12,11 +9,14 @@ on:
     branches:
       - master
 
+env:
+  NODE_VERSION: '12.x'
+
 jobs:
   build_and_deploy_job:
     name: Login
     runs-on: ubuntu-latest
-    steps
+    steps:
     - uses: azure/login@v1.1
       with:
         creds: ${{ secrets.AZURE_CREDENTIALS }}
