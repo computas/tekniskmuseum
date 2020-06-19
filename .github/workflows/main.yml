@@ -9,6 +9,11 @@ on:
     branches:
       - master
 
+env:
+  AZURE_WEBAPP_NAME: tekniskmuseum    # set this to your application's name
+  AZURE_WEBAPP_PACKAGE_PATH: '.'      # set this to the path to your web app project, defaults to the repository root
+  NODE_VERSION: '10.x'                # set this to the node version to use
+
 jobs:
   build_and_deploy_job:
     name: Login
@@ -21,3 +26,8 @@ jobs:
 
     - run: |
         az webapp list --query "[?state=='Running']"
+    - uses: actions/checkout@master
+    - name: Use Node.js ${{ env.NODE_VERSION }}
+      uses: actions/setup-node@v1
+      with:
+        node-version: ${{ env.NODE_VERSION }}
