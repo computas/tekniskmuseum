@@ -25,7 +25,12 @@ module.exports = function (config) {
     colors: true,
     logLevel: config.LOG_INFO,
     autoWatch: true,
-    browsers: ['Chrome','ChromeHeadless', 'ChromeHeadlessCI'],
+    browsers: ['ChromeHeadless'],
+    flags: [
+      '--disable-web-security',
+      '--disable-gpu',
+      '--no-sandbox'
+    ],
     singleRun: false,
     restartOnFileChange: true
   });
