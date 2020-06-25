@@ -23,3 +23,7 @@ jobs:
         uses: azure/login@v1.1
         with:
           creds: ${{ secrets.AZURE_CREDENTIALS }}
+      - name: Azure deploy
+        uses: azure/CLI@v1
+        with:
+          inlinescript: az storage blob upload-batch --account-name frontwebstorage --account-key ${{ secrets.AZURE_ACCOUNT_KEY }} --source dist/digitary --destination '$web'
