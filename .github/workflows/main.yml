@@ -15,15 +15,31 @@ jobs:
     runs-on: ubuntu-latest
     name: Build and Deploy Job
     steps:
-      - name: checkout
+      - name: Set up Node.js version
+        uses: actions/setup-node@v1
+        with:
+          node-version: '12.x'
+
+      - name: Checkout master
         uses: actions/checkout@v2
         with:
           submodules: true
-      - name: login
+
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Build
+        run: npm run build:ci
+
+      - name: Test
+        run: npm run test:ci
+
+      - name: Login to Azure
         uses: azure/login@v1.1
         with:
           creds: ${{ secrets.AZURE_CREDENTIALS }}
-      - name: Azure deploy
+
+      - name: Deploy to Azure
         uses: azure/CLI@v1
         with:
-          inlinescript: az storage blob upload-batch --account-name frontwebstorage --account-key ${{ secrets.AZURE_ACCOUNT_KEY }} --source dist/digitary --destination '$web'
+          inlinescript: az storage blob upload-batch --account-name frontwebstorage --account-key ${{ secrets.AZURE_ACCOUNT_KEY }} --source dist/tekniskmuseum --destination '$web'
