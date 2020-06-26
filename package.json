@@ -10,7 +10,7 @@
     "lint": "ng lint",
     "e2e": "ng e2e",
     "test:ci": "ng test --watch=false --browsers=ChromeHeadless",
-    "build:ci": "ng build --prod --sourceMap=false --base-href /"
+    "build:ci": "ng build --prod"
   },
   "private": true,
   "dependencies": {
