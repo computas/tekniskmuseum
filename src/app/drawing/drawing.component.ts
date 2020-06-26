@@ -1,4 +1,6 @@
 import { Component, ViewChild, ElementRef, OnInit } from '@angular/core';
+import { timer, interval } from 'rxjs';
+import { take } from 'rxjs/operators';
 
 @Component({
   selector: 'app-drawing',
@@ -13,8 +15,11 @@ export class DrawingComponent implements OnInit {
   x = 0;
   y = 0;
   isDrawing = false;
+  drawTotalTime = 5;
+  timeLeft = 10;
+  times = [];
+  words = [];
   guessWord = 'Cat';
-  timer = 20;
   gameOver = false;
   private ctx: CanvasRenderingContext2D;
 
@@ -29,8 +34,11 @@ export class DrawingComponent implements OnInit {
     this.canvas.nativeElement.width = document.body.clientWidth;
     this.canvas.nativeElement.height = document.body.clientHeight;
     this.startGame();
-    this.drawInit();
+    this.startDrawingTimer();
+    this.submitAnswer();
   }
+
+  submitAnswer() {}
 
   start(e: MouseEvent) {
     this.x = e.offsetX;
@@ -78,25 +86,21 @@ export class DrawingComponent implements OnInit {
     }
   }
 
-  private drawInit() {
+  private startDrawingTimer() {
     let color = 'red';
-    let changeColorInterval;
-    const interval = setInterval(() => {
-      if (this.timer <= 5 && !changeColorInterval) {
-        changeColorInterval = setInterval(() => {
+    interval(100)
+      .pipe(take(10 * this.timeLeft))
+      .subscribe((tics) => {
+        if (tics % 10 === 9) {
+          this.timeLeft--;
+        }
+        if (this.timeLeft <= 5) {
           this.countDown.nativeElement.style.color = color;
           color = color === 'white' ? 'red' : 'white';
-        }, 100);
-      }
-      if (this.timer === 0) {
-        this.gameOver = true;
-        clearInterval(interval);
-        clearInterval(changeColorInterval);
-        window.alert('Game over');
-      }
-      if (this.timer !== 0) {
-        this.timer -= 1;
-      }
-    }, 1000);
+        }
+        if (this.timeLeft === 0) {
+          this.gameOver = true;
+        }
+      });
   }
 }
