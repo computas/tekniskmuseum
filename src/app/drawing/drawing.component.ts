@@ -1,5 +1,12 @@
 import { Component, ViewChild, ElementRef, OnInit } from '@angular/core';
-import { timer, interval } from 'rxjs';
+import {
+  timer,
+  interval,
+  Subscription,
+  Subject,
+  BehaviorSubject,
+  Observable,
+} from 'rxjs';
 import { take } from 'rxjs/operators';
 
 @Component({
@@ -14,13 +21,13 @@ export class DrawingComponent implements OnInit {
   countDown: ElementRef<HTMLSpanElement>;
   x = 0;
   y = 0;
+  gameOver = new BehaviorSubject<boolean>(false);
   isDrawing = false;
   drawTotalTime = 5;
   timeLeft = 10;
   times = [];
   words = [];
   guessWord = 'Cat';
-  gameOver = false;
   private ctx: CanvasRenderingContext2D;
 
   constructor() {}
@@ -34,8 +41,12 @@ export class DrawingComponent implements OnInit {
     this.canvas.nativeElement.width = document.body.clientWidth;
     this.canvas.nativeElement.height = document.body.clientHeight;
     this.startGame();
-    this.startDrawingTimer();
-    this.submitAnswer();
+    this.startDrawingTimer().subscribe({
+      complete: () => {
+        console.log('gameover');
+        this.submitAnswer();
+      },
+    });
   }
 
   submitAnswer() {}
@@ -85,22 +96,25 @@ export class DrawingComponent implements OnInit {
       this.isDrawing = false;
     }
   }
+  gm() {}
 
   private startDrawingTimer() {
-    let color = 'red';
-    interval(100)
-      .pipe(take(10 * this.timeLeft))
-      .subscribe((tics) => {
-        if (tics % 10 === 9) {
-          this.timeLeft--;
-        }
-        if (this.timeLeft <= 5) {
-          this.countDown.nativeElement.style.color = color;
-          color = color === 'white' ? 'red' : 'white';
-        }
-        if (this.timeLeft === 0) {
-          this.gameOver = true;
-        }
-      });
+    return new Observable((observer) => {
+      let color = 'red';
+      interval(100)
+        .pipe(take(10 * this.timeLeft))
+        .subscribe((tics) => {
+          if (tics % 10 === 9) {
+            this.timeLeft--;
+          }
+          if (this.timeLeft <= 5) {
+            this.countDown.nativeElement.style.color = color;
+            color = color === 'white' ? 'red' : 'white';
+          }
+          if (this.timeLeft === 0) {
+            observer.complete();
+          }
+        });
+    });
   }
 }
