@@ -1,1 +1,20 @@
-<p>drawing works!</p>
+<mat-toolbar id="drawing-toolbar" color="primary">
+  <span>Draw: {{ guessWord }}</span>
+  <span #countDown>Clock: {{ timer }}</span>
+  <span class="nav-spacer"></span>
+  <button
+    (click)="clear()"
+    mat-icon-button
+    class="example-icon"
+    aria-label="Example icon-button with share icon"
+  >
+    Clear
+  </button>
+</mat-toolbar>
+<canvas
+  id="drawing-canvas"
+  (mousedown)="start($event)"
+  (mouseup)="stop($event)"
+  (mousemove)="draw($event)"
+  #canvas
+></canvas>
