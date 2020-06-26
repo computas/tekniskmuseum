@@ -4,10 +4,6 @@ on:
   push:
     branches:
       - master
-  pull_request:
-    types: [opened, synchronize, reopened, closed]
-    branches:
-      - master
 
 jobs:
   build_and_deploy_job:
@@ -18,7 +14,7 @@ jobs:
       - name: Set up Node.js version
         uses: actions/setup-node@v1
         with:
-          node-version: '12.x'
+          node-version: "12.x"
 
       - name: Checkout master
         uses: actions/checkout@v2
@@ -28,14 +24,8 @@ jobs:
       - name: Install dependencies
         run: npm ci
 
-      - name: Lint
-        run: npm run lint
-
       - name: Build
         run: npm run build:ci
-
-      - name: Test
-        run: npm run test:ci
 
       - name: Login to Azure
         uses: azure/login@v1.1
