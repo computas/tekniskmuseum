@@ -1,12 +1,5 @@
-import { Component, ViewChild, ElementRef, OnInit } from '@angular/core';
-import {
-  timer,
-  interval,
-  Subscription,
-  Subject,
-  BehaviorSubject,
-  Observable,
-} from 'rxjs';
+import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
+import { BehaviorSubject, interval, Observable } from 'rxjs';
 import { take } from 'rxjs/operators';
 
 @Component({
@@ -23,7 +16,6 @@ export class DrawingComponent implements OnInit {
   y = 0;
   gameOver = new BehaviorSubject<boolean>(false);
   isDrawing = false;
-  drawTotalTime = 5;
   timeLeft = 10;
   times = [];
   words = [];
@@ -43,7 +35,7 @@ export class DrawingComponent implements OnInit {
     this.startGame();
     this.startDrawingTimer().subscribe({
       complete: () => {
-        console.log('gameover');
+        // console.log('gameover');
         this.submitAnswer();
       },
     });
@@ -51,37 +43,46 @@ export class DrawingComponent implements OnInit {
 
   submitAnswer() {}
 
-  start(e: MouseEvent) {
-    this.x = e.offsetX;
-    this.y = e.offsetY;
+  start(e: MouseEvent | TouchEvent) {
+    const { x, y } = this.getClientOffset(e);
+    this.x = x;
+    this.y = y;
     this.isDrawing = true;
   }
 
   startGame() {
-    //TODO FETCH WORD FROM BACKEND
+    // TODO FETCH WORD FROM BACKEND
   }
 
-  draw(e: MouseEvent) {
-    if (!this.gameOver && this.isDrawing) {
-      this.drawLine(this.x, this.y, e.offsetX, e.offsetY);
-      this.x = e.offsetX;
-      this.y = e.offsetY;
+  getClientOffset = (event) => {
+    const { pageX, pageY } = event.touches ? event.touches[0] : event;
+    const x = pageX - this.canvas.nativeElement.offsetLeft;
+    const y = pageY - this.canvas.nativeElement.offsetTop;
+
+    return {
+      x,
+      y,
+    };
+  };
+  draw(e: MouseEvent | TouchEvent) {
+    if (!this.gameOver.getValue() && this.isDrawing) {
+      const { x, y } = this.getClientOffset(e);
+      this.drawLine(this.x, this.y, x, y);
+      this.x = x;
+      this.y = y;
     }
   }
 
   clear() {
-    this.ctx.clearRect(
-      0,
-      0,
-      this.canvas.nativeElement.width,
-      this.canvas.nativeElement.height
-    );
+    const canvas = this.canvas.nativeElement;
+    this.ctx.clearRect(0, 0, canvas.width, canvas.height);
   }
 
   drawLine(x1, y1, x2, y2) {
-    this.ctx.beginPath();
     this.ctx.strokeStyle = 'black';
-    this.ctx.lineWidth = 5;
+    this.ctx.lineWidth = 6;
+    this.ctx.lineCap = this.ctx.lineJoin = 'round';
+    this.ctx.beginPath();
     this.ctx.moveTo(x1, y1);
     this.ctx.lineTo(x2, y2);
     this.ctx.stroke();
@@ -89,14 +90,11 @@ export class DrawingComponent implements OnInit {
   }
 
   stop(e) {
-    if (!this.gameOver && this.isDrawing) {
+    if (!this.gameOver.getValue() && this.isDrawing) {
       this.drawLine(this.x, this.y, e.offsetX, e.offsetY);
-      this.x = 0;
-      this.y = 0;
       this.isDrawing = false;
     }
   }
-  gm() {}
 
   private startDrawingTimer() {
     return new Observable((observer) => {

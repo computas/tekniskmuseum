@@ -16,5 +16,8 @@
   (mousedown)="start($event)"
   (mouseup)="stop($event)"
   (mousemove)="draw($event)"
+  (touchstart)="start($event)"
+  (touchmove)="draw($event)"
+  (touchend)="stop($event)"
   #canvas
 ></canvas>
