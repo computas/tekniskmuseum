@@ -35,7 +35,7 @@ export class DrawingComponent implements OnInit {
     this.startGame();
     this.startDrawingTimer().subscribe({
       complete: () => {
-        // console.log('gameover');
+        this.gameOver.next(true);
         this.submitAnswer();
       },
     });
