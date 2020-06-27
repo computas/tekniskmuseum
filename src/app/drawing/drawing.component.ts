@@ -1,11 +1,44 @@
 import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
 import { BehaviorSubject, interval, Observable } from 'rxjs';
-import { take } from 'rxjs/operators';
+import {
+  trigger,
+  state,
+  style,
+  animate,
+  transition,
+} from '@angular/animations';
+import { take, delay } from 'rxjs/operators';
 
 @Component({
   selector: 'app-drawing',
   templateUrl: './drawing.component.html',
   styleUrls: ['./drawing.component.scss'],
+  animations: [
+    trigger('changeDivSize', [
+      state(
+        'initial',
+        style({
+          width: '100%',
+          color: 'white',
+          height: '0',
+        })
+      ),
+      state(
+        'final',
+        style({
+          backgroundColor: 'red',
+          height: '100%',
+          'text-align': 'center',
+          display: 'flex',
+          'justify-content': 'center',
+          'align-items': 'center',
+        })
+      ),
+
+      transition('initial=>final', animate('300ms')),
+      transition('final=>initial', animate('300ms')),
+    ]),
+  ],
 })
 export class DrawingComponent implements OnInit {
   @ViewChild('canvas', { static: true })
@@ -21,6 +54,7 @@ export class DrawingComponent implements OnInit {
   words = [];
   guessWord = 'Cat';
   private ctx: CanvasRenderingContext2D;
+  currentState = 'initial';
 
   constructor() {}
 
@@ -29,16 +63,11 @@ export class DrawingComponent implements OnInit {
     if (!ctx) {
       throw new Error('getContext failed');
     }
+
     this.ctx = ctx;
     this.canvas.nativeElement.width = document.body.clientWidth;
     this.canvas.nativeElement.height = document.body.clientHeight;
     this.startGame();
-    this.startDrawingTimer().subscribe({
-      complete: () => {
-        this.gameOver.next(true);
-        this.submitAnswer();
-      },
-    });
   }
 
   submitAnswer() {}
@@ -51,19 +80,19 @@ export class DrawingComponent implements OnInit {
   }
 
   startGame() {
+    this.startDrawingTimer(this.createDrawingTimer());
+
     // TODO FETCH WORD FROM BACKEND
   }
 
-  getClientOffset = (event) => {
+  getClientOffset(event) {
     const { pageX, pageY } = event.touches ? event.touches[0] : event;
     const x = pageX - this.canvas.nativeElement.offsetLeft;
     const y = pageY - this.canvas.nativeElement.offsetTop;
 
-    return {
-      x,
-      y,
-    };
-  };
+    return { x, y };
+  }
+
   draw(e: MouseEvent | TouchEvent) {
     if (!this.gameOver.getValue() && this.isDrawing) {
       const { x, y } = this.getClientOffset(e);
@@ -76,6 +105,11 @@ export class DrawingComponent implements OnInit {
   clear() {
     const canvas = this.canvas.nativeElement;
     this.ctx.clearRect(0, 0, canvas.width, canvas.height);
+    this.currentState = this.currentState === 'initial' ? 'final' : 'initial';
+    this.gameOver.next(false);
+    this.timeLeft = 10;
+    this.countDown.nativeElement.style.color = 'white';
+    this.startGame();
   }
 
   drawLine(x1, y1, x2, y2) {
@@ -86,7 +120,6 @@ export class DrawingComponent implements OnInit {
     this.ctx.moveTo(x1, y1);
     this.ctx.lineTo(x2, y2);
     this.ctx.stroke();
-    this.ctx.closePath();
   }
 
   stop(e) {
@@ -96,7 +129,7 @@ export class DrawingComponent implements OnInit {
     }
   }
 
-  private startDrawingTimer() {
+  private createDrawingTimer() {
     return new Observable((observer) => {
       let color = 'red';
       interval(100)
@@ -113,6 +146,17 @@ export class DrawingComponent implements OnInit {
             observer.complete();
           }
         });
+    });
+  }
+
+  private startDrawingTimer(timer) {
+    timer.subscribe({
+      complete: () => {
+        this.gameOver.next(true);
+        this.currentState =
+          this.currentState === 'initial' ? 'final' : 'initial';
+        this.submitAnswer();
+      },
     });
   }
 }
