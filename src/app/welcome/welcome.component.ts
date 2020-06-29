@@ -9,12 +9,11 @@ import { Router } from '@angular/router';
 export class WelcomeComponent implements OnInit {
 
   constructor(private router: Router) { }
-  
 
   ngOnInit(): void {
   }
 
-  startGame(){
+  startGame() {
     this.router.navigate(['drawing']);
   }
 }
