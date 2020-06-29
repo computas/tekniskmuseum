@@ -1,1 +1,29 @@
-<p>welcome works!</p>
+<mat-sidenav-container class="example-container">
+  <mat-sidenav mode="side" position="end" class="side-drawer" opened>
+    <mat-list role="list">
+      <mat-list-item role="listitem">
+        <button mat-button class="side-nav-button">
+          <mat-icon aria-label="Example home icon">home</mat-icon>Se andres
+          tegninger
+        </button>
+      </mat-list-item>
+      <mat-list-item role="listitem">
+        <button mat-button class="side-nav-button">
+          <mat-icon aria-label="Example home icon">home</mat-icon>Lær om kunstig
+          intelligens
+        </button>
+      </mat-list-item>
+      <mat-list-item role="listitem">
+        <button mat-button class="side-nav-button">
+          <mat-icon aria-label="Example home icon">home</mat-icon>Topplisten
+        </button>
+      </mat-list-item>
+    </mat-list>
+  </mat-sidenav>
+  <mat-sidenav-content class="content">
+    <div class="main-container">
+      <img src="assets/welcome-guy.png" alt="" class="welcome-guy" />
+      <button mat-raised-button color="primary" class="play-game-button" (click)="startGame()">Spill</button>
+    </div>
+  </mat-sidenav-content>
+</mat-sidenav-container>
