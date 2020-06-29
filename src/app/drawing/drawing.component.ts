@@ -7,7 +7,8 @@ import {
   animate,
   transition,
 } from '@angular/animations';
-import { take, delay } from 'rxjs/operators';
+import { take } from 'rxjs/operators';
+import { ImageService } from './services/image.service';
 
 @Component({
   selector: 'app-drawing',
@@ -56,7 +57,7 @@ export class DrawingComponent implements OnInit {
   private ctx: CanvasRenderingContext2D;
   currentState = 'initial';
 
-  constructor() {}
+  constructor(private imageService: ImageService) {}
 
   ngOnInit(): void {
     const ctx = this.canvas.nativeElement.getContext('2d');
@@ -71,7 +72,13 @@ export class DrawingComponent implements OnInit {
   }
 
   submitAnswer() {
-    this.createFormData();
+    const b64Image = this.canvas.nativeElement.toDataURL('image/png');
+
+    this.imageService.resize(b64Image).subscribe({
+      next: (dataUrl) => {
+        const formData: FormData = this.imageService.createFormData(dataUrl);
+      },
+    });
   }
 
   start(e: MouseEvent | TouchEvent) {
@@ -83,8 +90,6 @@ export class DrawingComponent implements OnInit {
 
   startGame() {
     this.startDrawingTimer(this.createDrawingTimer());
-
-    // TODO FETCH WORD FROM BACKEND
   }
 
   getClientOffset(event) {
@@ -160,44 +165,5 @@ export class DrawingComponent implements OnInit {
         this.submitAnswer();
       },
     });
-  }
-
-  b64ToUint8Array(b64Image) {
-    const img = atob(b64Image.split(',')[1]);
-    const imgBuffer: number[] = [];
-    let i = 0;
-    while (i < img.length) {
-      imgBuffer.push(img.charCodeAt(i));
-      i++;
-    }
-    return new Uint8Array(imgBuffer);
-  }
-
-  resize(b64Image, callback) {
-    const img = new Image();
-
-    const c = document.createElement('canvas');
-    const ctx = c.getContext('2d');
-    if (!ctx) {
-      throw new Error('getContext failed');
-    }
-    img.onload = () => {
-      c.width = 256;
-      c.height = 256;
-      ctx.drawImage(img, 0, 0, c.width, c.height);
-      callback(c.toDataURL('image/png', 1));
-    };
-    img.src = b64Image;
-  }
-
-  createFormData() {
-    const b64Image = this.canvas.nativeElement.toDataURL('image/png');
-    const callback = (dataUrl) => {
-      const u8Image = this.b64ToUint8Array(dataUrl);
-      const formData = new FormData();
-      formData.append('image', new Blob([u8Image], { type: 'image/png' }));
-      // TODO send data to server
-    };
-    this.resize(b64Image, callback);
   }
 }
