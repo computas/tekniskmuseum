@@ -9,6 +9,7 @@ import {
 } from '@angular/animations';
 import { take } from 'rxjs/operators';
 import { ImageService } from './services/image.service';
+import { DrawingService } from './services/drawing.service';
 
 @Component({
   selector: 'app-drawing',
@@ -57,7 +58,10 @@ export class DrawingComponent implements OnInit {
   private ctx: CanvasRenderingContext2D;
   currentState = 'initial';
 
-  constructor(private imageService: ImageService) {}
+  constructor(
+    private imageService: ImageService,
+    private drawingService: DrawingService
+  ) {}
 
   ngOnInit(): void {
     const ctx = this.canvas.nativeElement.getContext('2d');
