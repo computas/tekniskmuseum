@@ -13,7 +13,7 @@ export class WelcomeComponent implements OnInit {
   ngOnInit(): void {
   }
 
-  startGame() {
-    this.router.navigate(['drawing']);
+  goToGameInfoPage() {
+    this.router.navigate(['gameinfo']);
   }
 }
