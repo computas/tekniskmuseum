@@ -1,4 +1,10 @@
-import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
+import {
+  Component,
+  ElementRef,
+  OnInit,
+  ViewChild,
+  Output,
+} from '@angular/core';
 import { BehaviorSubject, interval, Observable } from 'rxjs';
 import {
   trigger,
@@ -11,6 +17,7 @@ import { take } from 'rxjs/operators';
 import { ImageService } from './services/image.service';
 import { DrawingService } from './services/drawing.service';
 import { StartGameInfo } from './services/start-game-info';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-drawing',
@@ -48,6 +55,7 @@ export class DrawingComponent implements OnInit {
   canvas: ElementRef<HTMLCanvasElement>;
   @ViewChild('countDown', { static: true })
   countDown: ElementRef<HTMLSpanElement>;
+
   x = 0;
   y = 0;
   gameOver = new BehaviorSubject<boolean>(false);
@@ -66,7 +74,8 @@ export class DrawingComponent implements OnInit {
 
   constructor(
     private imageService: ImageService,
-    private drawingService: DrawingService
+    private drawingService: DrawingService,
+    private router: Router
   ) {}
 
   ngOnInit(): void {
@@ -90,6 +99,7 @@ export class DrawingComponent implements OnInit {
         formData.append('token', this.gameToken);
         this.drawingService.submitAnswer(formData).subscribe((res) => {
           this.hasWon = res.hasWon;
+          this.drawingService.result = res.hasWon;
         });
       },
     });
@@ -128,16 +138,6 @@ export class DrawingComponent implements OnInit {
     }
   }
 
-  clear() {
-    const canvas = this.canvas.nativeElement;
-    this.ctx.clearRect(0, 0, canvas.width, canvas.height);
-    this.currentState = this.currentState === 'initial' ? 'final' : 'initial';
-    this.gameOver.next(false);
-    this.timeLeft = 10;
-    this.countDown.nativeElement.style.color = 'white';
-    this.startGame();
-  }
-
   drawLine(x1, y1, x2, y2) {
     this.ctx.strokeStyle = 'black';
     this.ctx.lineWidth = 6;
@@ -148,11 +148,25 @@ export class DrawingComponent implements OnInit {
     this.ctx.stroke();
   }
 
+  clear() {
+    const canvas = this.canvas.nativeElement;
+    this.ctx.clearRect(0, 0, canvas.width, canvas.height);
+    this.currentState = this.currentState === 'initial' ? 'final' : 'initial';
+    this.gameOver.next(false);
+    this.timeLeft = 10;
+    this.countDown.nativeElement.style.color = 'white';
+    this.startGame();
+  }
+
   stop(e) {
     if (!this.gameOver.getValue() && this.isDrawing) {
       this.drawLine(this.x, this.y, e.offsetX, e.offsetY);
       this.isDrawing = false;
     }
+  }
+
+  resultNavigation() {
+    this.router.navigate(['/result']);
   }
 
   private createDrawingTimer() {
@@ -182,6 +196,7 @@ export class DrawingComponent implements OnInit {
         this.currentState =
           this.currentState === 'initial' ? 'final' : 'initial';
         this.submitAnswer();
+        this.resultNavigation();
       },
     });
   }
