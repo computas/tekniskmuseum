@@ -1,4 +1,6 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { HttpClientTestingModule } from '@angular/common/http/testing';
 
 import { DrawingComponent } from './drawing.component';
 
@@ -8,9 +10,9 @@ describe('DrawingComponent', () => {
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ DrawingComponent ]
-    })
-    .compileComponents();
+      declarations: [DrawingComponent],
+      imports: [BrowserAnimationsModule, HttpClientTestingModule],
+    }).compileComponents();
   }));
 
   beforeEach(() => {

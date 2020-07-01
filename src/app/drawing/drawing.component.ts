@@ -10,7 +10,6 @@ import {
 import { take } from 'rxjs/operators';
 import { ImageService } from './services/image.service';
 import { DrawingService } from './services/drawing.service';
-import { MessageService } from './services/message.service';
 import { StartGameInfo } from './services/start-game-info';
 
 @Component({
@@ -67,8 +66,7 @@ export class DrawingComponent implements OnInit {
 
   constructor(
     private imageService: ImageService,
-    private drawingService: DrawingService,
-    private messageService: MessageService
+    private drawingService: DrawingService
   ) {}
 
   ngOnInit(): void {

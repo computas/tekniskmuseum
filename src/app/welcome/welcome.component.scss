@@ -1,0 +1,46 @@
+.side-drawer {
+  background: #e42313;
+}
+.example-container {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+}
+.side-nav-button {
+  color: white;
+  font-weight: normal;
+  mat-icon {
+    margin-right: 10px;
+  }
+}
+.main-container {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-evenly;
+  align-items: center;
+  height: 100%;
+}
+.welcome-guy {
+  max-width: 80%;
+}
+.play-game-button {
+  background: #e42313;
+  padding: 4px 50px;
+}
+.content {
+  position: relative;
+}
+.content::before {
+  background: url("./../../assets/computer-monitor-coding-programming-2194062.jpg");
+  background-repeat: no-repeat;
+  background-size: cover;
+  filter: opacity(0.2);
+  content: "";
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+}
