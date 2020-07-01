@@ -58,7 +58,7 @@ export class DrawingComponent implements OnInit {
   private ctx: CanvasRenderingContext2D;
   currentState = 'initial';
 
-  //game info
+  // game info
   startGameInfo: StartGameInfo;
   guessWord: string;
   gameToken: string;

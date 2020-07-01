@@ -38,7 +38,7 @@ export class ImageService {
 
   createFormData(dataUrl) {
     const u8Image = this.b64ToUint8Array(dataUrl);
-    var blob = new Blob([u8Image], {
+    const blob = new Blob([u8Image], {
       type: 'image/png',
     });
     const formData = new FormData();
