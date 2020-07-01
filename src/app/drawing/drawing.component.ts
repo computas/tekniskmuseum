@@ -10,6 +10,7 @@ import {
 import { take } from 'rxjs/operators';
 import { ImageService } from './services/image.service';
 import { DrawingService } from './services/drawing.service';
+import { StartGameInfo } from './services/start-game-info';
 
 @Component({
   selector: 'app-drawing',
@@ -54,9 +55,14 @@ export class DrawingComponent implements OnInit {
   timeLeft = 10;
   times = [];
   words = [];
-  guessWord = 'Cat';
   private ctx: CanvasRenderingContext2D;
   currentState = 'initial';
+
+  // game info
+  startGameInfo: StartGameInfo;
+  guessWord: string;
+  gameToken: string;
+  hasWon: boolean;
 
   constructor(
     private imageService: ImageService,
@@ -81,6 +87,10 @@ export class DrawingComponent implements OnInit {
     this.imageService.resize(b64Image).subscribe({
       next: (dataUrl) => {
         const formData: FormData = this.imageService.createFormData(dataUrl);
+        formData.append('token', this.gameToken);
+        this.drawingService.submitAnswer(formData).subscribe((res) => {
+          this.hasWon = res.hasWon;
+        });
       },
     });
   }
@@ -92,8 +102,13 @@ export class DrawingComponent implements OnInit {
     this.isDrawing = true;
   }
 
-  startGame() {
+  startGame(): void {
     this.startDrawingTimer(this.createDrawingTimer());
+    this.drawingService.startGame().subscribe((startGameInfo) => {
+      this.startGameInfo = startGameInfo;
+      this.guessWord = this.startGameInfo.label;
+      this.gameToken = this.startGameInfo.token;
+    });
   }
 
   getClientOffset(event) {
