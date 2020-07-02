@@ -28,7 +28,7 @@ export class DrawingService {
   updateResult(result: boolean, imageData: string) {
     this.resultSource.next({
       hasWon: result,
-      imageData: imageData,
+      imageData,
     });
   }
 }
