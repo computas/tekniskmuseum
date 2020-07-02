@@ -1,17 +1,17 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
-import { Observable, throwError, of, BehaviorSubject } from 'rxjs';
+import { Observable, throwError, of, BehaviorSubject, Subject } from 'rxjs';
 import { map, tap } from 'rxjs/operators';
 import { catchError, retry } from 'rxjs/operators';
 import { StartGameInfo } from './start-game-info';
+import { Result } from '../../shared/models/result.interface';
 
 @Injectable({
   providedIn: 'root',
 })
 export class DrawingService {
   baseUrl = 'https://tekniskback.azurewebsites.net';
-  resultSource = new BehaviorSubject<boolean>(false);
-  currentResult = this.resultSource.asObservable();
+  resultSource = new Subject<Result>();
 
   constructor(private http: HttpClient) {}
 
@@ -24,6 +24,8 @@ export class DrawingService {
   }
 
   updateResult(result: boolean) {
-    this.resultSource.next(result);
+    this.resultSource.next({
+      hasWon: result,
+    });
   }
 }
