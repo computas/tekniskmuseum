@@ -15,17 +15,21 @@ export class DrawingService {
 
   constructor(private http: HttpClient) {}
 
-  submitAnswer(answerInfo: FormData): Observable<any> {
-    return this.http.post<FormData>(`${this.baseUrl}/submitAnswer`, answerInfo);
+  submitAnswer(answerInfo: FormData, imageData: string): Observable<any> {
+    return this.http
+      .post<FormData>(`${this.baseUrl}/submitAnswer`, answerInfo)
+      .pipe(tap((res) => this.updateResult(res.hasWon, imageData)));
   }
 
   startGame(): Observable<StartGameInfo> {
     return this.http.get<StartGameInfo>(`${this.baseUrl}/startGame`);
   }
 
-  updateResult(result: boolean) {
+  updateResult(result: boolean, imageData: string) {
+    console.log(1);
     this.resultSource.next({
       hasWon: result,
+      imageData: imageData,
     });
   }
 }
