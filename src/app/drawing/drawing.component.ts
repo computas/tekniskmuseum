@@ -55,7 +55,6 @@ export class DrawingComponent implements OnInit {
   canvas: ElementRef<HTMLCanvasElement>;
   @ViewChild('countDown', { static: true })
   countDown: ElementRef<HTMLSpanElement>;
-
   x = 0;
   y = 0;
   gameOver = new BehaviorSubject<boolean>(false);
@@ -70,7 +69,7 @@ export class DrawingComponent implements OnInit {
   startGameInfo: StartGameInfo;
   guessWord: string;
   gameToken: string;
-  hasWon: boolean;
+  result: boolean;
 
   constructor(
     private imageService: ImageService,
@@ -83,26 +82,14 @@ export class DrawingComponent implements OnInit {
     if (!ctx) {
       throw new Error('getContext failed');
     }
+    this.drawingService.currentResult.subscribe(
+      (result) => (this.result = result)
+    );
 
     this.ctx = ctx;
     this.canvas.nativeElement.width = document.body.clientWidth;
     this.canvas.nativeElement.height = document.body.clientHeight;
     this.startGame();
-  }
-
-  submitAnswer() {
-    const b64Image = this.canvas.nativeElement.toDataURL('image/png');
-
-    this.imageService.resize(b64Image).subscribe({
-      next: (dataUrl) => {
-        const formData: FormData = this.imageService.createFormData(dataUrl);
-        formData.append('token', this.gameToken);
-        this.drawingService.submitAnswer(formData).subscribe((res) => {
-          this.hasWon = res.hasWon;
-          this.drawingService.result = res.hasWon;
-        });
-      },
-    });
   }
 
   start(e: MouseEvent | TouchEvent) {
@@ -118,6 +105,20 @@ export class DrawingComponent implements OnInit {
       this.startGameInfo = startGameInfo;
       this.guessWord = this.startGameInfo.label;
       this.gameToken = this.startGameInfo.token;
+    });
+  }
+
+  submitAnswer() {
+    const b64Image = this.canvas.nativeElement.toDataURL('image/png');
+
+    this.imageService.resize(b64Image).subscribe({
+      next: (dataUrl) => {
+        const formData: FormData = this.imageService.createFormData(dataUrl);
+        formData.append('token', this.gameToken);
+        this.drawingService.submitAnswer(formData).subscribe((res) => {
+          this.drawingService.updateResult(res.hasWon);
+        });
+      },
     });
   }
 
