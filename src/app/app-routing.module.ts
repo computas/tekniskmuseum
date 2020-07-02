@@ -3,6 +3,7 @@ import { Routes, RouterModule } from '@angular/router';
 import { WelcomeComponent } from './welcome/welcome.component';
 import { DrawingComponent } from './drawing/drawing.component';
 import { GameInfoComponent } from './game-info/game-info.component';
+import { ResultComponent } from './result/result.component';
 
 const routes: Routes = [
   {
@@ -17,10 +18,14 @@ const routes: Routes = [
     path: 'gameinfo',
     component: GameInfoComponent,
   },
+  {
+    path: 'result',
+    component: ResultComponent,
+  },
 ];
 
 @NgModule({
   imports: [RouterModule.forRoot(routes)],
   exports: [RouterModule],
 })
-export class AppRoutingModule { }
+export class AppRoutingModule {}
