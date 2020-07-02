@@ -3,6 +3,7 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { HttpClientTestingModule } from '@angular/common/http/testing';
 
 import { DrawingComponent } from './drawing.component';
+import { RouterTestingModule } from '@angular/router/testing';
 
 describe('DrawingComponent', () => {
   let component: DrawingComponent;
@@ -11,7 +12,11 @@ describe('DrawingComponent', () => {
   beforeEach(async(() => {
     TestBed.configureTestingModule({
       declarations: [DrawingComponent],
-      imports: [BrowserAnimationsModule, HttpClientTestingModule],
+      imports: [
+        BrowserAnimationsModule,
+        HttpClientTestingModule,
+        RouterTestingModule,
+      ],
     }).compileComponents();
   }));
 
