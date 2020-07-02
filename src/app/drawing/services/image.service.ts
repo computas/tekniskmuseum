@@ -5,6 +5,8 @@ import { Observable } from 'rxjs';
   providedIn: 'root',
 })
 export class ImageService {
+  name: string = 'ole';
+
   constructor() {}
 
   b64ToUint8Array(b64Image) {
@@ -42,7 +44,8 @@ export class ImageService {
       type: 'image/png',
     });
     const formData = new FormData();
-    formData.append('file', blob, 'image.png');
+    formData.append('image', blob, 'image.png');
+    formData.append('name', this.name);
     return formData;
   }
 }
