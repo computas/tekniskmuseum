@@ -1,27 +1,29 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
-import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { HttpClientTestingModule } from '@angular/common/http/testing';
+import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
+import { MatButtonModule } from '@angular/material/button';
 
-import { DrawingComponent } from './drawing.component';
+import { ResultComponent } from './result.component';
 import { RouterTestingModule } from '@angular/router/testing';
 
-describe('DrawingComponent', () => {
-  let component: DrawingComponent;
-  let fixture: ComponentFixture<DrawingComponent>;
+describe('ResultComponent', () => {
+  let component: ResultComponent;
+  let fixture: ComponentFixture<ResultComponent>;
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [DrawingComponent],
+      declarations: [ResultComponent],
       imports: [
-        BrowserAnimationsModule,
         HttpClientTestingModule,
+        MatProgressSpinnerModule,
+        MatButtonModule,
         RouterTestingModule,
       ],
     }).compileComponents();
   }));
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(DrawingComponent);
+    fixture = TestBed.createComponent(ResultComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

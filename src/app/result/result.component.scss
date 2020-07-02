@@ -1,0 +1,32 @@
+body {
+  background-color: #e42313;
+}
+
+#result-text {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  color: #ffffff;
+  font-size: x-large;
+  text-align: center;
+}
+
+.new-drawing-button {
+  color: #e42313;
+  background: #ffffff;
+  padding: 4px 50px;
+}
+
+.button {
+  position: relative;
+  margin-top: 10px;
+  left: 50%;
+  transform: translate(-50%, 0%);
+  text-align: center;
+}
+
+.answer-container {
+  display: flex;
+  justify-content: center;
+}

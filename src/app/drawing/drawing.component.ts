@@ -1,4 +1,10 @@
-import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
+import {
+  Component,
+  ElementRef,
+  OnInit,
+  ViewChild,
+  Output,
+} from '@angular/core';
 import { BehaviorSubject, interval, Observable } from 'rxjs';
 import {
   trigger,
@@ -11,6 +17,7 @@ import { take } from 'rxjs/operators';
 import { ImageService } from './services/image.service';
 import { DrawingService } from './services/drawing.service';
 import { StartGameInfo } from './services/start-game-info';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-drawing',
@@ -62,11 +69,12 @@ export class DrawingComponent implements OnInit {
   startGameInfo: StartGameInfo;
   guessWord: string;
   gameToken: string;
-  hasWon: boolean;
+  result: boolean;
 
   constructor(
     private imageService: ImageService,
-    private drawingService: DrawingService
+    private drawingService: DrawingService,
+    private router: Router
   ) {}
 
   ngOnInit(): void {
@@ -79,20 +87,6 @@ export class DrawingComponent implements OnInit {
     this.canvas.nativeElement.width = document.body.clientWidth;
     this.canvas.nativeElement.height = document.body.clientHeight;
     this.startGame();
-  }
-
-  submitAnswer() {
-    const b64Image = this.canvas.nativeElement.toDataURL('image/png');
-
-    this.imageService.resize(b64Image).subscribe({
-      next: (dataUrl) => {
-        const formData: FormData = this.imageService.createFormData(dataUrl);
-        formData.append('token', this.gameToken);
-        this.drawingService.submitAnswer(formData).subscribe((res) => {
-          this.hasWon = res.hasWon;
-        });
-      },
-    });
   }
 
   start(e: MouseEvent | TouchEvent) {
@@ -108,6 +102,20 @@ export class DrawingComponent implements OnInit {
       this.startGameInfo = startGameInfo;
       this.guessWord = this.startGameInfo.label;
       this.gameToken = this.startGameInfo.token;
+    });
+  }
+
+  submitAnswer() {
+    const b64Image = this.canvas.nativeElement.toDataURL('image/png');
+
+    this.imageService.resize(b64Image).subscribe({
+      next: (dataUrl) => {
+        const formData: FormData = this.imageService.createFormData(dataUrl);
+        formData.append('token', this.gameToken);
+        this.drawingService.submitAnswer(formData).subscribe((res) => {
+          this.drawingService.updateResult(res.hasWon);
+        });
+      },
     });
   }
 
@@ -128,16 +136,6 @@ export class DrawingComponent implements OnInit {
     }
   }
 
-  clear() {
-    const canvas = this.canvas.nativeElement;
-    this.ctx.clearRect(0, 0, canvas.width, canvas.height);
-    this.currentState = this.currentState === 'initial' ? 'final' : 'initial';
-    this.gameOver.next(false);
-    this.timeLeft = 10;
-    this.countDown.nativeElement.style.color = 'white';
-    this.startGame();
-  }
-
   drawLine(x1, y1, x2, y2) {
     this.ctx.strokeStyle = 'black';
     this.ctx.lineWidth = 6;
@@ -148,11 +146,25 @@ export class DrawingComponent implements OnInit {
     this.ctx.stroke();
   }
 
+  clear() {
+    const canvas = this.canvas.nativeElement;
+    this.ctx.clearRect(0, 0, canvas.width, canvas.height);
+    this.currentState = this.currentState === 'initial' ? 'final' : 'initial';
+    this.gameOver.next(false);
+    this.timeLeft = 10;
+    this.countDown.nativeElement.style.color = 'white';
+    this.startGame();
+  }
+
   stop(e) {
     if (!this.gameOver.getValue() && this.isDrawing) {
       this.drawLine(this.x, this.y, e.offsetX, e.offsetY);
       this.isDrawing = false;
     }
+  }
+
+  resultNavigation() {
+    this.router.navigate(['/result']);
   }
 
   private createDrawingTimer() {
@@ -182,6 +194,7 @@ export class DrawingComponent implements OnInit {
         this.currentState =
           this.currentState === 'initial' ? 'final' : 'initial';
         this.submitAnswer();
+        this.resultNavigation();
       },
     });
   }
