@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
-import { Observable, throwError, of } from 'rxjs';
+import { Observable, throwError, of, BehaviorSubject } from 'rxjs';
 import { map, tap } from 'rxjs/operators';
 import { catchError, retry } from 'rxjs/operators';
 import { StartGameInfo } from './start-game-info';
@@ -10,6 +10,9 @@ import { StartGameInfo } from './start-game-info';
 })
 export class DrawingService {
   baseUrl = 'https://tekniskback.azurewebsites.net';
+  resultSource = new BehaviorSubject<boolean>(false);
+  currentResult = this.resultSource.asObservable();
+
   constructor(private http: HttpClient) {}
 
   submitAnswer(answerInfo: FormData): Observable<any> {
@@ -18,5 +21,9 @@ export class DrawingService {
 
   startGame(): Observable<StartGameInfo> {
     return this.http.get<StartGameInfo>(`${this.baseUrl}/startGame`);
+  }
+
+  updateResult(result: boolean) {
+    this.resultSource.next(result);
   }
 }
