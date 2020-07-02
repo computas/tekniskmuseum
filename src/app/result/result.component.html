@@ -1,1 +1,16 @@
-<p>result works!</p>
+<body>
+  <div id="result-text">
+    <div *ngIf="result">Du vant!</div>
+    <div *ngIf="!result">Du tapte desverre</div>
+    <div class="button">
+      <button
+        mat-raised-button
+        color="primary"
+        class="new-drawing-button"
+        (click)="newDrawing()"
+      >
+        Ny tegning
+      </button>
+    </div>
+  </div>
+</body>
