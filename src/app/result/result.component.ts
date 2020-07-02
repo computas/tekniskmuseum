@@ -16,9 +16,7 @@ export class ResultComponent implements OnInit {
   constructor(private drawingService: DrawingService, private router: Router) {}
 
   ngOnInit(): void {
-    this.result$ = this.drawingService.resultSource.pipe(
-      tap((x) => console.log(x, 'result log'))
-    );
+    this.result$ = this.drawingService.resultSource;
   }
 
   newDrawing() {
