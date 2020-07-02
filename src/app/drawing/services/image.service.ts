@@ -5,7 +5,7 @@ import { Observable } from 'rxjs';
   providedIn: 'root',
 })
 export class ImageService {
-  name: string = 'ole';
+  name = 'ole';
 
   constructor() {}
 
