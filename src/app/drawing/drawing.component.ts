@@ -82,9 +82,6 @@ export class DrawingComponent implements OnInit {
     if (!ctx) {
       throw new Error('getContext failed');
     }
-    this.drawingService.currentResult.subscribe(
-      (result) => (this.result = result)
-    );
 
     this.ctx = ctx;
     this.canvas.nativeElement.width = document.body.clientWidth;
