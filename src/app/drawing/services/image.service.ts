@@ -23,16 +23,18 @@ export class ImageService {
   resize(b64Image) {
     return new Observable((observer) => {
       const img = new Image();
-      const c = document.createElement('canvas');
-      const ctx = c.getContext('2d');
+      const canvas = document.createElement('canvas');
+      const ctx = canvas.getContext('2d');
       if (!ctx) {
         throw new Error('getContext failed');
       }
       img.onload = () => {
-        c.width = 256;
-        c.height = 256;
-        ctx.drawImage(img, 0, 0, c.width, c.height);
-        observer.next(c.toDataURL('image/png', 1));
+        canvas.width = 256;
+        canvas.height = 256;
+        ctx.fillStyle = '#FFFFFF';
+        ctx.fillRect(0, 0, canvas.width, canvas.height);
+        ctx.drawImage(img, 0, 0, canvas.width, canvas.height);
+        observer.next(canvas.toDataURL('image/png', 1));
       };
       img.src = b64Image;
     });
