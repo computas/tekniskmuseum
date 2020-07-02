@@ -18,7 +18,7 @@ export class ResultComponent implements OnInit {
 
   getResult() {
     this.drawingService.resultSource.subscribe(
-      (result) => ((this.result = result), console.log(result))
+      (result) => (this.result = result)
     );
   }
 
