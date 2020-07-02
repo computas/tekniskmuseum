@@ -1,6 +1,9 @@
 import { Component, OnInit, AfterViewInit } from '@angular/core';
 import { DrawingService } from '../drawing/services/drawing.service';
 import { Router } from '@angular/router';
+import { Observable } from 'rxjs';
+import { tap } from 'rxjs/operators';
+import { Result } from '../shared/models/result.interface';
 
 @Component({
   selector: 'app-result',
@@ -8,17 +11,13 @@ import { Router } from '@angular/router';
   styleUrls: ['./result.component.scss'],
 })
 export class ResultComponent implements OnInit {
-  result: boolean;
+  result$: Observable<Result>;
 
   constructor(private drawingService: DrawingService, private router: Router) {}
 
   ngOnInit(): void {
-    this.getResult();
-  }
-
-  getResult() {
-    this.drawingService.resultSource.subscribe(
-      (result) => (this.result = result)
+    this.result$ = this.drawingService.resultSource.pipe(
+      tap((x) => console.log(x, 'result log'))
     );
   }
 
