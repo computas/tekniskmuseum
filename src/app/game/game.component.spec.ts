@@ -1,5 +1,4 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
-
 import { GameComponent } from './game.component';
 import { MaterialImportsModule } from '../shared/material-imports/material-imports.module';
 import { GameInfoComponent } from './game-info/game-info.component';
