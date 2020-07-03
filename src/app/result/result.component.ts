@@ -3,7 +3,7 @@ import { DrawingService } from '../game/game-draw/services/drawing.service';
 import { Router } from '@angular/router';
 import { Observable } from 'rxjs';
 import { Result } from '../shared/models/result.interface';
-
+import { routes } from '../shared/models/routes';
 @Component({
   selector: 'app-result',
   templateUrl: './result.component.html',
@@ -19,6 +19,6 @@ export class ResultComponent implements OnInit {
   }
 
   newDrawing() {
-    this.router.navigate(['/drawing']);
+    this.router.navigate([`/${routes.DRAWING}`]);
   }
 }

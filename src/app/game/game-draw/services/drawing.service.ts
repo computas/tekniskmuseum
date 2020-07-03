@@ -4,12 +4,12 @@ import { Observable, Subject } from 'rxjs';
 import { tap } from 'rxjs/operators';
 import { StartGameInfo } from './start-game-info';
 import { Result } from '../../../shared/models/result.interface';
-
+import { routes } from '../../../shared/models/routes';
 @Injectable({
   providedIn: 'root',
 })
 export class DrawingService {
-  baseUrl = 'https://tekniskback.azurewebsites.net';
+  baseUrl = routes.TEKNISKBACKEND;
   resultSource = new Subject<Result>();
 
   constructor(private http: HttpClient) {}

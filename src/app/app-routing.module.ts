@@ -3,18 +3,18 @@ import { Routes, RouterModule } from '@angular/router';
 import { WelcomeComponent } from './welcome/welcome.component';
 import { GameComponent } from './game/game.component';
 import { ResultComponent } from './result/result.component';
-
+import { routes as r } from './shared/models/routes';
 const routes: Routes = [
   {
-    path: '',
+    path: r.LANDING,
     component: WelcomeComponent,
   },
   {
-    path: 'playgame',
+    path: r.PLAYGAME,
     component: GameComponent,
   },
   {
-    path: 'result',
+    path: r.RESULT,
     component: ResultComponent,
   },
 ];

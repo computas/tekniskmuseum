@@ -12,6 +12,7 @@ import { ImageService } from './services/image.service';
 import { DrawingService } from './services/drawing.service';
 import { StartGameInfo } from './services/start-game-info';
 import { Router } from '@angular/router';
+import { routes } from '../../shared/models/routes';
 
 @Component({
   selector: 'app-drawing',
@@ -156,7 +157,7 @@ export class GameDrawComponent implements OnInit {
   }
 
   resultNavigation() {
-    this.router.navigate(['/result']);
+    this.router.navigate([`/${routes.RESULT}`]);
   }
 
   private createDrawingTimer() {
