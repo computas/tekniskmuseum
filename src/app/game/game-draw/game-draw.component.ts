@@ -131,19 +131,19 @@ export class GameDrawComponent implements OnInit {
   draw(e: MouseEvent | TouchEvent) {
     if (!this.gameOver.getValue() && this.isDrawing) {
       const { x, y } = this.getClientOffset(e);
-      this.drawLine(this.x, this.y, x, y);
+      this.drawLine(x, y);
       this.x = x;
       this.y = y;
     }
   }
 
-  drawLine(x1, y1, x2, y2) {
+  drawLine(currentX, currentY) {
     this.ctx.strokeStyle = 'black';
     this.ctx.lineWidth = 6;
     this.ctx.lineCap = this.ctx.lineJoin = 'round';
     this.ctx.beginPath();
-    this.ctx.moveTo(x1, y1);
-    this.ctx.lineTo(x2, y2);
+    this.ctx.moveTo(this.x, this.y);
+    this.ctx.lineTo(currentX, currentY);
     this.ctx.stroke();
   }
 
@@ -159,7 +159,7 @@ export class GameDrawComponent implements OnInit {
 
   stop(e) {
     if (!this.gameOver.getValue() && this.isDrawing) {
-      this.drawLine(this.x, this.y, e.offsetX, e.offsetY);
+      this.drawLine(e.offsetX, e.offsetY);
       this.isDrawing = false;
     }
   }
