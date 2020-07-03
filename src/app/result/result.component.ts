@@ -1,8 +1,7 @@
-import { Component, OnInit, AfterViewInit } from '@angular/core';
-import { DrawingService } from '../drawing/services/drawing.service';
+import { Component, OnInit } from '@angular/core';
+import { DrawingService } from '../game/game-draw/services/drawing.service';
 import { Router } from '@angular/router';
 import { Observable } from 'rxjs';
-import { tap } from 'rxjs/operators';
 import { Result } from '../shared/models/result.interface';
 
 @Component({

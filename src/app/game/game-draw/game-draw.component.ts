@@ -1,10 +1,4 @@
-import {
-  Component,
-  ElementRef,
-  OnInit,
-  ViewChild,
-  Output,
-} from '@angular/core';
+import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
 import { BehaviorSubject, interval, Observable } from 'rxjs';
 import {
   trigger,
@@ -21,8 +15,8 @@ import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-drawing',
-  templateUrl: './drawing.component.html',
-  styleUrls: ['./drawing.component.scss'],
+  templateUrl: './game-draw.component.html',
+  styleUrls: ['./game-draw.component.scss'],
   animations: [
     trigger('changeDivSize', [
       state(
@@ -50,7 +44,7 @@ import { Router } from '@angular/router';
     ]),
   ],
 })
-export class DrawingComponent implements OnInit {
+export class GameDrawComponent implements OnInit {
   @ViewChild('canvas', { static: true })
   canvas: ElementRef<HTMLCanvasElement>;
   @ViewChild('countDown', { static: true })

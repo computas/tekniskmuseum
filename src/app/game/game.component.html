@@ -1,0 +1,11 @@
+<ng-container *ngIf="newGame; then showGameInfo; else startGame">
+</ng-container>
+
+<ng-template #showGameInfo>
+  <app-game-info (valueChange)="testStartGame($event)"></app-game-info>
+</ng-template>
+<ng-template #startGame>
+  <div>
+    Please friend, login.
+  </div>
+</ng-template>

@@ -1,10 +1,9 @@
 import { Injectable } from '@angular/core';
-import { HttpClient, HttpHeaders } from '@angular/common/http';
-import { Observable, throwError, of, BehaviorSubject, Subject } from 'rxjs';
-import { map, tap } from 'rxjs/operators';
-import { catchError, retry } from 'rxjs/operators';
+import { HttpClient } from '@angular/common/http';
+import { Observable, Subject } from 'rxjs';
+import { tap } from 'rxjs/operators';
 import { StartGameInfo } from './start-game-info';
-import { Result } from '../../shared/models/result.interface';
+import { Result } from '../../../shared/models/result.interface';
 
 @Injectable({
   providedIn: 'root',

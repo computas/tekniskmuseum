@@ -1,11 +1,10 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { ResultComponent } from './result.component';
-import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
-import { MatButtonModule } from '@angular/material/button';
+import { MaterialImportsModule } from '../shared/material-imports/material-imports.module';
 
 @NgModule({
   declarations: [ResultComponent],
-  imports: [CommonModule, MatProgressSpinnerModule, MatButtonModule],
+  imports: [CommonModule, MaterialImportsModule],
 })
 export class ResultModule {}
