@@ -6,11 +6,15 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./game.component.scss'],
 })
 export class GameComponent implements OnInit {
-  newGame: boolean;
+  newGame = false;
+  startNewGame: boolean;
   constructor() {}
 
-  testStartGame(event) {}
+  testStartGame(event) {
+    console.log('startEvent');
+    this.newGame = event;
+  }
   ngOnInit(): void {
-    this.newGame = true;
+    console.log(this.newGame);
   }
 }
