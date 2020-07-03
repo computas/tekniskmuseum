@@ -112,9 +112,7 @@ export class DrawingComponent implements OnInit {
       next: (dataUrl) => {
         const formData: FormData = this.imageService.createFormData(dataUrl);
         formData.append('token', this.gameToken);
-        this.drawingService.submitAnswer(formData).subscribe((res) => {
-          this.drawingService.updateResult(res.hasWon);
-        });
+        this.drawingService.submitAnswer(formData, dataUrl).subscribe();
       },
     });
   }
