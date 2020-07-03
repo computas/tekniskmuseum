@@ -1,22 +1,16 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import { Observable, Subject, BehaviorSubject } from 'rxjs';
+import { Observable, Subject } from 'rxjs';
 import { tap } from 'rxjs/operators';
 import { StartGameInfo } from './start-game-info';
 import { Result } from '../../../shared/models/result.interface';
-import { routes } from '../../../shared/models/routes';
 
 @Injectable({
   providedIn: 'root',
 })
 export class DrawingService {
-  baseUrl = routes.TEKNISKBACKEND;
+  baseUrl = 'https://tekniskback.azurewebsites.net';
   resultSource = new Subject<Result>();
-  totalGuess = 5;
-  words: string[];
-  results: object[] = [];
-  gameOver = new BehaviorSubject<boolean>(false);
-  guessDone = new BehaviorSubject<boolean>(false);
 
   constructor(private http: HttpClient) {}
 
@@ -31,13 +25,9 @@ export class DrawingService {
   }
 
   updateResult(result: boolean, imageData: string) {
-    const isDonePlaying = this.results.length === this.totalGuess;
-    if (isDonePlaying) {
-      this.gameOver.next(isDonePlaying);
-    } else {
-      const gameResult = { hasWon: result, imageData };
-      this.results.push(gameResult);
-      this.resultSource.next(gameResult);
-    }
+    this.resultSource.next({
+      hasWon: result,
+      imageData,
+    });
   }
 }

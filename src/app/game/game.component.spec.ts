@@ -5,7 +5,6 @@ import { MaterialImportsModule } from '../shared/material-imports/material-impor
 import { GameInfoComponent } from './game-info/game-info.component';
 import { RouterTestingModule } from '@angular/router/testing';
 import { HttpClientTestingModule } from '@angular/common/http/testing';
-
 describe('GameComponent', () => {
   let component: GameComponent;
   let fixture: ComponentFixture<GameComponent>;
@@ -14,6 +13,7 @@ describe('GameComponent', () => {
     TestBed.configureTestingModule({
       declarations: [GameComponent, GameInfoComponent],
       imports: [
+        HttpClientTestingModule,
         MaterialImportsModule,
         RouterTestingModule,
         HttpClientTestingModule,

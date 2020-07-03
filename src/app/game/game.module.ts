@@ -7,7 +7,13 @@ import { MaterialImportsModule } from '../shared/material-imports/material-impor
 import { GameIntermediateResultComponent } from './game-intermediate-result/game-intermediate-result.component';
 import { GameResultComponent } from './game-result/game-result.component';
 @NgModule({
-  declarations: [GameInfoComponent, GameDrawComponent, GameComponent, GameIntermediateResultComponent, GameResultComponent],
+  declarations: [
+    GameInfoComponent,
+    GameDrawComponent,
+    GameComponent,
+    GameIntermediateResultComponent,
+    GameResultComponent,
+  ],
   imports: [CommonModule, MaterialImportsModule],
 })
 export class GameModule {}
