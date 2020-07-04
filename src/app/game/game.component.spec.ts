@@ -4,6 +4,7 @@ import { GameComponent } from './game.component';
 import { MaterialImportsModule } from '../shared/material-imports/material-imports.module';
 import { GameInfoComponent } from './game-info/game-info.component';
 import { RouterTestingModule } from '@angular/router/testing';
+import { HttpClientTestingModule } from '@angular/common/http/testing';
 
 describe('GameComponent', () => {
   let component: GameComponent;
@@ -12,7 +13,11 @@ describe('GameComponent', () => {
   beforeEach(async(() => {
     TestBed.configureTestingModule({
       declarations: [GameComponent, GameInfoComponent],
-      imports: [MaterialImportsModule, RouterTestingModule],
+      imports: [
+        MaterialImportsModule,
+        RouterTestingModule,
+        HttpClientTestingModule,
+      ],
     }).compileComponents();
   }));
 

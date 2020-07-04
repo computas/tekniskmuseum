@@ -1,4 +1,11 @@
-import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
+import {
+  Component,
+  ElementRef,
+  OnInit,
+  ViewChild,
+  Output,
+  EventEmitter,
+} from '@angular/core';
 import { BehaviorSubject, interval, Observable } from 'rxjs';
 import {
   trigger,
@@ -59,6 +66,7 @@ export class GameDrawComponent implements OnInit {
   words = [];
   private ctx: CanvasRenderingContext2D;
   currentState = 'initial';
+  @Output() isDoneDrawing = new EventEmitter();
 
   // game info
   startGameInfo: StartGameInfo;
@@ -187,7 +195,7 @@ export class GameDrawComponent implements OnInit {
         this.currentState =
           this.currentState === 'initial' ? 'final' : 'initial';
         this.submitAnswer();
-        this.resultNavigation();
+        this.drawingService.guessDone.next(true);
       },
     });
   }

@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { DrawingService } from './game-draw/services/drawing.service';
 
 @Component({
   selector: 'app-game',
@@ -7,14 +8,22 @@ import { Component, OnInit } from '@angular/core';
 })
 export class GameComponent implements OnInit {
   newGame = false;
-  startNewGame: boolean;
-  constructor() {}
+  guessDone = false;
+  showIntermediateResult = false;
+  constructor(private drawingService: DrawingService) {}
 
-  testStartGame(event) {
-    console.log('startEvent');
+  StartGame(event) {
     this.newGame = event;
   }
   ngOnInit(): void {
-    console.log(this.newGame);
+    this.drawingService.guessDone.subscribe({
+      next: (value) => {
+        this.showIntermediateResult = value;
+      },
+    });
+  }
+  nextGuess(event) {
+    this.newGame = true;
+    this.showIntermediateResult = false;
   }
 }

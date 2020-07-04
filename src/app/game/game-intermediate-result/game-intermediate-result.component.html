@@ -1,1 +1,23 @@
-<p>game-intermediate-result works!</p>
+<div id="result-text">
+  <ng-container *ngIf="result$ | async as result; else loading">
+    <div *ngIf="result.hasWon">Du vant!</div>
+    <div *ngIf="!result.hasWon">Du tapte desverre</div>
+    <h3 style="margin-top: 10px;">Ditt bilde:</h3>
+    <img [src]="result.imageData" alt="No data" />
+  </ng-container>
+  <ng-template #loading>
+    <div class="answer-container">
+      <mat-spinner [diameter]="50"></mat-spinner>
+    </div>
+  </ng-template>
+  <div class="button">
+    <button
+      mat-raised-button
+      color="primary"
+      class="new-drawing-button"
+      (click)="newDrawing()"
+    >
+      Ny tegning
+    </button>
+  </div>
+</div>
