@@ -2,7 +2,6 @@ import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 import { WelcomeComponent } from './welcome/welcome.component';
 import { GameComponent } from './game/game.component';
-import { ResultComponent } from './result/result.component';
 import { routes as r } from './shared/models/routes';
 const routes: Routes = [
   {
@@ -12,10 +11,6 @@ const routes: Routes = [
   {
     path: r.PLAYGAME,
     component: GameComponent,
-  },
-  {
-    path: r.RESULT,
-    component: ResultComponent,
   },
 ];
 

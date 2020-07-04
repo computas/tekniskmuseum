@@ -5,7 +5,6 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { WelcomeModule } from './welcome/welcome.module';
-import { ResultModule } from './result/result.module';
 import { GameModule } from './game/game.module';
 
 @NgModule({
@@ -17,7 +16,6 @@ import { GameModule } from './game/game.module';
     BrowserAnimationsModule,
     WelcomeModule,
     GameModule,
-    ResultModule,
   ],
   providers: [HttpClientModule],
   bootstrap: [AppComponent],
