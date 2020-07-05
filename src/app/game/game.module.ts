@@ -6,6 +6,7 @@ import { GameComponent } from './game.component';
 import { MaterialImportsModule } from '../shared/material-imports/material-imports.module';
 import { GameIntermediateResultComponent } from './game-intermediate-result/game-intermediate-result.component';
 import { GameResultComponent } from './game-result/game-result.component';
+import { GameWordToDrawComponent } from './game-word-to-draw/game-word-to-draw.component';
 @NgModule({
   declarations: [
     GameInfoComponent,
@@ -13,6 +14,7 @@ import { GameResultComponent } from './game-result/game-result.component';
     GameComponent,
     GameIntermediateResultComponent,
     GameResultComponent,
+    GameWordToDrawComponent,
   ],
   imports: [CommonModule, MaterialImportsModule],
 })
