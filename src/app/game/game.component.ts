@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, OnDestroy } from '@angular/core';
 import { DrawingService } from './game-draw/services/drawing.service';
 
 @Component({
@@ -6,16 +6,33 @@ import { DrawingService } from './game-draw/services/drawing.service';
   templateUrl: './game.component.html',
   styleUrls: ['./game.component.scss'],
 })
-export class GameComponent implements OnInit {
+export class GameComponent implements OnInit, OnDestroy {
   newGame = false;
   guessDone = false;
+  showHowToPlay = true;
   showIntermediateResult = false;
+  showFinalResult = false;
+  showWordToDraw = false;
   constructor(private drawingService: DrawingService) {}
 
+  getDrawWord() {
+    this.showWordToDraw = true;
+    this.showHowToPlay = false;
+  }
+
   StartGame(event) {
-    this.newGame = event;
+    this.showHowToPlay = false;
+    this.newGame = true;
+  }
+  ngOnDestroy(): void {
+    this.clearGameState();
   }
   ngOnInit(): void {
+    this.drawingService.totalGuess = 2;
+    this.drawingService.gameOver.subscribe((gameOver) => {
+      this.clearGameState();
+      this.showFinalResult = gameOver;
+    });
     this.drawingService.guessDone.subscribe({
       next: (value) => {
         this.showIntermediateResult = value;
@@ -24,6 +41,14 @@ export class GameComponent implements OnInit {
   }
   nextGuess(event) {
     this.newGame = true;
+    this.guessDone = true;
     this.showIntermediateResult = false;
+  }
+
+  clearGameState() {
+    this.newGame = false;
+    this.showIntermediateResult = false;
+    this.showFinalResult = false;
+    this.guessDone = false;
   }
 }

@@ -6,11 +6,12 @@ import { Component, OnInit, Output, EventEmitter } from '@angular/core';
   styleUrls: ['./game-info.component.scss'],
 })
 export class GameInfoComponent implements OnInit {
-  @Output() valueChange = new EventEmitter();
+  @Output() getDrawWord = new EventEmitter();
   constructor() {}
 
   ngOnInit(): void {}
-  startGame() {
-    this.valueChange.emit(true);
+
+  startDrawing() {
+    this.getDrawWord.emit(true);
   }
 }

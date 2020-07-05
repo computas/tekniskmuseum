@@ -61,7 +61,7 @@ export class GameDrawComponent implements OnInit {
   y = 0;
   gameOver = new BehaviorSubject<boolean>(false);
   isDrawing = false;
-  timeLeft = 10;
+  timeLeft = 2;
   times = [];
   words = [];
   private ctx: CanvasRenderingContext2D;
@@ -76,8 +76,7 @@ export class GameDrawComponent implements OnInit {
 
   constructor(
     private imageService: ImageService,
-    private drawingService: DrawingService,
-    private router: Router
+    private drawingService: DrawingService
   ) {}
 
   ngOnInit(): void {
@@ -101,11 +100,13 @@ export class GameDrawComponent implements OnInit {
 
   startGame(): void {
     this.startDrawingTimer(this.createDrawingTimer());
-    this.drawingService.startGame().subscribe((startGameInfo) => {
+    this.guessWord = this.drawingService.startGameInfo.label;
+    // this.drawingService.startGame();
+    /*this.drawingService.startGame().subscribe((startGameInfo) => {
       this.startGameInfo = startGameInfo;
       this.guessWord = this.startGameInfo.label;
       this.gameToken = this.startGameInfo.token;
-    });
+    });*/
   }
 
   submitAnswer() {
@@ -114,7 +115,7 @@ export class GameDrawComponent implements OnInit {
     this.imageService.resize(b64Image).subscribe({
       next: (dataUrl) => {
         const formData: FormData = this.imageService.createFormData(dataUrl);
-        formData.append('token', this.gameToken);
+        formData.append('token', this.drawingService.startGameInfo.token);
         this.drawingService.submitAnswer(formData, dataUrl).subscribe();
       },
     });
@@ -162,10 +163,6 @@ export class GameDrawComponent implements OnInit {
       this.drawLine(e.offsetX, e.offsetY);
       this.isDrawing = false;
     }
-  }
-
-  resultNavigation() {
-    this.router.navigate([`/${routes.RESULT}`]);
   }
 
   private createDrawingTimer() {
