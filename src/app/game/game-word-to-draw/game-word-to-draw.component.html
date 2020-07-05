@@ -1,6 +1,13 @@
-<div *ngIf="word">
-  ditt ord er {{ word }}
-  <button mat-raised-button color="primary" class="get-word-button" (click)="drawWord.emit(true)">
-    Tegn
-  </button>
+<div id="word-container" *ngIf="word">
+  <div class="words-remaining">1/5</div>
+  <div class="word-text">
+    <p>Ordet ditt er:</p>
+    <h1 class="word-to-guess">{{ word | uppercase }}</h1>
+  </div>
+  <div class="word-footer">
+    <div class="word-footer-avatar"></div>
+    <button mat-raised-button class="get-word-button" (click)="drawWord.emit(true)">
+      TEGN
+    </button>
+  </div>
 </div>
