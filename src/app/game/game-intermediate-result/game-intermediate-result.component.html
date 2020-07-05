@@ -1,14 +1,20 @@
-<div id="result-text">
-  <ng-container *ngIf="result$ | async as result; else loading">
-    <div *ngIf="result.hasWon">Du vant!</div>
-    <div *ngIf="!result.hasWon">Du tapte desverre</div>
-    <h3 style="margin-top: 10px;">Ditt bilde:</h3>
-    <img [src]="result.imageData" alt="No data" />
-    <button mat-raised-button color="primary" class="new-drawing-button" (click)="newDrawing()">
-      Ny tegning
-    </button>
-  </ng-container>
-  <ng-template #loading>
-    <mat-spinner [diameter]="50"></mat-spinner>
-  </ng-template>
+<div id="intermediate-container">
+  <div>
+    <ng-container *ngIf="result$ | async as result; else loading">
+      <div class="word-text">
+        <h1 class="word-to-guess">{{ result.word }}</h1>
+      </div>
+      <div>
+        <img [src]="result.imageData" [className]="result.hasWon ? 'won' : 'loss'" />
+      </div>
+      <div>
+        <button mat-raised-button class="new-drawing-button" (click)="newDrawing()">
+          NESTE ORD
+        </button>
+      </div>
+    </ng-container>
+    <ng-template #loading>
+      <mat-spinner [diameter]="50"></mat-spinner>
+    </ng-template>
+  </div>
 </div>
