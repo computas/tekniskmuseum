@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import { Observable, Subject } from 'rxjs';
-import { tap } from 'rxjs/operators';
+import { Observable, Subject, BehaviorSubject } from 'rxjs';
+import { tap, timestamp } from 'rxjs/operators';
 import { StartGameInfo } from './start-game-info';
 import { Result } from '../../../shared/models/result.interface';
 
@@ -33,6 +33,13 @@ export class DrawingService {
         this.startGameInfo = res;
       })
     );
+  }
+
+  endGame() {
+    this.guessDone.next(false);
+    this.gameOver.next(false);
+    this.words = [];
+    this.results = [];
   }
 
   updateResult(result: boolean, imageData: string) {

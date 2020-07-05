@@ -4,13 +4,6 @@
     <div *ngIf="!result.hasWon">Du tapte desverre</div>
     <h3 style="margin-top: 10px;">Ditt bilde:</h3>
     <img [src]="result.imageData" alt="No data" />
-  </ng-container>
-  <ng-template #loading>
-    <div class="answer-container">
-      <mat-spinner [diameter]="50"></mat-spinner>
-    </div>
-  </ng-template>
-  <div class="button">
     <button
       mat-raised-button
       color="primary"
@@ -19,5 +12,8 @@
     >
       Ny tegning
     </button>
-  </div>
+  </ng-container>
+  <ng-template #loading>
+    <mat-spinner [diameter]="50"></mat-spinner>
+  </ng-template>
 </div>

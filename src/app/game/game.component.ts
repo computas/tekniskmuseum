@@ -13,20 +13,12 @@ export class GameComponent implements OnInit, OnDestroy {
   showIntermediateResult = false;
   showFinalResult = false;
   showWordToDraw = false;
+
   constructor(private drawingService: DrawingService) {}
 
-  getDrawWord() {
-    this.showWordToDraw = true;
-    this.showHowToPlay = false;
-  }
-
-  startGame(event) {
-    this.showHowToPlay = false;
-    this.showWordToDraw = false;
-    this.newGame = true;
-  }
   ngOnDestroy(): void {
     this.clearGameState();
+    this.drawingService.endGame();
   }
   ngOnInit(): void {
     this.drawingService.totalGuess = 2;
@@ -40,6 +32,18 @@ export class GameComponent implements OnInit, OnDestroy {
       },
     });
   }
+
+  getDrawWord() {
+    this.showWordToDraw = true;
+    this.showHowToPlay = false;
+  }
+
+  startGame() {
+    this.showHowToPlay = false;
+    this.showWordToDraw = false;
+    this.newGame = true;
+  }
+
   nextGuess(event) {
     this.clearGameState();
     this.showWordToDraw = true;
