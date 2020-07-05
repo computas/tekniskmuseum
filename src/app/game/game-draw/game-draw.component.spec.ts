@@ -13,12 +13,7 @@ describe('DrawingComponent', () => {
   beforeEach(async(() => {
     TestBed.configureTestingModule({
       declarations: [GameDrawComponent],
-      imports: [
-        BrowserAnimationsModule,
-        HttpClientTestingModule,
-        RouterTestingModule,
-        MaterialImportsModule,
-      ],
+      imports: [BrowserAnimationsModule, HttpClientTestingModule, RouterTestingModule, MaterialImportsModule],
     }).compileComponents();
   }));
 

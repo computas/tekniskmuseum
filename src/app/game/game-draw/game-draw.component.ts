@@ -1,25 +1,10 @@
-import {
-  Component,
-  ElementRef,
-  OnInit,
-  ViewChild,
-  Output,
-  EventEmitter,
-} from '@angular/core';
+import { Component, ElementRef, OnInit, ViewChild, Output, EventEmitter } from '@angular/core';
 import { BehaviorSubject, interval, Observable } from 'rxjs';
-import {
-  trigger,
-  state,
-  style,
-  animate,
-  transition,
-} from '@angular/animations';
+import { trigger, state, style, animate, transition } from '@angular/animations';
 import { take } from 'rxjs/operators';
 import { ImageService } from './services/image.service';
 import { DrawingService } from './services/drawing.service';
 import { StartGameInfo } from './services/start-game-info';
-import { Router } from '@angular/router';
-import { routes } from '../../shared/models/routes';
 
 @Component({
   selector: 'app-drawing',
@@ -74,10 +59,7 @@ export class GameDrawComponent implements OnInit {
   gameToken: string;
   result: boolean;
 
-  constructor(
-    private imageService: ImageService,
-    private drawingService: DrawingService
-  ) {}
+  constructor(private imageService: ImageService, private drawingService: DrawingService) {}
 
   ngOnInit(): void {
     const ctx = this.canvas.nativeElement.getContext('2d');
@@ -100,13 +82,9 @@ export class GameDrawComponent implements OnInit {
 
   startGame(): void {
     this.startDrawingTimer(this.createDrawingTimer());
-    this.guessWord = this.drawingService.startGameInfo.label;
-    // this.drawingService.startGame();
-    /*this.drawingService.startGame().subscribe((startGameInfo) => {
-      this.startGameInfo = startGameInfo;
-      this.guessWord = this.startGameInfo.label;
-      this.gameToken = this.startGameInfo.token;
-    });*/
+    if (this.drawingService.startGameInfo) {
+      this.guessWord = this.drawingService.startGameInfo.label;
+    }
   }
 
   submitAnswer() {
@@ -189,8 +167,7 @@ export class GameDrawComponent implements OnInit {
     timer.subscribe({
       complete: () => {
         this.gameOver.next(true);
-        this.currentState =
-          this.currentState === 'initial' ? 'final' : 'initial';
+        this.currentState = this.currentState === 'initial' ? 'final' : 'initial';
         this.submitAnswer();
         this.drawingService.guessDone.next(true);
       },
