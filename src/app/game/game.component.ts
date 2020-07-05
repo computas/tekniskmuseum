@@ -20,8 +20,9 @@ export class GameComponent implements OnInit, OnDestroy {
     this.showHowToPlay = false;
   }
 
-  StartGame(event) {
+  startGame(event) {
     this.showHowToPlay = false;
+    this.showWordToDraw = false;
     this.newGame = true;
   }
   ngOnDestroy(): void {
@@ -40,9 +41,8 @@ export class GameComponent implements OnInit, OnDestroy {
     });
   }
   nextGuess(event) {
-    this.newGame = true;
-    this.guessDone = true;
-    this.showIntermediateResult = false;
+    this.clearGameState();
+    this.showWordToDraw = true;
   }
 
   clearGameState() {

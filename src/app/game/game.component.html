@@ -13,5 +13,5 @@
   <app-game-result></app-game-result>
 </div>
 <div *ngIf="showWordToDraw">
-  <app-game-word-to-draw></app-game-word-to-draw>
+  <app-game-word-to-draw (drawWord)="startGame()"></app-game-word-to-draw>
 </div>
