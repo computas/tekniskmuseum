@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { DrawingService } from '../game-draw/services/drawing.service';
+import { Result } from '../../shared/models/result.interface';
 
 @Component({
   selector: 'app-game-result',
@@ -6,7 +8,10 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./game-result.component.scss'],
 })
 export class GameResultComponent implements OnInit {
-  constructor() {}
+  results: Result[] = [];
+  constructor(private drawingService: DrawingService) {}
 
-  ngOnInit(): void {}
+  ngOnInit(): void {
+    this.results = this.drawingService.results;
+  }
 }

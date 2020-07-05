@@ -1,1 +1,9 @@
-<p>game-result works!</p>
+<div id="result-container">
+  <h1 id="result-header">Godt Tegnet</h1>
+  <div id="result-card-container">
+    <div id="result-card" *ngFor="let result of results">
+      <img mat-card-image [src]="result.imageData" [className]="result.hasWon ? 'card-won' : 'card-loss'" />
+      <p id="result-subtitile">{{ result.word }}</p>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,21 @@
+#result-container {
+  margin: 20px 48px;
+}
+#result-header {
+  text-align: center;
+}
+
+#result-card-container {
+  display: flex;
+  justify-content: center;
+}
+
+#result-card {
+  margin: 28px;
+}
+.card-won {
+  border: 3px solid green;
+}
+.card-loss {
+  border: 3px solid red;
+}

@@ -1,4 +1,5 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
+import { HttpClientTestingModule } from '@angular/common/http/testing';
 
 import { GameResultComponent } from './game-result.component';
 
@@ -9,6 +10,7 @@ describe('GameResultComponent', () => {
   beforeEach(async(() => {
     TestBed.configureTestingModule({
       declarations: [GameResultComponent],
+      imports: [HttpClientTestingModule],
     }).compileComponents();
   }));
 

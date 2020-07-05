@@ -14,7 +14,7 @@ export class DrawingService {
   startGameInfo: StartGameInfo;
   totalGuess = 5;
   words: string[] = [];
-  results: object[] = [];
+  results: Result[] = [];
   gameOver = new BehaviorSubject<boolean>(false);
   guessDone = new BehaviorSubject<boolean>(false);
 
@@ -43,7 +43,7 @@ export class DrawingService {
   }
 
   updateResult(result: boolean, imageData: string) {
-    const gameResult = { hasWon: result, imageData };
+    const gameResult = { hasWon: result, imageData, word: this.words.pop() };
     this.results.push(gameResult);
     this.resultSource.next(gameResult);
 
