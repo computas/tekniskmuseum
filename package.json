@@ -4,6 +4,7 @@
   "scripts": {
     "ng": "ng",
     "pretty-quick": "pretty-quick",
+    "prettier": "prettier --end-of-line=crlf --write src/**/*.ts",
     "start": "ng serve",
     "build": "ng build",
     "test": "ng test",

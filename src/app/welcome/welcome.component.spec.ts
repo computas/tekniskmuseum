@@ -11,11 +11,7 @@ describe('WelcomeComponent', () => {
   beforeEach(async(() => {
     TestBed.configureTestingModule({
       declarations: [WelcomeComponent],
-      imports: [
-        MaterialImportsModule,
-        RouterTestingModule,
-        BrowserAnimationsModule,
-      ],
+      imports: [MaterialImportsModule, RouterTestingModule, BrowserAnimationsModule],
     }).compileComponents();
   }));
 

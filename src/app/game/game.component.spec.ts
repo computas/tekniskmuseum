@@ -11,12 +11,7 @@ describe('GameComponent', () => {
   beforeEach(async(() => {
     TestBed.configureTestingModule({
       declarations: [GameComponent, GameInfoComponent],
-      imports: [
-        HttpClientTestingModule,
-        MaterialImportsModule,
-        RouterTestingModule,
-        HttpClientTestingModule,
-      ],
+      imports: [MaterialImportsModule, RouterTestingModule, HttpClientTestingModule],
     }).compileComponents();
   }));
 

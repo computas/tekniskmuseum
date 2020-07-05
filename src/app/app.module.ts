@@ -9,14 +9,7 @@ import { GameModule } from './game/game.module';
 
 @NgModule({
   declarations: [AppComponent],
-  imports: [
-    BrowserModule,
-    HttpClientModule,
-    AppRoutingModule,
-    BrowserAnimationsModule,
-    WelcomeModule,
-    GameModule,
-  ],
+  imports: [BrowserModule, HttpClientModule, AppRoutingModule, BrowserAnimationsModule, WelcomeModule, GameModule],
   providers: [HttpClientModule],
   bootstrap: [AppComponent],
 })

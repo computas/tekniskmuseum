@@ -1,11 +1,6 @@
 <div *ngIf="word">
   ditt ord er {{ word }}
-  <button
-    mat-raised-button
-    color="primary"
-    class="get-word-button"
-    (click)="drawWord.emit(true)"
-  >
+  <button mat-raised-button color="primary" class="get-word-button" (click)="drawWord.emit(true)">
     Tegn
   </button>
 </div>

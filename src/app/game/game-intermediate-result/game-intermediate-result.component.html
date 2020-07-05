@@ -4,12 +4,7 @@
     <div *ngIf="!result.hasWon">Du tapte desverre</div>
     <h3 style="margin-top: 10px;">Ditt bilde:</h3>
     <img [src]="result.imageData" alt="No data" />
-    <button
-      mat-raised-button
-      color="primary"
-      class="new-drawing-button"
-      (click)="newDrawing()"
-    >
+    <button mat-raised-button color="primary" class="new-drawing-button" (click)="newDrawing()">
       Ny tegning
     </button>
   </ng-container>
