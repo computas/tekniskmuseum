@@ -44,7 +44,6 @@ export class GameDrawComponent implements OnInit {
   countDown: ElementRef<HTMLSpanElement>;
   x = 0;
   y = 0;
-  gameOver = new BehaviorSubject<boolean>(false);
   isDrawing = false;
   timeLeft = 2;
   times = [];
@@ -52,6 +51,8 @@ export class GameDrawComponent implements OnInit {
   private ctx: CanvasRenderingContext2D;
   currentState = 'initial';
   @Output() isDoneDrawing = new EventEmitter();
+  private readonly _timeOut = new BehaviorSubject<boolean>(false);
+  readonly _timeOut$ = this._timeOut.asObservable();
 
   // game info
   startGameInfo: StartGameInfo;
@@ -108,7 +109,7 @@ export class GameDrawComponent implements OnInit {
   }
 
   draw(e: MouseEvent | TouchEvent) {
-    if (!this.gameOver.getValue() && this.isDrawing) {
+    if (!this.timeOut && this.isDrawing) {
       const { x, y } = this.getClientOffset(e);
       this.drawLine(x, y);
       this.x = x;
@@ -130,14 +131,14 @@ export class GameDrawComponent implements OnInit {
     const canvas = this.canvas.nativeElement;
     this.ctx.clearRect(0, 0, canvas.width, canvas.height);
     this.currentState = this.currentState === 'initial' ? 'final' : 'initial';
-    this.gameOver.next(false);
+    this.timeOut = true;
     this.timeLeft = 10;
     this.countDown.nativeElement.style.color = 'white';
     this.startGame();
   }
 
   stop(e) {
-    if (!this.gameOver.getValue() && this.isDrawing) {
+    if (!this.timeOut && this.isDrawing) {
       this.drawLine(e.offsetX, e.offsetY);
       this.isDrawing = false;
     }
@@ -166,11 +167,18 @@ export class GameDrawComponent implements OnInit {
   private startDrawingTimer(timer) {
     timer.subscribe({
       complete: () => {
-        this.gameOver.next(true);
+        this.timeOut = true;
         this.currentState = this.currentState === 'initial' ? 'final' : 'initial';
         this.submitAnswer();
-        this.drawingService.guessDone.next(true);
       },
     });
+  }
+
+  get timeOut(): boolean {
+    return this._timeOut.getValue();
+  }
+
+  set timeOut(val: boolean) {
+    this._timeOut.next(val);
   }
 }

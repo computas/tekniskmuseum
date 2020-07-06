@@ -1,6 +1,6 @@
 <div id="intermediate-container">
   <div>
-    <ng-container *ngIf="result$ | async as result; else loading">
+    <ng-container *ngIf="result">
       <div class="word-text">
         <h1 class="word-to-guess">{{ result.word }}</h1>
       </div>

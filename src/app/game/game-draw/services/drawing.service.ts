@@ -12,7 +12,6 @@ export class DrawingService {
   baseUrl = 'https://tekniskback.azurewebsites.net';
   startGameInfo: StartGameInfo;
   totalGuess = 5;
-  words: string[] = [];
 
   private readonly _gameOver = new BehaviorSubject<boolean>(false);
   private readonly _guessDone = new BehaviorSubject<boolean>(false);
@@ -24,19 +23,16 @@ export class DrawingService {
 
   constructor(private http: HttpClient) {}
 
-  addResult(result: Result) {
-    this.results = [...this.results, result];
-  }
-
   submitAnswer(answerInfo: FormData, imageData: string): Observable<any> {
     return this.http.post<FormData>(`${this.baseUrl}/submitAnswer`, answerInfo).pipe(
       tap((res) => {
         const result: Result = {
           hasWon: res.hasWon,
           imageData,
-          word: this.words.pop(),
+          word: this.startGameInfo.label,
         };
         this.addResult(result);
+        this.guessDone = true;
         this.isGameOver();
       })
     );
@@ -52,7 +48,6 @@ export class DrawingService {
   startGame(): Observable<StartGameInfo> {
     return this.http.get<StartGameInfo>(`${this.baseUrl}/startGame`).pipe(
       tap((res) => {
-        this.words.push(res.label);
         this.startGameInfo = res;
       })
     );
@@ -61,8 +56,15 @@ export class DrawingService {
   endGame() {
     this.guessDone = false;
     this.gameOver = false;
-    this.words = [];
     this.results = [];
+  }
+
+  addResult(result: Result) {
+    this.results = [...this.results, result];
+  }
+
+  get lastResult(): Result {
+    return this.results[this.results.length - 1];
   }
 
   get results(): Result[] {

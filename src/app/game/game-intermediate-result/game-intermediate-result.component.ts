@@ -8,13 +8,13 @@ import { DrawingService } from '../game-draw/services/drawing.service';
   styleUrls: ['./game-intermediate-result.component.scss'],
 })
 export class GameIntermediateResultComponent implements OnInit {
-  result$: Observable<Result>;
+  result: Result;
   @Output() nextGuess = new EventEmitter();
 
   constructor(private drawingService: DrawingService) {}
 
   ngOnInit(): void {
-    this.result$ = this.drawingService.resultSource;
+    this.result = this.drawingService.lastResult;
   }
 
   newDrawing() {
