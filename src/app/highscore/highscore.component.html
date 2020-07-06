@@ -1,0 +1,13 @@
+<table>
+  <thead>
+    <th>Name</th>
+    <th>Wins</th>
+    <th>Losses</th>
+  </thead>
+  <tbody>
+    <tr *ngFor="let highscore of highscores">
+      <td>{{ highscore.name }}</td>
+      <td>{{ highscore.score }}</td>
+    </tr>
+  </tbody>
+</table>
