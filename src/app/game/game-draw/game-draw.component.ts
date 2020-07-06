@@ -42,22 +42,22 @@ export class GameDrawComponent implements OnInit {
   canvas: ElementRef<HTMLCanvasElement>;
   @ViewChild('countDown', { static: true })
   countDown: ElementRef<HTMLSpanElement>;
-  x = 0;
-  y = 0;
-  gameOver = new BehaviorSubject<boolean>(false);
-  isDrawing = false;
-  timeLeft = 2;
-  times = [];
-  words = [];
+
   private ctx: CanvasRenderingContext2D;
-  currentState = 'initial';
+  clockColor = 'initial';
+
   @Output() isDoneDrawing = new EventEmitter();
 
-  // game info
+  x = 0;
+  y = 0;
+  isDrawing = false;
+  timeLeft = 2;
+
+  private readonly _timeOut = new BehaviorSubject<boolean>(false);
+  readonly _timeOut$ = this._timeOut.asObservable();
+
   startGameInfo: StartGameInfo;
   guessWord: string;
-  gameToken: string;
-  result: boolean;
 
   constructor(private imageService: ImageService, private drawingService: DrawingService) {}
 
@@ -108,7 +108,7 @@ export class GameDrawComponent implements OnInit {
   }
 
   draw(e: MouseEvent | TouchEvent) {
-    if (!this.gameOver.getValue() && this.isDrawing) {
+    if (!this.timeOut && this.isDrawing) {
       const { x, y } = this.getClientOffset(e);
       this.drawLine(x, y);
       this.x = x;
@@ -129,15 +129,15 @@ export class GameDrawComponent implements OnInit {
   clear() {
     const canvas = this.canvas.nativeElement;
     this.ctx.clearRect(0, 0, canvas.width, canvas.height);
-    this.currentState = this.currentState === 'initial' ? 'final' : 'initial';
-    this.gameOver.next(false);
+    this.clockColor = this.clockColor === 'initial' ? 'final' : 'initial';
+    this.timeOut = true;
     this.timeLeft = 10;
     this.countDown.nativeElement.style.color = 'white';
     this.startGame();
   }
 
   stop(e) {
-    if (!this.gameOver.getValue() && this.isDrawing) {
+    if (!this.timeOut && this.isDrawing) {
       this.drawLine(e.offsetX, e.offsetY);
       this.isDrawing = false;
     }
@@ -166,11 +166,18 @@ export class GameDrawComponent implements OnInit {
   private startDrawingTimer(timer) {
     timer.subscribe({
       complete: () => {
-        this.gameOver.next(true);
-        this.currentState = this.currentState === 'initial' ? 'final' : 'initial';
+        this.timeOut = true;
+        this.clockColor = this.clockColor === 'initial' ? 'final' : 'initial';
         this.submitAnswer();
-        this.drawingService.guessDone.next(true);
       },
     });
+  }
+
+  get timeOut(): boolean {
+    return this._timeOut.getValue();
+  }
+
+  set timeOut(val: boolean) {
+    this._timeOut.next(val);
   }
 }

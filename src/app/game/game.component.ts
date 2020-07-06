@@ -22,11 +22,11 @@ export class GameComponent implements OnInit, OnDestroy {
   }
   ngOnInit(): void {
     this.drawingService.totalGuess = 2;
-    this.drawingService.gameOver.subscribe((gameOver) => {
+    this.drawingService.gameOver$.subscribe((gameOver) => {
       this.clearGameState();
       this.showFinalResult = gameOver;
     });
-    this.drawingService.guessDone.subscribe({
+    this.drawingService.guessDone$.subscribe({
       next: (value) => {
         this.showIntermediateResult = value;
       },
