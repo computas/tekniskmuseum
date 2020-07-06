@@ -36,3 +36,16 @@ jobs:
         uses: azure/CLI@v1
         with:
           inlinescript: az storage blob upload-batch --account-name frontwebstorage --account-key ${{ secrets.AZURE_ACCOUNT_KEY }} --source dist/tekniskmuseum --destination '$web'
+
+      - name: Set cut-off date
+        run: |
+          export DATE=`date --date="1 day ago" +%Y-%m-%dT%H:%MZ`
+          echo "::set-env name=DATE::$DATE"
+
+      - name: Azure delete old js and css
+        uses: azure/CLI@v1
+        with:
+          inlineScript: |
+            az storage blob delete-batch --source '$web' --account-name frontwebstorage --pattern "*.js" --if-unmodified-since $DATE --account-key ${{ secrets.AZURE_ACCOUNT_KEY }}
+            az storage blob delete-batch --source '$web' --account-name frontwebstorage --pattern "*.css" --if-unmodified-since $DATE --account-key ${{ secrets.AZURE_ACCOUNT_KEY }}
+
