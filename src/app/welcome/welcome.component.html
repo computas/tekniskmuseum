@@ -1,5 +1,5 @@
 <mat-sidenav-container class="example-container">
-  <mat-sidenav mode="side" position="end" class="side-drawer" opened>
+  <mat-sidenav #sidenav mode="side" position="end" class="side-drawer" opened>
     <mat-card class="side-nav-button"
       ><mat-icon aria-label="Example home icon">perm_media</mat-icon>Se andres tegninger</mat-card
     >
@@ -14,6 +14,23 @@
     <div class="main-container">
       <img src="assets/welcome-guy.png" alt="" class="welcome-guy" />
       <button mat-raised-button color="primary" class="play-game-button" (click)="goToGameInfoPage()">Spill</button>
+      <button mat-icon-button [matMenuTriggerFor]="menu" aria-label="Example icon-button with a menu">
+        <mat-icon>menu</mat-icon>
+      </button>
+      <mat-menu #menu="matMenu">
+        <button mat-menu-item>
+          <mat-icon>perm_media</mat-icon>
+          <span>Se andres tegninger</span>
+        </button>
+        <button mat-menu-item>
+          <mat-icon>school</mat-icon>
+          <span>Lær om kunstig intelligens</span>
+        </button>
+        <button mat-menu-item [routerLink]="['/highscore']" routerLinkActive="router-link-active">
+          <mat-icon>star</mat-icon>
+          <span>Topplisten</span>
+        </button>
+      </mat-menu>
     </div>
   </mat-sidenav-content>
 </mat-sidenav-container>
