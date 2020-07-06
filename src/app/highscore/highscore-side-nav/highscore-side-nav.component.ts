@@ -10,8 +10,8 @@ export class HighScoreSideNavComponent implements OnInit {
   opened: boolean;
   highscores: Highscore[];
   value = '';
+  hasSubmit = false;
   @Input() playerScore: number;
-
   constructor(private highscoreService: HighScoreService) {}
 
   ngOnInit(): void {
@@ -22,5 +22,11 @@ export class HighScoreSideNavComponent implements OnInit {
       this.highscores = res;
     });
   }
-  click() {}
+  click() {
+    const player = this.highscoreService.findScoreOfNewUser();
+    if (player) {
+      player.name = this.value;
+    }
+    this.hasSubmit = true;
+  }
 }
