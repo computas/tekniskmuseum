@@ -1,24 +1,12 @@
 <mat-sidenav-container class="example-container">
   <mat-sidenav mode="side" position="end" class="side-drawer" opened>
-    <mat-list role="list">
-      <mat-list-item role="listitem">
-        <button mat-button class="side-nav-button">
-          <mat-icon aria-label="Example home icon">home</mat-icon>Se andres
-          tegninger
-        </button>
-      </mat-list-item>
-      <mat-list-item role="listitem">
-        <button mat-button class="side-nav-button">
-          <mat-icon aria-label="Example home icon">home</mat-icon>Lær om kunstig
-          intelligens
-        </button>
-      </mat-list-item>
-      <mat-list-item role="listitem">
-        <button mat-button class="side-nav-button">
-          <mat-icon aria-label="Example home icon">home</mat-icon>Topplisten
-        </button>
-      </mat-list-item>
-    </mat-list>
+    <mat-card class="side-nav-button"
+      ><mat-icon aria-label="Example home icon">home</mat-icon>Se andres tegninger</mat-card
+    >
+    <mat-card class="side-nav-button"
+      ><mat-icon aria-label="Example home icon">school</mat-icon>Lær om kunstig intelligens</mat-card
+    >
+    <mat-card class="side-nav-button"><mat-icon aria-label="Example home icon">star</mat-icon>Topplisten</mat-card>
   </mat-sidenav>
   <mat-sidenav-content class="content">
     <div class="main-container">
