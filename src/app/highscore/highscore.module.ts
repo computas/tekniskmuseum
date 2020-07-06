@@ -7,5 +7,6 @@ import { MaterialImportsModule } from '../shared/material-imports/material-impor
 @NgModule({
   declarations: [HighScoreComponent, HighScoreSideNavComponent],
   imports: [CommonModule, MaterialImportsModule],
+  exports: [HighScoreSideNavComponent],
 })
 export class HighScoreModule {}
