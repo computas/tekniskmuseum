@@ -15,7 +15,10 @@ export class HighScoreSideNavComponent implements OnInit {
   constructor(private highscoreService: HighScoreService) {}
 
   ngOnInit(): void {
-    this.highscoreService.get().subscribe((res) => {
+    /*this.highscoreService.get().subscribe((res) => {
+      this.highscores = res;
+    });*/
+    this.highscoreService.getHighScoresFiltered(this.playerScore).subscribe((res) => {
       this.highscores = res;
     });
   }
