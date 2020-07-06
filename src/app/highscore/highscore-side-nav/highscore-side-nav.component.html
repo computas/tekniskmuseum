@@ -2,7 +2,7 @@
   <mat-sidenav #sidenav mode="side" position="end" [(opened)]="opened">
     <h1 id="text-header">Best: Totalt</h1>
     <ul id="highscore-list">
-      <li *ngFor="let highscore of highscores; index as i" id="list-content">
+      <li *ngFor="let highscore of highscores; index as i" id="list-content" [ngClass]="i === 4 ? 'highlight' : ''">
         <span>{{ highscore.place === -1 ? i + 1 : highscore.place }}. {{ highscore.name }}</span>
         <span>{{ highscore.score }} p</span>
       </li>
