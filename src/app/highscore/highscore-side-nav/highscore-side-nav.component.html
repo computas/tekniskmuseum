@@ -1,0 +1,16 @@
+<mat-sidenav-container class="example-container">
+  <mat-sidenav #sidenav mode="side" position="end" [(opened)]="opened">
+    <h1 id="text-header">Best: Totalt</h1>
+    <ul id="highscore-list">
+      <li *ngFor="let highscore of highscores; index as i" id="list-content">
+        <span>{{ i + 1 }}. {{ highscore.name }}</span>
+        <span>{{ highscore.score }} p</span>
+      </li>
+    </ul>
+  </mat-sidenav>
+
+  <mat-sidenav-content>
+    <ng-content></ng-content>
+    <p><button mat-button (click)="sidenav.toggle()">sidenav.toggle()</button></p>
+  </mat-sidenav-content>
+</mat-sidenav-container>
