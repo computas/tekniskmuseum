@@ -9,6 +9,7 @@ import { MatSidenavModule } from '@angular/material/sidenav';
 import { MatListModule } from '@angular/material/list';
 import { MatCardModule } from '@angular/material/card';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { MatInputModule } from '@angular/material/input';
 
 const materialModules = [
   MatButtonModule,
@@ -19,6 +20,7 @@ const materialModules = [
   MatListModule,
   MatCardModule,
   BrowserAnimationsModule,
+  MatInputModule,
 ];
 
 @NgModule({

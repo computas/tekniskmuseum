@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Input } from '@angular/core';
 import { Highscore, HighScoreService } from 'src/app/services/highscore.service';
 
 @Component({
@@ -9,6 +9,8 @@ import { Highscore, HighScoreService } from 'src/app/services/highscore.service'
 export class HighScoreSideNavComponent implements OnInit {
   opened: boolean;
   highscores: Highscore[];
+  value = '';
+  @Input() playerScore: number;
 
   constructor(private highscoreService: HighScoreService) {}
 
@@ -17,4 +19,5 @@ export class HighScoreSideNavComponent implements OnInit {
       this.highscores = res;
     });
   }
+  click() {}
 }

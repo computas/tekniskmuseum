@@ -7,6 +7,17 @@
         <span>{{ highscore.score }} p</span>
       </li>
     </ul>
+    <form class="name-form">
+      <mat-form-field class="example-full-width">
+        <mat-label>Ditt navn</mat-label>
+        <input matInput placeholder="Eksempel Ola" [(ngModel)]="value" name="name" />
+      </mat-form-field>
+      <button mat-button (click)="click()">
+        <span class="material-icons">
+          add
+        </span>
+      </button>
+    </form>
   </mat-sidenav>
 
   <mat-sidenav-content>
