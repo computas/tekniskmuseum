@@ -1,0 +1,21 @@
+.example-container {
+  height: 100vh;
+}
+mat-sidenav {
+  width: 20%;
+}
+#highscore-list {
+  list-style: none;
+  padding: 0;
+}
+#list-content {
+  display: flex;
+  justify-content: space-between;
+  margin: 12px 12px;
+}
+#text-header {
+  text-align: center;
+  margin: 12px;
+  border-bottom: 1px solid;
+  color: #195272;
+}
