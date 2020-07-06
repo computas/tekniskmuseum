@@ -3,7 +3,7 @@ import { Routes, RouterModule } from '@angular/router';
 import { WelcomeComponent } from './welcome/welcome.component';
 import { GameComponent } from './game/game.component';
 import { routes as r } from './shared/models/routes';
-import { HighscoreComponent } from './highscore/highscore.component';
+import { HighScoreComponent } from './highscore/highscore.component';
 const routes: Routes = [
   {
     path: r.LANDING,
@@ -15,7 +15,7 @@ const routes: Routes = [
   },
   {
     path: r.HIGHSCORE,
-    component: HighscoreComponent,
+    component: HighScoreComponent,
   },
 ];
 

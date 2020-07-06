@@ -6,7 +6,7 @@ import { Highscore } from 'src/app/services/highscore.service';
   templateUrl: './highscore-side-nav.component.html',
   styleUrls: ['./highscore-side-nav.component.scss'],
 })
-export class HighscoreSideNavComponent implements OnInit {
+export class HighScoreSideNavComponent implements OnInit {
   @Input()
   highscores: Highscore;
 

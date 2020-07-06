@@ -1,19 +1,19 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { HighscoreSideNavComponent } from './highscore-side-nav.component';
+import { HighScoreSideNavComponent } from './highscore-side-nav.component';
 
 describe('HighscoreSideNavComponent', () => {
-  let component: HighscoreSideNavComponent;
-  let fixture: ComponentFixture<HighscoreSideNavComponent>;
+  let component: HighScoreSideNavComponent;
+  let fixture: ComponentFixture<HighScoreSideNavComponent>;
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [HighscoreSideNavComponent],
+      declarations: [HighScoreSideNavComponent],
     }).compileComponents();
   }));
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(HighscoreSideNavComponent);
+    fixture = TestBed.createComponent(HighScoreSideNavComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

@@ -8,7 +8,7 @@ export interface Highscore {
 @Injectable({
   providedIn: 'root',
 })
-export class HighscoreService {
+export class HighScoreService {
   highscores: Highscore[] = [
     { name: 'gunnar', score: 10 },
     { name: 'Patricia Harrison', score: 23 },
