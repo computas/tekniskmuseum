@@ -26,16 +26,12 @@
     "member-ordering": [
       true,
       {
-        "order": [
-          "static-field",
-          "instance-field",
-          "static-method",
-          "instance-method"
-        ]
+        "order": ["static-field", "instance-field", "static-method", "instance-method"]
       }
     ],
     "no-console": [true, "log", "debug", "info", "time", "timeEnd", "trace"],
     "no-empty": false,
+    "no-unused-variable": true,
     "no-inferrable-types": [true, "ignore-params"],
     "no-non-null-assertion": true,
     "no-redundant-jsdoc": true,
@@ -77,14 +73,7 @@
       "options": ["ban-keywords", "check-format", "allow-pascal-case"]
     },
     "whitespace": {
-      "options": [
-        "check-branch",
-        "check-decl",
-        "check-operator",
-        "check-separator",
-        "check-type",
-        "check-typecast"
-      ]
+      "options": ["check-branch", "check-decl", "check-operator", "check-separator", "check-type", "check-typecast"]
     },
     "no-conflicting-lifecycle": true,
     "no-host-metadata-property": true,

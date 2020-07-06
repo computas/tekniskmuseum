@@ -1,0 +1,15 @@
+<div *ngIf="showHowToPlay">
+  <app-game-info (getDrawWord)="getDrawWord()"></app-game-info>
+</div>
+<div *ngIf="newGame && !showIntermediateResult">
+  <app-drawing></app-drawing>
+</div>
+<div *ngIf="showIntermediateResult">
+  <app-game-intermediate-result (nextGuess)="nextGuess($event)"></app-game-intermediate-result>
+</div>
+<div *ngIf="showFinalResult">
+  <app-game-result></app-game-result>
+</div>
+<div *ngIf="showWordToDraw">
+  <app-game-word-to-draw (drawWord)="startGame()"></app-game-word-to-draw>
+</div>

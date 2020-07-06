@@ -1,19 +1,17 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
-
+import { routes } from '../shared/models/routes';
 @Component({
   selector: 'app-welcome',
   templateUrl: './welcome.component.html',
-  styleUrls: ['./welcome.component.scss']
+  styleUrls: ['./welcome.component.scss'],
 })
 export class WelcomeComponent implements OnInit {
+  constructor(private router: Router) {}
 
-  constructor(private router: Router) { }
-
-  ngOnInit(): void {
-  }
+  ngOnInit(): void {}
 
   goToGameInfoPage() {
-    this.router.navigate(['gameinfo']);
+    this.router.navigate([routes.PLAYGAME]);
   }
 }

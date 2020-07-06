@@ -4,11 +4,13 @@
   "scripts": {
     "ng": "ng",
     "pretty-quick": "pretty-quick",
+    "prettier": "prettier --end-of-line=crlf --write src/**/*.ts",
     "start": "ng serve",
     "build": "ng build",
     "test": "ng test",
     "lint": "ng lint",
     "e2e": "ng e2e",
+    "precommit": "npm run prettier && npm run lint && npm run test:ci",
     "test:ci": "ng test --watch=false --browsers=ChromeHeadless",
     "build:ci": "ng build --prod"
   },

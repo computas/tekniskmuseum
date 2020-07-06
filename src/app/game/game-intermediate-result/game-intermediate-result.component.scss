@@ -1,0 +1,22 @@
+.won {
+  border: 3px solid green;
+}
+.loss {
+  border: 3px solid red;
+}
+#intermediate-container {
+  min-height: 100vh;
+  background: #195272;
+  color: white;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.new-drawing-button {
+  position: absolute;
+  bottom: 0;
+  right: 0;
+  margin: 24px;
+  color: #195272;
+  width: 12%;
+}

@@ -1,28 +1,15 @@
-import {
-  Component,
-  ElementRef,
-  OnInit,
-  ViewChild,
-  Output,
-} from '@angular/core';
+import { Component, ElementRef, OnInit, ViewChild, Output, EventEmitter } from '@angular/core';
 import { BehaviorSubject, interval, Observable } from 'rxjs';
-import {
-  trigger,
-  state,
-  style,
-  animate,
-  transition,
-} from '@angular/animations';
+import { trigger, state, style, animate, transition } from '@angular/animations';
 import { take } from 'rxjs/operators';
 import { ImageService } from './services/image.service';
 import { DrawingService } from './services/drawing.service';
 import { StartGameInfo } from './services/start-game-info';
-import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-drawing',
-  templateUrl: './drawing.component.html',
-  styleUrls: ['./drawing.component.scss'],
+  templateUrl: './game-draw.component.html',
+  styleUrls: ['./game-draw.component.scss'],
   animations: [
     trigger('changeDivSize', [
       state(
@@ -50,7 +37,7 @@ import { Router } from '@angular/router';
     ]),
   ],
 })
-export class DrawingComponent implements OnInit {
+export class GameDrawComponent implements OnInit {
   @ViewChild('canvas', { static: true })
   canvas: ElementRef<HTMLCanvasElement>;
   @ViewChild('countDown', { static: true })
@@ -59,11 +46,12 @@ export class DrawingComponent implements OnInit {
   y = 0;
   gameOver = new BehaviorSubject<boolean>(false);
   isDrawing = false;
-  timeLeft = 10;
+  timeLeft = 2;
   times = [];
   words = [];
   private ctx: CanvasRenderingContext2D;
   currentState = 'initial';
+  @Output() isDoneDrawing = new EventEmitter();
 
   // game info
   startGameInfo: StartGameInfo;
@@ -71,11 +59,7 @@ export class DrawingComponent implements OnInit {
   gameToken: string;
   result: boolean;
 
-  constructor(
-    private imageService: ImageService,
-    private drawingService: DrawingService,
-    private router: Router
-  ) {}
+  constructor(private imageService: ImageService, private drawingService: DrawingService) {}
 
   ngOnInit(): void {
     const ctx = this.canvas.nativeElement.getContext('2d');
@@ -98,11 +82,9 @@ export class DrawingComponent implements OnInit {
 
   startGame(): void {
     this.startDrawingTimer(this.createDrawingTimer());
-    this.drawingService.startGame().subscribe((startGameInfo) => {
-      this.startGameInfo = startGameInfo;
-      this.guessWord = this.startGameInfo.label;
-      this.gameToken = this.startGameInfo.token;
-    });
+    if (this.drawingService.startGameInfo) {
+      this.guessWord = this.drawingService.startGameInfo.label;
+    }
   }
 
   submitAnswer() {
@@ -111,7 +93,7 @@ export class DrawingComponent implements OnInit {
     this.imageService.resize(b64Image).subscribe({
       next: (dataUrl) => {
         const formData: FormData = this.imageService.createFormData(dataUrl);
-        formData.append('token', this.gameToken);
+        formData.append('token', this.drawingService.startGameInfo.token);
         this.drawingService.submitAnswer(formData, dataUrl).subscribe();
       },
     });
@@ -161,10 +143,6 @@ export class DrawingComponent implements OnInit {
     }
   }
 
-  resultNavigation() {
-    this.router.navigate(['/result']);
-  }
-
   private createDrawingTimer() {
     return new Observable((observer) => {
       let color = 'red';
@@ -189,10 +167,9 @@ export class DrawingComponent implements OnInit {
     timer.subscribe({
       complete: () => {
         this.gameOver.next(true);
-        this.currentState =
-          this.currentState === 'initial' ? 'final' : 'initial';
+        this.currentState = this.currentState === 'initial' ? 'final' : 'initial';
         this.submitAnswer();
-        this.resultNavigation();
+        this.drawingService.guessDone.next(true);
       },
     });
   }

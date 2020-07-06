@@ -1,7 +1,8 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
-
 import { WelcomeComponent } from './welcome.component';
 import { RouterTestingModule } from '@angular/router/testing';
+import { MaterialImportsModule } from '../shared/material-imports/material-imports.module';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 describe('WelcomeComponent', () => {
   let component: WelcomeComponent;
@@ -9,10 +10,9 @@ describe('WelcomeComponent', () => {
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      imports: [RouterTestingModule],
-      declarations: [ WelcomeComponent ]
-    })
-    .compileComponents();
+      declarations: [WelcomeComponent],
+      imports: [MaterialImportsModule, RouterTestingModule, BrowserAnimationsModule],
+    }).compileComponents();
   }));
 
   beforeEach(() => {

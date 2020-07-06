@@ -1,26 +1,16 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 import { WelcomeComponent } from './welcome/welcome.component';
-import { DrawingComponent } from './drawing/drawing.component';
-import { GameInfoComponent } from './game-info/game-info.component';
-import { ResultComponent } from './result/result.component';
-
+import { GameComponent } from './game/game.component';
+import { routes as r } from './shared/models/routes';
 const routes: Routes = [
   {
-    path: '',
+    path: r.LANDING,
     component: WelcomeComponent,
   },
   {
-    path: 'drawing',
-    component: DrawingComponent,
-  },
-  {
-    path: 'gameinfo',
-    component: GameInfoComponent,
-  },
-  {
-    path: 'result',
-    component: ResultComponent,
+    path: r.PLAYGAME,
+    component: GameComponent,
   },
 ];
 
