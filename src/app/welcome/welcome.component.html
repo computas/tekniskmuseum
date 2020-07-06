@@ -6,7 +6,9 @@
     <mat-card class="side-nav-button"
       ><mat-icon aria-label="Example home icon">school</mat-icon>Lær om kunstig intelligens</mat-card
     >
-    <mat-card class="side-nav-button"><mat-icon aria-label="Example home icon">star</mat-icon>Topplisten</mat-card>
+    <a [routerLink]="['/highscore']" routerLinkActive="router-link-active">
+      <mat-card class="side-nav-button"><mat-icon aria-label="Example home icon">star</mat-icon>Topplisten</mat-card>
+    </a>
   </mat-sidenav>
   <mat-sidenav-content class="content">
     <div class="main-container">

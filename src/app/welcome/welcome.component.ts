@@ -14,4 +14,8 @@ export class WelcomeComponent implements OnInit {
   goToGameInfoPage() {
     this.router.navigate([routes.PLAYGAME]);
   }
+
+  goToHighscore() {
+    this.router.navigate([routes.HIGHSCORE]);
+  }
 }
