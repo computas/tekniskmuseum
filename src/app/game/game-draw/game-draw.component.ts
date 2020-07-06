@@ -42,23 +42,22 @@ export class GameDrawComponent implements OnInit {
   canvas: ElementRef<HTMLCanvasElement>;
   @ViewChild('countDown', { static: true })
   countDown: ElementRef<HTMLSpanElement>;
+
+  private ctx: CanvasRenderingContext2D;
+  clockColor = 'initial';
+
+  @Output() isDoneDrawing = new EventEmitter();
+
   x = 0;
   y = 0;
   isDrawing = false;
   timeLeft = 2;
-  times = [];
-  words = [];
-  private ctx: CanvasRenderingContext2D;
-  currentState = 'initial';
-  @Output() isDoneDrawing = new EventEmitter();
+
   private readonly _timeOut = new BehaviorSubject<boolean>(false);
   readonly _timeOut$ = this._timeOut.asObservable();
 
-  // game info
   startGameInfo: StartGameInfo;
   guessWord: string;
-  gameToken: string;
-  result: boolean;
 
   constructor(private imageService: ImageService, private drawingService: DrawingService) {}
 
@@ -130,7 +129,7 @@ export class GameDrawComponent implements OnInit {
   clear() {
     const canvas = this.canvas.nativeElement;
     this.ctx.clearRect(0, 0, canvas.width, canvas.height);
-    this.currentState = this.currentState === 'initial' ? 'final' : 'initial';
+    this.clockColor = this.clockColor === 'initial' ? 'final' : 'initial';
     this.timeOut = true;
     this.timeLeft = 10;
     this.countDown.nativeElement.style.color = 'white';
@@ -168,7 +167,7 @@ export class GameDrawComponent implements OnInit {
     timer.subscribe({
       complete: () => {
         this.timeOut = true;
-        this.currentState = this.currentState === 'initial' ? 'final' : 'initial';
+        this.clockColor = this.clockColor === 'initial' ? 'final' : 'initial';
         this.submitAnswer();
       },
     });
