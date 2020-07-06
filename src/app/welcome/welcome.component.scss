@@ -1,5 +1,5 @@
 .side-drawer {
-  background: #e42313;
+  background: #e1e1e1;
 }
 .example-container {
   position: absolute;
@@ -26,21 +26,23 @@
   max-width: 80%;
 }
 .play-game-button {
-  background: #e42313;
+  background: #195272;
   padding: 4px 50px;
 }
 .content {
   position: relative;
 }
 .content::before {
-  background: url("./../../assets/sketch-background.jpg");
+  background: url('./../../assets/sketch-background.jpg');
   background-repeat: no-repeat;
   background-size: cover;
   filter: opacity(0.2);
-  content: "";
+  content: '';
   position: absolute;
   top: 0;
   bottom: 0;
   left: 0;
   right: 0;
+}
+@media (max-width: 600px) {
 }
