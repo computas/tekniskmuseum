@@ -20,11 +20,31 @@ export class HighscoreService {
     { name: 'Brook Trujillo', score: 3 },
     { name: 'Jevon Rocha', score: 14 },
     { name: 'Amie Sargent', score: 10 },
+    { name: 'Ami ', score: 10 },
   ];
 
   constructor() {}
 
   get() {
+    this.sortHighScores();
     return of(this.highscores);
+  }
+
+  sortHighScores() {
+    this.highscores.sort((a, b) => {
+      if (b.score === a.score) {
+        return a.name > b.name ? 1 : -1;
+      }
+      return b.score - a.score;
+    });
+  }
+  getTop(n) {
+    if (this.highscores.length < n) {
+      return of(this.highscores.slice(0, n));
+    }
+    return of(this.highscores);
+  }
+  findScoreOfNewUser(name) {
+    return this.highscores.findIndex((value) => value.name === name);
   }
 }

@@ -1,8 +1,7 @@
 <table>
   <thead>
     <th>Name</th>
-    <th>Wins</th>
-    <th>Losses</th>
+    <th>Score</th>
   </thead>
   <tbody>
     <tr *ngFor="let highscore of highscores">
@@ -11,3 +10,4 @@
     </tr>
   </tbody>
 </table>
+<app-highscore-side-nav [highscores]="topHighscores"></app-highscore-side-nav>

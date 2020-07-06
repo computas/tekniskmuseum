@@ -1,4 +1,5 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Input } from '@angular/core';
+import { Highscore } from 'src/app/services/highscore.service';
 
 @Component({
   selector: 'app-highscore-side-nav',
@@ -6,6 +7,9 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./highscore-side-nav.component.scss'],
 })
 export class HighscoreSideNavComponent implements OnInit {
+  @Input()
+  highscores: Highscore;
+
   constructor() {}
 
   ngOnInit(): void {}
