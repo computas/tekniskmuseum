@@ -1,20 +1,26 @@
-.game-info {
-  height: 100%;
+.game-info-text-header {
+  color: #fa852f;
+  font-size: 48px;
+}
+.game-info-container {
+}
+.game-info-text-content {
   display: flex;
-  flex-direction: column;
   justify-content: center;
   align-items: center;
+  flex-direction: column;
+  min-height: 90vh;
 }
-.game-info {
-  color: #e42313;
+.game-info-text-list {
+  color: #195272;
+}
+.game-info-text-list > li {
+  font-size: 28px;
+  margin: 28px;
+}
+.game-info-footer {
 }
 .get-word-button {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  background: #e42313;
-}
-.welcome-guy {
-  height: 30%;
-  padding: 50px;
+  width: 200px;
+  background: #195272;
 }
