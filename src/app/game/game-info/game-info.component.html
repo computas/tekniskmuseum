@@ -1,18 +1,16 @@
 <div class="game-info-container">
   <div class="game-info-header">
-    <a href="#">
-      <mat-icon aria-hidden="false" aria-label="Example home icon" class="material-icons" md-48 outline>
-        home_outline
-      </mat-icon>
+    <a mat-flat-button href="#">
+      <mat-icon>home</mat-icon>
     </a>
-    <button mat-icon-button color="primary" aria-label="Example icon button with a home icon">
-      <span class="material-icons">
-        volume_off
-      </span>
-      <span class="material-icons">
-        volume_up
-      </span>
-    </button>
+    <div class="spacer"></div>
+    <div>
+      <button mat-icon-button color="primary" aria-label="Example icon button with a home icon">
+        <span class="material-icons">
+          volume_off
+        </span>
+      </button>
+    </div>
   </div>
   <div class="game-info-text-content">
     <h1 class="game-info-text-header">Slik spiller du:</h1>
@@ -20,7 +18,12 @@
       <li>Tegn ord</li>
       <li>Jeg gjetter</li>
       <li>Få poeng</li>
-      <mat-icon aria-hidden="true" aria-label="Example home icon"></mat-icon>
+      <div class="game-info-seconds">
+        <span class="material-icons">
+          access_alarms
+        </span>
+        <span class="seconds">20 s</span>
+      </div>
     </ol>
     <div class="game-info-footer">
       <div class="avatar"></div>
