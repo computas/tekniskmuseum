@@ -129,11 +129,6 @@ export class GameDrawComponent implements OnInit {
   clear() {
     const canvas = this.canvas.nativeElement;
     this.ctx.clearRect(0, 0, canvas.width, canvas.height);
-    this.clockColor = this.clockColor === 'initial' ? 'final' : 'initial';
-    this.timeOut = true;
-    this.timeLeft = 10;
-    this.countDown.nativeElement.style.color = 'white';
-    this.startGame();
   }
 
   stop(e) {
