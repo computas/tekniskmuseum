@@ -1,19 +1,43 @@
 .side-drawer {
-  background: #e42313;
+  background: #e1e1e1;
 }
-.example-container {
+.container {
+  display: flex;
+  flex-direction: column;
   position: absolute;
   top: 0;
   bottom: 0;
   left: 0;
   right: 0;
 }
+
+.site-is-mobile .toolbar-container {
+  position: fixed;
+  z-index: 2;
+}
+
+.sidenav-container {
+  flex: 1;
+}
+
+.site-is-mobile {
+  flex: 1 0 auto;
+}
+
+.nav-spacer {
+  flex: 1 1 auto;
+}
 .side-nav-button {
-  color: white;
+  color: #195272;
   font-weight: normal;
   mat-icon {
     margin-right: 10px;
+    vertical-align: middle;
   }
+  margin: 5px;
+}
+a {
+  text-decoration: none;
 }
 .main-container {
   display: flex;
@@ -23,24 +47,29 @@
   height: 100%;
 }
 .welcome-guy {
-  max-width: 80%;
+  max-height: 70vh;
 }
 .play-game-button {
-  background: #e42313;
+  background: #195272;
   padding: 4px 50px;
 }
 .content {
   position: relative;
 }
 .content::before {
-  background: url("./../../assets/sketch-background.jpg");
+  background: url('./../../assets/sketch-background.jpg');
   background-repeat: no-repeat;
   background-size: cover;
   filter: opacity(0.2);
-  content: "";
+  content: '';
   position: absolute;
   top: 0;
   bottom: 0;
   left: 0;
   right: 0;
+}
+
+.mat-toolbar.mat-primary {
+  background: #195272;
+  color: #fff;
 }
