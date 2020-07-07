@@ -1,12 +1,31 @@
 .side-drawer {
   background: #e1e1e1;
 }
-.example-container {
+.container {
+  display: flex;
+  flex-direction: column;
   position: absolute;
   top: 0;
   bottom: 0;
   left: 0;
   right: 0;
+}
+
+.site-is-mobile .toolbar-container {
+  position: fixed;
+  z-index: 2;
+}
+
+.sidenav-container {
+  flex: 1;
+}
+
+.site-is-mobile {
+  flex: 1 0 auto;
+}
+
+.nav-spacer {
+  flex: 1 1 auto;
 }
 .side-nav-button {
   color: #195272;
@@ -28,7 +47,7 @@ a {
   height: 100%;
 }
 .welcome-guy {
-  max-width: 80%;
+  max-width: 20%;
 }
 .play-game-button {
   background: #195272;
@@ -49,5 +68,8 @@ a {
   left: 0;
   right: 0;
 }
-@media (max-width: 600px) {
+
+.mat-toolbar.mat-primary {
+  background: #195272;
+  color: #fff;
 }
