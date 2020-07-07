@@ -20,6 +20,10 @@
 .drawing-seconds {
   display: flex;
   align-items: center;
+  font-size: 18px;
+}
+.drawing-seconds > span {
+  margin-right: 10px;
 }
 .countdown {
   user-select: none;
