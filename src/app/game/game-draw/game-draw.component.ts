@@ -51,7 +51,7 @@ export class GameDrawComponent implements OnInit {
   x = 0;
   y = 0;
   isDrawing = false;
-  timeLeft = 2;
+  timeLeft = 10;
 
   private readonly _timeOut = new BehaviorSubject<boolean>(false);
   readonly _timeOut$ = this._timeOut.asObservable();
@@ -68,8 +68,8 @@ export class GameDrawComponent implements OnInit {
     }
 
     this.ctx = ctx;
-    this.canvas.nativeElement.width = document.body.clientWidth;
-    this.canvas.nativeElement.height = document.body.clientHeight;
+    this.canvas.nativeElement.width = this.canvas.nativeElement.parentElement?.offsetWidth || document.body.clientWidth;
+    this.canvas.nativeElement.height = document.body.clientHeight - 100;
     this.startGame();
   }
 
