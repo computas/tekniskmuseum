@@ -1,7 +1,23 @@
-.nav-spacer {
-  flex: 1 1 auto;
-}
-canvas {
+#drawing-canvas {
   position: absolute;
   touch-action: none;
+  border: 1px solid;
+  margin: auto;
+}
+.drawing-container {
+  margin: auto;
+  width: 90%;
+  margin-top: 20px;
+}
+.drawing-header {
+  display: flex;
+  justify-content: space-between;
+}
+.drawing-header > h1 {
+  color: #fa852f;
+  margin: 0;
+}
+.drawing-seconds {
+  display: flex;
+  align-items: center;
 }
