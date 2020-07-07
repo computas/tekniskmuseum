@@ -1,36 +1,35 @@
-<mat-sidenav-container class="example-container">
-  <mat-sidenav #sidenav mode="side" position="end" class="side-drawer" opened>
-    <mat-card class="side-nav-button"
-      ><mat-icon aria-label="Example home icon">perm_media</mat-icon>Se andres tegninger</mat-card
+<div class="container" [class.site-is-mobile]="mobileQuery.matches">
+  <mat-toolbar color="primary" class="toolbar-container">
+    <span class="nav-spacer"></span>
+    <span class="nav-spacer"></span>
+    <button mat-icon-button (click)="snav.toggle()"><mat-icon>menu</mat-icon></button>
+  </mat-toolbar>
+
+  <mat-sidenav-container class="sidenav-container" [style.marginTop.px]="mobileQuery.matches ? 56 : 0">
+    <mat-sidenav
+      #snav
+      [mode]="mobileQuery.matches ? 'over' : 'side'"
+      position="end"
+      [fixedInViewport]="mobileQuery.matches"
+      fixedTopGap="56"
+      class="side-drawer"
     >
-    <mat-card class="side-nav-button"
-      ><mat-icon aria-label="Example home icon">school</mat-icon>Lær om kunstig intelligens</mat-card
-    >
-    <a [routerLink]="['/highscore']" routerLinkActive="router-link-active">
-      <mat-card class="side-nav-button"><mat-icon aria-label="Example home icon">star</mat-icon>Topplisten</mat-card>
-    </a>
-  </mat-sidenav>
-  <mat-sidenav-content class="content">
-    <div class="main-container">
-      <img src="assets/welcome-guy.png" alt="" class="welcome-guy" />
-      <button mat-raised-button color="primary" class="play-game-button" (click)="goToGameInfoPage()">Spill</button>
-      <button mat-icon-button [matMenuTriggerFor]="menu" aria-label="Example icon-button with a menu">
-        <mat-icon>menu</mat-icon>
-      </button>
-      <mat-menu #menu="matMenu">
-        <button mat-menu-item>
-          <mat-icon>perm_media</mat-icon>
-          <span>Se andres tegninger</span>
-        </button>
-        <button mat-menu-item>
-          <mat-icon>school</mat-icon>
-          <span>Lær om kunstig intelligens</span>
-        </button>
-        <button mat-menu-item [routerLink]="['/highscore']" routerLinkActive="router-link-active">
-          <mat-icon>star</mat-icon>
-          <span>Topplisten</span>
-        </button>
-      </mat-menu>
-    </div>
-  </mat-sidenav-content>
-</mat-sidenav-container>
+      <mat-card class="side-nav-button"
+        ><mat-icon aria-label="Example home icon">perm_media</mat-icon>Se andres tegninger</mat-card
+      >
+      <mat-card class="side-nav-button"
+        ><mat-icon aria-label="Example home icon">school</mat-icon>Lær om kunstig intelligens</mat-card
+      >
+      <a [routerLink]="['/highscore']" routerLinkActive="router-link-active">
+        <mat-card class="side-nav-button"><mat-icon aria-label="Example home icon">star</mat-icon>Topplisten</mat-card>
+      </a>
+    </mat-sidenav>
+
+    <mat-sidenav-content class="content">
+      <div class="main-container">
+        <img src="assets/welcome-guy.png" alt="" class="welcome-guy" />
+        <button mat-raised-button color="primary" class="play-game-button" (click)="goToGameInfoPage()">Spill</button>
+      </div>
+    </mat-sidenav-content>
+  </mat-sidenav-container>
+</div>
