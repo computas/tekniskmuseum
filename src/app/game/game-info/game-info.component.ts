@@ -7,11 +7,16 @@ import { Component, OnInit, Output, EventEmitter } from '@angular/core';
 })
 export class GameInfoComponent implements OnInit {
   @Output() getDrawWord = new EventEmitter();
+  vol = false;
   constructor() {}
 
   ngOnInit(): void {}
 
   startDrawing() {
     this.getDrawWord.emit(true);
+  }
+
+  volume() {
+    this.vol = !this.vol;
   }
 }

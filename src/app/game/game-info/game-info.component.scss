@@ -1,20 +1,45 @@
-.game-info {
-  height: 100%;
+.material-icons {
+  color: #195272;
+}
+.spacer {
+  flex: 1 1 auto;
+}
+.game-info-header {
+  display: flex;
+}
+.game-info-text-header {
+  color: #fa852f;
+  font-size: 48px;
+  text-align: center;
+}
+.game-info-seconds {
+  display: flex;
+  align-items: center;
+}
+.game-info-seconds > span {
+  margin-right: 10px;
+}
+
+.game-info-text-content {
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
+  min-height: 90vh;
 }
-.game-info {
-  color: #e42313;
+.game-info-text-list {
+  color: #195272;
+}
+.game-info-text-list > li {
+  font-size: 28px;
+  margin: 28px;
 }
 .get-word-button {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  background: #e42313;
+  width: 200px;
+  background: #195272;
 }
-.welcome-guy {
-  height: 30%;
-  padding: 50px;
+.game-info-volume {
+}
+.seconds {
+  font-size: 18px;
 }
