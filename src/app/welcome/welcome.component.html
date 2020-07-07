@@ -2,6 +2,15 @@
   <mat-toolbar color="primary" class="toolbar-container">
     <span>Tekniskspill</span>
     <span class="nav-spacer"></span>
+    <button
+      mat-icon-button
+      onclick="responsiveVoice.speak('Hei, mitt navn er Kunstig Intelligens. Jeg elsker å lære nye ord. Kan du hjelpe meg?');"
+      type="button"
+      value="Play"
+    >
+      <mat-icon>volume_up</mat-icon>
+    </button>
+    <span class="nav-spacer"></span>
     <button mat-icon-button (click)="snav.toggle()"><mat-icon>menu</mat-icon></button>
   </mat-toolbar>
 
