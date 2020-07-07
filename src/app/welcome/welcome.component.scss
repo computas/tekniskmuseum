@@ -53,6 +53,12 @@ a {
   background: #195272;
   padding: 4px 50px;
 }
+.tts-button {
+  top: 0;
+  position: absolute;
+  right: 0;
+  margin: 24px;
+}
 .content {
   position: relative;
 }
@@ -72,4 +78,9 @@ a {
 .mat-toolbar.mat-primary {
   background: #195272;
   color: #fff;
+}
+
+.mat-fab.mat-primary {
+  background: #ecf8ff;
+  color: #195272;
 }
