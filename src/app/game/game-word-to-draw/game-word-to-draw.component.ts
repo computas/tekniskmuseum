@@ -10,8 +10,10 @@ export class GameWordToDrawComponent implements OnInit {
   constructor(private drawingService: DrawingService) {}
   @Output() drawWord = new EventEmitter();
   word = '';
+  loading = true;
   ngOnInit(): void {
     this.drawingService.startGame().subscribe((res) => {
+      this.loading = false;
       this.word = res.label;
     });
   }
