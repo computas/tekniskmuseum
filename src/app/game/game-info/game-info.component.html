@@ -5,9 +5,12 @@
     </a>
     <div class="spacer"></div>
     <div>
-      <button mat-icon-button color="primary" aria-label="Example icon button with a home icon">
-        <span class="material-icons">
+      <button mat-icon-button color="primary" aria-label="Example icon button with a home icon" (click)="volume()">
+        <span *ngIf="!vol" class="material-icons">
           volume_off
+        </span>
+        <span *ngIf="vol" class="material-icons">
+          volume_up
         </span>
       </button>
     </div>
