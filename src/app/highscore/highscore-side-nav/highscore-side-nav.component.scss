@@ -22,7 +22,32 @@ mat-sidenav {
 }
 .name-form {
   display: flex;
+  padding-left: 15px;
 }
 .highlight {
   color: #fa852f;
+}
+.send-btn {
+  color: #195272;
+}
+#form-test {
+  height: 50px;
+}
+.send-btn {
+  background-color: #f8f8f8;
+  margin-left: 12px;
+}
+
+::ng-deep .mat-form-field {
+  .mat-form-field-flex {
+    background-color: #f8f8f8;
+    padding: 5px;
+    border-radius: 10px;
+  }
+  .mat-form-field-underline {
+    height: 1px;
+    margin-bottom: 5px;
+    width: 90%;
+    margin-left: 5px;
+  }
 }

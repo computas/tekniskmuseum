@@ -9,7 +9,7 @@
     </ul>
     <div *ngIf="!hasSubmit">
       <form class="name-form">
-        <mat-form-field class="example-full-width" floatLabel="always">
+        <mat-form-field id="form-test" class="example-full-width" floatLabel="always">
           <mat-label>Kallenavn</mat-label>
           <input
             matInput
@@ -20,9 +20,9 @@
             autofocus
           />
         </mat-form-field>
-        <button mat-button (click)="click()">
+        <button mat-button (click)="click()" class="send-btn">
           <span class="material-icons">
-            add
+            send
           </span>
         </button>
       </form>
