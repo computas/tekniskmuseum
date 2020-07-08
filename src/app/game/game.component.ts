@@ -21,8 +21,12 @@ export class GameComponent implements OnInit, OnDestroy {
     this.drawingService.endGame();
   }
   ngOnInit(): void {
+<<<<<<< HEAD
     this.drawingService.totalGuess = 3;
     this.drawingService.guessUsed = 1;
+=======
+    this.drawingService.totalGuess = 5;
+>>>>>>> 48de22a... add: mocks
     this.drawingService.gameOver$.subscribe((gameOver) => {
       this.clearGameState();
       this.showFinalResult = gameOver;

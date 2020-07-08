@@ -5,6 +5,7 @@ import { tap, switchMap } from 'rxjs/operators';
 import { StartGameToken } from './start-game-token';
 import { GameLabel } from './game-label';
 import { Result } from '../../../shared/models/result.interface';
+import { ResultsMock } from './results.mock';
 
 @Injectable({
   providedIn: 'root',
@@ -26,6 +27,8 @@ export class DrawingService {
   readonly results$ = this._results.asObservable();
   readonly guessDone$ = this._guessDone.asObservable();
   readonly gameOver$ = this._gameOver.asObservable();
+
+  resultsMock: Result[] = ResultsMock;
 
   constructor(private http: HttpClient) {}
 
@@ -57,6 +60,9 @@ export class DrawingService {
         */
       })
     );
+  }
+  get() {
+    return this.resultsMock;
   }
 
   isGameOver() {
