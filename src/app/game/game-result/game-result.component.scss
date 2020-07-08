@@ -1,21 +1,29 @@
 #result-container {
-  margin: 20px 48px;
+  margin: 48px 48px;
 }
 #result-header {
   text-align: center;
+  color: #195272;
+  font-size: 38px;
 }
 
 #result-card-container {
   display: flex;
   justify-content: center;
+  flex-wrap: wrap;
+  margin: 0 48px;
+  margin-top: 48px;
 }
 
 #result-card {
-  margin: 28px;
+  margin: 0 28px;
 }
 .card-won {
   border: 3px solid green;
 }
 .card-loss {
   border: 3px solid red;
+}
+.game-result-img {
+  width: 200px;
 }

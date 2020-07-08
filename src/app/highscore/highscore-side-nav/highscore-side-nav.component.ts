@@ -7,7 +7,7 @@ import { Highscore, HighScoreService } from 'src/app/services/highscore.service'
   styleUrls: ['./highscore-side-nav.component.scss'],
 })
 export class HighScoreSideNavComponent implements OnInit {
-  opened: boolean;
+  opened = true;
   highscores: Highscore[];
   value = '';
   hasSubmit = false;
