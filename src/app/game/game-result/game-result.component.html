@@ -8,7 +8,15 @@
           [src]="result.imageData"
           [className]="result.hasWon ? 'game-result-img card-won' : 'game-result-img card-loss'"
         />
-        <p id="result-subtitile">{{ result.word | titlecase }}</p>
+        <p id="result-subtitile">
+          <span *ngIf="result.hasWon" class="material-icons">
+            done
+          </span>
+          <span *ngIf="!result.hasWon" class="material-icons">
+            clear
+          </span>
+          {{ result.word | titlecase }}
+        </p>
       </div>
     </div>
     <button mat-raised-button class="start-new-game-button">

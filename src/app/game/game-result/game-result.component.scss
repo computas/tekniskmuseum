@@ -22,7 +22,7 @@
   border: 3px solid #68d466;
 }
 .card-loss {
-  border: 3px solid red;
+  border: 3px solid #de1f1f;
 }
 .game-result-img {
   width: 200px;
@@ -37,7 +37,13 @@ p {
   font-style: italic;
   font-weight: normal;
 }
-
+#result-subtitile {
+  display: flex;
+  align-items: center;
+}
+#result-subtitile > span {
+  color: #68d466;
+}
 @media only screen and (max-width: 768px) {
   .start-new-game-button {
     display: flex;
