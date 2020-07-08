@@ -37,3 +37,12 @@ p {
   font-style: italic;
   font-weight: normal;
 }
+
+@media only screen and (max-width: 768px) {
+  .start-new-game-button {
+    display: flex;
+    float: none;
+    width: 100%;
+    justify-content: center;
+  }
+}
