@@ -19,7 +19,7 @@
   margin: 0 28px;
 }
 .card-won {
-  border: 3px solid green;
+  border: 3px solid #68d466;
 }
 .card-loss {
   border: 3px solid red;
@@ -32,4 +32,8 @@
   width: 200px;
   color: #195272;
   border: 1px solid;
+}
+p {
+  font-style: italic;
+  font-weight: normal;
 }

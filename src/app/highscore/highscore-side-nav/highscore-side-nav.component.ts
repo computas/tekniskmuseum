@@ -11,7 +11,9 @@ export class HighScoreSideNavComponent implements OnInit {
   highscores: Highscore[];
   value = '';
   hasSubmit = false;
-  @Input() playerScore: number;
+
+  @Input()
+  playerScore: number;
   constructor(private highscoreService: HighScoreService) {}
 
   ngOnInit(): void {
@@ -22,6 +24,7 @@ export class HighScoreSideNavComponent implements OnInit {
       this.highscores = res;
     });
   }
+
   click() {
     const player = this.highscoreService.findScoreOfNewUser();
     if (player) {
