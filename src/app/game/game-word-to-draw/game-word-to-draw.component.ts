@@ -19,14 +19,18 @@ export class GameWordToDrawComponent implements OnInit {
         this.word = res.label;
         this.loading = false;
       });
-      this.guessUsed = this.drawingService.guessUsed;
+      this.drawingService.guessUsed$.subscribe((res) => {
+        this.guessUsed = res;
+      });
     } else {
       this.drawingService.startGame().subscribe((res) => {
         this.loading = false;
         this.word = this.drawingService.label;
         this.gameHasStarted = true;
       });
-      this.guessUsed = this.drawingService.guessUsed;
+      this.drawingService.guessUsed$.subscribe((res) => {
+        this.guessUsed = res;
+      });
     }
   }
 }

@@ -12,15 +12,16 @@ import { Result } from '../../../shared/models/result.interface';
 export class DrawingService {
   baseUrl = 'https://tekniskback.azurewebsites.net';
   totalGuess = 3;
-  guessUsed = 1;
   token = '';
   labels = [];
   label = '';
 
+  private readonly _guessUsed = new BehaviorSubject<number>(1);
   private readonly _gameOver = new BehaviorSubject<boolean>(false);
   private readonly _guessDone = new BehaviorSubject<boolean>(false);
   private readonly _results = new BehaviorSubject<Result[]>([]);
 
+  readonly guessUsed$ = this._guessUsed.asObservable();
   readonly results$ = this._results.asObservable();
   readonly guessDone$ = this._guessDone.asObservable();
   readonly gameOver$ = this._gameOver.asObservable();
@@ -37,7 +38,10 @@ export class DrawingService {
           gameState: res.gameState,
         };
         this.addResult(result);
-        this.guessUsed++;
+        if (this.guessUsed) {
+          // calls the getter
+          this.guessUsed++; // calls the setter and passes false
+        }
         this.guessDone = true;
         this.isGameOver();
         /*
@@ -89,6 +93,14 @@ export class DrawingService {
 
   get lastResult(): Result {
     return this.results[this.results.length - 1];
+  }
+
+  get guessUsed(): number {
+    return this._guessUsed.getValue();
+  }
+
+  set guessUsed(val: number) {
+    this._guessUsed.next(val);
   }
 
   get results(): Result[] {
