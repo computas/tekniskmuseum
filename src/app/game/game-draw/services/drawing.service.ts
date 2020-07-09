@@ -1,8 +1,9 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable, BehaviorSubject } from 'rxjs';
-import { tap } from 'rxjs/operators';
-import { StartGameInfo } from './start-game-info';
+import { tap, switchMap } from 'rxjs/operators';
+import { StartGameToken } from './start-game-token';
+import { GameLabel } from './game-label';
 import { Result } from '../../../shared/models/result.interface';
 
 @Injectable({
@@ -10,7 +11,6 @@ import { Result } from '../../../shared/models/result.interface';
 })
 export class DrawingService {
   baseUrl = 'https://tekniskback.azurewebsites.net';
-  startGameInfo: StartGameInfo;
   totalGuess = 3;
   token = '';
   labels = [];
@@ -26,33 +26,24 @@ export class DrawingService {
 
   constructor(private http: HttpClient) {}
 
-  submitAnswer(answerInfo: FormData, imageData: string): Observable<any> {
-    return this.http.post<FormData>(`${this.baseUrl}/submitAnswer`, answerInfo).pipe(
+  classify(answerInfo: FormData, imageData: string): Observable<any> {
+    return this.http.post<FormData>(`${this.baseUrl}/classify`, answerInfo).pipe(
       tap((res) => {
         const result: Result = {
           hasWon: res.hasWon,
           imageData,
-          word: this.startGameInfo.label,
+          word: this.label,
           gameState: res.gameState,
         };
-        this.addResult(result);
-        this.guessDone = true;
-        this.isGameOver();
-      })
-    );
-  }
-
-  classify(answerInfo: FormData, imageData: string) {
-    return this.http.post<FormData>(`${this.baseUrl}/classify`, answerInfo).pipe(
-      tap((res) => {
-        console.log('result', res);
-        // if riktig
-        // this.guessDone = true
-        /**
-         * this.addResult(result);
-           this.guessDone = true;
-           this.isGameOver();
-         */
+        if (result.gameState == 'Playing' && result.hasWon == true) {
+          this.addResult(result);
+          this.guessDone = true;
+          this.isGameOver();
+        } else if (result.gameState == 'Done') {
+          this.addResult(result);
+          this.guessDone = true;
+          this.isGameOver();
+        }
       })
     );
   }
