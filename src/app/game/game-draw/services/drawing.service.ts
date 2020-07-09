@@ -12,6 +12,7 @@ import { Result } from '../../../shared/models/result.interface';
 export class DrawingService {
   baseUrl = 'https://tekniskback.azurewebsites.net';
   totalGuess = 3;
+  guessUsed = 1;
   token = '';
   labels = [];
   label = '';
@@ -36,6 +37,7 @@ export class DrawingService {
           gameState: res.gameState,
         };
         this.addResult(result);
+        this.guessUsed++;
         this.guessDone = true;
         this.isGameOver();
         /*
