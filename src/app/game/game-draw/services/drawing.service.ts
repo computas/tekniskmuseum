@@ -35,6 +35,10 @@ export class DrawingService {
           word: this.label,
           gameState: res.gameState,
         };
+        this.addResult(result);
+        this.guessDone = true;
+        this.isGameOver();
+        /*
         if (result.gameState == 'Playing' && result.hasWon == true) {
           this.addResult(result);
           this.guessDone = true;
@@ -44,6 +48,7 @@ export class DrawingService {
           this.guessDone = true;
           this.isGameOver();
         }
+        */
       })
     );
   }

@@ -144,8 +144,23 @@ export class GameDrawComponent implements OnInit {
     return new Observable((observer) => {
       let color = 'red';
       interval(100)
-        .pipe(
-          take(10 * this.timeLeft),
+        .pipe(take(10 * this.timeLeft))
+        .subscribe((tics) => {
+          if (tics % 10 === 9) {
+            // TODO CALL CLASSIFY
+            //
+            // this.getDrawingFromCanvasAndCreateFormDataAndClassify();
+            this.timeLeft--;
+          }
+          if (this.timeLeft <= 5) {
+            this.countDown.nativeElement.style.color = color;
+            color = color === 'white' ? 'red' : 'white';
+          }
+          if (this.timeLeft === 0) {
+            observer.complete();
+          }
+        });
+      /*
           switchMap((tics) => {
             if (tics % 10 === 9) {
               if (this.drawingService.guessDone == false) {
@@ -166,7 +181,7 @@ export class GameDrawComponent implements OnInit {
           if (this.timeLeft === 0) {
             observer.complete();
           }
-        });
+        });*/
     });
   }
 
