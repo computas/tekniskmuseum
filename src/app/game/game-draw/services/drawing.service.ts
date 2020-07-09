@@ -64,26 +64,20 @@ export class DrawingService {
     }
   }
 
-  async startGameTest() {
-    const res: any = await this.http.get(`${this.baseUrl}/startGame`).toPromise();
-    const labelRes: any = await this.http.post(`${this.baseUrl}/getLabel?token=${res.token}`, {}).toPromise();
-    this.token = res.token;
-    this.label = labelRes.label;
-  }
-
-  startGame(): Observable<StartGameInfo> {
-    return this.http.get<StartGameInfo>(`${this.baseUrl}/startGame`).pipe(
-      tap((res) => {
+  startGame(): Observable<GameLabel> {
+    return this.http.get<StartGameToken>(`${this.baseUrl}/startGame`).pipe(
+      switchMap((res) => {
         this.token = res.token;
-        this.getLabel().subscribe();
+        return this.getLabel();
       })
     );
   }
-  getLabel(): Observable<string> {
+
+  getLabel(): Observable<GameLabel> {
     const options = {};
     return this.http
-      .post<string>(`${this.baseUrl}/getLabel?token=${this.token}`, {})
-      .pipe(tap((res) => (this.label = res)));
+      .post<GameLabel>(`${this.baseUrl}/getLabel?token=${this.token}`, {})
+      .pipe(tap((res) => (this.label = res.label)));
   }
 
   endGame() {
