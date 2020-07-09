@@ -2,7 +2,7 @@ import { MediaMatcher } from '@angular/cdk/layout';
 import { ChangeDetectorRef, Component, OnDestroy } from '@angular/core';
 import { Router } from '@angular/router';
 import { routes } from '../shared/models/routes';
-
+import Speaker from '../../assets/scripts/speech';
 @Component({
   selector: 'app-welcome',
   templateUrl: './welcome.component.html',
@@ -15,6 +15,7 @@ export class WelcomeComponent implements OnDestroy {
 
   constructor(private router: Router, changeDetectorRef: ChangeDetectorRef, media: MediaMatcher) {
     this.mobileQuery = media.matchMedia('(max-width: 600px)');
+    Speaker.speak('hei hva skjer');
     this._mobileQueryListener = () => {
       changeDetectorRef.detectChanges();
     };
