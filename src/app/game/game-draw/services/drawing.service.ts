@@ -11,7 +11,10 @@ import { Result } from '../../../shared/models/result.interface';
 export class DrawingService {
   baseUrl = 'https://tekniskback.azurewebsites.net';
   startGameInfo: StartGameInfo;
-  totalGuess = 5;
+  totalGuess = 3;
+  token = '';
+  labels = [];
+  label = '';
 
   private readonly _gameOver = new BehaviorSubject<boolean>(false);
   private readonly _guessDone = new BehaviorSubject<boolean>(false);
@@ -30,10 +33,26 @@ export class DrawingService {
           hasWon: res.hasWon,
           imageData,
           word: this.startGameInfo.label,
+          gameState: res.gameState,
         };
         this.addResult(result);
         this.guessDone = true;
         this.isGameOver();
+      })
+    );
+  }
+
+  classify(answerInfo: FormData, imageData: string) {
+    return this.http.post<FormData>(`${this.baseUrl}/classify`, answerInfo).pipe(
+      tap((res) => {
+        console.log('result', res);
+        // if riktig
+        // this.guessDone = true
+        /**
+         * this.addResult(result);
+           this.guessDone = true;
+           this.isGameOver();
+         */
       })
     );
   }
@@ -45,12 +64,26 @@ export class DrawingService {
     }
   }
 
+  async startGameTest() {
+    const res: any = await this.http.get(`${this.baseUrl}/startGame`).toPromise();
+    const labelRes: any = await this.http.post(`${this.baseUrl}/getLabel?token=${res.token}`, {}).toPromise();
+    this.token = res.token;
+    this.label = labelRes.label;
+  }
+
   startGame(): Observable<StartGameInfo> {
     return this.http.get<StartGameInfo>(`${this.baseUrl}/startGame`).pipe(
       tap((res) => {
-        this.startGameInfo = res;
+        this.token = res.token;
+        this.getLabel().subscribe();
       })
     );
+  }
+  getLabel(): Observable<string> {
+    const options = {};
+    return this.http
+      .post<string>(`${this.baseUrl}/getLabel?token=${this.token}`, {})
+      .pipe(tap((res) => (this.label = res)));
   }
 
   endGame() {

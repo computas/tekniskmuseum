@@ -93,11 +93,43 @@ export class GameDrawComponent implements OnInit {
     this.imageService.resize(b64Image).subscribe({
       next: (dataUrl) => {
         const formData: FormData = this.imageService.createFormData(dataUrl);
-        formData.append('token', this.drawingService.startGameInfo.token);
-        this.drawingService.submitAnswer(formData, dataUrl).subscribe();
+        formData.append('token', this.drawingService.token);
+        formData.append('time', '10.00');
+        this.drawingService.classify(formData, dataUrl).subscribe((val) => {
+          console.log('from drawing service;', val);
+        });
+        //this.drawingService.this.drawingService.submitAnswer(formData, dataUrl).subscribe();
       },
     });
   }
+  classify() {
+    const b64Image = this.canvas.nativeElement.toDataURL('image/png');
+
+    this.imageService.resize(b64Image).subscribe({
+      next: (dataUrl) => {
+        const formData: FormData = this.imageService.createFormData(dataUrl);
+        formData.append('token', this.drawingService.token);
+        formData.append('time', '24.01');
+        this.drawingService.classify(formData, dataUrl).subscribe((val) => {
+          console.log('from drawing service;', val);
+        });
+      },
+    });
+  }
+  /*
+  getDrawingFromCanvasAndCreateFormDataAndClassify() {
+    const b64Image = this.canvas.nativeElement.toDataURL('image/png');
+    this.imageService.resize(b64Image).subscribe({
+      next: (dataUrl) => {
+        const formData: FormData = this.imageService.createFormData(dataUrl);
+        formData.append('token', this.drawingService.token);
+        formData.append('time', '10.00');
+        this.drawingService.classify(formData, dataUrl).subscribe((val) => {
+          console.log('from drawing service;', val);
+        });
+      },
+    });
+  }*/
 
   getClientOffset(event) {
     const { pageX, pageY } = event.touches ? event.touches[0] : event;
@@ -145,6 +177,9 @@ export class GameDrawComponent implements OnInit {
         .pipe(take(10 * this.timeLeft))
         .subscribe((tics) => {
           if (tics % 10 === 9) {
+            // TODO CALL CLASSIFY
+            //
+            // this.getDrawingFromCanvasAndCreateFormDataAndClassify();
             this.timeLeft--;
           }
           if (this.timeLeft <= 5) {
