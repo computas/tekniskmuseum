@@ -27,6 +27,9 @@
 
     <mat-sidenav-content class="content">
       <div class="main-container">
+        <button mat-fab (click)="speakIntro()" type="button" value="Play" color="primary" class="tts-button">
+          <mat-icon>volume_up</mat-icon>
+        </button>
         <img src="assets/welcome-guy.png" alt="" class="welcome-guy" />
         <button mat-raised-button color="primary" class="play-game-button" (click)="goToGameInfoPage()">Spill</button>
       </div>
