@@ -1,7 +1,7 @@
 import { Component, ElementRef, OnInit, ViewChild, Output, EventEmitter } from '@angular/core';
-import { BehaviorSubject, interval, Observable } from 'rxjs';
+import { BehaviorSubject, interval, Observable, of } from 'rxjs';
 import { trigger, state, style, animate, transition } from '@angular/animations';
-import { take } from 'rxjs/operators';
+import { take, switchMap } from 'rxjs/operators';
 import { ImageService } from './services/image.service';
 import { DrawingService } from './services/drawing.service';
 import { StartGameInfo } from './services/start-game-info';
@@ -51,7 +51,7 @@ export class GameDrawComponent implements OnInit {
   x = 0;
   y = 0;
   isDrawing = false;
-  timeLeft = 10;
+  timeLeft = 20.0;
 
   private readonly _timeOut = new BehaviorSubject<boolean>(false);
   readonly _timeOut$ = this._timeOut.asObservable();
@@ -82,26 +82,11 @@ export class GameDrawComponent implements OnInit {
 
   startGame(): void {
     this.startDrawingTimer(this.createDrawingTimer());
-    if (this.drawingService.startGameInfo) {
-      this.guessWord = this.drawingService.startGameInfo.label;
+    if (this.drawingService.label) {
+      this.guessWord = this.drawingService.label;
     }
   }
 
-  submitAnswer() {
-    const b64Image = this.canvas.nativeElement.toDataURL('image/png');
-
-    this.imageService.resize(b64Image).subscribe({
-      next: (dataUrl) => {
-        const formData: FormData = this.imageService.createFormData(dataUrl);
-        formData.append('token', this.drawingService.token);
-        formData.append('time', '10.00');
-        this.drawingService.classify(formData, dataUrl).subscribe((val) => {
-          console.log('from drawing service;', val);
-        });
-        //this.drawingService.this.drawingService.submitAnswer(formData, dataUrl).subscribe();
-      },
-    });
-  }
   classify() {
     const b64Image = this.canvas.nativeElement.toDataURL('image/png');
 
@@ -109,27 +94,12 @@ export class GameDrawComponent implements OnInit {
       next: (dataUrl) => {
         const formData: FormData = this.imageService.createFormData(dataUrl);
         formData.append('token', this.drawingService.token);
-        formData.append('time', '24.01');
-        this.drawingService.classify(formData, dataUrl).subscribe((val) => {
-          console.log('from drawing service;', val);
-        });
+        // TODO coordinate with backend about time
+        formData.append('time', this.timeLeft.toString());
+        this.drawingService.classify(formData, dataUrl).subscribe();
       },
     });
   }
-  /*
-  getDrawingFromCanvasAndCreateFormDataAndClassify() {
-    const b64Image = this.canvas.nativeElement.toDataURL('image/png');
-    this.imageService.resize(b64Image).subscribe({
-      next: (dataUrl) => {
-        const formData: FormData = this.imageService.createFormData(dataUrl);
-        formData.append('token', this.drawingService.token);
-        formData.append('time', '10.00');
-        this.drawingService.classify(formData, dataUrl).subscribe((val) => {
-          console.log('from drawing service;', val);
-        });
-      },
-    });
-  }*/
 
   getClientOffset(event) {
     const { pageX, pageY } = event.touches ? event.touches[0] : event;
@@ -174,14 +144,21 @@ export class GameDrawComponent implements OnInit {
     return new Observable((observer) => {
       let color = 'red';
       interval(100)
-        .pipe(take(10 * this.timeLeft))
+        .pipe(
+          take(10 * this.timeLeft),
+          switchMap((tics) => {
+            if (tics % 10 === 9) {
+              if (this.drawingService.guessDone == false) {
+                this.classify();
+                this.timeLeft--;
+              } else {
+                this.timeLeft = 0;
+              }
+            }
+            return of(tics);
+          })
+        )
         .subscribe((tics) => {
-          if (tics % 10 === 9) {
-            // TODO CALL CLASSIFY
-            //
-            // this.getDrawingFromCanvasAndCreateFormDataAndClassify();
-            this.timeLeft--;
-          }
           if (this.timeLeft <= 5) {
             this.countDown.nativeElement.style.color = color;
             color = color === 'white' ? 'red' : 'white';
@@ -198,7 +175,7 @@ export class GameDrawComponent implements OnInit {
       complete: () => {
         this.timeOut = true;
         this.clockColor = this.clockColor === 'initial' ? 'final' : 'initial';
-        this.submitAnswer();
+        this.classify();
       },
     });
   }
