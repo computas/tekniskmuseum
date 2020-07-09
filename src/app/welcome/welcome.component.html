@@ -27,14 +27,7 @@
 
     <mat-sidenav-content class="content">
       <div class="main-container">
-        <button
-          mat-fab
-          onclick="responsiveVoice.speak('Hei, mitt navn er Kunstig Intelligens. Jeg elsker å lære nye ord. Kan du hjelpe meg?');"
-          type="button"
-          value="Play"
-          color="primary"
-          class="tts-button"
-        >
+        <button mat-fab (click)="speakIntro()" type="button" value="Play" color="primary" class="tts-button">
           <mat-icon>volume_up</mat-icon>
         </button>
         <img src="assets/welcome-guy.png" alt="" class="welcome-guy" />
