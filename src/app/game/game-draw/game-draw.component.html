@@ -1,17 +1,30 @@
-<mat-toolbar id="drawing-toolbar" color="primary">
-  <span>Draw: {{ guessWord }}</span>
-  <span class="nav-spacer"></span>
-  <span #countDown>Clock: {{ timeLeft }}</span>
-  <span class="nav-spacer"></span>
-</mat-toolbar>
+<div class="drawing-container">
+  <div class="drawing-header">
+    <h1>Tegn: {{ guessWord | uppercase }}</h1>
+    <div class="drawing-seconds">
+      <span class="material-icons">
+        timer
+      </span>
+      <span class="countdown" #countDown>{{ timeLeft }} s</span>
+    </div>
+    <button mat-icon-button color="primary" aria-label="icon button with a trash icon" (click)="clear()">
+      <span class="material-icons">
+        restore_from_trash
+      </span>
+    </button>
+  </div>
+  <div>
+    <canvas
+      id="drawing-canvas"
+      (mousedown)="start($event)"
+      (mouseup)="stop($event)"
+      (mousemove)="draw($event)"
+      (touchstart)="start($event)"
+      (touchmove)="draw($event)"
+      (touchend)="stop($event)"
+      #canvas
+    ></canvas>
+  </div>
 
-<canvas
-  id="drawing-canvas"
-  (mousedown)="start($event)"
-  (mouseup)="stop($event)"
-  (mousemove)="draw($event)"
-  (touchstart)="start($event)"
-  (touchmove)="draw($event)"
-  (touchend)="stop($event)"
-  #canvas
-></canvas>
+  <div class="drawing-robot"></div>
+</div>
