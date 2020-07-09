@@ -72,7 +72,6 @@ export class DrawingService {
   }
 
   getLabel(): Observable<GameLabel> {
-    const options = {};
     return this.http
       .post<GameLabel>(`${this.baseUrl}/getLabel?token=${this.token}`, {})
       .pipe(tap((res) => (this.label = res.label)));
