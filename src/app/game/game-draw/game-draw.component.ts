@@ -1,5 +1,6 @@
 import { Component, ElementRef, OnInit, ViewChild, Output, EventEmitter } from '@angular/core';
-import { BehaviorSubject, interval, Observable } from 'rxjs';
+import { BehaviorSubject, interval, Observable, of } from 'rxjs';
+import { switchMap } from 'rxjs/operators';
 import { trigger, state, style, animate, transition } from '@angular/animations';
 import { take } from 'rxjs/operators';
 import { ImageService } from './services/image.service';
@@ -51,7 +52,8 @@ export class GameDrawComponent implements OnInit {
   x = 0;
   y = 0;
   isDrawing = false;
-  timeLeft = 20.0;
+  timeLeft = 22.0;
+  timeElapsed = 0.0;
 
   private readonly _timeOut = new BehaviorSubject<boolean>(false);
   readonly _timeOut$ = this._timeOut.asObservable();
@@ -63,6 +65,7 @@ export class GameDrawComponent implements OnInit {
 
   ngOnInit(): void {
     const ctx = this.canvas.nativeElement.getContext('2d');
+    console.log('mounting', this.drawingService);
     if (!ctx) {
       throw new Error('getContext failed');
     }
@@ -95,7 +98,7 @@ export class GameDrawComponent implements OnInit {
         const formData: FormData = this.imageService.createFormData(dataUrl);
         formData.append('token', this.drawingService.token);
         // TODO coordinate with backend about time
-        formData.append('time', this.timeLeft.toString());
+        formData.append('time', this.timeElapsed.toString());
         this.drawingService.classify(formData, dataUrl).subscribe();
       },
     });
@@ -144,7 +147,33 @@ export class GameDrawComponent implements OnInit {
     return new Observable((observer) => {
       let color = 'red';
       interval(100)
-        .pipe(take(10 * this.timeLeft))
+        .pipe(
+          take(10 * this.timeLeft),
+          switchMap((tics) => {
+            if (tics % 10 === 9) {
+              if (this.drawingService.guessDone == false) {
+                this.timeLeft--;
+                this.timeElapsed++;
+                this.classify();
+              } else {
+                console.log(this.timeElapsed);
+                observer.complete();
+              }
+            }
+            return of(tics);
+          })
+        )
+        .subscribe((tics) => {
+          if (this.timeLeft <= 5) {
+            this.countDown.nativeElement.style.color = color;
+            color = color === 'white' ? 'red' : 'white';
+          }
+          if (this.timeLeft === 0) {
+            observer.complete();
+          }
+        });
+
+      /*)
         .subscribe((tics) => {
           if (tics % 10 === 9) {
             // TODO CALL CLASSIFY

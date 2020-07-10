@@ -42,23 +42,21 @@ export class DrawingService {
           word: this.label,
           gameState: res.gameState,
         };
-        this.addResult(result);
-        if (this.guessUsed) {
-          this.guessUsed++;
-        }
-        this.guessDone = true;
-        this.isGameOver();
-        /*
         if (result.gameState == 'Playing' && result.hasWon == true) {
           this.addResult(result);
           this.guessDone = true;
+          if (this.guessUsed) {
+            this.guessUsed++;
+          }
           this.isGameOver();
         } else if (result.gameState == 'Done') {
           this.addResult(result);
           this.guessDone = true;
+          if (this.guessUsed) {
+            this.guessUsed++;
+          }
           this.isGameOver();
         }
-        */
       })
     );
   }
