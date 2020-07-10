@@ -15,6 +15,7 @@ export class DrawingService {
   token = '';
   labels = [];
   label = '';
+  gameHasStarted = false;
 
   private readonly _guessUsed = new BehaviorSubject<number>(1);
   private readonly _gameOver = new BehaviorSubject<boolean>(false);
@@ -39,8 +40,7 @@ export class DrawingService {
         };
         this.addResult(result);
         if (this.guessUsed) {
-          // calls the getter
-          this.guessUsed++; // calls the setter and passes false
+          this.guessUsed++;
         }
         this.guessDone = true;
         this.isGameOver();
