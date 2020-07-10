@@ -6,12 +6,13 @@ import { StartGameToken } from './start-game-token';
 import { GameLabel } from './game-label';
 import { Result } from '../../../shared/models/result.interface';
 import { ResultsMock } from './results.mock';
+import { endpoints } from '../../../shared/models/endpoints';
 
 @Injectable({
   providedIn: 'root',
 })
 export class DrawingService {
-  baseUrl = 'https://tekniskback.azurewebsites.net';
+  baseUrl = endpoints.TEKNISKBACKEND;
   totalGuess = 3;
   token = '';
   labels = [];
@@ -33,7 +34,7 @@ export class DrawingService {
   constructor(private http: HttpClient) {}
 
   classify(answerInfo: FormData, imageData: string): Observable<any> {
-    return this.http.post<FormData>(`${this.baseUrl}/classify`, answerInfo).pipe(
+    return this.http.post<FormData>(`${this.baseUrl}/${endpoints.CLASSIFY}`, answerInfo).pipe(
       tap((res) => {
         const result: Result = {
           hasWon: res.hasWon,
@@ -73,7 +74,7 @@ export class DrawingService {
   }
 
   startGame(): Observable<GameLabel> {
-    return this.http.get<StartGameToken>(`${this.baseUrl}/startGame`).pipe(
+    return this.http.get<StartGameToken>(`${this.baseUrl}/${endpoints.STARTGAME}`).pipe(
       switchMap((res) => {
         this.token = res.token;
         return this.getLabel();
@@ -83,7 +84,7 @@ export class DrawingService {
 
   getLabel(): Observable<GameLabel> {
     return this.http
-      .post<GameLabel>(`${this.baseUrl}/getLabel?token=${this.token}`, {})
+      .post<GameLabel>(`${this.baseUrl}/${endpoints.GETLABEL}?token=${this.token}`, {})
       .pipe(tap((res) => (this.label = res.label)));
   }
 

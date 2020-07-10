@@ -1,10 +1,21 @@
 import { Injectable } from '@angular/core';
-import { of } from 'rxjs';
-
+import { of, Observable, BehaviorSubject } from 'rxjs';
+import { endpoints } from '../shared/models/endpoints';
+import { HttpClient } from '@angular/common/http';
+import { tap } from 'rxjs/operators';
 export interface Highscore {
   name: string;
   score: number;
   place: number;
+}
+
+interface HighScoreItem {
+  name: string;
+  score: number;
+}
+interface HighScoreResponse {
+  daily: [HighScoreItem];
+  total: [HighScoreItem];
 }
 @Injectable({
   providedIn: 'root',
@@ -23,12 +34,44 @@ export class HighScoreService {
     { name: 'Amie Sargent', score: 10, place: -1 },
     { name: 'Ami ', score: 10, place: -1 },
   ];
+  totalHighScore: HighScoreItem[] = [];
 
-  constructor() {}
+  private readonly _dailyHighScores = new BehaviorSubject<HighScoreItem[]>([]);
+  readonly dailyHighScores$ = this._dailyHighScores.asObservable();
+
+  constructor(private http: HttpClient) {}
 
   get() {
     this.sortHighScores();
     return of(this.highscores);
+  }
+
+  getAllHighScores(): Observable<any> {
+    const endpoint = `${endpoints.TEKNISKBACKEND}/${endpoints.HIGHSCORE}`;
+    return this.http.get(endpoint).pipe(
+      tap((res: HighScoreResponse) => {
+        this.dailyHighScores = res.daily;
+        this.totalHighScore = res.total;
+      })
+    );
+  }
+
+  getDailyScores() {
+    if (!this.dailyHighScores) {
+      this.getAllHighScores().subscribe((res) => {
+        return this.dailyHighScores;
+      });
+    }
+    return this.dailyHighScores;
+  }
+
+  getTotalHighScore() {
+    if (!this.totalHighScore) {
+      this.getAllHighScores().subscribe((res) => {
+        return this.totalHighScore;
+      });
+    }
+    return this.totalHighScore;
   }
 
   sortHighScores() {
@@ -39,15 +82,18 @@ export class HighScoreService {
       return b.score - a.score;
     });
   }
+
   getTop(n) {
     if (this.highscores.length < n) {
       return of(this.highscores.slice(0, n));
     }
     return of(this.highscores);
   }
+
   findScoreOfNewUser() {
     return this.highscores.find((value) => value.name === '___');
   }
+
   getHighScoresFiltered(score: number) {
     const result: Highscore = {
       score,
@@ -65,5 +111,13 @@ export class HighScoreService {
       filtered.push(user);
     }
     return of(filtered);
+  }
+
+  get dailyHighScores(): HighScoreItem[] {
+    return this._dailyHighScores.getValue();
+  }
+
+  set dailyHighScores(val: HighScoreItem[]) {
+    this._dailyHighScores.next(val);
   }
 }
