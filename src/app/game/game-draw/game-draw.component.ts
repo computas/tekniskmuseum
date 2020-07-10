@@ -1,7 +1,7 @@
 import { Component, ElementRef, OnInit, ViewChild, Output, EventEmitter } from '@angular/core';
-import { BehaviorSubject, interval, Observable, of } from 'rxjs';
+import { BehaviorSubject, interval, Observable } from 'rxjs';
 import { trigger, state, style, animate, transition } from '@angular/animations';
-import { take, switchMap } from 'rxjs/operators';
+import { take } from 'rxjs/operators';
 import { ImageService } from './services/image.service';
 import { DrawingService } from './services/drawing.service';
 import { StartGameInfo } from './services/start-game-info';
