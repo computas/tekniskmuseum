@@ -7,11 +7,13 @@ import { Highscore, HighScoreService } from 'src/app/services/highscore.service'
   styleUrls: ['./highscore-side-nav.component.scss'],
 })
 export class HighScoreSideNavComponent implements OnInit {
-  opened: boolean;
+  opened = true;
   highscores: Highscore[];
   value = '';
   hasSubmit = false;
-  @Input() playerScore: number;
+
+  @Input()
+  playerScore: number;
   constructor(private highscoreService: HighScoreService) {}
 
   ngOnInit(): void {
@@ -22,6 +24,7 @@ export class HighScoreSideNavComponent implements OnInit {
       this.highscores = res;
     });
   }
+
   click() {
     const player = this.highscoreService.findScoreOfNewUser();
     if (player) {

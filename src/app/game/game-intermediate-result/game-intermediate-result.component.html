@@ -2,7 +2,7 @@
   <div>
     <ng-container *ngIf="result">
       <div class="word-text">
-        <h1 class="word-to-guess">{{ result.word }}</h1>
+        <h1 class="word-to-guess">{{ result.word | uppercase }}</h1>
       </div>
       <div>
         <img [src]="result.imageData" [className]="result.hasWon ? 'won' : 'loss'" />

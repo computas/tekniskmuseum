@@ -51,7 +51,7 @@ export class GameDrawComponent implements OnInit {
   x = 0;
   y = 0;
   isDrawing = false;
-  timeLeft = 10;
+  timeLeft = 20.0;
 
   private readonly _timeOut = new BehaviorSubject<boolean>(false);
   readonly _timeOut$ = this._timeOut.asObservable();
@@ -82,19 +82,21 @@ export class GameDrawComponent implements OnInit {
 
   startGame(): void {
     this.startDrawingTimer(this.createDrawingTimer());
-    if (this.drawingService.startGameInfo) {
-      this.guessWord = this.drawingService.startGameInfo.label;
+    if (this.drawingService.label) {
+      this.guessWord = this.drawingService.label;
     }
   }
 
-  submitAnswer() {
+  classify() {
     const b64Image = this.canvas.nativeElement.toDataURL('image/png');
 
     this.imageService.resize(b64Image).subscribe({
       next: (dataUrl) => {
         const formData: FormData = this.imageService.createFormData(dataUrl);
-        formData.append('token', this.drawingService.startGameInfo.token);
-        this.drawingService.submitAnswer(formData, dataUrl).subscribe();
+        formData.append('token', this.drawingService.token);
+        // TODO coordinate with backend about time
+        formData.append('time', this.timeLeft.toString());
+        this.drawingService.classify(formData, dataUrl).subscribe();
       },
     });
   }
@@ -145,6 +147,9 @@ export class GameDrawComponent implements OnInit {
         .pipe(take(10 * this.timeLeft))
         .subscribe((tics) => {
           if (tics % 10 === 9) {
+            // TODO CALL CLASSIFY
+            //
+            // this.getDrawingFromCanvasAndCreateFormDataAndClassify();
             this.timeLeft--;
           }
           if (this.timeLeft <= 5) {
@@ -155,6 +160,28 @@ export class GameDrawComponent implements OnInit {
             observer.complete();
           }
         });
+      /*
+          switchMap((tics) => {
+            if (tics % 10 === 9) {
+              if (this.drawingService.guessDone == false) {
+                this.classify();
+                this.timeLeft--;
+              } else {
+                this.timeLeft = 0;
+              }
+            }
+            return of(tics);
+          })
+        )
+        .subscribe((tics) => {
+          if (this.timeLeft <= 5) {
+            this.countDown.nativeElement.style.color = color;
+            color = color === 'white' ? 'red' : 'white';
+          }
+          if (this.timeLeft === 0) {
+            observer.complete();
+          }
+        });*/
     });
   }
 
@@ -163,7 +190,7 @@ export class GameDrawComponent implements OnInit {
       complete: () => {
         this.timeOut = true;
         this.clockColor = this.clockColor === 'initial' ? 'final' : 'initial';
-        this.submitAnswer();
+        this.classify();
       },
     });
   }

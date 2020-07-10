@@ -3,7 +3,7 @@
     loading
   </div>
   <div *ngIf="word">
-    <div class="words-remaining">1/5</div>
+    <div class="words-remaining">{{ guessUsed }}/3</div>
     <div class="word-text">
       <p>Ordet ditt er:</p>
       <h1 class="word-to-guess">{{ word | uppercase }}</h1>

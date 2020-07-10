@@ -1,21 +1,57 @@
 #result-container {
-  margin: 20px 48px;
+  margin: 48px 48px;
 }
 #result-header {
   text-align: center;
+  color: #195272;
+  font-size: 38px;
 }
 
 #result-card-container {
   display: flex;
   justify-content: center;
+  flex-wrap: wrap;
+  margin: 0 48px;
+  margin-top: 48px;
 }
 
 #result-card {
-  margin: 28px;
+  margin: 0 28px;
 }
 .card-won {
-  border: 3px solid green;
+  border: 3px solid #68d466;
 }
 .card-loss {
-  border: 3px solid red;
+  border: 3px solid #de1f1f;
+}
+.game-result-img {
+  width: 200px;
+}
+.start-new-game-button {
+  float: right;
+  width: 200px;
+  color: #195272;
+  border: 1px solid;
+}
+p {
+  font-style: italic;
+  font-weight: normal;
+}
+#result-subtitile {
+  display: flex;
+  align-items: center;
+}
+#won {
+  color: #68d466;
+}
+#loss {
+  color: #de1f1f;
+}
+@media only screen and (max-width: 768px) {
+  .start-new-game-button {
+    display: flex;
+    float: none;
+    width: 100%;
+    justify-content: center;
+  }
 }
