@@ -41,8 +41,11 @@ p {
   display: flex;
   align-items: center;
 }
-#result-subtitile > span {
+#won {
   color: #68d466;
+}
+#loss {
+  color: #de1f1f;
 }
 @media only screen and (max-width: 768px) {
   .start-new-game-button {

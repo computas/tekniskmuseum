@@ -12,6 +12,7 @@ export class GameResultComponent implements OnInit {
   constructor(private drawingService: DrawingService) {}
 
   ngOnInit(): void {
-    this.results = this.drawingService.get();
+    // this.results = this.drawingService.get();
+    this.results = this.drawingService.results;
   }
 }

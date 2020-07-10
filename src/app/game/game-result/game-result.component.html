@@ -9,10 +9,10 @@
           [className]="result.hasWon ? 'game-result-img card-won' : 'game-result-img card-loss'"
         />
         <p id="result-subtitile">
-          <span *ngIf="result.hasWon" class="material-icons">
+          <span *ngIf="result.hasWon" class="material-icons" id="won">
             done
           </span>
-          <span *ngIf="!result.hasWon" class="material-icons">
+          <span *ngIf="!result.hasWon" class="material-icons" id="loss">
             clear
           </span>
           {{ result.word | titlecase }}
