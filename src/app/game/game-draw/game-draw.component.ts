@@ -1,6 +1,6 @@
-import { Component, ElementRef, OnInit, ViewChild, Output, EventEmitter } from '@angular/core';
-import { BehaviorSubject, interval, Observable, of } from 'rxjs';
-import { switchMap } from 'rxjs/operators';
+import { Component, ElementRef, OnInit, ViewChild, Output, EventEmitter, OnDestroy } from '@angular/core';
+import { BehaviorSubject, Subject, interval, Observable, of } from 'rxjs';
+import { switchMap, takeUntil } from 'rxjs/operators';
 import { trigger, state, style, animate, transition } from '@angular/animations';
 import { take } from 'rxjs/operators';
 import { ImageService } from './services/image.service';
@@ -38,7 +38,7 @@ import { StartGameInfo } from './services/start-game-info';
     ]),
   ],
 })
-export class GameDrawComponent implements OnInit {
+export class GameDrawComponent implements OnInit, OnDestroy {
   @ViewChild('canvas', { static: true })
   canvas: ElementRef<HTMLCanvasElement>;
   @ViewChild('countDown', { static: true })
@@ -63,6 +63,8 @@ export class GameDrawComponent implements OnInit {
   private readonly _timeOut = new BehaviorSubject<boolean>(false);
   readonly _timeOut$ = this._timeOut.asObservable();
 
+  private unsubscribe = new Subject<void>();
+
   startGameInfo: StartGameInfo;
   guessWord: string;
 
@@ -70,7 +72,6 @@ export class GameDrawComponent implements OnInit {
 
   ngOnInit(): void {
     const ctx = this.canvas.nativeElement.getContext('2d');
-    console.log('mounting', this.drawingService);
     if (!ctx) {
       throw new Error('getContext failed');
     }
@@ -80,6 +81,11 @@ export class GameDrawComponent implements OnInit {
     this.canvas.nativeElement.height = document.body.clientHeight - 100;
     this.drawingService.guessDone = false;
     this.startGame();
+  }
+
+  ngOnDestroy(): void {
+    this.unsubscribe.next();
+    this.unsubscribe.complete();
   }
 
   start(e: MouseEvent | TouchEvent) {
@@ -159,8 +165,6 @@ export class GameDrawComponent implements OnInit {
 
     this.xValues.push(currentX);
     this.yValues.push(currentY);
-    console.log(Math.min(...this.xValues));
-    console.log(currentX, currentY);
   }
 
   clear() {
@@ -179,21 +183,17 @@ export class GameDrawComponent implements OnInit {
     return new Observable((observer) => {
       let color = 'red';
       interval(100)
-        .pipe(take(10 * this.timeLeft))
+        .pipe(take(10 * this.timeLeft), takeUntil(this.unsubscribe))
         .subscribe((tics) => {
           if (!this.drawingService.classificationDone) {
             if (tics % 10 === 9) {
               this.timeLeft--;
               this.timeElapsed++;
               this.classify();
-              console.log('Classified:', this.timeLeft, this.timeElapsed);
             }
             if (this.timeLeft <= 5) {
               this.countDown.nativeElement.style.color = color;
               color = color === 'white' ? 'red' : 'white';
-            }
-            if (this.drawingService.classificationDone) {
-              observer.complete();
             }
           }
         });
