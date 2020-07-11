@@ -51,9 +51,14 @@ export class GameDrawComponent implements OnInit {
 
   x = 0;
   y = 0;
+
+  xValues: number[] = [];
+  yValues: number[] = [];
+
   isDrawing = false;
   timeLeft = 20.0;
   timeElapsed = 0.0;
+  userDrawLineWidth = 30;
 
   private readonly _timeOut = new BehaviorSubject<boolean>(false);
   readonly _timeOut$ = this._timeOut.asObservable();
@@ -95,7 +100,28 @@ export class GameDrawComponent implements OnInit {
   classify() {
     const b64Image = this.canvas.nativeElement.toDataURL('image/png');
 
-    this.imageService.resize(b64Image).subscribe({
+    let paddingForLineWidth = this.userDrawLineWidth / 2;
+    let paddingExtra = 20;
+    let paddingTotal = paddingForLineWidth + paddingExtra;
+
+    let minX = Math.min(...this.xValues);
+    let minY = Math.min(...this.yValues);
+    let maxX = Math.max(...this.xValues);
+    let maxY = Math.max(...this.yValues);
+
+    let userDrawingWidth = maxX - minX;
+    let userDrawingHeight = maxY - minY;
+
+    let squareCenterX = minX + userDrawingWidth / 2;
+    let squareCenterY = minY + userDrawingHeight / 2;
+    let squareSize = Math.max(userDrawingWidth, userDrawingHeight);
+
+    let sx = squareCenterX - squareSize / 2 - paddingTotal;
+    let sy = squareCenterY - squareSize / 2 - paddingTotal;
+    let sw = squareSize + paddingTotal * 2;
+    let sh = squareSize + paddingTotal * 2;
+
+    this.imageService.resize(b64Image, sx, sy, sw, sh).subscribe({
       next: (dataUrl) => {
         const formData: FormData = this.imageService.createFormData(dataUrl);
         formData.append('token', this.drawingService.token);
@@ -124,12 +150,17 @@ export class GameDrawComponent implements OnInit {
 
   drawLine(currentX, currentY) {
     this.ctx.strokeStyle = 'black';
-    this.ctx.lineWidth = 6;
+    this.ctx.lineWidth = this.userDrawLineWidth;
     this.ctx.lineCap = this.ctx.lineJoin = 'round';
     this.ctx.beginPath();
     this.ctx.moveTo(this.x, this.y);
     this.ctx.lineTo(currentX, currentY);
     this.ctx.stroke();
+
+    this.xValues.push(currentX);
+    this.yValues.push(currentY);
+    console.log(Math.min(...this.xValues));
+    console.log(currentX, currentY);
   }
 
   clear() {
