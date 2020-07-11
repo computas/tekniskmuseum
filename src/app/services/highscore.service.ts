@@ -3,6 +3,7 @@ import { of, Observable, BehaviorSubject } from 'rxjs';
 import { endpoints } from '../shared/models/endpoints';
 import { HttpClient } from '@angular/common/http';
 import { tap } from 'rxjs/operators';
+import { Entry } from '../services/highscore-entry.interface';
 export interface Highscore {
   name: string;
   score: number;
@@ -44,6 +45,11 @@ export class HighScoreService {
   get() {
     this.sortHighScores();
     return of(this.highscores);
+  }
+
+  submitHighscore(entry: Entry) {
+    const endpoint = `${endpoints.TEKNISKBACKEND}/${endpoints.ENDGAME}`;
+    return this.http.post<Entry>(endpoint, entry).pipe(tap((res) => console.log(res)));
   }
 
   getAllHighScores(): Observable<any> {
