@@ -8,6 +8,7 @@ import { Result } from '../../../shared/models/result.interface';
 import { ResultsMock } from './results.mock';
 import { endpoints } from '../../../shared/models/endpoints';
 import { SpeechService } from 'src/app/services/speech.service';
+import { SPEECH } from 'src/app/shared/speech-text/text';
 
 @Injectable({
   providedIn: 'root',
@@ -55,10 +56,10 @@ export class DrawingService {
           this.classificationDone = true;
           this.isGameOver();
           if (result.hasWon) {
-            this.speechService.speak(`Jeg vet hva det er, det er ${result.guess}`);
+            this.speechService.speak(`${SPEECH.correctGuess}${result.guess}`);
           }
           if (result.gameState === 'Done' && !result.hasWon) {
-            this.speechService.speak('Jeg greide dessverre ikke gjette hva du tegnet');
+            this.speechService.speak(`${SPEECH.couldntGuess}`);
           }
         }
       })
