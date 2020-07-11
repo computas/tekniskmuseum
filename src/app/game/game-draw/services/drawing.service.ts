@@ -7,6 +7,7 @@ import { GameLabel } from './game-label';
 import { Result } from '../../../shared/models/result.interface';
 import { ResultsMock } from './results.mock';
 import { endpoints } from '../../../shared/models/endpoints';
+import { SpeechService } from 'src/app/services/speech.service';
 
 @Injectable({
   providedIn: 'root',
@@ -19,6 +20,7 @@ export class DrawingService {
   label = '';
   gameHasStarted = false;
   classificationDone = false;
+  guess = '';
 
   private readonly _guessUsed = new BehaviorSubject<number>(1);
   private readonly _gameOver = new BehaviorSubject<boolean>(false);
@@ -32,7 +34,7 @@ export class DrawingService {
 
   resultsMock: Result[] = ResultsMock;
 
-  constructor(private http: HttpClient) {}
+  constructor(private http: HttpClient, private speechService: SpeechService) {}
 
   classify(answerInfo: FormData, imageData: string): Observable<any> {
     return this.http.post<FormData>(`${this.baseUrl}/${endpoints.CLASSIFY}`, answerInfo).pipe(
@@ -42,6 +44,7 @@ export class DrawingService {
           imageData,
           word: this.label,
           gameState: res.gameState,
+          guess: res.guess,
         };
         if (result.hasWon || result.gameState === 'Done') {
           this.addResult(result);
@@ -51,6 +54,12 @@ export class DrawingService {
           }
           this.classificationDone = true;
           this.isGameOver();
+          if (result.hasWon) {
+            this.speechService.speak(`Jeg vet hva det er, det er ${result.guess}`);
+          }
+          if (result.gameState === 'Done' && !result.hasWon) {
+            this.speechService.speak('Jeg greide dessverre ikke gjette hva du tegnet');
+          }
         }
       })
     );
