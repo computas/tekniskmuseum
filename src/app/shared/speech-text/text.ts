@@ -1,3 +1,4 @@
 export const SPEECH = {
-  welcome: 'Hei, mitt navn er Kunstig Intelligens. Jeg elsker å lære nye ord. Kan du hjelpe meg?',
+  welcome: 'Hei, jeg er Kunstig Intelligens. Kan du hjelpe meg lære?',
+  info: 'Slik spiller du: 1. Tegn ord. 2. Jeg gjetter. 3. Få poeng.',
 };
