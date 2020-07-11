@@ -3,4 +3,5 @@ export interface Result {
   imageData: string;
   word: string;
   gameState: string;
+  guess: string;
 }
