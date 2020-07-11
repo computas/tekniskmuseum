@@ -189,7 +189,9 @@ export class GameDrawComponent implements OnInit, OnDestroy {
             if (tics % 10 === 9) {
               this.timeLeft--;
               this.timeElapsed++;
-              this.classify();
+              if (this.timeElapsed > 3) {
+                this.classify();
+              }
             }
             if (this.timeLeft <= 5) {
               this.countDown.nativeElement.style.color = color;
