@@ -1,5 +1,6 @@
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
+import { min } from 'rxjs/operators';
 
 @Injectable({
   providedIn: 'root',
@@ -20,7 +21,7 @@ export class ImageService {
     return new Uint8Array(imgBuffer);
   }
 
-  resize(b64Image): Observable<string> {
+  resize(b64Image, sx, sy, sw, sh): Observable<string> {
     return new Observable((observer) => {
       const img = new Image();
       const canvas = document.createElement('canvas');
@@ -33,7 +34,7 @@ export class ImageService {
         canvas.height = 256;
         ctx.fillStyle = '#FFFFFF';
         ctx.fillRect(0, 0, canvas.width, canvas.height);
-        ctx.drawImage(img, 0, 0, canvas.width, canvas.height);
+        ctx.drawImage(img, sx, sy, sw, sh, 0, 0, canvas.width, canvas.height);
         observer.next(canvas.toDataURL('image/png', 1));
       };
       img.src = b64Image;

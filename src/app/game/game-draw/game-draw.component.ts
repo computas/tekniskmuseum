@@ -50,8 +50,14 @@ export class GameDrawComponent implements OnInit {
 
   x = 0;
   y = 0;
+
+  xValues: number[] = [];
+  yValues: number[] = [];
+
   isDrawing = false;
-  timeLeft = 20.0;
+  timeLeft = 10.0;
+
+  userDrawLineWidth = 6;
 
   private readonly _timeOut = new BehaviorSubject<boolean>(false);
   readonly _timeOut$ = this._timeOut.asObservable();
@@ -59,7 +65,7 @@ export class GameDrawComponent implements OnInit {
   startGameInfo: StartGameInfo;
   guessWord: string;
 
-  constructor(private imageService: ImageService, private drawingService: DrawingService) {}
+  constructor(private imageService: ImageService, private drawingService: DrawingService) { }
 
   ngOnInit(): void {
     const ctx = this.canvas.nativeElement.getContext('2d');
@@ -90,7 +96,16 @@ export class GameDrawComponent implements OnInit {
   classify() {
     const b64Image = this.canvas.nativeElement.toDataURL('image/png');
 
-    this.imageService.resize(b64Image).subscribe({
+    // let padding = 5;
+
+    let sx = Math.min(...this.xValues);
+    let sy = Math.min(...this.yValues);
+    let sw = Math.max(...this.xValues) - sx;
+    let sh = Math.max(...this.yValues) - sy;
+
+    // if (sx = )
+
+    this.imageService.resize(b64Image, sx, sy, sw, sh).subscribe({
       next: (dataUrl) => {
         const formData: FormData = this.imageService.createFormData(dataUrl);
         formData.append('token', this.drawingService.token);
@@ -120,12 +135,17 @@ export class GameDrawComponent implements OnInit {
 
   drawLine(currentX, currentY) {
     this.ctx.strokeStyle = 'black';
-    this.ctx.lineWidth = 6;
+    this.ctx.lineWidth = this.userDrawLineWidth;
     this.ctx.lineCap = this.ctx.lineJoin = 'round';
     this.ctx.beginPath();
     this.ctx.moveTo(this.x, this.y);
     this.ctx.lineTo(currentX, currentY);
     this.ctx.stroke();
+
+    this.xValues.push(currentX);
+    this.yValues.push(currentY);
+    console.log(Math.min(...this.xValues));
+    console.log(currentX, currentY);
   }
 
   clear() {
