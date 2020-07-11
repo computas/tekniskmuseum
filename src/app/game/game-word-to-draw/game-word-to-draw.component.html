@@ -1,6 +1,6 @@
 <div id="word-container">
   <div *ngIf="loading">
-    loading
+    <mat-spinner></mat-spinner>
   </div>
   <div *ngIf="word">
     <div class="words-remaining">{{ guessUsed }}/3</div>
