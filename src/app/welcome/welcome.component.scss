@@ -1,57 +1,50 @@
-.side-drawer {
-  background: #e1e1e1;
-}
 .container {
-  display: flex;
-  flex-direction: column;
-  position: absolute;
-  top: 0;
-  bottom: 0;
-  left: 0;
-  right: 0;
-}
-
-.site-is-mobile .toolbar-container {
-  position: fixed;
-  z-index: 2;
-}
-
-.sidenav-container {
-  flex: 1;
-}
-
-.site-is-mobile {
-  flex: 1 0 auto;
-}
-
-.nav-spacer {
-  flex: 1 1 auto;
-}
-.side-nav-button {
-  color: #195272;
-  font-weight: normal;
-  mat-icon {
-    margin-right: 10px;
-    vertical-align: middle;
-  }
-  margin: 5px;
-}
-a {
-  text-decoration: none;
-}
-.main-container {
   display: flex;
   flex-direction: column;
   justify-content: space-evenly;
   align-items: center;
   height: 100%;
+  background: linear-gradient(0.5deg, #195272 -0.56%, #05a3c7 138.78%);
 }
-.welcome-guy {
-  max-height: 70vh;
+.play-container {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-evenly;
+  align-items: center;
+}
+.navigation-container {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+}
+a {
+  text-decoration: none;
+}
+.info-text {
+  color: #ffffff;
+  font-size: 40px;
+  font-weight: 300;
+  line-height: 60px;
 }
 .play-game-button {
-  background: #195272;
+  background: #fa852f;
+  color: #ffffff;
+  font-size: 36px;
   padding: 4px 50px;
+  border-radius: 50px;
+  height: 60px;
+  width: 275px;
+  margin-top: 30px;
+}
+.navigation-button {
+  border-radius: 50px;
+  color: #195272;
+  font-size: 24px;
+  height: 45px;
+  width: 240px;
+  margin-left: 50px;
+  margin-right: 50px;
 }
 .tts-button {
   top: 0;
@@ -59,28 +52,10 @@ a {
   right: 0;
   margin: 24px;
 }
-.content {
-  position: relative;
-}
-.content::before {
-  background: url('./../../assets/sketch-background.jpg');
-  background-repeat: no-repeat;
-  background-size: cover;
-  filter: opacity(0.2);
-  content: '';
-  position: absolute;
-  top: 0;
-  bottom: 0;
-  left: 0;
-  right: 0;
-}
-
-.mat-toolbar.mat-primary {
-  background: #195272;
-  color: #fff;
-}
-
 .mat-fab.mat-primary {
   background: #ecf8ff;
   color: #195272;
+}
+.material-icons {
+  vertical-align: middle;
 }
