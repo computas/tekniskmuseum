@@ -18,6 +18,7 @@ export class DrawingService {
   labels = [];
   label = '';
   gameHasStarted = false;
+  classificationDone = false;
 
   private readonly _guessUsed = new BehaviorSubject<number>(1);
   private readonly _gameOver = new BehaviorSubject<boolean>(false);
@@ -42,24 +43,19 @@ export class DrawingService {
           word: this.label,
           gameState: res.gameState,
         };
-        if (result.gameState == 'Playing' && result.hasWon == true) {
+        if (result.hasWon || result.gameState === 'Done') {
           this.addResult(result);
           this.guessDone = true;
           if (this.guessUsed) {
             this.guessUsed++;
           }
-          this.isGameOver();
-        } else if (result.gameState == 'Done') {
-          this.addResult(result);
-          this.guessDone = true;
-          if (this.guessUsed) {
-            this.guessUsed++;
-          }
+          this.classificationDone = true;
           this.isGameOver();
         }
       })
     );
   }
+
   get() {
     return this.resultsMock;
   }

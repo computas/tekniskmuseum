@@ -52,7 +52,7 @@ export class GameDrawComponent implements OnInit {
   x = 0;
   y = 0;
   isDrawing = false;
-  timeLeft = 22.0;
+  timeLeft = 20.0;
   timeElapsed = 0.0;
 
   private readonly _timeOut = new BehaviorSubject<boolean>(false);
@@ -73,6 +73,7 @@ export class GameDrawComponent implements OnInit {
     this.ctx = ctx;
     this.canvas.nativeElement.width = this.canvas.nativeElement.parentElement?.offsetWidth || document.body.clientWidth;
     this.canvas.nativeElement.height = document.body.clientHeight - 100;
+    this.drawingService.guessDone = false;
     this.startGame();
   }
 
@@ -84,6 +85,7 @@ export class GameDrawComponent implements OnInit {
   }
 
   startGame(): void {
+    this.drawingService.classificationDone = false;
     this.startDrawingTimer(this.createDrawingTimer());
     if (this.drawingService.label) {
       this.guessWord = this.drawingService.label;
@@ -97,7 +99,6 @@ export class GameDrawComponent implements OnInit {
       next: (dataUrl) => {
         const formData: FormData = this.imageService.createFormData(dataUrl);
         formData.append('token', this.drawingService.token);
-        // TODO coordinate with backend about time
         formData.append('time', this.timeElapsed.toString());
         this.drawingService.classify(formData, dataUrl).subscribe();
       },
@@ -147,70 +148,24 @@ export class GameDrawComponent implements OnInit {
     return new Observable((observer) => {
       let color = 'red';
       interval(100)
-        .pipe(
-          take(10 * this.timeLeft),
-          switchMap((tics) => {
-            if (tics % 10 === 9) {
-              if (this.drawingService.guessDone == false) {
-                this.timeLeft--;
-                this.timeElapsed++;
-                this.classify();
-              } else {
-                console.log(this.timeElapsed);
-                observer.complete();
-              }
-            }
-            return of(tics);
-          })
-        )
+        .pipe(take(10 * this.timeLeft))
         .subscribe((tics) => {
-          if (this.timeLeft <= 5) {
-            this.countDown.nativeElement.style.color = color;
-            color = color === 'white' ? 'red' : 'white';
-          }
-          if (this.timeLeft === 0) {
-            observer.complete();
+          if (!this.drawingService.classificationDone) {
+            if (tics % 10 === 9) {
+              this.timeLeft--;
+              this.timeElapsed++;
+              this.classify();
+              console.log('Classified:', this.timeLeft, this.timeElapsed);
+            }
+            if (this.timeLeft <= 5) {
+              this.countDown.nativeElement.style.color = color;
+              color = color === 'white' ? 'red' : 'white';
+            }
+            if (this.drawingService.classificationDone) {
+              observer.complete();
+            }
           }
         });
-
-      /*)
-        .subscribe((tics) => {
-          if (tics % 10 === 9) {
-            // TODO CALL CLASSIFY
-            //
-            // this.getDrawingFromCanvasAndCreateFormDataAndClassify();
-            this.timeLeft--;
-          }
-          if (this.timeLeft <= 5) {
-            this.countDown.nativeElement.style.color = color;
-            color = color === 'white' ? 'red' : 'white';
-          }
-          if (this.timeLeft === 0) {
-            observer.complete();
-          }
-        });
-      /*
-          switchMap((tics) => {
-            if (tics % 10 === 9) {
-              if (this.drawingService.guessDone == false) {
-                this.classify();
-                this.timeLeft--;
-              } else {
-                this.timeLeft = 0;
-              }
-            }
-            return of(tics);
-          })
-        )
-        .subscribe((tics) => {
-          if (this.timeLeft <= 5) {
-            this.countDown.nativeElement.style.color = color;
-            color = color === 'white' ? 'red' : 'white';
-          }
-          if (this.timeLeft === 0) {
-            observer.complete();
-          }
-        });*/
     });
   }
 
@@ -219,7 +174,6 @@ export class GameDrawComponent implements OnInit {
       complete: () => {
         this.timeOut = true;
         this.clockColor = this.clockColor === 'initial' ? 'final' : 'initial';
-        this.classify();
       },
     });
   }
