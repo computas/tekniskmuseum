@@ -44,7 +44,6 @@ export class GameDrawComponent implements OnInit {
   countDown: ElementRef<HTMLSpanElement>;
 
   private ctx: CanvasRenderingContext2D;
-  clockColor = 'initial';
 
   @Output() isDoneDrawing = new EventEmitter();
 
@@ -152,10 +151,6 @@ export class GameDrawComponent implements OnInit {
             // this.getDrawingFromCanvasAndCreateFormDataAndClassify();
             this.timeLeft--;
           }
-          if (this.timeLeft <= 5) {
-            this.countDown.nativeElement.style.color = color;
-            color = color === 'white' ? 'red' : 'white';
-          }
           if (this.timeLeft === 0) {
             observer.complete();
           }
@@ -189,7 +184,6 @@ export class GameDrawComponent implements OnInit {
     timer.subscribe({
       complete: () => {
         this.timeOut = true;
-        this.clockColor = this.clockColor === 'initial' ? 'final' : 'initial';
         this.classify();
       },
     });
