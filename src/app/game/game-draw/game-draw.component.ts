@@ -141,7 +141,6 @@ export class GameDrawComponent implements OnInit {
 
   private createDrawingTimer() {
     return new Observable((observer) => {
-      let color = 'red';
       interval(100)
         .pipe(take(10 * this.timeLeft))
         .subscribe((tics) => {
