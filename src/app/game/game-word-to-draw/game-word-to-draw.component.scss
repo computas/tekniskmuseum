@@ -1,4 +1,4 @@
-#word-container {
+.word-container {
   background-color: #195272;
   min-height: 100vh;
   justify-content: center;
@@ -11,15 +11,45 @@
   position: absolute;
   top: 0;
   left: 0;
-  margin: 48px;
+  margin: 35px;
   font-size: 2em;
+  font-style: italic;
+}
+.word-draw {
+  text-align: center;
+  font-size: 30px;
+}
+.word-to-guess {
+  color: #fa852f;
 }
 .get-word-button {
-  bottom: 0;
+  position: absolute;
+  bottom: 65px;
+  right: 65px;
+  background: #ffffff;
+  color: #264d56;
+  box-shadow: 0 8px 16px 0 rgba(0, 0, 0, 0.1), 0 6px 20px 0 rgba(0, 0, 0, 0.15);
+  margin-top: 30px;
+  font-size: 20px;
+  border-radius: 50px;
+  height: 50px;
+  width: 240px;
+}
+@media (min-width: 600px) {
+  .get-word-button {
+    font-size: 36px;
+    height: 60px;
+    width: 275px;
+  }
+}
+.tts-button {
+  top: 0;
   position: absolute;
   right: 0;
-  width: 12%;
   margin: 24px;
+}
+.mat-fab.mat-primary {
+  background: #ecf8ff;
   color: #195272;
 }
 h1 {
