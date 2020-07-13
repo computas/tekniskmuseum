@@ -173,18 +173,8 @@ export class GameDrawComponent implements OnInit, OnDestroy {
     this.ctx.lineTo(currentX, currentY);
     this.ctx.stroke();
 
-    if (currentX < this.minX) {
-      this.minX = currentX;
-    }
-    if (currentY < this.minY) {
-      this.minY = currentY;
-    }
-    if (currentX > this.maxX) {
-      this.maxX = currentX;
-    }
-    if (currentY > this.maxY) {
-      this.maxY = currentY;
-    }
+    currentX < this.minX ? (this.minX = currentX) : (this.maxX = currentX);
+    currentY < this.minY ? (this.minY = currentY) : (this.maxY = currentY);
   }
 
   clear() {
