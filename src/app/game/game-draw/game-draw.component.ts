@@ -11,32 +11,6 @@ import { StartGameInfo } from './services/start-game-info';
   selector: 'app-drawing',
   templateUrl: './game-draw.component.html',
   styleUrls: ['./game-draw.component.scss'],
-  animations: [
-    trigger('changeDivSize', [
-      state(
-        'initial',
-        style({
-          width: '100%',
-          color: 'white',
-          height: '0',
-        })
-      ),
-      state(
-        'final',
-        style({
-          backgroundColor: 'red',
-          height: '100%',
-          'text-align': 'center',
-          display: 'flex',
-          'justify-content': 'center',
-          'align-items': 'center',
-        })
-      ),
-
-      transition('initial=>final', animate('300ms')),
-      transition('final=>initial', animate('300ms')),
-    ]),
-  ],
 })
 export class GameDrawComponent implements OnInit, OnDestroy {
   @ViewChild('canvas', { static: true })
@@ -67,7 +41,7 @@ export class GameDrawComponent implements OnInit, OnDestroy {
   startGameInfo: StartGameInfo;
   guessWord: string;
 
-  constructor(private imageService: ImageService, private drawingService: DrawingService) { }
+  constructor(private imageService: ImageService, private drawingService: DrawingService) {}
 
   ngOnInit(): void {
     const ctx = this.canvas.nativeElement.getContext('2d');
@@ -96,10 +70,35 @@ export class GameDrawComponent implements OnInit, OnDestroy {
 
   startGame(): void {
     this.drawingService.classificationDone = false;
-    this.startDrawingTimer(this.createDrawingTimer());
+    this.createDrawingTimer().subscribe({
+      next: (val) => {
+        this.classify();
+      },
+      complete: () => {
+        this.timeOut = true;
+      },
+    });
     if (this.drawingService.label) {
       this.guessWord = this.drawingService.label;
     }
+  }
+
+  private createDrawingTimer() {
+    return new Observable((observer) => {
+      interval(100)
+        .pipe(take(10 * this.timeLeft), takeUntil(this.unsubscribe))
+        .subscribe((tics) => {
+          if (!this.drawingService.classificationDone) {
+            if (tics % 10 === 9) {
+              this.timeLeft--;
+              this.timeElapsed++;
+              if (this.timeElapsed > 3) {
+                observer.next('classify');
+              }
+            }
+          }
+        });
+    });
   }
 
   classify() {
@@ -176,32 +175,6 @@ export class GameDrawComponent implements OnInit, OnDestroy {
       this.drawLine(e.offsetX, e.offsetY);
       this.isDrawing = false;
     }
-  }
-
-  private createDrawingTimer() {
-    return new Observable((observer) => {
-      interval(100)
-        .pipe(take(10 * this.timeLeft), takeUntil(this.unsubscribe))
-        .subscribe((tics) => {
-          if (!this.drawingService.classificationDone) {
-            if (tics % 10 === 9) {
-              this.timeLeft--;
-              this.timeElapsed++;
-              if (this.timeElapsed > 3) {
-                this.classify();
-              }
-            }
-          }
-        });
-    });
-  }
-
-  private startDrawingTimer(timer) {
-    timer.subscribe({
-      complete: () => {
-        this.timeOut = true;
-      },
-    });
   }
 
   get timeOut(): boolean {
