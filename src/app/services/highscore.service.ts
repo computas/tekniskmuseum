@@ -49,7 +49,7 @@ export class HighScoreService {
 
   submitHighscore(entry: Entry) {
     const endpoint = `${endpoints.TEKNISKBACKEND}/${endpoints.ENDGAME}`;
-    return this.http.post<Entry>(endpoint, entry).pipe(tap((res) => console.log(res)));
+    return this.http.post<Entry>(endpoint, entry).pipe();
   }
 
   getAllHighScores(): Observable<any> {
