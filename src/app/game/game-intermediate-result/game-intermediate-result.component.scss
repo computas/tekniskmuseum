@@ -1,22 +1,64 @@
 .won {
-  border: 3px solid #68d466;
+  border: 4px solid #68d466;
 }
 .loss {
-  border: 3px solid #de1f1f;
+  border: 4px solid #de1f1f;
+  display: flex;
+  justify-content: center;
 }
 #intermediate-container {
   min-height: 100vh;
-  background: #195272;
+  background: linear-gradient(0.5deg, #195272 -0.56%, #05a3c7 138.78%);
   color: white;
   display: flex;
   align-items: center;
   justify-content: center;
+  flex-direction: column;
 }
-.new-drawing-button {
+.intermediate-content {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+}
+.next-word-button {
   position: absolute;
-  bottom: 0;
+  bottom: 65px;
+  right: 65px;
+  background: #ffffff;
+  color: #264d56;
+  box-shadow: 0 8px 16px 0 rgba(0, 0, 0, 0.1), 0 6px 20px 0 rgba(0, 0, 0, 0.15);
+  margin-top: 30px;
+  font-size: 20px;
+  border-radius: 50px;
+  height: 50px;
+  width: 240px;
+}
+@media (min-width: 600px) {
+  .next-word-button {
+    font-size: 36px;
+    height: 60px;
+    width: 275px;
+  }
+}
+.word-text {
+  text-align: center;
+}
+.words-remaining {
+  position: absolute;
+  top: 0;
+  left: 0;
+  margin: 35px;
+  font-size: 2em;
+  font-style: italic;
+}
+.tts-button {
+  top: 0;
+  position: absolute;
   right: 0;
   margin: 24px;
+}
+.mat-fab.mat-primary {
+  background: #ecf8ff;
   color: #195272;
-  width: 12%;
 }

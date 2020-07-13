@@ -3,6 +3,8 @@ import { RouterTestingModule } from '@angular/router/testing';
 
 import { GameInfoComponent } from './game-info.component';
 import { MaterialImportsModule } from '../../shared/material-imports/material-imports.module';
+import { SpeechServiceMock } from 'src/app/services/speech.service.mock';
+import { SpeechService } from 'src/app/services/speech.service';
 
 describe('GameInfoComponent', () => {
   let component: GameInfoComponent;
@@ -12,6 +14,7 @@ describe('GameInfoComponent', () => {
     TestBed.configureTestingModule({
       imports: [RouterTestingModule, MaterialImportsModule],
       declarations: [GameInfoComponent],
+      providers: [{ provide: SpeechService, useValue: SpeechServiceMock }],
     }).compileComponents();
   }));
 

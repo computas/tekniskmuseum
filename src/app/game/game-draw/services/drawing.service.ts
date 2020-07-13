@@ -7,6 +7,8 @@ import { GameLabel } from './game-label';
 import { Result } from '../../../shared/models/result.interface';
 import { ResultsMock } from './results.mock';
 import { endpoints } from '../../../shared/models/endpoints';
+import { SpeechService } from 'src/app/services/speech.service';
+import { SPEECH } from 'src/app/shared/speech-text/text';
 
 @Injectable({
   providedIn: 'root',
@@ -18,6 +20,8 @@ export class DrawingService {
   labels = [];
   label = '';
   gameHasStarted = false;
+  classificationDone = false;
+  guess = '';
 
   private readonly _guessUsed = new BehaviorSubject<number>(1);
   private readonly _gameOver = new BehaviorSubject<boolean>(false);
@@ -31,7 +35,7 @@ export class DrawingService {
 
   resultsMock: Result[] = ResultsMock;
 
-  constructor(private http: HttpClient) {}
+  constructor(private http: HttpClient, private speechService: SpeechService) {}
 
   classify(answerInfo: FormData, imageData: string): Observable<any> {
     return this.http.post<FormData>(`${this.baseUrl}/${endpoints.CLASSIFY}`, answerInfo).pipe(
@@ -41,27 +45,27 @@ export class DrawingService {
           imageData,
           word: this.label,
           gameState: res.gameState,
+          guess: res.guess,
         };
-        this.addResult(result);
-        if (this.guessUsed) {
-          this.guessUsed++;
-        }
-        this.guessDone = true;
-        this.isGameOver();
-        /*
-        if (result.gameState == 'Playing' && result.hasWon == true) {
+        if (result.hasWon || result.gameState === 'Done') {
           this.addResult(result);
           this.guessDone = true;
+          if (this.guessUsed) {
+            this.guessUsed++;
+          }
+          this.classificationDone = true;
           this.isGameOver();
-        } else if (result.gameState == 'Done') {
-          this.addResult(result);
-          this.guessDone = true;
-          this.isGameOver();
+          if (result.hasWon) {
+            this.speechService.speak(`${SPEECH.correctGuess}${result.guess}`);
+          }
+          if (result.gameState === 'Done' && !result.hasWon) {
+            this.speechService.speak(`${SPEECH.couldntGuess}`);
+          }
         }
-        */
       })
     );
   }
+
   get() {
     return this.resultsMock;
   }

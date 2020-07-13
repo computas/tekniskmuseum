@@ -1,5 +1,7 @@
 import { Component, OnInit, Output, EventEmitter } from '@angular/core';
 import { DrawingService } from '../game-draw/services/drawing.service';
+import { SPEECH } from 'src/app/shared/speech-text/text';
+import { SpeechService } from 'src/app/services/speech.service';
 
 @Component({
   selector: 'app-game-word-to-draw',
@@ -7,7 +9,7 @@ import { DrawingService } from '../game-draw/services/drawing.service';
   styleUrls: ['./game-word-to-draw.component.scss'],
 })
 export class GameWordToDrawComponent implements OnInit {
-  constructor(private drawingService: DrawingService) {}
+  constructor(private drawingService: DrawingService, private speechService: SpeechService) {}
   @Output() drawWord = new EventEmitter();
   word = '';
   guessUsed = 1;
@@ -32,5 +34,9 @@ export class GameWordToDrawComponent implements OnInit {
         this.guessUsed = res;
       });
     }
+  }
+
+  speakWord() {
+    this.speechService.speak(`${SPEECH.draw}${this.word}`);
   }
 }

@@ -1,4 +1,6 @@
 import { Component, OnInit, Output, EventEmitter } from '@angular/core';
+import { SPEECH } from '../../shared/speech-text/text';
+import { SpeechService } from 'src/app/services/speech.service';
 
 @Component({
   selector: 'app-game-info',
@@ -7,8 +9,8 @@ import { Component, OnInit, Output, EventEmitter } from '@angular/core';
 })
 export class GameInfoComponent implements OnInit {
   @Output() getDrawWord = new EventEmitter();
-  vol = false;
-  constructor() {}
+
+  constructor(private speechService: SpeechService) {}
 
   ngOnInit(): void {}
 
@@ -16,7 +18,7 @@ export class GameInfoComponent implements OnInit {
     this.getDrawWord.emit(true);
   }
 
-  volume() {
-    this.vol = !this.vol;
+  speakInfo() {
+    this.speechService.speak(SPEECH.info);
   }
 }

@@ -1,5 +1,6 @@
-import { Component, ElementRef, OnInit, ViewChild, Output, EventEmitter } from '@angular/core';
-import { BehaviorSubject, interval, Observable } from 'rxjs';
+import { Component, ElementRef, OnInit, ViewChild, Output, EventEmitter, OnDestroy } from '@angular/core';
+import { BehaviorSubject, Subject, interval, Observable } from 'rxjs';
+import { takeUntil } from 'rxjs/operators';
 import { trigger, state, style, animate, transition } from '@angular/animations';
 import { take } from 'rxjs/operators';
 import { ImageService } from './services/image.service';
@@ -37,29 +38,36 @@ import { StartGameInfo } from './services/start-game-info';
     ]),
   ],
 })
-export class GameDrawComponent implements OnInit {
+export class GameDrawComponent implements OnInit, OnDestroy {
   @ViewChild('canvas', { static: true })
   canvas: ElementRef<HTMLCanvasElement>;
   @ViewChild('countDown', { static: true })
   countDown: ElementRef<HTMLSpanElement>;
 
   private ctx: CanvasRenderingContext2D;
-  clockColor = 'initial';
 
   @Output() isDoneDrawing = new EventEmitter();
 
   x = 0;
   y = 0;
+
+  xValues: number[] = [];
+  yValues: number[] = [];
+
   isDrawing = false;
   timeLeft = 20.0;
+  timeElapsed = 0.0;
+  userDrawLineWidth = 30;
 
   private readonly _timeOut = new BehaviorSubject<boolean>(false);
   readonly _timeOut$ = this._timeOut.asObservable();
 
+  private unsubscribe = new Subject<void>();
+
   startGameInfo: StartGameInfo;
   guessWord: string;
 
-  constructor(private imageService: ImageService, private drawingService: DrawingService) {}
+  constructor(private imageService: ImageService, private drawingService: DrawingService) { }
 
   ngOnInit(): void {
     const ctx = this.canvas.nativeElement.getContext('2d');
@@ -70,7 +78,13 @@ export class GameDrawComponent implements OnInit {
     this.ctx = ctx;
     this.canvas.nativeElement.width = this.canvas.nativeElement.parentElement?.offsetWidth || document.body.clientWidth;
     this.canvas.nativeElement.height = document.body.clientHeight - 100;
+    this.drawingService.guessDone = false;
     this.startGame();
+  }
+
+  ngOnDestroy(): void {
+    this.unsubscribe.next();
+    this.unsubscribe.complete();
   }
 
   start(e: MouseEvent | TouchEvent) {
@@ -81,6 +95,7 @@ export class GameDrawComponent implements OnInit {
   }
 
   startGame(): void {
+    this.drawingService.classificationDone = false;
     this.startDrawingTimer(this.createDrawingTimer());
     if (this.drawingService.label) {
       this.guessWord = this.drawingService.label;
@@ -89,13 +104,33 @@ export class GameDrawComponent implements OnInit {
 
   classify() {
     const b64Image = this.canvas.nativeElement.toDataURL('image/png');
+    // linje
+    const paddingForLineWidth = this.userDrawLineWidth / 2;
+    const paddingExtra = 20;
+    const paddingTotal = paddingForLineWidth + paddingExtra;
 
-    this.imageService.resize(b64Image).subscribe({
+    const minX = Math.min(...this.xValues);
+    const minY = Math.min(...this.yValues);
+    const maxX = Math.max(...this.xValues);
+    const maxY = Math.max(...this.yValues);
+
+    const userDrawingWidth = maxX - minX;
+    const userDrawingHeight = maxY - minY;
+
+    const squareCenterX = minX + userDrawingWidth / 2;
+    const squareCenterY = minY + userDrawingHeight / 2;
+    const squareSize = Math.max(userDrawingWidth, userDrawingHeight);
+
+    const sx = squareCenterX - squareSize / 2 - paddingTotal;
+    const sy = squareCenterY - squareSize / 2 - paddingTotal;
+    const sw = squareSize + paddingTotal * 2;
+    const sh = squareSize + paddingTotal * 2;
+
+    this.imageService.resize(b64Image, sx, sy, sw, sh).subscribe({
       next: (dataUrl) => {
         const formData: FormData = this.imageService.createFormData(dataUrl);
         formData.append('token', this.drawingService.token);
-        // TODO coordinate with backend about time
-        formData.append('time', this.timeLeft.toString());
+        formData.append('time', this.timeElapsed.toString());
         this.drawingService.classify(formData, dataUrl).subscribe();
       },
     });
@@ -120,12 +155,15 @@ export class GameDrawComponent implements OnInit {
 
   drawLine(currentX, currentY) {
     this.ctx.strokeStyle = 'black';
-    this.ctx.lineWidth = 6;
+    this.ctx.lineWidth = this.userDrawLineWidth;
     this.ctx.lineCap = this.ctx.lineJoin = 'round';
     this.ctx.beginPath();
     this.ctx.moveTo(this.x, this.y);
     this.ctx.lineTo(currentX, currentY);
     this.ctx.stroke();
+
+    this.xValues.push(currentX);
+    this.yValues.push(currentY);
   }
 
   clear() {
@@ -142,46 +180,19 @@ export class GameDrawComponent implements OnInit {
 
   private createDrawingTimer() {
     return new Observable((observer) => {
-      let color = 'red';
       interval(100)
-        .pipe(take(10 * this.timeLeft))
+        .pipe(take(10 * this.timeLeft), takeUntil(this.unsubscribe))
         .subscribe((tics) => {
-          if (tics % 10 === 9) {
-            // TODO CALL CLASSIFY
-            //
-            // this.getDrawingFromCanvasAndCreateFormDataAndClassify();
-            this.timeLeft--;
-          }
-          if (this.timeLeft <= 5) {
-            this.countDown.nativeElement.style.color = color;
-            color = color === 'white' ? 'red' : 'white';
-          }
-          if (this.timeLeft === 0) {
-            observer.complete();
-          }
-        });
-      /*
-          switchMap((tics) => {
+          if (!this.drawingService.classificationDone) {
             if (tics % 10 === 9) {
-              if (this.drawingService.guessDone == false) {
+              this.timeLeft--;
+              this.timeElapsed++;
+              if (this.timeElapsed > 3) {
                 this.classify();
-                this.timeLeft--;
-              } else {
-                this.timeLeft = 0;
               }
             }
-            return of(tics);
-          })
-        )
-        .subscribe((tics) => {
-          if (this.timeLeft <= 5) {
-            this.countDown.nativeElement.style.color = color;
-            color = color === 'white' ? 'red' : 'white';
           }
-          if (this.timeLeft === 0) {
-            observer.complete();
-          }
-        });*/
+        });
     });
   }
 
@@ -189,8 +200,6 @@ export class GameDrawComponent implements OnInit {
     timer.subscribe({
       complete: () => {
         this.timeOut = true;
-        this.clockColor = this.clockColor === 'initial' ? 'final' : 'initial';
-        this.classify();
       },
     });
   }
