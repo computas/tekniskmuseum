@@ -63,7 +63,7 @@ export class HighScoreService {
   }
 
   getDailyScores() {
-    if (!this.dailyHighScores) {
+    if (this.dailyHighScores.length === 0) {
       this.getAllHighScores().subscribe((res) => {
         return this.dailyHighScores;
       });

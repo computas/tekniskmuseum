@@ -9,7 +9,10 @@ import { Highscore, HighScoreService } from 'src/app/services/highscore.service'
 export class HighScoreSideNavComponent implements OnInit {
   opened = true;
   highscores: Highscore[];
+  totalHighScores: Highscore[];
+  dailyHighScores: Highscore[];
   value = '';
+  loading = true;
   hasSubmit = false;
 
   @Input()
@@ -20,6 +23,11 @@ export class HighScoreSideNavComponent implements OnInit {
     /*this.highscoreService.get().subscribe((res) => {
       this.highscores = res;
     });*/
+    this.highscoreService.getAllHighScores().subscribe((res) => {
+      this.totalHighScores = res.total;
+      this.loading = false;
+      this.dailyHighScores = res.daily;
+    });
     this.highscoreService.getHighScoresFiltered(this.playerScore).subscribe((res) => {
       this.highscores = res;
     });

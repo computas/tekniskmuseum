@@ -67,7 +67,7 @@ export class GameDrawComponent implements OnInit, OnDestroy {
   startGameInfo: StartGameInfo;
   guessWord: string;
 
-  constructor(private imageService: ImageService, private drawingService: DrawingService) { }
+  constructor(private imageService: ImageService, private drawingService: DrawingService) {}
 
   ngOnInit(): void {
     const ctx = this.canvas.nativeElement.getContext('2d');
@@ -187,9 +187,7 @@ export class GameDrawComponent implements OnInit, OnDestroy {
             if (tics % 10 === 9) {
               this.timeLeft--;
               this.timeElapsed++;
-              if (this.timeElapsed > 3) {
-                this.classify();
-              }
+              this.classify();
             }
           }
         });
@@ -199,6 +197,7 @@ export class GameDrawComponent implements OnInit, OnDestroy {
   private startDrawingTimer(timer) {
     timer.subscribe({
       complete: () => {
+        this.classify();
         this.timeOut = true;
       },
     });

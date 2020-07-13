@@ -1,38 +1,38 @@
 <mat-sidenav-container class="example-container">
   <mat-sidenav #sidenav mode="side" position="end" [(opened)]="opened">
-    <h1 id="text-header">BEST: TOTALT</h1>
-    <ul id="highscore-list">
-      <li *ngFor="let highscore of highscores; index as i" id="list-content" [ngClass]="i === 4 ? 'highlight' : ''">
-        <span>{{ highscore.place === -1 ? i + 1 : highscore.place }}. {{ highscore.name }}</span>
-        <span>{{ highscore.score }} p</span>
-      </li>
-    </ul>
-    <h1 id="text-header">BEST: I DAG</h1>
-    <ul id="highscore-list">
-      <li *ngFor="let highscore of highscores; index as i" id="list-content" [ngClass]="i === 4 ? 'highlight' : ''">
-        <span>{{ highscore.place === -1 ? i + 1 : highscore.place }}. {{ highscore.name }}</span>
-        <span>{{ highscore.score }} p</span>
-      </li>
-    </ul>
-    <div *ngIf="!hasSubmit">
-      <form class="name-form">
-        <mat-form-field id="form-test" class="example-full-width" floatLabel="always">
-          <mat-label>Kallenavn</mat-label>
-          <input
-            matInput
-            placeholder="Send inn ditt kallenavn"
-            [(ngModel)]="value"
-            name="name"
-            aria-selected="true"
-            autofocus
-          />
-        </mat-form-field>
-        <button mat-button (click)="click()" class="send-btn">
-          <span class="material-icons">
-            send
-          </span>
-        </button>
-      </form>
+    <mat-spinner class="black-spinner"></mat-spinner>
+    <div *ngIf="dailyHighScores">
+      <h1 id="text-header">BEST: I DAG</h1>
+      <ul id="highscore-list">
+        <li
+          *ngFor="let highscore of dailyHighScores; index as i"
+          id="list-content"
+          [ngClass]="i === 4 ? 'highlight' : ''"
+        >
+          <span>{{ highscore.place === -1 ? i + 1 : highscore.place }}. {{ highscore.name }}</span>
+          <span>{{ highscore.score }} p</span>
+        </li>
+      </ul>
+      <div *ngIf="!hasSubmit">
+        <form class="name-form">
+          <mat-form-field id="form-test" class="example-full-width" floatLabel="always">
+            <mat-label>Kallenavn</mat-label>
+            <input
+              matInput
+              placeholder="Send inn ditt kallenavn"
+              [(ngModel)]="value"
+              name="name"
+              aria-selected="true"
+              autofocus
+            />
+          </mat-form-field>
+          <button mat-button (click)="click()" class="send-btn">
+            <span class="material-icons">
+              send
+            </span>
+          </button>
+        </form>
+      </div>
     </div>
   </mat-sidenav>
 
