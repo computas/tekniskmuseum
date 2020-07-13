@@ -51,13 +51,15 @@ export class GameDrawComponent implements OnInit, OnDestroy {
   x = 0;
   y = 0;
 
-  xValues: number[] = [];
-  yValues: number[] = [];
+  minX;
+  minY;
+  maxX;
+  maxY;
 
   isDrawing = false;
   timeLeft = 20.0;
   timeElapsed = 0.0;
-  userDrawLineWidth = 30;
+  userDrawLineWidth = 10;
 
   private readonly _timeOut = new BehaviorSubject<boolean>(false);
   readonly _timeOut$ = this._timeOut.asObservable();
@@ -67,7 +69,7 @@ export class GameDrawComponent implements OnInit, OnDestroy {
   startGameInfo: StartGameInfo;
   guessWord: string;
 
-  constructor(private imageService: ImageService, private drawingService: DrawingService) { }
+  constructor(private imageService: ImageService, private drawingService: DrawingService) {}
 
   ngOnInit(): void {
     const ctx = this.canvas.nativeElement.getContext('2d');
@@ -78,6 +80,12 @@ export class GameDrawComponent implements OnInit, OnDestroy {
     this.ctx = ctx;
     this.canvas.nativeElement.width = this.canvas.nativeElement.parentElement?.offsetWidth || document.body.clientWidth;
     this.canvas.nativeElement.height = document.body.clientHeight - 100;
+
+    this.minX = this.canvas.nativeElement.width;
+    this.minY = this.canvas.nativeElement.height;
+    this.maxX = 0;
+    this.maxY = 0;
+
     this.drawingService.guessDone = false;
     this.startGame();
   }
@@ -104,29 +112,8 @@ export class GameDrawComponent implements OnInit, OnDestroy {
 
   classify() {
     const b64Image = this.canvas.nativeElement.toDataURL('image/png');
-    // linje
-    const paddingForLineWidth = this.userDrawLineWidth / 2;
-    const paddingExtra = 20;
-    const paddingTotal = paddingForLineWidth + paddingExtra;
 
-    const minX = Math.min(...this.xValues);
-    const minY = Math.min(...this.yValues);
-    const maxX = Math.max(...this.xValues);
-    const maxY = Math.max(...this.yValues);
-
-    const userDrawingWidth = maxX - minX;
-    const userDrawingHeight = maxY - minY;
-
-    const squareCenterX = minX + userDrawingWidth / 2;
-    const squareCenterY = minY + userDrawingHeight / 2;
-    const squareSize = Math.max(userDrawingWidth, userDrawingHeight);
-
-    const sx = squareCenterX - squareSize / 2 - paddingTotal;
-    const sy = squareCenterY - squareSize / 2 - paddingTotal;
-    const sw = squareSize + paddingTotal * 2;
-    const sh = squareSize + paddingTotal * 2;
-
-    this.imageService.resize(b64Image, sx, sy, sw, sh).subscribe({
+    this.imageService.resize(b64Image, this.minX, this.minY, this.maxX, this.maxY, this.userDrawLineWidth).subscribe({
       next: (dataUrl) => {
         const formData: FormData = this.imageService.createFormData(dataUrl);
         formData.append('token', this.drawingService.token);
@@ -162,8 +149,18 @@ export class GameDrawComponent implements OnInit, OnDestroy {
     this.ctx.lineTo(currentX, currentY);
     this.ctx.stroke();
 
-    this.xValues.push(currentX);
-    this.yValues.push(currentY);
+    if (currentX < this.minX) {
+      this.minX = currentX;
+    }
+    if (currentY < this.minY) {
+      this.minY = currentY;
+    }
+    if (currentX > this.maxX) {
+      this.maxX = currentX;
+    }
+    if (currentY > this.maxY) {
+      this.maxY = currentY;
+    }
   }
 
   clear() {
