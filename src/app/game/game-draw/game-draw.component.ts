@@ -31,7 +31,8 @@ export class GameDrawComponent implements OnInit, OnDestroy {
   hasLeftCanvas = false;
   timeLeft = 20.0;
   timeElapsed = 0.0;
-  userDrawLineWidth = 30;
+
+  private readonly LINE_WIDTH = 10;
 
   private readonly _timeOut = new BehaviorSubject<boolean>(false);
   readonly _timeOut$ = this._timeOut.asObservable();
@@ -104,7 +105,7 @@ export class GameDrawComponent implements OnInit, OnDestroy {
   classify() {
     const b64Image = this.canvas.nativeElement.toDataURL('image/png');
     // linje
-    const paddingForLineWidth = this.userDrawLineWidth / 2;
+    const paddingForLineWidth = this.LINE_WIDTH / 2;
     const paddingExtra = 20;
     const paddingTotal = paddingForLineWidth + paddingExtra;
 
@@ -159,6 +160,12 @@ export class GameDrawComponent implements OnInit, OnDestroy {
 
   leaveCanvas(e: MouseEvent | TouchEvent) {
     this.hasLeftCanvas = true;
+    if (this.isDrawing) {
+      const { x, y } = this.getClientOffset(e);
+      this.drawLine(x, y);
+      this.x = x;
+      this.y = y;
+    }
   }
 
   enterCanvas(e: MouseEvent | TouchEvent) {
@@ -172,7 +179,7 @@ export class GameDrawComponent implements OnInit, OnDestroy {
 
   drawLine(currentX, currentY) {
     this.ctx.strokeStyle = 'black';
-    this.ctx.lineWidth = this.userDrawLineWidth;
+    this.ctx.lineWidth = this.LINE_WIDTH;
     this.ctx.lineCap = this.ctx.lineJoin = 'round';
     this.ctx.beginPath();
     this.ctx.moveTo(this.x, this.y);
