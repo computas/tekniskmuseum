@@ -114,12 +114,17 @@ export class GameDrawComponent implements OnInit, OnDestroy {
 
     this.imageService.resize(b64Image, this.minX, this.minY, this.maxX, this.maxY, this.userDrawLineWidth).subscribe({
       next: (dataUrl) => {
-        const formData: FormData = this.imageService.createFormData(dataUrl);
-        formData.append('token', this.drawingService.token);
-        formData.append('time', this.timeElapsed.toString());
+        const formData: FormData = this.createFormData(dataUrl);
         this.drawingService.classify(formData, dataUrl).subscribe();
       },
     });
+  }
+
+  createFormData(dataUrl): FormData {
+    const formData: FormData = this.imageService.createFormData(dataUrl);
+    formData.append('token', this.drawingService.token);
+    formData.append('time', this.timeElapsed.toString());
+    return formData;
   }
 
   getClientOffset(event) {
