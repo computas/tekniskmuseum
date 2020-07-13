@@ -7,7 +7,7 @@ import { Observable } from 'rxjs';
 export class ImageService {
   name = 'ole';
 
-  constructor() {}
+  constructor() { }
 
   b64ToUint8Array(b64Image) {
     const img = atob(b64Image.split(',')[1]);
@@ -34,10 +34,17 @@ export class ImageService {
         ctx.fillStyle = '#FFFFFF';
         ctx.fillRect(0, 0, canvas.width, canvas.height);
         ctx.drawImage(img, sx, sy, sw, sh, 0, 0, canvas.width, canvas.height);
-        observer.next(canvas.toDataURL('image/png', 1));
+
+        const Image = observer.next(canvas.toDataURL('image/png', 1));
+        console.log("Image", Image);
       };
       img.src = b64Image;
     });
+  }
+
+  //private?
+  crop() {
+
   }
 
   createFormData(dataUrl) {

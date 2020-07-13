@@ -51,13 +51,19 @@ export class GameDrawComponent implements OnInit, OnDestroy {
   x = 0;
   y = 0;
 
-  xValues: number[] = [];
-  yValues: number[] = [];
+  // xValues: number[] = [];
+  // yValues: number[] = [];
+
+  minX;
+  minY;
+  maxX;
+  maxY;
 
   isDrawing = false;
   timeLeft = 20.0;
-  timeElapsed = 0.0;
-  userDrawLineWidth = 30;
+  // timeElapsed = 15.0; //TODO endre tilbake til 0
+  timeElapsed = 0.0; //TODO endre tilbake til 0
+  userDrawLineWidth = 10;
 
   private readonly _timeOut = new BehaviorSubject<boolean>(false);
   readonly _timeOut$ = this._timeOut.asObservable();
@@ -78,6 +84,13 @@ export class GameDrawComponent implements OnInit, OnDestroy {
     this.ctx = ctx;
     this.canvas.nativeElement.width = this.canvas.nativeElement.parentElement?.offsetWidth || document.body.clientWidth;
     this.canvas.nativeElement.height = document.body.clientHeight - 100;
+
+    // console.log("width", this.canvas.nativeElement.width);
+    this.minX = this.canvas.nativeElement.width;
+    this.minY = this.canvas.nativeElement.height;
+    this.maxX = 0;
+    this.maxY = 0;
+
     this.drawingService.guessDone = false;
     this.startGame();
   }
@@ -102,23 +115,20 @@ export class GameDrawComponent implements OnInit, OnDestroy {
     }
   }
 
+
+
   classify() {
     const b64Image = this.canvas.nativeElement.toDataURL('image/png');
-    // linje
+
     const paddingForLineWidth = this.userDrawLineWidth / 2;
     const paddingExtra = 20;
     const paddingTotal = paddingForLineWidth + paddingExtra;
 
-    const minX = Math.min(...this.xValues);
-    const minY = Math.min(...this.yValues);
-    const maxX = Math.max(...this.xValues);
-    const maxY = Math.max(...this.yValues);
+    const userDrawingWidth = this.maxX - this.minX;
+    const userDrawingHeight = this.maxY - this.minY;
 
-    const userDrawingWidth = maxX - minX;
-    const userDrawingHeight = maxY - minY;
-
-    const squareCenterX = minX + userDrawingWidth / 2;
-    const squareCenterY = minY + userDrawingHeight / 2;
+    const squareCenterX = this.minX + userDrawingWidth / 2;
+    const squareCenterY = this.minY + userDrawingHeight / 2;
     const squareSize = Math.max(userDrawingWidth, userDrawingHeight);
 
     const sx = squareCenterX - squareSize / 2 - paddingTotal;
@@ -162,8 +172,16 @@ export class GameDrawComponent implements OnInit, OnDestroy {
     this.ctx.lineTo(currentX, currentY);
     this.ctx.stroke();
 
-    this.xValues.push(currentX);
-    this.yValues.push(currentY);
+    if (currentX < this.minX) { this.minX = currentX };
+    if (currentY < this.minY) { this.minY = currentY };
+    if (currentX > this.maxX) { this.maxX = currentX };
+    if (currentY > this.maxY) { this.maxY = currentY };
+    // console.log("minX", this.minX, "currentX", currentX);
+    console.log("maxX", this.maxX, "currentX", currentX);
+
+
+    // this.xValues.push(currentX);
+    // this.yValues.push(currentY);
   }
 
   clear() {
