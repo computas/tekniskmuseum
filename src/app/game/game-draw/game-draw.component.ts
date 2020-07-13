@@ -67,7 +67,7 @@ export class GameDrawComponent implements OnInit, OnDestroy {
   startGameInfo: StartGameInfo;
   guessWord: string;
 
-  constructor(private imageService: ImageService, private drawingService: DrawingService) {}
+  constructor(private imageService: ImageService, private drawingService: DrawingService) { }
 
   ngOnInit(): void {
     const ctx = this.canvas.nativeElement.getContext('2d');
@@ -104,7 +104,7 @@ export class GameDrawComponent implements OnInit, OnDestroy {
 
   classify() {
     const b64Image = this.canvas.nativeElement.toDataURL('image/png');
-
+    // linje
     const paddingForLineWidth = this.userDrawLineWidth / 2;
     const paddingExtra = 20;
     const paddingTotal = paddingForLineWidth + paddingExtra;
