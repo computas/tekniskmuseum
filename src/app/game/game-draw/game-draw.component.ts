@@ -30,6 +30,7 @@ export class GameDrawComponent implements OnInit, OnDestroy {
   maxY;
 
   isDrawing = false;
+  hasLeftCanvas = false;
   timeLeft = 20.0;
   timeElapsed = 0.0;
   userDrawLineWidth = 10;
@@ -141,6 +142,19 @@ export class GameDrawComponent implements OnInit, OnDestroy {
       this.x = x;
       this.y = y;
     }
+  }
+
+  leaveCanvas(e: MouseEvent | TouchEvent) {
+    this.hasLeftCanvas = true;
+  }
+
+  enterCanvas(e: MouseEvent | TouchEvent) {
+    if (this.isDrawing && this.hasLeftCanvas) {
+      const { x, y } = this.getClientOffset(e);
+      this.x = x;
+      this.y = y;
+    }
+    this.hasLeftCanvas = false;
   }
 
   drawLine(currentX, currentY) {
