@@ -22,7 +22,7 @@
 .word-to-guess {
   color: #fa852f;
 }
-.get-word-button {
+.draw-word-button {
   position: absolute;
   bottom: 65px;
   right: 65px;
@@ -36,7 +36,7 @@
   width: 240px;
 }
 @media (min-width: 600px) {
-  .get-word-button {
+  .draw-word-button {
     font-size: 36px;
     height: 60px;
     width: 275px;
