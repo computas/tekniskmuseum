@@ -1,46 +1,94 @@
-.side-drawer {
-  background: #e42313;
-}
-.example-container {
-  position: absolute;
-  top: 0;
-  bottom: 0;
-  left: 0;
-  right: 0;
-}
-.side-nav-button {
-  color: white;
-  font-weight: normal;
-  mat-icon {
-    margin-right: 10px;
-  }
-}
-.main-container {
+.container {
   display: flex;
   flex-direction: column;
   justify-content: space-evenly;
   align-items: center;
   height: 100%;
+  background: linear-gradient(0.5deg, #195272 -0.56%, #05a3c7 138.78%);
 }
-.welcome-guy {
-  max-width: 80%;
+.play-container {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-evenly;
+  align-items: center;
+  margin-top: 50px;
+  @media (min-width: 600px) {
+    .play-container {
+      margin-top: 200px;
+    }
+  }
+}
+.navigation-container {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-evenly;
+  align-items: center;
+  flex-wrap: wrap;
+}
+a {
+  text-decoration: none;
+}
+.info-text {
+  color: #ffffff;
+  font-size: 24px;
+  font-weight: 300;
+  line-height: 30px;
+  text-align: center;
+}
+@media (min-width: 600px) {
+  .info-text {
+    font-size: 40px;
+    font-weight: 300;
+    line-height: 60px;
+  }
 }
 .play-game-button {
-  background: #e42313;
-  padding: 4px 50px;
+  background: #fa852f;
+  color: #ffffff;
+  box-shadow: 0 8px 16px 0 rgba(0, 0, 0, 0.1), 0 6px 20px 0 rgba(0, 0, 0, 0.15);
+  margin-top: 30px;
+  font-size: 20px;
+  border-radius: 50px;
+  height: 50px;
+  width: 240px;
 }
-.content {
-  position: relative;
+@media (min-width: 600px) {
+  .play-game-button {
+    font-size: 36px;
+    border-radius: 50px;
+    height: 60px;
+    width: 275px;
+  }
 }
-.content::before {
-  background: url("./../../assets/sketch-background.jpg");
-  background-repeat: no-repeat;
-  background-size: cover;
-  filter: opacity(0.2);
-  content: "";
-  position: absolute;
+.navigation-button {
+  border-radius: 50px;
+  color: #195272;
+  box-shadow: 0 8px 16px 0 rgba(0, 0, 0, 0.1), 0 6px 20px 0 rgba(0, 0, 0, 0.15);
+  font-size: 18px;
+  height: 40px;
+  width: 200px;
+  margin: 5px;
+  margin-top: 10px;
+  margin-bottom: 10px;
+}
+@media (min-width: 600px) {
+  .navigation-button {
+    font-size: 24px;
+    height: 45px;
+    width: 240px;
+    margin: 50px;
+  }
+}
+.tts-button {
   top: 0;
-  bottom: 0;
-  left: 0;
+  position: absolute;
   right: 0;
+  margin: 24px;
+}
+.mat-fab.mat-primary {
+  background: #ecf8ff;
+  color: #195272;
+}
+.material-icons {
+  vertical-align: middle;
 }

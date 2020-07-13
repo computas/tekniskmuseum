@@ -2,6 +2,8 @@ import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { GameWordToDrawComponent } from './game-word-to-draw.component';
 import { HttpClientTestingModule } from '@angular/common/http/testing';
+import { SpeechServiceMock } from 'src/app/services/speech.service.mock';
+import { SpeechService } from 'src/app/services/speech.service';
 
 describe('GameWordToDrawComponent', () => {
   let component: GameWordToDrawComponent;
@@ -11,6 +13,7 @@ describe('GameWordToDrawComponent', () => {
     TestBed.configureTestingModule({
       declarations: [GameWordToDrawComponent],
       imports: [HttpClientTestingModule],
+      providers: [{ provide: SpeechService, useValue: SpeechServiceMock }],
     }).compileComponents();
   }));
 

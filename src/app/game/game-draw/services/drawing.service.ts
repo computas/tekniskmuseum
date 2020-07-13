@@ -1,41 +1,73 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable, BehaviorSubject } from 'rxjs';
-import { tap } from 'rxjs/operators';
-import { StartGameInfo } from './start-game-info';
+import { tap, switchMap } from 'rxjs/operators';
+import { StartGameToken } from './start-game-token';
+import { GameLabel } from './game-label';
 import { Result } from '../../../shared/models/result.interface';
+import { ResultsMock } from './results.mock';
+import { endpoints } from '../../../shared/models/endpoints';
+import { SpeechService } from 'src/app/services/speech.service';
+import { SPEECH } from 'src/app/shared/speech-text/text';
 
 @Injectable({
   providedIn: 'root',
 })
 export class DrawingService {
-  baseUrl = 'https://tekniskback.azurewebsites.net';
-  startGameInfo: StartGameInfo;
-  totalGuess = 5;
+  baseUrl = endpoints.TEKNISKBACKEND;
+  totalGuess = 3;
+  token = '';
+  labels = [];
+  label = '';
+  gameHasStarted = false;
+  classificationDone = false;
+  guess = '';
 
+  private readonly _guessUsed = new BehaviorSubject<number>(1);
   private readonly _gameOver = new BehaviorSubject<boolean>(false);
   private readonly _guessDone = new BehaviorSubject<boolean>(false);
   private readonly _results = new BehaviorSubject<Result[]>([]);
 
+  readonly guessUsed$ = this._guessUsed.asObservable();
   readonly results$ = this._results.asObservable();
   readonly guessDone$ = this._guessDone.asObservable();
   readonly gameOver$ = this._gameOver.asObservable();
 
-  constructor(private http: HttpClient) {}
+  resultsMock: Result[] = ResultsMock;
 
-  submitAnswer(answerInfo: FormData, imageData: string): Observable<any> {
-    return this.http.post<FormData>(`${this.baseUrl}/submitAnswer`, answerInfo).pipe(
+  constructor(private http: HttpClient, private speechService: SpeechService) {}
+
+  classify(answerInfo: FormData, imageData: string): Observable<any> {
+    return this.http.post<FormData>(`${this.baseUrl}/${endpoints.CLASSIFY}`, answerInfo).pipe(
       tap((res) => {
         const result: Result = {
           hasWon: res.hasWon,
           imageData,
-          word: this.startGameInfo.label,
+          word: this.label,
+          gameState: res.gameState,
+          guess: res.guess,
         };
-        this.addResult(result);
-        this.guessDone = true;
-        this.isGameOver();
+        if (result.hasWon || result.gameState === 'Done') {
+          this.addResult(result);
+          this.guessDone = true;
+          if (this.guessUsed) {
+            this.guessUsed++;
+          }
+          this.classificationDone = true;
+          this.isGameOver();
+          if (result.hasWon) {
+            this.speechService.speak(`${SPEECH.correctGuess}${result.guess}`);
+          }
+          if (result.gameState === 'Done' && !result.hasWon) {
+            this.speechService.speak(`${SPEECH.couldntGuess}`);
+          }
+        }
       })
     );
+  }
+
+  get() {
+    return this.resultsMock;
   }
 
   isGameOver() {
@@ -45,12 +77,19 @@ export class DrawingService {
     }
   }
 
-  startGame(): Observable<StartGameInfo> {
-    return this.http.get<StartGameInfo>(`${this.baseUrl}/startGame`).pipe(
-      tap((res) => {
-        this.startGameInfo = res;
+  startGame(): Observable<GameLabel> {
+    return this.http.get<StartGameToken>(`${this.baseUrl}/${endpoints.STARTGAME}`).pipe(
+      switchMap((res) => {
+        this.token = res.token;
+        return this.getLabel();
       })
     );
+  }
+
+  getLabel(): Observable<GameLabel> {
+    return this.http
+      .post<GameLabel>(`${this.baseUrl}/${endpoints.GETLABEL}?token=${this.token}`, {})
+      .pipe(tap((res) => (this.label = res.label)));
   }
 
   endGame() {
@@ -65,6 +104,14 @@ export class DrawingService {
 
   get lastResult(): Result {
     return this.results[this.results.length - 1];
+  }
+
+  get guessUsed(): number {
+    return this._guessUsed.getValue();
+  }
+
+  set guessUsed(val: number) {
+    this._guessUsed.next(val);
   }
 
   get results(): Result[] {

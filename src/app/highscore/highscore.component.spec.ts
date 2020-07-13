@@ -4,6 +4,7 @@ import { HighScoreComponent } from './highscore.component';
 import { HighScoreSideNavComponent } from './highscore-side-nav/highscore-side-nav.component';
 import { MaterialImportsModule } from '../shared/material-imports/material-imports.module';
 import { FormsModule } from '@angular/forms';
+import { HttpClientTestingModule } from '@angular/common/http/testing';
 
 describe('HighscoreComponent', () => {
   let component: HighScoreComponent;
@@ -12,7 +13,7 @@ describe('HighscoreComponent', () => {
   beforeEach(async(() => {
     TestBed.configureTestingModule({
       declarations: [HighScoreComponent, HighScoreSideNavComponent],
-      imports: [MaterialImportsModule, FormsModule],
+      imports: [MaterialImportsModule, FormsModule, HttpClientTestingModule],
     }).compileComponents();
   }));
 

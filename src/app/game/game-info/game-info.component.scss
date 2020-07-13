@@ -1,20 +1,71 @@
-.game-info {
-  height: 100%;
+.material-icons {
+  color: #195272;
+}
+.game-info-text-header {
+  color: #fa852f;
+  text-align: center;
+  font-size: 38px;
+  font-weight: 500;
+  margin-top: 30px;
+}
+@media (min-width: 600px) {
+  .game-info-text-header {
+    font-size: 48px;
+    font-weight: 500;
+  }
+}
+.game-info-seconds {
+  display: flex;
+  align-items: center;
+}
+.game-info-seconds > span {
+  margin-right: 10px;
+}
+.game-info-text-content {
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
+  min-height: 90vh;
 }
-.game-info {
-  color: #e42313;
+.game-info-text-list {
+  color: #195272;
+}
+.game-info-text-list > li {
+  font-size: 24px;
+  margin: 28px;
+}
+@media (min-width: 600px) {
+  .game-info-text-list > li {
+    font-size: 30px;
+    margin: 28px;
+  }
 }
 .get-word-button {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  background: #e42313;
+  background: #fa852f;
+  color: #ffffff;
+  box-shadow: 0 8px 16px 0 rgba(0, 0, 0, 0.1), 0 6px 20px 0 rgba(0, 0, 0, 0.15);
+  margin-top: 30px;
+  font-size: 20px;
+  border-radius: 50px;
+  height: 50px;
+  width: 240px;
 }
-.welcome-guy {
-  height: 30%;
-  padding: 50px;
+@media (min-width: 600px) {
+  .get-word-button {
+    font-size: 36px;
+    border-radius: 50px;
+    height: 60px;
+    width: 275px;
+  }
+}
+.tts-button {
+  top: 0;
+  position: absolute;
+  right: 0;
+  margin: 24px;
+}
+.mat-fab.mat-primary {
+  background: #ecf8ff;
+  color: #195272;
 }

@@ -1,7 +1,62 @@
-.nav-spacer {
-  flex: 1 1 auto;
-}
-canvas {
+#drawing-canvas {
   position: absolute;
   touch-action: none;
+  border: 1px solid #e5e5e5;
+  margin: auto;
+}
+.drawing-container {
+  margin: auto;
+  width: 90%;
+  margin-top: 20px;
+}
+.drawing-header {
+  display: flex;
+  justify-content: space-between;
+}
+.drawing-header > h1 {
+  color: #fa852f;
+  margin: 0;
+}
+.drawing-header-text {
+  color: #949494;
+}
+.drawing-seconds {
+  display: flex;
+  align-items: center;
+  font-size: 18px;
+}
+.drawing-seconds > span {
+  margin-right: 10px;
+}
+.base-timer {
+  position: relative;
+  height: 30px;
+  width: 30px;
+}
+.base-timer__circle {
+  fill: none;
+  stroke: none;
+}
+.base-timer__path-elapsed {
+  stroke-width: 10px;
+  stroke: grey;
+}
+.base-timer__label {
+  position: absolute;
+  user-select: none;
+
+  /* Size should match the parent container */
+  width: 30px;
+  height: 30px;
+
+  /* Keep the label aligned to the top */
+  top: 0;
+
+  /* Create a flexible box that centers content vertically and horizontally */
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  /* Sort of an arbitrary number; adjust to your liking */
+  font-size: 13px;
 }

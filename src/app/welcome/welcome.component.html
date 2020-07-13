@@ -1,29 +1,27 @@
-<mat-sidenav-container class="example-container">
-  <mat-sidenav mode="side" position="end" class="side-drawer" opened>
-    <mat-list role="list">
-      <mat-list-item role="listitem">
-        <button mat-button class="side-nav-button">
-          <mat-icon aria-label="Example home icon">home</mat-icon>Se andres
-          tegninger
-        </button>
-      </mat-list-item>
-      <mat-list-item role="listitem">
-        <button mat-button class="side-nav-button">
-          <mat-icon aria-label="Example home icon">home</mat-icon>Lær om kunstig
-          intelligens
-        </button>
-      </mat-list-item>
-      <mat-list-item role="listitem">
-        <button mat-button class="side-nav-button">
-          <mat-icon aria-label="Example home icon">home</mat-icon>Topplisten
-        </button>
-      </mat-list-item>
-    </mat-list>
-  </mat-sidenav>
-  <mat-sidenav-content class="content">
-    <div class="main-container">
-      <img src="assets/welcome-guy.png" alt="" class="welcome-guy" />
-      <button mat-raised-button color="primary" class="play-game-button" (click)="goToGameInfoPage()">Spill</button>
-    </div>
-  </mat-sidenav-content>
-</mat-sidenav-container>
+<div class="container">
+  <button mat-fab (click)="speakIntro()" type="button" value="Play" color="primary" class="tts-button">
+    <mat-icon>volume_up</mat-icon>
+  </button>
+  <div class="play-container">
+    <span class="info-text">
+      Hei, jeg <span style="color: #fa852f; font-weight: 500;"> Kunstig Intelligens</span>. <br />
+      Kan du hjelpe meg lære?
+    </span>
+    <span>
+      <button mat-raised-button class="play-game-button" (click)="goToGameInfoPage()">
+        SPILL
+      </button>
+    </span>
+  </div>
+  <div class="navigation-container">
+    <button mat-raised-button class="navigation-button" (click)="goToGameInfoPage()">
+      <mat-icon aria-label="Example home icon">school</mat-icon>
+      Lær mer
+    </button>
+
+    <button mat-raised-button class="navigation-button" (click)="goToGameInfoPage()">
+      <mat-icon aria-label="Example home icon">star</mat-icon>
+      Topplisten
+    </button>
+  </div>
+</div>
