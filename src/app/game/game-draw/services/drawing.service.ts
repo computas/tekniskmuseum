@@ -7,8 +7,6 @@ import { GameLabel } from './game-label';
 import { Result } from '../../../shared/models/result.interface';
 import { ResultsMock } from './results.mock';
 import { endpoints } from '../../../shared/models/endpoints';
-import { SpeechService } from 'src/app/services/speech.service';
-import { SPEECH } from 'src/app/shared/speech-text/text';
 
 @Injectable({
   providedIn: 'root',
@@ -35,7 +33,7 @@ export class DrawingService {
 
   resultsMock: Result[] = ResultsMock;
 
-  constructor(private http: HttpClient, private speechService: SpeechService) {}
+  constructor(private http: HttpClient) {}
 
   classify(answerInfo: FormData, imageData: string): Observable<any> {
     return this.http.post<FormData>(`${this.baseUrl}/${endpoints.CLASSIFY}`, answerInfo).pipe(

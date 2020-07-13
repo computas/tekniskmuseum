@@ -1,7 +1,6 @@
 import { Component, ElementRef, OnInit, ViewChild, Output, EventEmitter, OnDestroy } from '@angular/core';
 import { BehaviorSubject, Subject, interval, Observable } from 'rxjs';
 import { takeUntil } from 'rxjs/operators';
-import { trigger, state, style, animate, transition } from '@angular/animations';
 import { take } from 'rxjs/operators';
 import { ImageService } from './services/image.service';
 import { DrawingService } from './services/drawing.service';
