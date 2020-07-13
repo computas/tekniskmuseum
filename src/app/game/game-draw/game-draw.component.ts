@@ -58,8 +58,7 @@ export class GameDrawComponent implements OnInit, OnDestroy {
 
   isDrawing = false;
   timeLeft = 20.0;
-  // timeElapsed = 15.0; //TODO endre tilbake til 0
-  timeElapsed = 0.0; //TODO endre tilbake til 0
+  timeElapsed = 0.0;
   userDrawLineWidth = 10;
 
   private readonly _timeOut = new BehaviorSubject<boolean>(false);
@@ -111,28 +110,10 @@ export class GameDrawComponent implements OnInit, OnDestroy {
     }
   }
 
-
-
   classify() {
     const b64Image = this.canvas.nativeElement.toDataURL('image/png');
 
-    const paddingForLineWidth = this.userDrawLineWidth / 2;
-    const paddingExtra = 20;
-    const paddingTotal = paddingForLineWidth + paddingExtra;
-
-    const userDrawingWidth = this.maxX - this.minX;
-    const userDrawingHeight = this.maxY - this.minY;
-
-    const squareCenterX = this.minX + userDrawingWidth / 2;
-    const squareCenterY = this.minY + userDrawingHeight / 2;
-    const squareSize = Math.max(userDrawingWidth, userDrawingHeight);
-
-    const sx = squareCenterX - squareSize / 2 - paddingTotal;
-    const sy = squareCenterY - squareSize / 2 - paddingTotal;
-    const sw = squareSize + paddingTotal * 2;
-    const sh = squareSize + paddingTotal * 2;
-
-    this.imageService.resize(b64Image, sx, sy, sw, sh).subscribe({
+    this.imageService.resize(b64Image, this.minX, this.minY, this.maxX, this.maxY, this.userDrawLineWidth).subscribe({
       next: (dataUrl) => {
         const formData: FormData = this.imageService.createFormData(dataUrl);
         formData.append('token', this.drawingService.token);
@@ -172,8 +153,6 @@ export class GameDrawComponent implements OnInit, OnDestroy {
     if (currentY < this.minY) { this.minY = currentY };
     if (currentX > this.maxX) { this.maxX = currentX };
     if (currentY > this.maxY) { this.maxY = currentY };
-    // console.log("minX", this.minX, "currentX", currentX);
-    // console.log("maxX", this.maxX, "currentX", currentX);
   }
 
   clear() {
