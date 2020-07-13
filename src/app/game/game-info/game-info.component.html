@@ -1,38 +1,20 @@
 <div class="game-info-container">
-  <div class="game-info-header">
-    <a mat-flat-button href="#">
-      <mat-icon>home</mat-icon>
-    </a>
-    <div class="spacer"></div>
-    <div>
-      <button mat-icon-button color="primary" aria-label="Example icon button with a home icon" (click)="volume()">
-        <span *ngIf="!vol" class="material-icons">
-          volume_off
-        </span>
-        <span *ngIf="vol" class="material-icons">
-          volume_up
-        </span>
-      </button>
-    </div>
-  </div>
+  <button mat-fab (click)="speakInfo()" type="button" value="Play" color="primary" class="tts-button">
+    <mat-icon>volume_up</mat-icon>
+  </button>
   <div class="game-info-text-content">
     <h1 class="game-info-text-header">Slik spiller du:</h1>
     <ol class="game-info-text-list">
       <li>Tegn ord</li>
       <li>Jeg gjetter</li>
       <li>Få poeng</li>
-      <div class="game-info-seconds">
-        <span class="material-icons">
-          access_alarms
-        </span>
-        <span class="seconds">20 s</span>
-      </div>
     </ol>
     <div class="game-info-footer">
       <div class="avatar"></div>
       <button mat-raised-button color="primary" class="get-word-button" (click)="startDrawing()">
         Start
       </button>
+      <!-- TODO add back button -->
     </div>
   </div>
 </div>

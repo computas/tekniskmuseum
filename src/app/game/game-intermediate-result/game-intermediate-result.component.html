@@ -1,14 +1,20 @@
 <div id="intermediate-container">
   <div>
     <ng-container *ngIf="result">
-      <div class="word-text">
-        <h1 class="word-to-guess">{{ result.word | uppercase }}</h1>
-      </div>
-      <div>
-        <img [src]="result.imageData" [className]="result.hasWon ? 'won' : 'loss'" />
-      </div>
-      <div>
-        <button mat-raised-button class="new-drawing-button" (click)="newDrawing()">
+      <div class="intermediate-content">
+        <button mat-fab (click)="speakResult()" type="button" value="Play" color="primary" class="tts-button">
+          <mat-icon>volume_up</mat-icon>
+        </button>
+        <div class="word-text" *ngIf="result.hasWon">
+          <h1>{{ wonSentence }}{{ result.word }}</h1>
+        </div>
+        <div class="word-text" *ngIf="!result.hasWon">
+          <h1>{{ lostSentence }}</h1>
+        </div>
+        <div>
+          <img [src]="result.imageData" [className]="result.hasWon ? 'won' : 'loss'" />
+        </div>
+        <button mat-raised-button class="next-word-button" (click)="newDrawing()">
           NESTE ORD
         </button>
       </div>
@@ -18,3 +24,4 @@
     </ng-template>
   </div>
 </div>
+(click)="newDrawing()"

@@ -45,7 +45,6 @@ export class GameDrawComponent implements OnInit, OnDestroy {
   countDown: ElementRef<HTMLSpanElement>;
 
   private ctx: CanvasRenderingContext2D;
-  clockColor = 'initial';
 
   @Output() isDoneDrawing = new EventEmitter();
 
@@ -181,7 +180,6 @@ export class GameDrawComponent implements OnInit, OnDestroy {
 
   private createDrawingTimer() {
     return new Observable((observer) => {
-      let color = 'red';
       interval(100)
         .pipe(take(10 * this.timeLeft), takeUntil(this.unsubscribe))
         .subscribe((tics) => {
@@ -193,10 +191,6 @@ export class GameDrawComponent implements OnInit, OnDestroy {
                 this.classify();
               }
             }
-            if (this.timeLeft <= 5) {
-              this.countDown.nativeElement.style.color = color;
-              color = color === 'white' ? 'red' : 'white';
-            }
           }
         });
     });
@@ -206,7 +200,6 @@ export class GameDrawComponent implements OnInit, OnDestroy {
     timer.subscribe({
       complete: () => {
         this.timeOut = true;
-        this.clockColor = this.clockColor === 'initial' ? 'final' : 'initial';
       },
     });
   }

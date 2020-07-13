@@ -1,16 +1,19 @@
-<div id="word-container">
+<div class="word-container">
   <div *ngIf="loading">
     <mat-spinner></mat-spinner>
   </div>
   <div *ngIf="word">
     <div class="words-remaining">{{ guessUsed }}/3</div>
+    <button mat-fab (click)="speakWord()" type="button" value="Play" color="primary" class="tts-button">
+      <mat-icon>volume_up</mat-icon>
+    </button>
     <div class="word-text">
-      <p>Ordet ditt er:</p>
+      <p class="word-draw">Tegn:</p>
       <h1 class="word-to-guess">{{ word | uppercase }}</h1>
     </div>
     <div class="word-footer">
       <div class="word-footer-avatar"></div>
-      <button mat-raised-button class="get-word-button" (click)="drawWord.emit(true)">
+      <button mat-raised-button class="draw-word-button" (click)="drawWord.emit(true)">
         TEGN
       </button>
     </div>
