@@ -20,7 +20,7 @@ export class ImageService {
     return new Uint8Array(imgBuffer);
   }
 
-  resize(b64Image, minX, minY, maxX, maxY, userDrawLineWidth): Observable<string> {
+  resize(b64Image, croppedCoordinates): Observable<string> {
     return new Observable((observer) => {
       const img = new Image();
       const canvas = document.createElement('canvas');
@@ -28,8 +28,6 @@ export class ImageService {
       if (!ctx) {
         throw new Error('getContext failed');
       }
-
-      const croppedCoordinates: any = this.crop(minX, minY, maxX, maxY, userDrawLineWidth);
 
       img.onload = () => {
         canvas.width = 256;
@@ -44,7 +42,7 @@ export class ImageService {
     });
   }
 
-  private crop(minX, minY, maxX, maxY, userDrawLineWidth) {
+  crop(minX, minY, maxX, maxY, userDrawLineWidth) {
     const paddingForLineWidth = userDrawLineWidth / 2;
     const paddingExtra = 20;
     const paddingTotal = paddingForLineWidth + paddingExtra;

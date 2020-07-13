@@ -33,7 +33,8 @@ export class GameDrawComponent implements OnInit, OnDestroy {
   hasLeftCanvas = false;
   timeLeft = 20.0;
   timeElapsed = 0.0;
-  userDrawLineWidth = 10;
+
+  private readonly LINE_WIDTH = 10;
 
   private readonly _timeOut = new BehaviorSubject<boolean>(false);
   readonly _timeOut$ = this._timeOut.asObservable();
@@ -111,8 +112,8 @@ export class GameDrawComponent implements OnInit, OnDestroy {
 
   classify() {
     const b64Image = this.canvas.nativeElement.toDataURL('image/png');
-
-    this.imageService.resize(b64Image, this.minX, this.minY, this.maxX, this.maxY, this.userDrawLineWidth).subscribe({
+    const croppedCoordinates: any = this.imageService.crop(this.minX, this.minY, this.maxX, this.maxY, this.LINE_WIDTH);
+    this.imageService.resize(b64Image, croppedCoordinates).subscribe({
       next: (dataUrl) => {
         const formData: FormData = this.createFormData(dataUrl);
         this.drawingService.classify(formData, dataUrl).subscribe();
@@ -146,6 +147,12 @@ export class GameDrawComponent implements OnInit, OnDestroy {
 
   leaveCanvas(e: MouseEvent | TouchEvent) {
     this.hasLeftCanvas = true;
+    if (this.isDrawing) {
+      const { x, y } = this.getClientOffset(e);
+      this.drawLine(x, y);
+      this.x = x;
+      this.y = y;
+    }
   }
 
   enterCanvas(e: MouseEvent | TouchEvent) {
@@ -159,7 +166,7 @@ export class GameDrawComponent implements OnInit, OnDestroy {
 
   drawLine(currentX, currentY) {
     this.ctx.strokeStyle = 'black';
-    this.ctx.lineWidth = this.userDrawLineWidth;
+    this.ctx.lineWidth = this.LINE_WIDTH;
     this.ctx.lineCap = this.ctx.lineJoin = 'round';
     this.ctx.beginPath();
     this.ctx.moveTo(this.x, this.y);
