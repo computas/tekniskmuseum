@@ -51,9 +51,6 @@ export class GameDrawComponent implements OnInit, OnDestroy {
   x = 0;
   y = 0;
 
-  // xValues: number[] = [];
-  // yValues: number[] = [];
-
   minX;
   minY;
   maxX;
@@ -85,7 +82,6 @@ export class GameDrawComponent implements OnInit, OnDestroy {
     this.canvas.nativeElement.width = this.canvas.nativeElement.parentElement?.offsetWidth || document.body.clientWidth;
     this.canvas.nativeElement.height = document.body.clientHeight - 100;
 
-    // console.log("width", this.canvas.nativeElement.width);
     this.minX = this.canvas.nativeElement.width;
     this.minY = this.canvas.nativeElement.height;
     this.maxX = 0;
@@ -177,11 +173,7 @@ export class GameDrawComponent implements OnInit, OnDestroy {
     if (currentX > this.maxX) { this.maxX = currentX };
     if (currentY > this.maxY) { this.maxY = currentY };
     // console.log("minX", this.minX, "currentX", currentX);
-    console.log("maxX", this.maxX, "currentX", currentX);
-
-
-    // this.xValues.push(currentX);
-    // this.yValues.push(currentY);
+    // console.log("maxX", this.maxX, "currentX", currentX);
   }
 
   clear() {
