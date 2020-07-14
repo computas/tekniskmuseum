@@ -44,7 +44,7 @@ export class GameDrawComponent implements OnInit, OnDestroy {
   startGameInfo: StartGameInfo;
   guessWord: string;
 
-  constructor(private imageService: ImageService, private drawingService: DrawingService) {}
+  constructor(private imageService: ImageService, private drawingService: DrawingService) { }
 
   ngOnInit(): void {
     const ctx = this.canvas.nativeElement.getContext('2d');
@@ -116,8 +116,10 @@ export class GameDrawComponent implements OnInit, OnDestroy {
     this.imageService.resize(b64Image, croppedCoordinates).subscribe({
       next: (dataUrl) => {
         const images = {
-          highres: b64Image,
+          // highres: b64Image,
+          highres: dataUrl,
           lowres: dataUrl,
+          // lowres: b64Image,
         };
         const formData: FormData = this.createFormData(dataUrl);
         this.drawingService.classify(formData, images).subscribe();
@@ -177,8 +179,10 @@ export class GameDrawComponent implements OnInit, OnDestroy {
     this.ctx.lineTo(currentX, currentY);
     this.ctx.stroke();
 
-    currentX < this.minX ? (this.minX = currentX) : (this.maxX = currentX);
-    currentY < this.minY ? (this.minY = currentY) : (this.maxY = currentY);
+    if (currentX < this.minX) this.minX = currentX;
+    if (currentY < this.minY) this.minY = currentY;
+    if (currentX > this.maxX) this.maxX = currentX;
+    if (currentY > this.maxY) this.maxY = currentY;
   }
 
   clear() {
