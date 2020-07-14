@@ -32,13 +32,13 @@
   font-size: 20px;
   border-radius: 50px;
   height: 50px;
-  width: 240px;
+  min-width: 200px;
+  max-width: 400px;
+  padding: 10px 20px 10px 20px;
 }
 @media (min-width: 600px) {
   .next-word-button {
     font-size: 36px;
-    height: 60px;
-    width: 275px;
   }
 }
 .word-text {
