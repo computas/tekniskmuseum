@@ -34,6 +34,8 @@ export class GameDrawComponent implements OnInit, OnDestroy {
   timeLeft = 20.0;
   timeElapsed = 0.0;
 
+  private readonly resultImageSize = 1024;
+
   private readonly LINE_WIDTH = 10;
 
   private readonly _timeOut = new BehaviorSubject<boolean>(false);
@@ -115,14 +117,17 @@ export class GameDrawComponent implements OnInit, OnDestroy {
     const croppedCoordinates: any = this.imageService.crop(this.minX, this.minY, this.maxX, this.maxY, this.LINE_WIDTH);
     this.imageService.resize(b64Image, croppedCoordinates).subscribe({
       next: (dataUrl) => {
-        const images = {
-          // highres: b64Image,
-          highres: dataUrl,
-          lowres: dataUrl,
-          // lowres: b64Image,
-        };
         const formData: FormData = this.createFormData(dataUrl);
-        this.drawingService.classify(formData, images).subscribe();
+        this.drawingService.classify(formData).subscribe(res => {
+          console.log("res ", res);
+          if (res.roundIsDone) {
+            this.imageService.resize(this.canvas.nativeElement.toDataURL('image/png'), croppedCoordinates, this.resultImageSize).subscribe({
+              next: (dataUrl) => {
+                this.drawingService.lastResult.imageData = dataUrl;
+              }
+            });
+          }
+        });
       },
     });
   }
