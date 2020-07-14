@@ -180,12 +180,15 @@ export class GameDrawComponent implements OnInit, OnDestroy {
     this.ctx.lineTo(currentX, currentY);
     this.ctx.stroke();
 
-    console.log("currentX: ", currentX);
-
     if (currentX < this.minX) { this.minX = currentX; }
     if (currentY < this.minY) { this.minY = currentY; }
     if (currentX > this.maxX) { this.maxX = currentX; }
     if (currentY > this.maxY) { this.maxY = currentY; }
+
+    if (this.minX < 0) {this.minX = 0};
+    if (this.minY < 0) {this.minY = 0};
+    if (this.maxX > this.canvas.nativeElement.width) {this.maxX = this.canvas.nativeElement.width};
+    if (this.maxY > this.canvas.nativeElement.height) {this.maxY = this.canvas.nativeElement.height};
   }
 
   clear() {
