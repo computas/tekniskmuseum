@@ -7,8 +7,6 @@ import { GameLabel } from './game-label';
 import { Result } from '../../../shared/models/result.interface';
 import { ResultsMock } from './results.mock';
 import { endpoints } from '../../../shared/models/endpoints';
-import { SpeechService } from 'src/app/services/speech.service';
-import { SPEECH } from 'src/app/shared/speech-text/text';
 
 @Injectable({
   providedIn: 'root',
@@ -35,46 +33,41 @@ export class DrawingService {
 
   resultsMock: Result[] = ResultsMock;
 
-  constructor(private http: HttpClient, private speechService: SpeechService) {}
+  constructor(private http: HttpClient) {}
 
   classify(answerInfo: FormData, imageData: string): Observable<any> {
     return this.http.post<FormData>(`${this.baseUrl}/${endpoints.CLASSIFY}`, answerInfo).pipe(
       tap((res) => {
-        const result: Result = {
-          hasWon: res.hasWon,
-          imageData,
-          word: this.label,
-          gameState: res.gameState,
-          guess: res.guess,
-        };
-        if (result.hasWon || result.gameState === 'Done') {
+        if (this.roundIsDone(res)) {
+          const result: Result = this.createResult(res, imageData);
           this.addResult(result);
           this.guessDone = true;
-          if (this.guessUsed) {
-            this.guessUsed++;
-          }
+          this.guessUsed++;
           this.classificationDone = true;
-          this.isGameOver();
-          if (result.hasWon) {
-            this.speechService.speak(`${SPEECH.correctGuess}${result.guess}`);
-          }
-          if (result.gameState === 'Done' && !result.hasWon) {
-            this.speechService.speak(`${SPEECH.couldntGuess}`);
+          const isDonePlaying = this.results.length === this.totalGuess;
+          if (isDonePlaying) {
+            this.gameOver = isDonePlaying;
           }
         }
       })
     );
   }
+  createResult(res, imageData): Result {
+    const result: Result = {
+      hasWon: res.hasWon,
+      imageData,
+      word: this.label,
+      gameState: res.gameState,
+      guess: res.guess,
+    };
+    return result;
+  }
+  roundIsDone(res) {
+    return res.hasWon || res.gameState === 'Done';
+  }
 
   get() {
     return this.resultsMock;
-  }
-
-  isGameOver() {
-    const isDonePlaying = this.results.length === this.totalGuess;
-    if (isDonePlaying) {
-      this.gameOver = isDonePlaying;
-    }
   }
 
   startGame(): Observable<GameLabel> {
