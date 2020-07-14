@@ -34,6 +34,8 @@ export class GameDrawComponent implements OnInit, OnDestroy {
   timeLeft = 20.0;
   timeElapsed = 0.0;
 
+  private readonly resultImageSize = 1024;
+
   private readonly LINE_WIDTH = 10;
 
   private readonly _timeOut = new BehaviorSubject<boolean>(false);
@@ -44,7 +46,7 @@ export class GameDrawComponent implements OnInit, OnDestroy {
   startGameInfo: StartGameInfo;
   guessWord: string;
 
-  constructor(private imageService: ImageService, private drawingService: DrawingService) {}
+  constructor(private imageService: ImageService, private drawingService: DrawingService) { }
 
   ngOnInit(): void {
     const ctx = this.canvas.nativeElement.getContext('2d');
@@ -55,12 +57,7 @@ export class GameDrawComponent implements OnInit, OnDestroy {
     this.ctx = ctx;
     this.canvas.nativeElement.width = this.canvas.nativeElement.parentElement?.offsetWidth || document.body.clientWidth;
     this.canvas.nativeElement.height = document.body.clientHeight - 100;
-
-    this.minX = this.canvas.nativeElement.width;
-    this.minY = this.canvas.nativeElement.height;
-    this.maxX = 0;
-    this.maxY = 0;
-
+    this.resetMinMaxMouseValues();
     this.drawingService.guessDone = false;
     this.startGame();
   }
@@ -116,7 +113,17 @@ export class GameDrawComponent implements OnInit, OnDestroy {
     this.imageService.resize(b64Image, croppedCoordinates).subscribe({
       next: (dataUrl) => {
         const formData: FormData = this.createFormData(dataUrl);
-        this.drawingService.classify(formData, dataUrl).subscribe();
+        this.drawingService.classify(formData).subscribe((res) => {
+          if (res.roundIsDone) {
+            this.imageService
+              .resize(this.canvas.nativeElement.toDataURL('image/png'), croppedCoordinates, this.resultImageSize)
+              .subscribe({
+                next: (dataUrlHighRes) => {
+                  this.drawingService.lastResult.imageData = dataUrlHighRes;
+                },
+              });
+          }
+        });
       },
     });
   }
@@ -173,13 +180,23 @@ export class GameDrawComponent implements OnInit, OnDestroy {
     this.ctx.lineTo(currentX, currentY);
     this.ctx.stroke();
 
-    currentX < this.minX ? (this.minX = currentX) : (this.maxX = currentX);
-    currentY < this.minY ? (this.minY = currentY) : (this.maxY = currentY);
+    if (currentX < this.minX) { this.minX = currentX; }
+    if (currentY < this.minY) { this.minY = currentY; }
+    if (currentX > this.maxX) { this.maxX = currentX; }
+    if (currentY > this.maxY) { this.maxY = currentY; }
   }
 
   clear() {
     const canvas = this.canvas.nativeElement;
     this.ctx.clearRect(0, 0, canvas.width, canvas.height);
+    this.resetMinMaxMouseValues();
+  }
+
+  resetMinMaxMouseValues() {
+    this.minX = this.canvas.nativeElement.width;
+    this.minY = this.canvas.nativeElement.height;
+    this.maxX = 0;
+    this.maxY = 0;
   }
 
   stop(e) {

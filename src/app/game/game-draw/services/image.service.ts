@@ -20,7 +20,7 @@ export class ImageService {
     return new Uint8Array(imgBuffer);
   }
 
-  resize(b64Image, croppedCoordinates): Observable<string> {
+  resize(b64Image, croppedCoordinates, imageSize = 256): Observable<string> {
     return new Observable((observer) => {
       const img = new Image();
       const canvas = document.createElement('canvas');
@@ -30,8 +30,8 @@ export class ImageService {
       }
 
       img.onload = () => {
-        canvas.width = 256;
-        canvas.height = 256;
+        canvas.width = imageSize;
+        canvas.height = imageSize;
         ctx.fillStyle = '#FFFFFF';
         ctx.fillRect(0, 0, canvas.width, canvas.height);
         const [sx, sy, sw, sh] = croppedCoordinates;
