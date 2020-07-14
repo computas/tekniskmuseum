@@ -52,6 +52,7 @@ export class DrawingService {
       })
     );
   }
+
   createResult(res, imageData): Result {
     const result: Result = {
       hasWon: res.hasWon,
@@ -62,6 +63,7 @@ export class DrawingService {
     };
     return result;
   }
+
   roundIsDone(res) {
     return res.hasWon || res.gameState === 'Done';
   }

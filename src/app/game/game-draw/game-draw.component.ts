@@ -1,5 +1,5 @@
 import { Component, ElementRef, OnInit, ViewChild, Output, EventEmitter, OnDestroy } from '@angular/core';
-import { BehaviorSubject, Subject, interval, Observable } from 'rxjs';
+import { BehaviorSubject, Subject, interval, Observable, pipe } from 'rxjs';
 import { takeUntil } from 'rxjs/operators';
 import { take } from 'rxjs/operators';
 import { ImageService } from './services/image.service';
@@ -110,13 +110,36 @@ export class GameDrawComponent implements OnInit, OnDestroy {
     });
   }
 
+  sortOnCertainty(res) {
+    interface Certainty {
+      label: string;
+      accuracy: number;
+    }
+
+    const arr: any = [];
+    Object.entries(res.certainty).map((keyValue) => {
+      const [label, certainty] = keyValue;
+      arr.push({ label, certainty });
+    });
+    arr.sort((a: any, b: any) => {
+      return b.value - a.value;
+    });
+    if (5 < arr.length) {
+      return arr.slice(0, 5);
+    }
+    return arr;
+  }
+
   classify() {
     const b64Image = this.canvas.nativeElement.toDataURL('image/png');
     const croppedCoordinates: any = this.imageService.crop(this.minX, this.minY, this.maxX, this.maxY, this.LINE_WIDTH);
     this.imageService.resize(b64Image, croppedCoordinates).subscribe({
       next: (dataUrl) => {
         const formData: FormData = this.createFormData(dataUrl);
-        this.drawingService.classify(formData, dataUrl).subscribe();
+        this.drawingService.classify(formData, dataUrl).subscribe((res) => {
+          const sortedCertaintyArr = this.sortOnCertainty(res);
+          const limitCertainty = sortedCertaintyArr.map((value) => value.certainty >= 0.5);
+        });
       },
     });
   }
