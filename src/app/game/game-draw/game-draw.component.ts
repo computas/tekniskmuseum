@@ -115,8 +115,12 @@ export class GameDrawComponent implements OnInit, OnDestroy {
     const croppedCoordinates: any = this.imageService.crop(this.minX, this.minY, this.maxX, this.maxY, this.LINE_WIDTH);
     this.imageService.resize(b64Image, croppedCoordinates).subscribe({
       next: (dataUrl) => {
+        const images = {
+          highres: b64Image,
+          lowres: dataUrl,
+        };
         const formData: FormData = this.createFormData(dataUrl);
-        this.drawingService.classify(formData, dataUrl).subscribe();
+        this.drawingService.classify(formData, images).subscribe();
       },
     });
   }
