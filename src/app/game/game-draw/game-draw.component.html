@@ -2,10 +2,6 @@
   <div class="drawing-header">
     <h1><span class="drawing-header-text">Tegn: </span>{{ guessWord | uppercase }}</h1>
     <div class="drawing-seconds">
-      <!--<span class="material-icons">
-        timer
-      </span>
-      <span class="countdown" #countDown>{{ timeLeft }} s</span>-->
       <div class="base-timer">
         <svg class="base-timer__svg" viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
           <g class="base-timer__circle">
@@ -40,6 +36,8 @@
       (mousedown)="start($event)"
       (mouseup)="stop($event)"
       (mousemove)="draw($event)"
+      (mouseleave)="leaveCanvas($event)"
+      (mouseenter)="enterCanvas($event)"
       (touchstart)="start($event)"
       (touchmove)="draw($event)"
       (touchend)="stop($event)"
