@@ -6,6 +6,9 @@
   display: flex;
   justify-content: center;
 }
+img {
+  width: 256px;
+}
 #intermediate-container {
   min-height: 100vh;
   background: linear-gradient(0.5deg, #195272 -0.56%, #05a3c7 138.78%);
