@@ -23,10 +23,6 @@ export class GameComponent implements OnInit, OnDestroy {
   ngOnInit(): void {
     this.drawingService.totalGuess = 3;
     this.drawingService.guessUsed = 1;
-    this.drawingService.gameOver$.subscribe((gameOver) => {
-      this.clearGameState();
-      this.showFinalResult = gameOver;
-    });
     this.drawingService.guessDone$.subscribe({
       next: (value) => {
         this.showIntermediateResult = value;
@@ -48,6 +44,11 @@ export class GameComponent implements OnInit, OnDestroy {
   nextGuess(event) {
     this.clearGameState();
     this.showWordToDraw = true;
+  }
+
+  finalResult(event) {
+    this.clearGameState();
+    this.showFinalResult = this.drawingService.gameOver;
   }
 
   clearGameState() {
