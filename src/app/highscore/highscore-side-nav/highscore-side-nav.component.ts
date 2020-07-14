@@ -29,12 +29,15 @@ export class HighScoreSideNavComponent implements OnInit {
       this.highscores = res;
     });
   }
-
   click() {
+    this.highscoreService.submitHighScore = { name: this.value, submit: true };
+
+    /*
     const player = this.highscoreService.findScoreOfNewUser();
     if (player) {
       player.name = this.value;
     }
+    */
     this.hasSubmit = true;
   }
 }

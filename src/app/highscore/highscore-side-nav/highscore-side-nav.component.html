@@ -1,6 +1,9 @@
 <mat-sidenav-container class="example-container">
   <mat-sidenav #sidenav mode="side" position="end" [(opened)]="opened">
-    <mat-spinner class="black-spinner"></mat-spinner>
+    <mat-spinner *ngIf="loading" class="black-spinner"></mat-spinner>
+    <div *ngIf="dailyHighScores && dailyHighScores.length === 0">
+      no Highscores
+    </div>
     <div *ngIf="dailyHighScores">
       <h1 id="text-header">BEST: I DAG</h1>
       <ul id="highscore-list">

@@ -18,6 +18,10 @@ interface HighScoreResponse {
   daily: [HighScoreItem];
   total: [HighScoreItem];
 }
+interface HighScoreSubmit {
+  name: string;
+  submit: boolean;
+}
 @Injectable({
   providedIn: 'root',
 })
@@ -38,6 +42,9 @@ export class HighScoreService {
   totalHighScore: HighScoreItem[] = [];
 
   private readonly _dailyHighScores = new BehaviorSubject<HighScoreItem[]>([]);
+  private readonly _submitHighScore = new BehaviorSubject<HighScoreSubmit>({ name: '', submit: false });
+
+  readonly submitHighScore$ = this._submitHighScore.asObservable();
   readonly dailyHighScores$ = this._dailyHighScores.asObservable();
 
   constructor(private http: HttpClient) {}
@@ -47,9 +54,9 @@ export class HighScoreService {
     return of(this.highscores);
   }
 
-  submitHighscore(entry: Entry) {
+  endGame(entry: Entry) {
     const endpoint = `${endpoints.TEKNISKBACKEND}/${endpoints.ENDGAME}`;
-    return this.http.post<Entry>(endpoint, entry).pipe();
+    return this.http.post<Entry>(endpoint, entry);
   }
 
   getAllHighScores(): Observable<any> {
@@ -125,5 +132,11 @@ export class HighScoreService {
 
   set dailyHighScores(val: HighScoreItem[]) {
     this._dailyHighScores.next(val);
+  }
+  get submitHighScore(): HighScoreSubmit {
+    return this._submitHighScore.getValue();
+  }
+  set submitHighScore(val: HighScoreSubmit) {
+    this._submitHighScore.next(val);
   }
 }
