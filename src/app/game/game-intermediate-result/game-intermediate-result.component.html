@@ -14,7 +14,10 @@
         <div>
           <img [src]="result.imageData" [className]="result.hasWon ? 'won' : 'loss'" />
         </div>
-        <button mat-raised-button class="next-word-button" (click)="newDrawing()">
+        <button *ngIf="gameOver" mat-raised-button class="next-word-button" (click)="getSummary()">
+          Vis oppsummering
+        </button>
+        <button *ngIf="!gameOver" mat-raised-button class="next-word-button" (click)="newDrawing()">
           NESTE ORD
         </button>
       </div>
