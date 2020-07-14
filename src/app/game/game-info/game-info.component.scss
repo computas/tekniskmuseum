@@ -26,7 +26,20 @@
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  min-height: 90vh;
+  min-height: 100vh;
+}
+.game-info-text-content-list {
+  display: flex;
+  flex-direction: row;
+  margin: auto;
+}
+.game-info-text-content-list-text {
+  display: flex;
+  flex-direction: column;
+}
+.game-info-footer {
+  width: 80%;
+  margin-bottom: 75px;
 }
 .game-info-text-list {
   color: #195272;
@@ -41,23 +54,35 @@
     margin: 28px;
   }
 }
-.get-word-button {
+.button {
+  box-shadow: 0 8px 16px 0 rgba(0, 0, 0, 0.1), 0 6px 20px 0 rgba(0, 0, 0, 0.15);
+  font-size: 30px;
+  border-radius: 50px;
+  width: 250px;
+  max-width: 100%;
+  padding-left: 15px;
+  padding-right: 15px;
+  padding-top: 10px;
+  padding-bottom: 10px;
+}
+#get-word-button {
   background: #fa852f;
   color: #ffffff;
-  box-shadow: 0 8px 16px 0 rgba(0, 0, 0, 0.1), 0 6px 20px 0 rgba(0, 0, 0, 0.15);
-  margin-top: 30px;
-  font-size: 20px;
-  border-radius: 50px;
-  height: 50px;
-  width: 240px;
+  float: right;
 }
-@media (min-width: 600px) {
-  .get-word-button {
-    font-size: 36px;
-    border-radius: 50px;
-    height: 60px;
-    width: 275px;
-  }
+#back-button {
+  background: #f4f4f4;
+  color: #14213d;
+}
+.button-text {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+}
+.button-icon {
+  color: #14213d;
+  margin-right: 5px;
 }
 .tts-button {
   top: 0;
