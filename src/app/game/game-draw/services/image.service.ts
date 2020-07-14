@@ -20,7 +20,7 @@ export class ImageService {
     return new Uint8Array(imgBuffer);
   }
 
-  resize(b64Image, croppedCoordinates, imageSize=256): Observable<string> {
+  resize(b64Image, croppedCoordinates, imageSize = 256): Observable<string> {
     return new Observable((observer) => {
       const img = new Image();
       const canvas = document.createElement('canvas');

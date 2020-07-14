@@ -57,7 +57,7 @@ export class DrawingService {
   createResult(res): Result {
     const result: Result = {
       hasWon: res.hasWon,
-      imageData: "", 
+      imageData: '',
       word: this.label,
       gameState: res.gameState,
       guess: res.guess,

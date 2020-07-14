@@ -57,12 +57,7 @@ export class GameDrawComponent implements OnInit, OnDestroy {
     this.ctx = ctx;
     this.canvas.nativeElement.width = this.canvas.nativeElement.parentElement?.offsetWidth || document.body.clientWidth;
     this.canvas.nativeElement.height = document.body.clientHeight - 100;
-
-    this.minX = this.canvas.nativeElement.width;
-    this.minY = this.canvas.nativeElement.height;
-    this.maxX = 0;
-    this.maxY = 0;
-
+    this.resetMinMaxMouseValues()
     this.drawingService.guessDone = false;
     this.startGame();
   }
@@ -118,14 +113,16 @@ export class GameDrawComponent implements OnInit, OnDestroy {
     this.imageService.resize(b64Image, croppedCoordinates).subscribe({
       next: (dataUrl) => {
         const formData: FormData = this.createFormData(dataUrl);
-        this.drawingService.classify(formData).subscribe(res => {
-          console.log("res ", res);
+        this.drawingService.classify(formData).subscribe((res) => {
+          console.log('res ', res);
           if (res.roundIsDone) {
-            this.imageService.resize(this.canvas.nativeElement.toDataURL('image/png'), croppedCoordinates, this.resultImageSize).subscribe({
-              next: (dataUrl) => {
-                this.drawingService.lastResult.imageData = dataUrl;
-              }
-            });
+            this.imageService
+              .resize(this.canvas.nativeElement.toDataURL('image/png'), croppedCoordinates, this.resultImageSize)
+              .subscribe({
+                next: (dataUrl) => {
+                  this.drawingService.lastResult.imageData = dataUrl;
+                },
+              });
           }
         });
       },
@@ -193,6 +190,14 @@ export class GameDrawComponent implements OnInit, OnDestroy {
   clear() {
     const canvas = this.canvas.nativeElement;
     this.ctx.clearRect(0, 0, canvas.width, canvas.height);
+    this.resetMinMaxMouseValues();
+  }
+
+  resetMinMaxMouseValues() {
+    this.minX = this.canvas.nativeElement.width;
+    this.minY = this.canvas.nativeElement.height;
+    this.maxX = 0;
+    this.maxY = 0;
   }
 
   stop(e) {
