@@ -57,7 +57,7 @@ export class GameDrawComponent implements OnInit, OnDestroy {
     this.ctx = ctx;
     this.canvas.nativeElement.width = this.canvas.nativeElement.parentElement?.offsetWidth || document.body.clientWidth;
     this.canvas.nativeElement.height = document.body.clientHeight - 100;
-    this.resetMinMaxMouseValues()
+    this.resetMinMaxMouseValues();
     this.drawingService.guessDone = false;
     this.startGame();
   }
@@ -114,13 +114,12 @@ export class GameDrawComponent implements OnInit, OnDestroy {
       next: (dataUrl) => {
         const formData: FormData = this.createFormData(dataUrl);
         this.drawingService.classify(formData).subscribe((res) => {
-          console.log('res ', res);
           if (res.roundIsDone) {
             this.imageService
               .resize(this.canvas.nativeElement.toDataURL('image/png'), croppedCoordinates, this.resultImageSize)
               .subscribe({
-                next: (dataUrl) => {
-                  this.drawingService.lastResult.imageData = dataUrl;
+                next: (dataUrlHighRes) => {
+                  this.drawingService.lastResult.imageData = dataUrlHighRes;
                 },
               });
           }
