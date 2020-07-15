@@ -1,16 +1,20 @@
 .result-container {
+  display: flex;
+  background: linear-gradient(to top, #dbf0fd, #e7f3ff, #f1f6ff, #f9faff, #ffffff);
 }
 .result-main-content-container {
   display: flex;
   flex-direction: column;
   justify-content: center;
   min-height: 100vh;
-  background: linear-gradient(to top, #dbf0fd, #e7f3ff, #f1f6ff, #f9faff, #ffffff);
+  min-width: 60%;
 }
 .result-section {
   display: flex;
   flex-direction: column;
   justify-content: center;
+  margin-top: 24px;
+  margin-bottom: 20%;
 }
 #result-header {
   text-align: center;
@@ -23,8 +27,8 @@
   margin-bottom: 15%;
   display: flex;
   flex-direction: row;
-  min-width: 100%;
   justify-content: space-around;
+  align-self: center;
 }
 .btn {
   min-width: 150px;
@@ -38,13 +42,17 @@
 .btn-home {
   margin-left: 24px;
 }
-
+.button-footer:first-child {
+  margin-left: 20%;
+}
+.spacer {
+  margin-right: 20%;
+}
 #result-card-container {
   display: flex;
   justify-content: center;
   flex-wrap: wrap;
   margin: 0 48px;
-  margin-top: 48px;
 }
 
 #result-card {
@@ -79,6 +87,66 @@ p {
 #loss {
   color: #de1f1f;
 }
+
+#highscore-list {
+  list-style: none;
+  padding: 0;
+  font-size: 20px;
+}
+#list-content {
+  display: flex;
+  justify-content: space-between;
+  margin: 12px 12px;
+}
+#text-header {
+  text-align: center;
+  margin: 12px;
+  border-bottom: 1px solid;
+  color: #195272;
+}
+.result-side-menu {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  width: 40%;
+}
+.highscorelist {
+  margin-bottom: 25%;
+}
+.name-form {
+  display: flex;
+  padding-left: 15px;
+}
+.highlight {
+  color: #fa852f;
+}
+.send-btn {
+  color: #195272;
+}
+
+#form-test {
+  height: 50px;
+}
+.send-btn {
+  background-color: white;
+  margin-left: 12px;
+  border-radius: 30px;
+}
+
+::ng-deep .mat-form-field {
+  .mat-form-field-flex {
+    background-color: white;
+    padding: 5px;
+    border-radius: 10px;
+  }
+  .mat-form-field-underline {
+    height: 1px;
+    margin-bottom: 5px;
+    width: 90%;
+    margin-left: 5px;
+  }
+}
+
 @media only screen and (max-width: 768px) {
   .start-new-game-button {
     display: flex;

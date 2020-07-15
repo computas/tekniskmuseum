@@ -1,45 +1,75 @@
 <div class="result-container">
-  <app-highscore-side-nav [playerScore]="13">
-    <div class="result-main-content-container">
-      <div class="result-section">
-        <h1 id="result-header">Ditt resultat:</h1>
-        <div id="result-card-container">
-          <div id="result-card" *ngFor="let result of results">
-            <img
-              mat-card-image
-              [src]="result.imageData"
-              [className]="result.hasWon ? 'game-result-img card-won' : 'game-result-img card-loss'"
-            />
-            <p id="result-subtitile">
-              <span *ngIf="result.hasWon" class="material-icons" id="won">
-                done
-              </span>
-              <span *ngIf="!result.hasWon" class="material-icons" id="loss">
-                clear
-              </span>
-              {{ result.word | titlecase }}
-            </p>
-          </div>
+  <div class="result-main-content-container">
+    <div class="result-section">
+      <h1 id="result-header">Ditt resultat:</h1>
+      <div id="result-card-container">
+        <div id="result-card" *ngFor="let result of results">
+          <img
+            mat-card-image
+            [src]="result.imageData"
+            [className]="result.hasWon ? 'game-result-img card-won' : 'game-result-img card-loss'"
+          />
+          <p id="result-subtitile">
+            <span *ngIf="result.hasWon" class="material-icons" id="won">
+              done
+            </span>
+            <span *ngIf="!result.hasWon" class="material-icons" id="loss">
+              clear
+            </span>
+            {{ result.word | titlecase }}
+          </p>
         </div>
       </div>
+    </div>
+    <div class="button-footer">
+      <a href="#" class="spacer"
+        ><button mat-raised-button class="btn btn-home">
+          <span class="material-icons">
+            home
+          </span>
+          Hjem
+        </button></a
+      >
+      <a href="#"
+        ><button mat-raised-button class="btn btn-again">
+          <span class="material-icons">
+            refresh
+          </span>
+          Spill igjen
+        </button></a
+      >
+    </div>
+  </div>
+  <div class="result-side-menu">
+    <mat-spinner *ngIf="loading" class="black-spinner"></mat-spinner>
+    <div *ngIf="dailyHighScores && dailyHighScores.length === 0">
+      no Highscores
+    </div>
+    <div class="highscorelist" *ngIf="dailyHighScores">
+      <h1 id="text-header">TOPPLISTEN: I DAG</h1>
+      <ul id="highscore-list">
+        <li
+          *ngFor="let highscore of dailyHighScores; index as i"
+          id="list-content"
+          [ngClass]="i === 4 ? 'highlight' : ''"
+        >
+          <span>{{ highscore.place === -1 ? i + 1 : highscore.place }}. {{ highscore.name }}</span>
+          <span>{{ highscore.score }} p</span>
+        </li>
+      </ul>
       <div class="button-footer">
-        <a href="#"
-          ><button mat-raised-button class="btn btn-home">
+        <form class="name-form">
+          <mat-form-field id="form-test" class="example-full-width" floatLabel="always">
+            <mat-label>Kallenavn</mat-label>
+            <input matInput placeholder="Send inn ditt kallenavn" name="name" aria-selected="true" />
+          </mat-form-field>
+          <button mat-button (click)="click()" class="send-btn">
             <span class="material-icons">
-              home
+              send
             </span>
-            Hjem
-          </button></a
-        >
-        <a href="#"
-          ><button mat-raised-button class="btn btn-again">
-            <span class="material-icons">
-              refresh
-            </span>
-            Spill igjen
-          </button></a
-        >
+          </button>
+        </form>
       </div>
     </div>
-  </app-highscore-side-nav>
+  </div>
 </div>
