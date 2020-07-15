@@ -29,7 +29,6 @@ export class HighScoreSideNavComponent implements OnInit {
       this.highscores = res;
     });*/
     this.highscoreService.get().subscribe((res) => {
-      console.log('resres', res);
       this.dailyHighScores = res;
       this.loading = false;
     });

@@ -20,7 +20,6 @@ export class GameResultComponent implements OnInit {
     this.highScoreService.getAllHighScores().subscribe((res) => {});
     this.results = this.drawingService.resultsMock;
     this.highScoreService.get().subscribe((res) => {
-      console.log('resres', res);
       this.dailyHighScores = res;
       this.loading = false;
     });
