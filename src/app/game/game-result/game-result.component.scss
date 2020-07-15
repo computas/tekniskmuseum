@@ -31,8 +31,27 @@
   align-self: center;
 }
 .btn {
-  min-width: 150px;
-  border-radius: 20px;
+  height: 60px;
+  min-width: 240px;
+  border-radius: 50px;
+  font-size: 30px;
+}
+input {
+  border: 0;
+  border-radius: 50px;
+  padding-left: 12px;
+  padding-right: 12px;
+  height: 60px;
+  border-radius: 50px;
+  font-size: 30px;
+}
+::placeholder {
+  border-bottom: 1px solid grey;
+  border-spacing: 15px 50px;
+  padding-left: 12px;
+  padding-right: 12px;
+  margin-left: 12px;
+  margin-right: 12px;
 }
 .btn-again {
   background-color: #fa852f;
@@ -52,7 +71,6 @@
   display: flex;
   justify-content: center;
   flex-wrap: wrap;
-  margin: 0 48px;
 }
 
 #result-card {
@@ -65,7 +83,7 @@
   border: 3px solid #de1f1f;
 }
 .game-result-img {
-  width: 200px;
+  width: 210px;
 }
 .start-new-game-button {
   float: right;
@@ -114,6 +132,10 @@ p {
   margin-bottom: 20%;
   border-left: 1px solid #05a3c7;
   padding-left: 24px;
+  font-style: normal;
+  font-weight: normal;
+  font-size: 18px;
+  line-height: 35px;
 }
 .name-form {
   display: flex;
@@ -124,6 +146,9 @@ p {
 }
 .send-btn {
   color: #195272;
+}
+.send {
+  font-size: 40px;
 }
 
 #form-test {
@@ -157,7 +182,7 @@ p {
     justify-content: center;
   }
 }
-@media only screen and (min-width: 768px) and (max-device-width: 1024px) {
+@media only screen and (min-width: 768px) and (max-device-width: 1050px) {
   #result-container {
     margin: 0;
   }

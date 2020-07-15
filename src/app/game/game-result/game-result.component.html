@@ -59,12 +59,9 @@
       </ul>
       <div class="button-footer">
         <form class="name-form">
-          <mat-form-field id="form-test" class="example-full-width" floatLabel="always">
-            <mat-label>Kallenavn</mat-label>
-            <input matInput placeholder="Send inn ditt kallenavn" name="name" aria-selected="true" />
-          </mat-form-field>
+          <input name="name" placeholder="Send inn ditt kallenavn" />
           <button mat-button (click)="click()" class="send-btn">
-            <span class="material-icons">
+            <span class="material-icons send">
               send
             </span>
           </button>
