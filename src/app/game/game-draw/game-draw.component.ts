@@ -113,14 +113,14 @@ export class GameDrawComponent implements OnInit, OnDestroy {
             if (this.timeLeft <= 5) {
               this.countDown.nativeElement.style.color = color;
               color = color === 'white' ? 'red' : 'white';
-              this.playTick();
+              this.playTickSound();
             }
           }
         });
     });
   }
 
-  playTick() {
+  playTickSound() {
     const sound = new Howl({
       src: ['../../../assets/tick.mp3'],
     });
