@@ -98,7 +98,6 @@ export class GameDrawComponent implements OnInit, OnDestroy {
         .subscribe((tics) => {
           if (!this.drawingService.classificationDone) {
             this.score = this.score - 1.67336683417;
-            console.log(this.score);
             if (tics % 10 === 9) {
               this.timeLeft--;
               this.timeElapsed++;
