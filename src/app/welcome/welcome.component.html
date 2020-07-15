@@ -4,8 +4,8 @@
   </button>
   <div class="play-container">
     <span class="info-text">
-      Hei, jeg <span style="color: #fa852f; font-weight: 500;"> Kunstig Intelligens</span>. <br />
-      Kan du hjelpe meg lære?
+      Hei, jeg heter<span style="color: #fa852f; font-weight: 500;"> Kunstig Intelligens</span>. <br />
+      Kan du hjelpe meg å lære?
     </span>
     <span>
       <button mat-raised-button class="play-game-button" (click)="goToGameInfoPage()">
@@ -15,13 +15,17 @@
   </div>
   <div class="navigation-container">
     <button mat-raised-button class="navigation-button" (click)="goToGameInfoPage()">
-      <mat-icon aria-label="Example home icon">school</mat-icon>
-      Lær mer
+      <div class="button-text">
+        <mat-icon class="button-icon" aria-label="Example home icon">school</mat-icon>
+        Lær mer
+      </div>
     </button>
 
     <button mat-raised-button class="navigation-button" (click)="goToGameInfoPage()">
-      <mat-icon aria-label="Example home icon">star</mat-icon>
-      Topplisten
+      <div class="button-text">
+        <mat-icon class="button-icon" aria-label="Example home icon">star</mat-icon>
+        Topplisten
+      </div>
     </button>
   </div>
 </div>

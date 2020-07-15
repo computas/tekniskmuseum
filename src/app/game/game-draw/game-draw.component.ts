@@ -5,6 +5,7 @@ import { take } from 'rxjs/operators';
 import { ImageService } from './services/image.service';
 import { DrawingService } from './services/drawing.service';
 import { StartGameInfo } from './services/start-game-info';
+import { Howl } from 'howler';
 
 @Component({
   selector: 'app-drawing',
@@ -34,6 +35,7 @@ export class GameDrawComponent implements OnInit, OnDestroy {
   timeLeft = 20.0;
   timeElapsed = 0.0;
 
+  clockColor = 'initial';
   private readonly resultImageSize = 1024;
 
   private readonly LINE_WIDTH = 10;
@@ -81,6 +83,7 @@ export class GameDrawComponent implements OnInit, OnDestroy {
         this.classify();
       },
       complete: () => {
+        this.clockColor = this.clockColor === 'initial' ? 'final' : 'initial';
         this.timeOut = true;
       },
     });
@@ -91,6 +94,7 @@ export class GameDrawComponent implements OnInit, OnDestroy {
 
   private createDrawingTimer() {
     return new Observable((observer) => {
+      let color = 'red';
       interval(100)
         .pipe(take(10 * this.timeLeft), takeUntil(this.unsubscribe))
         .subscribe((tics) => {
@@ -102,9 +106,21 @@ export class GameDrawComponent implements OnInit, OnDestroy {
                 observer.next('classify');
               }
             }
+            if (this.timeLeft <= 5) {
+              this.countDown.nativeElement.style.color = color;
+              color = color === 'white' ? 'red' : 'white';
+              this.playTickSound();
+            }
           }
         });
     });
+  }
+
+  playTickSound() {
+    const sound = new Howl({
+      src: ['../../../assets/tick.mp3'],
+    });
+    sound.play();
   }
 
   classify() {
