@@ -1,9 +1,10 @@
-import { Component, ElementRef, OnInit, ViewChild, Output, EventEmitter, OnDestroy } from '@angular/core';
-import { BehaviorSubject, Subject, interval, Observable } from 'rxjs';
-import { takeUntil } from 'rxjs/operators';
-import { take } from 'rxjs/operators';
-import { ImageService } from './services/image.service';
+import { Component, ElementRef, EventEmitter, OnDestroy, OnInit, Output, ViewChild } from '@angular/core';
+import { Howl } from 'howler';
+import { BehaviorSubject, interval, Observable, Subject } from 'rxjs';
+import { take, takeUntil } from 'rxjs/operators';
+
 import { DrawingService } from './services/drawing.service';
+import { ImageService } from './services/image.service';
 import { StartGameInfo } from './services/start-game-info';
 
 @Component({
@@ -32,10 +33,10 @@ export class GameDrawComponent implements OnInit, OnDestroy {
   isDrawing = false;
   hasLeftCanvas = false;
   timeLeft = 20.0;
-  timeElapsed = 0.0;
 
   score = 333;
 
+  clockColor = 'initial';
   private readonly resultImageSize = 1024;
 
   private readonly LINE_WIDTH = 10;
@@ -83,6 +84,7 @@ export class GameDrawComponent implements OnInit, OnDestroy {
         this.classify();
       },
       complete: () => {
+        this.clockColor = this.clockColor === 'initial' ? 'final' : 'initial';
         this.timeOut = true;
       },
     });
@@ -93,6 +95,7 @@ export class GameDrawComponent implements OnInit, OnDestroy {
 
   private createDrawingTimer() {
     return new Observable((observer) => {
+      let color = 'red';
       interval(100)
         .pipe(take(10 * this.timeLeft), takeUntil(this.unsubscribe))
         .subscribe((tics) => {
@@ -100,14 +103,25 @@ export class GameDrawComponent implements OnInit, OnDestroy {
             this.score = this.score - 1.67336683417;
             if (tics % 10 === 9) {
               this.timeLeft--;
-              this.timeElapsed++;
-              if (this.timeElapsed > 3) {
+              if (this.timeLeft < 17) {
                 observer.next('classify');
               }
+            }
+            if (this.timeLeft <= 5) {
+              this.countDown.nativeElement.style.color = color;
+              color = color === 'white' ? 'red' : 'white';
+              this.playTickSound();
             }
           }
         });
     });
+  }
+
+  playTickSound() {
+    const sound = new Howl({
+      src: ['../../../assets/tick.mp3'],
+    });
+    sound.play();
   }
 
   classify() {
@@ -136,7 +150,7 @@ export class GameDrawComponent implements OnInit, OnDestroy {
   createFormData(dataUrl): FormData {
     const formData: FormData = this.imageService.createFormData(dataUrl);
     formData.append('token', this.drawingService.token);
-    formData.append('time', this.timeElapsed.toString());
+    formData.append('time', this.timeLeft.toString());
     return formData;
   }
 

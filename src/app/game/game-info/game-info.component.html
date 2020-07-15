@@ -3,18 +3,26 @@
     <mat-icon>volume_up</mat-icon>
   </button>
   <div class="game-info-text-content">
-    <h1 class="game-info-text-header">Slik spiller du:</h1>
-    <ol class="game-info-text-list">
-      <li>Tegn ord</li>
-      <li>Jeg gjetter</li>
-      <li>Få poeng</li>
-    </ol>
+    <div class="game-info-text-content-list">
+      <div class="avatar"><img src="../../../assets/avatar.svg" alt="avatar" /></div>
+      <div class="game-info-text-content-list-text">
+        <h1 class="game-info-text-header">Slik spiller du:</h1>
+        <ol class="game-info-text-list">
+          <li>Tegn ord</li>
+          <li>Jeg gjetter</li>
+          <li>Få poeng</li>
+        </ol>
+      </div>
+    </div>
     <div class="game-info-footer">
-      <div class="avatar"></div>
-      <button mat-raised-button color="primary" class="get-word-button" (click)="startDrawing()">
+      <button mat-raised-button class="button" id="back-button" (click)="goToLanding()">
+        <div class="button-text">
+          <mat-icon class="button-icon" aria-label="Example home icon">home</mat-icon>Tilbake
+        </div>
+      </button>
+      <button mat-raised-button class="button" id="get-word-button" (click)="startDrawing()">
         Start
       </button>
-      <!-- TODO add back button -->
     </div>
   </div>
 </div>

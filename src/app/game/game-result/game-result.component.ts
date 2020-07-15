@@ -3,6 +3,7 @@ import { DrawingService } from '../game-draw/services/drawing.service';
 import { Result } from '../../shared/models/result.interface';
 import { Highscore, HighScoreService } from 'src/app/services/highscore.service';
 import { Entry } from 'src/app/services/highscore-entry.interface';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-game-result',
@@ -14,11 +15,19 @@ export class GameResultComponent implements OnInit {
   dailyHighScores: Highscore[];
   loading: boolean;
   value = '';
-  constructor(private drawingService: DrawingService, private highScoreService: HighScoreService) {}
+  constructor(
+    private drawingService: DrawingService,
+    private highScoreService: HighScoreService,
+    private router: Router
+  ) {}
 
   ngOnInit(): void {
     this.highScoreService.getAllHighScores().subscribe((res) => {});
-    this.results = this.drawingService.resultsMock;
+    if (this.router.url === '/summary') {
+      this.results = this.drawingService.get();
+    } else {
+      this.results = this.drawingService.results;
+    }
     this.highScoreService.get().subscribe((res) => {
       this.dailyHighScores = res;
       this.loading = false;
@@ -42,6 +51,6 @@ export class GameResultComponent implements OnInit {
     if (player) {
       player.name = this.value;
     }
-    */
+  */
   }
 }
