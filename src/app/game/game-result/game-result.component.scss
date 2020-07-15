@@ -1,13 +1,16 @@
 .result-container {
   display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  align-items: center;
   background: linear-gradient(to top, #dbf0fd, #e7f3ff, #f1f6ff, #f9faff, #ffffff);
 }
 .result-main-content-container {
+  min-height: 100vh;
   display: flex;
   flex-direction: column;
+  align-items: center;
   justify-content: center;
-  min-height: 100vh;
-  width: 60%;
 }
 .result-section {
   display: flex;
@@ -22,10 +25,6 @@
   font-size: 38px;
 }
 
-.button-footer {
-  display: flex;
-  justify-content: center;
-}
 .btn {
   height: 60px;
   min-width: 240px;
@@ -57,11 +56,11 @@ input {
 .btn-home {
   margin-left: 24px;
 }
-.button-footer:first-child {
-  margin-left: 20%;
+.button-footer {
+  min-width: 100%;
 }
-.spacer {
-  margin-right: 20%;
+.link-float {
+  float: right;
 }
 #result-card-container {
   display: flex;
@@ -120,10 +119,6 @@ p {
   color: #195272;
 }
 .result-side-menu {
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  width: 40%;
 }
 .highscorelist {
   margin-bottom: 20%;
@@ -161,21 +156,8 @@ p {
 }
 
 @media only screen and (max-width: 768px) {
-  .start-new-game-button {
-    display: flex;
-    float: none;
-    width: 100%;
-    justify-content: center;
-  }
-  .button-footer {
-    display: inline;
-    justify-self: start;
-  }
   .result-main-content-container {
     width: 100%;
-  }
-  .result-side-menu {
-    width: 0;
   }
 }
 @media only screen and (min-width: 768px) and (max-device-width: 1050px) {
