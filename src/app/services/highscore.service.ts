@@ -32,12 +32,6 @@ export class HighScoreService {
     { name: 'Koa Ahmad', score: 17, place: -1 },
     { name: 'Beck Mcgregor', score: 13, place: -1 },
     { name: 'Matteo Atherton', score: 13, place: -1 },
-    { name: 'Kaelan Wheeler', score: 26, place: -1 },
-    { name: 'Amie Sargent', score: 5, place: -1 },
-    { name: 'Brook Trujillo', score: 3, place: -1 },
-    { name: 'Jevon Rocha', score: 14, place: -1 },
-    { name: 'Amie Sargent', score: 10, place: -1 },
-    { name: 'Ami ', score: 10, place: -1 },
   ];
   totalHighScore: HighScoreItem[] = [];
 
