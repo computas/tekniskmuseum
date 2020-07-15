@@ -5,6 +5,7 @@ import { take } from 'rxjs/operators';
 import { ImageService } from './services/image.service';
 import { DrawingService } from './services/drawing.service';
 import { StartGameInfo } from './services/start-game-info';
+import { Howl, Howler } from 'howler';
 
 @Component({
   selector: 'app-drawing',
@@ -112,10 +113,18 @@ export class GameDrawComponent implements OnInit, OnDestroy {
             if (this.timeLeft <= 5) {
               this.countDown.nativeElement.style.color = color;
               color = color === 'white' ? 'red' : 'white';
+              this.playTick();
             }
           }
         });
     });
+  }
+
+  playTick() {
+    var sound = new Howl({
+      src: ['../../../assets/tick.mp3'],
+    });
+    sound.play();
   }
 
   classify() {
