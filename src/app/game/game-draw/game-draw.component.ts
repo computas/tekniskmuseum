@@ -208,6 +208,19 @@ export class GameDrawComponent implements OnInit, OnDestroy {
     if (currentY > this.maxY) {
       this.maxY = currentY;
     }
+
+    if (this.minX < 0) {
+      this.minX = 0;
+    }
+    if (this.minY < 0) {
+      this.minY = 0;
+    }
+    if (this.maxX > this.canvas.nativeElement.width) {
+      this.maxX = this.canvas.nativeElement.width;
+    }
+    if (this.maxY > this.canvas.nativeElement.height) {
+      this.maxY = this.canvas.nativeElement.height;
+    }
   }
 
   clear() {
