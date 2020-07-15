@@ -34,6 +34,8 @@ export class GameDrawComponent implements OnInit, OnDestroy {
   timeLeft = 20.0;
   timeElapsed = 0.0;
 
+  clockColor = 'initial';
+
   private readonly LINE_WIDTH = 10;
 
   private readonly _timeOut = new BehaviorSubject<boolean>(false);
@@ -84,6 +86,7 @@ export class GameDrawComponent implements OnInit, OnDestroy {
         this.classify();
       },
       complete: () => {
+        this.clockColor = this.clockColor === 'initial' ? 'final' : 'initial';
         this.timeOut = true;
       },
     });
@@ -94,6 +97,7 @@ export class GameDrawComponent implements OnInit, OnDestroy {
 
   private createDrawingTimer() {
     return new Observable((observer) => {
+      let color = 'red';
       interval(100)
         .pipe(take(10 * this.timeLeft), takeUntil(this.unsubscribe))
         .subscribe((tics) => {
@@ -104,6 +108,10 @@ export class GameDrawComponent implements OnInit, OnDestroy {
               if (this.timeElapsed > 3) {
                 observer.next('classify');
               }
+            }
+            if (this.timeLeft <= 5) {
+              this.countDown.nativeElement.style.color = color;
+              color = color === 'white' ? 'red' : 'white';
             }
           }
         });
