@@ -58,9 +58,9 @@ mat-sidenav {
   }
 }
 
-@media only screen and (min-width: 768px) and (max-device-width: 992px) {
+@media only screen and (min-width: 768px) and (max-device-width: 1024px) {
   mat-sidenav {
-    width: 45%;
+    width: 35%;
     display: block;
   }
 }

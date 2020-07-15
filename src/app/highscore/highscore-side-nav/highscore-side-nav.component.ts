@@ -20,13 +20,18 @@ export class HighScoreSideNavComponent implements OnInit {
   constructor(private highscoreService: HighScoreService) {}
 
   ngOnInit(): void {
-    this.highscoreService.getAllHighScores().subscribe((res) => {
+    /*this.highscoreService.getAllHighScores().subscribe((res) => {
       this.totalHighScores = res.total;
       this.loading = false;
       this.dailyHighScores = res.daily;
     });
     this.highscoreService.getHighScoresFiltered(this.playerScore).subscribe((res) => {
       this.highscores = res;
+    });*/
+    this.highscoreService.get().subscribe((res) => {
+      console.log('resres', res);
+      this.dailyHighScores = res;
+      this.loading = false;
     });
   }
   click() {

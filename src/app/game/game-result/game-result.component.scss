@@ -55,3 +55,18 @@ p {
     justify-content: center;
   }
 }
+@media only screen and (min-width: 768px) and (max-device-width: 1024px) {
+  #result-container {
+    margin: 0;
+  }
+  #result-card {
+    margin: 0 5px;
+  }
+  #result-container {
+    margin: 0;
+    margin-top: 48px;
+  }
+  .game-result-img {
+    width: 150px;
+  }
+}

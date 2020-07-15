@@ -15,7 +15,7 @@ export class GameResultComponent implements OnInit {
 
   ngOnInit(): void {
     this.highScoreService.getAllHighScores().subscribe((res) => {});
-    this.results = this.drawingService.results;
+    this.results = this.drawingService.resultsMock;
     this.highScoreService.submitHighScore$.subscribe((res) => {
       if (res.submit) {
         const entry: Entry = {
