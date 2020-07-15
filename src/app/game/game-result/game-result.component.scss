@@ -90,8 +90,8 @@ p {
 
 #highscore-list {
   list-style: none;
-  padding: 0;
   font-size: 20px;
+  padding: 20px;
 }
 #list-content {
   display: flex;
@@ -111,7 +111,9 @@ p {
   width: 40%;
 }
 .highscorelist {
-  margin-bottom: 25%;
+  margin-bottom: 20%;
+  border-left: 1px solid #05a3c7;
+  padding-left: 24px;
 }
 .name-form {
   display: flex;
