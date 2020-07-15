@@ -34,6 +34,8 @@ export class GameDrawComponent implements OnInit, OnDestroy {
   timeLeft = 20.0;
   timeElapsed = 0.0;
 
+  score = 333;
+
   private readonly resultImageSize = 1024;
 
   private readonly LINE_WIDTH = 10;
@@ -95,6 +97,7 @@ export class GameDrawComponent implements OnInit, OnDestroy {
         .pipe(take(10 * this.timeLeft), takeUntil(this.unsubscribe))
         .subscribe((tics) => {
           if (!this.drawingService.classificationDone) {
+            this.score = this.score - 1.67336683417;
             if (tics % 10 === 9) {
               this.timeLeft--;
               this.timeElapsed++;
