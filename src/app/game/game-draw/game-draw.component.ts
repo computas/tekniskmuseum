@@ -1,11 +1,11 @@
-import { Component, ElementRef, OnInit, ViewChild, Output, EventEmitter, OnDestroy } from '@angular/core';
-import { BehaviorSubject, Subject, interval, Observable } from 'rxjs';
-import { takeUntil } from 'rxjs/operators';
-import { take } from 'rxjs/operators';
-import { ImageService } from './services/image.service';
-import { DrawingService } from './services/drawing.service';
-import { StartGameInfo } from './services/start-game-info';
+import { Component, ElementRef, EventEmitter, OnDestroy, OnInit, Output, ViewChild } from '@angular/core';
 import { Howl } from 'howler';
+import { BehaviorSubject, interval, Observable, Subject } from 'rxjs';
+import { take, takeUntil } from 'rxjs/operators';
+
+import { DrawingService } from './services/drawing.service';
+import { ImageService } from './services/image.service';
+import { StartGameInfo } from './services/start-game-info';
 
 @Component({
   selector: 'app-drawing',
@@ -100,7 +100,7 @@ export class GameDrawComponent implements OnInit, OnDestroy {
           if (!this.drawingService.classificationDone) {
             if (tics % 10 === 9) {
               this.timeLeft--;
-              //this.timeElapsed++;
+              // this.timeElapsed++;
               if (this.timeLeft < 17) {
                 observer.next('classify');
               }
