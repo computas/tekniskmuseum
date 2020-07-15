@@ -98,6 +98,7 @@ export class GameDrawComponent implements OnInit, OnDestroy {
         .subscribe((tics) => {
           if (!this.drawingService.classificationDone) {
             this.score = this.score - 1.67336683417;
+            console.log(this.score);
             if (tics % 10 === 9) {
               this.timeLeft--;
               this.timeElapsed++;
@@ -118,6 +119,8 @@ export class GameDrawComponent implements OnInit, OnDestroy {
         const formData: FormData = this.createFormData(dataUrl);
         this.drawingService.classify(formData).subscribe((res) => {
           if (res.roundIsDone) {
+            const score = this.score > 0 ? this.score : 0;
+            this.drawingService.lastResult.score = Math.round(score);
             this.imageService
               .resize(this.canvas.nativeElement.toDataURL('image/png'), croppedCoordinates, this.resultImageSize)
               .subscribe({
