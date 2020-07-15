@@ -4,4 +4,5 @@ export interface Result {
   word: string;
   gameState: string;
   guess: string;
+  score: number;
 }

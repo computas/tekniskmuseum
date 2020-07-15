@@ -8,6 +8,7 @@ export const ResultsMock: Result[] = [
     word: 'square',
     gameState: 'Done',
     guess: 'square',
+    score: 60,
   },
   {
     hasWon: false,
@@ -16,6 +17,7 @@ export const ResultsMock: Result[] = [
     word: 'bench',
     gameState: 'Done',
     guess: 'square',
+    score: 60,
   },
   {
     hasWon: true,
@@ -24,6 +26,7 @@ export const ResultsMock: Result[] = [
     word: 'star',
     gameState: 'Done',
     guess: 'square',
+    score: 60,
   },
   {
     hasWon: true,
@@ -32,6 +35,7 @@ export const ResultsMock: Result[] = [
     word: 'car',
     gameState: 'Done',
     guess: 'square',
+    score: 60,
   },
   {
     hasWon: false,
@@ -40,5 +44,6 @@ export const ResultsMock: Result[] = [
     word: 'banana',
     gameState: 'Done',
     guess: 'square',
+    score: 60,
   },
 ];
