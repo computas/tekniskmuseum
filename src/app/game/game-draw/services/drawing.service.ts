@@ -35,11 +35,12 @@ export class DrawingService {
 
   constructor(private http: HttpClient) {}
 
-  classify(answerInfo: FormData, imageData: string): Observable<any> {
+  classify(answerInfo: FormData): Observable<any> {
     return this.http.post<FormData>(`${this.baseUrl}/${endpoints.CLASSIFY}`, answerInfo).pipe(
       tap((res) => {
         if (this.roundIsDone(res)) {
-          const result: Result = this.createResult(res, imageData);
+          res.roundIsDone = true;
+          const result: Result = this.createResult(res);
           this.addResult(result);
           this.guessDone = true;
           this.guessUsed++;
@@ -52,16 +53,18 @@ export class DrawingService {
       })
     );
   }
-  createResult(res, imageData): Result {
+
+  createResult(res): Result {
     const result: Result = {
       hasWon: res.hasWon,
-      imageData,
+      imageData: '',
       word: this.label,
       gameState: res.gameState,
       guess: res.guess,
     };
     return result;
   }
+
   roundIsDone(res) {
     return res.hasWon || res.gameState === 'Done';
   }
