@@ -15,7 +15,7 @@ export class AppComponent {
   userInactive: Subject<any> = new Subject();
 
   isDialogOpen = false;
-  inactivityTime = 3 * 1000;
+  inactivityTime = 30 * 1000;
 
   constructor(private router: Router, public dialog: MatDialog) {
     console.log(this.router.url);
@@ -58,7 +58,7 @@ export class IdleTimeoutDialog implements OnInit, OnDestroy {
 
   constructor(private router: Router, private dialogRef: MatDialogRef<IdleTimeoutDialog>) { }
 
-  startTime = 3;
+  startTime = 15;
   timer;
   countdown;
 
