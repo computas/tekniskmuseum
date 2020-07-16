@@ -4,7 +4,7 @@
 .game-info-text-header {
   color: #fa852f;
   text-align: center;
-  font-size: 38px;
+  font-size: 34px;
   font-weight: 500;
   margin-top: 30px;
 }
@@ -38,8 +38,18 @@
   flex-direction: column;
 }
 .game-info-footer {
+  display: flex;
   width: 80%;
   margin-bottom: 75px;
+  justify-content: center;
+  flex-wrap: wrap;
+}
+@media (min-width: 600px) {
+  .game-info-footer {
+    width: 80%;
+    margin-bottom: 75px;
+    justify-content: space-between;
+  }
 }
 .game-info-text-list {
   color: #195272;
@@ -54,19 +64,39 @@
     margin: 28px;
   }
 }
+.avatar {
+  display: none;
+}
+@media (min-width: 600px) {
+  .avatar {
+    display: block;
+    margin-right: 10px;
+  }
+}
 .button {
   box-shadow: 0 8px 16px 0 rgba(0, 0, 0, 0.1), 0 6px 20px 0 rgba(0, 0, 0, 0.15);
-  font-size: 30px;
+  font-size: 20px;
   border-radius: 50px;
-  height: 60px;
+  height: 40px;
+  margin-top: 10px;
   min-width: 240px;
   max-width: 400px;
-  padding: 10px 20px 10px 20px;
+}
+@media (min-width: 600px) {
+  .button {
+    font-size: 30px;
+    height: 60px;
+  }
 }
 #get-word-button {
   background: #fa852f;
   color: #ffffff;
   float: right;
+}
+@media (min-width: 600px) {
+  #get-word-button {
+    float: right;
+  }
 }
 #back-button {
   background: #f4f4f4;
@@ -90,5 +120,5 @@
 }
 .mat-fab.mat-primary {
   background: #ecf8ff;
-  color: #195272;
+  color: #14213d;
 }
