@@ -6,9 +6,10 @@ import { AppComponent } from './app.component';
 import { WelcomeModule } from './welcome/welcome.module';
 import { GameModule } from './game/game.module';
 import { HighScoreModule } from './highscore/highscore.module';
+import { IdleDialogComponent } from './idle-dialog/idle-dialog.component';
 
 @NgModule({
-  declarations: [AppComponent],
+  declarations: [AppComponent, IdleDialogComponent],
   imports: [BrowserModule, HttpClientModule, AppRoutingModule, WelcomeModule, GameModule, HighScoreModule],
   providers: [HttpClientModule],
   bootstrap: [AppComponent],
