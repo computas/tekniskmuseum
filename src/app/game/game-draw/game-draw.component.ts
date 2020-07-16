@@ -1,11 +1,11 @@
-import { Component, ElementRef, OnInit, ViewChild, Output, EventEmitter, OnDestroy } from '@angular/core';
-import { BehaviorSubject, Subject, interval, Observable } from 'rxjs';
-import { takeUntil } from 'rxjs/operators';
-import { take } from 'rxjs/operators';
-import { ImageService } from './services/image.service';
-import { DrawingService } from './services/drawing.service';
-import { StartGameInfo } from './services/start-game-info';
+import { Component, ElementRef, EventEmitter, OnDestroy, OnInit, Output, ViewChild } from '@angular/core';
 import { Howl } from 'howler';
+import { BehaviorSubject, interval, Observable, Subject } from 'rxjs';
+import { take, takeUntil } from 'rxjs/operators';
+
+import { DrawingService } from './services/drawing.service';
+import { ImageService } from './services/image.service';
+import { StartGameInfo } from './services/start-game-info';
 
 @Component({
   selector: 'app-drawing',
@@ -33,6 +33,8 @@ export class GameDrawComponent implements OnInit, OnDestroy {
   isDrawing = false;
   hasLeftCanvas = false;
   timeLeft = 20.0;
+
+  score = 333;
 
   clockColor = 'initial';
   private readonly resultImageSize = 1024;
@@ -98,6 +100,7 @@ export class GameDrawComponent implements OnInit, OnDestroy {
         .pipe(take(10 * this.timeLeft), takeUntil(this.unsubscribe))
         .subscribe((tics) => {
           if (!this.drawingService.classificationDone) {
+            this.score = this.score - 1.67336683417;
             if (tics % 10 === 9) {
               this.timeLeft--;
               if (this.timeLeft < 17) {
@@ -129,6 +132,8 @@ export class GameDrawComponent implements OnInit, OnDestroy {
         const formData: FormData = this.createFormData(dataUrl);
         this.drawingService.classify(formData).subscribe((res) => {
           if (res.roundIsDone) {
+            const score = this.score > 0 ? this.score : 0;
+            this.drawingService.lastResult.score = Math.round(score);
             this.imageService
               .resize(this.canvas.nativeElement.toDataURL('image/png'), croppedCoordinates, this.resultImageSize)
               .subscribe({
