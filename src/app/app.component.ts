@@ -8,21 +8,22 @@ import { MatDialog, MatDialogRef } from '@angular/material/dialog';
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.scss'],
 })
-export class AppComponent {
+export class AppComponent implements OnInit {
   title = 'Teknisk Museum';
 
   userActivity;
   userInactive: Subject<any> = new Subject();
 
   isDialogOpen = false;
-  inactivityTime = 30 * 1000;
+  inactivityTime = 3 * 1000;
 
-  constructor(private router: Router, public dialog: MatDialog) {
-    console.log(this.router.url);
+  // constructor(@Inject(MAT_DIALOG_DATA) public data: any, private router: Router, public dialog: MatDialog) {
+  constructor(private router: Router, public dialog: MatDialog) {}
+
+  ngOnInit(): void {
     this.setDialogTimeout();
-
     this.userInactive.subscribe(() => {
-      if (this.router.url != '/') {
+      if (this.router.url !== '/') {
         this.openDialog();
       }
     });
@@ -30,10 +31,12 @@ export class AppComponent {
 
   openDialog() {
     if (!this.isDialogOpen) {
-      this.dialog.open(IdleTimeoutDialog).afterClosed().subscribe(() => {
-        this.isDialogOpen = false;
-      });
-
+      this.dialog
+        .open(IdleTimeoutDialogComponent)
+        .afterClosed()
+        .subscribe(() => {
+          this.isDialogOpen = false;
+        });
       this.isDialogOpen = true;
     }
   }
@@ -51,12 +54,11 @@ export class AppComponent {
 }
 
 @Component({
-  selector: 'idle-timeout-dialog',
+  selector: 'app-idle-timeout-dialog',
   templateUrl: 'idle-timeout-dialog.html',
 })
-export class IdleTimeoutDialog implements OnInit, OnDestroy {
-
-  constructor(private router: Router, private dialogRef: MatDialogRef<IdleTimeoutDialog>) { }
+export class IdleTimeoutDialogComponent implements OnInit, OnDestroy {
+  constructor(private router: Router, private dialogRef: MatDialogRef<IdleTimeoutDialogComponent>) {}
 
   startTime = 15;
   timer;
