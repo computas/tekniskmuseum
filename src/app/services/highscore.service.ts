@@ -18,6 +18,10 @@ interface HighScoreResponse {
   daily: [HighScoreItem];
   total: [HighScoreItem];
 }
+interface HighScoreSubmit {
+  name: string;
+  submit: boolean;
+}
 @Injectable({
   providedIn: 'root',
 })
@@ -28,16 +32,13 @@ export class HighScoreService {
     { name: 'Koa Ahmad', score: 17, place: -1 },
     { name: 'Beck Mcgregor', score: 13, place: -1 },
     { name: 'Matteo Atherton', score: 13, place: -1 },
-    { name: 'Kaelan Wheeler', score: 26, place: -1 },
-    { name: 'Amie Sargent', score: 5, place: -1 },
-    { name: 'Brook Trujillo', score: 3, place: -1 },
-    { name: 'Jevon Rocha', score: 14, place: -1 },
-    { name: 'Amie Sargent', score: 10, place: -1 },
-    { name: 'Ami ', score: 10, place: -1 },
   ];
   totalHighScore: HighScoreItem[] = [];
 
   private readonly _dailyHighScores = new BehaviorSubject<HighScoreItem[]>([]);
+  private readonly _submitHighScore = new BehaviorSubject<HighScoreSubmit>({ name: '', submit: false });
+
+  readonly submitHighScore$ = this._submitHighScore.asObservable();
   readonly dailyHighScores$ = this._dailyHighScores.asObservable();
 
   constructor(private http: HttpClient) {}
@@ -47,9 +48,9 @@ export class HighScoreService {
     return of(this.highscores);
   }
 
-  submitHighscore(entry: Entry) {
+  endGame(entry: Entry) {
     const endpoint = `${endpoints.TEKNISKBACKEND}/${endpoints.ENDGAME}`;
-    return this.http.post<Entry>(endpoint, entry).pipe();
+    return this.http.post<Entry>(endpoint, entry);
   }
 
   getAllHighScores(): Observable<any> {
@@ -63,7 +64,7 @@ export class HighScoreService {
   }
 
   getDailyScores() {
-    if (!this.dailyHighScores) {
+    if (this.dailyHighScores.length === 0) {
       this.getAllHighScores().subscribe((res) => {
         return this.dailyHighScores;
       });
@@ -125,5 +126,11 @@ export class HighScoreService {
 
   set dailyHighScores(val: HighScoreItem[]) {
     this._dailyHighScores.next(val);
+  }
+  get submitHighScore(): HighScoreSubmit {
+    return this._submitHighScore.getValue();
+  }
+  set submitHighScore(val: HighScoreSubmit) {
+    this._submitHighScore.next(val);
   }
 }

@@ -4,6 +4,7 @@ import { HighScoreModule } from '../../highscore/highscore.module';
 import { GameResultComponent } from './game-result.component';
 import { SpeechServiceMock } from 'src/app/services/speech.service.mock';
 import { SpeechService } from 'src/app/services/speech.service';
+import { RouterTestingModule } from '@angular/router/testing';
 
 describe('GameResultComponent', () => {
   let component: GameResultComponent;
@@ -12,7 +13,7 @@ describe('GameResultComponent', () => {
   beforeEach(async(() => {
     TestBed.configureTestingModule({
       declarations: [GameResultComponent],
-      imports: [HttpClientTestingModule, HighScoreModule],
+      imports: [HttpClientTestingModule, HighScoreModule, RouterTestingModule],
       providers: [{ provide: SpeechService, useValue: SpeechServiceMock }],
     }).compileComponents();
   }));

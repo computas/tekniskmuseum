@@ -1,8 +1,8 @@
 import { Component, ElementRef, OnInit, ViewChild, Output, EventEmitter, OnDestroy } from '@angular/core';
-import { BehaviorSubject, Subject, interval, Observable, pipe } from 'rxjs';
-import { takeUntil } from 'rxjs/operators';
-import { take } from 'rxjs/operators';
+import { BehaviorSubject, Subject, interval, Observable } from 'rxjs';
 import { ImageService } from './services/image.service';
+import { Howl } from 'howler';
+import { take, takeUntil } from 'rxjs/operators';
 import { DrawingService } from './services/drawing.service';
 import { StartGameInfo } from './services/start-game-info';
 
@@ -32,7 +32,11 @@ export class GameDrawComponent implements OnInit, OnDestroy {
   isDrawing = false;
   hasLeftCanvas = false;
   timeLeft = 20.0;
-  timeElapsed = 0.0;
+
+  score = 333;
+
+  clockColor = 'initial';
+  private readonly resultImageSize = 1024;
 
   private readonly LINE_WIDTH = 10;
 
@@ -55,12 +59,7 @@ export class GameDrawComponent implements OnInit, OnDestroy {
     this.ctx = ctx;
     this.canvas.nativeElement.width = this.canvas.nativeElement.parentElement?.offsetWidth || document.body.clientWidth;
     this.canvas.nativeElement.height = document.body.clientHeight - 100;
-
-    this.minX = this.canvas.nativeElement.width;
-    this.minY = this.canvas.nativeElement.height;
-    this.maxX = 0;
-    this.maxY = 0;
-
+    this.resetMinMaxMouseValues();
     this.drawingService.guessDone = false;
     this.startGame();
   }
@@ -84,6 +83,7 @@ export class GameDrawComponent implements OnInit, OnDestroy {
         this.classify();
       },
       complete: () => {
+        this.clockColor = this.clockColor === 'initial' ? 'final' : 'initial';
         this.timeOut = true;
       },
     });
@@ -94,16 +94,22 @@ export class GameDrawComponent implements OnInit, OnDestroy {
 
   private createDrawingTimer() {
     return new Observable((observer) => {
+      let color = 'red';
       interval(100)
         .pipe(take(10 * this.timeLeft), takeUntil(this.unsubscribe))
         .subscribe((tics) => {
           if (!this.drawingService.classificationDone) {
+            this.score = this.score - 1.67336683417;
             if (tics % 10 === 9) {
               this.timeLeft--;
-              this.timeElapsed++;
-              if (this.timeElapsed > 3) {
+              if (this.timeLeft < 17) {
                 observer.next('classify');
               }
+            }
+            if (this.timeLeft <= 5) {
+              this.countDown.nativeElement.style.color = color;
+              color = color === 'white' ? 'red' : 'white';
+              this.playTickSound();
             }
           }
         });
@@ -111,11 +117,6 @@ export class GameDrawComponent implements OnInit, OnDestroy {
   }
 
   sortOnCertainty(res) {
-    interface Certainty {
-      label: string;
-      accuracy: number;
-    }
-
     const arr: any = [];
     Object.entries(res.certainty).map((keyValue) => {
       const [label, certainty] = keyValue;
@@ -129,6 +130,12 @@ export class GameDrawComponent implements OnInit, OnDestroy {
     }
     return arr;
   }
+  playTickSound() {
+    const sound = new Howl({
+      src: ['../../../assets/tick.mp3'],
+    });
+    sound.play();
+  }
 
   classify() {
     const b64Image = this.canvas.nativeElement.toDataURL('image/png');
@@ -136,9 +143,20 @@ export class GameDrawComponent implements OnInit, OnDestroy {
     this.imageService.resize(b64Image, croppedCoordinates).subscribe({
       next: (dataUrl) => {
         const formData: FormData = this.createFormData(dataUrl);
-        this.drawingService.classify(formData, dataUrl).subscribe((res) => {
-          const sortedCertaintyArr = this.sortOnCertainty(res);
-          const limitCertainty = sortedCertaintyArr.map((value) => value.certainty >= 0.5);
+        this.drawingService.classify(formData).subscribe((res) => {
+          // const sortedCertaintyArr = this.sortOnCertainty(res);
+          // const limitCertainty = sortedCertaintyArr.map((value) => value.certainty >= 0.5);
+          if (res.roundIsDone) {
+            const score = this.score > 0 ? this.score : 0;
+            this.drawingService.lastResult.score = Math.round(score);
+            this.imageService
+              .resize(this.canvas.nativeElement.toDataURL('image/png'), croppedCoordinates, this.resultImageSize)
+              .subscribe({
+                next: (dataUrlHighRes) => {
+                  this.drawingService.lastResult.imageData = dataUrlHighRes;
+                },
+              });
+          }
         });
       },
     });
@@ -147,7 +165,7 @@ export class GameDrawComponent implements OnInit, OnDestroy {
   createFormData(dataUrl): FormData {
     const formData: FormData = this.imageService.createFormData(dataUrl);
     formData.append('token', this.drawingService.token);
-    formData.append('time', this.timeElapsed.toString());
+    formData.append('time', this.timeLeft.toString());
     return formData;
   }
 
@@ -196,13 +214,44 @@ export class GameDrawComponent implements OnInit, OnDestroy {
     this.ctx.lineTo(currentX, currentY);
     this.ctx.stroke();
 
-    currentX < this.minX ? (this.minX = currentX) : (this.maxX = currentX);
-    currentY < this.minY ? (this.minY = currentY) : (this.maxY = currentY);
+    if (currentX < this.minX) {
+      this.minX = currentX;
+    }
+    if (currentY < this.minY) {
+      this.minY = currentY;
+    }
+    if (currentX > this.maxX) {
+      this.maxX = currentX;
+    }
+    if (currentY > this.maxY) {
+      this.maxY = currentY;
+    }
+
+    if (this.minX < 0) {
+      this.minX = 0;
+    }
+    if (this.minY < 0) {
+      this.minY = 0;
+    }
+    if (this.maxX > this.canvas.nativeElement.width) {
+      this.maxX = this.canvas.nativeElement.width;
+    }
+    if (this.maxY > this.canvas.nativeElement.height) {
+      this.maxY = this.canvas.nativeElement.height;
+    }
   }
 
   clear() {
     const canvas = this.canvas.nativeElement;
     this.ctx.clearRect(0, 0, canvas.width, canvas.height);
+    this.resetMinMaxMouseValues();
+  }
+
+  resetMinMaxMouseValues() {
+    this.minX = this.canvas.nativeElement.width;
+    this.minY = this.canvas.nativeElement.height;
+    this.maxX = 0;
+    this.maxY = 0;
   }
 
   stop(e) {
