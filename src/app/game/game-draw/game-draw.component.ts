@@ -33,7 +33,6 @@ export class GameDrawComponent implements OnInit, OnDestroy {
   isDrawing = false;
   hasLeftCanvas = false;
   timeLeft = 20.0;
-  timeElapsed = 0.0;
 
   clockColor = 'initial';
   private readonly resultImageSize = 1024;
@@ -101,8 +100,7 @@ export class GameDrawComponent implements OnInit, OnDestroy {
           if (!this.drawingService.classificationDone) {
             if (tics % 10 === 9) {
               this.timeLeft--;
-              this.timeElapsed++;
-              if (this.timeElapsed > 3) {
+              if (this.timeLeft < 17) {
                 observer.next('classify');
               }
             }
@@ -130,6 +128,7 @@ export class GameDrawComponent implements OnInit, OnDestroy {
       next: (dataUrl) => {
         const formData: FormData = this.createFormData(dataUrl);
         this.drawingService.classify(formData).subscribe((res) => {
+          console.log(res);
           if (res.roundIsDone) {
             this.imageService
               .resize(this.canvas.nativeElement.toDataURL('image/png'), croppedCoordinates, this.resultImageSize)
@@ -147,7 +146,7 @@ export class GameDrawComponent implements OnInit, OnDestroy {
   createFormData(dataUrl): FormData {
     const formData: FormData = this.imageService.createFormData(dataUrl);
     formData.append('token', this.drawingService.token);
-    formData.append('time', this.timeElapsed.toString());
+    formData.append('time', this.timeLeft.toString());
     return formData;
   }
 
