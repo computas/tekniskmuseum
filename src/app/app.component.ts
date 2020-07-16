@@ -1,4 +1,4 @@
-import { Component, HostListener } from '@angular/core';
+import { Component, HostListener, OnInit } from '@angular/core';
 import { Subject } from 'rxjs';
 import { Router } from '@angular/router';
 import { MatDialog, MatDialogRef } from '@angular/material/dialog';
@@ -15,6 +15,7 @@ export class AppComponent {
   userInactive: Subject<any> = new Subject();
 
   isDialogOpen = false;
+  inactivityTime = 5 * 1000;
 
   constructor(private router: Router, public dialog: MatDialog) {
     console.log(this.router.url);
@@ -22,12 +23,7 @@ export class AppComponent {
 
     this.userInactive.subscribe(() => {
       if (this.router.url != '/') {
-        // alert("timeout");
-        // this.router.navigateByUrl('');
         this.openDialog();
-        console.log(this.router.url, "inaktiv");
-        setTimeout(() => console.log(this.router.url, "starter igjen"), 1500);
-
       }
     });
   }
@@ -43,10 +39,9 @@ export class AppComponent {
   }
 
   setDialogTimeout() {
-    this.userActivity = setTimeout(() => this.userInactive.next(undefined), 3000);
+    this.userActivity = setTimeout(() => this.userInactive.next(undefined), this.inactivityTime);
   }
 
-  //legge til dersom bilde endrer seg? ?
   @HostListener('window:mousemove')
   @HostListener('document:touchmove')
   refreshUserState() {
@@ -59,9 +54,25 @@ export class AppComponent {
   selector: 'idle-timeout-dialog',
   templateUrl: 'idle-timeout-dialog.html',
 })
-export class IdleTimeoutDialog {
+export class IdleTimeoutDialog implements OnInit {
 
   constructor(private router: Router, private dialogRef: MatDialogRef<IdleTimeoutDialog>) { }
+
+  startTime = 15;
+  timer;
+  countdown;
+
+  ngOnInit(): void {
+    this.timer = this.startTime;
+    this.countdown = setInterval(() => {
+      this.timer -= 1;
+      if (this.timer === 0) {
+        this.timer = this.startTime;
+        this.goHome();
+        clearInterval(this.countdown);
+      }
+    }, 1000);
+  }
 
   goHome() {
     this.closeDialog();
@@ -69,6 +80,7 @@ export class IdleTimeoutDialog {
   }
 
   closeDialog() {
+    clearInterval(this.countdown);
     this.dialogRef.close();
   }
 }
