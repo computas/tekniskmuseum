@@ -70,7 +70,6 @@ export class IdleTimeoutDialog implements OnInit, OnDestroy {
         this.resetTimer();
         this.goHome();
       }
-      console.log(this.timer);
     }, 1000);
   }
 
