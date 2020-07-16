@@ -13,7 +13,12 @@ body {
   font-family: Roboto, 'Helvetica Neue', sans-serif;
 }
 
-.mat-progress-spinner circle,
-.mat-spinner circle {
-  stroke: #ffffff;
+::ng-deep .mat-spinner circle,
+.mat-progress-spinner {
+  .white-spinner {
+    stroke: #ffffff;
+  }
+  .black-spinner {
+    stroke: black;
+  }
 }
