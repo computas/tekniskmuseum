@@ -47,6 +47,7 @@ export class GameDrawComponent implements OnInit, OnDestroy {
 
   startGameInfo: StartGameInfo;
   guessWord: string;
+  AI_GUESS: string;
 
   constructor(private imageService: ImageService, private drawingService: DrawingService) {}
 
@@ -144,8 +145,11 @@ export class GameDrawComponent implements OnInit, OnDestroy {
       next: (dataUrl) => {
         const formData: FormData = this.createFormData(dataUrl);
         this.drawingService.classify(formData).subscribe((res) => {
-          // const sortedCertaintyArr = this.sortOnCertainty(res);
-          // const limitCertainty = sortedCertaintyArr.map((value) => value.certainty >= 0.5);
+          console.log(Object.keys(res.certainty).sort());
+          const sortedCertaintyArr = this.sortOnCertainty(res);
+          if (sortedCertaintyArr && sortedCertaintyArr.length > 1) {
+            this.AI_GUESS = sortedCertaintyArr[0].label;
+          }
           if (res.roundIsDone) {
             const score = this.score > 0 ? this.score : 0;
             this.drawingService.lastResult.score = Math.round(score);
