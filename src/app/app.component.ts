@@ -1,4 +1,4 @@
-import { Component, HostListener, OnInit } from '@angular/core';
+import { Component, HostListener, OnInit, OnDestroy } from '@angular/core';
 import { Subject } from 'rxjs';
 import { Router } from '@angular/router';
 import { MatDialog, MatDialogRef } from '@angular/material/dialog';
@@ -15,7 +15,7 @@ export class AppComponent {
   userInactive: Subject<any> = new Subject();
 
   isDialogOpen = false;
-  inactivityTime = 5 * 1000;
+  inactivityTime = 3 * 1000;
 
   constructor(private router: Router, public dialog: MatDialog) {
     console.log(this.router.url);
@@ -54,11 +54,11 @@ export class AppComponent {
   selector: 'idle-timeout-dialog',
   templateUrl: 'idle-timeout-dialog.html',
 })
-export class IdleTimeoutDialog implements OnInit {
+export class IdleTimeoutDialog implements OnInit, OnDestroy {
 
   constructor(private router: Router, private dialogRef: MatDialogRef<IdleTimeoutDialog>) { }
 
-  startTime = 15;
+  startTime = 3;
   timer;
   countdown;
 
@@ -67,10 +67,10 @@ export class IdleTimeoutDialog implements OnInit {
     this.countdown = setInterval(() => {
       this.timer -= 1;
       if (this.timer === 0) {
-        this.timer = this.startTime;
+        this.resetTimer();
         this.goHome();
-        clearInterval(this.countdown);
       }
+      console.log(this.timer);
     }, 1000);
   }
 
@@ -82,5 +82,14 @@ export class IdleTimeoutDialog implements OnInit {
   closeDialog() {
     clearInterval(this.countdown);
     this.dialogRef.close();
+  }
+
+  resetTimer() {
+    clearInterval(this.countdown);
+    this.timer = this.startTime;
+  }
+
+  ngOnDestroy(): void {
+    this.resetTimer();
   }
 }
