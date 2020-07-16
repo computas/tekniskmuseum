@@ -1,10 +1,9 @@
-import { Component, ElementRef, EventEmitter, OnDestroy, OnInit, Output, ViewChild } from '@angular/core';
-import { Howl } from 'howler';
-import { BehaviorSubject, interval, Observable, Subject } from 'rxjs';
-import { take, takeUntil } from 'rxjs/operators';
-
-import { DrawingService } from './services/drawing.service';
+import { Component, ElementRef, OnInit, ViewChild, Output, EventEmitter, OnDestroy } from '@angular/core';
+import { BehaviorSubject, Subject, interval, Observable } from 'rxjs';
 import { ImageService } from './services/image.service';
+import { Howl } from 'howler';
+import { take, takeUntil } from 'rxjs/operators';
+import { DrawingService } from './services/drawing.service';
 import { StartGameInfo } from './services/start-game-info';
 
 @Component({
@@ -48,6 +47,7 @@ export class GameDrawComponent implements OnInit, OnDestroy {
 
   startGameInfo: StartGameInfo;
   guessWord: string;
+  AI_GUESS: string;
 
   constructor(private imageService: ImageService, private drawingService: DrawingService) {}
 
@@ -117,6 +117,20 @@ export class GameDrawComponent implements OnInit, OnDestroy {
     });
   }
 
+  sortOnCertainty(res) {
+    const arr: any = [];
+    Object.entries(res.certainty).map((keyValue) => {
+      const [label, certainty] = keyValue;
+      arr.push({ label, certainty });
+    });
+    arr.sort((a: any, b: any) => {
+      return b.value - a.value;
+    });
+    if (5 < arr.length) {
+      return arr.slice(0, 5);
+    }
+    return arr;
+  }
   playTickSound() {
     const sound = new Howl({
       src: ['../../../assets/tick.mp3'],
@@ -131,6 +145,10 @@ export class GameDrawComponent implements OnInit, OnDestroy {
       next: (dataUrl) => {
         const formData: FormData = this.createFormData(dataUrl);
         this.drawingService.classify(formData).subscribe((res) => {
+          const sortedCertaintyArr = this.sortOnCertainty(res);
+          if (sortedCertaintyArr && sortedCertaintyArr.length > 1) {
+            this.AI_GUESS = sortedCertaintyArr[0].label;
+          }
           if (res.roundIsDone) {
             const score = this.score > 0 ? this.score : 0;
             this.drawingService.lastResult.score = Math.round(score);
