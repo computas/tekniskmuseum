@@ -1,9 +1,7 @@
 import { Component, HostListener } from '@angular/core';
 import { Subject } from 'rxjs';
 import { Router } from '@angular/router';
-import {MatDialogModule} from '@angular/material/dialog';
-
-
+import { MatDialog, MatDialogRef } from '@angular/material/dialog';
 
 @Component({
   selector: 'app-root',
@@ -14,31 +12,38 @@ export class AppComponent {
   title = 'Teknisk Museum';
 
   userActivity;
-  // userActivity2;
   userInactive: Subject<any> = new Subject();
-  // userInactive2: Subject<any> = new Subject();
 
-  constructor(private router: Router) {
+  isDialogOpen = false;
+
+  constructor(private router: Router, public dialog: MatDialog) {
     console.log(this.router.url);
-    this.setTimeout();
-
-    // this.userInactive.subscribe(() => alert("Spillet starter på nytt om 10 sekunder."));
+    this.setDialogTimeout();
 
     this.userInactive.subscribe(() => {
       if (this.router.url != '/') {
         // alert("timeout");
         // this.router.navigateByUrl('');
+        this.openDialog();
         console.log(this.router.url, "inaktiv");
-        // this.userInactive2.subscribe(() => console.log(this.router.url, "starter igjen"));
         setTimeout(() => console.log(this.router.url, "starter igjen"), 1500);
 
       }
     });
   }
 
-  setTimeout() {
+  openDialog() {
+    if (!this.isDialogOpen) {
+      this.dialog.open(IdleTimeoutDialog).afterClosed().subscribe(() => {
+        this.isDialogOpen = false;
+      });
+
+      this.isDialogOpen = true;
+    }
+  }
+
+  setDialogTimeout() {
     this.userActivity = setTimeout(() => this.userInactive.next(undefined), 3000);
-    // this.userActivity2 = setTimeout(() => this.userInactive2.next(undefined), 1500);
   }
 
   //legge til dersom bilde endrer seg? ?
@@ -46,7 +51,24 @@ export class AppComponent {
   @HostListener('document:touchmove')
   refreshUserState() {
     clearTimeout(this.userActivity);
-    // clearTimeout(this.userActivity2);
-    this.setTimeout();
+    this.setDialogTimeout();
+  }
+}
+
+@Component({
+  selector: 'idle-timeout-dialog',
+  templateUrl: 'idle-timeout-dialog.html',
+})
+export class IdleTimeoutDialog {
+
+  constructor(private router: Router, private dialogRef: MatDialogRef<IdleTimeoutDialog>) { }
+
+  goHome() {
+    this.closeDialog();
+    this.router.navigateByUrl('');
+  }
+
+  closeDialog() {
+    this.dialogRef.close();
   }
 }
