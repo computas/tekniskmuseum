@@ -1,28 +1,25 @@
 .result-container {
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: center;
-  align-items: center;
-  background: linear-gradient(to top, #dbf0fd, #e7f3ff, #f1f6ff, #f9faff, #ffffff);
-}
-.result-main-content-container {
   min-height: 100vh;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
+  display: grid;
+  background-image: linear-gradient(to top, #dbf0fd, #e7f3ff, #f1f6ff, #f9faff, #ffffff);
 }
-.result-section {
-  display: flex;
-  flex-direction: column;
+#result-card-container {
+  display: grid;
+  column-gap: 1em;
+  row-gap: 1em;
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+}
+#result-card-container > div {
+  display: grid;
   justify-content: center;
-  margin-top: 24px;
-  margin-bottom: 20%;
 }
 #result-header {
   text-align: center;
   color: #195272;
   font-size: 38px;
+  display: grid;
+  align-items: end;
+  margin-bottom: 48px;
 }
 
 .btn {
@@ -31,45 +28,16 @@
   border-radius: 50px;
   font-size: 30px;
 }
-input {
-  border: 0;
-  border-radius: 50px;
-  padding-left: 12px;
-  padding-right: 12px;
-  height: 60px;
-  border-radius: 50px;
-  font-size: 30px;
-}
-::placeholder {
-  border-bottom: 1px solid grey;
-  border-spacing: 15px 50px;
-  padding-left: 12px;
-  padding-right: 12px;
-  margin-left: 12px;
-  margin-right: 12px;
-}
 .btn-again {
   background-color: #fa852f;
   color: white;
-  margin-right: 24px;
-}
-.btn-home {
-  margin-left: 24px;
 }
 .button-footer {
-  min-width: 100%;
-}
-.link-float {
-  float: right;
-}
-#result-card-container {
-  display: flex;
-  justify-content: center;
-  flex-wrap: wrap;
-}
-
-#result-card {
-  margin: 0 28px;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  justify-items: center;
+  column-gap: 1em;
+  row-gap: 1em;
 }
 .card-won {
   border: 3px solid #68d466;
@@ -78,14 +46,13 @@ input {
   border: 3px solid #de1f1f;
 }
 .game-result-img {
-  width: 210px;
+  width: 250px;
 }
 .start-new-game-button {
   float: right;
   width: 200px;
   color: #195272;
   border: 1px solid;
-  margin-bottom: 50px;
 }
 p {
   font-style: italic;
@@ -101,77 +68,15 @@ p {
 #loss {
   color: #de1f1f;
 }
-
-#highscore-list {
-  list-style: none;
-  font-size: 20px;
-  padding: 20px;
-}
-#list-content {
-  display: flex;
-  justify-content: space-between;
-  margin: 12px 12px;
-}
 #text-header {
   text-align: center;
   margin: 12px;
   border-bottom: 1px solid;
   color: #195272;
 }
-.result-side-menu {
-}
-.highscorelist {
-  margin-bottom: 20%;
-  border-left: 1px solid #05a3c7;
-  padding-left: 24px;
-  font-style: normal;
-  font-weight: normal;
-  font-size: 18px;
-  line-height: 35px;
-}
-.name-form {
-  display: flex;
-  padding-left: 15px;
-}
-.highlight {
-  color: #fa852f;
-}
-.send-btn {
-  color: #195272;
-}
-.send {
-  font-size: 40px;
-}
-
-#form-test {
-  height: 50px;
-}
-.send-btn {
-  background-color: white;
-  margin-left: 12px;
-  border-radius: 30px;
-}
 .icon {
   font-size: 40px;
 }
 
-@media only screen and (max-width: 768px) {
-  .result-main-content-container {
-    width: 100%;
-  }
-}
-@media only screen and (min-width: 768px) and (max-device-width: 1050px) {
-  #result-container {
-    margin: 0;
-  }
-  #result-card {
-    margin: 0 5px;
-  }
-  #result-container {
-    margin: 0;
-    margin-top: 48px;
-  }
-  .game-result-img {
-    width: 150px;
-  }
+@media (max-width: 568px) {
 }
