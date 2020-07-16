@@ -1,18 +1,27 @@
 <div class="container">
+  <button mat-raised-button class="learn-button">
+    <div class="button-text"><mat-icon class="button-icon" aria-label="Example home icon">school</mat-icon>Lær mer</div>
+  </button>
   <button mat-fab (click)="speakIntro()" type="button" value="Play" color="primary" class="tts-button">
     <mat-icon>volume_up</mat-icon>
   </button>
   <div class="play-container">
-    <span class="info-text">
-      Hei, jeg heter<span style="color: #fa852f; font-weight: 500;"> Kunstig Intelligens</span>. <br />
-      Kan du hjelpe meg å lære?
-    </span>
-    <span>
-      <button mat-raised-button class="play-game-button" (click)="goToGameInfoPage()">
-        SPILL
-      </button>
-    </span>
+    <div class="text-container">
+      <div class="avatar"><img class="avatar-image" src="../../../assets/avatar-welcome.svg" alt="avatar" /></div>
+      <div class="info-text">
+        <span>
+          Hei, jeg heter<span style="color: #fa852f; font-weight: 500;"> Kunstig Intelligens</span>. <br />
+          Kan du hjelpe meg å lære?
+        </span>
+        <span>
+          <button mat-raised-button class="play-game-button" (click)="goToGameInfoPage()">
+            SPILL
+          </button>
+        </span>
+      </div>
+    </div>
   </div>
+  <!--
   <div class="navigation-container">
     <button mat-raised-button class="navigation-button" (click)="goToGameInfoPage()">
       <div class="button-text">
@@ -28,4 +37,5 @@
       </div>
     </button>
   </div>
+  -->
 </div>
