@@ -7,7 +7,7 @@
 .drawing-container {
   margin: auto;
   width: 90%;
-  margin-top: 20px;
+  padding-top: 24px;
 }
 .drawing-header {
   display: flex;
@@ -60,16 +60,20 @@
   /* Sort of an arbitrary number; adjust to your liking */
   font-size: 13px;
 }
-.guess-label {
+
+.avatar-container {
+  display: flex;
+  display: flex;
   position: absolute;
   bottom: 0;
-  left: 0;
-  margin-left: 20px;
-  margin-bottom: 5px;
+}
+.guess-label {
+  align-self: flex-end;
   color: #195272;
   background-color: #ecf8ff;
   font-size: 36px;
   line-height: 43px;
+  height: 50%;
   border-radius: 20px;
   box-shadow: 0 0 6px #b2b2b2;
   display: inline-block;
@@ -79,24 +83,17 @@
 
 .guess-label::before {
   background-color: #ecf8ff;
-  content: '\00a0';
-  display: block;
-  height: 18px;
-  position: absolute;
-  top: 20px;
-  transform: rotate(29deg) skew(-35deg);
-  -moz-transform: rotate(29deg) skew(-35deg);
-  -ms-transform: rotate(29deg) skew(-35deg);
-  -o-transform: rotate(29deg) skew(-35deg);
-  -webkit-transform: rotate(29deg) skew(-35deg);
-  width: 20px;
 }
-
-.me {
-  float: left;
-  margin: 5px 45px 5px 20px;
+.clip-container {
+  width: 100px;
+  height: 100px;
 }
-
+.clip {
+  width: 200px;
+  height: 200px;
+  background: #195272;
+  clip-path: polygon(100% 0, 100% 100%, 20% 100%, 20% 68%, 0 56%, 20% 46%, 20% 0);
+}
 .me::before {
   box-shadow: -2px 2px 2px 0 rgba(178, 178, 178, 0.4);
   left: -9px;

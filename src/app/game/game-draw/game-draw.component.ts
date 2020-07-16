@@ -31,7 +31,7 @@ export class GameDrawComponent implements OnInit, OnDestroy {
 
   isDrawing = false;
   hasLeftCanvas = false;
-  timeLeft = 20.0;
+  timeLeft = 200.0;
 
   score = 333;
 
@@ -145,7 +145,6 @@ export class GameDrawComponent implements OnInit, OnDestroy {
       next: (dataUrl) => {
         const formData: FormData = this.createFormData(dataUrl);
         this.drawingService.classify(formData).subscribe((res) => {
-          console.log(Object.keys(res.certainty).sort());
           const sortedCertaintyArr = this.sortOnCertainty(res);
           if (sortedCertaintyArr && sortedCertaintyArr.length > 1) {
             this.AI_GUESS = sortedCertaintyArr[0].label;
