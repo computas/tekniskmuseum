@@ -16,7 +16,7 @@
 #result-header {
   text-align: center;
   color: #195272;
-  font-size: 38px;
+  font-size: 48px;
   display: grid;
   align-items: end;
   margin-bottom: 48px;
@@ -40,10 +40,10 @@
   row-gap: 1em;
 }
 .card-won {
-  border: 3px solid #68d466;
+  border: 8px solid #68d466;
 }
 .card-loss {
-  border: 3px solid #de1f1f;
+  border: 8px solid #de1f1f;
 }
 .start-new-game-button {
   float: right;
@@ -58,12 +58,23 @@ p {
 #result-subtitile {
   display: flex;
   align-items: center;
+  justify-content: center;
+
+  font-style: normal;
+  font-weight: 500;
+  font-size: 30px;
+  line-height: 43px;
 }
 #won {
   color: #68d466;
+  font-size: 36px;
 }
 #loss {
   color: #de1f1f;
+  font-size: 36px;
+}
+.home-text {
+  color: #14213d;
 }
 #text-header {
   text-align: center;
