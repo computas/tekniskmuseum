@@ -31,9 +31,14 @@ export class GameDrawComponent implements OnInit, OnDestroy {
 
   isDrawing = false;
   hasLeftCanvas = false;
-  timeLeft = 20.0;
+  timeLeft = 7.0;
 
   score = 333;
+
+  playTick = false;
+  sound = new Howl({
+    src: ['../../../assets/tick.mp3'],
+  });
 
   clockColor = 'initial';
   private readonly resultImageSize = 1024;
@@ -68,6 +73,7 @@ export class GameDrawComponent implements OnInit, OnDestroy {
   ngOnDestroy(): void {
     this.unsubscribe.next();
     this.unsubscribe.complete();
+    this.sound.stop();
   }
 
   start(e: MouseEvent | TouchEvent) {
@@ -85,6 +91,7 @@ export class GameDrawComponent implements OnInit, OnDestroy {
       },
       complete: () => {
         this.clockColor = this.clockColor === 'initial' ? 'final' : 'initial';
+        this.sound.stop();
         this.timeOut = true;
       },
     });
@@ -110,6 +117,8 @@ export class GameDrawComponent implements OnInit, OnDestroy {
             if (this.timeLeft <= 5) {
               this.countDown.nativeElement.style.color = color;
               color = color === 'white' ? 'red' : 'white';
+              this.playTickSound();
+              this.playTick = true;
             }
           }
         });
@@ -132,10 +141,9 @@ export class GameDrawComponent implements OnInit, OnDestroy {
   }
 
   playTickSound() {
-    const sound = new Howl({
-      src: ['../../../assets/tick.mp3'],
-    });
-    sound.play();
+    if (!this.playTick) {
+      this.sound.play();
+    }
   }
 
   playResultSound(hasWon: boolean) {
