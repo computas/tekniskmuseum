@@ -13,10 +13,10 @@
             <mat-icon>volume_up</mat-icon>
           </button>
           <div class="word-text" *ngIf="result.hasWon">
-            <h1>{{ wonSentence }}{{ result.word }}!</h1>
+            <h1>{{ wonSentence }}</h1>
           </div>
           <div class="word-text" *ngIf="!result.hasWon">
-            <h1>{{ lostSentence }}{{ result.word }}</h1>
+            <h1>{{ lostSentence }}</h1>
           </div>
           <div class="result-img">
             <img [src]="result.imageData" [className]="result.hasWon ? 'won' : 'loss'" />
