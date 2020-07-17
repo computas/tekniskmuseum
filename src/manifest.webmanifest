@@ -2,7 +2,7 @@
   "name": "Tekniskmuseum",
   "short_name": "Tekniskmuseum",
   "theme_color": "#1976d2",
-  "background_color": "#fafafa",
+  "background_color": "#195272",
   "display": "standalone",
   "scope": "./",
   "start_url": "./",
