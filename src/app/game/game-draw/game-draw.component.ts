@@ -35,6 +35,11 @@ export class GameDrawComponent implements OnInit, OnDestroy {
 
   score = 333;
 
+  playTick = false;
+  sound = new Howl({
+    src: ['../../../assets/tick.mp3'],
+  });
+
   clockColor = 'initial';
   private readonly resultImageSize = 1024;
 
@@ -68,6 +73,7 @@ export class GameDrawComponent implements OnInit, OnDestroy {
   ngOnDestroy(): void {
     this.unsubscribe.next();
     this.unsubscribe.complete();
+    this.sound.stop();
   }
 
   start(e: MouseEvent | TouchEvent) {
@@ -85,6 +91,7 @@ export class GameDrawComponent implements OnInit, OnDestroy {
       },
       complete: () => {
         this.clockColor = this.clockColor === 'initial' ? 'final' : 'initial';
+        this.sound.stop();
         this.timeOut = true;
       },
     });
@@ -111,6 +118,7 @@ export class GameDrawComponent implements OnInit, OnDestroy {
               this.countDown.nativeElement.style.color = color;
               color = color === 'white' ? 'red' : 'white';
               this.playTickSound();
+              this.playTick = true;
             }
           }
         });
@@ -131,11 +139,25 @@ export class GameDrawComponent implements OnInit, OnDestroy {
     }
     return arr;
   }
+
   playTickSound() {
-    const sound = new Howl({
-      src: ['../../../assets/tick.mp3'],
-    });
-    sound.play();
+    if (!this.playTick) {
+      this.sound.play();
+    }
+  }
+
+  playResultSound(hasWon: boolean) {
+    if (hasWon) {
+      const sound = new Howl({
+        src: ['../../../assets/win.mp3'],
+      });
+      sound.play();
+    } else {
+      const sound = new Howl({
+        src: ['../../../assets/loss.mp3'],
+      });
+      sound.play();
+    }
   }
 
   classify() {
@@ -150,6 +172,7 @@ export class GameDrawComponent implements OnInit, OnDestroy {
             this.AI_GUESS = sortedCertaintyArr[0].label;
           }
           if (res.roundIsDone) {
+            this.playResultSound(res.hasWon);
             const score = this.score > 0 ? this.score : 0;
             this.drawingService.lastResult.score = Math.round(score);
             this.imageService
