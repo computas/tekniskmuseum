@@ -110,7 +110,6 @@ export class GameDrawComponent implements OnInit, OnDestroy {
             if (this.timeLeft <= 5) {
               this.countDown.nativeElement.style.color = color;
               color = color === 'white' ? 'red' : 'white';
-              this.playTickSound();
             }
           }
         });
@@ -131,11 +130,26 @@ export class GameDrawComponent implements OnInit, OnDestroy {
     }
     return arr;
   }
+
   playTickSound() {
     const sound = new Howl({
       src: ['../../../assets/tick.mp3'],
     });
     sound.play();
+  }
+
+  playResultSound(hasWon: boolean) {
+    if (hasWon) {
+      const sound = new Howl({
+        src: ['../../../assets/win.mp3'],
+      });
+      sound.play();
+    } else {
+      const sound = new Howl({
+        src: ['../../../assets/loss.mp3'],
+      });
+      sound.play();
+    }
   }
 
   classify() {
@@ -150,6 +164,7 @@ export class GameDrawComponent implements OnInit, OnDestroy {
             this.AI_GUESS = sortedCertaintyArr[0].label;
           }
           if (res.roundIsDone) {
+            this.playResultSound(res.hasWon);
             const score = this.score > 0 ? this.score : 0;
             this.drawingService.lastResult.score = Math.round(score);
             this.imageService
