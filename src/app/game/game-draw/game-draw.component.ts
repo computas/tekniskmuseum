@@ -31,7 +31,7 @@ export class GameDrawComponent implements OnInit, OnDestroy {
 
   isDrawing = false;
   hasLeftCanvas = false;
-  timeLeft = 7.0;
+  timeLeft = 20.0;
 
   score = 333;
 
