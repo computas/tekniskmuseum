@@ -26,6 +26,8 @@
     "@angular/platform-browser": "~10.0.0",
     "@angular/platform-browser-dynamic": "~10.0.0",
     "@angular/router": "~10.0.0",
+    "@types/howler": "^2.2.1",
+    "howler": "^2.2.0",
     "normalize.css": "^8.0.1",
     "rxjs": "~6.5.4",
     "tslib": "^2.0.0",
