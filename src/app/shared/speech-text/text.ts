@@ -4,6 +4,6 @@ export const SPEECH = {
   welcome: 'Hei, jeg heter Kunstig Intelligens. Kan du hjelpe meg å lære?',
   info: 'Slik spiller du: 1. Tegn ord. 2. Jeg gjetter. 3. Få poeng.',
   draw: 'Tegn: ',
-  resultWon: 'Hurra, jeg har lært meg ',
-  resultLoss: 'Beklager, jeg klarte ikke gjette ',
+  resultWon: 'Hurra, vi klarte det!',
+  resultLoss: 'Beklager, jeg klarte ikke gjettet hva du tegnet',
 };
