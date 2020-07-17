@@ -51,6 +51,6 @@
     <img src="../../../assets/avatar-halv.svg" alt="Avatar guessing words" />
   </div>
   <div class="guess-label me">
-    <span>Jeg tror det er... {{ AI_GUESS }} </span>
+    <span>Hmm... <span *ngIf="AI_GUESS">kan det være &nbsp;</span>{{ AI_GUESS | uppercase }} </span>
   </div>
 </div>
