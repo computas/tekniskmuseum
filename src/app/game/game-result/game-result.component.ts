@@ -36,7 +36,7 @@ export class GameResultComponent implements OnInit {
       if (res.submit) {
         const entry: Entry = {
           name: res.name,
-          player_id: this.drawingService.player_id,
+          playerid: this.drawingService.playerid,
         };
         this.highScoreService.endGame(entry).subscribe((response) => {});
       }

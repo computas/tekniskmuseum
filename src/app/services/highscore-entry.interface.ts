@@ -1,4 +1,4 @@
 export interface Entry {
-  player_id: string;
+  playerid: string;
   name: string;
 }

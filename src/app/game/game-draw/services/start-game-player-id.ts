@@ -1,3 +1,3 @@
-export interface StartGameToken {
-  token: string;
+export interface StartGamePlayerId {
+  player_id: string;
 }
