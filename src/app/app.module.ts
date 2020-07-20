@@ -10,6 +10,8 @@ import { GameModeModule } from './game-mode/game-mode.module';
 import { MultiplayerComponent } from './multiplayer/multiplayer.component';
 import { LobbyComponent } from './multiplayer/lobby/lobby.component';
 import { GameModeComponent } from './game-mode/game-mode.component';
+import { ServiceWorkerModule } from '@angular/service-worker';
+import { environment } from '../environments/environment';
 
 @NgModule({
   declarations: [AppComponent],
@@ -21,6 +23,7 @@ import { GameModeComponent } from './game-mode/game-mode.component';
     GameModule,
     HighScoreModule,
     GameModeModule,
+    ServiceWorkerModule.register('ngsw-worker.js', { enabled: environment.production }),
   ],
   providers: [HttpClientModule],
   bootstrap: [AppComponent],
