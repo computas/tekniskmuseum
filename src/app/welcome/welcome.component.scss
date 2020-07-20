@@ -34,15 +34,6 @@
 .avatar-image {
   height: 250px;
 }
-/*
-.navigation-container {
-  display: flex;
-  flex-direction: row;
-  justify-content: space-evenly;
-  align-items: center;
-  flex-wrap: wrap;
-}
-*/
 a {
   text-decoration: none;
 }
@@ -85,37 +76,6 @@ a {
     max-width: 400px;
   }
 }
-/*
-.navigation-button {
-  border-radius: 50px;
-  color: #14213d;
-  box-shadow: 0 8px 16px 0 rgba(0, 0, 0, 0.1), 0 6px 20px 0 rgba(0, 0, 0, 0.15);
-  font-size: 18px;
-  height: 40px;
-  min-width: 200px;
-  max-width: 400px;
-  margin-top: 10px;
-  margin-left: 5px;
-  margin-right: 5px;
-}
-@media (min-width: 600px) {
-  .navigation-button {
-    font-size: 24px;
-    height: 45px;
-    width: 240px;
-    margin: 50px;
-  }
-}
-.button-text {
-  display: flex;
-  flex-direction: row;
-  justify-content: center;
-  align-items: center;
-}
-.button-icon {
-  color: #14213d;
-  margin-right: 5px;
-}*/
 .tts-button {
   top: 0;
   position: absolute;
