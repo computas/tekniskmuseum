@@ -8,16 +8,22 @@
       <div class="info-text">Velg modus:</div>
       <button mat-raised-button class="game-mode-button">
         <div class="button-text">
-          <mat-icon class="button-icon" aria-label="Example home icon" (click)="goToSingleplayer()">person</mat-icon>1
-          spiller
+          <mat-icon class="mode-button-icon" aria-label="Example home icon" (click)="goToSingleplayer()"
+            >person</mat-icon
+          >1 spiller
         </div>
       </button>
       <button mat-raised-button class="game-mode-button">
         <div class="button-text">
-          <mat-icon class="button-icon" aria-label="Example home icon" (click)="goToMultiplayer()">group</mat-icon>2
-          spiller
+          <mat-icon class="mode-button-icon" aria-label="Example home icon" (click)="goToMultiplayer()">group</mat-icon
+          >2 spiller
         </div>
       </button>
     </div>
+    <button mat-raised-button class="back-button">
+      <div class="button-text">
+        <mat-icon class="button-icon" aria-label="Example home icon" (click)="goToLanding()">home</mat-icon>Tilbake
+      </div>
+    </button>
   </div>
 </div>
