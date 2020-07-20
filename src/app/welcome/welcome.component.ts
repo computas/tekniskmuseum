@@ -17,11 +17,7 @@ export class WelcomeComponent implements OnInit {
     this.speechService.speak(SPEECH.welcome);
   }
 
-  goToGameInfoPage() {
-    this.router.navigate([routes.PLAYGAME]);
-  }
-
-  goToHighscore() {
-    this.router.navigate([routes.HIGHSCORE]);
+  goToGameModePage() {
+    this.router.navigate([routes.GAMEMODE]);
   }
 }
