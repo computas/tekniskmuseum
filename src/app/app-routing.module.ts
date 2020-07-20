@@ -17,7 +17,11 @@ const routes: Routes = [
     component: GameModeComponent,
   },
   {
-    path: r.PLAYGAME,
+    path: r.SINGLEPLAYER,
+    component: GameComponent,
+  },
+  {
+    path: r.MULTIPLAYER,
     component: GameComponent,
   },
   {
