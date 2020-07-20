@@ -2,12 +2,12 @@ import { Injectable } from '@angular/core';
 import { webSocket, WebSocketSubject } from 'rxjs/webSocket';
 import { tap, catchError } from 'rxjs/operators';
 import { Subject, EMPTY } from 'rxjs';
-
+import { environment } from '../../../environments/environment';
 @Injectable({
   providedIn: 'root',
 })
 export class WebSocketService {
-  WS_ENDPOINT = 'ws://localhost:8000';
+  WS_ENDPOINT = environment.WS_ENDPOINT;
   private socket$: WebSocketSubject<any>;
 
   private messagesSubject$ = new Subject();
