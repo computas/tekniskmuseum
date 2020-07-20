@@ -6,10 +6,11 @@ import { AppComponent } from './app.component';
 import { WelcomeModule } from './welcome/welcome.module';
 import { GameModule } from './game/game.module';
 import { HighScoreModule } from './highscore/highscore.module';
-import { MultiplayerComponent } from './multiplayer/multiplayer/multiplayer.component';
+import { MultiplayerComponent } from './multiplayer/multiplayer.component';
+import { LobbyComponent } from './multiplayer/lobby/lobby.component';
 
 @NgModule({
-  declarations: [AppComponent, MultiplayerComponent],
+  declarations: [AppComponent, MultiplayerComponent, LobbyComponent],
   imports: [BrowserModule, HttpClientModule, AppRoutingModule, WelcomeModule, GameModule, HighScoreModule],
   providers: [HttpClientModule],
   bootstrap: [AppComponent],
