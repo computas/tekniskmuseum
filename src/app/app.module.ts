@@ -12,7 +12,7 @@ import { LobbyComponent } from './multiplayer/lobby/lobby.component';
 import { GameModeComponent } from './game-mode/game-mode.component';
 
 @NgModule({
-  declarations: [AppComponent, MultiplayerComponent, LobbyComponent, GameModeComponent],
+  declarations: [AppComponent],
   imports: [
     BrowserModule,
     HttpClientModule,
