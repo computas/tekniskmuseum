@@ -19,4 +19,8 @@ export class GameModeComponent implements OnInit {
   goToMultiplayer() {
     this.router.navigate([routes.MULTIPLAYER]);
   }
+
+  goToLanding() {
+    this.router.navigate([routes.LANDING]);
+  }
 }
