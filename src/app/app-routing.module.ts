@@ -7,6 +7,7 @@ import { HighScoreComponent } from './highscore/highscore.component';
 import { GameResultComponent } from './game/game-result/game-result.component';
 import { GameDrawComponent } from './game/game-draw/game-draw.component';
 import { GameModeComponent } from './game-mode/game-mode.component';
+import { LobbyComponent } from './multiplayer/lobby/lobby.component';
 const routes: Routes = [
   {
     path: r.LANDING,
@@ -22,7 +23,7 @@ const routes: Routes = [
   },
   {
     path: r.MULTIPLAYER,
-    component: GameComponent,
+    component: LobbyComponent,
   },
   {
     path: r.HIGHSCORE,
