@@ -1,40 +1,27 @@
 import { Injectable } from '@angular/core';
-import { webSocket, WebSocketSubject } from 'rxjs/webSocket';
-import { tap, catchError } from 'rxjs/operators';
-import { Subject, EMPTY } from 'rxjs';
+import { Observable } from 'rxjs';
+import * as io from 'socket.io-client';
 import { environment } from '../../../environments/environment';
+
 @Injectable({
   providedIn: 'root',
 })
 export class WebSocketService {
-  WS_ENDPOINT = environment.WS_ENDPOINT;
-  private socket$: WebSocketSubject<any>;
+  socket: any;
 
-  private messagesSubject$ = new Subject();
-  constructor() {}
-
-  public connect(): void {
-    if (!this.socket$ || this.socket$.closed) {
-      this.socket$ = this.getNewWebSocket();
-      const messages = this.socket$.pipe(
-        tap({
-          error: (error) => console.error(error),
-        }),
-        catchError((_) => EMPTY)
-      );
-      this.messagesSubject$.next(messages);
-    }
+  constructor() {
+    this.socket = io(environment.WS_ENDPOINT);
   }
 
-  private getNewWebSocket() {
-    return webSocket(this.WS_ENDPOINT);
+  listen(eventName: string) {
+    return new Observable((subscriber) => {
+      this.socket.on(eventName, (data) => {
+        subscriber.next(data);
+      });
+    });
   }
 
-  sendMessage(msg: any) {
-    this.socket$.next(msg);
-  }
-
-  close() {
-    this.socket$.complete();
+  emit(eventName: string, data: any) {
+    this.socket.emit(eventName, data);
   }
 }

@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { MultiplayerService } from '../services/multiplayer.service';
+import { WebSocketService } from '../services/web-socket.service';
+import { GameInfo } from '../services/game-info';
 
 @Component({
   selector: 'app-lobby',
@@ -7,7 +9,20 @@ import { MultiplayerService } from '../services/multiplayer.service';
   styleUrls: ['./lobby.component.scss'],
 })
 export class LobbyComponent implements OnInit {
-  constructor(private multiplayerService: MultiplayerService) {}
+  loading = true;
 
-  ngOnInit(): void {}
+  gameInfo: GameInfo;
+
+  constructor(private webSocketService: WebSocketService) {}
+
+  ngOnInit(): void {
+    this.webSocketService.emit('joinGame', '');
+    this.webSocketService.listen('message').subscribe((data: any) => {
+      this.gameInfo = JSON.parse(data);
+      if (this.gameInfo) {
+        this.loading = false;
+      }
+      console.log(data);
+    });
+  }
 }

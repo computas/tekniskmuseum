@@ -2,14 +2,16 @@
   <div class="waiting-text">
     Venter på spiller 2
   </div>
-  <mat-spinner></mat-spinner>
-  <div>
-    <a routerLink="/" routerLinkActive="active">
-      <button mat-raised-button class="home-button">
-        <div class="button-text">
-          <mat-icon class="button-icon" aria-label="Example home icon">home</mat-icon>Tilbake
-        </div>
-      </button>
-    </a>
+  <div *ngIf="loading">
+    <mat-spinner></mat-spinner>
   </div>
+  <div *ngIf="!loading">
+    <p>{{ gameInfo.game_id }}</p>
+    <p>{{ gameInfo.player_id }}</p>
+  </div>
+  <a routerLink="/" routerLinkActive="active">
+    <button mat-raised-button class="home-button">
+      <div class="button-text"><mat-icon class="button-icon" aria-label="Example home icon">home</mat-icon>Tilbake</div>
+    </button>
+  </a>
 </div>
