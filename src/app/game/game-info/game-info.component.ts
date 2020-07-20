@@ -11,10 +11,15 @@ import { SpeechService } from 'src/app/services/speech.service';
 })
 export class GameInfoComponent implements OnInit {
   @Output() getDrawWord = new EventEmitter();
+  isSinglePlayer = false;
 
   constructor(private speechService: SpeechService, private router: Router) {}
 
-  ngOnInit(): void {}
+  ngOnInit(): void {
+    if (this.router.url === routes.SINGLEPLAYER) {
+      this.isSinglePlayer = true;
+    }
+  }
 
   startDrawing() {
     this.getDrawWord.emit(true);
