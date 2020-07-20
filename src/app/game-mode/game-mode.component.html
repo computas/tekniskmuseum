@@ -1,1 +1,23 @@
-<p>game-mode works!</p>
+<div class="container">
+  <button mat-fab type="button" value="Play" color="primary" class="tts-button">
+    <mat-icon>volume_up</mat-icon>
+  </button>
+  <div class="game-mode-container">
+    <div class="avatar"><img class="avatar-image" src="../../../assets/avatar-welcome.svg" alt="avatar" /></div>
+    <div class="button-container">
+      <div class="info-text">Velg modus:</div>
+      <button mat-raised-button class="game-mode-button">
+        <div class="button-text">
+          <mat-icon class="button-icon" aria-label="Example home icon" (click)="goToSingleplayer()">person</mat-icon>1
+          spiller
+        </div>
+      </button>
+      <button mat-raised-button class="game-mode-button">
+        <div class="button-text">
+          <mat-icon class="button-icon" aria-label="Example home icon" (click)="goToMultiplayer()">group</mat-icon>2
+          spiller
+        </div>
+      </button>
+    </div>
+  </div>
+</div>
