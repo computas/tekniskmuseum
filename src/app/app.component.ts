@@ -15,10 +15,10 @@ export class AppComponent implements OnInit {
   userInactive: Subject<any> = new Subject();
 
   isDialogOpen = false;
-  inactivityTime = 3 * 1000;
+  inactivityTime = 0.5 * 1000;
 
   // constructor(@Inject(MAT_DIALOG_DATA) public data: any, private router: Router, public dialog: MatDialog) {
-  constructor(private router: Router, public dialog: MatDialog) {}
+  constructor(private router: Router, public dialog: MatDialog) { }
 
   ngOnInit(): void {
     this.setDialogTimeout();
@@ -56,9 +56,11 @@ export class AppComponent implements OnInit {
 @Component({
   selector: 'app-idle-timeout-dialog',
   templateUrl: 'idle-timeout-dialog.html',
+  styleUrls: ['./idle-timeout-dialog.scss'],
+
 })
 export class IdleTimeoutDialogComponent implements OnInit, OnDestroy {
-  constructor(private router: Router, private dialogRef: MatDialogRef<IdleTimeoutDialogComponent>) {}
+  constructor(private router: Router, private dialogRef: MatDialogRef<IdleTimeoutDialogComponent>) { }
 
   startTime = 15;
   timer;
