@@ -4,6 +4,8 @@
   </button>
 
   <div class="game-info-text-content">
+    <h1 class="player-mode" *ngIf="isSinglePlayer">En Spiller</h1>
+    <h1 class="player-mode" *ngIf="isMultiPlayer">Fler spiller</h1>
     <div class="game-info-text-content-list">
       <div class="avatar"><img src="../../../assets/avatar-hallo.svg" alt="avatar" /></div>
       <div class="game-info-text-content-list-text">
