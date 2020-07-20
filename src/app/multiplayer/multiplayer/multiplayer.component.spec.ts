@@ -8,9 +8,8 @@ describe('MultiplayerComponent', () => {
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ MultiplayerComponent ]
-    })
-    .compileComponents();
+      declarations: [MultiplayerComponent],
+    }).compileComponents();
   }));
 
   beforeEach(() => {
