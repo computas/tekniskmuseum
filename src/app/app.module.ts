@@ -8,7 +8,7 @@ import { GameModule } from './game/game.module';
 import { HighScoreModule } from './highscore/highscore.module';
 import { MultiplayerComponent } from './multiplayer/multiplayer.component';
 import { LobbyComponent } from './multiplayer/lobby/lobby.component';
-import { GameModeComponent } from './game-mode/game-mode/game-mode.component';
+import { GameModeComponent } from './game-mode/game-mode.component';
 
 @NgModule({
   declarations: [AppComponent, MultiplayerComponent, LobbyComponent, GameModeComponent],
