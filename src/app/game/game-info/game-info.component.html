@@ -4,14 +4,18 @@
   </button>
 
   <div class="game-info-text-content">
+    <h1 class="player-mode" *ngIf="isSinglePlayer">En Spiller</h1>
+    <h1 class="player-mode" *ngIf="isMultiPlayer">Fler spiller</h1>
     <div class="game-info-text-content-list">
       <div class="avatar"><img src="../../../assets/avatar-hallo.svg" alt="avatar" /></div>
       <div class="game-info-text-content-list-text">
-        <h1 class="game-info-text-header">Slik spiller du:</h1>
+        <h1 class="game-info-text-header" *ngIf="isSinglePlayer">Slik spiller du:</h1>
+        <h1 class="game-info-text-header" *ngIf="isMultiPlayer">Slik spiller dere:</h1>
         <ol class="game-info-text-list">
           <li>Tegn ord</li>
           <li>Jeg gjetter</li>
-          <li>Tre runder</li>
+          <li *ngIf="isSinglePlayer">Tre runder</li>
+          <li *ngIf="isMultiPlayer">Best av tre vinner!</li>
         </ol>
       </div>
     </div>

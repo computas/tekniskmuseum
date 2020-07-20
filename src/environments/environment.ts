@@ -4,6 +4,7 @@
 
 export const environment = {
   production: false,
+  WS_ENDPOINT: 'ws://localhost:5000',
 };
 
 /*
