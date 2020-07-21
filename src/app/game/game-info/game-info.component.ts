@@ -3,6 +3,7 @@ import { Router } from '@angular/router';
 import { routes } from '../../shared/models/routes';
 import { SPEECH } from '../../shared/speech-text/text';
 import { SpeechService } from 'src/app/services/speech.service';
+import { MultiplayerService, GAMELEVEL } from 'src/app/multiplayer/services/multiplayer.service';
 
 @Component({
   selector: 'app-game-info',
@@ -14,7 +15,11 @@ export class GameInfoComponent implements OnInit {
   isSinglePlayer = false;
   isMultiPlayer = false;
 
-  constructor(private speechService: SpeechService, private router: Router) {}
+  constructor(
+    private speechService: SpeechService,
+    private router: Router,
+    private multiplayerService: MultiplayerService
+  ) {}
 
   ngOnInit(): void {
     if (this.router.url === `/${routes.SINGLEPLAYER}`) {
@@ -25,7 +30,11 @@ export class GameInfoComponent implements OnInit {
   }
 
   startDrawing() {
-    this.getDrawWord.emit(true);
+    if (this.isSinglePlayer) {
+      this.getDrawWord.emit(true);
+    } else {
+      this.multiplayerService.stateInfo = { ...this.multiplayerService.stateInfo, gameLevel: GAMELEVEL.waitingForWord };
+    }
   }
 
   goToLanding() {
