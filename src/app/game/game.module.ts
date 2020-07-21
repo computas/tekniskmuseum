@@ -17,6 +17,7 @@ import { HighScoreModule } from '../highscore/highscore.module';
     GameResultComponent,
     GameWordToDrawComponent,
   ],
+  exports: [GameInfoComponent],
   imports: [CommonModule, MaterialImportsModule, HighScoreModule],
 })
 export class GameModule {}
