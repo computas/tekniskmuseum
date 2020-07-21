@@ -5,5 +5,5 @@ export const SPEECH = {
   info: 'Slik spiller du: 1. Tegn ord. 2. Jeg gjetter. 3. Få poeng.',
   draw: 'Tegn: ',
   resultWon: 'Hurra, vi klarte det!',
-  resultLoss: 'Beklager, jeg klarte ikke gjette hva du tegnet',
+  resultLoss: 'Beklager, jeg klarte ikke å gjette hva du tegnet',
 };
