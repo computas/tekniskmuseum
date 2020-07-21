@@ -4,7 +4,7 @@ import { routes } from '../../shared/models/routes';
 import { Router } from '@angular/router';
 import { Observable, Subject, BehaviorSubject, Observer } from 'rxjs';
 
-enum GAMELEVEL {
+export enum GAMELEVEL {
   lobby = 'LOBBY',
   drawing = 'DRAWING',
   waitingForWord = 'WAITINGFORWORD',
