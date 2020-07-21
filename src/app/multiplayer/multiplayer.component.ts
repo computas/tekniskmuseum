@@ -12,6 +12,9 @@ export class MultiplayerComponent implements OnInit {
 
   ngOnInit(): void {
     this.gameLevel = this.multiplayerService.stateInfo.gameLevel;
-    console.log(this.multiplayerService.stateInfo);
+    this.multiplayerService.stateInfo$.subscribe((obs) => {
+      console.log('MULTIPLAYER', obs);
+      this.gameLevel = obs.gameLevel;
+    });
   }
 }

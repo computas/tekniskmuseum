@@ -23,7 +23,7 @@ export interface PlayerInfo {
   game_id: string;
 }
 export interface StateInfo {
-  Ready: boolean;
+  ready: boolean;
 }
 @Injectable({
   providedIn: 'root',
@@ -53,9 +53,8 @@ export class MultiplayerService {
     });
     this.webSocketService.listen('state_info').subscribe((data: any) => {
       const el: StateInfo = JSON.parse(data);
-      this.stateInfo.isReady = el.Ready;
-      if (el.Ready) {
-        this.stateInfo.gameLevel = GAMELEVEL.howToPlay;
+      if (el.ready) {
+        this.stateInfo = { ...this.stateInfo, isReady: el.ready, gameLevel: GAMELEVEL.howToPlay };
       }
     });
   }
