@@ -1,5 +1,4 @@
 import { Component, OnInit } from '@angular/core';
-import { MultiplayerService } from './services/multiplayer.service';
 
 @Component({
   selector: 'app-multiplayer',
@@ -7,7 +6,7 @@ import { MultiplayerService } from './services/multiplayer.service';
   styleUrls: ['./multiplayer.component.scss'],
 })
 export class MultiplayerComponent implements OnInit {
-  constructor(private multiplayerService: MultiplayerService) {}
+  constructor() {}
 
   ngOnInit(): void {}
 }

@@ -12,11 +12,11 @@ export class WebSocketService {
   constructor() {
     this.socket = io(environment.WS_ENDPOINT);
 
-    this.socket.on('connect_failed', function () {
+    this.socket.on('connect_failed', () => {
       console.log('Connection Failed');
     });
 
-    this.socket.on('connect', function () {
+    this.socket.on('connect', () => {
       console.log('Connected');
     });
   }

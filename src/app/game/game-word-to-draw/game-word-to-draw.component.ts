@@ -10,7 +10,7 @@ import { Router } from '@angular/router';
   styleUrls: ['./game-word-to-draw.component.scss'],
 })
 export class GameWordToDrawComponent implements OnInit {
-  constructor(private drawingService: DrawingService, private speechService: SpeechService, private router: Router) {}
+  constructor(private drawingService: DrawingService, private speechService: SpeechService) {}
   @Output() drawWord = new EventEmitter();
   word = '';
   guessUsed = 1;

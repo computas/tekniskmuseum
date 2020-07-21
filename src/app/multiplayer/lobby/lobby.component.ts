@@ -1,5 +1,4 @@
 import { Component, OnInit } from '@angular/core';
-import { MultiplayerService } from '../services/multiplayer.service';
 import { WebSocketService } from '../services/web-socket.service';
 import { routes } from '../../shared/models/routes';
 import { Router } from '@angular/router';
