@@ -7,9 +7,10 @@ import { AppComponent, IdleTimeoutDialogComponent } from './app.component';
 import { WelcomeModule } from './welcome/welcome.module';
 import { GameModule } from './game/game.module';
 import { HighScoreModule } from './highscore/highscore.module';
+import { IdleTimeoutComponent } from './idle-timeout/idle-timeout.component';
 
 @NgModule({
-  declarations: [AppComponent],
+  declarations: [AppComponent, IdleTimeoutComponent],
   imports: [
     BrowserModule,
     HttpClientModule,
