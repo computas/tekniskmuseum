@@ -2,10 +2,10 @@
   <div class="waiting-text">
     Venter på spiller 2
   </div>
-  <div *ngIf="multiPlayerService.loading">
+  <div *ngIf="waitingForOtherPlayer">
     <mat-spinner></mat-spinner>
   </div>
-  <div *ngIf="!multiPlayerService.loading">
+  <div *ngIf="!waitingForOtherPlayer">
     <mat-icon class="check-icon" aria-label="Example home icon">done</mat-icon>
   </div>
   <a routerLink="/" routerLinkActive="active">
