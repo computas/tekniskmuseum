@@ -6,7 +6,7 @@ import { MultiplayerService, GAMELEVEL } from './services/multiplayer.service';
   styleUrls: ['./multiplayer.component.scss'],
 })
 export class MultiplayerComponent implements OnInit {
-  gameLevel: GAMELEVEL | undefined;
+  gameLevel: string | undefined;
   GAMELEVEL = GAMELEVEL;
   constructor(private multiplayerService: MultiplayerService) {}
 
