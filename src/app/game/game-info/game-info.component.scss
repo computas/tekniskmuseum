@@ -42,12 +42,10 @@
   width: 80%;
   margin-bottom: 75px;
   justify-content: center;
-  flex-wrap: wrap;
+  flex-wrap: wrap-reverse;
 }
 @media (min-width: 600px) {
   .game-info-footer {
-    width: 80%;
-    margin-bottom: 75px;
     justify-content: space-between;
   }
 }
