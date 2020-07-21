@@ -1,6 +1,6 @@
 <div [ngSwitch]="gameLevel">
   <div *ngSwitchCase="GAMELEVEL.lobby"><app-lobby></app-lobby></div>
   <div *ngSwitchCase="GAMELEVEL.howToPlay"><app-game-info></app-game-info></div>
-  <div *ngSwitchCase="GAMELEVEL.waitingForWord">tester_tester</div>
+  <div *ngSwitchCase="GAMELEVEL.waitingForWord"><app-game-word-to-draw></app-game-word-to-draw></div>
   <div *ngSwitchDefault>Heisann</div>
 </div>
