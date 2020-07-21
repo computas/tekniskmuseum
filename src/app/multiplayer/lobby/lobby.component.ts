@@ -16,7 +16,7 @@ export class LobbyComponent implements OnInit {
   ngOnInit(): void {
     this.multiPlayerService.joinGame();
     this.multiPlayerService.stateInfo$.subscribe((obs) => {
-      if (obs.Ready) {
+      if (obs.isReady) {
         this.waitingForOtherPlayer = false;
       }
     });
