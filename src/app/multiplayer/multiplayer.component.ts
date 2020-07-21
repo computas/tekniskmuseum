@@ -7,6 +7,7 @@ import { MultiplayerService, GAMELEVEL } from './services/multiplayer.service';
 })
 export class MultiplayerComponent implements OnInit {
   gameLevel: GAMELEVEL | undefined;
+  GAMELEVEL = GAMELEVEL;
   constructor(private multiplayerService: MultiplayerService) {}
 
   ngOnInit(): void {
