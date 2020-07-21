@@ -31,23 +31,27 @@ export class GameWordToDrawComponent implements OnInit {
     } else {
       this.isMultiPlayer = true;
     }
-    if (this.drawingService.gameHasStarted) {
-      this.drawingService.getLabel().subscribe((res) => {
-        this.word = res.label;
-        this.loading = false;
-      });
-      this.drawingService.guessUsed$.subscribe((res) => {
-        this.guessUsed = res;
-      });
-    } else {
-      this.drawingService.startGame().subscribe((res) => {
-        this.loading = false;
-        this.word = this.drawingService.label;
-        this.drawingService.gameHasStarted = true;
-      });
-      this.drawingService.guessUsed$.subscribe((res) => {
-        this.guessUsed = res;
-      });
+    if (this.isSinglePlayer) {
+      if (this.drawingService.gameHasStarted) {
+        this.drawingService.getLabel().subscribe((res) => {
+          this.word = res.label;
+          this.loading = false;
+        });
+        this.drawingService.guessUsed$.subscribe((res) => {
+          this.guessUsed = res;
+        });
+      } else {
+        this.drawingService.startGame().subscribe((res) => {
+          this.loading = false;
+          this.word = this.drawingService.label;
+          this.drawingService.gameHasStarted = true;
+        });
+        this.drawingService.guessUsed$.subscribe((res) => {
+          this.guessUsed = res;
+        });
+      }
+    }
+    if (this.isMultiPlayer) {
     }
   }
 
