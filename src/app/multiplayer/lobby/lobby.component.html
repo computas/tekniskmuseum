@@ -6,8 +6,7 @@
     <mat-spinner></mat-spinner>
   </div>
   <div *ngIf="!loading">
-    <p>{{ gameInfo.game_id }}</p>
-    <p>{{ gameInfo.player_id }}</p>
+    <mat-icon class="check-icon" aria-label="Example home icon">done</mat-icon>
   </div>
   <a routerLink="/" routerLinkActive="active">
     <button mat-raised-button class="home-button">
