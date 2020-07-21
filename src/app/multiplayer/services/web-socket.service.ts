@@ -15,9 +15,16 @@ export class WebSocketService {
     this.socket.on('connect_failed', () => {
       console.log('Connection Failed');
     });
+    this.socket.on('connect_error', (error) => {
+      console.error(error);
+    });
 
     this.socket.on('connect', () => {
       console.log('Connected');
+    });
+
+    this.socket.on('disconnect', (reason) => {
+      console.warn('disconnected', reason);
     });
   }
 
