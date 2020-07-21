@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable, BehaviorSubject } from 'rxjs';
 import { tap, switchMap } from 'rxjs/operators';
-import { StartGameToken } from './start-game-token';
+import { StartGamePlayerId } from './start-game-player-id';
 import { GameLabel } from './game-label';
 import { Result } from '../../../shared/models/result.interface';
 import { ResultsMock } from './results.mock';
@@ -14,7 +14,7 @@ import { endpoints } from '../../../shared/models/endpoints';
 export class DrawingService {
   baseUrl = endpoints.TEKNISKBACKEND;
   totalGuess = 3;
-  token = '';
+  playerid = '';
   labels = [];
   label = '';
   gameHasStarted = false;
@@ -75,9 +75,9 @@ export class DrawingService {
   }
 
   startGame(): Observable<GameLabel> {
-    return this.http.get<StartGameToken>(`${this.baseUrl}/${endpoints.STARTGAME}`).pipe(
+    return this.http.get<StartGamePlayerId>(`${this.baseUrl}/${endpoints.STARTGAME}`).pipe(
       switchMap((res) => {
-        this.token = res.token;
+        this.playerid = res.player_id;
         return this.getLabel();
       })
     );
@@ -85,7 +85,7 @@ export class DrawingService {
 
   getLabel(): Observable<GameLabel> {
     return this.http
-      .post<GameLabel>(`${this.baseUrl}/${endpoints.GETLABEL}?token=${this.token}`, {})
+      .post<GameLabel>(`${this.baseUrl}/${endpoints.GETLABEL}?player_id=${this.playerid}`, {})
       .pipe(tap((res) => (this.label = res.label)));
   }
 
