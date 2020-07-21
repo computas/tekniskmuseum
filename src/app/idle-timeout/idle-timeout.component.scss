@@ -1,11 +1,39 @@
-div mat-dialog-content {
+.button {
+    box-shadow: 0 8px 16px 0 rgba(0, 0, 0, 0.1), 0 6px 20px 0 rgba(0, 0, 0, 0.15);
+    font-size: 20px;
     border-radius: 50px;
-}
-
-#test {
+    height: 40px;
+    margin-top: 10px;
+    min-width: 240px;
+    max-width: 400px;
+  }
+  @media (min-width: 600px) {
+    .button {
+      font-size: 30px;
+      height: 60px;
+    }
+  }
+  #get-word-button {
+    background: #fa852f;
+    color: #ffffff;
+    float: right;
+  }
+  @media (min-width: 600px) {
+    #get-word-button {
+      float: right;
+    }
+  }
+  #back-button {
+    background: #f4f4f4;
+    color: #14213d;
+  }
+  .button-text {
     display: flex;
+    flex-direction: row;
+    justify-content: center;
     align-items: center;
-    background-color: #000;
-    width: 250px;
-    height: 250px
-}
+  }
+  .button-icon {
+    color: #14213d;
+    margin-right: 5px;
+  }
