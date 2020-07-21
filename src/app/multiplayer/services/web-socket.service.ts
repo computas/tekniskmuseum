@@ -11,6 +11,14 @@ export class WebSocketService {
 
   constructor() {
     this.socket = io(environment.WS_ENDPOINT);
+
+    this.socket.on('connect_failed', function () {
+      console.log('Connection Failed');
+    });
+
+    this.socket.on('connect', function () {
+      console.log('Connected');
+    });
   }
 
   listen(eventName: string) {
