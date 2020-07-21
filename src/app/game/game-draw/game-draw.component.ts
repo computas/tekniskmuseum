@@ -1,8 +1,8 @@
 import { Component, ElementRef, OnInit, ViewChild, Output, EventEmitter, OnDestroy } from '@angular/core';
 import { BehaviorSubject, Subject, interval, Observable } from 'rxjs';
-import { takeUntil } from 'rxjs/operators';
-import { take } from 'rxjs/operators';
 import { ImageService } from './services/image.service';
+import { Howl } from 'howler';
+import { take, takeUntil } from 'rxjs/operators';
 import { DrawingService } from './services/drawing.service';
 import { StartGameInfo } from './services/start-game-info';
 
@@ -32,8 +32,15 @@ export class GameDrawComponent implements OnInit, OnDestroy {
   isDrawing = false;
   hasLeftCanvas = false;
   timeLeft = 20.0;
-  timeElapsed = 0.0;
 
+  score = 333;
+
+  playTick = false;
+  sound = new Howl({
+    src: ['../../../assets/tick.mp3'],
+  });
+
+  clockColor = 'initial';
   private readonly resultImageSize = 1024;
 
   private readonly LINE_WIDTH = 10;
@@ -45,6 +52,7 @@ export class GameDrawComponent implements OnInit, OnDestroy {
 
   startGameInfo: StartGameInfo;
   guessWord: string;
+  AI_GUESS: string;
 
   constructor(private imageService: ImageService, private drawingService: DrawingService) {}
 
@@ -65,6 +73,7 @@ export class GameDrawComponent implements OnInit, OnDestroy {
   ngOnDestroy(): void {
     this.unsubscribe.next();
     this.unsubscribe.complete();
+    this.sound.stop();
   }
 
   start(e: MouseEvent | TouchEvent) {
@@ -81,6 +90,8 @@ export class GameDrawComponent implements OnInit, OnDestroy {
         this.classify();
       },
       complete: () => {
+        this.clockColor = this.clockColor === 'initial' ? 'final' : 'initial';
+        this.sound.stop();
         this.timeOut = true;
       },
     });
@@ -91,20 +102,62 @@ export class GameDrawComponent implements OnInit, OnDestroy {
 
   private createDrawingTimer() {
     return new Observable((observer) => {
+      let color = 'red';
       interval(100)
         .pipe(take(10 * this.timeLeft), takeUntil(this.unsubscribe))
         .subscribe((tics) => {
           if (!this.drawingService.classificationDone) {
+            this.score = this.score - 1.67336683417;
             if (tics % 10 === 9) {
               this.timeLeft--;
-              this.timeElapsed++;
-              if (this.timeElapsed > 3) {
+              if (this.timeLeft < 17) {
                 observer.next('classify');
               }
+            }
+            if (this.timeLeft <= 5) {
+              this.countDown.nativeElement.style.color = color;
+              color = color === 'white' ? 'red' : 'white';
+              this.playTickSound();
+              this.playTick = true;
             }
           }
         });
     });
+  }
+
+  sortOnCertainty(res) {
+    const arr: any = [];
+    Object.entries(res.certainty).map((keyValue) => {
+      const [label, certainty] = keyValue;
+      arr.push({ label, certainty });
+    });
+    arr.sort((a: any, b: any) => {
+      return b.value - a.value;
+    });
+    if (5 < arr.length) {
+      return arr.slice(0, 5);
+    }
+    return arr;
+  }
+
+  playTickSound() {
+    if (!this.playTick) {
+      this.sound.play();
+    }
+  }
+
+  playResultSound(hasWon: boolean) {
+    if (hasWon) {
+      const sound = new Howl({
+        src: ['../../../assets/win.mp3'],
+      });
+      sound.play();
+    } else {
+      const sound = new Howl({
+        src: ['../../../assets/loss.mp3'],
+      });
+      sound.play();
+    }
   }
 
   classify() {
@@ -114,7 +167,14 @@ export class GameDrawComponent implements OnInit, OnDestroy {
       next: (dataUrl) => {
         const formData: FormData = this.createFormData(dataUrl);
         this.drawingService.classify(formData).subscribe((res) => {
+          const sortedCertaintyArr = this.sortOnCertainty(res);
+          if (sortedCertaintyArr && sortedCertaintyArr.length > 1) {
+            this.AI_GUESS = sortedCertaintyArr[0].label;
+          }
           if (res.roundIsDone) {
+            this.playResultSound(res.hasWon);
+            const score = this.score > 0 ? this.score : 0;
+            this.drawingService.lastResult.score = Math.round(score);
             this.imageService
               .resize(this.canvas.nativeElement.toDataURL('image/png'), croppedCoordinates, this.resultImageSize)
               .subscribe({
@@ -130,8 +190,8 @@ export class GameDrawComponent implements OnInit, OnDestroy {
 
   createFormData(dataUrl): FormData {
     const formData: FormData = this.imageService.createFormData(dataUrl);
-    formData.append('token', this.drawingService.token);
-    formData.append('time', this.timeElapsed.toString());
+    formData.append('player_id', this.drawingService.playerid);
+    formData.append('time', this.timeLeft.toString());
     return formData;
   }
 
@@ -191,6 +251,19 @@ export class GameDrawComponent implements OnInit, OnDestroy {
     }
     if (currentY > this.maxY) {
       this.maxY = currentY;
+    }
+
+    if (this.minX < 0) {
+      this.minX = 0;
+    }
+    if (this.minY < 0) {
+      this.minY = 0;
+    }
+    if (this.maxX > this.canvas.nativeElement.width) {
+      this.maxX = this.canvas.nativeElement.width;
+    }
+    if (this.maxY > this.canvas.nativeElement.height) {
+      this.maxY = this.canvas.nativeElement.height;
     }
   }
 

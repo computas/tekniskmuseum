@@ -1,6 +1,6 @@
-<app-highscore-side-nav [playerScore]="13">
-  <div id="result-container">
-    <h1 id="result-header">Godt Tegnet!</h1>
+<div class="result-container">
+  <h1 id="result-header">Ditt resultat:</h1>
+  <div class="result-section">
     <div id="result-card-container">
       <div id="result-card" *ngFor="let result of results">
         <img
@@ -19,13 +19,23 @@
         </p>
       </div>
     </div>
-    <a href="#"
-      ><button mat-raised-button class="start-new-game-button">
-        <span class="material-icons">
+  </div>
+  <div class="button-footer">
+    <a href="#" class="spacer"
+      ><button mat-raised-button class="btn btn-home">
+        <span class="material-icons icon">
+          home
+        </span>
+        <span class="home-text">Hjem</span>
+      </button></a
+    >
+    <a href="playgame" class="link-float"
+      ><button mat-raised-button class="btn btn-again">
+        <span class="material-icons icon">
           refresh
         </span>
         Spill igjen
       </button></a
     >
   </div>
-</app-highscore-side-nav>
+</div>

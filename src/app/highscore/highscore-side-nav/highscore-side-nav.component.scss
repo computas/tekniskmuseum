@@ -3,6 +3,7 @@
 }
 mat-sidenav {
   width: 30%;
+  background: linear-gradient(to top, #dbf0fd, #e7f3ff, #f1f6ff, #f9faff, #ffffff);
 }
 #highscore-list {
   list-style: none;
@@ -58,9 +59,9 @@ mat-sidenav {
   }
 }
 
-@media only screen and (min-width: 768px) and (max-device-width: 992px) {
+@media only screen and (min-width: 768px) and (max-device-width: 1024px) {
   mat-sidenav {
-    width: 45%;
+    width: 35%;
     display: block;
   }
 }

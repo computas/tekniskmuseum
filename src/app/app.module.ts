@@ -9,18 +9,13 @@ import { GameModule } from './game/game.module';
 import { HighScoreModule } from './highscore/highscore.module';
 import { IdleTimeoutComponent } from './idle-timeout/idle-timeout.component';
 
+import { ServiceWorkerModule } from '@angular/service-worker';
+import { environment } from '../environments/environment';
+
 @NgModule({
-  declarations: [AppComponent, IdleTimeoutComponent],
-  imports: [
-    BrowserModule,
-    HttpClientModule,
-    AppRoutingModule,
-    WelcomeModule,
-    GameModule,
-    HighScoreModule,
-    MatDialogModule,
-  ],
-  providers: [HttpClientModule, IdleTimeoutComponent],
+  declarations: [AppComponent],
+  imports: [BrowserModule, HttpClientModule, AppRoutingModule, WelcomeModule, GameModule, HighScoreModule, ServiceWorkerModule.register('ngsw-worker.js', { enabled: environment.production }), IdleTimeoutComponent],
+  providers: [HttpClientModule],
   bootstrap: [AppComponent],
 })
-export class AppModule {}
+export class AppModule { }

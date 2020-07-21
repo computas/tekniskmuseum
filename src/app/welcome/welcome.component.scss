@@ -18,6 +18,23 @@
     }
   }
 }
+.text-container {
+  display: flex;
+  flex-direction: row;
+}
+.avatar {
+  display: none;
+}
+@media (min-width: 600px) {
+  .avatar {
+    display: block;
+    margin-right: 25px;
+  }
+}
+.avatar-image {
+  height: 250px;
+}
+/*
 .navigation-container {
   display: flex;
   flex-direction: row;
@@ -25,18 +42,25 @@
   align-items: center;
   flex-wrap: wrap;
 }
+*/
 a {
   text-decoration: none;
 }
 .info-text {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  margin-top: 30px;
   color: #ffffff;
   font-size: 24px;
   font-weight: 300;
   line-height: 30px;
-  text-align: center;
 }
 @media (min-width: 600px) {
   .info-text {
+    align-items: flex-start;
+    text-align: left;
     font-size: 40px;
     font-weight: 300;
     line-height: 60px;
@@ -49,27 +73,30 @@ a {
   margin-top: 30px;
   font-size: 20px;
   border-radius: 50px;
-  height: 50px;
-  width: 240px;
+  height: 40px;
+  min-width: 240px;
+  max-width: 400px;
 }
 @media (min-width: 600px) {
   .play-game-button {
-    font-size: 36px;
-    border-radius: 50px;
+    font-size: 32px;
     height: 60px;
-    width: 275px;
+    min-width: 270px;
+    max-width: 400px;
   }
 }
+/*
 .navigation-button {
   border-radius: 50px;
-  color: #195272;
+  color: #14213d;
   box-shadow: 0 8px 16px 0 rgba(0, 0, 0, 0.1), 0 6px 20px 0 rgba(0, 0, 0, 0.15);
   font-size: 18px;
   height: 40px;
-  width: 200px;
-  margin: 5px;
+  min-width: 200px;
+  max-width: 400px;
   margin-top: 10px;
-  margin-bottom: 10px;
+  margin-left: 5px;
+  margin-right: 5px;
 }
 @media (min-width: 600px) {
   .navigation-button {
@@ -79,16 +106,54 @@ a {
     margin: 50px;
   }
 }
+.button-text {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+}
+.button-icon {
+  color: #14213d;
+  margin-right: 5px;
+}*/
 .tts-button {
   top: 0;
   position: absolute;
   right: 0;
   margin: 24px;
+  color: #14213d;
+}
+
+.learn-button {
+  top: 0;
+  position: absolute;
+  left: 0;
+  margin: 24px;
+  margin-top: 30px;
+  box-shadow: 0 8px 16px 0 rgba(0, 0, 0, 0.1), 0 6px 20px 0 rgba(0, 0, 0, 0.15);
+  font-size: 20px;
+  border-radius: 50px;
+  height: 40px;
+  min-width: 200px;
+  max-width: 400px;
+}
+@media (min-width: 600px) {
+  .learn-button {
+    font-size: 24px;
+    height: 50px;
+  }
+}
+.button-text {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+}
+.button-icon {
+  color: #14213d;
+  margin-right: 5px;
 }
 .mat-fab.mat-primary {
   background: #ecf8ff;
-  color: #195272;
-}
-.material-icons {
-  vertical-align: middle;
+  color: #14213d;
 }

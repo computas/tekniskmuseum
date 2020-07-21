@@ -2,29 +2,37 @@
   <div>
     <ng-container *ngIf="result">
       <div class="intermediate-content">
-        <button mat-fab (click)="speakResult()" type="button" value="Play" color="primary" class="tts-button">
-          <mat-icon>volume_up</mat-icon>
-        </button>
-        <div class="word-text" *ngIf="result.hasWon">
-          <h1>{{ wonSentence }}{{ result.word }}</h1>
+        <div class="avatar-container" *ngIf="result.hasWon">
+          <div class="avatar"><img src="../../../assets/avatar-happy.svg" alt="avatar" /></div>
         </div>
-        <div class="word-text" *ngIf="!result.hasWon">
-          <h1>{{ lostSentence }}</h1>
+        <div class="avatar-container" *ngIf="!result.hasWon">
+          <div class="avatar"><img src="../../../assets/avatar-sad.svg" alt="avatar" /></div>
         </div>
-        <div>
-          <img [src]="result.imageData" [className]="result.hasWon ? 'won' : 'loss'" />
+        <div class="intermediate-container">
+          <button mat-fab (click)="speakResult()" type="button" value="Play" color="primary" class="tts-button">
+            <mat-icon>volume_up</mat-icon>
+          </button>
+          <div class="word-text" *ngIf="result.hasWon">
+            <h1>{{ wonSentence }}</h1>
+          </div>
+          <div class="word-text" *ngIf="!result.hasWon">
+            <h1>{{ lostSentence }}</h1>
+          </div>
+          <div class="result-img">
+            <img [src]="result.imageData" [className]="result.hasWon ? 'won' : 'loss'" />
+          </div>
         </div>
+        <div class="avatar-container-spacer"></div>
         <button *ngIf="gameOver" mat-raised-button class="next-word-button" (click)="getSummary()">
-          Vis oppsummering
+          Oppsummering
         </button>
         <button *ngIf="!gameOver" mat-raised-button class="next-word-button" (click)="newDrawing()">
-          NESTE ORD
+          Neste ord
         </button>
       </div>
     </ng-container>
     <ng-template #loading>
-      <mat-spinner [diameter]="50"></mat-spinner>
+      <mat-spinner [diameter]="50" class="white-spinner"></mat-spinner>
     </ng-template>
   </div>
 </div>
-(click)="newDrawing()"

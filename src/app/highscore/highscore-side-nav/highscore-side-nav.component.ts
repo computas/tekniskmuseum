@@ -9,7 +9,10 @@ import { Highscore, HighScoreService } from 'src/app/services/highscore.service'
 export class HighScoreSideNavComponent implements OnInit {
   opened = true;
   highscores: Highscore[];
+  totalHighScores: Highscore[];
+  dailyHighScores: Highscore[];
   value = '';
+  loading = true;
   hasSubmit = false;
 
   @Input()
@@ -17,16 +20,28 @@ export class HighScoreSideNavComponent implements OnInit {
   constructor(private highscoreService: HighScoreService) {}
 
   ngOnInit(): void {
+    /*this.highscoreService.getAllHighScores().subscribe((res) => {
+      this.totalHighScores = res.total;
+      this.loading = false;
+      this.dailyHighScores = res.daily;
+    });
     this.highscoreService.getHighScoresFiltered(this.playerScore).subscribe((res) => {
       this.highscores = res;
+    });*/
+    this.highscoreService.get().subscribe((res) => {
+      this.dailyHighScores = res;
+      this.loading = false;
     });
   }
-
   click() {
+    this.highscoreService.submitHighScore = { name: this.value, submit: true };
+
+    /*
     const player = this.highscoreService.findScoreOfNewUser();
     if (player) {
       player.name = this.value;
     }
+    */
     this.hasSubmit = true;
   }
 }

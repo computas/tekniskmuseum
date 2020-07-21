@@ -15,31 +15,61 @@
   font-size: 2em;
   font-style: italic;
 }
+.word-text {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
 .word-draw {
   text-align: center;
-  font-size: 30px;
+  font-size: 24px;
+}
+@media (min-width: 600px) {
+  .word-draw {
+    font-size: 34px;
+  }
 }
 .word-to-guess {
   color: #fa852f;
+  font-size: 34px;
+}
+@media (min-width: 600px) {
+  .word-to-guess {
+    font-size: 52px;
+  }
 }
 .draw-word-button {
-  position: absolute;
-  bottom: 65px;
-  right: 65px;
   background: #ffffff;
   color: #264d56;
   box-shadow: 0 8px 16px 0 rgba(0, 0, 0, 0.1), 0 6px 20px 0 rgba(0, 0, 0, 0.15);
   margin-top: 30px;
   font-size: 20px;
   border-radius: 50px;
-  height: 50px;
-  width: 240px;
+  height: 40px;
+  min-width: 240px;
+  max-width: 400px;
 }
 @media (min-width: 600px) {
   .draw-word-button {
     font-size: 36px;
     height: 60px;
-    width: 275px;
+    position: absolute;
+    bottom: 65px;
+    right: 65px;
+  }
+}
+.avatar {
+  display: none;
+}
+@media (min-width: 600px) {
+  .avatar {
+    display: block;
+    margin-right: 10px;
+    bottom: 0;
+    position: absolute;
+    left: 0;
+    margin: 65px;
   }
 }
 .tts-button {
@@ -50,7 +80,7 @@
 }
 .mat-fab.mat-primary {
   background: #ecf8ff;
-  color: #195272;
+  color: #14213d;
 }
 h1 {
   font-size: 5em;
