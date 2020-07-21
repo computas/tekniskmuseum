@@ -1,7 +1,8 @@
-import { Component, HostListener, OnInit, OnDestroy } from '@angular/core';
+import { Component, HostListener, OnInit } from '@angular/core';
 import { Subject } from 'rxjs';
 import { Router } from '@angular/router';
-import { MatDialog, MatDialogRef } from '@angular/material/dialog';
+import { MatDialog } from '@angular/material/dialog';
+import { IdleTimeoutComponent } from './idle-timeout/idle-timeout.component';
 
 @Component({
   selector: 'app-root',
@@ -32,7 +33,7 @@ export class AppComponent implements OnInit {
   openDialog() {
     if (!this.isDialogOpen) {
       this.dialog
-        .open(IdleTimeoutDialogComponent)
+        .open(IdleTimeoutComponent)
         .afterClosed()
         .subscribe(() => {
           this.isDialogOpen = false;
@@ -53,46 +54,46 @@ export class AppComponent implements OnInit {
   }
 }
 
-@Component({
-  selector: 'app-idle-timeout-dialog',
-  templateUrl: 'idle-timeout-dialog.html',
-  styleUrls: ['./idle-timeout-dialog.scss'],
+// @Component({
+//   selector: 'app-idle-timeout-dialog',
+//   templateUrl: 'idle-timeout-dialog.html',
+//   styleUrls: ['./idle-timeout-dialog.scss'],
 
-})
-export class IdleTimeoutDialogComponent implements OnInit, OnDestroy {
-  constructor(private router: Router, private dialogRef: MatDialogRef<IdleTimeoutDialogComponent>) { }
+// })
+// export class IdleTimeoutDialogComponent implements OnInit, OnDestroy {
+//   constructor(private router: Router, private dialogRef: MatDialogRef<IdleTimeoutDialogComponent>) { }
 
-  startTime = 15;
-  timer;
-  countdown;
+//   startTime = 15;
+//   timer;
+//   countdown;
 
-  ngOnInit(): void {
-    this.timer = this.startTime;
-    this.countdown = setInterval(() => {
-      this.timer -= 1;
-      if (this.timer === 0) {
-        this.resetTimer();
-        this.goHome();
-      }
-    }, 1000);
-  }
+//   ngOnInit(): void {
+//     this.timer = this.startTime;
+//     this.countdown = setInterval(() => {
+//       this.timer -= 1;
+//       if (this.timer === 0) {
+//         this.resetTimer();
+//         this.goHome();
+//       }
+//     }, 1000);
+//   }
 
-  goHome() {
-    this.closeDialog();
-    this.router.navigateByUrl('');
-  }
+//   goHome() {
+//     this.closeDialog();
+//     this.router.navigateByUrl('');
+//   }
 
-  closeDialog() {
-    clearInterval(this.countdown);
-    this.dialogRef.close();
-  }
+//   closeDialog() {
+//     clearInterval(this.countdown);
+//     this.dialogRef.close();
+//   }
 
-  resetTimer() {
-    clearInterval(this.countdown);
-    this.timer = this.startTime;
-  }
+//   resetTimer() {
+//     clearInterval(this.countdown);
+//     this.timer = this.startTime;
+//   }
 
-  ngOnDestroy(): void {
-    this.resetTimer();
-  }
-}
+//   ngOnDestroy(): void {
+//     this.resetTimer();
+//   }
+// }
