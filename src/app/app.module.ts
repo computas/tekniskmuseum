@@ -10,10 +10,12 @@ import { WelcomeModule } from './welcome/welcome.module';
 import { GameModule } from './game/game.module';
 import { HighScoreModule } from './highscore/highscore.module';
 import { environment } from '../environments/environment';
+import { MaterialImportsModule } from './shared/material-imports/material-imports.module';
+import { IdleTimeoutComponent } from './idle-timeout/idle-timeout.component';
 
 @NgModule({
-  declarations: [AppComponent],
-  imports: [BrowserModule, HttpClientModule, AppRoutingModule, WelcomeModule, GameModule, HighScoreModule, ServiceWorkerModule.register('ngsw-worker.js', { enabled: environment.production }), MatDialogModule],
+  declarations: [AppComponent, IdleTimeoutComponent],
+  imports: [BrowserModule, HttpClientModule, AppRoutingModule, WelcomeModule, GameModule, HighScoreModule, ServiceWorkerModule.register('ngsw-worker.js', { enabled: environment.production }), MatDialogModule, MaterialImportsModule],
   providers: [HttpClientModule],
   bootstrap: [AppComponent],
 })

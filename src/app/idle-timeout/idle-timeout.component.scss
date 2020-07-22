@@ -1,3 +1,5 @@
+@import url('https://fonts.googleapis.com/icon?family=Material+Icons');
+
 .cdk-overlay-backdrop.cdk-overlay-dark-backdrop.cdk-overlay-backdrop-showing {
   background: rgba(20, 33, 61, 0.8);
 }
@@ -13,16 +15,20 @@
 }
 
 .content {
-  left: 50%;
-  top: 10%;
-
+  display: flex;
+  justify-content: center;
   width: 646px;
+  height: 50px;
+  font-size: 27px;
+  p {
+    padding: 5px;
+  }
 }
 
 .actions {
   width: inherit;
-
   display: flex;
+  flex-direction: row-reverse;
   align-items: center;
   justify-content: space-between;
 }
@@ -33,9 +39,10 @@
   border-radius: 50px;
   height: 40px;
   margin-top: 10px;
-  min-width: 240px;
-  max-width: 400px;
+  min-width: 306px;
   border-style: none;
+  background: #f4f4f4;
+  color: #14213d;
 }
 
 @media (min-width: 600px) {
@@ -45,7 +52,7 @@
   }
 }
 
-#home-button {
-  background: #f4f4f4;
+.button-icon {
   color: #14213d;
+  margin-right: 5px;
 }

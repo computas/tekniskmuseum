@@ -13,7 +13,7 @@ import { ViewEncapsulation } from '@angular/core'
 export class IdleTimeoutComponent implements OnInit, OnDestroy {
   constructor(private router: Router, private dialogRef: MatDialogRef<IdleTimeoutComponent>) { }
 
-  startTime = 1500;
+  startTime = 15;
   timer;
   countdown;
 
