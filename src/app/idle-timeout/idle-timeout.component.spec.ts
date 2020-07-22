@@ -4,7 +4,6 @@ import { MatDialogRef } from '@angular/material/dialog';
 
 import { IdleTimeoutComponent } from './idle-timeout.component';
 
-
 describe('IdleTimeoutComponent', () => {
   let component: IdleTimeoutComponent;
   let fixture: ComponentFixture<IdleTimeoutComponent>;
@@ -13,11 +12,8 @@ describe('IdleTimeoutComponent', () => {
     TestBed.configureTestingModule({
       declarations: [IdleTimeoutComponent],
       imports: [RouterTestingModule],
-      providers: [
-        { provide: MatDialogRef, useValue: {} },
-      ]
-    })
-      .compileComponents();
+      providers: [{ provide: MatDialogRef, useValue: {} }],
+    }).compileComponents();
   }));
 
   beforeEach(() => {

@@ -15,8 +15,18 @@ import { IdleTimeoutComponent } from './idle-timeout/idle-timeout.component';
 
 @NgModule({
   declarations: [AppComponent, IdleTimeoutComponent],
-  imports: [BrowserModule, HttpClientModule, AppRoutingModule, WelcomeModule, GameModule, HighScoreModule, ServiceWorkerModule.register('ngsw-worker.js', { enabled: environment.production }), MatDialogModule, MaterialImportsModule],
+  imports: [
+    BrowserModule,
+    HttpClientModule,
+    AppRoutingModule,
+    WelcomeModule,
+    GameModule,
+    HighScoreModule,
+    ServiceWorkerModule.register('ngsw-worker.js', { enabled: environment.production }),
+    MatDialogModule,
+    MaterialImportsModule,
+  ],
   providers: [HttpClientModule],
   bootstrap: [AppComponent],
 })
-export class AppModule { }
+export class AppModule {}
