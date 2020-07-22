@@ -59,6 +59,18 @@ export class MultiplayerService {
     });
   }
 
+  newRound() {
+    this.webSocketService.emit('newRound', { game_id: this.stateInfo.game_id });
+    this.webSocketService.listen('player_info').subscribe((data: any) => {
+      const el: PlayerInfo = JSON.parse(data);
+      console.log('PlayerInfo', el);
+    });
+    this.webSocketService.listen('state_info').subscribe((data: any) => {
+      const el: StateInfo = JSON.parse(data);
+      console.log('state_info', el);
+    });
+  }
+
   get stateInfo(): GameState {
     return this._stateInfo.getValue();
   }
