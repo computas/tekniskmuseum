@@ -4,6 +4,7 @@ import { SPEECH } from 'src/app/shared/speech-text/text';
 import { SpeechService } from 'src/app/services/speech.service';
 import { Router } from '@angular/router';
 import { routes } from 'src/app/shared/models/routes';
+import { MultiplayerService } from 'src/app/multiplayer/services/multiplayer.service';
 
 @Component({
   selector: 'app-game-word-to-draw',
@@ -11,7 +12,12 @@ import { routes } from 'src/app/shared/models/routes';
   styleUrls: ['./game-word-to-draw.component.scss'],
 })
 export class GameWordToDrawComponent implements OnInit {
-  constructor(private drawingService: DrawingService, private speechService: SpeechService, private router: Router) {}
+  constructor(
+    private drawingService: DrawingService,
+    private speechService: SpeechService,
+    private multiplayerService: MultiplayerService,
+    private router: Router
+  ) {}
   isSinglePlayer = false;
   isMultiPlayer = false;
   @Output() drawWord = new EventEmitter();
