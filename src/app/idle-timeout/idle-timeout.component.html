@@ -1,10 +1,5 @@
 <div mat-dialog-content class="content">Spillet vil automatisk avslutte om {{ timer }} sekunder</div>
 <div mat-dialog-actions class="actions">
-  <button mat-button mat-dialog-close (click)="goHome()">Avslutt nå</button>
-  <!-- <button mat-raised-button class="button" id="back-button" (click)="goToLanding()">
-    <div class="button-text">
-      <mat-icon class="button-icon" aria-label="Example home icon">home</mat-icon>Tilbake
-    </div>
-  </button> -->
-  <button mat-button mat-dialog-close (click)="closeDialog()">Bli værende</button>
+  <button mat-raised-button class="button" id="home-button" (click)="goHome()">Avslutt nå</button>
+  <button mat-raised-button class="button" id="stay-button" (click)="closeDialog()">Bli værende</button>
 </div>
