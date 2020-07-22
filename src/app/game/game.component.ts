@@ -1,10 +1,35 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
+import { trigger, state, style, animate, transition } from '@angular/animations';
+
 import { DrawingService } from './game-draw/services/drawing.service';
 
 @Component({
   selector: 'app-game',
   templateUrl: './game.component.html',
   styleUrls: ['./game.component.scss'],
+  animations: [
+    trigger(
+      'inOutAnimation',
+      [
+        transition(
+          ':enter',
+          [
+            style({ opacity: 0 }),
+            animate('1s ease-out',
+              style({ opacity: 1 }))
+          ]
+        ),
+        transition(
+          ':leave',
+          [
+            style({ height: 300, opacity: 1 }),
+            animate('10000s ease-in',
+              style({ height: 0, opacity: 0 }))
+          ]
+        )
+      ]
+    )
+  ]
 })
 export class GameComponent implements OnInit, OnDestroy {
   newGame = false;
@@ -14,7 +39,7 @@ export class GameComponent implements OnInit, OnDestroy {
   showFinalResult = false;
   showWordToDraw = false;
 
-  constructor(private drawingService: DrawingService) {}
+  constructor(private drawingService: DrawingService) { }
 
   ngOnDestroy(): void {
     this.clearGameState();
