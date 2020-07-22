@@ -9,6 +9,7 @@ export enum GAMELEVEL {
   howToPlay = 'HOWTOPLAY',
 }
 export interface GameState {
+  player: string | undefined;
   player_id: string | undefined;
   game_id: string | undefined;
   isReady: boolean | undefined;
@@ -17,6 +18,7 @@ export interface GameState {
 }
 
 export interface PlayerInfo {
+  player: string;
   player_id: string;
   game_id: string;
 }
@@ -29,6 +31,7 @@ export interface StateInfo {
 export class MultiplayerService {
   public loading = true;
   private initialState: GameState = {
+    player: undefined,
     gameLevel: GAMELEVEL.lobby,
     game_id: undefined,
     guessUsed: 0,
@@ -46,10 +49,11 @@ export class MultiplayerService {
     this.webSocketService.emit('joinGame', '');
     this.webSocketService.listen('player_info').subscribe((data: any) => {
       const el: PlayerInfo = JSON.parse(data);
+      this.stateInfo.player = el.player;
       this.stateInfo.game_id = el.player_id;
       this.stateInfo.player_id = el.game_id;
     });
-    this.webSocketService.listen('state_info').subscribe((data: any) => {
+    this.webSocketService.listen('joinGame').subscribe((data: any) => {
       const el: StateInfo = JSON.parse(data);
       if (el.ready) {
         this.stateInfo = { ...this.stateInfo, isReady: el.ready, gameLevel: GAMELEVEL.howToPlay };

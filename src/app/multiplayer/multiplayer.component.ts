@@ -18,7 +18,7 @@ export class MultiplayerComponent implements OnInit, OnDestroy {
     this.multiplayerService.stateInfo$.subscribe((data) => {
       this.gameLevel = data.gameLevel;
     });
-    this.webSocketService.gameOver$.subscribe((data) => {
+    this.webSocketService.playerDisconnected$.subscribe((data) => {
       if (data) {
         window.location.href = this.destination;
       }

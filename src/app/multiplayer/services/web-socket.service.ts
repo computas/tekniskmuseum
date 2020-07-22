@@ -3,47 +3,42 @@ import { Observable, BehaviorSubject } from 'rxjs';
 import * as io from 'socket.io-client';
 import { environment } from '../../../environments/environment';
 
-export interface GameOverData {
-  game_over: boolean | undefined;
-  player_left: string | undefined;
+export interface PlayerDisconnectedData {
+  player_disconnected: boolean | undefined;
 }
 
 @Injectable({
   providedIn: 'root',
 })
 export class WebSocketService {
-  socket: any;
+  socket: SocketIOClient.Socket;
 
-  gameOverData: GameOverData;
+  playerDisconnectedData: PlayerDisconnectedData;
 
-  private readonly _gameOver = new BehaviorSubject<boolean>(false);
-  readonly gameOver$ = this._gameOver.asObservable();
+  private readonly _playerDisconnected = new BehaviorSubject<boolean>(false);
+  readonly playerDisconnected$ = this._playerDisconnected.asObservable();
 
   constructor() {}
 
   startSockets() {
-    console.log('setup');
     this.socket = io(environment.WS_ENDPOINT);
 
     this.socket.on('connect_failed', () => {
-      console.log('Connection Failed');
-    });
-    this.socket.on('connect_error', (error) => {
-      console.error(error);
+      console.error('connect_failed');
     });
 
-    this.socket.on('connect', () => {
-      console.log('Connected');
+    this.socket.on('connect_error', (error) => {
+      console.error(error);
     });
 
     this.socket.on('disconnect', (reason) => {
       console.warn('disconnected', reason);
     });
 
-    this.listen('game_over').subscribe((data: any) => {
-      const el: GameOverData = JSON.parse(data);
-      if (el.game_over) {
-        this.gameOver = true;
+    this.listen('player_disconnected').subscribe((data: any) => {
+      const el: PlayerDisconnectedData = JSON.parse(data);
+      if (el.player_disconnected) {
+        this.playerDisconnected = true;
         this.disconnect();
       }
     });
@@ -65,11 +60,11 @@ export class WebSocketService {
     this.socket.emit(eventName, data);
   }
 
-  get gameOver(): boolean {
-    return this._gameOver.getValue();
+  get playerDisconnected(): boolean {
+    return this._playerDisconnected.getValue();
   }
 
-  set gameOver(val: boolean) {
-    this._gameOver.next(val);
+  set playerDisconnected(val: boolean) {
+    this._playerDisconnected.next(val);
   }
 }
