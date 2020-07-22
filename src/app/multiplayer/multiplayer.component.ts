@@ -15,9 +15,8 @@ export class MultiplayerComponent implements OnInit, OnDestroy {
   ngOnInit(): void {
     this.webSocketService.startSockets();
     this.gameLevel = this.multiplayerService.stateInfo.gameLevel;
-    this.multiplayerService.stateInfo$.subscribe((obs) => {
-      console.log('MULTIPLAYER', obs);
-      this.gameLevel = obs.gameLevel;
+    this.multiplayerService.stateInfo$.subscribe((data) => {
+      this.gameLevel = data.gameLevel;
     });
     this.webSocketService.gameOver$.subscribe((data) => {
       if (data) {
