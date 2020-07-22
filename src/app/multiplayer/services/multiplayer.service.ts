@@ -46,6 +46,9 @@ export class MultiplayerService {
 
   joinGame() {
     this.webSocketService.emit('joinGame', '');
+    this.webSocketService.listen('joinGame').subscribe((data) => {
+      console.log('joingame', data);
+    });
     this.webSocketService.listen('player_info').subscribe((data: any) => {
       const el: PlayerInfo = JSON.parse(data);
       this.stateInfo.game_id = el.player_id;
@@ -60,7 +63,9 @@ export class MultiplayerService {
   }
 
   newRound() {
-    this.webSocketService.emit('newRound', { game_id: this.stateInfo.game_id });
+    console.log(this.stateInfo.game_id);
+    const response = this.webSocketService.emit('newRound', JSON.stringify({ game_id: this.stateInfo.game_id }));
+    console.log('emitted', response);
     this.webSocketService.listen('player_info').subscribe((data: any) => {
       const el: PlayerInfo = JSON.parse(data);
       console.log('PlayerInfo', el);

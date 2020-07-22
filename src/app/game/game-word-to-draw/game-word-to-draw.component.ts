@@ -52,6 +52,8 @@ export class GameWordToDrawComponent implements OnInit {
       }
     }
     if (this.isMultiPlayer) {
+      console.log('starting new round');
+      this.multiplayerService.newRound();
     }
   }
 
