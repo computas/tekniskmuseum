@@ -1,20 +1,32 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, OnDestroy } from '@angular/core';
 import { MultiplayerService, GAMELEVEL } from './services/multiplayer.service';
+import { WebSocketService } from './services/web-socket.service';
 @Component({
   selector: 'app-multiplayer',
   templateUrl: './multiplayer.component.html',
   styleUrls: ['./multiplayer.component.scss'],
 })
-export class MultiplayerComponent implements OnInit {
+export class MultiplayerComponent implements OnInit, OnDestroy {
   gameLevel: string | undefined;
   GAMELEVEL = GAMELEVEL;
-  constructor(private multiplayerService: MultiplayerService) {}
+  constructor(private multiplayerService: MultiplayerService, private webSocketService: WebSocketService) {}
+  destination = '/';
 
   ngOnInit(): void {
+    this.webSocketService.startSockets();
     this.gameLevel = this.multiplayerService.stateInfo.gameLevel;
     this.multiplayerService.stateInfo$.subscribe((obs) => {
       console.log('MULTIPLAYER', obs);
       this.gameLevel = obs.gameLevel;
     });
+    this.webSocketService.gameOver$.subscribe((data) => {
+      if (data) {
+        window.location.href = this.destination;
+      }
+    });
+  }
+
+  ngOnDestroy(): void {
+    this.webSocketService.disconnect();
   }
 }

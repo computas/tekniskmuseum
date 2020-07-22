@@ -1,7 +1,12 @@
 import { Injectable } from '@angular/core';
-import { Observable } from 'rxjs';
+import { Observable, BehaviorSubject } from 'rxjs';
 import * as io from 'socket.io-client';
 import { environment } from '../../../environments/environment';
+
+export interface GameOverData {
+  game_over: boolean | undefined;
+  player_left: string | undefined;
+}
 
 @Injectable({
   providedIn: 'root',
@@ -9,7 +14,15 @@ import { environment } from '../../../environments/environment';
 export class WebSocketService {
   socket: any;
 
-  constructor() {
+  gameOverData: GameOverData;
+
+  private readonly _gameOver = new BehaviorSubject<boolean>(false);
+  readonly gameOver$ = this._gameOver.asObservable();
+
+  constructor() {}
+
+  startSockets() {
+    console.log('setup');
     this.socket = io(environment.WS_ENDPOINT);
 
     this.socket.on('connect_failed', () => {
@@ -26,6 +39,19 @@ export class WebSocketService {
     this.socket.on('disconnect', (reason) => {
       console.warn('disconnected', reason);
     });
+
+    this.listen('game_over').subscribe((data: any) => {
+      const el: GameOverData = JSON.parse(data);
+      if (el.game_over) {
+        this.gameOver = true;
+        this.disconnect();
+      }
+      console.log('game over', el);
+    });
+  }
+
+  disconnect() {
+    this.socket.disconnect();
   }
 
   listen(eventName: string) {
@@ -38,5 +64,13 @@ export class WebSocketService {
 
   emit(eventName: string, data: any) {
     this.socket.emit(eventName, data);
+  }
+
+  get gameOver(): boolean {
+    return this._gameOver.getValue();
+  }
+
+  set gameOver(val: boolean) {
+    this._gameOver.next(val);
   }
 }
