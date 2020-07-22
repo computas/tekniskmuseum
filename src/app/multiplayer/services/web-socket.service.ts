@@ -46,7 +46,6 @@ export class WebSocketService {
         this.gameOver = true;
         this.disconnect();
       }
-      console.log('game over', el);
     });
   }
 
