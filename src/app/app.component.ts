@@ -16,9 +16,8 @@ export class AppComponent implements OnInit {
   userInactive: Subject<any> = new Subject();
 
   isDialogOpen = false;
-  inactivityTime = 0.5 * 1000;
+  inactivityTime = 0.1 * 1000;
 
-  // constructor(@Inject(MAT_DIALOG_DATA) public data: any, private router: Router, public dialog: MatDialog) {
   constructor(private router: Router, public dialog: MatDialog) { }
 
   ngOnInit(): void {
@@ -53,47 +52,3 @@ export class AppComponent implements OnInit {
     this.setDialogTimeout();
   }
 }
-
-// @Component({
-//   selector: 'app-idle-timeout-dialog',
-//   templateUrl: 'idle-timeout-dialog.html',
-//   styleUrls: ['./idle-timeout-dialog.scss'],
-
-// })
-// export class IdleTimeoutDialogComponent implements OnInit, OnDestroy {
-//   constructor(private router: Router, private dialogRef: MatDialogRef<IdleTimeoutDialogComponent>) { }
-
-//   startTime = 15;
-//   timer;
-//   countdown;
-
-//   ngOnInit(): void {
-//     this.timer = this.startTime;
-//     this.countdown = setInterval(() => {
-//       this.timer -= 1;
-//       if (this.timer === 0) {
-//         this.resetTimer();
-//         this.goHome();
-//       }
-//     }, 1000);
-//   }
-
-//   goHome() {
-//     this.closeDialog();
-//     this.router.navigateByUrl('');
-//   }
-
-//   closeDialog() {
-//     clearInterval(this.countdown);
-//     this.dialogRef.close();
-//   }
-
-//   resetTimer() {
-//     clearInterval(this.countdown);
-//     this.timer = this.startTime;
-//   }
-
-//   ngOnDestroy(): void {
-//     this.resetTimer();
-//   }
-// }

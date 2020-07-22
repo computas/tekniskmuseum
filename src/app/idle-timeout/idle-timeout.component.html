@@ -1,10 +1,10 @@
-<div mat-dialog-content>Returnerer hjem om {{ timer }} sekunder</div>
-<div mat-dialog-actions class="test">
-  <!-- <button mat-button mat-dialog-close (click)="goHome()">Hjem</button> -->
-  <button mat-raised-button class="button" id="back-button" (click)="goToLanding()">
+<div mat-dialog-content class="content">Spillet vil automatisk avslutte om {{ timer }} sekunder</div>
+<div mat-dialog-actions class="actions">
+  <button mat-button mat-dialog-close (click)="goHome()">Avslutt nå</button>
+  <!-- <button mat-raised-button class="button" id="back-button" (click)="goToLanding()">
     <div class="button-text">
       <mat-icon class="button-icon" aria-label="Example home icon">home</mat-icon>Tilbake
     </div>
-  </button>
+  </button> -->
   <button mat-button mat-dialog-close (click)="closeDialog()">Bli værende</button>
 </div>

@@ -1,16 +1,19 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
 import { Router } from '@angular/router';
 import { MatDialogRef } from '@angular/material/dialog';
+import { ViewEncapsulation } from '@angular/core'
 
 @Component({
   selector: 'app-idle-timeout',
   templateUrl: './idle-timeout.component.html',
-  styleUrls: ['./idle-timeout.component.scss']
+  styleUrls: ['./idle-timeout.component.scss'],
+  encapsulation: ViewEncapsulation.None
+
 })
 export class IdleTimeoutComponent implements OnInit, OnDestroy {
   constructor(private router: Router, private dialogRef: MatDialogRef<IdleTimeoutComponent>) { }
 
-  startTime = 15;
+  startTime = 1500;
   timer;
   countdown;
 
