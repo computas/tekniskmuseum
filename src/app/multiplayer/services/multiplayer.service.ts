@@ -47,6 +47,9 @@ export class MultiplayerService {
 
   joinGame() {
     this.webSocketService.emit('joinGame', '');
+    this.webSocketService.listen('joinGame').subscribe((data) => {
+      console.log('joingame', data);
+    });
     this.webSocketService.listen('player_info').subscribe((data: any) => {
       const el: PlayerInfo = JSON.parse(data);
       this.stateInfo.player = el.player;
@@ -58,6 +61,20 @@ export class MultiplayerService {
       if (el.ready) {
         this.stateInfo = { ...this.stateInfo, isReady: el.ready, gameLevel: GAMELEVEL.howToPlay };
       }
+    });
+  }
+
+  newRound() {
+    console.log(this.stateInfo.game_id);
+    const response = this.webSocketService.emit('newRound', JSON.stringify({ game_id: this.stateInfo.game_id }));
+    console.log('emitted', response);
+    this.webSocketService.listen('player_info').subscribe((data: any) => {
+      const el: PlayerInfo = JSON.parse(data);
+      console.log('PlayerInfo', el);
+    });
+    this.webSocketService.listen('state_info').subscribe((data: any) => {
+      const el: StateInfo = JSON.parse(data);
+      console.log('state_info', el);
     });
   }
 
