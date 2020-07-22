@@ -1,6 +1,9 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
+import { RouterTestingModule } from '@angular/router/testing';
+import { MatDialogRef } from '@angular/material/dialog';
 
 import { IdleTimeoutComponent } from './idle-timeout.component';
+
 
 describe('IdleTimeoutComponent', () => {
   let component: IdleTimeoutComponent;
@@ -8,9 +11,13 @@ describe('IdleTimeoutComponent', () => {
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ IdleTimeoutComponent ]
+      declarations: [IdleTimeoutComponent],
+      imports: [RouterTestingModule],
+      providers: [
+        { provide: MatDialogRef, useValue: {} },
+      ]
     })
-    .compileComponents();
+      .compileComponents();
   }));
 
   beforeEach(() => {

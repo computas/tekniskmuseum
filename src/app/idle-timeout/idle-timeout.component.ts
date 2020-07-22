@@ -1,7 +1,8 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
 import { Router } from '@angular/router';
 import { MatDialogRef } from '@angular/material/dialog';
-import { ViewEncapsulation } from '@angular/core'
+import { ViewEncapsulation } from '@angular/core';
+
 
 @Component({
   selector: 'app-idle-timeout',
