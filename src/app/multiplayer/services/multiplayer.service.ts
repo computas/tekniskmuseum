@@ -1,8 +1,6 @@
 import { Injectable } from '@angular/core';
 import { WebSocketService } from './web-socket.service';
-import { routes } from '../../shared/models/routes';
-import { Router } from '@angular/router';
-import { Observable, Subject, BehaviorSubject, Observer } from 'rxjs';
+import { BehaviorSubject } from 'rxjs';
 
 export enum GAMELEVEL {
   lobby = 'LOBBY',
@@ -42,7 +40,7 @@ export class MultiplayerService {
 
   readonly stateInfo$ = this._stateInfo.asObservable();
 
-  constructor(private webSocketService: WebSocketService, private router: Router) {}
+  constructor(private webSocketService: WebSocketService) {}
 
   joinGame() {
     this.webSocketService.emit('joinGame', '');
