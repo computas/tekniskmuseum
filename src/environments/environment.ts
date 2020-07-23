@@ -4,7 +4,7 @@
 
 export const environment = {
   production: false,
-  WS_ENDPOINT: 'ws://localhost:5000',
+  WS_ENDPOINT: 'ws://tekniskback-mp.azurewebsites.net',
 };
 
 /*

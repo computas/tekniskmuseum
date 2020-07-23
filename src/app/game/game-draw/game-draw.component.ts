@@ -6,6 +6,7 @@ import { take, takeUntil } from 'rxjs/operators';
 import { DrawingService } from './services/drawing.service';
 import { StartGameInfo } from './services/start-game-info';
 import { MultiplayerService, GAMELEVEL } from 'src/app/multiplayer/services/multiplayer.service';
+import { Result } from 'src/app/shared/models/result.interface';
 
 @Component({
   selector: 'app-drawing',
@@ -78,8 +79,10 @@ export class GameDrawComponent implements OnInit, OnDestroy {
         if (sortedCertaintyArr && sortedCertaintyArr.length > 1) {
           this.AI_GUESS = sortedCertaintyArr[0].label;
         }
+        console.log('prediction', prediction);
         if (prediction.hasWon) {
-          this.hasWonFunction();
+          console.log('HASWON');
+          this.hasWonFunction(prediction);
           this.multiplayerService.stateInfo = {
             ...this.multiplayerService.stateInfo,
             gameLevel: GAMELEVEL.intermediateResult,
@@ -93,11 +96,45 @@ export class GameDrawComponent implements OnInit, OnDestroy {
     this.startGame();
   }
 
-  hasWonFunction() {
+  hasWonFunction(prediction) {
     this.playResultSound(true);
-    const score = this.score > 0 ? this.score : 0;
-    this.drawingService.lastResult.score = Math.round(score);
+    const obj: Result = {
+      hasWon: true,
+      guess: prediction.guess,
+      imageData: '',
+      gameState: 'Done',
+      score: this.getScore(),
+      word: this.guessWord,
+    };
+    console.log('hasWonFunction');
+    this.createResultAndResize(obj);
+  }
+
+  hasLossFunction() {
+    const obj: Result = {
+      hasWon: false,
+      guess: '',
+      imageData: '',
+      gameState: 'Done',
+      score: 0,
+      word: this.guessWord,
+    };
+    console.log('hasLossfunction');
+    this.createResultAndResize(obj);
+  }
+  createResultAndResize(obj) {
+    const result: Result = this.drawingService.createResult(obj);
+    this.drawingService.addResult(result);
     const croppedCoordinates: any = this.imageService.crop(this.minX, this.minY, this.maxX, this.maxY, this.LINE_WIDTH);
+    this.resizeImage(croppedCoordinates);
+  }
+
+  getScore() {
+    const score = this.score > 0 ? this.score : 0;
+    return Math.round(score);
+  }
+
+  resizeImage(croppedCoordinates) {
     this.imageService
       .resize(this.canvas.nativeElement.toDataURL('image/png'), croppedCoordinates, this.resultImageSize)
       .subscribe({
@@ -136,6 +173,9 @@ export class GameDrawComponent implements OnInit, OnDestroy {
         this.timeOut = true;
         if (this.multiplayerService.isMultiplayer) {
           console.warn('GAME IS OVER');
+          console.warn(this.timeLeft);
+          this.classifyMultiplayer();
+          this.hasLossFunction();
           this.multiplayerService.stateInfo = {
             ...this.multiplayerService.stateInfo,
             gameLevel: GAMELEVEL.intermediateResult,
