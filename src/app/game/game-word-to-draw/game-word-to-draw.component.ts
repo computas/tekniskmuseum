@@ -52,7 +52,9 @@ export class GameWordToDrawComponent implements OnInit {
       }
     }
     if (this.isMultiPlayer) {
-      this.multiplayerService.getLabel();
+      this.multiplayerService.getLabel().subscribe((label) => {
+        this.word = label;
+      });
     }
   }
 

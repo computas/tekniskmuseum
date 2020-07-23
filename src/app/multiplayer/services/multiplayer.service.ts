@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 import { WebSocketService } from './web-socket.service';
 import { BehaviorSubject } from 'rxjs';
+import { tap, map } from 'rxjs/operators';
 
 export enum GAMELEVEL {
   lobby = 'LOBBY',
@@ -25,6 +26,7 @@ export interface StateInfo {
 })
 export class MultiplayerService {
   public loading = true;
+  public label = '';
   private initialState: GameState = {
     player_nr: undefined,
     gameLevel: GAMELEVEL.lobby,
@@ -55,7 +57,13 @@ export class MultiplayerService {
 
   getLabel() {
     const response = this.webSocketService.emit('getLabel', JSON.stringify({ game_id: this.stateInfo.game_id }));
-    this.webSocketService.listen('getLabel').subscribe((data: any) => {});
+    return this.webSocketService.listen('getLabel').pipe(
+      map((res: any) => {
+        const data = JSON.parse(res);
+        this.label = data.label;
+        return this.label;
+      })
+    );
   }
 
   get stateInfo(): GameState {
