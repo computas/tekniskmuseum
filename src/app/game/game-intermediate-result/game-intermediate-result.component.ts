@@ -16,7 +16,8 @@ export class GameIntermediateResultComponent implements OnInit {
   gameOver: boolean;
   @Output() nextGuess = new EventEmitter();
   @Output() finalResult = new EventEmitter();
-
+  waitingForPlayer = true;
+  isMultiplayer = true;
   constructor(
     private drawingService: DrawingService,
     private speechService: SpeechService,
@@ -28,6 +29,14 @@ export class GameIntermediateResultComponent implements OnInit {
     this.gameOver = this.drawingService.gameOver;
 
     if (this.multiplayerService.isMultiplayer) {
+      this.isMultiplayer = true;
+      this.multiplayerService.stateInfo$.subscribe((res) => {
+        if (res.ready) {
+          this.waitingForPlayer = false;
+        }
+        console.log('stateChange', res.ready);
+      });
+      console.log('this.multiplayerService.stateInfo.ready', this.multiplayerService.stateInfo.ready);
       this.multiplayerService.getLabel(false).subscribe((res) => {
         if (res) {
           this.multiplayerService.stateInfo = {

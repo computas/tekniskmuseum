@@ -26,8 +26,22 @@
         <button *ngIf="gameOver" mat-raised-button class="next-word-button" (click)="getSummary()">
           Oppsummering
         </button>
-        <button *ngIf="!gameOver" mat-raised-button class="next-word-button" (click)="newDrawing()">
+        <button
+          *ngIf="!gameOver && !waitingForPlayer"
+          mat-raised-button
+          class="next-word-button"
+          (click)="newDrawing()"
+        >
           Neste ord
+        </button>
+        <button
+          *ngIf="!gameOver && isMultiplayer && waitingForPlayer"
+          mat-raised-button
+          disabled
+          class="next-word-button"
+          (click)="newDrawing()"
+        >
+          Venter på spiller
         </button>
       </div>
     </ng-container>
