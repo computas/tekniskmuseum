@@ -3,6 +3,7 @@ import { Result } from '../../shared/models/result.interface';
 import { DrawingService } from '../game-draw/services/drawing.service';
 import { SPEECH } from 'src/app/shared/speech-text/text';
 import { SpeechService } from 'src/app/services/speech.service';
+import { MultiplayerService, GAMELEVEL } from 'src/app/multiplayer/services/multiplayer.service';
 @Component({
   selector: 'app-game-intermediate-result',
   templateUrl: './game-intermediate-result.component.html',
@@ -16,15 +17,29 @@ export class GameIntermediateResultComponent implements OnInit {
   @Output() nextGuess = new EventEmitter();
   @Output() finalResult = new EventEmitter();
 
-  constructor(private drawingService: DrawingService, private speechService: SpeechService) {}
+  constructor(
+    private drawingService: DrawingService,
+    private speechService: SpeechService,
+    private multiplayerService: MultiplayerService
+  ) {}
 
   ngOnInit(): void {
     this.result = this.drawingService.lastResult;
     this.gameOver = this.drawingService.gameOver;
+    if (this.multiplayerService.isMultiplayer) {
+      this.gameOver = this.multiplayerService.stateInfo.guessUsed === this.drawingService.totalGuess;
+    }
   }
 
   newDrawing() {
-    this.nextGuess.next(true);
+    if (this.multiplayerService.isMultiplayer) {
+      this.multiplayerService.stateInfo = {
+        ...this.multiplayerService.stateInfo,
+        gameLevel: GAMELEVEL.waitingForWord,
+      };
+    } else {
+      this.nextGuess.next(true);
+    }
   }
 
   getSummary() {

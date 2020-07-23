@@ -28,6 +28,7 @@ export class MultiplayerService {
   public loading = true;
   public label = '';
   public isMultiplayer = false;
+  roundIsOver = false;
   score = 100;
   name = 'Ole';
   private initialState: GameState = {

@@ -56,6 +56,10 @@ export class GameDrawComponent implements OnInit, OnDestroy {
   guessWord: string;
   AI_GUESS: string;
 
+  prediction: any;
+  result: Result;
+  hasAddedResult = false;
+
   constructor(
     private imageService: ImageService,
     private drawingService: DrawingService,
@@ -63,6 +67,7 @@ export class GameDrawComponent implements OnInit, OnDestroy {
   ) {}
 
   ngOnInit(): void {
+    this.multiplayerService.roundIsOver = false;
     const ctx = this.canvas.nativeElement.getContext('2d');
     if (!ctx) {
       throw new Error('getContext failed');
@@ -76,30 +81,42 @@ export class GameDrawComponent implements OnInit, OnDestroy {
     if (this.multiplayerService.isMultiplayer) {
       this.multiplayerService.predictionListener().subscribe((prediction: any) => {
         const sortedCertaintyArr = this.sortOnCertainty(prediction);
-        console.log('predicton', prediction);
+        let multiplayerGameState = false;
+        this.prediction = prediction;
         if (sortedCertaintyArr && sortedCertaintyArr.length > 1) {
           this.AI_GUESS = sortedCertaintyArr[0].label;
         }
         if (this.timeLeft <= 0) {
-          console.log('hasLoss');
           this.hasLossFunction();
+          multiplayerGameState = true;
+        } else {
+          if (prediction.hasWon) {
+            this.hasWonFunction(prediction);
+
+            multiplayerGameState = true;
+          }
+        }
+        if (multiplayerGameState) {
+          this.drawingService.addResult(this.result);
+          this.hasAddedResult = true;
           this.multiplayerService.stateInfo = {
             ...this.multiplayerService.stateInfo,
             gameLevel: GAMELEVEL.intermediateResult,
           };
-        } else {
-          if (prediction.hasWon) {
-            console.log('HASWON');
-            this.hasWonFunction(prediction);
-            this.multiplayerService.stateInfo = {
-              ...this.multiplayerService.stateInfo,
-              gameLevel: GAMELEVEL.intermediateResult,
-            };
-          }
         }
       });
       this.multiplayerService.roundOverListener().subscribe((roundOver: any) => {
-        console.log('ROUND_OVER', roundOver);
+        if (!this.hasAddedResult) {
+          this.drawingService.addResult(this.result);
+          this.hasAddedResult = true;
+        }
+        const guess = this.multiplayerService.stateInfo.guessUsed;
+        const guessUsed = guess ? guess : 0;
+        this.multiplayerService.stateInfo = {
+          ...this.multiplayerService.stateInfo,
+          guessUsed: guessUsed + 1,
+          gameLevel: GAMELEVEL.intermediateResult,
+        };
       });
     }
     this.startGame();
@@ -133,7 +150,7 @@ export class GameDrawComponent implements OnInit, OnDestroy {
   }
   createResultAndResize(obj) {
     const result: Result = this.drawingService.createResult(obj);
-    this.drawingService.addResult(result);
+    this.result = result;
     const croppedCoordinates: any = this.imageService.crop(this.minX, this.minY, this.maxX, this.maxY, this.LINE_WIDTH);
     this.resizeImage(croppedCoordinates);
   }
@@ -148,7 +165,7 @@ export class GameDrawComponent implements OnInit, OnDestroy {
       .resize(this.canvas.nativeElement.toDataURL('image/png'), croppedCoordinates, this.resultImageSize)
       .subscribe({
         next: (dataUrlHighRes) => {
-          this.drawingService.lastResult.imageData = dataUrlHighRes;
+          this.result.imageData = dataUrlHighRes;
         },
       });
   }
