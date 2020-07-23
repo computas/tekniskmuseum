@@ -27,6 +27,7 @@ export interface StateInfo {
 export class MultiplayerService {
   public loading = true;
   public label = '';
+  public isMultiplayer = false;
   private initialState: GameState = {
     player_nr: undefined,
     gameLevel: GAMELEVEL.lobby,

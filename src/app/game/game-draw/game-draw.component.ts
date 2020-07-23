@@ -5,6 +5,7 @@ import { Howl } from 'howler';
 import { take, takeUntil } from 'rxjs/operators';
 import { DrawingService } from './services/drawing.service';
 import { StartGameInfo } from './services/start-game-info';
+import { MultiplayerService } from 'src/app/multiplayer/services/multiplayer.service';
 
 @Component({
   selector: 'app-drawing',
@@ -54,7 +55,11 @@ export class GameDrawComponent implements OnInit, OnDestroy {
   guessWord: string;
   AI_GUESS: string;
 
-  constructor(private imageService: ImageService, private drawingService: DrawingService) {}
+  constructor(
+    private imageService: ImageService,
+    private drawingService: DrawingService,
+    private multiplayerService: MultiplayerService
+  ) {}
 
   ngOnInit(): void {
     const ctx = this.canvas.nativeElement.getContext('2d');
@@ -67,7 +72,11 @@ export class GameDrawComponent implements OnInit, OnDestroy {
     this.canvas.nativeElement.height = document.body.clientHeight - 100;
     this.resetMinMaxMouseValues();
     this.drawingService.guessDone = false;
-    this.startGame();
+    if (this.multiplayerService.isMultiplayer) {
+      // this.multiplayerService.
+    } else {
+      this.startGame();
+    }
   }
 
   ngOnDestroy(): void {
