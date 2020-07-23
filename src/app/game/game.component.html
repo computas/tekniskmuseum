@@ -1,19 +1,19 @@
 <!-- <div *ngIf="showHowToPlay" [@inOutAnimation]> -->
-<div *ngIf="showHowToPlay">
+<div *ngIf="showHowToPlay" [@enterAnimation]>
   <app-game-info (getDrawWord)="getDrawWord()"></app-game-info>
 </div>
-<div *ngIf="newGame && !showIntermediateResult">
+<div *ngIf="newGame && !showIntermediateResult" [@enterAnimation]>
   <app-drawing></app-drawing>
 </div>
-<div *ngIf="showIntermediateResult">
+<div *ngIf="showIntermediateResult" [@enterAnimation]>
   <app-game-intermediate-result
     (nextGuess)="nextGuess($event)"
     (finalResult)="finalResult($event)"
   ></app-game-intermediate-result>
 </div>
-<div *ngIf="showFinalResult">
+<div *ngIf="showFinalResult" [@enterAnimation]>
   <app-game-result></app-game-result>
 </div>
-<div *ngIf="showWordToDraw">
+<div *ngIf="showWordToDraw" [@enterAnimation]>
   <app-game-word-to-draw (drawWord)="startGame()"></app-game-word-to-draw>
 </div>
