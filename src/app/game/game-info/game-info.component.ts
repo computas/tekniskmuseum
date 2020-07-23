@@ -26,6 +26,14 @@ export class GameInfoComponent implements OnInit {
       this.isSinglePlayer = true;
     } else {
       this.isMultiPlayer = true;
+      this.multiplayerService.getLabel(false).subscribe((res) => {
+        if (res) {
+          this.multiplayerService.stateInfo = {
+            ...this.multiplayerService.stateInfo,
+            gameLevel: GAMELEVEL.waitingForWord,
+          };
+        }
+      });
     }
   }
 
@@ -33,7 +41,7 @@ export class GameInfoComponent implements OnInit {
     if (this.isSinglePlayer) {
       this.getDrawWord.emit(true);
     } else {
-      this.multiplayerService.stateInfo = { ...this.multiplayerService.stateInfo, gameLevel: GAMELEVEL.waitingForWord };
+      this.multiplayerService.getLabel(true);
     }
   }
 

@@ -55,8 +55,10 @@ export class MultiplayerService {
     });
   }
 
-  getLabel() {
-    const response = this.webSocketService.emit('getLabel', JSON.stringify({ game_id: this.stateInfo.game_id }));
+  getLabel(emit = true) {
+    if (emit) {
+      this.webSocketService.emit('getLabel', JSON.stringify({ game_id: this.stateInfo.game_id }));
+    }
     return this.webSocketService.listen('getLabel').pipe(
       map((res: any) => {
         const data = JSON.parse(res);
