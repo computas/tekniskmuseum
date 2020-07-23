@@ -1,4 +1,4 @@
-import { Component, OnInit, EventEmitter, Output } from '@angular/core';
+import { Component, OnInit, EventEmitter, Output, Input, OnChanges, SimpleChanges } from '@angular/core';
 import { Result } from '../../shared/models/result.interface';
 import { DrawingService } from '../game-draw/services/drawing.service';
 import { SPEECH } from 'src/app/shared/speech-text/text';
@@ -27,12 +27,20 @@ export class GameIntermediateResultComponent implements OnInit {
     this.result = this.drawingService.lastResult;
     this.gameOver = this.drawingService.gameOver;
     if (this.multiplayerService.isMultiplayer) {
+      this.multiplayerService.getLabel(false).subscribe((res) => {
+        if (res) {
+          this.multiplayerService.stateInfo = {
+            ...this.multiplayerService.stateInfo,
+            gameLevel: GAMELEVEL.waitingForWord,
+          };
+        }
+      });
       this.gameOver = this.multiplayerService.stateInfo.guessUsed === this.drawingService.totalGuess;
     }
   }
 
   newDrawing() {
-    if (this.multiplayerService.isMultiplayer) {
+    if (this.multiplayerService.isMultiplayer && this.multiplayerService.stateInfo.ready) {
       this.multiplayerService.stateInfo = {
         ...this.multiplayerService.stateInfo,
         gameLevel: GAMELEVEL.waitingForWord,

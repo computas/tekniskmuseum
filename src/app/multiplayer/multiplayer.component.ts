@@ -11,7 +11,6 @@ import { routes } from '../shared/models/routes';
 export class MultiplayerComponent implements OnInit, OnDestroy {
   gameLevel: string | undefined;
   GAMELEVEL = GAMELEVEL;
-  bothPlayersReady = false;
   constructor(
     private multiplayerService: MultiplayerService,
     private webSocketService: WebSocketService,
@@ -26,8 +25,8 @@ export class MultiplayerComponent implements OnInit, OnDestroy {
     this.webSocketService.startSockets();
     this.gameLevel = this.multiplayerService.stateInfo.gameLevel;
     this.multiplayerService.roundOverListener().subscribe((roundOver: any) => {
-      console.warn('round is over multi', roundOver);
       if (roundOver.round_over) {
+        this.multiplayerService.stateInfo = { ...this.multiplayerService.stateInfo, ready: true };
       }
     });
     this.multiplayerService.stateInfo$.subscribe((data) => {

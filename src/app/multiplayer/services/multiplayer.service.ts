@@ -52,7 +52,6 @@ export class MultiplayerService {
       const el: GameState = JSON.parse(data);
       if (el && el.game_id) {
         this.stateInfo = el;
-        console.log(el);
       }
       if (el.ready) {
         this.stateInfo = { ...this.stateInfo, ready: el.ready, gameLevel: GAMELEVEL.howToPlay };

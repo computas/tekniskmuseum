@@ -1,4 +1,4 @@
-import { Component, ElementRef, OnInit, ViewChild, Output, EventEmitter, OnDestroy } from '@angular/core';
+import { Component, ElementRef, OnInit, ViewChild, Output, EventEmitter, OnDestroy, ɵConsole } from '@angular/core';
 import { BehaviorSubject, Subject, interval, Observable } from 'rxjs';
 import { ImageService } from './services/image.service';
 import { Howl } from 'howler';
@@ -72,13 +72,13 @@ export class GameDrawComponent implements OnInit, OnDestroy {
     if (!ctx) {
       throw new Error('getContext failed');
     }
-
     this.ctx = ctx;
     this.canvas.nativeElement.width = this.canvas.nativeElement.parentElement?.offsetWidth || document.body.clientWidth;
     this.canvas.nativeElement.height = document.body.clientHeight - 100;
     this.resetMinMaxMouseValues();
     this.drawingService.guessDone = false;
     if (this.multiplayerService.isMultiplayer) {
+      this.multiplayerService.stateInfo = { ...this.multiplayerService.stateInfo, ready: false };
       this.multiplayerService.predictionListener().subscribe((prediction: any) => {
         const sortedCertaintyArr = this.sortOnCertainty(prediction);
         let multiplayerGameState = false;
@@ -92,7 +92,7 @@ export class GameDrawComponent implements OnInit, OnDestroy {
         } else {
           if (prediction.hasWon) {
             this.hasWonFunction(prediction);
-
+            console.log('haswon');
             multiplayerGameState = true;
           }
         }
@@ -103,13 +103,23 @@ export class GameDrawComponent implements OnInit, OnDestroy {
             ...this.multiplayerService.stateInfo,
             gameLevel: GAMELEVEL.intermediateResult,
           };
+          this.timeLeft = 20;
         }
       });
       this.multiplayerService.roundOverListener().subscribe((roundOver: any) => {
+        console.log('ROUND_OVER', roundOver);
+        this.multiplayerService.roundIsOver = true;
+        console.log('roundOver', this.multiplayerService.roundIsOver);
+        if (this.prediction.hasWon) {
+          this.hasWonFunction(this.prediction);
+        } else {
+          this.hasLossFunction();
+        }
         if (!this.hasAddedResult) {
           this.drawingService.addResult(this.result);
           this.hasAddedResult = true;
         }
+        this.drawingService.guessUsed++;
         const guess = this.multiplayerService.stateInfo.guessUsed;
         const guessUsed = guess ? guess : 0;
         this.multiplayerService.stateInfo = {
