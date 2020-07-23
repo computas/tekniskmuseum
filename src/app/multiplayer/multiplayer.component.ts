@@ -25,6 +25,7 @@ export class MultiplayerComponent implements OnInit, OnDestroy {
     this.webSocketService.startSockets();
     this.gameLevel = this.multiplayerService.stateInfo.gameLevel;
     this.multiplayerService.roundOverListener().subscribe((roundOver: any) => {
+      console.warn('round is over', roundOver);
       if (roundOver.round_over) {
         this.multiplayerService.stateInfo = { ...this.multiplayerService.stateInfo, ready: true };
       }

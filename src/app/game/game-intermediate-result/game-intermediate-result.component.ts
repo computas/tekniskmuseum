@@ -26,6 +26,7 @@ export class GameIntermediateResultComponent implements OnInit {
   ngOnInit(): void {
     this.result = this.drawingService.lastResult;
     this.gameOver = this.drawingService.gameOver;
+
     if (this.multiplayerService.isMultiplayer) {
       this.multiplayerService.getLabel(false).subscribe((res) => {
         if (res) {

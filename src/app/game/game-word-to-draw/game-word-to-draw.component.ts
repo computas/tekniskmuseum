@@ -57,6 +57,7 @@ export class GameWordToDrawComponent implements OnInit {
       }
     }
     if (this.isMultiPlayer) {
+      this.guessUsed = this.drawingService.guessUsed;
       this.multiplayerService.getLabel().subscribe((label) => {
         if (label) {
           this.word = label;
