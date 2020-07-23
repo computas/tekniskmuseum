@@ -5,7 +5,7 @@ import { Howl } from 'howler';
 import { take, takeUntil } from 'rxjs/operators';
 import { DrawingService } from './services/drawing.service';
 import { StartGameInfo } from './services/start-game-info';
-import { MultiplayerService } from 'src/app/multiplayer/services/multiplayer.service';
+import { MultiplayerService, GAMELEVEL } from 'src/app/multiplayer/services/multiplayer.service';
 
 @Component({
   selector: 'app-drawing',
@@ -73,14 +73,38 @@ export class GameDrawComponent implements OnInit, OnDestroy {
     this.resetMinMaxMouseValues();
     this.drawingService.guessDone = false;
     if (this.multiplayerService.isMultiplayer) {
-      this.multiplayerService.predictionListener().subscribe((prediction) => {
-        console.log('PREDICTION', prediction);
+      this.multiplayerService.predictionListener().subscribe((prediction: any) => {
+        const sortedCertaintyArr = this.sortOnCertainty(prediction);
+        if (sortedCertaintyArr && sortedCertaintyArr.length > 1) {
+          this.AI_GUESS = sortedCertaintyArr[0].label;
+        }
+        if (prediction.hasWon) {
+          this.hasWonFunction();
+          this.multiplayerService.stateInfo = {
+            ...this.multiplayerService.stateInfo,
+            gameLevel: GAMELEVEL.intermediateResult,
+          };
+        }
       });
-      this.multiplayerService.roundOverListener().subscribe((roundOver) => {
+      this.multiplayerService.roundOverListener().subscribe((roundOver: any) => {
         console.log('ROUND_OVER', roundOver);
       });
     }
     this.startGame();
+  }
+
+  hasWonFunction() {
+    this.playResultSound(true);
+    const score = this.score > 0 ? this.score : 0;
+    this.drawingService.lastResult.score = Math.round(score);
+    const croppedCoordinates: any = this.imageService.crop(this.minX, this.minY, this.maxX, this.maxY, this.LINE_WIDTH);
+    this.imageService
+      .resize(this.canvas.nativeElement.toDataURL('image/png'), croppedCoordinates, this.resultImageSize)
+      .subscribe({
+        next: (dataUrlHighRes) => {
+          this.drawingService.lastResult.imageData = dataUrlHighRes;
+        },
+      });
   }
 
   ngOnDestroy(): void {
@@ -110,6 +134,13 @@ export class GameDrawComponent implements OnInit, OnDestroy {
         this.clockColor = this.clockColor === 'initial' ? 'final' : 'initial';
         this.sound.stop();
         this.timeOut = true;
+        if (this.multiplayerService.isMultiplayer) {
+          console.warn('GAME IS OVER');
+          this.multiplayerService.stateInfo = {
+            ...this.multiplayerService.stateInfo,
+            gameLevel: GAMELEVEL.intermediateResult,
+          };
+        }
       },
     });
     if (this.drawingService.label) {
@@ -139,6 +170,11 @@ export class GameDrawComponent implements OnInit, OnDestroy {
               color = color === 'white' ? 'red' : 'white';
               this.playTickSound();
               this.playTick = true;
+            }
+          }
+          if (this.timeLeft <= 0) {
+            if (this.multiplayerService.isMultiplayer) {
+              observer.complete();
             }
           }
         });
