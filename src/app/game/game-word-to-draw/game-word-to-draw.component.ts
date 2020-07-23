@@ -1,4 +1,7 @@
 import { Component, OnInit, Output, EventEmitter } from '@angular/core';
+import { interval, Observable } from 'rxjs';
+import { take } from 'rxjs/operators';
+import { GAMELEVEL } from '../../multiplayer/services/multiplayer.service';
 import { DrawingService } from '../game-draw/services/drawing.service';
 import { SPEECH } from 'src/app/shared/speech-text/text';
 import { SpeechService } from 'src/app/services/speech.service';
@@ -23,6 +26,8 @@ export class GameWordToDrawComponent implements OnInit {
   @Output() drawWord = new EventEmitter();
   word = '';
   guessUsed = 1;
+
+  timeLeft = 5;
 
   loading = true;
   ngOnInit(): void {
@@ -53,9 +58,26 @@ export class GameWordToDrawComponent implements OnInit {
     }
     if (this.isMultiPlayer) {
       this.multiplayerService.getLabel().subscribe((label) => {
-        this.word = label;
+        if (label) {
+          this.word = label;
+          this.loading = false;
+          this.startTimer().subscribe();
+        }
       });
     }
+  }
+
+  startTimer() {
+    return new Observable((observer) => {
+      interval(1000)
+        .pipe(take(5))
+        .subscribe((tics) => {
+          if (this.timeLeft <= 0) {
+            this.multiplayerService.stateInfo = { ...this.multiplayerService.stateInfo, gameLevel: GAMELEVEL.drawing };
+          }
+          this.timeLeft--;
+        });
+    });
   }
 
   speakWord() {

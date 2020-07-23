@@ -5,16 +5,12 @@
   </button>
   <div class="word-text">
     <p class="word-draw">Tegn:</p>
-
     <div *ngIf="loading">
       <mat-spinner class="white-spinner" id="white"></mat-spinner>
     </div>
-
     <div *ngIf="word">
       <h1 class="word-to-guess">{{ word | uppercase }}</h1>
-    </div>
-    <div *ngIf="isMultiPlayer">
-      <h2>Venter på Spiller 2</h2>
+      <h1 class="timer">{{ timeLeft }}</h1>
     </div>
   </div>
   <div class="word-footer">
