@@ -10,10 +10,12 @@ const routes: Routes = [
   {
     path: r.LANDING,
     component: WelcomeComponent,
+    data: { animationState: 'One' }
   },
   {
     path: r.PLAYGAME,
     component: GameComponent,
+    data: { animationState: 'Two' }
   },
   {
     path: r.HIGHSCORE,
@@ -33,4 +35,4 @@ const routes: Routes = [
   imports: [RouterModule.forRoot(routes)],
   exports: [RouterModule],
 })
-export class AppRoutingModule {}
+export class AppRoutingModule { }
