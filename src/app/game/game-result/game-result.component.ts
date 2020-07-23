@@ -21,10 +21,10 @@ export class GameResultComponent implements OnInit {
     private drawingService: DrawingService,
     private highScoreService: HighScoreService,
     private router: Router
-  ) { }
+  ) {}
 
   ngOnInit(): void {
-    this.highScoreService.getAllHighScores().subscribe((res) => { });
+    this.highScoreService.getAllHighScores().subscribe((res) => {});
     if (this.router.url === '/summary') {
       this.results = this.drawingService.get();
     } else {
@@ -40,7 +40,7 @@ export class GameResultComponent implements OnInit {
           name: res.name,
           playerid: this.drawingService.playerid,
         };
-        this.highScoreService.endGame(entry).subscribe((response) => { });
+        this.highScoreService.endGame(entry).subscribe((response) => {});
       }
     });
   }
@@ -49,7 +49,7 @@ export class GameResultComponent implements OnInit {
     this.router.navigate([routes.LANDING]);
   }
 
-  submitHighScore() { }
+  submitHighScore() {}
   click() {
     this.highScoreService.submitHighScore = { name: this.value, submit: true };
 

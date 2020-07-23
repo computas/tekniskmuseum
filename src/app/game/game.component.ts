@@ -1,16 +1,14 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
-import { trigger, state, style, animate, transition, query, animateChild, group } from '@angular/animations';
+import { trigger, style, animate, transition } from '@angular/animations';
 
 import { DrawingService } from './game-draw/services/drawing.service';
-import { routeTransitionAnimations } from '../route-transition-animations';
 
 @Component({
   selector: 'app-game',
   templateUrl: './game.component.html',
   styleUrls: ['./game.component.scss'],
   animations: [
-    trigger(
-      'enterAnimation', [
+    trigger('enterAnimation', [
       transition(':enter', [
         style({
           position: 'absolute',
@@ -20,7 +18,7 @@ import { routeTransitionAnimations } from '../route-transition-animations';
           height: '100%',
         }),
         style({ right: '-100%', opacity: 0 }),
-        animate('.4s ease-out', style({ right: '0%', opacity: 1 }))
+        animate('.4s ease-out', style({ right: '0%', opacity: 1 })),
       ]),
       transition(':leave', [
         style({
@@ -30,10 +28,10 @@ import { routeTransitionAnimations } from '../route-transition-animations';
           width: '100%',
           height: '100%',
         }),
-        animate('.4s ease-out', style({ transform: 'translateX(-100%)', opacity: 0 }))
-      ])
-    ])
-  ]
+        animate('.4s ease-out', style({ transform: 'translateX(-100%)', opacity: 0 })),
+      ]),
+    ]),
+  ],
 })
 export class GameComponent implements OnInit, OnDestroy {
   newGame = false;
@@ -43,7 +41,7 @@ export class GameComponent implements OnInit, OnDestroy {
   showFinalResult = false;
   showWordToDraw = false;
 
-  constructor(private drawingService: DrawingService) { }
+  constructor(private drawingService: DrawingService) {}
 
   ngOnDestroy(): void {
     this.clearGameState();

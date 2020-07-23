@@ -54,7 +54,7 @@ export class GameDrawComponent implements OnInit, OnDestroy {
   guessWord: string;
   AI_GUESS: string;
 
-  constructor(private imageService: ImageService, private drawingService: DrawingService) { }
+  constructor(private imageService: ImageService, private drawingService: DrawingService) {}
 
   ngOnInit(): void {
     const ctx = this.canvas.nativeElement.getContext('2d');
