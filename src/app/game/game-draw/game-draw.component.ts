@@ -76,17 +76,26 @@ export class GameDrawComponent implements OnInit, OnDestroy {
     if (this.multiplayerService.isMultiplayer) {
       this.multiplayerService.predictionListener().subscribe((prediction: any) => {
         const sortedCertaintyArr = this.sortOnCertainty(prediction);
+        console.log('predicton', prediction);
         if (sortedCertaintyArr && sortedCertaintyArr.length > 1) {
           this.AI_GUESS = sortedCertaintyArr[0].label;
         }
-        console.log('prediction', prediction);
-        if (prediction.hasWon) {
-          console.log('HASWON');
-          this.hasWonFunction(prediction);
+        if (this.timeLeft <= 0) {
+          console.log('hasLoss');
+          this.hasLossFunction();
           this.multiplayerService.stateInfo = {
             ...this.multiplayerService.stateInfo,
             gameLevel: GAMELEVEL.intermediateResult,
           };
+        } else {
+          if (prediction.hasWon) {
+            console.log('HASWON');
+            this.hasWonFunction(prediction);
+            this.multiplayerService.stateInfo = {
+              ...this.multiplayerService.stateInfo,
+              gameLevel: GAMELEVEL.intermediateResult,
+            };
+          }
         }
       });
       this.multiplayerService.roundOverListener().subscribe((roundOver: any) => {
@@ -172,14 +181,7 @@ export class GameDrawComponent implements OnInit, OnDestroy {
         this.sound.stop();
         this.timeOut = true;
         if (this.multiplayerService.isMultiplayer) {
-          console.warn('GAME IS OVER');
-          console.warn(this.timeLeft);
           this.classifyMultiplayer();
-          this.hasLossFunction();
-          this.multiplayerService.stateInfo = {
-            ...this.multiplayerService.stateInfo,
-            gameLevel: GAMELEVEL.intermediateResult,
-          };
         }
       },
     });
