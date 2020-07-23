@@ -4,6 +4,7 @@ import { routes } from '../../shared/models/routes';
 import { SPEECH } from '../../shared/speech-text/text';
 import { SpeechService } from 'src/app/services/speech.service';
 import { MultiplayerService, GAMELEVEL } from 'src/app/multiplayer/services/multiplayer.service';
+import { WebSocketService } from 'src/app/multiplayer/services/web-socket.service';
 
 @Component({
   selector: 'app-game-info',
@@ -18,7 +19,8 @@ export class GameInfoComponent implements OnInit {
   constructor(
     private speechService: SpeechService,
     private router: Router,
-    private multiplayerService: MultiplayerService
+    private multiplayerService: MultiplayerService,
+    private webSocketService: WebSocketService
   ) {}
 
   ngOnInit(): void {
@@ -35,6 +37,9 @@ export class GameInfoComponent implements OnInit {
         }
       });
     }
+    this.webSocketService.listen('endGame').subscribe((res) => {
+      console.log(res);
+    });
   }
 
   startDrawing() {
@@ -43,6 +48,10 @@ export class GameInfoComponent implements OnInit {
     } else {
       this.multiplayerService.getLabel(true);
     }
+  }
+
+  endGame() {
+    this.multiplayerService.endGame();
   }
 
   goToLanding() {

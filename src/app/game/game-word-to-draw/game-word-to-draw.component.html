@@ -10,7 +10,7 @@
     </div>
     <div *ngIf="word">
       <h1 class="word-to-guess">{{ word | uppercase }}</h1>
-      <h1 class="timer">{{ timeLeft }}</h1>
+      <h1 *ngIf="isMultiPlayer" class="timer">{{ timeLeft }}</h1>
     </div>
   </div>
   <div class="word-footer">

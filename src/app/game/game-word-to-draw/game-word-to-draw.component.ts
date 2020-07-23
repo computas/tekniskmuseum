@@ -68,14 +68,15 @@ export class GameWordToDrawComponent implements OnInit {
   }
 
   startTimer() {
+    console.log('starting new timer');
     return new Observable((observer) => {
       interval(1000)
         .pipe(take(5))
         .subscribe((tics) => {
+          this.timeLeft--;
           if (this.timeLeft <= 0) {
             this.multiplayerService.stateInfo = { ...this.multiplayerService.stateInfo, gameLevel: GAMELEVEL.drawing };
           }
-          this.timeLeft--;
         });
     });
   }
