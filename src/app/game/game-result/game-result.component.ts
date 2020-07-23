@@ -5,6 +5,8 @@ import { Highscore, HighScoreService } from 'src/app/services/highscore.service'
 import { Entry } from 'src/app/services/highscore-entry.interface';
 import { Router } from '@angular/router';
 
+import { routes } from '../../shared/models/routes';
+
 @Component({
   selector: 'app-game-result',
   templateUrl: './game-result.component.html',
@@ -19,10 +21,10 @@ export class GameResultComponent implements OnInit {
     private drawingService: DrawingService,
     private highScoreService: HighScoreService,
     private router: Router
-  ) {}
+  ) { }
 
   ngOnInit(): void {
-    this.highScoreService.getAllHighScores().subscribe((res) => {});
+    this.highScoreService.getAllHighScores().subscribe((res) => { });
     if (this.router.url === '/summary') {
       this.results = this.drawingService.get();
     } else {
@@ -38,11 +40,16 @@ export class GameResultComponent implements OnInit {
           name: res.name,
           playerid: this.drawingService.playerid,
         };
-        this.highScoreService.endGame(entry).subscribe((response) => {});
+        this.highScoreService.endGame(entry).subscribe((response) => { });
       }
     });
   }
-  submitHighScore() {}
+
+  goToLanding() {
+    this.router.navigate([routes.LANDING]);
+  }
+
+  submitHighScore() { }
   click() {
     this.highScoreService.submitHighScore = { name: this.value, submit: true };
 

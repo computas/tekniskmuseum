@@ -43,7 +43,7 @@ export class GameDrawComponent implements OnInit, OnDestroy {
   clockColor = 'initial';
   private readonly resultImageSize = 1024;
 
-  private readonly LINE_WIDTH = 10;
+  private readonly LINE_WIDTH = 6;
 
   private readonly _timeOut = new BehaviorSubject<boolean>(false);
   readonly _timeOut$ = this._timeOut.asObservable();
@@ -54,7 +54,7 @@ export class GameDrawComponent implements OnInit, OnDestroy {
   guessWord: string;
   AI_GUESS: string;
 
-  constructor(private imageService: ImageService, private drawingService: DrawingService) {}
+  constructor(private imageService: ImageService, private drawingService: DrawingService) { }
 
   ngOnInit(): void {
     const ctx = this.canvas.nativeElement.getContext('2d');

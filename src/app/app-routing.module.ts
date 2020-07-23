@@ -10,12 +10,12 @@ const routes: Routes = [
   {
     path: r.LANDING,
     component: WelcomeComponent,
-    data: { animationState: 'One' }
+    data: { animationState: 'welcome' }
   },
   {
     path: r.PLAYGAME,
     component: GameComponent,
-    data: { animationState: 'Two' }
+    data: { animationState: 'game' }
   },
   {
     path: r.HIGHSCORE,
