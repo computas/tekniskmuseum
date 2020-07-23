@@ -73,10 +73,14 @@ export class GameDrawComponent implements OnInit, OnDestroy {
     this.resetMinMaxMouseValues();
     this.drawingService.guessDone = false;
     if (this.multiplayerService.isMultiplayer) {
-      // this.multiplayerService.
-    } else {
-      this.startGame();
+      this.multiplayerService.predictionListener().subscribe((prediction) => {
+        console.log('PREDICTION', prediction);
+      });
+      this.multiplayerService.roundOverListener().subscribe((roundOver) => {
+        console.log('ROUND_OVER', roundOver);
+      });
     }
+    this.startGame();
   }
 
   ngOnDestroy(): void {
@@ -96,7 +100,11 @@ export class GameDrawComponent implements OnInit, OnDestroy {
     this.drawingService.classificationDone = false;
     this.createDrawingTimer().subscribe({
       next: (val) => {
-        this.classify();
+        if (this.multiplayerService.isMultiplayer) {
+          this.classifyMultiplayer();
+        } else {
+          this.classify();
+        }
       },
       complete: () => {
         this.clockColor = this.clockColor === 'initial' ? 'final' : 'initial';
@@ -106,6 +114,9 @@ export class GameDrawComponent implements OnInit, OnDestroy {
     });
     if (this.drawingService.label) {
       this.guessWord = this.drawingService.label;
+    }
+    if (this.multiplayerService.isMultiplayer) {
+      this.guessWord = this.multiplayerService.label;
     }
   }
 
@@ -167,6 +178,21 @@ export class GameDrawComponent implements OnInit, OnDestroy {
       });
       sound.play();
     }
+  }
+
+  classifyMultiplayer() {
+    const b64Image = this.canvas.nativeElement.toDataURL('image/png');
+    const croppedCoordinates: any = this.imageService.crop(this.minX, this.minY, this.maxX, this.maxY, this.LINE_WIDTH);
+    this.imageService.resize(b64Image, croppedCoordinates).subscribe({
+      next: (dataUrl) => {
+        const body = {
+          game_id: this.multiplayerService.stateInfo.game_id,
+          time_left: this.timeLeft,
+        };
+        const image = this.imageService.createBlob(dataUrl);
+        this.multiplayerService.classify(body, image);
+      },
+    });
   }
 
   classify() {

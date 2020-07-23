@@ -56,8 +56,8 @@ export class WebSocketService {
     });
   }
 
-  emit(eventName: string, data: any) {
-    this.socket.emit(eventName, data);
+  emit(eventName: string, ...rest: any) {
+    this.socket.emit(eventName, ...rest);
   }
 
   get playerDisconnected(): boolean {

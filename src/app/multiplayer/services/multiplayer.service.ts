@@ -69,6 +69,16 @@ export class MultiplayerService {
     );
   }
 
+  classify(data, image) {
+    this.webSocketService.emit('classify', data, image);
+  }
+  predictionListener() {
+    return this.webSocketService.listen('prediction');
+  }
+  roundOverListener() {
+    return this.webSocketService.listen('round_over');
+  }
+
   get stateInfo(): GameState {
     return this._stateInfo.getValue();
   }
