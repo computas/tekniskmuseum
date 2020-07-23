@@ -13,7 +13,7 @@ import { routeTransitionAnimations } from '../route-transition-animations';
       'enterAnimation', [
       transition(':enter', [
         // style({ transform: 'translateX(100%)', opacity: 0 }),
-        style({ position: 'relative' }),
+        // style({ position: 'relative' }),
         // query(':enter, :leave', [
         style({
           position: 'absolute',
@@ -27,13 +27,26 @@ import { routeTransitionAnimations } from '../route-transition-animations';
         style({ right: '-100%', opacity: 0 }),
         // group([
         // query(':leave', [animate('0.5s ease-out', style({ right: '100%', opacity: 0 }))]),
-        animate('.5s ease-out', style({ right: '0%', opacity: 1 }))
+        animate('.4s ease-out', style({ right: '0%', opacity: 1 }))
         // ]),
       ]),
+
       transition(':leave', [
-        style({ transform: 'translateX(0)', opacity: 1 }),
-        animate('.5s ease-out', style({ transform: 'translateX(-100%)', opacity: 0 }))
+        // style({ position: 'relative' }),
+        // query(':enter, :leave', [
+        style({
+          position: 'absolute',
+          top: 0,
+          right: 0,
+          width: '100%',
+          height: '100%',
+        }),
+        animate('.4s ease-out', style({ transform: 'translateX(-100%)', opacity: 0 }))
       ])
+      // transition(':leave', [
+      //   style({ transform: 'translateX(0)', opacity: 1 }),
+      //   animate('.5s ease-out', style({ transform: 'translateX(-100%)', opacity: 0 }))
+      // ])
     ]
     )
 
