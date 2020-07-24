@@ -54,7 +54,7 @@ export class GameDrawComponent implements OnInit, OnDestroy {
   guessWord: string;
   AI_GUESS: string;
 
-  constructor(private imageService: ImageService, private drawingService: DrawingService) {}
+  constructor(private imageService: ImageService, private drawingService: DrawingService) { }
 
   ngOnInit(): void {
     const ctx = this.canvas.nativeElement.getContext('2d');
@@ -110,7 +110,7 @@ export class GameDrawComponent implements OnInit, OnDestroy {
             this.score = this.score - 1.67336683417;
             if (tics % 10 === 9) {
               this.timeLeft--;
-              if (this.timeLeft < 17) {
+              if (this.timeLeft < 16) {
                 observer.next('classify');
               }
             }
