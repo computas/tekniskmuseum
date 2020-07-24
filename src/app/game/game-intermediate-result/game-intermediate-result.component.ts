@@ -55,6 +55,7 @@ export class GameIntermediateResultComponent implements OnInit {
         const totalScore: any = this.drawingService.results.reduce((accumulator: any, currentValue: any) => {
           return accumulator + currentValue.score;
         }, 0);
+        console.log('this.drawingService', this.drawingService.results);
         console.log('total_score', totalScore);
         this.multiplayerService.stateInfo = { ...this.multiplayerService.stateInfo, score: totalScore };
         this.multiplayerService.endGame();

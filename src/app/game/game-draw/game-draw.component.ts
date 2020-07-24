@@ -172,6 +172,8 @@ export class GameDrawComponent implements OnInit, OnDestroy {
 
   getScore() {
     const score = this.score > 0 ? this.score : 0;
+    console.log('this.score', this.score);
+    console.log('score', score);
     return Math.round(score);
   }
 

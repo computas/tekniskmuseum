@@ -61,7 +61,7 @@ export class DrawingService {
       word: this.label,
       gameState: res.gameState,
       guess: res.guess,
-      score: 0,
+      score: res.score ? res.score : 0,
     };
     return result;
   }
