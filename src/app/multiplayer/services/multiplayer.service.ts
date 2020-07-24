@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { WebSocketService } from './web-socket.service';
 import { BehaviorSubject } from 'rxjs';
-import { tap, map, take } from 'rxjs/operators';
+import { map, take } from 'rxjs/operators';
 
 export enum GAMELEVEL {
   lobby = 'LOBBY',

@@ -1,8 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { DrawingService } from '../game-draw/services/drawing.service';
 import { Result } from '../../shared/models/result.interface';
-import { Highscore, HighScoreService } from 'src/app/services/highscore.service';
-import { Entry } from 'src/app/services/highscore-entry.interface';
+import { Highscore } from 'src/app/services/highscore.service';
 import { Router } from '@angular/router';
 import { MultiplayerService } from 'src/app/multiplayer/services/multiplayer.service';
 

@@ -1,4 +1,4 @@
-import { Component, ElementRef, OnInit, ViewChild, Output, EventEmitter, OnDestroy, ɵConsole } from '@angular/core';
+import { Component, ElementRef, OnInit, ViewChild, Output, EventEmitter, OnDestroy } from '@angular/core';
 import { BehaviorSubject, Subject, interval, Observable } from 'rxjs';
 import { ImageService } from './services/image.service';
 import { Howl } from 'howler';

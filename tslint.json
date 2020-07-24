@@ -29,7 +29,7 @@
         "order": ["static-field", "instance-field", "static-method", "instance-method"]
       }
     ],
-    "no-console": [true, "log", "debug", "info", "time", "timeEnd", "trace"],
+    "no-console": [false, "log", "debug", "info", "time", "timeEnd", "trace"],
     "no-empty": false,
     "no-unused-variable": true,
     "no-inferrable-types": [true, "ignore-params"],
