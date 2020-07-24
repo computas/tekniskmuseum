@@ -33,6 +33,7 @@ export class GameResultComponent implements OnInit {
             this.hasWon = false;
           } else {
             this.hasWon = this.multiplayerService.stateInfo.score >= val.score;
+            this.hasWon = true;
           }
         }
         console.log('oppnent score from result', val);
