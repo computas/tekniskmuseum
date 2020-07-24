@@ -55,9 +55,5 @@ export class AppComponent implements OnInit {
   refreshUserState() {
     clearTimeout(this.userActivity);
     this.setDialogTimeout();
-
-  prepareRoute(outlet: RouterOutlet) {
-    const animationState = 'animationState';
-    return outlet && outlet.activatedRouteData && outlet.activatedRouteData[animationState];
   }
 }
