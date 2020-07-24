@@ -3,11 +3,16 @@ import { Subject } from 'rxjs';
 import { Router } from '@angular/router';
 import { MatDialog } from '@angular/material/dialog';
 import { IdleTimeoutComponent } from './idle-timeout/idle-timeout.component';
+import { Component } from '@angular/core';
+import { RouterOutlet } from '@angular/router';
+
+import { routeTransitionAnimations } from './route-transition-animations';
 
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.scss'],
+  animations: [routeTransitionAnimations],
 })
 export class AppComponent implements OnInit {
   title = 'Teknisk Museum';
@@ -50,5 +55,10 @@ export class AppComponent implements OnInit {
   refreshUserState() {
     clearTimeout(this.userActivity);
     this.setDialogTimeout();
+
+  prepareRoute(outlet: RouterOutlet) {
+    const animationState = 'animationState';
+    return outlet && outlet.activatedRouteData && outlet.activatedRouteData[animationState];
+
   }
 }

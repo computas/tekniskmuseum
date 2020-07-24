@@ -3,6 +3,7 @@ import { HttpClientModule } from '@angular/common/http';
 import { NgModule } from '@angular/core';
 import { MatDialogModule } from '@angular/material/dialog';
 import { ServiceWorkerModule } from '@angular/service-worker';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
@@ -25,6 +26,7 @@ import { IdleTimeoutComponent } from './idle-timeout/idle-timeout.component';
     ServiceWorkerModule.register('ngsw-worker.js', { enabled: environment.production }),
     MatDialogModule,
     MaterialImportsModule,
+    BrowserAnimationsModule,
   ],
   providers: [HttpClientModule],
   bootstrap: [AppComponent],
