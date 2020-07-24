@@ -18,6 +18,7 @@ export class GameResultComponent implements OnInit {
   value = '';
   hasWon: boolean;
   ismultiplayer = false;
+  score: 0;
   constructor(
     private drawingService: DrawingService,
     private multiplayerService: MultiplayerService,
@@ -29,11 +30,11 @@ export class GameResultComponent implements OnInit {
       this.ismultiplayer = true;
       this.multiplayerService._oppentScore.subscribe((val) => {
         if (val && val.score) {
-          if (typeof this.multiplayerService.stateInfo.score === 'undefined') {
-            this.hasWon = false;
-          } else {
+          if (this.multiplayerService.stateInfo.score) {
             this.hasWon = this.multiplayerService.stateInfo.score >= val.score;
-            this.hasWon = true;
+            this.score = val.score;
+          } else {
+            this.hasWon = false;
           }
         }
         console.log('oppnent score from result', val);
