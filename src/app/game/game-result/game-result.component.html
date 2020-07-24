@@ -15,7 +15,7 @@
           <span *ngIf="!result.hasWon" class="material-icons" id="loss">
             clear
           </span>
-          {{ result.word | titlecase }}
+          <span *ngIf="result.word">{{ result.word | titlecase }}</span>
         </p>
       </div>
     </div>

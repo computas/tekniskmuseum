@@ -94,7 +94,7 @@ export class GameDrawComponent implements OnInit, OnDestroy {
           this.hasLossFunction();
           multiplayerGameState = true;
         } else {
-          if (prediction.hasWon) {
+          if (prediction && prediction.hasWon) {
             this.hasWonFunction(prediction);
             console.log('haswon');
             multiplayerGameState = true;
@@ -115,7 +115,7 @@ export class GameDrawComponent implements OnInit, OnDestroy {
     if (!this.hasUpdatedState) {
       console.log('SHOULD ONLY RUN ONCE');
       console.log('this.prediction', this.prediction);
-      if (this.prediction.hasWon) {
+      if (this.prediction && this.prediction.hasWon) {
         this.hasWonFunction(this.prediction);
       } else {
         this.hasLossFunction();
