@@ -144,9 +144,9 @@ export class GameDrawComponent implements OnInit, OnDestroy {
       imageData: '',
       gameState: 'Done',
       score: this.getScore(),
-      word: this.guessWord,
+      word: this.multiplayerService.stateInfo.label,
     };
-    console.log('hasWonFunction');
+    console.log('hasWonFunction', obj);
     this.createResultAndResize(obj);
   }
 
@@ -157,12 +157,13 @@ export class GameDrawComponent implements OnInit, OnDestroy {
       imageData: '',
       gameState: 'Done',
       score: 0,
-      word: this.guessWord,
+      word: this.multiplayerService.stateInfo.label,
     };
-    console.log('hasLossfunction');
+    console.log('hasLossfunction', obj);
     this.createResultAndResize(obj);
   }
   createResultAndResize(obj) {
+    this.drawingService.label = obj.word;
     const result: Result = this.drawingService.createResult(obj);
     this.result = result;
     const croppedCoordinates: any = this.imageService.crop(this.minX, this.minY, this.maxX, this.maxY, this.LINE_WIDTH);

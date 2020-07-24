@@ -25,9 +25,8 @@ export class GameResultComponent implements OnInit {
   ngOnInit(): void {
     if (this.multiplayerService.isMultiplayer) {
       const totalScore = this.drawingService.results.reduce((accumulator: any, currentValue: any) => {
-        return accumulator.score + currentValue.score;
-      });
-      console.log('totalScore', totalScore);
+        return accumulator + currentValue.score;
+      }, 0);
     }
 
     if (this.router.url === '/summary') {

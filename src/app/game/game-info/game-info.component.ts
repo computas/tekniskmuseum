@@ -28,10 +28,11 @@ export class GameInfoComponent implements OnInit {
       this.isSinglePlayer = true;
     } else {
       this.isMultiPlayer = true;
-      this.multiplayerService.getLabel(false).subscribe((res) => {
+      this.multiplayerService.getLabel(false).subscribe((res: any) => {
         if (res) {
           this.multiplayerService.stateInfo = {
             ...this.multiplayerService.stateInfo,
+            label: res.label,
             gameLevel: GAMELEVEL.waitingForWord,
           };
         }

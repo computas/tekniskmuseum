@@ -19,6 +19,7 @@ export interface GameState {
   gameLevel: GAMELEVEL | undefined;
   guessUsed: number | undefined;
   score: number | undefined;
+  label: string | undefined;
 }
 export interface StateInfo {
   ready: boolean;
@@ -41,6 +42,7 @@ export class MultiplayerService {
     guessUsed: 0,
     ready: false,
     score: 0,
+    label: undefined,
   };
 
   private readonly _stateInfo = new BehaviorSubject<GameState>(this.initialState);
@@ -89,6 +91,7 @@ export class MultiplayerService {
   }
 
   endGameListener() {
+    console.log('LISTENING TO ENDGAME');
     return this.webSocketService.listen('endGame');
   }
 
@@ -97,7 +100,6 @@ export class MultiplayerService {
       game_id: this.stateInfo.game_id,
       score: this.stateInfo.score,
       player_id: this.stateInfo.player_id,
-      name: this.stateInfo.player_nr,
     });
     this.webSocketService.emit('endGame', result);
   }

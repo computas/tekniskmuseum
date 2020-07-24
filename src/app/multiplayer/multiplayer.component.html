@@ -6,5 +6,10 @@
   <div *ngSwitchCase="GAMELEVEL.intermediateResult">
     <app-game-intermediate-result></app-game-intermediate-result>
   </div>
-  <div *ngSwitchDefault>Loading</div>
+  <div *ngSwitchCase="GAMELEVEL.showResult">
+    <app-game-result></app-game-result>
+  </div>
+  <div *ngSwitchDefault>
+    <div *ngSwitchCase="GAMELEVEL.lobby"><app-lobby></app-lobby></div>
+  </div>
 </div>

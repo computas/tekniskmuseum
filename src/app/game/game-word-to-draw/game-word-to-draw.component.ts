@@ -60,6 +60,10 @@ export class GameWordToDrawComponent implements OnInit {
       this.guessUsed = this.drawingService.guessUsed;
       this.multiplayerService.getLabel().subscribe((label) => {
         if (label) {
+          this.multiplayerService.stateInfo = {
+            ...this.multiplayerService.stateInfo,
+            label,
+          };
           this.word = label;
           this.loading = false;
           this.startTimer().subscribe();
@@ -69,7 +73,6 @@ export class GameWordToDrawComponent implements OnInit {
   }
 
   startTimer() {
-    console.log('starting new timer');
     return new Observable((observer) => {
       interval(1000)
         .pipe(take(5))
