@@ -188,8 +188,10 @@ export class GameDrawComponent implements OnInit, OnDestroy {
   ngOnDestroy(): void {
     this.unsubscribe.next();
     this.unsubscribe.complete();
-    this.roundOverSubscription.unsubscribe();
-    this.predictionSubscription.unsubscribe();
+    if (this.multiplayerService.isMultiplayer) {
+      this.roundOverSubscription.unsubscribe();
+      this.predictionSubscription.unsubscribe();
+    }
     this.sound.stop();
   }
 
