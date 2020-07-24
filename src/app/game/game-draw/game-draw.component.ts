@@ -162,7 +162,8 @@ export class GameDrawComponent implements OnInit, OnDestroy {
   }
 
   classify() {
-    if (!this.isBlankImage) {
+    console.log(this.timeLeft);
+    if (!this.isBlankImage || this.isBlankImage && this.timeLeft === 0) {
       const b64Image = this.canvas.nativeElement.toDataURL('image/png');
       const croppedCoordinates: any = this.imageService.crop(this.minX, this.minY, this.maxX, this.maxY, this.LINE_WIDTH);
       this.imageService.resize(b64Image, croppedCoordinates).subscribe({
