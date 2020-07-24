@@ -4,6 +4,8 @@ import { DrawingService } from '../game-draw/services/drawing.service';
 import { SPEECH } from 'src/app/shared/speech-text/text';
 import { SpeechService } from 'src/app/services/speech.service';
 import { MultiplayerService, GAMELEVEL } from 'src/app/multiplayer/services/multiplayer.service';
+import { Router } from '@angular/router';
+import { routes } from '../../shared/models/routes';
 @Component({
   selector: 'app-game-intermediate-result',
   templateUrl: './game-intermediate-result.component.html',
@@ -17,17 +19,21 @@ export class GameIntermediateResultComponent implements OnInit {
   @Output() nextGuess = new EventEmitter();
   @Output() finalResult = new EventEmitter();
   waitingForPlayer = true;
-  isMultiplayer = true;
+  isMultiplayer = false;
+  isSinglePlayer = false;
   constructor(
     private drawingService: DrawingService,
     private speechService: SpeechService,
-    private multiplayerService: MultiplayerService
+    private multiplayerService: MultiplayerService,
+    private router: Router
   ) {}
 
   ngOnInit(): void {
     this.result = this.drawingService.lastResult;
     this.gameOver = this.drawingService.gameOver;
-
+    if (this.router.url === `/${routes.SINGLEPLAYER}`) {
+      this.isSinglePlayer = true;
+    }
     if (this.multiplayerService.isMultiplayer) {
       this.isMultiplayer = true;
       this.multiplayerService.stateInfo$.subscribe((res) => {

@@ -26,12 +26,10 @@
         <button *ngIf="gameOver" mat-raised-button class="next-word-button" (click)="getSummary()">
           Oppsummering
         </button>
-        <button
-          *ngIf="!gameOver && !waitingForPlayer"
-          mat-raised-button
-          class="next-word-button"
-          (click)="newDrawing()"
-        >
+        <button *ngIf="" mat-raised-button class="next-word-button" (click)="newDrawing()">
+          Neste ord
+        </button>
+        <button *ngIf="isSinglePlayer" mat-raised-button class="next-word-button" (click)="newDrawing()">
           Neste ord
         </button>
         <button
