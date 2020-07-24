@@ -5,6 +5,8 @@ import { Highscore, HighScoreService } from 'src/app/services/highscore.service'
 import { Entry } from 'src/app/services/highscore-entry.interface';
 import { Router } from '@angular/router';
 
+import { routes } from '../../shared/models/routes';
+
 @Component({
   selector: 'app-game-result',
   templateUrl: './game-result.component.html',
@@ -42,6 +44,11 @@ export class GameResultComponent implements OnInit {
       }
     });
   }
+
+  goToLanding() {
+    this.router.navigate([routes.LANDING]);
+  }
+
   submitHighScore() {}
   click() {
     this.highScoreService.submitHighScore = { name: this.value, submit: true };

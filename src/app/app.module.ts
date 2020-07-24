@@ -8,10 +8,20 @@ import { GameModule } from './game/game.module';
 import { HighScoreModule } from './highscore/highscore.module';
 import { ServiceWorkerModule } from '@angular/service-worker';
 import { environment } from '../environments/environment';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 @NgModule({
   declarations: [AppComponent],
-  imports: [BrowserModule, HttpClientModule, AppRoutingModule, WelcomeModule, GameModule, HighScoreModule, ServiceWorkerModule.register('ngsw-worker.js', { enabled: environment.production })],
+  imports: [
+    BrowserModule,
+    HttpClientModule,
+    AppRoutingModule,
+    WelcomeModule,
+    GameModule,
+    HighScoreModule,
+    ServiceWorkerModule.register('ngsw-worker.js', { enabled: environment.production }),
+    BrowserAnimationsModule,
+  ],
   providers: [HttpClientModule],
   bootstrap: [AppComponent],
 })
