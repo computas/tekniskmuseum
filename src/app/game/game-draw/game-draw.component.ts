@@ -1,5 +1,5 @@
 import { Component, ElementRef, OnInit, ViewChild, Output, EventEmitter, OnDestroy } from '@angular/core';
-import { BehaviorSubject, Subject, interval, Observable } from 'rxjs';
+import { BehaviorSubject, Subject, interval, Observable, Subscription } from 'rxjs';
 import { ImageService } from './services/image.service';
 import { Howl } from 'howler';
 import { take, takeUntil } from 'rxjs/operators';
@@ -33,7 +33,7 @@ export class GameDrawComponent implements OnInit, OnDestroy {
 
   isDrawing = false;
   hasLeftCanvas = false;
-  timeLeft = 20.0;
+  timeLeft = 5.0;
 
   score = 333;
 
@@ -60,6 +60,9 @@ export class GameDrawComponent implements OnInit, OnDestroy {
   result: Result;
   hasAddedResult = false;
 
+  roundOverSubscription: Subscription;
+  predictionSubscription: Subscription;
+
   constructor(
     private imageService: ImageService,
     private drawingService: DrawingService,
@@ -79,7 +82,7 @@ export class GameDrawComponent implements OnInit, OnDestroy {
     this.drawingService.guessDone = false;
     if (this.multiplayerService.isMultiplayer) {
       this.multiplayerService.stateInfo = { ...this.multiplayerService.stateInfo, ready: false };
-      this.multiplayerService.predictionListener().subscribe((prediction: any) => {
+      this.predictionSubscription = this.multiplayerService.predictionListener().subscribe((prediction: any) => {
         const sortedCertaintyArr = this.sortOnCertainty(prediction);
         let multiplayerGameState = false;
         this.prediction = prediction;
@@ -97,39 +100,47 @@ export class GameDrawComponent implements OnInit, OnDestroy {
           }
         }
         if (multiplayerGameState) {
-          this.drawingService.addResult(this.result);
-          this.hasAddedResult = true;
+          console.log('SHOULD ONLY RUN ONCE');
+          if (!this.hasAddedResult) {
+            this.drawingService.addResult(this.result);
+            this.hasAddedResult = true;
+          }
+          this.drawingService.guessUsed++;
+          const guess = this.multiplayerService.stateInfo.guessUsed;
+          const guessUsed = guess ? guess : 0;
+
+          this.multiplayerService.stateInfo = {
+            ...this.multiplayerService.stateInfo,
+            guessUsed: guessUsed + 1,
+            gameLevel: GAMELEVEL.intermediateResult,
+          };
           this.multiplayerService.stateInfo = {
             ...this.multiplayerService.stateInfo,
             gameLevel: GAMELEVEL.intermediateResult,
           };
-          this.timeLeft = 20;
         }
       });
-      this.multiplayerService.roundOverListener().subscribe((roundOver: any) => {
+      this.roundOverSubscription = this.multiplayerService.roundOverListener().subscribe((roundOver: any) => {
         console.log('ROUND_OVER', roundOver);
-        this.multiplayerService.roundIsOver = true;
-        console.log('roundOver', this.multiplayerService.roundIsOver);
-        if (this.prediction.hasWon) {
-          this.hasWonFunction(this.prediction);
-        } else {
-          this.hasLossFunction();
-        }
-        if (!this.hasAddedResult) {
-          this.drawingService.addResult(this.result);
-          this.hasAddedResult = true;
-        }
-        this.drawingService.guessUsed++;
-        const guess = this.multiplayerService.stateInfo.guessUsed;
-        const guessUsed = guess ? guess : 0;
-        this.multiplayerService.stateInfo = {
-          ...this.multiplayerService.stateInfo,
-          guessUsed: guessUsed + 1,
-          gameLevel: GAMELEVEL.intermediateResult,
-        };
       });
     }
     this.startGame();
+  }
+
+  updateResultAtEndOfGame() {
+    console.log('SHOULD ONLY RUN ONCE');
+    if (!this.hasAddedResult) {
+      this.drawingService.addResult(this.result);
+      this.hasAddedResult = true;
+    }
+    this.drawingService.guessUsed++;
+    const guess = this.multiplayerService.stateInfo.guessUsed;
+    const guessUsed = guess ? guess : 0;
+    this.multiplayerService.stateInfo = {
+      ...this.multiplayerService.stateInfo,
+      guessUsed: guessUsed + 1,
+      gameLevel: GAMELEVEL.intermediateResult,
+    };
   }
 
   hasWonFunction(prediction) {
@@ -183,6 +194,8 @@ export class GameDrawComponent implements OnInit, OnDestroy {
   ngOnDestroy(): void {
     this.unsubscribe.next();
     this.unsubscribe.complete();
+    this.roundOverSubscription.unsubscribe();
+    this.predictionSubscription.unsubscribe();
     this.sound.stop();
   }
 
@@ -208,6 +221,7 @@ export class GameDrawComponent implements OnInit, OnDestroy {
         this.sound.stop();
         this.timeOut = true;
         if (this.multiplayerService.isMultiplayer) {
+          console.log('COMPLETEEVENT');
           this.classifyMultiplayer();
         }
       },
