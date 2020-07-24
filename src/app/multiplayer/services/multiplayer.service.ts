@@ -9,6 +9,7 @@ export enum GAMELEVEL {
   intermediateResult = 'INTERMEDIATERESULT',
   waitingForWord = 'WAITINGFORWORD',
   howToPlay = 'HOWTOPLAY',
+  showResult = 'SHOWRESULT',
 }
 export interface GameState {
   player_nr: string | undefined;
@@ -17,6 +18,7 @@ export interface GameState {
   ready: boolean | undefined;
   gameLevel: GAMELEVEL | undefined;
   guessUsed: number | undefined;
+  score: number | undefined;
 }
 export interface StateInfo {
   ready: boolean;
@@ -38,6 +40,7 @@ export class MultiplayerService {
     player_id: undefined,
     guessUsed: 0,
     ready: false,
+    score: 0,
   };
 
   private readonly _stateInfo = new BehaviorSubject<GameState>(this.initialState);
@@ -85,16 +88,18 @@ export class MultiplayerService {
     return this.webSocketService.listen('round_over');
   }
 
+  endGameListener() {
+    return this.webSocketService.listen('endGame');
+  }
+
   endGame() {
-    this.webSocketService.emit(
-      'endGame',
-      JSON.stringify({
-        game_id: this.stateInfo.game_id,
-        score: this.score,
-        player_id: this.stateInfo.player_id,
-        name: this.name,
-      })
-    );
+    const result = JSON.stringify({
+      game_id: this.stateInfo.game_id,
+      score: this.stateInfo.score,
+      player_id: this.stateInfo.player_id,
+      name: this.stateInfo.player_nr,
+    });
+    this.webSocketService.emit('endGame', result);
   }
 
   get stateInfo(): GameState {

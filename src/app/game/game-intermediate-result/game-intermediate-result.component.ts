@@ -34,9 +34,7 @@ export class GameIntermediateResultComponent implements OnInit {
         if (res.ready) {
           this.waitingForPlayer = false;
         }
-        console.log('stateChange', res.ready);
       });
-      console.log('this.multiplayerService.stateInfo.ready', this.multiplayerService.stateInfo.ready);
       this.multiplayerService.getLabel(false).subscribe((res) => {
         if (res) {
           this.multiplayerService.stateInfo = {
@@ -45,7 +43,16 @@ export class GameIntermediateResultComponent implements OnInit {
           };
         }
       });
+
       this.gameOver = this.multiplayerService.stateInfo.guessUsed === this.drawingService.totalGuess;
+      if (this.gameOver) {
+        const totalScore: any = this.drawingService.results.reduce((accumulator: any, currentValue: any) => {
+          return accumulator.score + currentValue.score;
+        });
+        console.log('total_score', totalScore);
+        this.multiplayerService.stateInfo = { ...this.multiplayerService.stateInfo, score: totalScore };
+        this.multiplayerService.endGame();
+      }
     }
   }
 
@@ -61,7 +68,14 @@ export class GameIntermediateResultComponent implements OnInit {
   }
 
   getSummary() {
-    this.finalResult.next(true);
+    if (this.multiplayerService.isMultiplayer && this.gameOver) {
+      this.multiplayerService.stateInfo = {
+        ...this.multiplayerService.stateInfo,
+        gameLevel: GAMELEVEL.showResult,
+      };
+    } else {
+      this.finalResult.next(true);
+    }
   }
 
   speakResult() {

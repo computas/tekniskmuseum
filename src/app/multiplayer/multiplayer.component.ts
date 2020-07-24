@@ -3,6 +3,7 @@ import { MultiplayerService, GAMELEVEL } from './services/multiplayer.service';
 import { WebSocketService } from './services/web-socket.service';
 import { Router } from '@angular/router';
 import { routes } from '../shared/models/routes';
+import { Subscription } from 'rxjs';
 @Component({
   selector: 'app-multiplayer',
   templateUrl: './multiplayer.component.html',
@@ -17,6 +18,10 @@ export class MultiplayerComponent implements OnInit, OnDestroy {
     private router: Router
   ) {}
   destination = '/';
+  stateInfoSubscription: Subscription;
+  playerDisconnectedSubscription: Subscription;
+  roundOverSubscription: Subscription;
+  endGameSubscription: Subscription;
 
   ngOnInit(): void {
     if (this.router.url === `/${routes.MULTIPLAYER}`) {
@@ -24,21 +29,28 @@ export class MultiplayerComponent implements OnInit, OnDestroy {
     }
     this.webSocketService.startSockets();
     this.gameLevel = this.multiplayerService.stateInfo.gameLevel;
-    this.multiplayerService.roundOverListener().subscribe((roundOver: any) => {
+    this.roundOverSubscription = this.multiplayerService.roundOverListener().subscribe((roundOver: any) => {
       console.warn('round is over', roundOver);
       this.multiplayerService.stateInfo = { ...this.multiplayerService.stateInfo, ready: true };
     });
-    this.multiplayerService.stateInfo$.subscribe((data) => {
+    this.stateInfoSubscription = this.multiplayerService.stateInfo$.subscribe((data) => {
       this.gameLevel = data.gameLevel;
     });
-    this.webSocketService.playerDisconnected$.subscribe((data) => {
+    this.playerDisconnectedSubscription = this.webSocketService.playerDisconnected$.subscribe((data) => {
       if (data) {
         window.location.href = this.destination;
       }
+    });
+    this.endGameSubscription = this.multiplayerService.endGameListener().subscribe((data) => {
+      console.warn('GAME IS OVER', data);
     });
   }
 
   ngOnDestroy(): void {
     this.webSocketService.disconnect();
+    this.stateInfoSubscription.unsubscribe();
+    this.playerDisconnectedSubscription.unsubscribe();
+    this.roundOverSubscription.unsubscribe();
+    this.endGameSubscription.unsubscribe();
   }
 }
