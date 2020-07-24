@@ -51,10 +51,6 @@ export class GameInfoComponent implements OnInit {
     }
   }
 
-  endGame() {
-    this.multiplayerService.endGame();
-  }
-
   goToLanding() {
     this.router.navigate([routes.LANDING]);
   }

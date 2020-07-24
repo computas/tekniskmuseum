@@ -97,7 +97,7 @@ export class MultiplayerService {
     return this.webSocketService.listen('endGame');
   }
 
-  endGame() {
+  endGame(score) {
     const result = JSON.stringify({
       game_id: this.stateInfo.game_id,
       score: this.stateInfo.score,

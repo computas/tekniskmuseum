@@ -58,7 +58,7 @@ export class GameIntermediateResultComponent implements OnInit {
         console.log('this.drawingService', this.drawingService.results);
         console.log('total_score', totalScore);
         this.multiplayerService.stateInfo = { ...this.multiplayerService.stateInfo, score: totalScore };
-        this.multiplayerService.endGame();
+        this.multiplayerService.endGame(totalScore);
       }
     }
   }
