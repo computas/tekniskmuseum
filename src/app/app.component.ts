@@ -3,7 +3,6 @@ import { Subject } from 'rxjs';
 import { Router } from '@angular/router';
 import { MatDialog } from '@angular/material/dialog';
 import { IdleTimeoutComponent } from './idle-timeout/idle-timeout.component';
-import { Component } from '@angular/core';
 
 import { routeTransitionAnimations } from './route-transition-animations';
 
