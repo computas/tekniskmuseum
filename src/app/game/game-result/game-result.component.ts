@@ -22,35 +22,13 @@ export class GameResultComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
-    this.highScoreService.getAllHighScores().subscribe((res) => {});
+    const totalScore = this.drawingService.results.reduce((accumulator: any, currentValue: any) => {
+      return accumulator.score + currentValue.score;
+    });
     if (this.router.url === '/summary') {
       this.results = this.drawingService.get();
     } else {
       this.results = this.drawingService.results;
     }
-    this.highScoreService.get().subscribe((res) => {
-      this.dailyHighScores = res;
-      this.loading = false;
-    });
-    this.highScoreService.submitHighScore$.subscribe((res) => {
-      if (res.submit) {
-        const entry: Entry = {
-          name: res.name,
-          playerid: this.drawingService.playerid,
-        };
-        this.highScoreService.endGame(entry).subscribe((response) => {});
-      }
-    });
-  }
-  submitHighScore() {}
-  click() {
-    this.highScoreService.submitHighScore = { name: this.value, submit: true };
-
-    /*
-    const player = this.highscoreService.findScoreOfNewUser();
-    if (player) {
-      player.name = this.value;
-    }
-  */
   }
 }
