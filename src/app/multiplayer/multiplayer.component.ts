@@ -18,6 +18,7 @@ export class MultiplayerComponent implements OnInit, OnDestroy {
     private router: Router
   ) {}
   destination = '/';
+  otherPlayer = undefined;
   stateInfoSubscription: Subscription;
   playerDisconnectedSubscription: Subscription;
   roundOverSubscription: Subscription;
@@ -41,8 +42,10 @@ export class MultiplayerComponent implements OnInit, OnDestroy {
         window.location.href = this.destination;
       }
     });
-    this.endGameSubscription = this.multiplayerService.endGameListener().subscribe((data) => {
+    this.endGameSubscription = this.multiplayerService.endGameListener().subscribe((data: string) => {
       console.warn('GAME IS OVER', data);
+      const otherplayer = JSON.parse(data);
+      this.multiplayerService._oppentScore.next(otherplayer);
     });
   }
 

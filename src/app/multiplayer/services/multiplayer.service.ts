@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { WebSocketService } from './web-socket.service';
-import { BehaviorSubject } from 'rxjs';
+import { BehaviorSubject, Subject } from 'rxjs';
 import { map, take } from 'rxjs/operators';
 
 export enum GAMELEVEL {
@@ -48,6 +48,8 @@ export class MultiplayerService {
   private readonly _stateInfo = new BehaviorSubject<GameState>(this.initialState);
 
   readonly stateInfo$ = this._stateInfo.asObservable();
+
+  public _oppentScore = new Subject<any>();
 
   constructor(private webSocketService: WebSocketService) {}
 
