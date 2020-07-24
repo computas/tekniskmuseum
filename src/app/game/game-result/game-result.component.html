@@ -1,5 +1,7 @@
 <div class="result-container">
-  <h1 id="result-header">Ditt resultat:</h1>
+  <h1 *ngIf="ismultiplayer && hasWon" id="result-header">Vinner</h1>
+  <h1 *ngIf="ismultiplayer && !hasWon" id="result-header">Andreplass</h1>
+  <h1 *ngIf="!ismultiplayer" id="result-header">Ditt resultat:</h1>
   <div class="result-section">
     <div id="result-card-container">
       <div id="result-card" *ngFor="let result of results">

@@ -16,6 +16,8 @@ export class GameResultComponent implements OnInit {
   totalScore: number;
   loading: boolean;
   value = '';
+  hasWon = true;
+  ismultiplayer = false;
   constructor(
     private drawingService: DrawingService,
     private multiplayerService: MultiplayerService,
@@ -24,9 +26,17 @@ export class GameResultComponent implements OnInit {
 
   ngOnInit(): void {
     if (this.multiplayerService.isMultiplayer) {
-      const totalScore = this.drawingService.results.reduce((accumulator: any, currentValue: any) => {
-        return accumulator + currentValue.score;
-      }, 0);
+      this.ismultiplayer = true;
+      this.multiplayerService._oppentScore.subscribe((val) => {
+        if (val && val.score) {
+          if (typeof this.multiplayerService.stateInfo.score === 'undefined') {
+            this.hasWon = false;
+          } else {
+            this.hasWon = this.multiplayerService.stateInfo.score >= val.score;
+          }
+        }
+        console.log('oppnent score from result', val);
+      });
     }
 
     if (this.router.url === '/summary') {
