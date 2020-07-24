@@ -219,7 +219,6 @@ export class GameDrawComponent implements OnInit, OnDestroy {
         if (this.multiplayerService.isMultiplayer) {
           console.log('COMPLETEEVENT');
           this.updateResultAtEndOfGame();
-          //this.classifyMultiplayer();
         }
       },
     });
