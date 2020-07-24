@@ -33,7 +33,7 @@ export class GameDrawComponent implements OnInit, OnDestroy {
 
   isDrawing = false;
   hasLeftCanvas = false;
-  timeLeft = 5.0;
+  timeLeft = 20.0;
 
   score = 333;
 
@@ -114,7 +114,8 @@ export class GameDrawComponent implements OnInit, OnDestroy {
   updateResultAtEndOfGame() {
     if (!this.hasUpdatedState) {
       console.log('SHOULD ONLY RUN ONCE');
-      if (this.prediction.hasWone) {
+      console.log('this.prediction', this.prediction);
+      if (this.prediction.hasWon) {
         this.hasWonFunction(this.prediction);
       } else {
         this.hasLossFunction();
