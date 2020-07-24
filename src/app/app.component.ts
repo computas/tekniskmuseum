@@ -59,6 +59,5 @@ export class AppComponent implements OnInit {
   prepareRoute(outlet: RouterOutlet) {
     const animationState = 'animationState';
     return outlet && outlet.activatedRouteData && outlet.activatedRouteData[animationState];
-
   }
 }
