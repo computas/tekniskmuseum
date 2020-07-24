@@ -62,6 +62,7 @@ export class GameDrawComponent implements OnInit, OnDestroy {
 
   roundOverSubscription: Subscription;
   predictionSubscription: Subscription;
+  hasUpdatedState = false;
 
   constructor(
     private imageService: ImageService,
@@ -100,24 +101,7 @@ export class GameDrawComponent implements OnInit, OnDestroy {
           }
         }
         if (multiplayerGameState) {
-          console.log('SHOULD ONLY RUN ONCE');
-          if (!this.hasAddedResult) {
-            this.drawingService.addResult(this.result);
-            this.hasAddedResult = true;
-          }
-          this.drawingService.guessUsed++;
-          const guess = this.multiplayerService.stateInfo.guessUsed;
-          const guessUsed = guess ? guess : 0;
-
-          this.multiplayerService.stateInfo = {
-            ...this.multiplayerService.stateInfo,
-            guessUsed: guessUsed + 1,
-            gameLevel: GAMELEVEL.intermediateResult,
-          };
-          this.multiplayerService.stateInfo = {
-            ...this.multiplayerService.stateInfo,
-            gameLevel: GAMELEVEL.intermediateResult,
-          };
+          this.updateResultAtEndOfGame();
         }
       });
       this.roundOverSubscription = this.multiplayerService.roundOverListener().subscribe((roundOver: any) => {
@@ -128,19 +112,27 @@ export class GameDrawComponent implements OnInit, OnDestroy {
   }
 
   updateResultAtEndOfGame() {
-    console.log('SHOULD ONLY RUN ONCE');
-    if (!this.hasAddedResult) {
-      this.drawingService.addResult(this.result);
-      this.hasAddedResult = true;
+    if (!this.hasUpdatedState) {
+      console.log('SHOULD ONLY RUN ONCE');
+      if (this.prediction.hasWone) {
+        this.hasWonFunction(this.prediction);
+      } else {
+        this.hasLossFunction();
+      }
+      if (!this.hasAddedResult) {
+        this.drawingService.addResult(this.result);
+        this.hasAddedResult = true;
+      }
+      this.drawingService.guessUsed++;
+      const guess = this.multiplayerService.stateInfo.guessUsed;
+      const guessUsed = guess ? guess : 0;
+      this.multiplayerService.stateInfo = {
+        ...this.multiplayerService.stateInfo,
+        guessUsed: guessUsed + 1,
+        gameLevel: GAMELEVEL.intermediateResult,
+      };
     }
-    this.drawingService.guessUsed++;
-    const guess = this.multiplayerService.stateInfo.guessUsed;
-    const guessUsed = guess ? guess : 0;
-    this.multiplayerService.stateInfo = {
-      ...this.multiplayerService.stateInfo,
-      guessUsed: guessUsed + 1,
-      gameLevel: GAMELEVEL.intermediateResult,
-    };
+    this.hasUpdatedState = true;
   }
 
   hasWonFunction(prediction) {
@@ -222,7 +214,8 @@ export class GameDrawComponent implements OnInit, OnDestroy {
         this.timeOut = true;
         if (this.multiplayerService.isMultiplayer) {
           console.log('COMPLETEEVENT');
-          this.classifyMultiplayer();
+          this.updateResultAtEndOfGame();
+          //this.classifyMultiplayer();
         }
       },
     });
