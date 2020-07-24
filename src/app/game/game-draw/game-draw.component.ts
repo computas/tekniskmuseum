@@ -45,7 +45,7 @@ export class GameDrawComponent implements OnInit, OnDestroy {
   clockColor = 'initial';
   private readonly resultImageSize = 1024;
 
-  private readonly LINE_WIDTH = 10;
+  private readonly LINE_WIDTH = 6;
 
   private readonly _timeOut = new BehaviorSubject<boolean>(false);
   readonly _timeOut$ = this._timeOut.asObservable();

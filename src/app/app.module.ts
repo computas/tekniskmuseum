@@ -10,6 +10,7 @@ import { GameModeModule } from './game-mode/game-mode.module';
 import { MultiplayerModule } from './multiplayer/multiplayer.module';
 import { ServiceWorkerModule } from '@angular/service-worker';
 import { environment } from '../environments/environment';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 @NgModule({
   declarations: [AppComponent],
@@ -23,6 +24,7 @@ import { environment } from '../environments/environment';
     GameModeModule,
     MultiplayerModule,
     ServiceWorkerModule.register('ngsw-worker.js', { enabled: environment.production }),
+    BrowserAnimationsModule,
   ],
   providers: [HttpClientModule],
   bootstrap: [AppComponent],

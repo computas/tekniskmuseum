@@ -12,6 +12,7 @@ const routes: Routes = [
   {
     path: r.LANDING,
     component: WelcomeComponent,
+    data: { animationState: 'welcome' },
   },
   {
     path: r.GAMEMODE,
@@ -20,6 +21,7 @@ const routes: Routes = [
   {
     path: r.SINGLEPLAYER,
     component: GameComponent,
+    data: { animationState: 'game' },
   },
   {
     path: r.MULTIPLAYER,
