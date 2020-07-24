@@ -16,7 +16,7 @@ export class GameResultComponent implements OnInit {
   totalScore: number;
   loading: boolean;
   value = '';
-  hasWon = true;
+  hasWon: boolean;
   ismultiplayer = false;
   constructor(
     private drawingService: DrawingService,
