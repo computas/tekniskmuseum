@@ -152,6 +152,9 @@ export class InfoComponent implements OnInit {
         if (res.status) {
           this.router.navigate(['admin']);
           this.openSnackBar('Du er logget ut!');
+        } else {
+          this.router.navigate(['admin']);
+          this.openSnackBar('En feil har oppstådd!');
         }
       },
       (error) => {
