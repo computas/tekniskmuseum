@@ -8,10 +8,25 @@ import { GameModule } from './game/game.module';
 import { HighScoreModule } from './highscore/highscore.module';
 import { ServiceWorkerModule } from '@angular/service-worker';
 import { environment } from '../environments/environment';
+import { AdminComponent } from './admin/admin.component';
+import { InfoComponent } from './admin/info/info.component';
+import { MatSnackBarModule } from '@angular/material/snack-bar';
+import { MatDialogModule } from '@angular/material/dialog';
+import { InfoDialogComponent } from './admin/info-dialog/info-dialog.component';
 
 @NgModule({
-  declarations: [AppComponent],
-  imports: [BrowserModule, HttpClientModule, AppRoutingModule, WelcomeModule, GameModule, HighScoreModule, ServiceWorkerModule.register('ngsw-worker.js', { enabled: environment.production })],
+  declarations: [AppComponent, AdminComponent, InfoComponent, InfoDialogComponent],
+  imports: [
+    BrowserModule,
+    HttpClientModule,
+    AppRoutingModule,
+    WelcomeModule,
+    GameModule,
+    HighScoreModule,
+    ServiceWorkerModule.register('ngsw-worker.js', { enabled: environment.production }),
+    MatSnackBarModule,
+    MatDialogModule,
+  ],
   providers: [HttpClientModule],
   bootstrap: [AppComponent],
 })
