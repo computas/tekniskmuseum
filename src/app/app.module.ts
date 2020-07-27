@@ -13,6 +13,8 @@ import { InfoComponent } from './admin/info/info.component';
 import { MatSnackBarModule } from '@angular/material/snack-bar';
 import { MatDialogModule } from '@angular/material/dialog';
 import { InfoDialogComponent } from './admin/info-dialog/info-dialog.component';
+import { DialogExampleComponent } from './admin/info-dialog/info-dialog.component';
+import { MAT_DIALOG_DATA } from '@angular/material/dialog';
 
 @NgModule({
   declarations: [AppComponent, AdminComponent, InfoComponent, InfoDialogComponent],
@@ -27,7 +29,12 @@ import { InfoDialogComponent } from './admin/info-dialog/info-dialog.component';
     MatSnackBarModule,
     MatDialogModule,
   ],
-  providers: [HttpClientModule, InfoDialogComponent],
+  providers: [
+    HttpClientModule,
+    InfoDialogComponent,
+    DialogExampleComponent,
+    { provide: MAT_DIALOG_DATA, useValue: {} },
+  ],
   bootstrap: [AppComponent],
 })
 export class AppModule {}
