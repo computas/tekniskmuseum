@@ -1,23 +1,24 @@
-import { Component, OnInit, Inject } from '@angular/core';
-import { MatDialog, MAT_DIALOG_DATA } from '@angular/material/dialog';
+import { Component } from '@angular/core';
+import { MatDialog } from '@angular/material/dialog';
 
+/**
+ * @title Dialog elements
+ */
 @Component({
   selector: 'app-info-dialog',
   templateUrl: './info-dialog.component.html',
   styleUrls: ['./info-dialog.component.scss'],
 })
-export class InfoDialogComponent implements OnInit {
+export class InfoDialogComponent {
   constructor(public dialog: MatDialog) {}
 
   openDialog() {
-    this.dialog.open(DialogElementsComponent);
+    this.dialog.open(DialogExampleComponent);
   }
-
-  ngOnInit(): void {}
 }
 
 @Component({
-  selector: 'app-info-example-dialog',
-  templateUrl: 'info-dialog.component.html',
+  selector: 'app-info-dialog-example',
+  templateUrl: 'app-info-dialog-example.html',
 })
-export class DialogElementsComponent {}
+export class DialogExampleComponent {}
