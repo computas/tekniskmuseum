@@ -1,5 +1,6 @@
 <div class="word-container">
   <div class="words-remaining">{{ guessUsed }}/3</div>
+  <h1 class="playernr">Spiller {{ playernr }}</h1>
   <button mat-fab (click)="speakWord()" type="button" value="Play" color="primary" class="tts-button">
     <mat-icon>volume_up</mat-icon>
   </button>
@@ -9,8 +10,8 @@
       <mat-spinner class="white-spinner" id="white"></mat-spinner>
     </div>
     <div *ngIf="word">
-      <h1 class="word-to-guess">{{ word | uppercase }}</h1>
-      <h1 *ngIf="isMultiPlayer" class="timer">{{ timeLeft }}</h1>
+      <h1 class="word-to-guess header">{{ word | uppercase }}</h1>
+      <h1 *ngIf="isMultiPlayer" class="timer header">{{ timeLeft }}</h1>
     </div>
   </div>
   <div class="word-footer">

@@ -30,6 +30,7 @@ export class GameWordToDrawComponent implements OnInit {
   timeLeft = 5;
 
   loading = true;
+  playernr: string;
   ngOnInit(): void {
     if (this.router.url === `/${routes.SINGLEPLAYER}`) {
       this.isSinglePlayer = true;
@@ -57,6 +58,8 @@ export class GameWordToDrawComponent implements OnInit {
       }
     }
     if (this.isMultiPlayer) {
+      const player = this.multiplayerService.stateInfo.player_nr;
+      this.playernr = player === 'player_1' ? '1' : '2';
       this.guessUsed = this.drawingService.guessUsed;
       this.multiplayerService.getLabel().subscribe((label) => {
         if (label) {
