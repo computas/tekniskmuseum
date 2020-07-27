@@ -169,7 +169,7 @@ export class GameDrawComponent implements OnInit, OnDestroy {
         this.drawingService.classify(formData).subscribe((res) => {
           const sortedCertaintyArr = this.sortOnCertainty(res);
           if (sortedCertaintyArr && sortedCertaintyArr.length > 1) {
-            this.AI_GUESS = sortedCertaintyArr[0].label;
+            (sortedCertaintyArr[0].label === this.guessWord) ? this.AI_GUESS = sortedCertaintyArr[1].label : this.AI_GUESS = sortedCertaintyArr[0].label;
           }
           if (res.roundIsDone) {
             this.playResultSound(res.hasWon);
