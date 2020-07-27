@@ -104,11 +104,23 @@ p {
   color: #fa852f;
   font-weight: 500;
 }
+.loser {
+  color: #fa852f;
+  font-weight: 500;
+}
 .winner-points {
 }
 .winner-img {
   height: 100px;
   background: blue;
+}
+.loser-img {
+  height: 100px;
+  background: blue;
+}
+.multiplayer-score {
+  color: #195272;
+  font-weight: normal;
 }
 @media (max-width: 568px) {
 }
