@@ -28,8 +28,8 @@ export class GameResultComponent implements OnInit {
   ngOnInit(): void {
     if (this.multiplayerService.isMultiplayer) {
       this.ismultiplayer = true;
-      this.multiplayerService._oppentScore.subscribe((val) => {
-        if (val && val.score) {
+      this.multiplayerService._opponentScore.subscribe((val) => {
+        if (val) {
           if (this.multiplayerService.stateInfo.score) {
             this.hasWon = this.multiplayerService.stateInfo.score >= val.score;
             this.score = val.score;
@@ -37,7 +37,6 @@ export class GameResultComponent implements OnInit {
             this.hasWon = false;
           }
         }
-        console.log('oppnent score from result', val);
       });
     }
 

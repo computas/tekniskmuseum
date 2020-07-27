@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { WebSocketService } from './web-socket.service';
-import { BehaviorSubject, Subject } from 'rxjs';
+import { BehaviorSubject, ReplaySubject } from 'rxjs';
 import { map, take } from 'rxjs/operators';
 
 export enum GAMELEVEL {
@@ -32,8 +32,7 @@ export class MultiplayerService {
   public label = '';
   public isMultiplayer = false;
   roundIsOver = false;
-  score = 100;
-  name = 'Ole';
+
   private initialState: GameState = {
     player_nr: undefined,
     gameLevel: GAMELEVEL.lobby,
@@ -49,7 +48,7 @@ export class MultiplayerService {
 
   readonly stateInfo$ = this._stateInfo.asObservable();
 
-  public _oppentScore = new Subject<any>();
+  public _opponentScore = new ReplaySubject<any>(1);
 
   constructor(private webSocketService: WebSocketService) {}
 
@@ -93,7 +92,6 @@ export class MultiplayerService {
   }
 
   endGameListener() {
-    console.log('LISTENING TO ENDGAME');
     return this.webSocketService.listen('endGame');
   }
 
