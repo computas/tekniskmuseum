@@ -10,7 +10,7 @@ import { InfoDialogComponent } from './../info-dialog/info-dialog.component';
   styleUrls: ['./info.component.scss'],
 })
 export class InfoComponent implements OnInit {
-  datasetString = 'Nullstill treningssett';
+  datasetString = 'Nullstill treningssett til originalen';
   datasetBool = false;
   retrainString = 'Tren maskinlæringsmodellen';
   retrainBool = false;
@@ -39,7 +39,7 @@ export class InfoComponent implements OnInit {
       this.loginService.revertDataset().subscribe(
         (res: any) => {
           if (res.status) {
-            msg = 'Suksess! treningssett tilbakestilt!';
+            msg = 'Suksess! treningssett tilbakestilles (dette kan ta noen minutter)';
           } else {
             msg = this.errorMsg;
           }
@@ -65,7 +65,7 @@ export class InfoComponent implements OnInit {
       this.loginService.revertDataset().subscribe(
         (res: any) => {
           if (res.status) {
-            msg = 'Suksess! Modellen blir trent!';
+            msg = 'Suksess! Modellen blir trent (dette kan ta noen minutter)';
           } else {
             msg = this.errorMsg;
           }
@@ -91,7 +91,7 @@ export class InfoComponent implements OnInit {
       this.loginService.revertDataset().subscribe(
         (res: any) => {
           if (res.status) {
-            msg = 'Suksess! Poengliste nullstilt!';
+            msg = 'Suksess! Poengliste nullstilles (dette kan ta noen minutter)';
           } else {
             msg = this.errorMsg;
           }
@@ -147,13 +147,14 @@ export class InfoComponent implements OnInit {
   getInformation() {
     this.loginService.getStatus().subscribe(
       (res: any) => {
-        this._dialog.openDialog('test1', 'test2', 'test3');
+        const data = JSON.parse(res);
+        const name = data.CV_iteration_name;
+        const time = data.CV_time_created;
+        const count = data.BLOB_IMAGE_COUNT;
+        this._dialog.openDialog(name, time, count);
       },
       (error) => {
-        // This is correct
         this.openSnackBar(this.errorMsg);
-        // load mock-card with mock information
-        this._dialog.openDialog('test1', 'test2', 'test3');
       }
     );
   }
