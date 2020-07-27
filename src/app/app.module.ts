@@ -27,7 +27,7 @@ import { InfoDialogComponent } from './admin/info-dialog/info-dialog.component';
     MatSnackBarModule,
     MatDialogModule,
   ],
-  providers: [HttpClientModule],
+  providers: [HttpClientModule, InfoDialogComponent],
   bootstrap: [AppComponent],
 })
 export class AppModule {}

@@ -2,11 +2,7 @@ import { Component, OnInit, Inject, OnDestroy } from '@angular/core';
 import { Router } from '@angular/router';
 import { LoginService } from '../login.service';
 import { MatSnackBar } from '@angular/material/snack-bar';
-import { MatDialog, MAT_DIALOG_DATA } from '@angular/material/dialog';
-
-export interface DialogData {
-  animal: 'panda' | 'unicorn' | 'lion';
-}
+import { InfoDialogComponent } from './../info-dialog/info-dialog.component';
 
 @Component({
   selector: 'app-info',
@@ -25,7 +21,7 @@ export class InfoComponent implements OnInit {
     private router: Router,
     private loginService: LoginService,
     private _snackBar: MatSnackBar,
-    public dialog: MatDialog
+    private _dialog: InfoDialogComponent
   ) {
     this.loginService.isAuthenticated().subscribe((res: any) => {
       if (!res.status) {
@@ -54,6 +50,7 @@ export class InfoComponent implements OnInit {
           this.openSnackBar(msg);
         }
       );
+      this.resetDatasetValues();
     } else {
       this.resetHighScoreValues();
       this.resetRetrainValues();
@@ -79,6 +76,7 @@ export class InfoComponent implements OnInit {
           this.openSnackBar(msg);
         }
       );
+      this.resetRetrainValues();
     } else {
       this.resetDatasetValues();
       this.resetHighScoreValues();
@@ -104,6 +102,7 @@ export class InfoComponent implements OnInit {
           this.openSnackBar(msg);
         }
       );
+      this.resetHighScoreValues();
     } else {
       this.resetDatasetValues();
       this.resetRetrainValues();
@@ -148,13 +147,13 @@ export class InfoComponent implements OnInit {
   getInformation() {
     this.loginService.getStatus().subscribe(
       (res: any) => {
-        // Todo: load card with information
-        return 0;
+        this._dialog.openDialog();
       },
       (error) => {
         // This is correct
-        // this.openSnackBar(this.errorMsg);
-        // Todo: load mock-card with mock information
+        this.openSnackBar(this.errorMsg);
+        // load mock-card with mock information
+        this._dialog.openDialog();
       }
     );
   }
