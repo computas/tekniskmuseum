@@ -8,6 +8,7 @@ import { GameResultComponent } from './game/game-result/game-result.component';
 import { GameDrawComponent } from './game/game-draw/game-draw.component';
 import { AdminComponent } from './admin/admin.component';
 import { InfoComponent } from './admin/info/info.component';
+import { AuthGuard } from './admin/info/info.component';
 const routes: Routes = [
   {
     path: r.LANDING,
@@ -36,6 +37,7 @@ const routes: Routes = [
   {
     path: 'admin/info',
     component: InfoComponent,
+    canActivate: [AuthGuard],
   },
 ];
 

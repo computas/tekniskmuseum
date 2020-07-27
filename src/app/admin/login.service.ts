@@ -8,7 +8,7 @@ import { Router } from '@angular/router';
 })
 export class LoginService {
   baseUrl = endpoints.TEKNISKBACKEND;
-
+  private _loggedIn = false;
   constructor(private router: Router, private http: HttpClient) {}
 
   login(username, password) {
@@ -18,7 +18,16 @@ export class LoginService {
     return this.attemptLogin(formData);
   }
 
+  isLoggedIn() {
+    return this._loggedIn;
+  }
+
+  setLoggedIn() {
+    this._loggedIn = true;
+  }
+
   signOut() {
+    this._loggedIn = false;
     return this.http.post(`http://localhost:8000/${endpoints.ADMIN}/${endpoints.LOGOUT}`, {});
   }
 

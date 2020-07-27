@@ -18,6 +18,7 @@ export class AdminComponent implements OnInit {
     this.loginService.login(username, password).subscribe(
       (res: any) => {
         if (res.status) {
+          this.loginService.setLoggedIn();
           this.router.navigate(['admin/info']);
         } else {
           this.openSnackBar('Feil brukernavn eller passord!');
@@ -27,6 +28,8 @@ export class AdminComponent implements OnInit {
         this.openSnackBar('En feil har oppstådd!');
       }
     );
+    this.loginService.setLoggedIn();
+    this.router.navigate(['admin/info']);
   }
 
   openSnackBar(msg = 'suksess!') {

@@ -15,6 +15,7 @@ import { MatDialogModule } from '@angular/material/dialog';
 import { InfoDialogComponent } from './admin/info-dialog/info-dialog.component';
 import { DialogComponent } from './admin/info-dialog/info-dialog.component';
 import { MAT_DIALOG_DATA } from '@angular/material/dialog';
+import { AuthGuard } from './admin/info/info.component';
 
 @NgModule({
   declarations: [AppComponent, AdminComponent, InfoComponent, InfoDialogComponent],
@@ -29,7 +30,13 @@ import { MAT_DIALOG_DATA } from '@angular/material/dialog';
     MatSnackBarModule,
     MatDialogModule,
   ],
-  providers: [HttpClientModule, InfoDialogComponent, DialogComponent, { provide: MAT_DIALOG_DATA, useValue: {} }],
+  providers: [
+    HttpClientModule,
+    InfoDialogComponent,
+    DialogComponent,
+    AuthGuard,
+    { provide: MAT_DIALOG_DATA, useValue: {} },
+  ],
   bootstrap: [AppComponent],
 })
 export class AppModule {}
