@@ -96,7 +96,6 @@ export class GameDrawComponent implements OnInit, OnDestroy {
         } else {
           if (prediction && prediction.hasWon) {
             this.hasWonFunction(prediction);
-            console.log('haswon');
             multiplayerGameState = true;
           }
         }
@@ -104,17 +103,13 @@ export class GameDrawComponent implements OnInit, OnDestroy {
           this.updateResultAtEndOfGame();
         }
       });
-      this.roundOverSubscription = this.multiplayerService.roundOverListener().subscribe((roundOver: any) => {
-        console.log('ROUND_OVER', roundOver);
-      });
+      this.roundOverSubscription = this.multiplayerService.roundOverListener().subscribe((roundOver: any) => {});
     }
     this.startGame();
   }
 
   updateResultAtEndOfGame() {
     if (!this.hasUpdatedState) {
-      console.log('SHOULD ONLY RUN ONCE');
-      console.log('this.prediction', this.prediction);
       if (this.prediction && this.prediction.hasWon) {
         this.hasWonFunction(this.prediction);
       } else {
@@ -146,7 +141,6 @@ export class GameDrawComponent implements OnInit, OnDestroy {
       score: this.getScore(),
       word: this.multiplayerService.stateInfo.label,
     };
-    console.log('hasWonFunction', obj);
     this.createResultAndResize(obj);
   }
 
@@ -159,7 +153,6 @@ export class GameDrawComponent implements OnInit, OnDestroy {
       score: 0,
       word: this.multiplayerService.stateInfo.label,
     };
-    console.log('hasLossfunction', obj);
     this.createResultAndResize(obj);
   }
   createResultAndResize(obj) {
@@ -172,8 +165,6 @@ export class GameDrawComponent implements OnInit, OnDestroy {
 
   getScore() {
     const score = this.score > 0 ? this.score : 0;
-    console.log('this.score', this.score);
-    console.log('score', score);
     return Math.round(score);
   }
 
@@ -219,7 +210,6 @@ export class GameDrawComponent implements OnInit, OnDestroy {
         this.sound.stop();
         this.timeOut = true;
         if (this.multiplayerService.isMultiplayer) {
-          console.log('COMPLETEEVENT');
           this.updateResultAtEndOfGame();
         }
       },

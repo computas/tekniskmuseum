@@ -36,6 +36,10 @@ const routes: Routes = [
     component: GameResultComponent,
   },
   {
+    path: 'summary/multiplayer',
+    component: GameResultComponent,
+  },
+  {
     path: 'drawing',
     component: GameDrawComponent,
   },

@@ -48,7 +48,11 @@ export class WebSocketService {
   }
 
   disconnect() {
-    this.socket.disconnect();
+    if (this.socket && !this.socket.disconnected) {
+      console.warn('socket disconnecting and removing listener');
+      this.socket.removeAllListeners();
+      this.socket.disconnect();
+    }
   }
 
   listen(eventName: string) {

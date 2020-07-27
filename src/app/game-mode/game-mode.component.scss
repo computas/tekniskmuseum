@@ -82,6 +82,11 @@ a {
     left: 65px;
   }
 }
+@media (max-width: 600px) {
+  .game-mode-container {
+    flex-direction: column;
+  }
+}
 .tts-button {
   top: 0;
   position: absolute;

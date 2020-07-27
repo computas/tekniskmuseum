@@ -1,7 +1,22 @@
 <div class="result-container">
   <div>{{ score }}</div>
-  <h1 *ngIf="ismultiplayer && hasWon" id="result-header">Vinner</h1>
-  <h1 *ngIf="ismultiplayer && !hasWon" id="result-header">Andreplass</h1>
+
+  <div *ngIf="ismultiplayer && hasWon" id="result-header" class="result-header-multi">
+    <img src="../../../assets/avatar-welcome.svg" alt="Avatar won" class="winner-img" />
+    <h1 class="result-header-multi">
+      <span class="winner">VINNER!</span>
+      <span class="winner-points">&nbsp;Du fikk: 121 poeng</span>
+    </h1>
+    <img src="../../../assets/avatar-welcome.svg" alt="Avatar won" class="winner-img" />
+  </div>
+  <div *ngIf="ismultiplayer && !hasWon" id="result-header" class="result-header-multi">
+    <img src="../../../assets/avatar-welcome.svg" alt="Avatar lost" class="loser-img" />
+    <h1 class="result-header-multi">
+      <span class="loser">ANDREPLASS!</span>
+      <span class="loser-points">&nbsp;Du fikk: 120 poeng</span>
+    </h1>
+    <img src="../../../assets/avatar-welcome.svg" alt="Avatar lost" class="loser-img" />
+  </div>
   <h1 *ngIf="!ismultiplayer" id="result-header">Ditt resultat:</h1>
   <div class="result-section">
     <div id="result-card-container">
@@ -18,7 +33,10 @@
           <span *ngIf="!result.hasWon" class="material-icons" id="loss">
             clear
           </span>
-          <span *ngIf="result.word">{{ result.word | titlecase }}</span>
+          <span *ngIf="result.word"
+            >{{ result.word | titlecase }}
+            <span *ngIf="ismultiplayer" class="multiplayer-score"> {{ result.score }} p</span></span
+          >
         </p>
       </div>
     </div>

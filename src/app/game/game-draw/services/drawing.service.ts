@@ -99,6 +99,13 @@ export class DrawingService {
     this.results = [...this.results, result];
   }
 
+  clearState() {
+    this.guessUsed = 1;
+    this.gameOver = false;
+    this.guessDone = false;
+    this.results = [];
+  }
+
   get lastResult(): Result {
     return this.results[this.results.length - 1];
   }

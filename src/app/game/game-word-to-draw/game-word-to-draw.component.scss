@@ -85,10 +85,17 @@
   background: #ecf8ff;
   color: #14213d;
 }
-h1 {
+.header {
   font-size: 5em;
   margin-top: 40px;
 }
 p {
   font-size: 2em;
+}
+.playernr {
+  top: 0px;
+  position: absolute;
+  padding: 35px;
+  color: #fee500;
+  font-weight: 500;
 }

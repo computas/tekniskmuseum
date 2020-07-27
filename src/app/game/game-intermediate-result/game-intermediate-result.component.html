@@ -37,15 +37,9 @@
         >
           Neste ord
         </button>
-        <button
-          *ngIf="!gameOver && isMultiplayer && waitingForPlayer"
-          mat-raised-button
-          disabled
-          class="next-word-button"
-          (click)="newDrawing()"
-        >
+        <h1 class="waiting" *ngIf="!gameOver && isMultiplayer && waitingForPlayer">
           Venter på spiller
-        </button>
+        </h1>
       </div>
     </ng-container>
     <ng-template #loading>
