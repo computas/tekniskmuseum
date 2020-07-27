@@ -32,6 +32,7 @@ export class GameDrawComponent implements OnInit, OnDestroy {
   isDrawing = false;
   hasLeftCanvas = false;
   timeLeft = 20.0;
+  isBlankImage = true;
 
   score = 333;
 
@@ -43,7 +44,7 @@ export class GameDrawComponent implements OnInit, OnDestroy {
   clockColor = 'initial';
   private readonly resultImageSize = 1024;
 
-  private readonly LINE_WIDTH = 10;
+  private readonly LINE_WIDTH = 6;
 
   private readonly _timeOut = new BehaviorSubject<boolean>(false);
   readonly _timeOut$ = this._timeOut.asObservable();
@@ -54,7 +55,7 @@ export class GameDrawComponent implements OnInit, OnDestroy {
   guessWord: string;
   AI_GUESS: string;
 
-  constructor(private imageService: ImageService, private drawingService: DrawingService) {}
+  constructor(private imageService: ImageService, private drawingService: DrawingService) { }
 
   ngOnInit(): void {
     const ctx = this.canvas.nativeElement.getContext('2d');
@@ -87,7 +88,9 @@ export class GameDrawComponent implements OnInit, OnDestroy {
     this.drawingService.classificationDone = false;
     this.createDrawingTimer().subscribe({
       next: (val) => {
-        this.classify();
+        if (!this.isBlankImage || this.isBlankImage && this.timeLeft === 0) {
+          this.classify();
+        }
       },
       complete: () => {
         this.clockColor = this.clockColor === 'initial' ? 'final' : 'initial';
@@ -110,7 +113,7 @@ export class GameDrawComponent implements OnInit, OnDestroy {
             this.score = this.score - 1.67336683417;
             if (tics % 10 === 9) {
               this.timeLeft--;
-              if (this.timeLeft < 17) {
+              if (this.timeLeft < 16) {
                 observer.next('classify');
               }
             }
@@ -240,6 +243,8 @@ export class GameDrawComponent implements OnInit, OnDestroy {
     this.ctx.lineTo(currentX, currentY);
     this.ctx.stroke();
 
+    this.isBlankImage = false;
+
     if (currentX < this.minX) {
       this.minX = currentX;
     }
@@ -270,6 +275,7 @@ export class GameDrawComponent implements OnInit, OnDestroy {
   clear() {
     const canvas = this.canvas.nativeElement;
     this.ctx.clearRect(0, 0, canvas.width, canvas.height);
+    this.isBlankImage = true;
     this.resetMinMaxMouseValues();
   }
 

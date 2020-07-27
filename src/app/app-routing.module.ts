@@ -13,10 +13,12 @@ const routes: Routes = [
   {
     path: r.LANDING,
     component: WelcomeComponent,
+    data: { animationState: 'welcome' },
   },
   {
     path: r.PLAYGAME,
     component: GameComponent,
+    data: { animationState: 'game' },
   },
   {
     path: r.HIGHSCORE,
