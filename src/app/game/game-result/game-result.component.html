@@ -1,11 +1,9 @@
 <div class="result-container">
-  <div>{{ score }}</div>
-
   <div *ngIf="ismultiplayer && hasWon" id="result-header" class="result-header-multi">
     <img src="../../../assets/avatar-welcome.svg" alt="Avatar won" class="winner-img" />
     <h1 class="result-header-multi">
       <span class="winner">VINNER!</span>
-      <span class="winner-points">&nbsp;Du fikk: 121 poeng</span>
+      <span class="winner-points">&nbsp;Du fikk: {{ score }} poeng</span>
     </h1>
     <img src="../../../assets/avatar-welcome.svg" alt="Avatar won" class="winner-img" />
   </div>
@@ -13,7 +11,7 @@
     <img src="../../../assets/avatar-welcome.svg" alt="Avatar lost" class="loser-img" />
     <h1 class="result-header-multi">
       <span class="loser">ANDREPLASS!</span>
-      <span class="loser-points">&nbsp;Du fikk: 120 poeng</span>
+      <span class="loser-points">&nbsp;Du fikk: {{ score }}</span>
     </h1>
     <img src="../../../assets/avatar-welcome.svg" alt="Avatar lost" class="loser-img" />
   </div>

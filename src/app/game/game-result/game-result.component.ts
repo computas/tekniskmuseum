@@ -18,7 +18,7 @@ export class GameResultComponent implements OnInit {
   value = '';
   hasWon: boolean;
   ismultiplayer = false;
-  score: 0;
+  score: number = 0;
   constructor(
     private drawingService: DrawingService,
     private multiplayerService: MultiplayerService,
@@ -32,7 +32,7 @@ export class GameResultComponent implements OnInit {
         if (val) {
           if (this.multiplayerService.stateInfo.score) {
             this.hasWon = this.multiplayerService.stateInfo.score >= val.score;
-            this.score = val.score;
+            this.score = this.multiplayerService.stateInfo.score;
           } else {
             this.hasWon = false;
           }
