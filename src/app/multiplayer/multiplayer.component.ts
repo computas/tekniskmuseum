@@ -31,7 +31,6 @@ export class MultiplayerComponent implements OnInit, OnDestroy {
     this.webSocketService.startSockets();
     this.gameLevel = this.multiplayerService.stateInfo.gameLevel;
     this.roundOverSubscription = this.multiplayerService.roundOverListener().subscribe((roundOver: any) => {
-      console.warn('round is over', roundOver);
       this.multiplayerService.stateInfo = { ...this.multiplayerService.stateInfo, ready: true };
     });
     this.stateInfoSubscription = this.multiplayerService.stateInfo$.subscribe((data) => {
@@ -43,9 +42,8 @@ export class MultiplayerComponent implements OnInit, OnDestroy {
       }
     });
     this.endGameSubscription = this.multiplayerService.endGameListener().subscribe((data: string) => {
-      console.warn('GAME IS OVER', data);
       const otherplayer = JSON.parse(data);
-      this.multiplayerService._oppentScore.next(otherplayer);
+      this.multiplayerService._opponentScore.next(otherplayer);
     });
   }
 
