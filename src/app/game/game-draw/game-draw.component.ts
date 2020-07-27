@@ -163,6 +163,13 @@ export class GameDrawComponent implements OnInit, OnDestroy {
     }
   }
 
+  updateAiGuess(sortedCertaintyArr) {
+    if (sortedCertaintyArr && sortedCertaintyArr.length > 1) {
+      const guess = sortedCertaintyArr[0].label;
+      this.AI_GUESS = guess === this.guessWord ? sortedCertaintyArr[1].label : guess;
+    }
+  }
+
   classify() {
     const b64Image = this.canvas.nativeElement.toDataURL('image/png');
     const croppedCoordinates: any = this.imageService.crop(this.minX, this.minY, this.maxX, this.maxY, this.LINE_WIDTH);
@@ -171,13 +178,7 @@ export class GameDrawComponent implements OnInit, OnDestroy {
         const formData: FormData = this.createFormData(dataUrl);
         this.drawingService.classify(formData).subscribe((res) => {
           const sortedCertaintyArr = this.sortOnCertainty(res);
-          if (sortedCertaintyArr && sortedCertaintyArr.length > 1) {
-            if (sortedCertaintyArr[0].label === this.guessWord) {
-              this.AI_GUESS = sortedCertaintyArr[1].label;
-            } else {
-              this.AI_GUESS = sortedCertaintyArr[0].label;
-            }
-          }
+          this.updateAiGuess(sortedCertaintyArr);
           if (res.roundIsDone) {
             this.playResultSound(res.hasWon);
             const score = this.score > 0 ? this.score : 0;
