@@ -82,26 +82,40 @@ export class GameDrawComponent implements OnInit, OnDestroy {
     this.resetMinMaxMouseValues();
     this.drawingService.guessDone = false;
     if (this.multiplayerService.isMultiplayer) {
-      this.multiplayerService.stateInfo = { ...this.multiplayerService.stateInfo, ready: false };
-      this.predictionSubscription = this.multiplayerService.predictionListener().subscribe((prediction: any) => {
-        const sortedCertaintyArr = this.sortOnCertainty(prediction);
-        this.prediction = prediction;
-        if (sortedCertaintyArr && sortedCertaintyArr.length > 1) {
-          this.AI_GUESS = sortedCertaintyArr[0].label;
-        }
-        if (this.prediction && this.prediction.hasWon && !this.hasAddedResult) {
-          this.updateResult(true);
-          this.hasAddedResult = true;
-        }
-      });
-      this.roundOverSubscription = this.multiplayerService.roundOverListener().subscribe((roundOver: any) => {
-        if (!this.hasAddedResult) {
-          this.updateResult(roundOver.round_over);
-          this.hasAddedResult = true;
-        }
-      });
+      this.setUpMultiplayer();
     }
     this.startGame();
+  }
+
+  setUpMultiplayer() {
+    this.multiplayerService.stateInfo = { ...this.multiplayerService.stateInfo, ready: false };
+
+    this.predictionSubscription = this.predictionListener();
+
+    this.roundOverSubscription = this.roundOverListener();
+  }
+
+  predictionListener() {
+    return this.multiplayerService.predictionListener().subscribe((prediction: any) => {
+      this.prediction = prediction;
+      const sortedCertaintyArr = this.sortOnCertainty(prediction);
+      if (sortedCertaintyArr && sortedCertaintyArr.length > 1) {
+        this.AI_GUESS = sortedCertaintyArr[0].label;
+      }
+      if (this.prediction && this.prediction.hasWon && !this.hasAddedResult) {
+        this.updateResult(true);
+        this.hasAddedResult = true;
+      }
+    });
+  }
+
+  roundOverListener() {
+    return this.multiplayerService.roundOverListener().subscribe((roundOver: any) => {
+      if (!this.hasAddedResult) {
+        this.updateResult(roundOver.round_over);
+        this.hasAddedResult = true;
+      }
+    });
   }
 
   updateResult(won) {
@@ -110,20 +124,15 @@ export class GameDrawComponent implements OnInit, OnDestroy {
     this.addResultAndResize(result).subscribe({
       next: (dataUrlHighRes) => {
         this.drawingService.lastResult.imageData = dataUrlHighRes;
-        this.changeMultiplayerState();
+        this.changeMultiplayerState(GAMELEVEL.intermediateResult);
       },
     });
   }
 
-  changeMultiplayerState() {
+  changeMultiplayerState(state: GAMELEVEL) {
     const guess = this.multiplayerService.stateInfo.guessUsed;
-    const guessUsed = guess ? guess : 0;
-
-    this.multiplayerService.stateInfo = {
-      ...this.multiplayerService.stateInfo,
-      guessUsed: guessUsed + 1,
-      gameLevel: GAMELEVEL.intermediateResult,
-    };
+    const guessUsed = guess ? guess + 1 : 1;
+    this.multiplayerService.changestate(state, guessUsed);
   }
 
   createResult(won) {
