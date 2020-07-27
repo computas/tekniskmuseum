@@ -19,7 +19,7 @@ export class LoginService {
   }
 
   signOut() {
-    this.router.navigate(['admin']);
+    return this.http.post(`http://localhost:8000/${endpoints.ADMIN}/${endpoints.LOGOUT}`, {});
   }
 
   isAuthenticated() {

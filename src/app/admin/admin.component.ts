@@ -9,7 +9,6 @@ import { MatSnackBar } from '@angular/material/snack-bar';
   styleUrls: ['./admin.component.scss'],
 })
 export class AdminComponent implements OnInit {
-  errorMsg = 'Feil brukernavn eller passord!';
   constructor(private router: Router, private loginService: LoginService, private _snackBar: MatSnackBar) {}
 
   ngOnInit(): void {}
@@ -21,11 +20,11 @@ export class AdminComponent implements OnInit {
         if (res.status) {
           this.router.navigate(['admin/info']);
         } else {
-          this.openSnackBar(this.errorMsg);
+          this.openSnackBar('Feil brukernavn eller passord!');
         }
       },
       (error) => {
-        this.openSnackBar(this.errorMsg);
+        this.openSnackBar('En feil har oppstådd!');
       }
     );
   }

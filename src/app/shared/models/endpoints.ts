@@ -15,4 +15,5 @@ export const endpoints = {
   CLEARTRAINSET: 'clearTrainSet',
   PING: 'ping',
   GETSTATUS: 'get_status',
+  LOGOUT: 'logout',
 };

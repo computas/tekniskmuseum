@@ -16,18 +16,24 @@ export class InfoComponent implements OnInit {
   retrainBool = false;
   highScoreString = 'Nullstill poengliste';
   highScoreBool = false;
-  errorMsg = 'En feil har oppstådd!';
+  errorMsg = 'En tilkoblingsfeil har oppstådd!';
   constructor(
     private router: Router,
     private loginService: LoginService,
     private _snackBar: MatSnackBar,
     private _dialog: InfoDialogComponent
   ) {
-    this.loginService.isAuthenticated().subscribe((res: any) => {
-      if (!res.status) {
+    this.loginService.isAuthenticated().subscribe(
+      (res: any) => {
+        if (!res.status) {
+          this.router.navigate(['admin']);
+        }
+      },
+      (error) => {
         this.router.navigate(['admin']);
+        this.openSnackBar(this.errorMsg);
       }
-    });
+    );
   }
 
   ngOnInit(): void {}
@@ -141,7 +147,18 @@ export class InfoComponent implements OnInit {
   }
 
   signOut() {
-    this.loginService.signOut();
+    this.loginService.signOut().subscribe(
+      (res: any) => {
+        if (res.status) {
+          this.router.navigate(['admin']);
+          this.openSnackBar('Du er logget ut!');
+        }
+      },
+      (error) => {
+        this.router.navigate(['admin']);
+        this.openSnackBar(this.errorMsg);
+      }
+    );
   }
 
   getInformation() {
@@ -161,7 +178,7 @@ export class InfoComponent implements OnInit {
 
   openSnackBar(msg = 'suksess!') {
     this._snackBar.open(msg, 'Lukk', {
-      duration: 4000,
+      duration: 6000,
     });
   }
 }
