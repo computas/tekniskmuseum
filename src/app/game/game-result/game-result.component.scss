@@ -19,7 +19,6 @@
   font-size: 48px;
   display: grid;
   align-items: end;
-  margin-bottom: 48px;
 }
 
 .btn {
@@ -87,6 +86,29 @@ p {
 }
 .game-result-img {
   width: 256px;
+}
+#result-header {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-wrap: wrap;
+}
+.result-header-multi {
+  text-align: center;
+  color: #195272;
+  font-size: 48px;
+  margin: 0;
+  padding: 24px 24px;
+}
+.winner {
+  color: #fa852f;
+  font-weight: 500;
+}
+.winner-points {
+}
+.winner-img {
+  height: 100px;
+  background: blue;
 }
 @media (max-width: 568px) {
 }

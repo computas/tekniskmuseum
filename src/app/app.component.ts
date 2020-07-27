@@ -19,7 +19,7 @@ export class AppComponent implements OnInit {
   userInactive: Subject<any> = new Subject();
 
   isDialogOpen = false;
-  inactivityTime = 30 * 1000;
+  inactivityTime = 120 * 1000;
 
   constructor(private router: Router, public dialog: MatDialog) {}
 

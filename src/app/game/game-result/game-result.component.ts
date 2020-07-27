@@ -44,6 +44,7 @@ export class GameResultComponent implements OnInit {
       this.results = this.drawingService.get();
     } else if (this.router.url === '/summary/multiplayer') {
       this.ismultiplayer = true;
+      this.hasWon = true;
       this.results = this.drawingService.get();
     } else {
       this.results = this.drawingService.results;
