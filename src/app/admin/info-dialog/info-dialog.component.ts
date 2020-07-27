@@ -13,10 +13,10 @@ export interface DialogData {
   styleUrls: ['./info-dialog.component.scss'],
 })
 export class InfoDialogComponent {
-  constructor(public dialog: MatDialog, public dialogExample: DialogExampleComponent) {}
+  constructor(public dialog: MatDialog, public dialogExample: DialogComponent) {}
 
   openDialog(iterName: string, time: string, imgCount: string) {
-    this.dialog.open(DialogExampleComponent, {
+    this.dialog.open(DialogComponent, {
       data: {
         iterationName: iterName,
         timeCreated: time,
@@ -27,9 +27,9 @@ export class InfoDialogComponent {
 }
 
 @Component({
-  selector: 'app-info-dialog-example',
-  templateUrl: 'app-info-dialog-example.html',
+  selector: 'app-info-dialog',
+  templateUrl: 'app-info-dialog.html',
 })
-export class DialogExampleComponent {
+export class DialogComponent {
   constructor(@Inject(MAT_DIALOG_DATA) public data: DialogData) {}
 }
