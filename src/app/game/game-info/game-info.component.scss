@@ -124,5 +124,13 @@
 }
 
 .player-mode {
+  padding-top: 25px;
   text-align: center;
+  display: flex;
+  align-items: center;
+  font-weight: 500;
+  color: #05a3c7;
+}
+.player-mode > .material-icons {
+  color: #05a3c7;
 }
