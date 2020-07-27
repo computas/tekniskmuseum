@@ -106,6 +106,11 @@ export class MultiplayerService {
     this.webSocketService.emit('endGame', result);
   }
 
+  clearState() {
+    this.stateInfo = this.initialState;
+    this.webSocketService.disconnect();
+  }
+
   get stateInfo(): GameState {
     return this._stateInfo.getValue();
   }
