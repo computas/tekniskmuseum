@@ -85,7 +85,7 @@ export class GameIntermediateResultComponent implements OnInit {
 
   speakResult() {
     if (this.result.hasWon) {
-      this.speechService.speak(`${SPEECH.resultWon}${this.result.word}`);
+      this.speechService.speak(`${SPEECH.resultWon}`);
     } else {
       this.speechService.speak(SPEECH.resultLoss);
     }

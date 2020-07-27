@@ -54,6 +54,10 @@ export class GameInfoComponent implements OnInit {
   }
 
   speakInfo() {
-    this.speechService.speak(SPEECH.info);
+    if (this.isSinglePlayer) {
+      this.speechService.speak(SPEECH.infoSingle);
+    } else {
+      this.speechService.speak(SPEECH.infoMultiplayer);
+    }
   }
 }
