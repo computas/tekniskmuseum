@@ -1,19 +1,28 @@
-import { Component } from '@angular/core';
-import { MatDialog } from '@angular/material/dialog';
+import { Component, Inject } from '@angular/core';
+import { MatDialog, MAT_DIALOG_DATA } from '@angular/material/dialog';
 
-/**
- * @title Dialog elements
- */
+export interface DialogData {
+  iterationName: string;
+  timeCreated: string;
+  imageCount: string;
+}
+
 @Component({
   selector: 'app-info-dialog',
   templateUrl: './info-dialog.component.html',
   styleUrls: ['./info-dialog.component.scss'],
 })
 export class InfoDialogComponent {
-  constructor(public dialog: MatDialog) {}
+  constructor(public dialog: MatDialog, public dialogExample: DialogExampleComponent) {}
 
-  openDialog() {
-    this.dialog.open(DialogExampleComponent);
+  openDialog(iterName: string, time: string, imgCount: string) {
+    this.dialog.open(DialogExampleComponent, {
+      data: {
+        iterationName: iterName,
+        timeCreated: time,
+        imageCount: imgCount,
+      },
+    });
   }
 }
 
@@ -21,4 +30,6 @@ export class InfoDialogComponent {
   selector: 'app-info-dialog-example',
   templateUrl: 'app-info-dialog-example.html',
 })
-export class DialogExampleComponent {}
+export class DialogExampleComponent {
+  constructor(@Inject(MAT_DIALOG_DATA) public data: DialogData) {}
+}

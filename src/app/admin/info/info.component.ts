@@ -1,4 +1,4 @@
-import { Component, OnInit, Inject, OnDestroy } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { LoginService } from '../login.service';
 import { MatSnackBar } from '@angular/material/snack-bar';
@@ -147,13 +147,13 @@ export class InfoComponent implements OnInit {
   getInformation() {
     this.loginService.getStatus().subscribe(
       (res: any) => {
-        this._dialog.openDialog();
+        this._dialog.openDialog('test1', 'test2', 'test3');
       },
       (error) => {
         // This is correct
         this.openSnackBar(this.errorMsg);
         // load mock-card with mock information
-        this._dialog.openDialog();
+        this._dialog.openDialog('test1', 'test2', 'test3');
       }
     );
   }
