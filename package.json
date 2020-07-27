@@ -28,7 +28,10 @@
     "@angular/router": "~10.0.0",
     "@angular/service-worker": "~10.0.0",
     "howler": "^2.2.0",
+    "install": "^0.13.0",
+    "material": "^0.4.3",
     "normalize.css": "^8.0.1",
+    "npm": "^6.14.7",
     "rxjs": "~6.5.4",
     "tslib": "^2.0.0",
     "zone.js": "~0.10.2"
