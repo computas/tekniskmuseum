@@ -1,0 +1,81 @@
+body {
+  margin: 0;
+  padding: 0;
+  background: #f4f4f4;
+  font-family: 'Arial';
+}
+
+.login {
+  width: 382px;
+  overflow: hidden;
+  margin: auto;
+  margin: 20 0 0 450px;
+  padding: 80px;
+  background: linear-gradient(0.5deg, #195272 -0.56%, #05a3c7 138.78%);
+  border-radius: 15px;
+}
+
+h2 {
+  text-align: center;
+  color: black;
+  padding: 20px;
+}
+
+label {
+  color: black;
+  font-size: 17px;
+  float: left;
+  padding-left: 36px;
+}
+
+#Uname {
+  width: 300px;
+  height: 30px;
+  border: none;
+  border-radius: 3px;
+  padding-left: 8px;
+}
+
+#Pass {
+  width: 300px;
+  height: 30px;
+  border: none;
+  border-radius: 3px;
+  padding-left: 8px;
+}
+
+span {
+  color: #f4f4f4;
+  font-size: 17px;
+}
+
+a {
+  float: right;
+  background-color: grey;
+}
+
+.login-button {
+  background: #fa852f;
+  color: #f4f4f4;
+  box-shadow: 0 8px 16px 0 rgba(0, 0, 0, 0.1), 0 6px 20px 0 rgba(0, 0, 0, 0.15);
+  margin-top: 30px;
+  font-size: 20px;
+  border-radius: 50px;
+  height: 40px;
+  min-width: 240px;
+  max-width: 400px;
+  border: none;
+  cursor: pointer;
+}
+.login-button:hover {
+  border-color: #f4f4f4;
+  border: 1px solid #f4f4f4;
+}
+@media (min-width: 600px) {
+  .login-button {
+    font-size: 32px;
+    height: 60px;
+    min-width: 270px;
+    max-width: 400px;
+  }
+}
