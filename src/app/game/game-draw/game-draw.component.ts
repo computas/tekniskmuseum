@@ -88,7 +88,9 @@ export class GameDrawComponent implements OnInit, OnDestroy {
     this.drawingService.classificationDone = false;
     this.createDrawingTimer().subscribe({
       next: (val) => {
-        this.classify();
+        if (!this.isBlankImage || this.isBlankImage && this.timeLeft === 0) {
+          this.classify();
+        }
       },
       complete: () => {
         this.clockColor = this.clockColor === 'initial' ? 'final' : 'initial';
@@ -162,33 +164,31 @@ export class GameDrawComponent implements OnInit, OnDestroy {
   }
 
   classify() {
-    if (!this.isBlankImage || this.isBlankImage && this.timeLeft === 0) {
-      const b64Image = this.canvas.nativeElement.toDataURL('image/png');
-      const croppedCoordinates: any = this.imageService.crop(this.minX, this.minY, this.maxX, this.maxY, this.LINE_WIDTH);
-      this.imageService.resize(b64Image, croppedCoordinates).subscribe({
-        next: (dataUrl) => {
-          const formData: FormData = this.createFormData(dataUrl);
-          this.drawingService.classify(formData).subscribe((res) => {
-            const sortedCertaintyArr = this.sortOnCertainty(res);
-            if (sortedCertaintyArr && sortedCertaintyArr.length > 1) {
-              this.AI_GUESS = sortedCertaintyArr[0].label;
-            }
-            if (res.roundIsDone) {
-              this.playResultSound(res.hasWon);
-              const score = this.score > 0 ? this.score : 0;
-              this.drawingService.lastResult.score = Math.round(score);
-              this.imageService
-                .resize(this.canvas.nativeElement.toDataURL('image/png'), croppedCoordinates, this.resultImageSize)
-                .subscribe({
-                  next: (dataUrlHighRes) => {
-                    this.drawingService.lastResult.imageData = dataUrlHighRes;
-                  },
-                });
-            }
-          });
-        },
-      });
-    }
+    const b64Image = this.canvas.nativeElement.toDataURL('image/png');
+    const croppedCoordinates: any = this.imageService.crop(this.minX, this.minY, this.maxX, this.maxY, this.LINE_WIDTH);
+    this.imageService.resize(b64Image, croppedCoordinates).subscribe({
+      next: (dataUrl) => {
+        const formData: FormData = this.createFormData(dataUrl);
+        this.drawingService.classify(formData).subscribe((res) => {
+          const sortedCertaintyArr = this.sortOnCertainty(res);
+          if (sortedCertaintyArr && sortedCertaintyArr.length > 1) {
+            this.AI_GUESS = sortedCertaintyArr[0].label;
+          }
+          if (res.roundIsDone) {
+            this.playResultSound(res.hasWon);
+            const score = this.score > 0 ? this.score : 0;
+            this.drawingService.lastResult.score = Math.round(score);
+            this.imageService
+              .resize(this.canvas.nativeElement.toDataURL('image/png'), croppedCoordinates, this.resultImageSize)
+              .subscribe({
+                next: (dataUrlHighRes) => {
+                  this.drawingService.lastResult.imageData = dataUrlHighRes;
+                },
+              });
+          }
+        });
+      },
+    });
   }
 
   createFormData(dataUrl): FormData {
