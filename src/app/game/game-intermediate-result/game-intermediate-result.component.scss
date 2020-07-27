@@ -72,8 +72,18 @@
   min-width: 240px;
   max-width: 400px;
 }
+.waiting {
+  margin-top: 30px;
+}
 @media (min-width: 600px) {
   .next-word-button {
+    font-size: 36px;
+    height: 60px;
+    position: absolute;
+    bottom: 65px;
+    right: 65px;
+  }
+  .waiting {
     font-size: 36px;
     height: 60px;
     position: absolute;
