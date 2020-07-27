@@ -49,7 +49,7 @@ export class WebSocketService {
 
   disconnect() {
     if (this.socket && !this.socket.disconnected) {
-      console.info('socket disconnecting and removing listener');
+      console.warn('socket disconnecting and removing listener');
       this.socket.removeAllListeners();
       this.socket.disconnect();
     }

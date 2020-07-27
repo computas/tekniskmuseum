@@ -93,7 +93,6 @@ export class MultiplayerService {
   }
 
   endGameListener() {
-    console.log('LISTENING TO ENDGAME');
     return this.webSocketService.listen('endGame');
   }
 

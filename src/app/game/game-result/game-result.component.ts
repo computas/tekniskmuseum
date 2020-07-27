@@ -37,7 +37,6 @@ export class GameResultComponent implements OnInit {
             this.hasWon = false;
           }
         }
-        console.log('oppnent score from result', val);
       });
     }
 

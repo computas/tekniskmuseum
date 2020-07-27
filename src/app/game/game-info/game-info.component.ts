@@ -37,9 +37,7 @@ export class GameInfoComponent implements OnInit {
           };
         }
       });
-      this.webSocketService.listen('endGame').subscribe((res) => {
-        console.log(res);
-      });
+      this.webSocketService.listen('endGame').subscribe((res) => {});
     }
   }
 
