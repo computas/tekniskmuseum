@@ -32,6 +32,7 @@ export class GameDrawComponent implements OnInit, OnDestroy {
   isDrawing = false;
   hasLeftCanvas = false;
   timeLeft = 20.0;
+  isBlankImage = true;
 
   score = 333;
 
@@ -87,7 +88,9 @@ export class GameDrawComponent implements OnInit, OnDestroy {
     this.drawingService.classificationDone = false;
     this.createDrawingTimer().subscribe({
       next: (val) => {
-        this.classify();
+        if (!this.isBlankImage || this.isBlankImage && this.timeLeft === 0) {
+          this.classify();
+        }
       },
       complete: () => {
         this.clockColor = this.clockColor === 'initial' ? 'final' : 'initial';
@@ -240,6 +243,8 @@ export class GameDrawComponent implements OnInit, OnDestroy {
     this.ctx.lineTo(currentX, currentY);
     this.ctx.stroke();
 
+    this.isBlankImage = false;
+
     if (currentX < this.minX) {
       this.minX = currentX;
     }
@@ -270,6 +275,7 @@ export class GameDrawComponent implements OnInit, OnDestroy {
   clear() {
     const canvas = this.canvas.nativeElement;
     this.ctx.clearRect(0, 0, canvas.width, canvas.height);
+    this.isBlankImage = true;
     this.resetMinMaxMouseValues();
   }
 
