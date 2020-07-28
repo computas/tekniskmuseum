@@ -1,4 +1,15 @@
-<h1 align="center" mat-dialog-title>Informasjon:</h1>
-<div mat-dialog-content>Iterasjonsnavn: {{ data.iterationName }}</div>
-<div mat-dialog-content>Tidspunk iterasjonen ble lagd: {{ data.timeCreated }}</div>
-<div mat-dialog-content>Antall bilder i treningssettet: {{ data.imageCount }}</div>
+<div mat-dialog-content class="content">
+  <h1 align="center" class="dialog-title" mat-dialog-title>Informasjon:</h1>
+</div>
+<div mat-dialog-content class="content">
+  <p>Navn på iterasjon: {{ data.iterationName }}</p>
+</div>
+<div mat-dialog-content class="content">
+  <p>Tidspunk iterasjonen ble lagd: {{ data.timeCreated }}</p>
+</div>
+<div mat-dialog-content class="content">
+  <p>Antall bilder i treningssettet: {{ data.imageCount }}</p>
+</div>
+<div mat-dialog-content class="content">
+  <p>(Trykk utenfor boksen for å lukke)</p>
+</div>

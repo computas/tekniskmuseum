@@ -17,6 +17,7 @@ export class InfoComponent implements OnInit {
   highScoreString = 'Nullstill poengliste';
   highScoreBool = false;
   errorMsg = 'En tilkoblingsfeil har oppstådd!';
+  secondMsg = 'Er du helt sikker?';
   constructor(
     private router: Router,
     private loginService: LoginService,
@@ -119,18 +120,24 @@ export class InfoComponent implements OnInit {
     this.datasetBool = false;
   }
 
+  resetAll() {
+    this.resetHighScoreValues();
+    this.resetRetrainValues();
+    this.resetDatasetValues();
+  }
+
   setHighScoreValues() {
-    this.highScoreString = 'Er du sikker?';
+    this.highScoreString = this.secondMsg;
     this.highScoreBool = true;
   }
 
   setRetrainValues() {
-    this.retrainString = 'Er du sikker?';
+    this.retrainString = this.secondMsg;
     this.retrainBool = true;
   }
 
   setDatasetValues() {
-    this.datasetString = 'Er du sikker?';
+    this.datasetString = this.secondMsg;
     this.datasetBool = true;
   }
 
@@ -153,6 +160,8 @@ export class InfoComponent implements OnInit {
   }
 
   getInformation() {
+    this.resetAll();
+    this._dialog.openDialog('1', '2', '3');
     this.loginService.getStatus().subscribe(
       (res: any) => {
         const data = JSON.parse(res);
