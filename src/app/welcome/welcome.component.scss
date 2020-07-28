@@ -35,7 +35,7 @@
   }
 }
 .avatar-image {
-  height: 250px;
+  height: 300px;
 }
 a {
   text-decoration: none;
@@ -55,16 +55,42 @@ a {
   .info-text {
     align-items: flex-start;
     text-align: left;
+    justify-content: center;
     font-size: 40px;
     font-weight: 300;
     line-height: 60px;
+  }
+}
+.button-container {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  width: 100%;
+}
+@media (min-width: 600px) {
+  .button-container {
+    justify-content: center;
+  }
+}
+.game-mode-text {
+  display: flex;
+  justify-content: center;
+  width: 100%;
+  font-size: 22px;
+  margin-top: 50px;
+}
+@media (min-width: 600px) {
+  .game-mode-text {
+    font-size: 32px;
   }
 }
 .play-game-button {
   background: #fa852f;
   color: #ffffff;
   box-shadow: 0 8px 16px 0 rgba(0, 0, 0, 0.1), 0 6px 20px 0 rgba(0, 0, 0, 0.15);
-  margin-top: 30px;
+  margin-top: 20px;
+  margin-right: 7.5px;
+  margin-left: 7.5px;
   font-size: 20px;
   border-radius: 50px;
   height: 40px;
@@ -75,16 +101,11 @@ a {
   .play-game-button {
     font-size: 32px;
     height: 60px;
-    min-width: 270px;
+    margin-right: 7.5px;
+    margin-left: 7.5px;
+    min-width: 230px;
     max-width: 400px;
   }
-}
-.tts-button {
-  top: 0;
-  position: absolute;
-  right: 0;
-  margin: 24px;
-  color: #14213d;
 }
 
 .learn-button {
@@ -113,10 +134,6 @@ a {
   align-items: center;
 }
 .button-icon {
-  color: #14213d;
-  margin-right: 5px;
-}
-.mat-fab.mat-primary {
-  background: #ecf8ff;
-  color: #14213d;
+  color: #ffffff;
+  margin-right: 10px;
 }

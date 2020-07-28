@@ -1,8 +1,6 @@
 import { Component, OnInit, Output, EventEmitter } from '@angular/core';
 import { Router } from '@angular/router';
 import { routes } from '../../shared/models/routes';
-import { SPEECH } from '../../shared/speech-text/text';
-import { SpeechService } from 'src/app/services/speech.service';
 import { MultiplayerService, GAMELEVEL } from 'src/app/multiplayer/services/multiplayer.service';
 import { WebSocketService } from 'src/app/multiplayer/services/web-socket.service';
 
@@ -17,7 +15,6 @@ export class GameInfoComponent implements OnInit {
   isMultiPlayer = false;
 
   constructor(
-    private speechService: SpeechService,
     private router: Router,
     private multiplayerService: MultiplayerService,
     private webSocketService: WebSocketService
@@ -51,13 +48,5 @@ export class GameInfoComponent implements OnInit {
 
   goToLanding() {
     this.router.navigate([routes.LANDING]);
-  }
-
-  speakInfo() {
-    if (this.isSinglePlayer) {
-      this.speechService.speak(SPEECH.infoSingle);
-    } else {
-      this.speechService.speak(SPEECH.infoMultiplayer);
-    }
   }
 }

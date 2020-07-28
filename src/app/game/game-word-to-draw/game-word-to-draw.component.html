@@ -1,9 +1,6 @@
 <div class="word-container">
   <div class="words-remaining">{{ guessUsed }}/3</div>
   <h1 class="playernr">Spiller {{ playernr }}</h1>
-  <button mat-fab (click)="speakWord()" type="button" value="Play" color="primary" class="tts-button">
-    <mat-icon>volume_up</mat-icon>
-  </button>
   <div class="word-text">
     <p class="word-draw">Tegn:</p>
     <div *ngIf="loading">
