@@ -1,10 +1,12 @@
 import { Component, ElementRef, OnInit, ViewChild, Output, EventEmitter, OnDestroy } from '@angular/core';
-import { BehaviorSubject, Subject, interval, Observable } from 'rxjs';
+import { BehaviorSubject, Subject, interval, Observable, Subscription } from 'rxjs';
 import { ImageService } from './services/image.service';
 import { Howl } from 'howler';
 import { take, takeUntil } from 'rxjs/operators';
 import { DrawingService } from './services/drawing.service';
 import { StartGameInfo } from './services/start-game-info';
+import { MultiplayerService, GAMELEVEL } from 'src/app/multiplayer/services/multiplayer.service';
+import { Result } from 'src/app/shared/models/result.interface';
 
 @Component({
   selector: 'app-drawing',
@@ -55,25 +57,119 @@ export class GameDrawComponent implements OnInit, OnDestroy {
   guessWord: string;
   AI_GUESS: string;
 
-  constructor(private imageService: ImageService, private drawingService: DrawingService) { }
+  prediction: any;
+  result: Result;
+  hasAddedResult = false;
+
+  roundOverSubscription: Subscription;
+  predictionSubscription: Subscription;
+  hasUpdatedState = false;
+
+  constructor(
+    private imageService: ImageService,
+    private drawingService: DrawingService,
+    private multiplayerService: MultiplayerService
+  ) {}
 
   ngOnInit(): void {
+    this.multiplayerService.roundIsOver = false;
     const ctx = this.canvas.nativeElement.getContext('2d');
     if (!ctx) {
       throw new Error('getContext failed');
     }
-
     this.ctx = ctx;
     this.canvas.nativeElement.width = this.canvas.nativeElement.parentElement?.offsetWidth || document.body.clientWidth;
     this.canvas.nativeElement.height = document.body.clientHeight - 100;
     this.resetMinMaxMouseValues();
     this.drawingService.guessDone = false;
+    if (this.multiplayerService.isMultiplayer) {
+      this.setUpMultiplayer();
+    }
     this.startGame();
+  }
+
+  setUpMultiplayer() {
+    this.multiplayerService.stateInfo = { ...this.multiplayerService.stateInfo, ready: false };
+
+    this.predictionSubscription = this.predictionListener();
+
+    this.roundOverSubscription = this.roundOverListener();
+  }
+
+  predictionListener() {
+    return this.multiplayerService.predictionListener().subscribe((prediction: any) => {
+      this.prediction = prediction;
+      const sortedCertaintyArr = this.sortOnCertainty(prediction);
+      if (sortedCertaintyArr && sortedCertaintyArr.length > 1) {
+        this.AI_GUESS = sortedCertaintyArr[0].label;
+      }
+      if (this.prediction && this.prediction.hasWon && !this.hasAddedResult) {
+        this.updateResult(true);
+        this.hasAddedResult = true;
+      }
+    });
+  }
+
+  roundOverListener() {
+    return this.multiplayerService.roundOverListener().subscribe((roundOver: any) => {
+      if (!this.hasAddedResult) {
+        this.updateResult(this.prediction.hasWon);
+        this.hasAddedResult = true;
+      }
+    });
+  }
+
+  updateResult(won) {
+    const result: Result = this.createResult(won);
+    this.drawingService.guessUsed++;
+    this.addResultAndResize(result).subscribe({
+      next: (dataUrlHighRes) => {
+        this.drawingService.lastResult.imageData = dataUrlHighRes;
+        this.multiplayerService.changestate(GAMELEVEL.intermediateResult);
+      },
+    });
+  }
+
+  createResult(won) {
+    let score = 0;
+    if (won) {
+      score = this.getScore();
+    }
+    const result: Result = {
+      hasWon: won,
+      guess: won ? this.multiplayerService.stateInfo.label : this.prediction.guess,
+      imageData: '',
+      gameState: 'Done',
+      score,
+      word: this.multiplayerService.stateInfo.label,
+    };
+    return result;
+  }
+
+  addResultAndResize(res: Result): Observable<string> {
+    this.drawingService.label = res.word ? res.word : '';
+    this.result = this.drawingService.createResult(res);
+    this.drawingService.addResult(this.result);
+    const croppedCoordinates: any = this.imageService.crop(this.minX, this.minY, this.maxX, this.maxY, this.LINE_WIDTH);
+    return this.imageService.resize(
+      this.canvas.nativeElement.toDataURL('image/png'),
+      croppedCoordinates,
+      this.resultImageSize
+    );
+  }
+
+  getScore() {
+    const score = this.score > 0 ? this.score : 0;
+    return Math.round(score);
   }
 
   ngOnDestroy(): void {
     this.unsubscribe.next();
     this.unsubscribe.complete();
+    if (this.multiplayerService.isMultiplayer) {
+      this.roundOverSubscription.unsubscribe();
+      this.predictionSubscription.unsubscribe();
+    }
     this.sound.stop();
   }
 
@@ -88,18 +184,29 @@ export class GameDrawComponent implements OnInit, OnDestroy {
     this.drawingService.classificationDone = false;
     this.createDrawingTimer().subscribe({
       next: (val) => {
-        if (!this.isBlankImage || this.isBlankImage && this.timeLeft === 0) {
-          this.classify();
+        if (this.multiplayerService.isMultiplayer) {
+          this.classifyMultiplayer();
+        } else {
+          if (!this.isBlankImage || (this.isBlankImage && this.timeLeft === 0)) {
+            this.classify();
+          }
         }
       },
       complete: () => {
         this.clockColor = this.clockColor === 'initial' ? 'final' : 'initial';
         this.sound.stop();
         this.timeOut = true;
+        if (this.multiplayerService.isMultiplayer && !this.hasAddedResult) {
+          this.updateResult(false);
+          this.hasAddedResult = true;
+        }
       },
     });
     if (this.drawingService.label) {
       this.guessWord = this.drawingService.label;
+    }
+    if (this.multiplayerService.isMultiplayer) {
+      this.guessWord = this.multiplayerService.label;
     }
   }
 
@@ -122,6 +229,11 @@ export class GameDrawComponent implements OnInit, OnDestroy {
               color = color === 'white' ? 'red' : 'white';
               this.playTickSound();
               this.playTick = true;
+            }
+          }
+          if (this.timeLeft <= 0) {
+            if (this.multiplayerService.isMultiplayer) {
+              observer.complete();
             }
           }
         });
@@ -163,6 +275,20 @@ export class GameDrawComponent implements OnInit, OnDestroy {
     }
   }
 
+  classifyMultiplayer() {
+    const b64Image = this.canvas.nativeElement.toDataURL('image/png');
+    const croppedCoordinates: any = this.imageService.crop(this.minX, this.minY, this.maxX, this.maxY, this.LINE_WIDTH);
+    this.imageService.resize(b64Image, croppedCoordinates).subscribe({
+      next: (dataUrl) => {
+        const body = {
+          game_id: this.multiplayerService.stateInfo.game_id,
+          time_left: this.timeLeft,
+        };
+        const image = this.imageService.createBlob(dataUrl);
+        this.multiplayerService.classify(body, image);
+      },
+    });
+  }
   updateAiGuess(sortedCertaintyArr) {
     if (sortedCertaintyArr && sortedCertaintyArr.length > 1) {
       const guess = sortedCertaintyArr[0].label;

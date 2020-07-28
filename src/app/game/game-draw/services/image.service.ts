@@ -72,4 +72,12 @@ export class ImageService {
     formData.append('name', this.name);
     return formData;
   }
+
+  createBlob(dataUrl) {
+    const u8Image = this.b64ToUint8Array(dataUrl);
+    const blob = new Blob([u8Image], {
+      type: 'image/png',
+    });
+    return blob;
+  }
 }

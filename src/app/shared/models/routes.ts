@@ -1,6 +1,8 @@
 export const routes = {
   LANDING: '',
-  PLAYGAME: 'playgame',
+  GAMEMODE: 'gamemode',
+  SINGLEPLAYER: 'playgame/singleplayer',
+  MULTIPLAYER: 'playgame/multiplayer',
   RESULT: 'result',
   TEKNISKBACKEND: 'https://tekniskback.azurewebsites.net',
   DRAWING: 'drawing',

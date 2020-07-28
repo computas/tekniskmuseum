@@ -1,19 +1,23 @@
 <div class="word-container">
-  <div *ngIf="loading">
-    <mat-spinner class="white-spinner" id="white"></mat-spinner>
-  </div>
-  <div *ngIf="word">
-    <div class="words-remaining">{{ guessUsed }}/3</div>
-    <button mat-fab (click)="speakWord()" type="button" value="Play" color="primary" class="tts-button">
-      <mat-icon>volume_up</mat-icon>
-    </button>
-    <div class="word-text">
-      <p class="word-draw">Tegn:</p>
-      <h1 class="word-to-guess">{{ word | uppercase }}</h1>
+  <div class="words-remaining">{{ guessUsed }}/3</div>
+  <h1 class="playernr">Spiller {{ playernr }}</h1>
+  <button mat-fab (click)="speakWord()" type="button" value="Play" color="primary" class="tts-button">
+    <mat-icon>volume_up</mat-icon>
+  </button>
+  <div class="word-text">
+    <p class="word-draw">Tegn:</p>
+    <div *ngIf="loading">
+      <mat-spinner class="white-spinner" id="white"></mat-spinner>
     </div>
-    <div class="word-footer">
-      <div class="avatar"><img src="../../../assets/avatar-hide.svg" alt="avatar" /></div>
-      <button mat-raised-button class="draw-word-button" (click)="drawWord.emit(true)">
+    <div *ngIf="word">
+      <h1 class="word-to-guess header">{{ word | uppercase }}</h1>
+      <h1 *ngIf="isMultiPlayer" class="timer header">{{ timeLeft }}</h1>
+    </div>
+  </div>
+  <div class="word-footer">
+    <div class="avatar"><img src="../../../assets/avatar-hide.svg" alt="avatar" /></div>
+    <div *ngIf="!loading">
+      <button *ngIf="isSinglePlayer" mat-raised-button class="draw-word-button" (click)="drawWord.emit(true)">
         Tegn
       </button>
     </div>

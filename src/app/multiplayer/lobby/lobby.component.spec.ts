@@ -1,26 +1,26 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 import { RouterTestingModule } from '@angular/router/testing';
 
-import { GameInfoComponent } from './game-info.component';
+import { LobbyComponent } from './lobby.component';
 import { MaterialImportsModule } from '../../shared/material-imports/material-imports.module';
-import { SpeechServiceMock } from 'src/app/services/speech.service.mock';
-import { SpeechService } from 'src/app/services/speech.service';
 import { HttpClientTestingModule } from '@angular/common/http/testing';
+import { WebSocketServiceMock } from '../services/web-socket.service.mock';
+import { WebSocketService } from '../services/web-socket.service';
 
-describe('GameInfoComponent', () => {
-  let component: GameInfoComponent;
-  let fixture: ComponentFixture<GameInfoComponent>;
+describe('LobbyComponent', () => {
+  let component: LobbyComponent;
+  let fixture: ComponentFixture<LobbyComponent>;
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      imports: [RouterTestingModule, MaterialImportsModule, HttpClientTestingModule],
-      declarations: [GameInfoComponent],
-      providers: [{ provide: SpeechService, useValue: SpeechServiceMock }],
+      imports: [MaterialImportsModule, HttpClientTestingModule, RouterTestingModule],
+      declarations: [LobbyComponent],
+      providers: [{ provide: WebSocketService, useValue: WebSocketServiceMock }],
     }).compileComponents();
   }));
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(GameInfoComponent);
+    fixture = TestBed.createComponent(LobbyComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

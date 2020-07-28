@@ -6,6 +6,8 @@ import { routes as r } from './shared/models/routes';
 import { HighScoreComponent } from './highscore/highscore.component';
 import { GameResultComponent } from './game/game-result/game-result.component';
 import { GameDrawComponent } from './game/game-draw/game-draw.component';
+import { GameModeComponent } from './game-mode/game-mode.component';
+import { MultiplayerComponent } from './multiplayer/multiplayer.component';
 const routes: Routes = [
   {
     path: r.LANDING,
@@ -13,9 +15,17 @@ const routes: Routes = [
     data: { animationState: 'welcome' },
   },
   {
-    path: r.PLAYGAME,
+    path: r.GAMEMODE,
+    component: GameModeComponent,
+  },
+  {
+    path: r.SINGLEPLAYER,
     component: GameComponent,
     data: { animationState: 'game' },
+  },
+  {
+    path: r.MULTIPLAYER,
+    component: MultiplayerComponent,
   },
   {
     path: r.HIGHSCORE,
@@ -23,6 +33,10 @@ const routes: Routes = [
   },
   {
     path: 'summary',
+    component: GameResultComponent,
+  },
+  {
+    path: 'summary/multiplayer',
     component: GameResultComponent,
   },
   {

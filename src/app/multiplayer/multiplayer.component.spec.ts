@@ -1,25 +1,22 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
-import { WelcomeComponent } from './welcome.component';
 import { RouterTestingModule } from '@angular/router/testing';
 import { HttpClientTestingModule } from '@angular/common/http/testing';
+import { MultiplayerComponent } from './multiplayer.component';
 import { MaterialImportsModule } from '../shared/material-imports/material-imports.module';
-import { SpeechService } from '../services/speech.service';
-import { SpeechServiceMock } from '../services/speech.service.mock';
 
-describe('WelcomeComponent', () => {
-  let component: WelcomeComponent;
-  let fixture: ComponentFixture<WelcomeComponent>;
+describe('MultiplayerComponent', () => {
+  let component: MultiplayerComponent;
+  let fixture: ComponentFixture<MultiplayerComponent>;
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      providers: [{ provide: SpeechService, useValue: SpeechServiceMock }],
-      declarations: [WelcomeComponent],
       imports: [MaterialImportsModule, RouterTestingModule, HttpClientTestingModule],
+      declarations: [MultiplayerComponent],
     }).compileComponents();
   }));
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(WelcomeComponent);
+    fixture = TestBed.createComponent(MultiplayerComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

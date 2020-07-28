@@ -3,6 +3,8 @@ import { Router } from '@angular/router';
 import { routes } from '../../shared/models/routes';
 import { SPEECH } from '../../shared/speech-text/text';
 import { SpeechService } from 'src/app/services/speech.service';
+import { MultiplayerService, GAMELEVEL } from 'src/app/multiplayer/services/multiplayer.service';
+import { WebSocketService } from 'src/app/multiplayer/services/web-socket.service';
 
 @Component({
   selector: 'app-game-info',
@@ -11,13 +13,40 @@ import { SpeechService } from 'src/app/services/speech.service';
 })
 export class GameInfoComponent implements OnInit {
   @Output() getDrawWord = new EventEmitter();
+  isSinglePlayer = false;
+  isMultiPlayer = false;
 
-  constructor(private speechService: SpeechService, private router: Router) {}
+  constructor(
+    private speechService: SpeechService,
+    private router: Router,
+    private multiplayerService: MultiplayerService,
+    private webSocketService: WebSocketService
+  ) {}
 
-  ngOnInit(): void {}
+  ngOnInit(): void {
+    if (this.router.url === `/${routes.SINGLEPLAYER}`) {
+      this.isSinglePlayer = true;
+    } else {
+      this.isMultiPlayer = true;
+      this.multiplayerService.getLabel(false).subscribe((res: any) => {
+        if (res) {
+          this.multiplayerService.stateInfo = {
+            ...this.multiplayerService.stateInfo,
+            label: res.label,
+            gameLevel: GAMELEVEL.waitingForWord,
+          };
+        }
+      });
+      this.webSocketService.listen('endGame').subscribe((res) => {});
+    }
+  }
 
   startDrawing() {
-    this.getDrawWord.emit(true);
+    if (this.isSinglePlayer) {
+      this.getDrawWord.emit(true);
+    } else {
+      this.multiplayerService.getLabel(true);
+    }
   }
 
   goToLanding() {
@@ -25,6 +54,10 @@ export class GameInfoComponent implements OnInit {
   }
 
   speakInfo() {
-    this.speechService.speak(SPEECH.info);
+    if (this.isSinglePlayer) {
+      this.speechService.speak(SPEECH.infoSingle);
+    } else {
+      this.speechService.speak(SPEECH.infoMultiplayer);
+    }
   }
 }

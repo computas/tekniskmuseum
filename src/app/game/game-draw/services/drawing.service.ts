@@ -61,7 +61,7 @@ export class DrawingService {
       word: this.label,
       gameState: res.gameState,
       guess: res.guess,
-      score: 0,
+      score: res.score ? res.score : 0,
     };
     return result;
   }
@@ -97,6 +97,13 @@ export class DrawingService {
 
   addResult(result: Result) {
     this.results = [...this.results, result];
+  }
+
+  clearState() {
+    this.guessUsed = 1;
+    this.gameOver = false;
+    this.guessDone = false;
+    this.results = [];
   }
 
   get lastResult(): Result {
