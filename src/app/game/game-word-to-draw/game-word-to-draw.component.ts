@@ -3,8 +3,6 @@ import { interval, Observable } from 'rxjs';
 import { take } from 'rxjs/operators';
 import { GAMELEVEL } from '../../multiplayer/services/multiplayer.service';
 import { DrawingService } from '../game-draw/services/drawing.service';
-import { SPEECH } from 'src/app/shared/speech-text/text';
-import { SpeechService } from 'src/app/services/speech.service';
 import { Router } from '@angular/router';
 import { routes } from 'src/app/shared/models/routes';
 import { MultiplayerService } from 'src/app/multiplayer/services/multiplayer.service';
@@ -17,7 +15,6 @@ import { MultiplayerService } from 'src/app/multiplayer/services/multiplayer.ser
 export class GameWordToDrawComponent implements OnInit {
   constructor(
     private drawingService: DrawingService,
-    private speechService: SpeechService,
     private multiplayerService: MultiplayerService,
     private router: Router
   ) {}
@@ -86,9 +83,5 @@ export class GameWordToDrawComponent implements OnInit {
           }
         });
     });
-  }
-
-  speakWord() {
-    this.speechService.speak(`${SPEECH.draw}${this.word}`);
   }
 }
