@@ -19,8 +19,4 @@ export class WelcomeComponent implements OnInit {
     this.multiplayerService.clearState();
     this.drawingService.clearState();
   }
-
-  goToGameModePage() {
-    this.router.navigate([routes.GAMEMODE]);
-  }
 }
