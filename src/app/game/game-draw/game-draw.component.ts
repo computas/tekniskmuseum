@@ -1,7 +1,6 @@
 import { Component, ElementRef, OnInit, ViewChild, Output, EventEmitter, OnDestroy } from '@angular/core';
 import { BehaviorSubject, interval, Observable, Subscription } from 'rxjs';
 import { ImageService } from './services/image.service';
-import { Howl } from 'howler';
 import { take } from 'rxjs/operators';
 import { DrawingService } from './services/drawing.service';
 import { MultiplayerService, GAMELEVEL } from '../game-multiplayer/services/multiplayer.service';
