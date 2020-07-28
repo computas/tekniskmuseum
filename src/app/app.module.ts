@@ -8,7 +8,7 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { WelcomeModule } from './welcome/welcome.module';
 import { GameModule } from './game/game.module';
-import { MultiplayerModule } from './multiplayer/multiplayer.module';
+import { MultiplayerModule } from '../app/game/game-multiplayer/multiplayer.module';
 import { environment } from '../environments/environment';
 import { MaterialImportsModule } from './shared/material-imports/material-imports.module';
 import { IdleTimeoutComponent } from './idle-timeout/idle-timeout.component';

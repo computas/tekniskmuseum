@@ -1,7 +1,8 @@
 import { Injectable } from '@angular/core';
 import { Observable, BehaviorSubject } from 'rxjs';
 import * as io from 'socket.io-client';
-import { environment } from '../../../environments/environment';
+import { environment } from '../../../../environments/environment';
+import { SocketEndpoints } from '../../../shared/models/websocketEndpoints';
 
 export interface PlayerDisconnectedData {
   player_disconnected: boolean | undefined;
@@ -38,7 +39,7 @@ export class WebSocketService {
       console.error('error', reason);
     });
 
-    this.listen('playerDisconnected').subscribe((data: any) => {
+    this.listen(SocketEndpoints.PLAYER_DISCONNECTED).subscribe((data: any) => {
       const el: PlayerDisconnectedData = JSON.parse(data);
       if (el.player_disconnected) {
         this.playerDisconnected = true;

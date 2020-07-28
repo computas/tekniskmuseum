@@ -2,7 +2,7 @@ import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 import { RouterTestingModule } from '@angular/router/testing';
 import { HttpClientTestingModule } from '@angular/common/http/testing';
 import { MultiplayerComponent } from './multiplayer.component';
-import { MaterialImportsModule } from '../shared/material-imports/material-imports.module';
+import { MaterialImportsModule } from '../../shared/material-imports/material-imports.module';
 
 describe('MultiplayerComponent', () => {
   let component: MultiplayerComponent;

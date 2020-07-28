@@ -1,8 +1,9 @@
 import { Component, OnInit, Output, EventEmitter } from '@angular/core';
 import { Router } from '@angular/router';
 import { routes } from '../../shared/models/routes';
-import { MultiplayerService, GAMELEVEL } from 'src/app/multiplayer/services/multiplayer.service';
-import { WebSocketService } from 'src/app/multiplayer/services/web-socket.service';
+import { MultiplayerService, GAMELEVEL } from '../game-multiplayer/services/multiplayer.service';
+import { WebSocketService } from '../game-multiplayer/services/web-socket.service';
+import { SocketEndpoints } from '../../shared/models/websocketEndpoints';
 
 @Component({
   selector: 'app-game-info',
@@ -34,7 +35,7 @@ export class GameInfoComponent implements OnInit {
           };
         }
       });
-      this.webSocketService.listen('endGame').subscribe((res) => {});
+      this.webSocketService.listen(SocketEndpoints.END_GAME).subscribe((res) => {});
     }
   }
 

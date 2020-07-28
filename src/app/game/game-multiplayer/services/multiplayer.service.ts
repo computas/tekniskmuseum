@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 import { WebSocketService } from './web-socket.service';
 import { BehaviorSubject, ReplaySubject } from 'rxjs';
 import { map, take, tap } from 'rxjs/operators';
+import { SocketEndpoints } from '../../../shared/models/websocketEndpoints';
 
 export enum GAMELEVEL {
   lobby = 'LOBBY',
@@ -57,8 +58,8 @@ export class MultiplayerService {
   }
 
   joinGame() {
-    this.webSocketService.emit('joinGame', '');
-    return this.webSocketService.listen('joinGame').pipe(
+    this.webSocketService.emit(SocketEndpoints.JOIN_GAME, '');
+    return this.webSocketService.listen(SocketEndpoints.JOIN_GAME).pipe(
       tap((data: any) => {
         const el: GameState = data;
         if (el && el.game_id) {
@@ -73,9 +74,9 @@ export class MultiplayerService {
 
   getLabel(emit = true) {
     if (emit) {
-      this.webSocketService.emit('getLabel', JSON.stringify({ game_id: this.stateInfo.game_id }));
+      this.webSocketService.emit(SocketEndpoints.GET_LABEL, JSON.stringify({ game_id: this.stateInfo.game_id }));
     }
-    return this.webSocketService.listen('getLabel').pipe(
+    return this.webSocketService.listen(SocketEndpoints.GET_LABEL).pipe(
       take(1),
       map((res: any) => {
         const data = JSON.parse(res);
@@ -86,19 +87,19 @@ export class MultiplayerService {
   }
 
   classify(data, image) {
-    this.webSocketService.emit('classify', data, image);
+    this.webSocketService.emit(SocketEndpoints.CLASSIFY, data, image);
   }
 
   predictionListener() {
-    return this.webSocketService.listen('prediction');
+    return this.webSocketService.listen(SocketEndpoints.PREDICTION);
   }
 
   roundOverListener() {
-    return this.webSocketService.listen('roundOver');
+    return this.webSocketService.listen(SocketEndpoints.ROUND_OVER);
   }
 
   endGameListener() {
-    return this.webSocketService.listen('endGame');
+    return this.webSocketService.listen(SocketEndpoints.END_GAME);
   }
 
   endGame(score) {
@@ -107,7 +108,7 @@ export class MultiplayerService {
       score: this.stateInfo.score,
       player_id: this.stateInfo.player_id,
     });
-    this.webSocketService.emit('endGame', result);
+    this.webSocketService.emit(SocketEndpoints.END_GAME, result);
   }
 
   clearState() {

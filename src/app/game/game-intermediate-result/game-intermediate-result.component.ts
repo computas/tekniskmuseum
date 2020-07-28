@@ -1,7 +1,7 @@
 import { Component, OnInit, EventEmitter, Output } from '@angular/core';
-import { Result } from '../../shared/models/result.interface';
+import { Result } from '../../shared/models/interfaces';
 import { DrawingService } from '../game-draw/services/drawing.service';
-import { MultiplayerService, GAMELEVEL } from 'src/app/multiplayer/services/multiplayer.service';
+import { MultiplayerService, GAMELEVEL } from '../game-multiplayer/services/multiplayer.service';
 import { Router } from '@angular/router';
 import { routes } from '../../shared/models/routes';
 @Component({

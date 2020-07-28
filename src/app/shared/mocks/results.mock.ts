@@ -1,5 +1,4 @@
-import { Result } from '../../../shared/models/result.interface';
-
+import { Result } from '../models/interfaces';
 export const ResultsMock: Result[] = [
   {
     hasWon: true,

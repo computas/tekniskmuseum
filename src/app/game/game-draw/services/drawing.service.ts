@@ -2,10 +2,8 @@ import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable, BehaviorSubject } from 'rxjs';
 import { tap, switchMap } from 'rxjs/operators';
-import { StartGamePlayerId } from './start-game-player-id';
-import { GameLabel } from './game-label';
-import { Result } from '../../../shared/models/result.interface';
-import { ResultsMock } from './results.mock';
+import { Result, StartGamePlayerId, GameLabel } from '../../../shared/models/interfaces';
+import { ResultsMock } from '../../../shared/mocks/results.mock';
 import { endpoints } from '../../../shared/models/endpoints';
 
 @Injectable({
