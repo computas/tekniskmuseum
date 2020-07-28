@@ -21,8 +21,6 @@ export class GameIntermediateResultComponent implements OnInit {
   ngOnInit(): void {
     this.result = this.drawingService.lastResult;
     this.gameOver = this.drawingService.gameOver;
-
-    console.log("ord", this.result.word);
   }
 
   newDrawing() {
