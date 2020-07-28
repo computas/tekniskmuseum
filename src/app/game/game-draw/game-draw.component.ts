@@ -34,6 +34,7 @@ export class GameDrawComponent implements OnInit, OnDestroy {
   isDrawing = false;
   hasLeftCanvas = false;
   timeLeft = 20.0;
+  isBlankImage = true;
 
   score = 333;
 
@@ -186,7 +187,9 @@ export class GameDrawComponent implements OnInit, OnDestroy {
         if (this.multiplayerService.isMultiplayer) {
           this.classifyMultiplayer();
         } else {
-          this.classify();
+          if (!this.isBlankImage || (this.isBlankImage && this.timeLeft === 0)) {
+            this.classify();
+          }
         }
       },
       complete: () => {
@@ -286,6 +289,12 @@ export class GameDrawComponent implements OnInit, OnDestroy {
       },
     });
   }
+  updateAiGuess(sortedCertaintyArr) {
+    if (sortedCertaintyArr && sortedCertaintyArr.length > 1) {
+      const guess = sortedCertaintyArr[0].label;
+      this.AI_GUESS = guess === this.guessWord ? sortedCertaintyArr[1].label : guess;
+    }
+  }
 
   classify() {
     const b64Image = this.canvas.nativeElement.toDataURL('image/png');
@@ -295,9 +304,7 @@ export class GameDrawComponent implements OnInit, OnDestroy {
         const formData: FormData = this.createFormData(dataUrl);
         this.drawingService.classify(formData).subscribe((res) => {
           const sortedCertaintyArr = this.sortOnCertainty(res);
-          if (sortedCertaintyArr && sortedCertaintyArr.length > 1) {
-            this.AI_GUESS = sortedCertaintyArr[0].label;
-          }
+          this.updateAiGuess(sortedCertaintyArr);
           if (res.roundIsDone) {
             this.playResultSound(res.hasWon);
             const score = this.score > 0 ? this.score : 0;
@@ -367,6 +374,8 @@ export class GameDrawComponent implements OnInit, OnDestroy {
     this.ctx.lineTo(currentX, currentY);
     this.ctx.stroke();
 
+    this.isBlankImage = false;
+
     if (currentX < this.minX) {
       this.minX = currentX;
     }
@@ -397,6 +406,7 @@ export class GameDrawComponent implements OnInit, OnDestroy {
   clear() {
     const canvas = this.canvas.nativeElement;
     this.ctx.clearRect(0, 0, canvas.width, canvas.height);
+    this.isBlankImage = true;
     this.resetMinMaxMouseValues();
   }
 
