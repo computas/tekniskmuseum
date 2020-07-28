@@ -19,6 +19,7 @@
   font-size: 48px;
   display: grid;
   align-items: end;
+  margin: 0;
 }
 
 .btn {
@@ -92,13 +93,14 @@ p {
   justify-content: center;
   align-items: center;
   flex-wrap: wrap;
+  align-items: flex-end;
 }
 .result-header-multi {
   text-align: center;
   color: #195272;
   font-size: 48px;
   margin: 0;
-  padding: 24px 24px;
+  padding: 0 24px;
 }
 .winner {
   color: #fa852f;
@@ -119,6 +121,10 @@ p {
 .multiplayer-score {
   color: #195272;
   font-weight: normal;
+}
+.result-section {
+  align-items: center;
+  display: flex;
 }
 @media (max-width: 568px) {
 }
