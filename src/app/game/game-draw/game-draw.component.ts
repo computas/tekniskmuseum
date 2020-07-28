@@ -103,7 +103,6 @@ export class GameDrawComponent implements OnInit, OnDestroy {
 
   roundOverListener() {
     return this.multiplayerService.roundOverListener().subscribe((roundOver: any) => {
-      console.log('play loss sound');
       if (!this.hasAddedResult) {
         this.updateResult(this.prediction.hasWon);
         this.hasAddedResult = true;
