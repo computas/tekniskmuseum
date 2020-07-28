@@ -16,11 +16,13 @@ export class GameIntermediateResultComponent implements OnInit {
   @Output() nextGuess = new EventEmitter();
   @Output() finalResult = new EventEmitter();
 
-  constructor(private drawingService: DrawingService, private speechService: SpeechService) {}
+  constructor(private drawingService: DrawingService, private speechService: SpeechService) { }
 
   ngOnInit(): void {
     this.result = this.drawingService.lastResult;
     this.gameOver = this.drawingService.gameOver;
+
+    console.log("ord", this.result.word);
   }
 
   newDrawing() {
