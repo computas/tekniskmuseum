@@ -28,30 +28,30 @@ export class LoginService {
 
   signOut() {
     this._loggedIn = false;
-    return this.http.post(`http://localhost:8000/${endpoints.ADMIN}/${endpoints.LOGOUT}`, {});
+    return this.http.post(`${endpoints.TEKNISKBACKEND}/${endpoints.ADMIN}/${endpoints.LOGOUT}`, {});
   }
 
   isAuthenticated() {
-    return this.http.post(`http://localhost:8000/${endpoints.ADMIN}/${endpoints.PING}`, {});
+    return this.http.post(`${endpoints.TEKNISKBACKEND}/${endpoints.ADMIN}/${endpoints.PING}`, {});
   }
 
   attemptLogin(formData) {
-    return this.http.post(`http://localhost:8000/${endpoints.AUTH}`, formData);
+    return this.http.post(`${endpoints.TEKNISKBACKEND}/${endpoints.AUTH}`, formData);
   }
 
   revertDataset() {
-    return this.http.post(`http://localhost:8000/${endpoints.ADMIN}/${endpoints.CLEARTRAINSET}`, {});
+    return this.http.post(`${endpoints.TEKNISKBACKEND}/${endpoints.ADMIN}/${endpoints.CLEARTRAINSET}`, {});
   }
 
   retrain() {
-    return this.http.post(`http://localhost:8000/${endpoints.ADMIN}/${endpoints.TRAINML}`, {});
+    return this.http.post(`${endpoints.TEKNISKBACKEND}/${endpoints.ADMIN}/${endpoints.TRAINML}`, {});
   }
 
   clearHighScore() {
-    return this.http.post(`http://localhost:8000/${endpoints.ADMIN}/${endpoints.DROPTABLE}`, {});
+    return this.http.post(`${endpoints.TEKNISKBACKEND}/${endpoints.ADMIN}/${endpoints.DROPTABLE}`, {});
   }
 
   getStatus() {
-    return this.http.post(`http://localhost:8000/${endpoints.ADMIN}/${endpoints.GETSTATUS}`, {});
+    return this.http.post(`${endpoints.TEKNISKBACKEND}/${endpoints.ADMIN}/${endpoints.GETSTATUS}`, {});
   }
 }

@@ -1,5 +1,6 @@
-import { Component, Inject } from '@angular/core';
-import { MatDialog, MAT_DIALOG_DATA } from '@angular/material/dialog';
+import { Component } from '@angular/core';
+import { MatDialog } from '@angular/material/dialog';
+import { DialogTemplateComponent } from './../dialog-template/dialog-template.component';
 
 export interface DialogData {
   iterationName: string;
@@ -13,10 +14,10 @@ export interface DialogData {
   styleUrls: ['./info-dialog.component.scss'],
 })
 export class InfoDialogComponent {
-  constructor(public dialog: MatDialog, public dialogExample: DialogComponent) {}
+  constructor(public dialog: MatDialog) {}
 
   openDialog(iterName: string, time: string, imgCount: string) {
-    this.dialog.open(DialogComponent, {
+    this.dialog.open(DialogTemplateComponent, {
       data: {
         iterationName: iterName,
         timeCreated: time,
@@ -24,12 +25,4 @@ export class InfoDialogComponent {
       },
     });
   }
-}
-
-@Component({
-  selector: 'app-info-dialog',
-  templateUrl: 'app-info-dialog.html',
-})
-export class DialogComponent {
-  constructor(@Inject(MAT_DIALOG_DATA) public data: DialogData) {}
 }

@@ -16,12 +16,19 @@ import { AdminComponent } from './admin/admin.component';
 import { InfoComponent } from './admin/info/info.component';
 import { MatSnackBarModule } from '@angular/material/snack-bar';
 import { InfoDialogComponent } from './admin/info-dialog/info-dialog.component';
-import { DialogComponent } from './admin/info-dialog/info-dialog.component';
 import { MAT_DIALOG_DATA } from '@angular/material/dialog';
-import { AuthGuard } from './admin/info/info.component';
+import { AuthGuard } from './admin/auth-guard';
+import { DialogTemplateComponent } from './admin/dialog-template/dialog-template.component';
 
 @NgModule({
-  declarations: [AppComponent, AdminComponent, InfoComponent, InfoDialogComponent],
+  declarations: [
+    AppComponent,
+    AdminComponent,
+    InfoComponent,
+    IdleTimeoutComponent,
+    InfoDialogComponent,
+    DialogTemplateComponent,
+  ],
 
   imports: [
     BrowserModule,
@@ -36,13 +43,7 @@ import { AuthGuard } from './admin/info/info.component';
     MaterialImportsModule,
     BrowserAnimationsModule,
   ],
-  providers: [
-    HttpClientModule,
-    InfoDialogComponent,
-    DialogComponent,
-    AuthGuard,
-    { provide: MAT_DIALOG_DATA, useValue: {} },
-  ],
+  providers: [HttpClientModule, InfoDialogComponent, AuthGuard, { provide: MAT_DIALOG_DATA, useValue: {} }],
 
   bootstrap: [AppComponent],
 })

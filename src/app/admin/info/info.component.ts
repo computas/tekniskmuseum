@@ -3,7 +3,6 @@ import { Router } from '@angular/router';
 import { LoginService } from '../login.service';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { InfoDialogComponent } from './../info-dialog/info-dialog.component';
-import { CanActivate } from '@angular/router';
 
 @Component({
   selector: 'app-info',
@@ -172,17 +171,5 @@ export class InfoComponent implements OnInit {
     this._snackBar.open(msg, 'Lukk', {
       duration: 6000,
     });
-  }
-}
-
-@Injectable()
-export class AuthGuard implements CanActivate {
-  constructor(private loginService: LoginService, private router: Router) {}
-  canActivate() {
-    if (!this.loginService.isLoggedIn()) {
-      this.router.navigate(['admin']);
-      return false;
-    }
-    return true;
   }
 }

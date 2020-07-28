@@ -1,6 +1,3 @@
-import { trimTrailingNulls } from '@angular/compiler/src/render3/view/util';
-import { EventListenerFocusTrapInertStrategy } from '@angular/cdk/a11y';
-
 export const endpoints = {
   TEKNISKBACKEND: 'https://tekniskback.azurewebsites.net',
   HIGHSCORE: 'viewHighScore',
