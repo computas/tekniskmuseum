@@ -38,7 +38,7 @@ export class WebSocketService {
       console.error('error', reason);
     });
 
-    this.listen('player_disconnected').subscribe((data: any) => {
+    this.listen('playerDisconnected').subscribe((data: any) => {
       const el: PlayerDisconnectedData = JSON.parse(data);
       if (el.player_disconnected) {
         this.playerDisconnected = true;

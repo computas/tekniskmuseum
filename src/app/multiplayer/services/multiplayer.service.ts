@@ -88,7 +88,7 @@ export class MultiplayerService {
   }
 
   roundOverListener() {
-    return this.webSocketService.listen('round_over');
+    return this.webSocketService.listen('roundOver');
   }
 
   endGameListener() {

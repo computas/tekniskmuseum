@@ -17,7 +17,7 @@ export class MultiplayerComponent implements OnInit, OnDestroy {
     private webSocketService: WebSocketService,
     private router: Router
   ) {}
-  destination = '/';
+  destination = '/gamemode';
   otherPlayer = undefined;
   stateInfoSubscription: Subscription;
   playerDisconnectedSubscription: Subscription;
