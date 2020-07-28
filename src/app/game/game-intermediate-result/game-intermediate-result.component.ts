@@ -1,8 +1,6 @@
 import { Component, OnInit, EventEmitter, Output } from '@angular/core';
 import { Result } from '../../shared/models/result.interface';
 import { DrawingService } from '../game-draw/services/drawing.service';
-import { SPEECH } from 'src/app/shared/speech-text/text';
-import { SpeechService } from 'src/app/services/speech.service';
 import { MultiplayerService, GAMELEVEL } from 'src/app/multiplayer/services/multiplayer.service';
 import { Router } from '@angular/router';
 import { routes } from '../../shared/models/routes';
@@ -13,8 +11,8 @@ import { routes } from '../../shared/models/routes';
 })
 export class GameIntermediateResultComponent implements OnInit {
   result: Result;
-  wonSentence = SPEECH.resultWon;
-  lostSentence = SPEECH.resultLoss;
+  wonSentence = 'Hurra, jeg klarte å gjette at du tegnet ';
+  lostSentence = 'Beklager, jeg klarte ikke å gjette hva du tegnet';
   gameOver: boolean;
   @Output() nextGuess = new EventEmitter();
   @Output() finalResult = new EventEmitter();
@@ -23,16 +21,16 @@ export class GameIntermediateResultComponent implements OnInit {
   isSinglePlayer = false;
   constructor(
     private drawingService: DrawingService,
-    private speechService: SpeechService,
     private multiplayerService: MultiplayerService,
     private router: Router
   ) {}
 
   ngOnInit(): void {
     this.result = this.drawingService.lastResult;
-    this.gameOver = this.drawingService.gameOver;
     if (this.router.url === `/${routes.SINGLEPLAYER}`) {
       this.isSinglePlayer = true;
+      this.gameOver = this.drawingService.gameOver;
+      this.waitingForPlayer = false;
     }
     if (this.multiplayerService.isMultiplayer) {
       this.isMultiplayer = true;
@@ -80,14 +78,6 @@ export class GameIntermediateResultComponent implements OnInit {
       };
     } else {
       this.finalResult.next(true);
-    }
-  }
-
-  speakResult() {
-    if (this.result.hasWon) {
-      this.speechService.speak(`${SPEECH.resultWon}`);
-    } else {
-      this.speechService.speak(SPEECH.resultLoss);
     }
   }
 }

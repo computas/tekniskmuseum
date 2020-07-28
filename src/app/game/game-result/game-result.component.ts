@@ -1,7 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { DrawingService } from '../game-draw/services/drawing.service';
 import { Result } from '../../shared/models/result.interface';
-import { Highscore } from 'src/app/services/highscore.service';
 import { Router } from '@angular/router';
 import { MultiplayerService } from 'src/app/multiplayer/services/multiplayer.service';
 
@@ -12,7 +11,6 @@ import { MultiplayerService } from 'src/app/multiplayer/services/multiplayer.ser
 })
 export class GameResultComponent implements OnInit {
   results: Result[] = [];
-  dailyHighScores: Highscore[];
   totalScore: number;
   loading: boolean;
   value = '';
