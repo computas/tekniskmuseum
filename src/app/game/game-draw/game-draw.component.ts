@@ -6,6 +6,7 @@ import { take } from 'rxjs/operators';
 import { DrawingService } from './services/drawing.service';
 import { MultiplayerService, GAMELEVEL } from '../game-multiplayer/services/multiplayer.service';
 import { Result } from '../../shared/models/interfaces';
+import { SoundService } from './services/sound.service';
 
 @Component({
   selector: 'app-drawing',
@@ -37,11 +38,6 @@ export class GameDrawComponent implements OnInit, OnDestroy {
 
   score = 333;
 
-  playTick = false;
-  sound = new Howl({
-    src: ['../../../assets/tick.mp3'],
-  });
-
   clockColor = 'initial';
   private readonly resultImageSize = 1024;
 
@@ -63,7 +59,8 @@ export class GameDrawComponent implements OnInit, OnDestroy {
   constructor(
     private imageService: ImageService,
     private drawingService: DrawingService,
-    private multiplayerService: MultiplayerService
+    private multiplayerService: MultiplayerService,
+    private soundService: SoundService
   ) {}
 
   ngOnInit(): void {
@@ -97,6 +94,7 @@ export class GameDrawComponent implements OnInit, OnDestroy {
       const sortedCertaintyArr = this.sortOnCertainty(prediction);
       this.updateAiGuess(sortedCertaintyArr);
       if (this.prediction && this.prediction.hasWon && !this.hasAddedResult) {
+        this.soundService.playResultSound(this.prediction.hasWon);
         this.updateResult(true);
         this.hasAddedResult = true;
       }
@@ -105,6 +103,7 @@ export class GameDrawComponent implements OnInit, OnDestroy {
 
   roundOverListener() {
     return this.multiplayerService.roundOverListener().subscribe((roundOver: any) => {
+      console.log('play loss sound');
       if (!this.hasAddedResult) {
         this.updateResult(this.prediction.hasWon);
         this.hasAddedResult = true;
@@ -158,7 +157,7 @@ export class GameDrawComponent implements OnInit, OnDestroy {
 
   ngOnDestroy(): void {
     this.subscriptions.unsubscribe();
-    this.sound.stop();
+    this.soundService.sound.stop();
   }
 
   start(e: MouseEvent | TouchEvent) {
@@ -183,7 +182,7 @@ export class GameDrawComponent implements OnInit, OnDestroy {
         },
         complete: () => {
           this.clockColor = this.clockColor === 'initial' ? 'final' : 'initial';
-          this.sound.stop();
+          this.soundService.sound.stop();
           this.timeOut = true;
           if (this.multiplayerService.isMultiplayer && !this.hasAddedResult) {
             this.updateResult(false);
@@ -217,11 +216,12 @@ export class GameDrawComponent implements OnInit, OnDestroy {
             if (this.timeLeft <= 5) {
               this.countDown.nativeElement.style.color = color;
               color = color === 'white' ? 'red' : 'white';
-              this.playTickSound();
-              this.playTick = true;
+              this.soundService.playTickSound();
+              this.soundService.playTick = true;
             }
           }
           if (this.timeLeft <= 0) {
+            this.soundService.playResultSound(false);
             if (this.multiplayerService.isMultiplayer) {
               observer.complete();
             }
@@ -246,26 +246,6 @@ export class GameDrawComponent implements OnInit, OnDestroy {
     return arr;
   }
 
-  playTickSound() {
-    if (!this.playTick) {
-      this.sound.play();
-    }
-  }
-
-  playResultSound(hasWon: boolean) {
-    if (hasWon) {
-      const sound = new Howl({
-        src: ['../../../assets/win.mp3'],
-      });
-      sound.play();
-    } else {
-      const sound = new Howl({
-        src: ['../../../assets/loss.mp3'],
-      });
-      sound.play();
-    }
-  }
-
   updateAiGuess(sortedCertaintyArr) {
     if (sortedCertaintyArr && sortedCertaintyArr.length > 1) {
       const guess = sortedCertaintyArr[0].label;
@@ -279,7 +259,7 @@ export class GameDrawComponent implements OnInit, OnDestroy {
       const sortedCertaintyArr = this.sortOnCertainty(res);
       this.updateAiGuess(sortedCertaintyArr);
       if (res.roundIsDone) {
-        this.playResultSound(res.hasWon);
+        this.soundService.playResultSound(res.hasWon);
         const score = this.score > 0 ? this.score : 0;
         this.drawingService.lastResult.score = Math.round(score);
         this.imageService
