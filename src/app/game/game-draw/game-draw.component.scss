@@ -103,3 +103,15 @@
   box-shadow: -2px 2px 2px 0 rgba(178, 178, 178, 0.4);
   left: -9px;
 }
+.guessing-avatar {
+  display: flex;
+}
+@media only screen and (max-width: 600px) {
+  .guess-label {
+    font-size: 18px;
+    line-height: normal;
+  }
+  .guessing-avatar {
+    width: 120px;
+  }
+}
