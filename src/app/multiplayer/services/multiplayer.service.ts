@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { WebSocketService } from './web-socket.service';
 import { BehaviorSubject, ReplaySubject } from 'rxjs';
-import { map, take } from 'rxjs/operators';
+import { map, take, tap } from 'rxjs/operators';
 
 export enum GAMELEVEL {
   lobby = 'LOBBY',
@@ -52,17 +52,23 @@ export class MultiplayerService {
 
   constructor(private webSocketService: WebSocketService) {}
 
+  resetStateInfo() {
+    this.stateInfo = this.initialState;
+  }
+
   joinGame() {
     this.webSocketService.emit('joinGame', '');
-    this.webSocketService.listen('joinGame').subscribe((data: any) => {
-      const el: GameState = data;
-      if (el && el.game_id) {
-        this.stateInfo = el;
-      }
-      if (el.ready) {
-        this.stateInfo = { ...this.stateInfo, ready: el.ready, gameLevel: GAMELEVEL.howToPlay };
-      }
-    });
+    return this.webSocketService.listen('joinGame').pipe(
+      tap((data: any) => {
+        const el: GameState = data;
+        if (el && el.game_id) {
+          this.stateInfo = el;
+        }
+        if (el.ready) {
+          this.stateInfo = { ...this.stateInfo, ready: el.ready, gameLevel: GAMELEVEL.howToPlay };
+        }
+      })
+    );
   }
 
   getLabel(emit = true) {

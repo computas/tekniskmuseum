@@ -50,6 +50,7 @@ export class MultiplayerComponent implements OnInit, OnDestroy {
 
   ngOnDestroy(): void {
     this.webSocketService.disconnect();
+    this.multiplayerService.resetStateInfo();
     this.stateInfoSubscription.unsubscribe();
     this.playerDisconnectedSubscription.unsubscribe();
     this.roundOverSubscription.unsubscribe();

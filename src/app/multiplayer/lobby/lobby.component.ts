@@ -1,28 +1,30 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, OnDestroy } from '@angular/core';
 import { MultiplayerService } from '../services/multiplayer.service';
-import { routes } from '../../shared/models/routes';
-import { Router } from '@angular/router';
+import { Subscription } from 'rxjs';
 
 @Component({
   selector: 'app-lobby',
   templateUrl: './lobby.component.html',
   styleUrls: ['./lobby.component.scss'],
 })
-export class LobbyComponent implements OnInit {
+export class LobbyComponent implements OnInit, OnDestroy {
   waitingForOtherPlayer = true;
+  subscriptions = new Subscription();
 
-  constructor(public multiPlayerService: MultiplayerService, private router: Router) {}
+  constructor(public multiPlayerService: MultiplayerService) {}
 
   ngOnInit(): void {
-    this.multiPlayerService.joinGame();
-    this.multiPlayerService.stateInfo$.subscribe((obs) => {
-      if (obs.ready) {
-        this.waitingForOtherPlayer = false;
-      }
-    });
+    this.subscriptions.add(this.multiPlayerService.joinGame().subscribe());
+    this.subscriptions.add(
+      this.multiPlayerService.stateInfo$.subscribe((obs) => {
+        if (obs.ready) {
+          this.waitingForOtherPlayer = false;
+        }
+      })
+    );
   }
 
-  goToGameInfo() {
-    this.router.navigate([routes.MULTIPLAYER]);
+  ngOnDestroy() {
+    this.subscriptions.unsubscribe();
   }
 }
