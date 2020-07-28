@@ -4,8 +4,8 @@
 
 export const environment = {
   production: false,
-  WS_ENDPOINT: 'wss://tekniskback-mp.azurewebsites.net',
-  // WS_ENDPOINT: 'ws://localhost:8000',
+  //WS_ENDPOINT: 'wss://tekniskback-mp.azurewebsites.net',
+  WS_ENDPOINT: 'ws://localhost:8000',
 };
 
 /*
