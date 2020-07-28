@@ -56,7 +56,6 @@ export class MultiplayerService {
     this.webSocketService.emit('joinGame', '');
     this.webSocketService.listen('joinGame').subscribe((data: any) => {
       const el: GameState = data;
-      console.log(el);
       if (el && el.game_id) {
         this.stateInfo = el;
       }
