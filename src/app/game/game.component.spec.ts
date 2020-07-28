@@ -5,8 +5,6 @@ import { GameInfoComponent } from './game-info/game-info.component';
 import { RouterTestingModule } from '@angular/router/testing';
 import { HttpClientTestingModule } from '@angular/common/http/testing';
 import { HighScoreModule } from '../highscore/highscore.module';
-import { SpeechServiceMock } from '../services/speech.service.mock';
-import { SpeechService } from '../services/speech.service';
 
 describe('GameComponent', () => {
   let component: GameComponent;
@@ -16,7 +14,6 @@ describe('GameComponent', () => {
     TestBed.configureTestingModule({
       declarations: [GameComponent, GameInfoComponent],
       imports: [MaterialImportsModule, RouterTestingModule, HttpClientTestingModule, HighScoreModule],
-      providers: [{ provide: SpeechService, useValue: SpeechServiceMock }],
     }).compileComponents();
   }));
 
