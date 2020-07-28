@@ -1,6 +1,6 @@
-import { Component, OnInit, Output, EventEmitter } from '@angular/core';
-import { interval, Observable } from 'rxjs';
-import { take } from 'rxjs/operators';
+import { Component, OnInit, Output, EventEmitter, OnDestroy } from '@angular/core';
+import { interval, Subscription } from 'rxjs';
+import { take, tap } from 'rxjs/operators';
 import { GAMELEVEL } from '../../multiplayer/services/multiplayer.service';
 import { DrawingService } from '../game-draw/services/drawing.service';
 import { SPEECH } from 'src/app/shared/speech-text/text';
@@ -14,7 +14,7 @@ import { MultiplayerService } from 'src/app/multiplayer/services/multiplayer.ser
   templateUrl: './game-word-to-draw.component.html',
   styleUrls: ['./game-word-to-draw.component.scss'],
 })
-export class GameWordToDrawComponent implements OnInit {
+export class GameWordToDrawComponent implements OnInit, OnDestroy {
   constructor(
     private drawingService: DrawingService,
     private speechService: SpeechService,
@@ -31,6 +31,10 @@ export class GameWordToDrawComponent implements OnInit {
 
   loading = true;
   playernr: string;
+
+  subscriptions = new Subscription();
+  timerSubscription: Subscription;
+
   ngOnInit(): void {
     if (this.router.url === `/${routes.SINGLEPLAYER}`) {
       this.isSinglePlayer = true;
@@ -39,56 +43,70 @@ export class GameWordToDrawComponent implements OnInit {
     }
     if (this.isSinglePlayer) {
       if (this.drawingService.gameHasStarted) {
-        this.drawingService.getLabel().subscribe((res) => {
-          this.word = res.label;
-          this.loading = false;
-        });
-        this.drawingService.guessUsed$.subscribe((res) => {
-          this.guessUsed = res;
-        });
+        this.subscriptions.add(
+          this.drawingService.getLabel().subscribe((res) => {
+            this.word = res.label;
+            this.loading = false;
+          })
+        );
+        this.subscriptions.add(
+          this.drawingService.guessUsed$.subscribe((res) => {
+            this.guessUsed = res;
+          })
+        );
       } else {
-        this.drawingService.startGame().subscribe((res) => {
-          this.loading = false;
-          this.word = this.drawingService.label;
-          this.drawingService.gameHasStarted = true;
-        });
-        this.drawingService.guessUsed$.subscribe((res) => {
-          this.guessUsed = res;
-        });
+        this.subscriptions.add(
+          this.drawingService.startGame().subscribe((res) => {
+            this.loading = false;
+            this.word = this.drawingService.label;
+            this.drawingService.gameHasStarted = true;
+          })
+        );
+        this.subscriptions.add(
+          this.drawingService.guessUsed$.subscribe((res) => {
+            this.guessUsed = res;
+          })
+        );
       }
     }
     if (this.isMultiPlayer) {
       const player = this.multiplayerService.stateInfo.player_nr;
       this.playernr = player === 'player_1' ? '1' : '2';
       this.guessUsed = this.drawingService.guessUsed;
-      this.multiplayerService.getLabel().subscribe((label) => {
-        if (label) {
-          this.multiplayerService.stateInfo = {
-            ...this.multiplayerService.stateInfo,
-            label,
-          };
-          this.word = label;
-          this.loading = false;
-          this.startTimer().subscribe();
-        }
-      });
+      this.subscriptions.add(
+        this.multiplayerService.getLabel().subscribe((label) => {
+          if (label) {
+            this.multiplayerService.stateInfo = {
+              ...this.multiplayerService.stateInfo,
+              label,
+            };
+            this.word = label;
+            this.loading = false;
+            this.subscriptions.add(this.startTimer().subscribe());
+          }
+        })
+      );
     }
   }
 
   startTimer() {
-    return new Observable((observer) => {
-      interval(1000)
-        .pipe(take(5))
-        .subscribe((tics) => {
+    return interval(1000)
+      .pipe(take(5))
+      .pipe(
+        tap((tics) => {
           this.timeLeft--;
           if (this.timeLeft <= 0) {
             this.multiplayerService.stateInfo = { ...this.multiplayerService.stateInfo, gameLevel: GAMELEVEL.drawing };
           }
-        });
-    });
+        })
+      );
   }
 
   speakWord() {
     this.speechService.speak(`${SPEECH.draw}${this.word}`);
+  }
+
+  ngOnDestroy() {
+    this.subscriptions.unsubscribe();
   }
 }
