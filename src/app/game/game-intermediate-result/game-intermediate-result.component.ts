@@ -30,9 +30,10 @@ export class GameIntermediateResultComponent implements OnInit {
 
   ngOnInit(): void {
     this.result = this.drawingService.lastResult;
-    this.gameOver = this.drawingService.gameOver;
     if (this.router.url === `/${routes.SINGLEPLAYER}`) {
       this.isSinglePlayer = true;
+      this.gameOver = this.drawingService.gameOver;
+      this.waitingForPlayer = false;
     }
     if (this.multiplayerService.isMultiplayer) {
       this.isMultiplayer = true;

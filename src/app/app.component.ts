@@ -6,6 +6,7 @@ import { RouterOutlet } from '@angular/router';
 
 import { IdleTimeoutComponent } from './idle-timeout/idle-timeout.component';
 import { routeTransitionAnimations } from './route-transition-animations';
+import { environment } from '../environments/environment';
 
 @Component({
   selector: 'app-root',
@@ -20,7 +21,7 @@ export class AppComponent implements OnInit {
   userInactive: Subject<any> = new Subject();
 
   isDialogOpen = false;
-  inactivityTime = 60 * 1000;
+  inactivityTime = environment.inactivityTime;
 
   constructor(private router: Router, public dialog: MatDialog) {}
 
