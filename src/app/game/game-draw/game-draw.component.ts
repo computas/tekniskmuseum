@@ -4,9 +4,8 @@ import { ImageService } from './services/image.service';
 import { Howl } from 'howler';
 import { take } from 'rxjs/operators';
 import { DrawingService } from './services/drawing.service';
-import { StartGameInfo } from './services/start-game-info';
 import { MultiplayerService, GAMELEVEL } from 'src/app/multiplayer/services/multiplayer.service';
-import { Result } from 'src/app/shared/models/result.interface';
+import { Result } from 'src/app/shared/models/interfaces';
 
 @Component({
   selector: 'app-drawing',
@@ -51,7 +50,6 @@ export class GameDrawComponent implements OnInit, OnDestroy {
   private readonly _timeOut = new BehaviorSubject<boolean>(false);
   readonly _timeOut$ = this._timeOut.asObservable();
 
-  startGameInfo: StartGameInfo;
   guessWord: string;
   AI_GUESS: string;
 
