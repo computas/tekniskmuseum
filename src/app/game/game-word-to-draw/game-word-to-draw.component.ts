@@ -1,5 +1,5 @@
 import { Component, OnInit, Output, EventEmitter, OnDestroy } from '@angular/core';
-import { interval, Observable, Subscription } from 'rxjs';
+import { interval, Subscription } from 'rxjs';
 import { take, tap } from 'rxjs/operators';
 import { GAMELEVEL } from '../../multiplayer/services/multiplayer.service';
 import { DrawingService } from '../game-draw/services/drawing.service';
@@ -94,7 +94,6 @@ export class GameWordToDrawComponent implements OnInit, OnDestroy {
       .pipe(take(5))
       .pipe(
         tap((tics) => {
-          console.log('tics', tics);
           this.timeLeft--;
           if (this.timeLeft <= 0) {
             this.multiplayerService.stateInfo = { ...this.multiplayerService.stateInfo, gameLevel: GAMELEVEL.drawing };

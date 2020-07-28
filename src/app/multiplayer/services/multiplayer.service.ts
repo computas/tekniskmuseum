@@ -61,7 +61,6 @@ export class MultiplayerService {
     return this.webSocketService.listen('joinGame').pipe(
       tap((data: any) => {
         const el: GameState = data;
-        console.log('joining game', data);
         if (el && el.game_id) {
           this.stateInfo = el;
         }
