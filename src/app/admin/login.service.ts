@@ -1,7 +1,6 @@
 import { endpoints } from '../shared/models/endpoints';
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { Router } from '@angular/router';
 
 @Injectable({
   providedIn: 'root',
@@ -9,7 +8,7 @@ import { Router } from '@angular/router';
 export class LoginService {
   baseUrl = endpoints.TEKNISKBACKEND;
   private _loggedIn = false;
-  constructor(private router: Router, private http: HttpClient) {}
+  constructor(private http: HttpClient) {}
 
   login(username, password) {
     const formData = new FormData();
