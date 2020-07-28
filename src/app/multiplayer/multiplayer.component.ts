@@ -19,10 +19,7 @@ export class MultiplayerComponent implements OnInit, OnDestroy {
   ) {}
   destination = '/';
   otherPlayer = undefined;
-  stateInfoSubscription: Subscription;
-  playerDisconnectedSubscription: Subscription;
-  roundOverSubscription: Subscription;
-  endGameSubscription: Subscription;
+  subs = new Subscription();
 
   ngOnInit(): void {
     if (this.router.url === `/${routes.MULTIPLAYER}`) {
@@ -30,30 +27,35 @@ export class MultiplayerComponent implements OnInit, OnDestroy {
     }
     this.webSocketService.startSockets();
     this.gameLevel = this.multiplayerService.stateInfo.gameLevel;
-    this.roundOverSubscription = this.multiplayerService.roundOverListener().subscribe((roundOver: any) => {
-      this.multiplayerService.stateInfo = { ...this.multiplayerService.stateInfo, ready: true };
-    });
-    this.stateInfoSubscription = this.multiplayerService.stateInfo$.subscribe((data) => {
-      this.gameLevel = data.gameLevel;
-    });
-    this.playerDisconnectedSubscription = this.webSocketService.playerDisconnected$.subscribe((data) => {
-      console.warn('DISCONNECTED', data);
-      if (data) {
-        window.location.href = this.destination;
-      }
-    });
-    this.endGameSubscription = this.multiplayerService.endGameListener().subscribe((data: string) => {
-      const otherplayer = JSON.parse(data);
-      this.multiplayerService._opponentScore.next(otherplayer);
-    });
+    this.subs.add(
+      this.multiplayerService.roundOverListener().subscribe((roundOver: any) => {
+        this.multiplayerService.stateInfo = { ...this.multiplayerService.stateInfo, ready: true };
+      })
+    );
+    this.subs.add(
+      this.multiplayerService.stateInfo$.subscribe((data) => {
+        this.gameLevel = data.gameLevel;
+      })
+    );
+    this.subs.add(
+      this.webSocketService.playerDisconnected$.subscribe((data) => {
+        console.warn('DISCONNECTED', data);
+        if (data) {
+          window.location.href = this.destination;
+        }
+      })
+    );
+    this.subs.add(
+      this.multiplayerService.endGameListener().subscribe((data: string) => {
+        const otherplayer = JSON.parse(data);
+        this.multiplayerService._opponentScore.next(otherplayer);
+      })
+    );
   }
 
   ngOnDestroy(): void {
     this.webSocketService.disconnect();
     this.multiplayerService.resetStateInfo();
-    this.stateInfoSubscription.unsubscribe();
-    this.playerDisconnectedSubscription.unsubscribe();
-    this.roundOverSubscription.unsubscribe();
-    this.endGameSubscription.unsubscribe();
+    this.subs.unsubscribe();
   }
 }

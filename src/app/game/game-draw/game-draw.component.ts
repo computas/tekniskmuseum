@@ -1,8 +1,8 @@
 import { Component, ElementRef, OnInit, ViewChild, Output, EventEmitter, OnDestroy } from '@angular/core';
-import { BehaviorSubject, Subject, interval, Observable, Subscription } from 'rxjs';
+import { BehaviorSubject, interval, Observable, Subscription } from 'rxjs';
 import { ImageService } from './services/image.service';
 import { Howl } from 'howler';
-import { take, takeUntil } from 'rxjs/operators';
+import { take } from 'rxjs/operators';
 import { DrawingService } from './services/drawing.service';
 import { StartGameInfo } from './services/start-game-info';
 import { MultiplayerService, GAMELEVEL } from 'src/app/multiplayer/services/multiplayer.service';
@@ -51,8 +51,6 @@ export class GameDrawComponent implements OnInit, OnDestroy {
   private readonly _timeOut = new BehaviorSubject<boolean>(false);
   readonly _timeOut$ = this._timeOut.asObservable();
 
-  private unsubscribe = new Subject<void>();
-
   startGameInfo: StartGameInfo;
   guessWord: string;
   AI_GUESS: string;
@@ -61,8 +59,7 @@ export class GameDrawComponent implements OnInit, OnDestroy {
   result: Result;
   hasAddedResult = false;
 
-  roundOverSubscription: Subscription;
-  predictionSubscription: Subscription;
+  subscriptions = new Subscription();
   hasUpdatedState = false;
 
   constructor(
@@ -91,9 +88,9 @@ export class GameDrawComponent implements OnInit, OnDestroy {
   setUpMultiplayer() {
     this.multiplayerService.stateInfo = { ...this.multiplayerService.stateInfo, ready: false };
 
-    this.predictionSubscription = this.predictionListener();
+    this.subscriptions.add(this.predictionListener());
 
-    this.roundOverSubscription = this.roundOverListener();
+    this.subscriptions.add(this.roundOverListener());
   }
 
   predictionListener() {
@@ -164,12 +161,7 @@ export class GameDrawComponent implements OnInit, OnDestroy {
   }
 
   ngOnDestroy(): void {
-    this.unsubscribe.next();
-    this.unsubscribe.complete();
-    if (this.multiplayerService.isMultiplayer) {
-      this.roundOverSubscription.unsubscribe();
-      this.predictionSubscription.unsubscribe();
-    }
+    this.subscriptions.unsubscribe();
     this.sound.stop();
   }
 
@@ -182,26 +174,28 @@ export class GameDrawComponent implements OnInit, OnDestroy {
 
   startGame(): void {
     this.drawingService.classificationDone = false;
-    this.createDrawingTimer().subscribe({
-      next: (val) => {
-        if (this.multiplayerService.isMultiplayer) {
-          this.classifyMultiplayer();
-        } else {
-          if (!this.isBlankImage || (this.isBlankImage && this.timeLeft === 0)) {
-            this.classify();
+    this.subscriptions.add(
+      this.createDrawingTimer().subscribe({
+        next: (val) => {
+          if (this.multiplayerService.isMultiplayer) {
+            this.classifyMultiplayer();
+          } else {
+            if (!this.isBlankImage || (this.isBlankImage && this.timeLeft === 0)) {
+              this.classify();
+            }
           }
-        }
-      },
-      complete: () => {
-        this.clockColor = this.clockColor === 'initial' ? 'final' : 'initial';
-        this.sound.stop();
-        this.timeOut = true;
-        if (this.multiplayerService.isMultiplayer && !this.hasAddedResult) {
-          this.updateResult(false);
-          this.hasAddedResult = true;
-        }
-      },
-    });
+        },
+        complete: () => {
+          this.clockColor = this.clockColor === 'initial' ? 'final' : 'initial';
+          this.sound.stop();
+          this.timeOut = true;
+          if (this.multiplayerService.isMultiplayer && !this.hasAddedResult) {
+            this.updateResult(false);
+            this.hasAddedResult = true;
+          }
+        },
+      })
+    );
     if (this.drawingService.label) {
       this.guessWord = this.drawingService.label;
     }
@@ -213,8 +207,8 @@ export class GameDrawComponent implements OnInit, OnDestroy {
   private createDrawingTimer() {
     return new Observable((observer) => {
       let color = 'red';
-      interval(100)
-        .pipe(take(10 * this.timeLeft), takeUntil(this.unsubscribe))
+      const sub = interval(100)
+        .pipe(take(10 * this.timeLeft))
         .subscribe((tics) => {
           if (!this.drawingService.classificationDone) {
             this.score = this.score - 1.67336683417;
@@ -237,6 +231,7 @@ export class GameDrawComponent implements OnInit, OnDestroy {
             }
           }
         });
+      return () => sub.unsubscribe();
     });
   }
 
