@@ -6,6 +6,6 @@ export const SPEECH = {
   infoSingle: 'Slik spiller du: 1. Tegn ord. 2. Jeg gjetter. 3. Tre runder.',
   infoMultiplayer: 'Slik spiller dere: 1. Tegn ord. 2. Jeg gjetter. 3. Best av tre vinner!.',
   draw: 'Tegn: ',
-  resultWon: 'Hurra, vi klarte det!',
+  resultWon: 'Hurra, jeg klarte å gjette at du tegnet ',
   resultLoss: 'Beklager, jeg klarte ikke å gjette hva du tegnet',
 };
