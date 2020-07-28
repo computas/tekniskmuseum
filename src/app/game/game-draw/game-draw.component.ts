@@ -95,9 +95,7 @@ export class GameDrawComponent implements OnInit, OnDestroy {
     return this.multiplayerService.predictionListener().subscribe((prediction: any) => {
       this.prediction = prediction;
       const sortedCertaintyArr = this.sortOnCertainty(prediction);
-      if (sortedCertaintyArr && sortedCertaintyArr.length > 1) {
-        this.AI_GUESS = sortedCertaintyArr[0].label;
-      }
+      this.updateAiGuess(sortedCertaintyArr);
       if (this.prediction && this.prediction.hasWon && !this.hasAddedResult) {
         this.updateResult(true);
         this.hasAddedResult = true;
@@ -176,7 +174,7 @@ export class GameDrawComponent implements OnInit, OnDestroy {
       this.createDrawingTimer().subscribe({
         next: (val) => {
           if (this.multiplayerService.isMultiplayer) {
-            this.classifyMultiplayer();
+            this.classify(true);
           } else {
             if (!this.isBlankImage || (this.isBlankImage && this.timeLeft === 0)) {
               this.classify();
@@ -268,20 +266,6 @@ export class GameDrawComponent implements OnInit, OnDestroy {
     }
   }
 
-  classifyMultiplayer() {
-    const b64Image = this.canvas.nativeElement.toDataURL('image/png');
-    const croppedCoordinates: any = this.imageService.crop(this.minX, this.minY, this.maxX, this.maxY, this.LINE_WIDTH);
-    this.imageService.resize(b64Image, croppedCoordinates).subscribe({
-      next: (dataUrl) => {
-        const body = {
-          game_id: this.multiplayerService.stateInfo.game_id,
-          time_left: this.timeLeft,
-        };
-        const image = this.imageService.createBlob(dataUrl);
-        this.multiplayerService.classify(body, image);
-      },
-    });
-  }
   updateAiGuess(sortedCertaintyArr) {
     if (sortedCertaintyArr && sortedCertaintyArr.length > 1) {
       const guess = sortedCertaintyArr[0].label;
@@ -289,28 +273,41 @@ export class GameDrawComponent implements OnInit, OnDestroy {
     }
   }
 
-  classify() {
+  handleSinglePlayerClassification(dataUrl, croppedCoordinates) {
+    const formData: FormData = this.createFormData(dataUrl);
+    this.drawingService.classify(formData).subscribe((res) => {
+      const sortedCertaintyArr = this.sortOnCertainty(res);
+      this.updateAiGuess(sortedCertaintyArr);
+      if (res.roundIsDone) {
+        this.playResultSound(res.hasWon);
+        const score = this.score > 0 ? this.score : 0;
+        this.drawingService.lastResult.score = Math.round(score);
+        this.imageService
+          .resize(this.canvas.nativeElement.toDataURL('image/png'), croppedCoordinates, this.resultImageSize)
+          .subscribe({
+            next: (dataUrlHighRes) => {
+              this.drawingService.lastResult.imageData = dataUrlHighRes;
+            },
+          });
+      }
+    });
+  }
+
+  classify(isMultiplayer = false) {
     const b64Image = this.canvas.nativeElement.toDataURL('image/png');
     const croppedCoordinates: any = this.imageService.crop(this.minX, this.minY, this.maxX, this.maxY, this.LINE_WIDTH);
     this.imageService.resize(b64Image, croppedCoordinates).subscribe({
       next: (dataUrl) => {
-        const formData: FormData = this.createFormData(dataUrl);
-        this.drawingService.classify(formData).subscribe((res) => {
-          const sortedCertaintyArr = this.sortOnCertainty(res);
-          this.updateAiGuess(sortedCertaintyArr);
-          if (res.roundIsDone) {
-            this.playResultSound(res.hasWon);
-            const score = this.score > 0 ? this.score : 0;
-            this.drawingService.lastResult.score = Math.round(score);
-            this.imageService
-              .resize(this.canvas.nativeElement.toDataURL('image/png'), croppedCoordinates, this.resultImageSize)
-              .subscribe({
-                next: (dataUrlHighRes) => {
-                  this.drawingService.lastResult.imageData = dataUrlHighRes;
-                },
-              });
-          }
-        });
+        if (isMultiplayer) {
+          const body = {
+            game_id: this.multiplayerService.stateInfo.game_id,
+            time_left: this.timeLeft,
+          };
+          const image = this.imageService.createBlob(dataUrl);
+          this.multiplayerService.classify(body, image);
+        } else {
+          this.handleSinglePlayerClassification(dataUrl, croppedCoordinates);
+        }
       },
     });
   }
