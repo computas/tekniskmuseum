@@ -2,7 +2,7 @@ import { Component, OnInit, OnDestroy } from '@angular/core';
 import { MultiplayerService, GAMELEVEL } from './services/multiplayer.service';
 import { WebSocketService } from './services/web-socket.service';
 import { Router } from '@angular/router';
-import { routes } from '../shared/models/routes';
+import { routes } from '../../shared/models/routes';
 import { Subscription } from 'rxjs';
 @Component({
   selector: 'app-multiplayer',

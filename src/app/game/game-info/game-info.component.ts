@@ -1,8 +1,8 @@
 import { Component, OnInit, Output, EventEmitter } from '@angular/core';
 import { Router } from '@angular/router';
 import { routes } from '../../shared/models/routes';
-import { MultiplayerService, GAMELEVEL } from 'src/app/multiplayer/services/multiplayer.service';
-import { WebSocketService } from 'src/app/multiplayer/services/web-socket.service';
+import { MultiplayerService, GAMELEVEL } from '../game-multiplayer/services/multiplayer.service';
+import { WebSocketService } from '../game-multiplayer/services/web-socket.service';
 
 @Component({
   selector: 'app-game-info',

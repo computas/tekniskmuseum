@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { DrawingService } from '../game-draw/services/drawing.service';
 import { Result } from '../../shared/models/result.interface';
 import { Router } from '@angular/router';
-import { MultiplayerService } from 'src/app/multiplayer/services/multiplayer.service';
+import { MultiplayerService } from '../game-multiplayer/services/multiplayer.service';
 
 @Component({
   selector: 'app-game-result',

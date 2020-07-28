@@ -5,8 +5,8 @@ import { Howl } from 'howler';
 import { take } from 'rxjs/operators';
 import { DrawingService } from './services/drawing.service';
 import { StartGameInfo } from './services/start-game-info';
-import { MultiplayerService, GAMELEVEL } from 'src/app/multiplayer/services/multiplayer.service';
-import { Result } from 'src/app/shared/models/result.interface';
+import { MultiplayerService, GAMELEVEL } from '../game-multiplayer/services/multiplayer.service';
+import { Result } from '../../shared/models/result.interface';
 
 @Component({
   selector: 'app-drawing',

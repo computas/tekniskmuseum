@@ -1,11 +1,10 @@
 import { Component, OnInit, Output, EventEmitter, OnDestroy } from '@angular/core';
 import { interval, Subscription } from 'rxjs';
 import { take, tap } from 'rxjs/operators';
-import { GAMELEVEL } from '../../multiplayer/services/multiplayer.service';
 import { DrawingService } from '../game-draw/services/drawing.service';
 import { Router } from '@angular/router';
-import { routes } from 'src/app/shared/models/routes';
-import { MultiplayerService } from 'src/app/multiplayer/services/multiplayer.service';
+import { routes } from '../../shared/models/routes';
+import { MultiplayerService, GAMELEVEL } from '../game-multiplayer/services/multiplayer.service';
 
 @Component({
   selector: 'app-game-word-to-draw',

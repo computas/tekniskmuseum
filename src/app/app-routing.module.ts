@@ -5,7 +5,7 @@ import { GameComponent } from './game/game.component';
 import { routes as r } from './shared/models/routes';
 import { GameResultComponent } from './game/game-result/game-result.component';
 import { GameDrawComponent } from './game/game-draw/game-draw.component';
-import { MultiplayerComponent } from './multiplayer/multiplayer.component';
+import { MultiplayerComponent } from '../app/game/game-multiplayer/multiplayer.component';
 
 const routes: Routes = [
   {
