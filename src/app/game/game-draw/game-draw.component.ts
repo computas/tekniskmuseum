@@ -112,7 +112,7 @@ export class GameDrawComponent implements OnInit, OnDestroy {
   roundOverListener() {
     return this.multiplayerService.roundOverListener().subscribe((roundOver: any) => {
       if (!this.hasAddedResult) {
-        this.updateResult(roundOver.round_over);
+        this.updateResult(this.prediction.hasWon);
         this.hasAddedResult = true;
       }
     });
@@ -124,15 +124,9 @@ export class GameDrawComponent implements OnInit, OnDestroy {
     this.addResultAndResize(result).subscribe({
       next: (dataUrlHighRes) => {
         this.drawingService.lastResult.imageData = dataUrlHighRes;
-        this.changeMultiplayerState(GAMELEVEL.intermediateResult);
+        this.multiplayerService.changestate(GAMELEVEL.intermediateResult);
       },
     });
-  }
-
-  changeMultiplayerState(state: GAMELEVEL) {
-    const guess = this.multiplayerService.stateInfo.guessUsed;
-    const guessUsed = guess ? guess + 1 : 1;
-    this.multiplayerService.changestate(state, guessUsed);
   }
 
   createResult(won) {
@@ -199,8 +193,9 @@ export class GameDrawComponent implements OnInit, OnDestroy {
         this.clockColor = this.clockColor === 'initial' ? 'final' : 'initial';
         this.sound.stop();
         this.timeOut = true;
-        if (this.multiplayerService.isMultiplayer) {
+        if (this.multiplayerService.isMultiplayer && !this.hasAddedResult) {
           this.updateResult(false);
+          this.hasAddedResult = true;
         }
       },
     });

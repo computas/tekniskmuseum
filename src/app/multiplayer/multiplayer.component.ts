@@ -37,6 +37,7 @@ export class MultiplayerComponent implements OnInit, OnDestroy {
       this.gameLevel = data.gameLevel;
     });
     this.playerDisconnectedSubscription = this.webSocketService.playerDisconnected$.subscribe((data) => {
+      console.info('DISCONNECTED', data);
       if (data) {
         window.location.href = this.destination;
       }
