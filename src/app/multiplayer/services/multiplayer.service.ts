@@ -109,6 +109,14 @@ export class MultiplayerService {
     this.webSocketService.disconnect();
   }
 
+  changestate(gameLevel: GAMELEVEL, ...rest) {
+    this.stateInfo = {
+      ...this.stateInfo,
+      ...rest,
+      gameLevel,
+    };
+  }
+
   get stateInfo(): GameState {
     return this._stateInfo.getValue();
   }

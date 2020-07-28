@@ -49,8 +49,8 @@ export class GameIntermediateResultComponent implements OnInit {
           };
         }
       });
+      this.gameOver = this.drawingService.results.length === this.drawingService.totalGuess;
 
-      this.gameOver = this.multiplayerService.stateInfo.guessUsed === this.drawingService.totalGuess;
       if (this.gameOver) {
         const totalScore: any = this.drawingService.results.reduce((accumulator: any, currentValue: any) => {
           return accumulator + currentValue.score;
