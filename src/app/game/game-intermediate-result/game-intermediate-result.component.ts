@@ -37,6 +37,7 @@ export class GameIntermediateResultComponent implements OnInit {
     if (this.multiplayerService.isMultiplayer) {
       this.isMultiplayer = true;
       this.multiplayerService.stateInfo$.subscribe((res) => {
+        console.log(res);
         if (res.ready) {
           this.waitingForPlayer = false;
         }

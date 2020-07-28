@@ -23,7 +23,7 @@
           </div>
         </div>
         <div class="avatar-container-spacer"></div>
-        <button *ngIf="gameOver" mat-raised-button class="next-word-button" (click)="getSummary()">
+        <button *ngIf="gameOver && !waitingForPlayer" mat-raised-button class="next-word-button" (click)="getSummary()">
           Oppsummering
         </button>
         <button *ngIf="!isMultiplayer && !gameOver" mat-raised-button class="next-word-button" (click)="newDrawing()">
@@ -38,6 +38,9 @@
           Neste ord
         </button>
         <h1 class="waiting" *ngIf="!gameOver && isMultiplayer && waitingForPlayer">
+          Venter på spiller
+        </h1>
+        <h1 class="waiting" *ngIf="gameOver && isMultiplayer && waitingForPlayer">
           Venter på spiller
         </h1>
       </div>
