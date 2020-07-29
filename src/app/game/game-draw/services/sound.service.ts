@@ -18,6 +18,11 @@ export class SoundService {
     }
   }
 
+  stop() {
+    this.sound.stop();
+    this.playTick = false;
+  }
+
   playResultSound(hasWon: boolean) {
     if (hasWon) {
       const sound = new Howl({
