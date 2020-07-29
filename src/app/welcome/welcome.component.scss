@@ -70,7 +70,8 @@ a {
 }
 @media (min-width: 600px) {
   .button-container {
-    justify-content: center;
+    justify-content: space-between;
+    margin-top: 20px;
   }
 }
 .game-mode-text {
@@ -90,8 +91,6 @@ a {
   color: #ffffff;
   box-shadow: 0 8px 16px 0 rgba(0, 0, 0, 0.1), 0 6px 20px 0 rgba(0, 0, 0, 0.15);
   margin-top: 20px;
-  margin-right: 7.5px;
-  margin-left: 7.5px;
   font-size: 20px;
   border-radius: 50px;
   height: 40px;
@@ -102,13 +101,10 @@ a {
   .play-game-button {
     font-size: 32px;
     height: 60px;
-    margin-right: 7.5px;
-    margin-left: 7.5px;
     min-width: 230px;
     max-width: 400px;
   }
 }
-
 .learn-button {
   top: 0;
   position: absolute;
