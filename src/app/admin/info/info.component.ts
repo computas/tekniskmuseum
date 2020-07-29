@@ -163,10 +163,9 @@ export class InfoComponent implements OnInit {
     this.resetAll();
     this.loginService.getStatus().subscribe(
       (res: any) => {
-        const data = JSON.parse(res);
-        const name = data.CV_iteration_name;
-        const time = data.CV_time_created;
-        const count = data.BLOB_IMAGE_COUNT;
+        const name = res.CV_iteration_name;
+        const time = res.CV_time_created;
+        const count = res.BLOB_image_count;
         this._dialog.openDialog(name, time, count);
       },
       (error) => {
