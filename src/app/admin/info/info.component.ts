@@ -57,7 +57,7 @@ export class InfoComponent implements OnInit {
     let msg = '';
     if (this.retrainBool) {
       this.resetDatasetValues();
-      this.loginService.revertDataset().subscribe(
+      this.loginService.retrain().subscribe(
         (res: any) => {
           if (res.status) {
             msg = 'Suksess! Modellen blir trent (dette kan ta noen minutter)';
@@ -83,7 +83,7 @@ export class InfoComponent implements OnInit {
     let msg = '';
     if (this.highScoreBool) {
       this.resetDatasetValues();
-      this.loginService.revertDataset().subscribe(
+      this.loginService.clearHighScore().subscribe(
         (res: any) => {
           if (res.status) {
             msg = 'Suksess! Poengliste nullstilles (dette kan ta noen minutter)';
