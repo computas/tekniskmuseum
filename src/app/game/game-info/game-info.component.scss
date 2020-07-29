@@ -110,15 +110,24 @@
 }
 .button-icon {
   color: #14213d;
+  margin-right: 16px;
+  font-size: 36px !important;
+  height: 36px;
+  width: 36px;
+}
+.player-mode {
+  padding-top: 25px;
+  text-align: center;
+  display: flex;
+  align-items: center;
+  font-weight: 500;
+  color: #05a3c7;
+}
+.player-mode > .material-icons {
+  color: #05a3c7;
   margin-right: 5px;
 }
-.tts-button {
-  top: 0;
-  position: absolute;
-  right: 0;
-  margin: 24px;
-}
-.mat-fab.mat-primary {
-  background: #ecf8ff;
-  color: #14213d;
+.play_arrow {
+  color: white;
+  margin-right: 12px;
 }

@@ -161,7 +161,6 @@ export class InfoComponent implements OnInit {
 
   getInformation() {
     this.resetAll();
-    this._dialog.openDialog('1', '2', '3');
     this.loginService.getStatus().subscribe(
       (res: any) => {
         const data = JSON.parse(res);

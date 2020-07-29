@@ -2,9 +2,11 @@ import { Component, HostListener, OnInit } from '@angular/core';
 import { Subject } from 'rxjs';
 import { Router } from '@angular/router';
 import { MatDialog } from '@angular/material/dialog';
-import { IdleTimeoutComponent } from './idle-timeout/idle-timeout.component';
+import { RouterOutlet } from '@angular/router';
 
+import { IdleTimeoutComponent } from './idle-timeout/idle-timeout.component';
 import { routeTransitionAnimations } from './route-transition-animations';
+import { environment } from '../environments/environment';
 
 @Component({
   selector: 'app-root',
@@ -19,7 +21,7 @@ export class AppComponent implements OnInit {
   userInactive: Subject<any> = new Subject();
 
   isDialogOpen = false;
-  inactivityTime = 30 * 1000;
+  inactivityTime = environment.inactivityTime;
 
   constructor(private router: Router, public dialog: MatDialog) {}
 
@@ -46,6 +48,11 @@ export class AppComponent implements OnInit {
 
   setDialogTimeout() {
     this.userActivity = setTimeout(() => this.userInactive.next(undefined), this.inactivityTime);
+  }
+
+  prepareRoute(outlet: RouterOutlet) {
+    const animationState = 'animationState';
+    return outlet && outlet.activatedRouteData && outlet.activatedRouteData[animationState];
   }
 
   @HostListener('window:mousemove')

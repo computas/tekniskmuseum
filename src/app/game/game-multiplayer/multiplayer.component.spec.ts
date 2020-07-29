@@ -1,22 +1,22 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
-import { HttpClientTestingModule } from '@angular/common/http/testing';
-
-import { GameDrawComponent } from './game-draw.component';
 import { RouterTestingModule } from '@angular/router/testing';
+import { HttpClientTestingModule } from '@angular/common/http/testing';
+import { MultiplayerComponent } from './multiplayer.component';
 import { MaterialImportsModule } from '../../shared/material-imports/material-imports.module';
-describe('DrawingComponent', () => {
-  let component: GameDrawComponent;
-  let fixture: ComponentFixture<GameDrawComponent>;
+
+describe('MultiplayerComponent', () => {
+  let component: MultiplayerComponent;
+  let fixture: ComponentFixture<MultiplayerComponent>;
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [GameDrawComponent],
-      imports: [HttpClientTestingModule, RouterTestingModule, MaterialImportsModule],
+      imports: [MaterialImportsModule, RouterTestingModule, HttpClientTestingModule],
+      declarations: [MultiplayerComponent],
     }).compileComponents();
   }));
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(GameDrawComponent);
+    fixture = TestBed.createComponent(MultiplayerComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });
