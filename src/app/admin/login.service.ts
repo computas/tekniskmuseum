@@ -47,7 +47,9 @@ export class LoginService {
   }
 
   attemptLogin(formData) {
-    return this.http.post(`${endpoints.TEKNISKBACKEND}/${endpoints.AUTH}`, formData);
+    return this.http.post(`${endpoints.TEKNISKBACKEND}/${endpoints.AUTH}`, formData, {
+      withCredentials: true,
+    });
   }
 
   revertDataset() {
