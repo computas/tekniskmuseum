@@ -155,7 +155,7 @@ export class GameDrawComponent implements OnInit, OnDestroy {
 
   ngOnDestroy(): void {
     this.subscriptions.unsubscribe();
-    this.soundService.sound.stop();
+    this.soundService.stop();
   }
 
   start(e: MouseEvent | TouchEvent) {
