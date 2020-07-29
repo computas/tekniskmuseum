@@ -144,13 +144,8 @@ export class InfoComponent implements OnInit {
   signOut() {
     this.loginService.signOut().subscribe(
       (res: any) => {
-        if (res.success === 'OK') {
-          this.router.navigate(['admin']);
-          this.openSnackBar('Du er logget ut!');
-        } else {
-          this.router.navigate(['admin']);
-          this.openSnackBar('En feil har oppstådd!');
-        }
+        this.router.navigate(['admin']);
+        this.openSnackBar('Du er logget ut!');
       },
       (error) => {
         this.router.navigate(['admin']);
