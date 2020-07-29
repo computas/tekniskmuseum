@@ -1,0 +1,22 @@
+.dialog-title {
+  font-weight: bold;
+  font-size: 35px;
+}
+
+.content {
+  display: flex;
+  justify-content: center;
+  width: 625px;
+  height: 50px;
+  font-size: 20px;
+}
+
+.mat-dialog-container {
+  border-radius: 56px;
+  width: 698px;
+  height: 246px;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}

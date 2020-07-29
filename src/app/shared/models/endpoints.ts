@@ -4,4 +4,12 @@ export const endpoints = {
   CLASSIFY: 'classify',
   GETLABEL: 'getLabel',
   STARTGAME: 'startGame',
+  AUTH: 'auth',
+  ADMIN: 'admin',
+  DROPTABLE: 'dropTable',
+  TRAINML: 'trainML',
+  CLEARTRAINSET: 'clearTrainSet',
+  PING: 'ping',
+  GETSTATUS: 'get_status',
+  LOGOUT: 'logout',
 };
