@@ -1,0 +1,41 @@
+.info-title {
+  border-bottom: 1px solid black;
+}
+
+button:active {
+  transform: translateY(3px);
+}
+
+.btn-group button {
+  background-color: #05a3c7;
+  border: 1px solid #195272;
+  color: #f4f4f4;
+  padding: 2.5%;
+  cursor: pointer;
+  width: 90%;
+  display: block;
+  border-radius: 10px;
+  font-size: 18px;
+}
+
+.btn-group button:first-child {
+  background-color: #fa852f;
+}
+
+.btn-group button:hover {
+  background-color: #195272;
+}
+
+.sign-out-btn {
+  padding: 2%;
+  border: 1px solid #05a3c7;
+  background-color: #195272;
+  width: 50%;
+  border-radius: 10px;
+  font-size: 16px;
+  color: #f4f4f4;
+}
+
+.sign-out-btn:hover {
+  background-color: #ce0e2d;
+}

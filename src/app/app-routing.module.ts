@@ -5,6 +5,9 @@ import { GameComponent } from './game/game.component';
 import { routes as r } from './shared/models/routes';
 import { GameResultComponent } from './game/game-result/game-result.component';
 import { GameDrawComponent } from './game/game-draw/game-draw.component';
+import { AdminComponent } from './admin/admin.component';
+import { InfoComponent } from './admin/info/info.component';
+import { AuthGuard } from './admin/auth-guard';
 import { MultiplayerComponent } from '../app/game/game-multiplayer/multiplayer.component';
 
 const routes: Routes = [
@@ -33,6 +36,15 @@ const routes: Routes = [
   {
     path: 'drawing',
     component: GameDrawComponent,
+  },
+  {
+    path: 'admin',
+    component: AdminComponent,
+  },
+  {
+    path: 'admin/info',
+    component: InfoComponent,
+    canActivate: [AuthGuard],
   },
 ];
 
