@@ -33,12 +33,7 @@ export class InfoComponent implements OnInit {
       this.resetDatasetValues();
       this.loginService.revertDataset().subscribe(
         (res: any) => {
-          if (res.success === 'OK') {
-            msg = 'Suksess! treningssett tilbakestilles (dette kan ta noen minutter)';
-          } else {
-            msg = this.errorMsg;
-          }
-          this.openSnackBar(msg);
+          this.openSnackBar('Suksess! treningssett tilbakestilles (dette kan ta noen minutter)');
         },
         (error) => {
           msg = this.errorMsg;
@@ -59,12 +54,7 @@ export class InfoComponent implements OnInit {
       this.resetDatasetValues();
       this.loginService.retrain().subscribe(
         (res: any) => {
-          if (res.success === 'OK') {
-            msg = 'Suksess! Modellen blir trent (dette kan ta noen minutter)';
-          } else {
-            msg = this.errorMsg;
-          }
-          this.openSnackBar(msg);
+          this.openSnackBar('Suksess! Modellen blir trent (dette kan ta noen minutter)');
         },
         (error) => {
           msg = this.errorMsg;
@@ -85,12 +75,7 @@ export class InfoComponent implements OnInit {
       this.resetDatasetValues();
       this.loginService.clearHighScore().subscribe(
         (res: any) => {
-          if (res.success === 'OK') {
-            msg = 'Suksess! Poengliste nullstilles (dette kan ta noen minutter)';
-          } else {
-            msg = this.errorMsg;
-          }
-          this.openSnackBar(msg);
+          this.openSnackBar('Suksess! Poengliste nullstilles (dette kan ta noen minutter)');
         },
         (error) => {
           msg = this.errorMsg;
