@@ -38,6 +38,20 @@
 .drawing-seconds > span {
   margin-right: 10px;
 }
+.base-timer {
+  position: relative;
+  height: 30px;
+  width: 30px;
+}
+.base-timer__circle {
+  fill: none;
+  stroke: none;
+}
+.base-timer__path-elapsed {
+  stroke-width: 10px;
+  stroke: grey;
+}
+
 .avatar-container {
   display: flex;
   position: absolute;

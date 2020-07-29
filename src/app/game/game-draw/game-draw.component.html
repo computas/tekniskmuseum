@@ -2,9 +2,8 @@
   <div class="drawing-header">
     <h1><span class="drawing-header-text">Tegn: </span>{{ guessWord | uppercase }}</h1>
     <div class="drawing-seconds">
-      <div class="timer-container">
-        <mat-icon class="timer-icon" aria-label="Example home icon">timer</mat-icon>
-        <span #countDown>
+      <div class="base-timer">
+        <span class="base-timer__label" #countDown>
           {{ timeLeft }}
         </span>
       </div>
