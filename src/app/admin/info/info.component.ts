@@ -33,7 +33,7 @@ export class InfoComponent implements OnInit {
       this.resetDatasetValues();
       this.loginService.revertDataset().subscribe(
         (res: any) => {
-          if (res.status) {
+          if (res.success === 'OK') {
             msg = 'Suksess! treningssett tilbakestilles (dette kan ta noen minutter)';
           } else {
             msg = this.errorMsg;
@@ -59,7 +59,7 @@ export class InfoComponent implements OnInit {
       this.resetDatasetValues();
       this.loginService.retrain().subscribe(
         (res: any) => {
-          if (res.status) {
+          if (res.success === 'OK') {
             msg = 'Suksess! Modellen blir trent (dette kan ta noen minutter)';
           } else {
             msg = this.errorMsg;
@@ -85,7 +85,7 @@ export class InfoComponent implements OnInit {
       this.resetDatasetValues();
       this.loginService.clearHighScore().subscribe(
         (res: any) => {
-          if (res.status) {
+          if (res.success === 'OK') {
             msg = 'Suksess! Poengliste nullstilles (dette kan ta noen minutter)';
           } else {
             msg = this.errorMsg;
@@ -144,7 +144,7 @@ export class InfoComponent implements OnInit {
   signOut() {
     this.loginService.signOut().subscribe(
       (res: any) => {
-        if (res.status) {
+        if (res.success === 'OK') {
           this.router.navigate(['admin']);
           this.openSnackBar('Du er logget ut!');
         } else {
