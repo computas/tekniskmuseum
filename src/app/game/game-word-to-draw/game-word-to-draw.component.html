@@ -1,6 +1,6 @@
 <div class="word-container">
   <div class="words-remaining">{{ guessUsed }}/3</div>
-  <h1 class="playernr">Spiller {{ playernr }}</h1>
+  <h1 class="playernr" *ngIf="isMultiPlayer">Spiller {{ playernr }}</h1>
   <div class="word-text">
     <p class="word-draw">Tegn:</p>
     <div *ngIf="loading">
@@ -8,7 +8,9 @@
     </div>
     <div *ngIf="word">
       <h1 class="word-to-guess header">{{ word | uppercase }}</h1>
-      <h1 *ngIf="isMultiPlayer" class="timer header">{{ timeLeft }}</h1>
+      <div *ngIf="isMultiPlayer" class="timer header">
+        <span>{{ timeLeft }}</span>
+      </div>
     </div>
   </div>
   <div class="word-footer">

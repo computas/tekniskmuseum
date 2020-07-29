@@ -2,7 +2,7 @@
   <div *ngIf="ismultiplayer && hasWon" id="result-header" class="result-header-multi">
     <img src="../../../assets/happy-blue.svg" alt="Avatar won" class="winner-img" />
     <h1 class="result-header-multi">
-      <span class="winner">VINNER!</span>
+      <span class="winner">Du vant!</span>
       <span class="winner-points">&nbsp;Du fikk: {{ score }} poeng</span>
     </h1>
     <img src="../../../assets/happy-blue.svg" alt="Avatar won" class="winner-img" />
@@ -10,7 +10,7 @@
   <div *ngIf="ismultiplayer && !hasWon" id="result-header" class="result-header-multi">
     <img src="../../../assets/sad-blue.svg" alt="Avatar lost" class="loser-img" />
     <h1 class="result-header-multi">
-      <span class="loser">ANDREPLASS!</span>
+      <span class="loser">Du tapte</span>
       <span class="loser-points">&nbsp;Du fikk: {{ score }} poeng</span>
     </h1>
     <img src="../../../assets/sad-blue.svg" alt="Avatar lost" class="loser-img" />
@@ -31,7 +31,7 @@
           <span *ngIf="!result.hasWon" class="material-icons" id="loss">
             clear
           </span>
-          <span *ngIf="result.word"
+          <span *ngIf="result.word" class="result-word"
             >{{ result.word | titlecase }}
             <span *ngIf="ismultiplayer" class="multiplayer-score"> {{ result.score }} p</span></span
           >
@@ -40,14 +40,6 @@
     </div>
   </div>
   <div class="button-footer">
-    <a href="#" class="spacer"
-      ><button mat-raised-button class="btn btn-home">
-        <span class="material-icons icon">
-          home
-        </span>
-        <span class="home-text">Hjem</span>
-      </button></a
-    >
     <a href="/" class="link-float"
       ><button mat-raised-button class="btn btn-again">
         <span class="material-icons icon">

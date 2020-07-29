@@ -111,6 +111,8 @@ p {
   font-weight: 500;
 }
 .winner-points {
+  font-size: 32px;
+  color: #14213d;
 }
 .winner-img {
   height: 100px;
@@ -120,11 +122,20 @@ p {
 }
 .multiplayer-score {
   color: #195272;
-  font-weight: normal;
+  font-weight: 200;
+}
+.result-word {
+  font-weight: bold;
 }
 .result-section {
   align-items: center;
   display: flex;
 }
-@media (max-width: 568px) {
+@media (max-width: 600px) {
+  #result-header {
+    padding: 24px;
+  }
+  .link-float {
+    padding-bottom: 24px;
+  }
 }
