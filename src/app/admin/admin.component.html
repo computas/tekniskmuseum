@@ -1,0 +1,25 @@
+<h2>Administrering</h2>
+<br />
+<div class="login">
+  <form id="login" method="get" align="center">
+    <label for="Uname">
+      <b>Brukernavn</b>
+    </label>
+    <input #username type="text" name="Uname" id="Uname" placeholder="Brukernavn" />
+    <br /><br />
+    <label>
+      <b>Passord</b>
+    </label>
+    <input #password type="Password" name="Pass" id="Pass" placeholder="Passord" />
+    <br /><br />
+    <input
+      type="button"
+      class="login-button"
+      (click)="login(username.value, password.value)"
+      name="log"
+      id="log"
+      value="Logg inn"
+    />
+    <br /><br />
+  </form>
+</div>

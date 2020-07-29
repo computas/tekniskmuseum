@@ -12,9 +12,24 @@ import { MultiplayerModule } from '../app/game/game-multiplayer/multiplayer.modu
 import { environment } from '../environments/environment';
 import { MaterialImportsModule } from './shared/material-imports/material-imports.module';
 import { IdleTimeoutComponent } from './idle-timeout/idle-timeout.component';
+import { AdminComponent } from './admin/admin.component';
+import { InfoComponent } from './admin/info/info.component';
+import { MatSnackBarModule } from '@angular/material/snack-bar';
+import { InfoDialogComponent } from './admin/info-dialog/info-dialog.component';
+import { MAT_DIALOG_DATA } from '@angular/material/dialog';
+import { AuthGuard } from './admin/auth-guard';
+import { DialogTemplateComponent } from './admin/dialog-template/dialog-template.component';
 
 @NgModule({
-  declarations: [AppComponent, IdleTimeoutComponent],
+  declarations: [
+    AppComponent,
+    AdminComponent,
+    InfoComponent,
+    IdleTimeoutComponent,
+    InfoDialogComponent,
+    DialogTemplateComponent,
+  ],
+
   imports: [
     BrowserModule,
     HttpClientModule,
@@ -23,11 +38,13 @@ import { IdleTimeoutComponent } from './idle-timeout/idle-timeout.component';
     GameModule,
     MultiplayerModule,
     ServiceWorkerModule.register('ngsw-worker.js', { enabled: environment.production }),
+    MatSnackBarModule,
     MatDialogModule,
     MaterialImportsModule,
     BrowserAnimationsModule,
   ],
-  providers: [HttpClientModule],
+  providers: [HttpClientModule, InfoDialogComponent, AuthGuard, { provide: MAT_DIALOG_DATA, useValue: {} }],
+
   bootstrap: [AppComponent],
 })
 export class AppModule {}
