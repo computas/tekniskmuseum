@@ -1,0 +1,56 @@
+.cdk-overlay-backdrop.cdk-overlay-dark-backdrop.cdk-overlay-backdrop-showing {
+  background: rgba(20, 33, 61, 0.8);
+}
+
+.mat-dialog-container {
+  border-radius: 56px;
+  width: 698px;
+  height: 246px;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.content {
+  display: flex;
+  justify-content: center;
+  width: 646px;
+  height: 50px;
+  font-size: 27px;
+  p {
+    padding: 5px;
+  }
+}
+
+.actions {
+  width: inherit;
+  display: flex;
+  flex-direction: row-reverse;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.button {
+  box-shadow: 0 8px 16px 0 rgba(0, 0, 0, 0.1), 0 6px 20px 0 rgba(0, 0, 0, 0.15);
+  font-size: 20px;
+  border-radius: 50px;
+  height: 40px;
+  margin-top: 10px;
+  min-width: 306px;
+  border-style: none;
+  background: #f4f4f4;
+  color: #14213d;
+}
+
+@media (min-width: 600px) {
+  .button {
+    font-size: 30px;
+    height: 60px;
+  }
+}
+
+.button-icon {
+  color: #14213d;
+  margin-right: 5px;
+}

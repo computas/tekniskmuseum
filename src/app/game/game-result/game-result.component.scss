@@ -19,7 +19,7 @@
   font-size: 48px;
   display: grid;
   align-items: end;
-  margin-bottom: 48px;
+  margin: 0;
 }
 
 .btn {
@@ -87,6 +87,44 @@ p {
 }
 .game-result-img {
   width: 256px;
+}
+#result-header {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-wrap: wrap;
+  align-items: flex-end;
+}
+.result-header-multi {
+  text-align: center;
+  color: #195272;
+  font-size: 48px;
+  margin: 0;
+  padding: 0 24px;
+}
+.winner {
+  color: #fa852f;
+  font-weight: 500;
+}
+.loser {
+  color: #fa852f;
+  font-weight: 500;
+}
+.winner-points {
+}
+.winner-img {
+  height: 100px;
+}
+.loser-img {
+  height: 100px;
+}
+.multiplayer-score {
+  color: #195272;
+  font-weight: normal;
+}
+.result-section {
+  align-items: center;
+  display: flex;
 }
 @media (max-width: 568px) {
 }

@@ -1,28 +1,30 @@
 <div class="game-info-container">
-  <button mat-fab (click)="speakInfo()" type="button" value="Play" color="primary" class="tts-button">
-    <mat-icon>volume_up</mat-icon>
-  </button>
-
   <div class="game-info-text-content">
+    <h1 class="player-mode" *ngIf="isSinglePlayer"><mat-icon>person</mat-icon>En Spiller</h1>
+    <h1 class="player-mode" *ngIf="isMultiPlayer"><mat-icon>people_alt</mat-icon>Fler spiller</h1>
     <div class="game-info-text-content-list">
       <div class="avatar"><img src="../../../assets/avatar-hallo.svg" alt="avatar" /></div>
       <div class="game-info-text-content-list-text">
-        <h1 class="game-info-text-header">Slik spiller du:</h1>
+        <h1 class="game-info-text-header" *ngIf="isSinglePlayer">Slik spiller du:</h1>
+        <h1 class="game-info-text-header" *ngIf="isMultiPlayer">Slik spiller dere:</h1>
         <ol class="game-info-text-list">
           <li>Tegn ord</li>
-          <li>Jeg gjetter</li>
-          <li>Tre runder</li>
+          <li>Kunstig Jens gjetter</li>
+          <li *ngIf="isSinglePlayer">Tre runder</li>
+          <li *ngIf="isMultiPlayer">Best av tre vinner!</li>
         </ol>
       </div>
     </div>
     <div class="game-info-footer">
       <button mat-raised-button class="button" id="back-button" (click)="goToLanding()">
         <div class="button-text">
-          <mat-icon class="button-icon" aria-label="Example home icon">home</mat-icon>Tilbake
+          <mat-icon class="button-icon" aria-label="Example home icon">arrow_back</mat-icon>Tilbake
         </div>
       </button>
       <button mat-raised-button class="button" id="get-word-button" (click)="startDrawing()">
-        Start
+        <div class="button-text">
+          <mat-icon class="button-icon play_arrow" aria-label="play_arrow">play_arrow</mat-icon> Start
+        </div>
       </button>
     </div>
   </div>

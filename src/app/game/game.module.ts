@@ -7,7 +7,6 @@ import { MaterialImportsModule } from '../shared/material-imports/material-impor
 import { GameIntermediateResultComponent } from './game-intermediate-result/game-intermediate-result.component';
 import { GameResultComponent } from './game-result/game-result.component';
 import { GameWordToDrawComponent } from './game-word-to-draw/game-word-to-draw.component';
-import { HighScoreModule } from '../highscore/highscore.module';
 @NgModule({
   declarations: [
     GameInfoComponent,
@@ -17,6 +16,13 @@ import { HighScoreModule } from '../highscore/highscore.module';
     GameResultComponent,
     GameWordToDrawComponent,
   ],
-  imports: [CommonModule, MaterialImportsModule, HighScoreModule],
+  exports: [
+    GameInfoComponent,
+    GameWordToDrawComponent,
+    GameDrawComponent,
+    GameIntermediateResultComponent,
+    GameResultComponent,
+  ],
+  imports: [CommonModule, MaterialImportsModule],
 })
 export class GameModule {}

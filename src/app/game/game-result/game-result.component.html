@@ -1,5 +1,21 @@
 <div class="result-container">
-  <h1 id="result-header">Ditt resultat:</h1>
+  <div *ngIf="ismultiplayer && hasWon" id="result-header" class="result-header-multi">
+    <img src="../../../assets/happy-blue.svg" alt="Avatar won" class="winner-img" />
+    <h1 class="result-header-multi">
+      <span class="winner">VINNER!</span>
+      <span class="winner-points">&nbsp;Du fikk: {{ score }} poeng</span>
+    </h1>
+    <img src="../../../assets/happy-blue.svg" alt="Avatar won" class="winner-img" />
+  </div>
+  <div *ngIf="ismultiplayer && !hasWon" id="result-header" class="result-header-multi">
+    <img src="../../../assets/sad-blue.svg" alt="Avatar lost" class="loser-img" />
+    <h1 class="result-header-multi">
+      <span class="loser">ANDREPLASS!</span>
+      <span class="loser-points">&nbsp;Du fikk: {{ score }} poeng</span>
+    </h1>
+    <img src="../../../assets/sad-blue.svg" alt="Avatar lost" class="loser-img" />
+  </div>
+  <h1 *ngIf="!ismultiplayer" id="result-header">Ditt resultat:</h1>
   <div class="result-section">
     <div id="result-card-container">
       <div id="result-card" *ngFor="let result of results">
@@ -15,7 +31,10 @@
           <span *ngIf="!result.hasWon" class="material-icons" id="loss">
             clear
           </span>
-          {{ result.word | titlecase }}
+          <span *ngIf="result.word"
+            >{{ result.word | titlecase }}
+            <span *ngIf="ismultiplayer" class="multiplayer-score"> {{ result.score }} p</span></span
+          >
         </p>
       </div>
     </div>
@@ -29,7 +48,7 @@
         <span class="home-text">Hjem</span>
       </button></a
     >
-    <a href="playgame" class="link-float"
+    <a href="/" class="link-float"
       ><button mat-raised-button class="btn btn-again">
         <span class="material-icons icon">
           refresh

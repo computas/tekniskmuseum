@@ -63,13 +63,13 @@
 
 .avatar-container {
   display: flex;
-  display: flex;
   position: absolute;
   bottom: 0;
   -webkit-user-select: none; /* Chrome all / Safari all */
   -moz-user-select: none; /* Firefox all */
   -ms-user-select: none; /* IE 10+ */
   user-select: none;
+  pointer-events: none;
 }
 .guess-label {
   align-self: flex-end;
@@ -102,4 +102,16 @@
 .me::before {
   box-shadow: -2px 2px 2px 0 rgba(178, 178, 178, 0.4);
   left: -9px;
+}
+.guessing-avatar {
+  display: flex;
+}
+@media only screen and (max-width: 600px) {
+  .guess-label {
+    font-size: 18px;
+    line-height: normal;
+  }
+  .guessing-avatar {
+    width: 120px;
+  }
 }
