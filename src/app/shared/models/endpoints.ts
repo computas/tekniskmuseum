@@ -6,10 +6,10 @@ export const endpoints = {
   STARTGAME: 'startGame',
   AUTH: 'auth',
   ADMIN: 'admin',
-  DROPTABLE: 'dropTable',
+  DROPTABLE: 'clearHighScore',
   TRAINML: 'trainML',
-  CLEARTRAINSET: 'clearTrainSet',
+  CLEARTRAINSET: 'hardReset',
   PING: 'ping',
-  GETSTATUS: 'get_status',
+  GETSTATUS: 'status',
   LOGOUT: 'logout',
 };
