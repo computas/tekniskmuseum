@@ -219,8 +219,8 @@ export class GameDrawComponent implements OnInit, OnDestroy {
             }
           }
           if (this.timeLeft <= 0) {
-            this.soundService.playResultSound(false);
             if (this.multiplayerService.isMultiplayer) {
+              this.soundService.playResultSound(false);
               observer.complete();
             }
           }
