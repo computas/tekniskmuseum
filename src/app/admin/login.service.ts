@@ -27,15 +27,23 @@ export class LoginService {
 
   signOut() {
     this._loggedIn = false;
-    return this.http.post(`${endpoints.TEKNISKBACKEND}/${endpoints.ADMIN}/${endpoints.LOGOUT}`, {
-      withCredentials: true,
-    });
+    return this.http.post(
+      `${endpoints.TEKNISKBACKEND}/${endpoints.ADMIN}/${endpoints.LOGOUT}`,
+      {},
+      {
+        withCredentials: true,
+      }
+    );
   }
 
   isAuthenticated() {
-    return this.http.post(`${endpoints.TEKNISKBACKEND}/${endpoints.ADMIN}/${endpoints.PING}`, {
-      withCredentials: true,
-    });
+    return this.http.post(
+      `${endpoints.TEKNISKBACKEND}/${endpoints.ADMIN}/${endpoints.PING}`,
+      {},
+      {
+        withCredentials: true,
+      }
+    );
   }
 
   attemptLogin(formData) {
@@ -43,26 +51,42 @@ export class LoginService {
   }
 
   revertDataset() {
-    return this.http.post(`${endpoints.TEKNISKBACKEND}/${endpoints.ADMIN}/${endpoints.CLEARTRAINSET}`, {
-      withCredentials: true,
-    });
+    return this.http.post(
+      `${endpoints.TEKNISKBACKEND}/${endpoints.ADMIN}/${endpoints.CLEARTRAINSET}`,
+      {},
+      {
+        withCredentials: true,
+      }
+    );
   }
 
   retrain() {
-    return this.http.post(`${endpoints.TEKNISKBACKEND}/${endpoints.ADMIN}/${endpoints.TRAINML}`, {
-      withCredentials: true,
-    });
+    return this.http.post(
+      `${endpoints.TEKNISKBACKEND}/${endpoints.ADMIN}/${endpoints.TRAINML}`,
+      {},
+      {
+        withCredentials: true,
+      }
+    );
   }
 
   clearHighScore() {
-    return this.http.post(`${endpoints.TEKNISKBACKEND}/${endpoints.ADMIN}/${endpoints.DROPTABLE}`, {
-      withCredentials: true,
-    });
+    return this.http.post(
+      `${endpoints.TEKNISKBACKEND}/${endpoints.ADMIN}/${endpoints.DROPTABLE}`,
+      {},
+      {
+        withCredentials: true,
+      }
+    );
   }
 
   getStatus() {
-    return this.http.post(`${endpoints.TEKNISKBACKEND}/${endpoints.ADMIN}/${endpoints.GETSTATUS}`, {
-      withCredentials: true,
-    });
+    return this.http.post(
+      `${endpoints.TEKNISKBACKEND}/${endpoints.ADMIN}/${endpoints.GETSTATUS}`,
+      {},
+      {
+        withCredentials: true,
+      }
+    );
   }
 }
