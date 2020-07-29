@@ -41,25 +41,6 @@
   stroke-width: 10px;
   stroke: grey;
 }
-.base-timer__label {
-  position: absolute;
-  user-select: none;
-
-  /* Size should match the parent container */
-  width: 30px;
-  height: 30px;
-
-  /* Keep the label aligned to the top */
-  top: 0;
-
-  /* Create a flexible box that centers content vertically and horizontally */
-  display: flex;
-  align-items: center;
-  justify-content: center;
-
-  /* Sort of an arbitrary number; adjust to your liking */
-  font-size: 13px;
-}
 
 .avatar-container {
   display: flex;
