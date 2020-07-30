@@ -1,5 +1,4 @@
 <div [ngSwitch]="gameLevel">
-  <div *ngSwitchCase="GAMELEVEL.lobby" [@enterAnimation]><app-lobby></app-lobby></div>
   <div *ngSwitchCase="GAMELEVEL.howToPlay" [@enterAnimation]><app-game-info></app-game-info></div>
   <div *ngSwitchCase="GAMELEVEL.waitingForWord" [@enterAnimation]><app-game-word-to-draw></app-game-word-to-draw></div>
   <div *ngSwitchCase="GAMELEVEL.drawing" [@enterAnimation]><app-drawing></app-drawing></div>
