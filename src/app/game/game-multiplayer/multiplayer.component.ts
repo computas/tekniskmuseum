@@ -44,7 +44,7 @@ export class MultiplayerComponent implements OnInit, OnDestroy {
     private multiplayerService: MultiplayerService,
     private webSocketService: WebSocketService,
     private router: Router
-  ) { }
+  ) {}
   destination = '/';
   otherPlayer = undefined;
   subs = new Subscription();

@@ -1,4 +1,4 @@
-import { Component, OnInit, EventEmitter, Output } from '@angular/core';
+import { Component, OnInit, EventEmitter, Output, OnDestroy } from '@angular/core';
 import { Result } from '../../shared/models/interfaces';
 import { DrawingService } from '../game-draw/services/drawing.service';
 import { MultiplayerService, GAMELEVEL } from '../game-multiplayer/services/multiplayer.service';
@@ -9,7 +9,7 @@ import { routes } from '../../shared/models/routes';
   templateUrl: './game-intermediate-result.component.html',
   styleUrls: ['./game-intermediate-result.component.scss'],
 })
-export class GameIntermediateResultComponent implements OnInit {
+export class GameIntermediateResultComponent implements OnInit, OnDestroy {
   result: Result;
   wonSentence = 'Hurra, jeg klarte å gjette at du tegnet ';
   lostSentence = 'Beklager, jeg klarte ikke å gjette hva du tegnet';
@@ -56,6 +56,11 @@ export class GameIntermediateResultComponent implements OnInit {
         this.multiplayerService.stateInfo = { ...this.multiplayerService.stateInfo, score: totalScore };
         this.multiplayerService.endGame(totalScore);
       }
+    }
+  }
+  ngOnDestroy() {
+    if (this.isSinglePlayer) {
+      this.drawingService.hasAddedSingleplayerResult = false;
     }
   }
 
