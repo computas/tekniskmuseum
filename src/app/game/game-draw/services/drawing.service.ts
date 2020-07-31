@@ -31,25 +31,45 @@ export class DrawingService {
 
   resultsMock: Result[] = ResultsMock;
 
+  hasAddedSingleplayerResult = false;
+  pred: any;
+
   constructor(private http: HttpClient) {}
 
   classify(answerInfo: FormData): Observable<any> {
     return this.http.post<FormData>(`${this.baseUrl}/${endpoints.CLASSIFY}`, answerInfo).pipe(
       tap((res) => {
-        if (this.roundIsDone(res)) {
+        this.pred = res;
+        if (this.roundIsDone(res) && !this.hasAddedSingleplayerResult) {
           res.roundIsDone = true;
           const result: Result = this.createResult(res);
           this.addResult(result);
-          this.guessDone = true;
-          this.guessUsed++;
-          this.classificationDone = true;
-          const isDonePlaying = this.results.length === this.totalGuess;
-          if (isDonePlaying) {
-            this.gameOver = isDonePlaying;
-          }
+          this.updateGameState();
         }
       })
     );
+  }
+  updateGameState() {
+    this.hasAddedSingleplayerResult = true;
+    this.guessDone = true;
+    this.guessUsed++;
+    this.classificationDone = true;
+    const isDonePlaying = this.results.length === this.totalGuess;
+    if (isDonePlaying) {
+      this.gameOver = isDonePlaying;
+    }
+  }
+  createDefaultResult() {
+    const result: Result = {
+      hasWon: false,
+      imageData:
+        'data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAQAAAAEACAQAAAD2e2DtAAABm0lEQVR42u3SMQEAAAgDINc/9LxMIWQg7fBYBBAAARAAARAAARAAARAAARAAARAAARAAARAAARAAARAAARAAARAAARAAARAAARAAARAAARAAARAAARAAARAAARAAARAAARAAARAAARAAARAAARAAARAAARAAARAAARAAARAAARAAARAAARAAARAAARAAARAAARAAARAAARAAARBAAAEEQAAEQAAEQAAEQAAEQAAEQAAEQAAEQAAEQAAEQAAEQAAEQAAEQAAEQAAEQAAEQAAEQAAEQAAEQAAEQAAEQAAEQAAEQAAEQAAEQAAEQAAEQAAEQAAEQAAEQAAEQAAEQAAEQAAEQAAEQAAEQAAEQAAEQAAEQAAEQAAEQAAEQAAEEEAAARAAARAAARAAARAAARAAARAAARAAARAAARAAARAAARAAARAAARAAARAAARAAARAAARAAARAAARAAARAAARAAARAAARAAARAAARAAARAAARAAARAAARAAARAAARAAARAAARAAARAAARAAARAAARAAARAAARAAARAAARCAs6Mk/xDKKakhAAAAAElFTkSuQmCC',
+      word: this.label,
+      gameState: 'Done',
+      guess: '',
+      score: 0,
+    };
+    return result;
   }
 
   createResult(res): Result {

@@ -186,6 +186,20 @@ export class GameDrawComponent implements OnInit, OnDestroy {
             this.updateResult(false);
             this.hasAddedResult = true;
           }
+          if (!this.multiplayerService.isMultiplayer && !this.drawingService.hasAddedSingleplayerResult) {
+            let res;
+            let hasWon = false;
+            if (!this.drawingService.pred) {
+              res = this.drawingService.createDefaultResult();
+            } else {
+              res = this.drawingService.createResult(this.drawingService.pred);
+              res.imageData = this.drawingService.pred.imageData;
+              hasWon = this.drawingService.pred.hasWon;
+            }
+            this.soundService.playResultSound(hasWon);
+            this.drawingService.addResult(res);
+            this.drawingService.updateGameState();
+          }
         },
       })
     );
@@ -221,8 +235,8 @@ export class GameDrawComponent implements OnInit, OnDestroy {
           if (this.timeLeft <= 0) {
             if (this.multiplayerService.isMultiplayer) {
               this.soundService.playResultSound(false);
-              observer.complete();
             }
+            observer.complete();
           }
         });
       return () => sub.unsubscribe();
@@ -253,6 +267,7 @@ export class GameDrawComponent implements OnInit, OnDestroy {
 
   handleSinglePlayerClassification(dataUrl, croppedCoordinates) {
     const formData: FormData = this.createFormData(dataUrl);
+
     this.drawingService.classify(formData).subscribe((res) => {
       const sortedCertaintyArr = this.sortOnCertainty(res);
       this.updateAiGuess(sortedCertaintyArr);
@@ -265,6 +280,14 @@ export class GameDrawComponent implements OnInit, OnDestroy {
           .subscribe({
             next: (dataUrlHighRes) => {
               this.drawingService.lastResult.imageData = dataUrlHighRes;
+            },
+          });
+      } else {
+        this.imageService
+          .resize(this.canvas.nativeElement.toDataURL('image/png'), croppedCoordinates, this.resultImageSize)
+          .subscribe({
+            next: (dataUrlHighRes) => {
+              this.drawingService.pred.imageData = dataUrlHighRes;
             },
           });
       }
