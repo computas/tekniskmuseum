@@ -1,5 +1,6 @@
+import { environment } from 'src/environments/environment';
 export const endpoints = {
-  TEKNISKBACKEND: 'https://tekniskback.azurewebsites.net',
+  TEKNISKBACKEND: environment.TEKNISKBACKEND_ENDPOINT,
   ENDGAME: 'endGame',
   CLASSIFY: 'classify',
   GETLABEL: 'getLabel',
