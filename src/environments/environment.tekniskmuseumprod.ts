@@ -1,7 +1,7 @@
 export const environment = {
   production: true,
-  WS_ENDPOINT: 'wss://tekniskback-mp.azurewebsites.net',
+  WS_ENDPOINT: 'wss://tekniskmuseumbackendsingleplayer.azurewebsites.net',
   // TEKNISKBACKEND_ENDPOINT :'https://tekniskback.azurewebsites.net',
-  TEKNISKBACKEND_ENDPOINT :'http://localhost:8000',
+  TEKNISKBACKEND_ENDPOINT :'https://tekniskmuseumbackendsingleplayer.azurewebsites.net',
   inactivityTime: 60 * 1000,
 };
