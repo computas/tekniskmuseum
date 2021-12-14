@@ -35,11 +35,11 @@
             "scripts": []
           },
           "configurations": {
-            "production": {
+            "TekniskMuseumProd": {
               "fileReplacements": [
                 {
                   "replace": "src/environments/environment.ts",
-                  "with": "src/environments/environment.prod.ts"
+                  "with": "src/environments/environment.tekniskmuseumprod.ts"
                 }
               ],
               "optimization": true,
@@ -103,8 +103,8 @@
             "browserTarget": "tekniskmuseum:build"
           },
           "configurations": {
-            "production": {
-              "browserTarget": "tekniskmuseum:build:production"
+            "TekniskMuseumProd": {
+              "browserTarget": "tekniskmuseum:build:TekniskMuseumProd"
             },
             "development": {
               "browserTarget": "tekniskmuseum:build:development"
