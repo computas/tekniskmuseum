@@ -1,8 +1,9 @@
+import { environment } from 'src/environments/environment';
 export const routes = {
   LANDING: '',
   SINGLEPLAYER: 'playgame/singleplayer',
   MULTIPLAYER: 'playgame/multiplayer',
   RESULT: 'result',
-  TEKNISKBACKEND: 'https://tekniskback.azurewebsites.net',
+  TEKNISKBACKEND: environment.TEKNISKBACKEND_ENDPOINT,
   DRAWING: 'drawing',
 };

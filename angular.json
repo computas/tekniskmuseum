@@ -35,11 +35,41 @@
             "scripts": []
           },
           "configurations": {
-            "production": {
+            "TekniskMuseumProd": {
               "fileReplacements": [
                 {
                   "replace": "src/environments/environment.ts",
-                  "with": "src/environments/environment.prod.ts"
+                  "with": "src/environments/environment.tekniskmuseumprod.ts"
+                }
+              ],
+              "optimization": true,
+              "outputHashing": "all",
+              "sourceMap": false,
+              "extractCss": true,
+              "namedChunks": false,
+              "extractLicenses": true,
+              "vendorChunk": false,
+              "buildOptimizer": true,
+              "budgets": [
+                {
+                  "type": "initial",
+                  "maximumWarning": "2mb",
+                  "maximumError": "5mb"
+                },
+                {
+                  "type": "anyComponentStyle",
+                  "maximumWarning": "6kb",
+                  "maximumError": "10kb"
+                }
+              ],
+              "serviceWorker": true,
+              "ngswConfigPath": "ngsw-config.json"
+            },
+            "development": {
+              "fileReplacements": [
+                {
+                  "replace": "src/environments/environment.ts",
+                  "with": "src/environments/environment.dev.ts"
                 }
               ],
               "optimization": true,
@@ -73,8 +103,11 @@
             "browserTarget": "tekniskmuseum:build"
           },
           "configurations": {
-            "production": {
-              "browserTarget": "tekniskmuseum:build:production"
+            "TekniskMuseumProd": {
+              "browserTarget": "tekniskmuseum:build:TekniskMuseumProd"
+            },
+            "development": {
+              "browserTarget": "tekniskmuseum:build:development"
             }
           }
         },
