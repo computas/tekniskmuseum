@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { Observable, BehaviorSubject } from 'rxjs';
-import * as io from 'socket.io-client';
+import { io, Socket } from "socket.io-client";
 import { environment } from '../../../../environments/environment';
 import { SocketEndpoints } from '../../../shared/models/websocketEndpoints';
 
@@ -12,7 +12,7 @@ export interface PlayerDisconnectedData {
   providedIn: 'root',
 })
 export class WebSocketService {
-  socket: SocketIOClient.Socket;
+  socket: Socket;
 
   playerDisconnectedData: PlayerDisconnectedData;
 
