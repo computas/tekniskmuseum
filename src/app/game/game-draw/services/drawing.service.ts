@@ -40,7 +40,7 @@ export class DrawingService {
     return this.http.post<FormData>(`${this.baseUrl}/${endpoints.CLASSIFY}`, answerInfo).pipe(
       tap((res) => {
         this.pred = res;
-        if (this.roundIsDone(res) && !this.hasAddedSingleplayerResult) {
+        if (this.guessUsed <= res.serverRound && this.roundIsDone(res) && !this.hasAddedSingleplayerResult) {
           res.roundIsDone = true;
           const result: Result = this.createResult(res);
           this.addResult(result);

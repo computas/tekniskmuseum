@@ -317,6 +317,7 @@ export class GameDrawComponent implements OnInit, OnDestroy {
     const formData: FormData = this.imageService.createFormData(dataUrl);
     formData.append('player_id', this.drawingService.playerid);
     formData.append('time', this.timeLeft.toString());
+    formData.append('client_round_num', this.drawingService.guessUsed.toString());
     return formData;
   }
 

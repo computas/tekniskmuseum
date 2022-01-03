@@ -5,6 +5,7 @@ export interface Result {
   gameState: string;
   guess: string;
   score: number;
+  serverRound?: number;
 }
 
 export interface StartGamePlayerId {
