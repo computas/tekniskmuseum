@@ -346,6 +346,7 @@ export class GameDrawComponent implements OnInit, OnDestroy {
       this.x = x;
       this.y = y;
     }
+    this.isDrawing=false;
   }
 
   enterCanvas(e: MouseEvent | TouchEvent) {
