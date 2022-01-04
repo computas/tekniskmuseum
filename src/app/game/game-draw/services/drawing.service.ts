@@ -118,6 +118,7 @@ export class DrawingService {
   }
 
   clearState() {
+    this.gameHasStarted=false;
     this.guessUsed = 1;
     this.gameOver = false;
     this.guessDone = false;

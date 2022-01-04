@@ -2,6 +2,7 @@ import { Component, OnInit, OnDestroy } from '@angular/core';
 import { Router } from '@angular/router';
 import { MatDialogRef } from '@angular/material/dialog';
 import { ViewEncapsulation } from '@angular/core';
+import { routes } from '../shared/models/routes';
 
 @Component({
   selector: 'app-idle-timeout',
@@ -29,7 +30,7 @@ export class IdleTimeoutComponent implements OnInit, OnDestroy {
 
   goHome() {
     this.closeDialog();
-    this.router.navigateByUrl('');
+    this.router.navigate([routes.LANDING]);
   }
 
   closeDialog() {
