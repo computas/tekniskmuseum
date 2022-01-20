@@ -21,7 +21,7 @@
   display: flex;
   flex-direction: column;
   align-items: center;
-  color: white;
+  color: $text_primary_color;
 }
 .words-remaining {
   position: absolute;
@@ -47,7 +47,7 @@
   }
 }
 .word-to-guess {
-  color: #fa852f;
+  color: $text_secondary_color;
   font-size: 34px;
 }
 @media (min-width: 600px) {
@@ -103,7 +103,7 @@ p {
   top: 0px;
   position: absolute;
   padding: 35px;
-  color: #fee500;
+  color: $text_primary_color;
   font-weight: 500;
 }
 

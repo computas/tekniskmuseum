@@ -21,7 +21,7 @@
   color: #195272;
 }
 .game-info-text-header {
-  color: #fa852f;
+  color: $text_primary_color;
   text-align: center;
   font-size: 34px;
   font-weight: 500;
@@ -71,7 +71,7 @@
   }
 }
 .game-info-text-list {
-  color: #195272;
+  color: $text_primary_color;
 }
 .game-info-text-list > li {
   font-size: 24px;
@@ -141,10 +141,10 @@
   display: flex;
   align-items: center;
   font-weight: 500;
-  color: #05a3c7;
+  color: $text_primary_color;
 }
 .player-mode > .material-icons {
-  color: #05a3c7;
+  color: $text_primary_color;
   margin-right: 5px;
 }
 .play_arrow {

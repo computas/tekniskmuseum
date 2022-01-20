@@ -31,7 +31,7 @@
 }
 #result-header {
   text-align: center;
-  color: white;
+  color: $text_primary_color;
   font-size: 48px;
   display: grid;
   align-items: end;
@@ -119,16 +119,16 @@ p {
   padding: 0 24px;
 }
 .winner {
-  color: #fa852f;
+  color: $text_secondary_color;
   font-weight: 500;
 }
 .loser {
-  color: #fa852f;
+  color: $text_secondary_color;
   font-weight: 500;
 }
 .winner-points {
   font-size: 32px;
-  color: #14213d;
+  color: $text_primary_color;
 }
 .winner-img {
   height: 100px;
@@ -137,12 +137,12 @@ p {
   height: 100px;
 }
 .multiplayer-score {
-  color: #195272;
+  color: $text_primary_color;
   font-weight: 200;
 }
 .result-word {
   font-weight: bold;
-  color: white;
+  color: $text_primary_color;
 }
 .result-section {
   align-items: center;

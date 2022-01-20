@@ -29,7 +29,7 @@
 #intermediate-container {
   position: relative;
   min-height: 100vh;
-  color: white;
+  color: $text_primary_color;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -57,6 +57,9 @@
   .intermediate-content {
     flex-direction: row;
   }
+}
+.guessed-word {
+  color: $text_secondary_color;
 }
 .avatar-container {
   width: 155px;
