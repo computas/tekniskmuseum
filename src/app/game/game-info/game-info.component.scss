@@ -1,8 +1,27 @@
+@import '../../../variables.scss';
+
+.game-info-container-background {
+  position: relative;
+}
+.game-info-container-background:before {
+  content: "";
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  position: absolute;
+  background-image: url("../../../assets/background/io_rutemoenster-inverted.png");
+  background-size: cover;
+  background-color: black;
+}
+.game-info-container {
+  position: relative;
+}
 .material-icons {
   color: #195272;
 }
 .game-info-text-header {
-  color: #fa852f;
+  color: $text_primary_color;
   text-align: center;
   font-size: 34px;
   font-weight: 500;
@@ -52,7 +71,7 @@
   }
 }
 .game-info-text-list {
-  color: #195272;
+  color: $text_primary_color;
 }
 .game-info-text-list > li {
   font-size: 24px;
@@ -71,6 +90,7 @@
   .avatar {
     display: block;
     margin-right: 10px;
+    filter: invert(100%);
   }
 }
 .button {
@@ -89,8 +109,8 @@
   }
 }
 #get-word-button {
-  background: #fa852f;
-  color: #ffffff;
+  background: $button_background_color;
+  color: $button_content_color;
   float: right;
 }
 @media (min-width: 600px) {
@@ -99,8 +119,8 @@
   }
 }
 #back-button {
-  background: #f4f4f4;
-  color: #14213d;
+  background: $button_background_color;
+  color: $button_content_color;
 }
 .button-text {
   display: flex;
@@ -109,7 +129,7 @@
   align-items: center;
 }
 .button-icon {
-  color: #14213d;
+  color: $button_content_color;
   margin-right: 16px;
   font-size: 36px !important;
   height: 36px;
@@ -121,13 +141,13 @@
   display: flex;
   align-items: center;
   font-weight: 500;
-  color: #05a3c7;
+  color: $text_primary_color;
 }
 .player-mode > .material-icons {
-  color: #05a3c7;
+  color: $text_primary_color;
   margin-right: 5px;
 }
 .play_arrow {
-  color: white;
+  color: $button_content_color;
   margin-right: 12px;
 }
