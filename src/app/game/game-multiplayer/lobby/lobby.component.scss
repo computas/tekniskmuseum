@@ -1,5 +1,19 @@
+.container-background {
+  position: relative;
+}
+.container-background:before {
+  content: "";
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  position: absolute;
+  background-image: url("../../../../assets/background/io_rutemoenster-inverted.png");
+  background-size: cover;
+  background-color: black;
+}
 .container {
-  background: linear-gradient(0.5deg, #195272 -0.56%, #05a3c7 138.78%);
+  position: relative;
   min-height: 100vh;
   justify-content: center;
   display: flex;
