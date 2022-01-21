@@ -109,16 +109,16 @@ a {
   margin-top: 20px;
   font-size: 20px;
   border-radius: 50px;
-  height: 40px;
+  height: 50px;
   min-width: 240px;
-  max-width: 400px;
+  max-width: 300px;
 }
 @media (min-width: 600px) {
   .play-game-button {
-    font-size: 32px;
-    height: 60px;
-    min-width: 230px;
-    max-width: 400px;
+    font-size: 36px;
+    height: 76px;
+    min-width: 249px;
+    max-width: 300px;
   }
 }
 .learn-button {
@@ -147,8 +147,11 @@ a {
   align-items: center;
 }
 .button-icon {
-  color: $button_content_color;
-  margin-right: 20px;
+  margin-right: 16px;
   font-size: 36px;
-  margin-bottom: 12px;
+  background: linear-gradient(to top, #2514d1 0%, #f14a64 50%, #de7d6e 90%);
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+  height: 100%;
+  width: 40px;
 }
