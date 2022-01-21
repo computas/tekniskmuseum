@@ -1,3 +1,5 @@
+@import '../../variables.scss';
+
 // .ng-star-inserted {
 //   height: 100px !important;
 // }
@@ -101,8 +103,8 @@ a {
   }
 }
 .play-game-button {
-  background: #fa852f;
-  color: #ffffff;
+  background: $button_background_color;
+  color: $button_content_color;
   box-shadow: 0 8px 16px 0 rgba(0, 0, 0, 0.1), 0 6px 20px 0 rgba(0, 0, 0, 0.15);
   margin-top: 20px;
   font-size: 20px;
@@ -145,7 +147,7 @@ a {
   align-items: center;
 }
 .button-icon {
-  color: #ffffff;
+  color: $button_content_color;
   margin-right: 20px;
   font-size: 36px;
   margin-bottom: 12px;

@@ -1,3 +1,4 @@
+@import '../../../variables.scss';
 
 .game-info-container-background {
   position: relative;
@@ -108,8 +109,8 @@
   }
 }
 #get-word-button {
-  background: #fa852f;
-  color: #ffffff;
+  background: $button_background_color;
+  color: $button_content_color;
   float: right;
 }
 @media (min-width: 600px) {
@@ -118,8 +119,8 @@
   }
 }
 #back-button {
-  background: #f4f4f4;
-  color: #14213d;
+  background: $button_background_color;
+  color: $button_content_color;
 }
 .button-text {
   display: flex;
@@ -128,7 +129,7 @@
   align-items: center;
 }
 .button-icon {
-  color: #14213d;
+  color: $button_content_color;
   margin-right: 16px;
   font-size: 36px !important;
   height: 36px;
@@ -147,6 +148,6 @@
   margin-right: 5px;
 }
 .play_arrow {
-  color: white;
+  color: $button_content_color;
   margin-right: 12px;
 }

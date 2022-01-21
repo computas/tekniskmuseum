@@ -1,3 +1,5 @@
+@import '../../../variables.scss';
+
 .result-container-background {
   position: relative;
 }
@@ -43,8 +45,8 @@
   font-size: 30px;
 }
 .btn-again {
-  background-color: #fa852f;
-  color: white;
+  background-color: $button_background_color;
+  color: $button_content_color;
 }
 .button-footer {
   display: grid;
