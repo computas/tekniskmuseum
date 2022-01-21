@@ -17,6 +17,11 @@
   src: url("../../assets/fonts/Aeonik/Aeonik-Light.otf") format("opentype");
 }
 
+@font-face {
+  font-family: AeonikBlack;
+  src: url("../../assets/fonts/Aeonik/Aeonik-Black.otf") format("opentype");
+}
+
 html,
 body {
   height: 100%;
