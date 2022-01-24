@@ -126,7 +126,7 @@ p {
   color: $text_secondary_color;
   font-weight: 500;
 }
-.winner-points {
+.winner-points, .loser-points {
   font-size: 32px;
   color: $text_primary_color;
 }
