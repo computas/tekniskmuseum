@@ -95,6 +95,7 @@
 }
 .guessing-avatar {
   display: flex;
+  height: 150px;
 }
 @media only screen and (max-width: 600px) {
   .guess-label {
@@ -103,6 +104,5 @@
   }
   .guessing-avatar {
     width: 120px;
-    height: 150px;
   }
 }
