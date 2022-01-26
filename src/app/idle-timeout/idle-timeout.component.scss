@@ -1,3 +1,5 @@
+@import '../../variables.scss';
+
 .cdk-overlay-backdrop.cdk-overlay-dark-backdrop.cdk-overlay-backdrop-showing {
   background: rgba(20, 33, 61, 0.8);
 }
@@ -39,8 +41,8 @@
   margin-top: 10px;
   min-width: 306px;
   border-style: none;
-  background: #f4f4f4;
-  color: #14213d;
+  background: $button_background_secondary_color;
+  color: $button_content_color;
 }
 
 @media (min-width: 600px) {
@@ -51,6 +53,6 @@
 }
 
 .button-icon {
-  color: #14213d;
+  color: $button_content_color;
   margin-right: 5px;
 }
