@@ -19,6 +19,14 @@
   min-height: 100vh;
   display: grid;
 }
+.logo {
+  position: absolute;
+  top: 0;
+  left: 0;
+  margin: 35px;
+  height: 44px;
+  width: 70px;
+}
 #result-card-container {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
