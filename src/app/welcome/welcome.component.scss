@@ -106,6 +106,17 @@ a {
 .avatar-image {
   height: 250px;
 }
+.avatar-name {
+  font-family: AeonikBlack;
+}
+.logo {
+  position: absolute;
+  top: 0;
+  left: 0;
+  margin: 35px;
+  height: 44px;
+  width: 70px;
+}
 .play-game-button {
   background: $button_background_color;
   color: $button_content_color;
