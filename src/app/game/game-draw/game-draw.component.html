@@ -1,41 +1,43 @@
-<div class="drawing-container">
-  <div class="drawing-header">
-    <h1><span class="drawing-header-text">Tegn: </span>{{ guessWord | uppercase }}</h1>
-    <div class="drawing-seconds">
-      <div class="timer-container">
-        <mat-icon class="timer-icon" aria-label="Example home icon">timer</mat-icon>
-        <span #countDown>
-          {{ timeLeft }}
-        </span>
+<div class="game-draw-container-background">
+  <div class="drawing-container">
+    <div class="drawing-header">
+      <h1><span class="drawing-header-text">Tegn: </span>{{ guessWord | uppercase }}</h1>
+      <div class="drawing-seconds">
+        <div class="timer-container">
+          <mat-icon class="timer-icon" aria-label="Example home icon">timer</mat-icon>
+          <span #countDown>
+            {{ timeLeft }}
+          </span>
+        </div>
       </div>
+      <button mat-icon-button color="primary" aria-label="icon button with a trash icon" (click)="clear()">
+        <span class="material-icons">
+          <mat-icon class="delete-icon" aria-label="delete icon">delete</mat-icon>
+        </span>
+      </button>
     </div>
-    <button mat-icon-button color="primary" aria-label="icon button with a trash icon" (click)="clear()">
-      <span class="material-icons">
-        <mat-icon class="delete-icon" aria-label="delete icon">delete</mat-icon>
-      </span>
-    </button>
+    <div>
+      <canvas
+        id="drawing-canvas"
+        (mousedown)="start($event)"
+        (mouseup)="stop($event)"
+        (mousemove)="draw($event)"
+        (mouseleave)="leaveCanvas($event)"
+        (mouseenter)="enterCanvas($event)"
+        (touchstart)="start($event)"
+        (touchmove)="draw($event)"
+        (touchend)="stop($event)"
+        #canvas
+      ></canvas>
+    </div>
   </div>
-  <div>
-    <canvas
-      id="drawing-canvas"
-      (mousedown)="start($event)"
-      (mouseup)="stop($event)"
-      (mousemove)="draw($event)"
-      (mouseleave)="leaveCanvas($event)"
-      (mouseenter)="enterCanvas($event)"
-      (touchstart)="start($event)"
-      (touchmove)="draw($event)"
-      (touchend)="stop($event)"
-      #canvas
-    ></canvas>
-  </div>
-</div>
 
-<div class="avatar-container">
-  <div class="">
-    <img src="../../../assets/illustrations/IO_Illustrasjoner-1_1360x939.png" alt="Avatar guessing words" class="guessing-avatar" />
-  </div>
-  <div class="guess-label me">
-    <span>Hmm... <span *ngIf="AI_GUESS">kan det være &nbsp;</span>{{ AI_GUESS | uppercase }} </span>
+  <div class="avatar-container">
+    <div class="">
+      <img src="../../../assets/illustrations/IO_Illustrasjoner-1_1360x939.png" alt="Avatar guessing words" class="guessing-avatar" />
+    </div>
+    <div class="guess-label me">
+      <span>Hmm... <span *ngIf="AI_GUESS">kan det være &nbsp;</span>{{ AI_GUESS | uppercase }} </span>
+    </div>
   </div>
 </div>
