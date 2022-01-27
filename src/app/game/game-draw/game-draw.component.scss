@@ -1,3 +1,5 @@
+@import '../../../variables.scss';
+
 #drawing-canvas {
   position: absolute;
   touch-action: none;
@@ -64,8 +66,8 @@
 }
 .guess-label {
   align-self: flex-end;
-  color: #195272;
-  background-color: #ecf8ff;
+  color: black;
+  background-color: $button_background_secondary_color;
   font-size: 36px;
   line-height: 43px;
   height: 50%;
@@ -77,7 +79,7 @@
   margin-bottom: 24px;
 }
 .guess-label::before {
-  background-color: #ecf8ff;
+  background-color: $button_background_secondary_color;
 }
 .clip-container {
   width: 100px;
