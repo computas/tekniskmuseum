@@ -1,6 +1,5 @@
-<div class="game-draw-container-background">
-  <div class="drawing-container">
-    <div class="drawing-header">
+<div class="drawing-container">
+  <div class="drawing-header">
       <h1><span class="drawing-header-text">Tegn: </span>{{ guessWord | uppercase }}</h1>
       <div class="drawing-seconds">
         <div class="timer-container">
@@ -15,21 +14,20 @@
           <mat-icon class="delete-icon" aria-label="delete icon">delete</mat-icon>
         </span>
       </button>
-    </div>
-    <div>
-      <canvas
-        id="drawing-canvas"
-        (mousedown)="start($event)"
-        (mouseup)="stop($event)"
-        (mousemove)="draw($event)"
-        (mouseleave)="leaveCanvas($event)"
-        (mouseenter)="enterCanvas($event)"
-        (touchstart)="start($event)"
-        (touchmove)="draw($event)"
-        (touchend)="stop($event)"
-        #canvas
-      ></canvas>
-    </div>
+  </div>
+  <div>
+    <canvas
+      id="drawing-canvas"
+      (mousedown)="start($event)"
+      (mouseup)="stop($event)"
+      (mousemove)="draw($event)"
+      (mouseleave)="leaveCanvas($event)"
+      (mouseenter)="enterCanvas($event)"
+      (touchstart)="start($event)"
+      (touchmove)="draw($event)"
+      (touchend)="stop($event)"
+      #canvas
+    ></canvas>
   </div>
 </div>
 
