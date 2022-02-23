@@ -13,6 +13,25 @@
   <p></p>
   <button (click)="clearHighScore()">{{ this.highScoreString }}</button>
 </div>
+<br />
+<div align="center">
+  <form id="pair" method="get" align="center">
+    <label for="pairid">
+      <b>Pair ID</b>
+    </label>
+    <input #pairid type="text" name="pairid" id="pairid" (placeholder)="getPairID()" />
+    <br /><br />
+    <input
+      type="button"
+      class="pair-button"
+      (click)="pair(pairid.value)"
+      name="log"
+      id="log"
+      value="Sett ID"
+    />
+    <br /><br />
+  </form>
+</div>
 <p></p>
 <div align="center">
   <button mat-button class="sign-out-btn" (click)="signOut()">Logg ut</button>
