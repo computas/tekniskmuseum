@@ -3,7 +3,6 @@ import { WebSocketService } from './web-socket.service';
 import { BehaviorSubject, ReplaySubject } from 'rxjs';
 import { map, take, tap } from 'rxjs/operators';
 import { SocketEndpoints } from '../../../shared/models/websocketEndpoints';
-import { environment } from '../../../../environments/environment';
 import { PairingService } from './pairing.service';
 
 export enum GAMELEVEL {
@@ -60,7 +59,7 @@ export class MultiplayerService {
   }
 
   joinGame() {
-    this.webSocketService.emit(SocketEndpoints.JOIN_GAME, {"pair_id": this.pairing.getPairID()});
+    this.webSocketService.emit(SocketEndpoints.JOIN_GAME, { pair_id: this.pairing.getPairID() });
     return this.webSocketService.listen(SocketEndpoints.JOIN_GAME).pipe(
       tap((data: any) => {
         const el: GameState = data;

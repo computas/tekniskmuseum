@@ -18,8 +18,7 @@ export class LoginService {
   }
 
   isLoggedIn() {
-    // return this._loggedIn;
-    return true;
+    return this._loggedIn;
   }
 
   setLoggedIn() {
