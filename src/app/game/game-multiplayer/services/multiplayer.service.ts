@@ -59,7 +59,7 @@ export class MultiplayerService {
   }
 
   joinGame() {
-    this.webSocketService.emit(SocketEndpoints.JOIN_GAME, { pair_id: this.pairing.getPairID() });
+    this.webSocketService.emit(SocketEndpoints.JOIN_GAME, `{ "pair_id": "${this.pairing.getPairID()}" }`);
     return this.webSocketService.listen(SocketEndpoints.JOIN_GAME).pipe(
       tap((data: any) => {
         const el: GameState = data;
