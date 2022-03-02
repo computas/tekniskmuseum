@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Observable, BehaviorSubject } from 'rxjs';
 import { tap, switchMap } from 'rxjs/operators';
 import { Result, StartGamePlayerId, GameLabel } from '../../../shared/models/interfaces';
@@ -93,7 +93,9 @@ export class DrawingService {
   }
 
   startGame(): Observable<GameLabel> {
-    return this.http.get<StartGamePlayerId>(`${this.baseUrl}/${endpoints.STARTGAME}`).pipe(
+    const headers = new HttpHeaders();
+    headers.set('Access-Control-Allow-Origin', '*');
+    return this.http.get<StartGamePlayerId>(`${this.baseUrl}/${endpoints.STARTGAME}`, { headers: headers }).pipe(
       switchMap((res) => {
         this.playerid = res.player_id;
         return this.getLabel();
