@@ -1,4 +1,4 @@
-name: Azure Static Web Apps CI/CD
+name: Deploy to teknisk museum Production(ambitious-pond)
 
 on:
   workflow_dispatch:
