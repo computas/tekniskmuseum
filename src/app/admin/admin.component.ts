@@ -35,4 +35,8 @@ export class AdminComponent implements OnInit {
       duration: 4000,
     });
   }
+
+  goBack() {
+    this.router.navigate(['/']);
+  }
 }
