@@ -60,7 +60,8 @@
 .game-info-footer {
   display: flex;
   width: 80%;
-  margin-bottom: 75px;
+  max-width: 1000px;
+  margin-bottom: 175px;
   justify-content: center;
   flex-wrap: wrap;
 }
