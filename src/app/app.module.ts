@@ -19,6 +19,7 @@ import { InfoDialogComponent } from './admin/info-dialog/info-dialog.component';
 import { MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { AuthGuard } from './admin/auth-guard';
 import { DialogTemplateComponent } from './admin/dialog-template/dialog-template.component';
+import { CommonModule } from '@angular/common';
 
 @NgModule({
   declarations: [
@@ -42,6 +43,7 @@ import { DialogTemplateComponent } from './admin/dialog-template/dialog-template
     MatDialogModule,
     MaterialImportsModule,
     BrowserAnimationsModule,
+    CommonModule,
   ],
   providers: [HttpClientModule, InfoDialogComponent, AuthGuard, { provide: MAT_DIALOG_DATA, useValue: {} }],
 
