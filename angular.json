@@ -197,5 +197,8 @@
       }
     }
   },
-  "defaultProject": "tekniskmuseum"
+  "defaultProject": "tekniskmuseum",
+  "cli": {
+    "analytics": false
+  }
 }
