@@ -4,10 +4,11 @@
 
 export const environment = {
   production: false,
-  WS_ENDPOINT: 'wss://tekniskback-mp.azurewebsites.net',
-  // WS_ENDPOINT: 'ws://localhost:8000',
-  TEKNISKBACKEND_ENDPOINT: 'https://tekniskback.azurewebsites.net',
-  inactivityTime: 600 * 1000
+  // WS_ENDPOINT: 'wss://tekniskback-mp.azurewebsites.net',
+  WS_ENDPOINT: 'ws://localhost:5000',
+  TEKNISKBACKEND_ENDPOINT: 'https://localhost:5000',
+  inactivityTime: 600 * 1000,
+  PAIR_ID: 'f368b28b-4d39-4362-8c8c-c1f230c64fb0'
 };
 
 /*

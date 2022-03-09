@@ -3,6 +3,7 @@ import { Router } from '@angular/router';
 import { LoginService } from '../login.service';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { InfoDialogComponent } from './../info-dialog/info-dialog.component';
+import { PairingService } from '../../game/game-multiplayer/services/pairing.service';
 
 @Component({
   selector: 'app-info',
@@ -18,11 +19,14 @@ export class InfoComponent implements OnInit {
   highScoreBool = false;
   errorMsg = 'En tilkoblingsfeil har oppstådd!';
   secondMsg = 'Er du helt sikker?';
+  pairID = '';
+
   constructor(
     private router: Router,
     private loginService: LoginService,
     private _snackBar: MatSnackBar,
-    private _dialog: InfoDialogComponent
+    private _dialog: InfoDialogComponent,
+    private pairing: PairingService
   ) {}
 
   ngOnInit(): void {}
@@ -158,5 +162,13 @@ export class InfoComponent implements OnInit {
     this._snackBar.open(msg, 'Lukk', {
       duration: 6000,
     });
+  }
+
+  pair(id: string) {
+    this.pairing.setPairID(id);
+  }
+
+  getPairID() {
+    return this.pairing.getPairID();
   }
 }

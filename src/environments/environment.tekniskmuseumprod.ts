@@ -4,4 +4,5 @@ export const environment = {
   // TEKNISKBACKEND_ENDPOINT :'https://tekniskback.azurewebsites.net',
   TEKNISKBACKEND_ENDPOINT :'https://tekniskmuseumbackendsingleplayer.azurewebsites.net',
   inactivityTime: 60 * 1000,
+  PAIR_ID: 'teknisk-1'
 };
