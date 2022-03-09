@@ -9,7 +9,7 @@ export class PairingService {
 
     constructor() {
       const id = localStorage.getItem('pairID');
-      id ? this.pairID = id : this.pairID = environment.PAIR_ID;
+      id ? this.setPairID(id) : this.setPairID(environment.PAIR_ID ?? '');
     }
 
     getPairID() {
@@ -17,7 +17,7 @@ export class PairingService {
     }
 
     setPairID(pairID: string) {
-      this.pairID = pairID;
-      localStorage.setItem('pairID', pairID);
+      this.pairID = pairID.substring(0, 32);
+      localStorage.setItem('pairID', this.pairID);
     }
 }
