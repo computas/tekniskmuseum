@@ -8,6 +8,7 @@ export const environment = {
   WS_ENDPOINT: 'ws://localhost:5000',
   TEKNISKBACKEND_ENDPOINT: 'https://localhost:5000',
   inactivityTime: 600 * 1000,
+  // Maximum length of value is 32 characters
   PAIR_ID: 'local-1'
 };
 
