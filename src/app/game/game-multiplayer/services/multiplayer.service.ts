@@ -56,6 +56,7 @@ export class MultiplayerService {
 
   resetStateInfo() {
     this.stateInfo = this.initialState;
+    this.isMultiplayer = false;
   }
 
   joinGame() {
@@ -114,6 +115,7 @@ export class MultiplayerService {
 
   clearState() {
     this.stateInfo = this.initialState;
+    this.isMultiplayer = false;
     this.webSocketService.disconnect();
   }
 
