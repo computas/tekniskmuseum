@@ -56,6 +56,7 @@ export class MultiplayerService {
 
   resetStateInfo() {
     this.stateInfo = this.initialState;
+    this.isMultiplayer = false;
   }
 
   joinGame() {
