@@ -10,13 +10,8 @@
       </div>
       <div *ngIf="word">
         <h1 class="word-to-guess header">{{ word | uppercase }}</h1>
-        <div *ngIf="isMultiPlayer" [ngSwitch]="timeLeft" class="timer header">
-          <span *ngSwitchCase="0">0</span>
-          <span *ngSwitchCase="1">1</span>
-          <span *ngSwitchCase="2">2</span>
-          <span *ngSwitchCase="3">3</span>
-          <span *ngSwitchCase="4">4</span>
-          <span *ngSwitchCase="5">5</span>
+        <div *ngIf="isMultiPlayer" class="timer header">
+          <span>{{ timeLeft }}</span>
         </div>
       </div>
     </div>
