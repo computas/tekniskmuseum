@@ -26,10 +26,10 @@ export class GameWordToDrawComponent implements OnInit, OnDestroy {
   timeLeft = 5;
 
   loading = true;
-  playernr: string;
+  playernr = '';
 
   subscriptions = new Subscription();
-  timerSubscription: Subscription;
+  timerSubscription: Subscription | undefined;
 
   ngOnInit(): void {
     if (this.router.url === `/${routes.SINGLEPLAYER}`) {

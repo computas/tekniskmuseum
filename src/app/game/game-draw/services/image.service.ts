@@ -9,7 +9,7 @@ export class ImageService {
 
   constructor() {}
 
-  b64ToUint8Array(b64Image) {
+  b64ToUint8Array(b64Image: string) {
     const img = atob(b64Image.split(',')[1]);
     const imgBuffer: number[] = [];
     let i = 0;
@@ -20,7 +20,7 @@ export class ImageService {
     return new Uint8Array(imgBuffer);
   }
 
-  resize(b64Image, croppedCoordinates, imageSize = 256): Observable<string> {
+  resize(b64Image: string, croppedCoordinates: number[], imageSize = 256): Observable<string> {
     return new Observable((observer) => {
       const img = new Image();
       const canvas = document.createElement('canvas');
@@ -42,7 +42,7 @@ export class ImageService {
     });
   }
 
-  crop(minX, minY, maxX, maxY, userDrawLineWidth) {
+  crop(minX: number, minY: number, maxX: number, maxY: number, userDrawLineWidth: number) {
     const paddingForLineWidth = userDrawLineWidth / 2;
     const paddingExtra = 20;
     const paddingTotal = paddingForLineWidth + paddingExtra;
@@ -62,7 +62,7 @@ export class ImageService {
     return [sx, sy, sw, sh];
   }
 
-  createFormData(dataUrl) {
+  createFormData(dataUrl: string) {
     const u8Image = this.b64ToUint8Array(dataUrl);
     const blob = new Blob([u8Image], {
       type: 'image/png',
@@ -73,7 +73,7 @@ export class ImageService {
     return formData;
   }
 
-  createBlob(dataUrl) {
+  createBlob(dataUrl: string) {
     const u8Image = this.b64ToUint8Array(dataUrl);
     const blob = new Blob([u8Image], {
       type: 'image/png',

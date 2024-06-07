@@ -12,9 +12,9 @@ export interface PlayerDisconnectedData {
   providedIn: 'root',
 })
 export class WebSocketService {
-  socket: Socket;
+  socket: Socket | undefined;
 
-  playerDisconnectedData: PlayerDisconnectedData;
+  playerDisconnectedData: PlayerDisconnectedData | undefined;
 
   private readonly _playerDisconnected = new BehaviorSubject<boolean>(false);
   readonly playerDisconnected$ = this._playerDisconnected.asObservable();
@@ -56,16 +56,16 @@ export class WebSocketService {
     }
   }
 
-  listen(eventName: string) {
-    return new Observable((subscriber) => {
-      this.socket.on(eventName, (data) => {
+  listen<T = string>(eventName: string) {
+    return new Observable<T>((subscriber) => {
+      this.socket?.on(eventName, (data) => {
         subscriber.next(data);
       });
     });
   }
 
   emit(eventName: string, ...rest: any) {
-    this.socket.emit(eventName, ...rest);
+    this.socket?.emit(eventName, ...rest);
   }
 
   get playerDisconnected(): boolean {

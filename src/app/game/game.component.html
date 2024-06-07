@@ -6,10 +6,7 @@
   <app-drawing></app-drawing>
 </div>
 <div *ngIf="showIntermediateResult" [@enterAnimation]>
-  <app-game-intermediate-result
-    (nextGuess)="nextGuess($event)"
-    (finalResult)="finalResult($event)"
-  ></app-game-intermediate-result>
+  <app-game-intermediate-result (nextGuess)="nextGuess()" (finalResult)="finalResult()"></app-game-intermediate-result>
 </div>
 <div *ngIf="showFinalResult" [@enterAnimation]>
   <app-game-result></app-game-result>

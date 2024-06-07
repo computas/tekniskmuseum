@@ -13,7 +13,7 @@ export class AdminComponent implements OnInit {
 
   ngOnInit(): void {}
 
-  login(username, password) {
+  login(username: string, password: string) {
     // Call on login service to authorize user
     this.loginService.login(username, password).subscribe(
       (res: any) => {

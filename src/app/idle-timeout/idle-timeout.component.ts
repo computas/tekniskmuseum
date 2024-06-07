@@ -14,12 +14,12 @@ export class IdleTimeoutComponent implements OnInit, OnDestroy {
   constructor(private router: Router, private dialogRef: MatDialogRef<IdleTimeoutComponent>) {}
 
   startTime = 15;
-  timer;
-  countdown;
+  timer = 0;
+  countdown = 0;
 
   ngOnInit(): void {
     this.timer = this.startTime;
-    this.countdown = setInterval(() => {
+    this.countdown = window.setInterval(() => {
       this.timer -= 1;
       if (this.timer === 0) {
         this.resetTimer();
