@@ -5,7 +5,8 @@
     "prettier": "prettier --end-of-line=crlf --write src/**/*.ts",
     "start": "ng serve",
     "build": "ng build",
-    "build:ci": "ng build --prod"
+    "build:ci": "ng build --configuration production",
+    "build:computas": "ng build --configuration computas"
   },
   "private": true,
   "dependencies": {
