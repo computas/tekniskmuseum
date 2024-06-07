@@ -6,7 +6,8 @@
     "start": "ng serve",
     "build": "ng build",
     "build:ci": "ng build --configuration production",
-    "build:computas": "ng build --configuration computas"
+    "build:computas": "ng build --configuration computas",
+    "lint": "ng lint"
   },
   "private": true,
   "dependencies": {
@@ -32,8 +33,11 @@
     "@angular/cli": "^18.0.3",
     "@angular/compiler-cli": "^18.0.0",
     "@types/howler": "^2.2.11",
+    "angular-eslint": "18.0.1",
+    "eslint": "^9.3.0",
     "prettier": "^2.0.5",
     "ts-node": "~8.3.0",
-    "typescript": "~5.4.2"
+    "typescript": "~5.4.2",
+    "typescript-eslint": "8.0.0-alpha.20"
   }
 }

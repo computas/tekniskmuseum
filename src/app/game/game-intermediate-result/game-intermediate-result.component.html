@@ -19,7 +19,7 @@
             <h1>{{ lostSentence }}</h1>
           </div>
           <div class="result-img">
-            <img [src]="result.imageData" [className]="result.hasWon ? 'won' : 'loss'" />
+            <img [src]="result.imageData" alt="" [className]="result.hasWon ? 'won' : 'loss'" />
           </div>
         </div>
         <div class="avatar-container-spacer"></div>
@@ -34,9 +34,7 @@
         >
           Neste ord
         </button>
-        <h1 class="waiting" *ngIf="isMultiplayer && waitingForPlayer">
-          Venter på spiller
-        </h1>
+        <h1 class="waiting" *ngIf="isMultiplayer && waitingForPlayer">Venter på spiller</h1>
       </div>
     </ng-container>
     <ng-template #loading>

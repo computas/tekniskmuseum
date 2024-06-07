@@ -99,7 +99,7 @@ export class GameDrawComponent implements OnInit, OnDestroy {
   }
 
   roundOverListener() {
-    return this.multiplayerService.roundOverListener().subscribe((roundOver: any) => {
+    return this.multiplayerService.roundOverListener().subscribe(() => {
       if (!this.hasAddedResult) {
         this.updateResult(this.prediction.hasWon);
         this.hasAddedResult = true;
@@ -173,7 +173,7 @@ export class GameDrawComponent implements OnInit, OnDestroy {
     this.drawingService.classificationDone = false;
     this.subscriptions.add(
       this.createDrawingTimer().subscribe({
-        next: (val) => {
+        next: () => {
           if (this.multiplayerService.isMultiplayer) {
             this.classify(true);
           } else {

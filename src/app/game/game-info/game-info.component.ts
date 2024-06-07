@@ -35,7 +35,7 @@ export class GameInfoComponent implements OnInit {
           };
         }
       });
-      this.webSocketService.listen(SocketEndpoints.END_GAME).subscribe((res) => {});
+      this.webSocketService.listen(SocketEndpoints.END_GAME).subscribe();
     }
   }
 

@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component } from '@angular/core';
 import { Router } from '@angular/router';
 import { LoginService } from '../login.service';
 import { MatSnackBar } from '@angular/material/snack-bar';
@@ -10,7 +10,7 @@ import { PairingService } from '../../game/game-multiplayer/services/pairing.ser
   templateUrl: './info.component.html',
   styleUrls: ['./info.component.scss'],
 })
-export class InfoComponent implements OnInit {
+export class InfoComponent {
   datasetString = 'Nullstill treningssett til originalen';
   datasetBool = false;
   retrainString = 'Tren maskinlæringsmodellen';
@@ -29,17 +29,15 @@ export class InfoComponent implements OnInit {
     private pairing: PairingService
   ) {}
 
-  ngOnInit(): void {}
-
   revertDataset() {
     let msg = '';
     if (this.datasetBool) {
       this.resetDatasetValues();
       this.loginService.revertDataset().subscribe(
-        (res: any) => {
+        () => {
           this.openSnackBar('Suksess! treningssett tilbakestilles (dette kan ta noen minutter)');
         },
-        (error) => {
+        () => {
           msg = this.errorMsg;
           this.openSnackBar(msg);
         }
@@ -57,10 +55,10 @@ export class InfoComponent implements OnInit {
     if (this.retrainBool) {
       this.resetDatasetValues();
       this.loginService.retrain().subscribe(
-        (res: any) => {
+        () => {
           this.openSnackBar('Suksess! Modellen blir trent (dette kan ta noen minutter)');
         },
-        (error) => {
+        () => {
           msg = this.errorMsg;
           this.openSnackBar(msg);
         }
@@ -78,10 +76,10 @@ export class InfoComponent implements OnInit {
     if (this.highScoreBool) {
       this.resetDatasetValues();
       this.loginService.clearHighScore().subscribe(
-        (res: any) => {
+        () => {
           this.openSnackBar('Suksess! Poengliste nullstilles (dette kan ta noen minutter)');
         },
-        (error) => {
+        () => {
           msg = this.errorMsg;
           this.openSnackBar(msg);
         }
@@ -132,11 +130,11 @@ export class InfoComponent implements OnInit {
 
   signOut() {
     this.loginService.signOut().subscribe(
-      (res: any) => {
+      () => {
         this.router.navigate(['admin']);
         this.openSnackBar('Du er logget ut!');
       },
-      (error) => {
+      () => {
         this.router.navigate(['admin']);
         this.openSnackBar(this.errorMsg);
       }
@@ -152,7 +150,7 @@ export class InfoComponent implements OnInit {
         const count = res.BLOB_image_count;
         this._dialog.openDialog(name, time, count);
       },
-      (error) => {
+      () => {
         this.openSnackBar(this.errorMsg);
       }
     );

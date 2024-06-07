@@ -18,7 +18,7 @@ export class AppComponent implements OnInit {
   title = 'Teknisk Museum';
 
   userActivity = 0;
-  userInactive: Subject<any> = new Subject();
+  userInactive = new Subject<any>();
 
   isDialogOpen = false;
   inactivityTime = environment.inactivityTime;

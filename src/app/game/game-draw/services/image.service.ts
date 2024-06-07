@@ -7,8 +7,6 @@ import { Observable } from 'rxjs';
 export class ImageService {
   name = 'ole';
 
-  constructor() {}
-
   b64ToUint8Array(b64Image: string) {
     const img = atob(b64Image.split(',')[1]);
     const imgBuffer: number[] = [];

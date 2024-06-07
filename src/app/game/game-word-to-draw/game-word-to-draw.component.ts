@@ -52,7 +52,7 @@ export class GameWordToDrawComponent implements OnInit, OnDestroy {
         );
       } else {
         this.subscriptions.add(
-          this.drawingService.startGame().subscribe((res) => {
+          this.drawingService.startGame().subscribe(() => {
             this.loading = false;
             this.word = this.drawingService.label;
             this.drawingService.gameHasStarted = true;
@@ -89,7 +89,7 @@ export class GameWordToDrawComponent implements OnInit, OnDestroy {
     return interval(1000)
       .pipe(take(5))
       .pipe(
-        tap((tics) => {
+        tap(() => {
           this.timeLeft--;
           if (this.timeLeft <= 0) {
             this.multiplayerService.stateInfo = { ...this.multiplayerService.stateInfo, gameLevel: GAMELEVEL.drawing };

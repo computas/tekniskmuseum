@@ -23,14 +23,11 @@
           mat-card-image
           [src]="result.imageData"
           [className]="result.hasWon ? 'game-result-img card-won' : 'game-result-img card-loss'"
+          alt=""
         />
         <p id="result-subtitile">
-          <span *ngIf="result.hasWon" class="material-icons" id="won">
-            done
-          </span>
-          <span *ngIf="!result.hasWon" class="material-icons" id="loss">
-            clear
-          </span>
+          <span *ngIf="result.hasWon" class="material-icons" id="won"> done </span>
+          <span *ngIf="!result.hasWon" class="material-icons" id="loss"> clear </span>
           <span *ngIf="result.word" class="result-word"
             >{{ result.word | titlecase }}
             <span *ngIf="ismultiplayer" class="multiplayer-score"> {{ result.score }} p</span></span
@@ -42,9 +39,7 @@
   <div class="button-footer">
     <a href="/" class="link-float"
       ><button mat-raised-button class="btn btn-again">
-        <span class="material-icons icon">
-          refresh
-        </span>
+        <span class="material-icons icon"> refresh </span>
         Spill igjen
       </button></a
     >

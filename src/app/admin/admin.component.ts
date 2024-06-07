@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component } from '@angular/core';
 import { Router } from '@angular/router';
 import { LoginService } from './login.service';
 import { MatSnackBar } from '@angular/material/snack-bar';
@@ -8,10 +8,8 @@ import { MatSnackBar } from '@angular/material/snack-bar';
   templateUrl: './admin.component.html',
   styleUrls: ['./admin.component.scss'],
 })
-export class AdminComponent implements OnInit {
+export class AdminComponent {
   constructor(private router: Router, private loginService: LoginService, private _snackBar: MatSnackBar) {}
-
-  ngOnInit(): void {}
 
   login(username: string, password: string) {
     // Call on login service to authorize user
@@ -24,7 +22,7 @@ export class AdminComponent implements OnInit {
           this.openSnackBar('Feil brukernavn eller passord!');
         }
       },
-      (error) => {
+      () => {
         this.openSnackBar('En feil har oppstådd!');
       }
     );
