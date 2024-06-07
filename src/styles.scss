@@ -1,15 +1,7 @@
 /* You can add global styles to this file, and also import other style files */
-@import '~normalize.css/normalize.css';
+@import './css-reset.css';
 
-html,
 body {
-  height: 100%;
-  margin: 0;
-  padding: 0;
-  width: 100%;
-}
-body {
-  margin: 0;
   font-family: 'Barlow Condensed', sans-serif;
   -webkit-touch-callout: none; /* iOS Safari */
   -webkit-user-select: none; /* Safari */
@@ -18,6 +10,7 @@ body {
   -ms-user-select: none; /* Internet Explorer/Edge */
   user-select: none; /* Non-prefixed version, currently supported by Chrome, Edge, Opera and Firefox */
 }
+
 .mat-progress-spinner circle,
 .mat-spinner circle {
   stroke: #ffffff;
