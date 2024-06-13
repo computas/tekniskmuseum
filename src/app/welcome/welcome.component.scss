@@ -1,19 +1,16 @@
 @import '../../variables.scss';
 
-// .ng-star-inserted {
-//   height: 100px !important;
-// }
 .container-background {
   position: relative;
 }
 .container-background:before {
-  content: "";
+  content: '';
   top: 0;
   left: 0;
   width: 100%;
   height: 100%;
   position: absolute;
-  background-image: url("../../assets/background/io_rutemoenster-inverted.png");
+  background-image: url('../../assets/background/io_rutemoenster-inverted.png');
   background-size: cover;
   background-color: black;
 }
@@ -117,7 +114,13 @@ a {
   margin: 35px;
   height: 44px;
   width: 70px;
+  cursor: default;
+
+  img {
+    width: 100%;
+  }
 }
+
 .play-game-button {
   background: $button_background_color;
   color: $button_content_color;

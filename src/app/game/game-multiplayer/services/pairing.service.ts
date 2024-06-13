@@ -9,7 +9,8 @@ export class PairingService {
 
   constructor() {
     const id = localStorage.getItem('pairID');
-    id ? this.setPairID(id) : this.setPairID(environment.PAIR_ID ?? '');
+
+    this.setPairID(id ?? environment.PAIR_ID ?? '');
   }
 
   getPairID() {
