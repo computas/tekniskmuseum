@@ -1,14 +1,18 @@
 <div class="intermediate-container-background">
   <div id="intermediate-container">
-    <div><img class="logo" src="../../../assets/logo/IO-logo-inverted_transparent-bg.png" alt="logo" /></div>
+    <div><img class="logo" src="assets/logo/IO-logo-inverted_transparent-bg.png" alt="logo" /></div>
     <div>
       <ng-container *ngIf="result">
         <div class="intermediate-content">
           <div class="avatar-container" *ngIf="result.hasWon">
-            <div class="avatar"><img class="avatar-image" src="../../../assets/illustrations/IO_Illustrasjoner-1_1360x939.png" alt="avatar" /></div>
+            <div class="avatar">
+              <img class="avatar-image" src="assets/illustrations/IO_Illustrasjoner-1_1360x939.png" alt="avatar" />
+            </div>
           </div>
           <div class="avatar-container" *ngIf="!result.hasWon">
-            <div class="avatar"><img class="avatar-image" src="../../../assets/illustrations/IO_Illustrasjoner-1_1360x939.png" alt="avatar" /></div>
+            <div class="avatar">
+              <img class="avatar-image" src="assets/illustrations/IO_Illustrasjoner-1_1360x939.png" alt="avatar" />
+            </div>
           </div>
           <div class="intermediate-container">
             <div class="word-text" *ngIf="result.hasWon">
@@ -25,7 +29,12 @@
             </div>
           </div>
           <div class="avatar-container-spacer"></div>
-          <button *ngIf="gameOver && !waitingForPlayer" mat-raised-button class="next-word-button" (click)="getSummary()">
+          <button
+            *ngIf="gameOver && !waitingForPlayer"
+            mat-raised-button
+            class="next-word-button"
+            (click)="getSummary()"
+          >
             Oppsummering
           </button>
           <button
@@ -36,9 +45,7 @@
           >
             Neste ord
           </button>
-          <h1 class="waiting" *ngIf="isMultiplayer && waitingForPlayer">
-            Venter på spiller
-          </h1>
+          <h1 class="waiting" *ngIf="isMultiplayer && waitingForPlayer">Venter på spiller</h1>
         </div>
       </ng-container>
       <ng-template #loading>

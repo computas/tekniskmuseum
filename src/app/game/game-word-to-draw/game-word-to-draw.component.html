@@ -1,6 +1,6 @@
 <div class="word-container-background">
   <div class="word-container">
-    <div><img class="logo" src="../../../assets/logo/IO-logo-inverted_transparent-bg.png" alt="logo" /></div>
+    <div><img class="logo" src="assets/logo/IO-logo-inverted_transparent-bg.png" alt="logo" /></div>
     <h1 class="playernr" *ngIf="isMultiPlayer">Spiller {{ playernr }}</h1>
     <div class="word-text">
       <div class="words-remaining">{{ guessUsed }}/3</div>
@@ -16,7 +16,9 @@
       </div>
     </div>
     <div class="word-footer">
-      <div class="avatar"><img class="avatar-image" src="../../../assets/illustrations/IO_Illustrasjoner-1_1360x939.png" alt="avatar" /></div>
+      <div class="avatar">
+        <img class="avatar-image" src="assets/illustrations/IO_Illustrasjoner-1_1360x939.png" alt="avatar" />
+      </div>
       <div *ngIf="!loading">
         <button *ngIf="isSinglePlayer" mat-raised-button class="draw-word-button" (click)="drawWord.emit(true)">
           Tegn

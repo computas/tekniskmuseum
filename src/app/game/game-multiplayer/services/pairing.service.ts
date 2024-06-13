@@ -5,7 +5,7 @@ import { environment } from '../../../../environments/environment';
   providedIn: 'root',
 })
 export class PairingService {
-  private pairID: string;
+  private pairID = '';
 
   constructor() {
     const id = localStorage.getItem('pairID');

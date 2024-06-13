@@ -1,15 +1,13 @@
 <div class="game-info-container-background">
   <div class="game-info-container">
-    <div><img class="logo" src="../../../assets/logo/IO-logo-inverted_transparent-bg.png" alt="logo" /></div>
+    <div><img class="logo" src="assets/logo/IO-logo-inverted_transparent-bg.png" alt="logo" /></div>
     <div class="game-info-text-content">
-      <h1 class="player-mode" *ngIf="isSinglePlayer">
-        <mat-icon>person</mat-icon>1 spiller
-      </h1>
-      <h1 class="player-mode" *ngIf="isMultiPlayer">
-        <mat-icon>people_alt</mat-icon>2 spillere
-      </h1>
+      <h1 class="player-mode" *ngIf="isSinglePlayer"><mat-icon>person</mat-icon>1 spiller</h1>
+      <h1 class="player-mode" *ngIf="isMultiPlayer"><mat-icon>people_alt</mat-icon>2 spillere</h1>
       <div class="game-info-text-content-list">
-        <div class="avatar"><img class="avatar-image" src="../../../assets/illustrations/IO_Illustrasjoner-1_1360x939.png" alt="avatar" /></div>
+        <div class="avatar">
+          <img class="avatar-image" src="assets/illustrations/IO_Illustrasjoner-1_1360x939.png" alt="avatar" />
+        </div>
         <div class="game-info-text-content-list-text">
           <h1 class="game-info-text-header" *ngIf="isSinglePlayer">Slik spiller du:</h1>
           <h1 class="game-info-text-header" *ngIf="isMultiPlayer">Slik spiller dere:</h1>
@@ -28,7 +26,8 @@
           </div>
         </button>
         <button mat-raised-button class="button" id="get-word-button" (click)="startDrawing()">
-          <div class="button-text">Start
+          <div class="button-text">
+            Start
             <mat-icon class="button-icon play_arrow" aria-label="play_arrow">arrow_forward_ios</mat-icon>
           </div>
         </button>
