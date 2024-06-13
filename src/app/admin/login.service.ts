@@ -10,7 +10,7 @@ export class LoginService {
   private _loggedIn = false;
   constructor(private http: HttpClient) {}
 
-  login(username, password) {
+  login(username: string, password: string) {
     const formData = new FormData();
     formData.append('password', password);
     formData.append('username', username);
@@ -46,7 +46,7 @@ export class LoginService {
     );
   }
 
-  attemptLogin(formData) {
+  attemptLogin(formData: FormData) {
     return this.http.post(`${endpoints.TEKNISKBACKEND}/${endpoints.AUTH}`, formData, {
       withCredentials: true,
     });

@@ -1,4 +1,5 @@
-import { environment } from 'src/environments/environment';
+import { environment } from '@/environments/environment';
+
 export const endpoints = {
   TEKNISKBACKEND: environment.TEKNISKBACKEND_ENDPOINT,
   ENDGAME: 'endGame',

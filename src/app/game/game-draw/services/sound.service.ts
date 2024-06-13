@@ -10,8 +10,6 @@ export class SoundService {
   });
   playTick = false;
 
-  constructor() {}
-
   playTickSound() {
     if (!this.playTick) {
       this.sound.play();

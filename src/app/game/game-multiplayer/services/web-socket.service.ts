@@ -1,8 +1,8 @@
 import { Injectable } from '@angular/core';
 import { Observable, BehaviorSubject } from 'rxjs';
 import { io, Socket } from 'socket.io-client';
-import { environment } from '../../../../environments/environment';
-import { SocketEndpoints } from '../../../shared/models/websocketEndpoints';
+import { environment } from '@/environments/environment';
+import { SocketEndpoints } from '@/app/shared/models/websocketEndpoints';
 
 export interface PlayerDisconnectedData {
   player_disconnected: boolean | undefined;
@@ -12,14 +12,12 @@ export interface PlayerDisconnectedData {
   providedIn: 'root',
 })
 export class WebSocketService {
-  socket: Socket;
+  socket: Socket | undefined;
 
-  playerDisconnectedData: PlayerDisconnectedData;
+  playerDisconnectedData: PlayerDisconnectedData | undefined;
 
   private readonly _playerDisconnected = new BehaviorSubject<boolean>(false);
   readonly playerDisconnected$ = this._playerDisconnected.asObservable();
-
-  constructor() {}
 
   startSockets() {
     this.socket = io(environment.WS_ENDPOINT);
@@ -56,16 +54,16 @@ export class WebSocketService {
     }
   }
 
-  listen(eventName: string) {
-    return new Observable((subscriber) => {
-      this.socket.on(eventName, (data) => {
+  listen<T = string>(eventName: string) {
+    return new Observable<T>((subscriber) => {
+      this.socket?.on(eventName, (data) => {
         subscriber.next(data);
       });
     });
   }
 
   emit(eventName: string, ...rest: any) {
-    this.socket.emit(eventName, ...rest);
+    this.socket?.emit(eventName, ...rest);
   }
 
   get playerDisconnected(): boolean {

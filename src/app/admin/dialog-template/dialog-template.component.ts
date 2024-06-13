@@ -1,4 +1,4 @@
-import { Component, OnInit, Inject } from '@angular/core';
+import { Component, Inject } from '@angular/core';
 import { MAT_DIALOG_DATA } from '@angular/material/dialog';
 
 export interface DialogData {
@@ -12,8 +12,6 @@ export interface DialogData {
   templateUrl: './dialog-template.component.html',
   styleUrls: ['./dialog-template.component.scss'],
 })
-export class DialogTemplateComponent implements OnInit {
+export class DialogTemplateComponent {
   constructor(@Inject(MAT_DIALOG_DATA) public data: DialogData) {}
-
-  ngOnInit(): void {}
 }

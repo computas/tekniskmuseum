@@ -1,5 +1,5 @@
 /* You can add global styles to this file, and also import other style files */
-@import '~normalize.css/normalize.css';
+@import './css-reset.css';
 @import './variables.scss';
 
 @font-face {
@@ -22,15 +22,7 @@
   src: url("./assets/fonts/Aeonik/Aeonik-Black.otf") format("opentype");
 }
 
-html,
 body {
-  height: 100%;
-  margin: 0;
-  padding: 0;
-  width: 100%;
-}
-body {
-  margin: 0;
   font-family: 'Barlow Condensed', sans-serif;
   -webkit-touch-callout: none; /* iOS Safari */
   -webkit-user-select: none; /* Safari */
@@ -44,7 +36,7 @@ div {
 }
 button, .button-text {
   font-family: AeonikRegular;
-} 
+}
 .mat-typography h1{
   font-family: AeonikMedium;
 }

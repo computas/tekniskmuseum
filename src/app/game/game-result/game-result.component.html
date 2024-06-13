@@ -18,7 +18,9 @@
       <div id="result-card-container">
         <div id="result-card" *ngFor="let result of results">
           <img mat-card-image [src]="result.imageData"
-            [className]="result.hasWon ? 'game-result-img card-won' : 'game-result-img card-loss'" />
+            [className]="result.hasWon ? 'game-result-img card-won' : 'game-result-img card-loss'"
+            alt=""
+          />
           <p id="result-subtitile">
             <span *ngIf="result.hasWon" class="material-icons" id="won">
               done

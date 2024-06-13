@@ -88,7 +88,7 @@ export class MultiplayerService {
     );
   }
 
-  classify(data, image) {
+  classify(data: { game_id?: string; time_left: number }, image: Blob) {
     this.webSocketService.emit(SocketEndpoints.CLASSIFY, data, image);
   }
 
@@ -104,7 +104,7 @@ export class MultiplayerService {
     return this.webSocketService.listen(SocketEndpoints.END_GAME);
   }
 
-  endGame(score) {
+  endGame() {
     const result = JSON.stringify({
       game_id: this.stateInfo.game_id,
       score: this.stateInfo.score,
@@ -119,10 +119,9 @@ export class MultiplayerService {
     this.webSocketService.disconnect();
   }
 
-  changestate(gameLevel: GAMELEVEL, ...rest) {
+  changestate(gameLevel: GAMELEVEL) {
     this.stateInfo = {
       ...this.stateInfo,
-      ...rest,
       gameLevel,
     };
   }

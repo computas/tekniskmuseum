@@ -9,7 +9,11 @@ import { Router } from '@angular/router';
 })
 export class WelcomeComponent implements OnInit {
   private headerClicks = 0;
-  constructor(private multiplayerService: MultiplayerService, private drawingService: DrawingService, private router: Router) {}
+  constructor(
+    private multiplayerService: MultiplayerService,
+    private drawingService: DrawingService,
+    private router: Router
+  ) {}
 
   ngOnInit() {
     this.multiplayerService.clearState();

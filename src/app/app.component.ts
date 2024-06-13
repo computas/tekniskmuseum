@@ -17,8 +17,8 @@ import { environment } from '../environments/environment';
 export class AppComponent implements OnInit {
   title = 'Teknisk Museum';
 
-  userActivity;
-  userInactive: Subject<any> = new Subject();
+  userActivity = 0;
+  userInactive = new Subject<any>();
 
   isDialogOpen = false;
   inactivityTime = environment.inactivityTime;
@@ -47,7 +47,7 @@ export class AppComponent implements OnInit {
   }
 
   setDialogTimeout() {
-    this.userActivity = setTimeout(() => this.userInactive.next(undefined), this.inactivityTime);
+    this.userActivity = window.setTimeout(() => this.userInactive.next(undefined), this.inactivityTime);
   }
 
   prepareRoute(outlet: RouterOutlet) {
