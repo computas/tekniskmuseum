@@ -1,8 +1,28 @@
+@import '../../../variables.scss';
+
+.game-info-container-background {
+  position: relative;
+}
+.game-info-container-background:before {
+  content: "";
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  position: absolute;
+  background-image: url("../../../assets/background/io_rutemoenster-inverted.png");
+  background-size: cover;
+  background-color: black;
+}
+.game-info-container {
+  position: relative;
+}
 .material-icons {
   color: #195272;
 }
 .game-info-text-header {
-  color: #fa852f;
+  font-family: AeonikBlack;
+  color: $text_primary_color;
   text-align: center;
   font-size: 34px;
   font-weight: 500;
@@ -40,7 +60,8 @@
 .game-info-footer {
   display: flex;
   width: 80%;
-  margin-bottom: 75px;
+  max-width: 1000px;
+  margin-bottom: 175px;
   justify-content: center;
   flex-wrap: wrap;
 }
@@ -52,7 +73,7 @@
   }
 }
 .game-info-text-list {
-  color: #195272;
+  color: $text_primary_color;
 }
 .game-info-text-list > li {
   font-size: 24px;
@@ -73,6 +94,17 @@
     margin-right: 10px;
   }
 }
+.avatar-image {
+  height: 250px;
+}
+.logo {
+  position: absolute;
+  top: 0;
+  left: 0;
+  margin: 35px;
+  height: 44px;
+  width: 70px;
+}
 .button {
   box-shadow: 0 8px 16px 0 rgba(0, 0, 0, 0.1), 0 6px 20px 0 rgba(0, 0, 0, 0.15);
   font-size: 20px;
@@ -89,8 +121,8 @@
   }
 }
 #get-word-button {
-  background: #fa852f;
-  color: #ffffff;
+  background: $button_background_color;
+  color: $button_content_color;
   float: right;
 }
 @media (min-width: 600px) {
@@ -99,8 +131,8 @@
   }
 }
 #back-button {
-  background: #f4f4f4;
-  color: #14213d;
+  background: $button_background_color;
+  color: $button_content_color;
 }
 .button-text {
   display: flex;
@@ -109,7 +141,7 @@
   align-items: center;
 }
 .button-icon {
-  color: #14213d;
+  color: $button_content_color;
   margin-right: 16px;
   font-size: 36px !important;
   height: 36px;
@@ -121,13 +153,16 @@
   display: flex;
   align-items: center;
   font-weight: 500;
-  color: #05a3c7;
+  color: $text_primary_color;
 }
 .player-mode > .material-icons {
-  color: #05a3c7;
   margin-right: 5px;
+  background: linear-gradient(to top, #2514d1 0%, #f14a64 55%, #de7d6e 90%);
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
 }
 .play_arrow {
-  color: white;
-  margin-right: 12px;
+  color: $button_content_color;
+  margin-right: 0px;
+  margin-left: 45px;
 }

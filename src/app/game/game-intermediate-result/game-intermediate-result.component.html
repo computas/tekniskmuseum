@@ -1,46 +1,56 @@
-<div id="intermediate-container">
-  <div>
-    <ng-container *ngIf="result">
-      <div class="intermediate-content">
-        <div class="avatar-container" *ngIf="result.hasWon">
-          <div class="avatar"><img src="../../../assets/avatar-happy.svg" alt="avatar" /></div>
-        </div>
-        <div class="avatar-container" *ngIf="!result.hasWon">
-          <div class="avatar"><img src="../../../assets/avatar-sad.svg" alt="avatar" /></div>
-        </div>
-        <div class="intermediate-container">
-          <div class="word-text" *ngIf="result.hasWon">
-            <h1>
-              {{ wonSentence }}<b *ngIf="result.word">{{ this.result.word | uppercase }}</b
-              >!
-            </h1>
+<div class="intermediate-container-background">
+  <div id="intermediate-container">
+    <div><img class="logo" src="assets/logo/IO-logo-inverted_transparent-bg.png" alt="logo" /></div>
+    <div>
+      <ng-container *ngIf="result">
+        <div class="intermediate-content">
+          <div class="avatar-container" *ngIf="result.hasWon">
+            <div class="avatar">
+              <img class="avatar-image" src="assets/illustrations/IO_Illustrasjoner-1_1360x939.png" alt="avatar" />
+            </div>
           </div>
-          <div class="word-text" *ngIf="!result.hasWon">
-            <h1>{{ lostSentence }}</h1>
+          <div class="avatar-container" *ngIf="!result.hasWon">
+            <div class="avatar">
+              <img class="avatar-image" src="assets/illustrations/IO_Illustrasjoner-1_1360x939.png" alt="avatar" />
+            </div>
           </div>
-          <div class="result-img">
-            <img [src]="result.imageData" [className]="result.hasWon ? 'won' : 'loss'" />
+          <div class="intermediate-container">
+            <div class="word-text" *ngIf="result.hasWon">
+              <h1>
+                {{ wonSentence }}<b class="guessed-word" *ngIf="result.word">{{ this.result.word | uppercase }}</b
+                >!
+              </h1>
+            </div>
+            <div class="word-text" *ngIf="!result.hasWon">
+              <h1>{{ lostSentence }}</h1>
+            </div>
+            <div class="result-img">
+              <img [src]="result.imageData" alt="" [className]="result.hasWon ? 'won' : 'loss'" />
+            </div>
           </div>
+          <div class="avatar-container-spacer"></div>
+          <button
+            *ngIf="gameOver && !waitingForPlayer"
+            mat-raised-button
+            class="next-word-button"
+            (click)="getSummary()"
+          >
+            Oppsummering
+          </button>
+          <button
+            *ngIf="!gameOver && !waitingForPlayer"
+            mat-raised-button
+            class="next-word-button"
+            (click)="newDrawing()"
+          >
+            Neste ord
+          </button>
+          <h1 class="waiting" *ngIf="isMultiplayer && waitingForPlayer">Venter på spiller</h1>
         </div>
-        <div class="avatar-container-spacer"></div>
-        <button *ngIf="gameOver && !waitingForPlayer" mat-raised-button class="next-word-button" (click)="getSummary()">
-          Oppsummering
-        </button>
-        <button
-          *ngIf="!gameOver && !waitingForPlayer"
-          mat-raised-button
-          class="next-word-button"
-          (click)="newDrawing()"
-        >
-          Neste ord
-        </button>
-        <h1 class="waiting" *ngIf="isMultiplayer && waitingForPlayer">
-          Venter på spiller
-        </h1>
-      </div>
-    </ng-container>
-    <ng-template #loading>
-      <mat-spinner [diameter]="50" class="white-spinner"></mat-spinner>
-    </ng-template>
+      </ng-container>
+      <ng-template #loading>
+        <mat-spinner [diameter]="50" class="white-spinner"></mat-spinner>
+      </ng-template>
+    </div>
   </div>
 </div>

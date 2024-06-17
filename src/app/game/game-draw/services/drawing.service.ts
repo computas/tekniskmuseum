@@ -38,7 +38,7 @@ export class DrawingService {
 
   classify(answerInfo: FormData): Observable<any> {
     return this.http.post<FormData>(`${this.baseUrl}/${endpoints.CLASSIFY}`, answerInfo).pipe(
-      tap((res) => {
+      tap((res: any) => {
         this.pred = res;
         if (this.guessUsed <= res.serverRound && this.roundIsDone(res) && !this.hasAddedSingleplayerResult) {
           res.roundIsDone = true;
@@ -72,7 +72,7 @@ export class DrawingService {
     return result;
   }
 
-  createResult(res): Result {
+  createResult(res: any): Result {
     const result: Result = {
       hasWon: res.hasWon,
       imageData: '',
@@ -84,7 +84,7 @@ export class DrawingService {
     return result;
   }
 
-  roundIsDone(res) {
+  roundIsDone(res: any) {
     return res.hasWon || res.gameState === 'Done';
   }
 

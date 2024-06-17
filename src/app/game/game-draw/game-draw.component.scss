@@ -1,3 +1,5 @@
+@import '../../../variables.scss';
+
 #drawing-canvas {
   position: absolute;
   touch-action: none;
@@ -24,7 +26,7 @@
   justify-content: space-between;
 }
 .drawing-header > h1 {
-  color: #fa852f;
+  color: $text_secondary_color;
   margin: 0;
 }
 .drawing-header-text {
@@ -64,8 +66,8 @@
 }
 .guess-label {
   align-self: flex-end;
-  color: #195272;
-  background-color: #ecf8ff;
+  color: black;
+  background-color: $button_background_secondary_color;
   font-size: 36px;
   line-height: 43px;
   height: 50%;
@@ -77,7 +79,7 @@
   margin-bottom: 24px;
 }
 .guess-label::before {
-  background-color: #ecf8ff;
+  background-color: $button_background_secondary_color;
 }
 .clip-container {
   width: 100px;
@@ -95,6 +97,7 @@
 }
 .guessing-avatar {
   display: flex;
+  height: 150px;
 }
 @media only screen and (max-width: 600px) {
   .guess-label {
@@ -104,4 +107,7 @@
   .guessing-avatar {
     width: 120px;
   }
+}
+.delete-icon {
+  color: grey;
 }

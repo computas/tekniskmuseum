@@ -10,10 +10,10 @@ import { routes } from '../../shared/models/routes';
   styleUrls: ['./game-intermediate-result.component.scss'],
 })
 export class GameIntermediateResultComponent implements OnInit, OnDestroy {
-  result: Result;
+  result: Result | undefined;
   wonSentence = 'Hurra, jeg klarte å gjette at du tegnet ';
   lostSentence = 'Beklager, jeg klarte ikke å gjette hva du tegnet';
-  gameOver: boolean;
+  gameOver = false;
   @Output() nextGuess = new EventEmitter();
   @Output() finalResult = new EventEmitter();
   waitingForPlayer = true;
@@ -54,7 +54,7 @@ export class GameIntermediateResultComponent implements OnInit, OnDestroy {
           return accumulator + currentValue.score;
         }, 0);
         this.multiplayerService.stateInfo = { ...this.multiplayerService.stateInfo, score: totalScore };
-        this.multiplayerService.endGame(totalScore);
+        this.multiplayerService.endGame();
       }
     }
   }

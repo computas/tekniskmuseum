@@ -1,4 +1,4 @@
-import { Component, ElementRef, OnInit, ViewChild, Output, EventEmitter, OnDestroy } from '@angular/core';
+import { Component, ElementRef, OnInit, Output, EventEmitter, OnDestroy, viewChild } from '@angular/core';
 import { BehaviorSubject, interval, Observable, Subscription } from 'rxjs';
 import { ImageService } from './services/image.service';
 import { take } from 'rxjs/operators';
@@ -13,22 +13,19 @@ import { SoundService } from './services/sound.service';
   styleUrls: ['./game-draw.component.scss'],
 })
 export class GameDrawComponent implements OnInit, OnDestroy {
-  @ViewChild('canvas', { static: true })
-  canvas: ElementRef<HTMLCanvasElement>;
-  @ViewChild('countDown', { static: true })
-  countDown: ElementRef<HTMLSpanElement>;
-
-  private ctx: CanvasRenderingContext2D;
+  canvas = viewChild.required<ElementRef<HTMLCanvasElement>>('canvas');
+  countDown = viewChild.required<ElementRef<HTMLSpanElement>>('countDown');
+  private ctx: CanvasRenderingContext2D | undefined;
 
   @Output() isDoneDrawing = new EventEmitter();
 
   x = 0;
   y = 0;
 
-  minX;
-  minY;
-  maxX;
-  maxY;
+  minX = 0;
+  minY = 0;
+  maxX = 0;
+  maxY = 0;
 
   isDrawing = false;
   hasLeftCanvas = false;
@@ -45,11 +42,11 @@ export class GameDrawComponent implements OnInit, OnDestroy {
   private readonly _timeOut = new BehaviorSubject<boolean>(false);
   readonly _timeOut$ = this._timeOut.asObservable();
 
-  guessWord: string;
-  AI_GUESS: string;
+  guessWord = '';
+  AI_GUESS = '';
 
   prediction: any;
-  result: Result;
+  result: Result | undefined;
   hasAddedResult = false;
 
   subscriptions = new Subscription();
@@ -64,13 +61,14 @@ export class GameDrawComponent implements OnInit, OnDestroy {
 
   ngOnInit(): void {
     this.multiplayerService.roundIsOver = false;
-    const ctx = this.canvas.nativeElement.getContext('2d');
+    const ctx = this.canvas().nativeElement.getContext('2d');
     if (!ctx) {
       throw new Error('getContext failed');
     }
     this.ctx = ctx;
-    this.canvas.nativeElement.width = this.canvas.nativeElement.parentElement?.offsetWidth || document.body.clientWidth;
-    this.canvas.nativeElement.height = document.body.clientHeight - 100;
+    this.canvas().nativeElement.width =
+      this.canvas().nativeElement.parentElement?.offsetWidth || document.body.clientWidth;
+    this.canvas().nativeElement.height = document.body.clientHeight - 100;
     this.resetMinMaxMouseValues();
     this.drawingService.guessDone = false;
     if (this.multiplayerService.isMultiplayer) {
@@ -101,7 +99,7 @@ export class GameDrawComponent implements OnInit, OnDestroy {
   }
 
   roundOverListener() {
-    return this.multiplayerService.roundOverListener().subscribe((roundOver: any) => {
+    return this.multiplayerService.roundOverListener().subscribe(() => {
       if (!this.hasAddedResult) {
         this.updateResult(this.prediction.hasWon);
         this.hasAddedResult = true;
@@ -109,7 +107,7 @@ export class GameDrawComponent implements OnInit, OnDestroy {
     });
   }
 
-  updateResult(won) {
+  updateResult(won: boolean) {
     const result: Result = this.createResult(won);
     this.drawingService.guessUsed++;
     this.addResultAndResize(result).subscribe({
@@ -120,7 +118,7 @@ export class GameDrawComponent implements OnInit, OnDestroy {
     });
   }
 
-  createResult(won) {
+  createResult(won: boolean) {
     let score = 0;
     if (won) {
       score = this.getScore();
@@ -140,9 +138,15 @@ export class GameDrawComponent implements OnInit, OnDestroy {
     this.drawingService.label = res.word ? res.word : '';
     this.result = this.drawingService.createResult(res);
     this.drawingService.addResult(this.result);
-    const croppedCoordinates: any = this.imageService.crop(this.minX, this.minY, this.maxX, this.maxY, this.LINE_WIDTH);
+    const croppedCoordinates: number[] = this.imageService.crop(
+      this.minX,
+      this.minY,
+      this.maxX,
+      this.maxY,
+      this.LINE_WIDTH
+    );
     return this.imageService.resize(
-      this.canvas.nativeElement.toDataURL('image/png'),
+      this.canvas().nativeElement.toDataURL('image/png'),
       croppedCoordinates,
       this.resultImageSize
     );
@@ -169,7 +173,7 @@ export class GameDrawComponent implements OnInit, OnDestroy {
     this.drawingService.classificationDone = false;
     this.subscriptions.add(
       this.createDrawingTimer().subscribe({
-        next: (val) => {
+        next: () => {
           if (this.multiplayerService.isMultiplayer) {
             this.classify(true);
           } else {
@@ -226,7 +230,7 @@ export class GameDrawComponent implements OnInit, OnDestroy {
               }
             }
             if (this.timeLeft <= 5) {
-              this.countDown.nativeElement.style.color = color;
+              this.countDown().nativeElement.style.color = color;
               color = color === 'white' ? 'red' : 'white';
               this.soundService.playTickSound();
               this.soundService.playTick = true;
@@ -243,7 +247,7 @@ export class GameDrawComponent implements OnInit, OnDestroy {
     });
   }
 
-  sortOnCertainty(res) {
+  sortOnCertainty(res: any) {
     const arr: any = [];
     Object.entries(res.certainty).map((keyValue) => {
       const [label, certainty] = keyValue;
@@ -258,14 +262,14 @@ export class GameDrawComponent implements OnInit, OnDestroy {
     return arr;
   }
 
-  updateAiGuess(sortedCertaintyArr) {
+  updateAiGuess(sortedCertaintyArr: any[]) {
     if (sortedCertaintyArr && sortedCertaintyArr.length > 1) {
       const guess = sortedCertaintyArr[0].label;
       this.AI_GUESS = guess === this.guessWord ? sortedCertaintyArr[1].label : guess;
     }
   }
 
-  handleSinglePlayerClassification(dataUrl, croppedCoordinates) {
+  handleSinglePlayerClassification(dataUrl: string, croppedCoordinates: number[]) {
     const formData: FormData = this.createFormData(dataUrl);
 
     this.drawingService.classify(formData).subscribe((res) => {
@@ -276,7 +280,7 @@ export class GameDrawComponent implements OnInit, OnDestroy {
         const score = this.score > 0 ? this.score : 0;
         this.drawingService.lastResult.score = Math.round(score);
         this.imageService
-          .resize(this.canvas.nativeElement.toDataURL('image/png'), croppedCoordinates, this.resultImageSize)
+          .resize(this.canvas().nativeElement.toDataURL('image/png'), croppedCoordinates, this.resultImageSize)
           .subscribe({
             next: (dataUrlHighRes) => {
               this.drawingService.lastResult.imageData = dataUrlHighRes;
@@ -284,7 +288,7 @@ export class GameDrawComponent implements OnInit, OnDestroy {
           });
       } else {
         this.imageService
-          .resize(this.canvas.nativeElement.toDataURL('image/png'), croppedCoordinates, this.resultImageSize)
+          .resize(this.canvas().nativeElement.toDataURL('image/png'), croppedCoordinates, this.resultImageSize)
           .subscribe({
             next: (dataUrlHighRes) => {
               this.drawingService.pred.imageData = dataUrlHighRes;
@@ -295,12 +299,18 @@ export class GameDrawComponent implements OnInit, OnDestroy {
   }
 
   classify(isMultiplayer = false) {
-    const b64Image = this.canvas.nativeElement.toDataURL('image/png');
-    const croppedCoordinates: any = this.imageService.crop(this.minX, this.minY, this.maxX, this.maxY, this.LINE_WIDTH);
+    const b64Image = this.canvas().nativeElement.toDataURL('image/png');
+    const croppedCoordinates: number[] = this.imageService.crop(
+      this.minX,
+      this.minY,
+      this.maxX,
+      this.maxY,
+      this.LINE_WIDTH
+    );
     this.imageService.resize(b64Image, croppedCoordinates).subscribe({
       next: (dataUrl) => {
         if (isMultiplayer) {
-          const body = {
+          const body: { game_id?: string; time_left: number } = {
             game_id: this.multiplayerService.stateInfo.game_id,
             time_left: this.timeLeft,
           };
@@ -313,7 +323,7 @@ export class GameDrawComponent implements OnInit, OnDestroy {
     });
   }
 
-  createFormData(dataUrl): FormData {
+  createFormData(dataUrl: string): FormData {
     const formData: FormData = this.imageService.createFormData(dataUrl);
     formData.append('player_id', this.drawingService.playerid);
     formData.append('time', this.timeLeft.toString());
@@ -321,10 +331,10 @@ export class GameDrawComponent implements OnInit, OnDestroy {
     return formData;
   }
 
-  getClientOffset(event) {
+  getClientOffset(event: any) {
     const { pageX, pageY } = event.touches ? event.touches[0] : event;
-    const x = pageX - this.canvas.nativeElement.offsetLeft;
-    const y = pageY - this.canvas.nativeElement.offsetTop;
+    const x = pageX - this.canvas().nativeElement.offsetLeft;
+    const y = pageY - this.canvas().nativeElement.offsetTop;
 
     return { x, y };
   }
@@ -358,14 +368,16 @@ export class GameDrawComponent implements OnInit, OnDestroy {
     this.hasLeftCanvas = false;
   }
 
-  drawLine(currentX, currentY) {
-    this.ctx.strokeStyle = 'black';
-    this.ctx.lineWidth = this.LINE_WIDTH;
-    this.ctx.lineCap = this.ctx.lineJoin = 'round';
-    this.ctx.beginPath();
-    this.ctx.moveTo(this.x, this.y);
-    this.ctx.lineTo(currentX, currentY);
-    this.ctx.stroke();
+  drawLine(currentX: number, currentY: number) {
+    if (this.ctx) {
+      this.ctx.strokeStyle = 'black';
+      this.ctx.lineWidth = this.LINE_WIDTH;
+      this.ctx.lineCap = this.ctx.lineJoin = 'round';
+      this.ctx.beginPath();
+      this.ctx.moveTo(this.x, this.y);
+      this.ctx.lineTo(currentX, currentY);
+      this.ctx.stroke();
+    }
 
     this.isBlankImage = false;
 
@@ -388,30 +400,30 @@ export class GameDrawComponent implements OnInit, OnDestroy {
     if (this.minY < 0) {
       this.minY = 0;
     }
-    if (this.maxX > this.canvas.nativeElement.width) {
-      this.maxX = this.canvas.nativeElement.width;
+    if (this.maxX > this.canvas().nativeElement.width) {
+      this.maxX = this.canvas().nativeElement.width;
     }
-    if (this.maxY > this.canvas.nativeElement.height) {
-      this.maxY = this.canvas.nativeElement.height;
+    if (this.maxY > this.canvas().nativeElement.height) {
+      this.maxY = this.canvas().nativeElement.height;
     }
   }
 
   clear() {
-    const canvas = this.canvas.nativeElement;
-    this.ctx.clearRect(0, 0, canvas.width, canvas.height);
+    const canvas = this.canvas().nativeElement;
+    this.ctx?.clearRect(0, 0, canvas.width, canvas.height);
     this.isBlankImage = true;
     this.resetMinMaxMouseValues();
   }
 
   resetMinMaxMouseValues() {
-    this.minX = this.canvas.nativeElement.width;
-    this.minY = this.canvas.nativeElement.height;
+    this.minX = this.canvas().nativeElement.width;
+    this.minY = this.canvas().nativeElement.height;
     this.maxX = 0;
     this.maxY = 0;
   }
 
-  stop(e) {
-    if (!this.timeOut && this.isDrawing) {
+  stop(e: MouseEvent | TouchEvent) {
+    if (!this.timeOut && this.isDrawing && e instanceof MouseEvent) {
       this.drawLine(e.offsetX, e.offsetY);
       this.isDrawing = false;
     }

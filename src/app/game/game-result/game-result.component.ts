@@ -11,10 +11,10 @@ import { MultiplayerService } from '../game-multiplayer/services/multiplayer.ser
 })
 export class GameResultComponent implements OnInit {
   results: Result[] = [];
-  totalScore: number;
-  loading: boolean;
+  totalScore = 0;
+  loading = false;
   value = '';
-  hasWon: boolean;
+  hasWon = false;
   ismultiplayer = false;
   score = 0;
   constructor(

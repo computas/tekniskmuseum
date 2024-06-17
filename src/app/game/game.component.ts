@@ -68,12 +68,12 @@ export class GameComponent implements OnInit, OnDestroy {
     this.newGame = true;
   }
 
-  nextGuess(event) {
+  nextGuess() {
     this.clearGameState();
     this.showWordToDraw = true;
   }
 
-  finalResult(event) {
+  finalResult() {
     this.clearGameState();
     this.showFinalResult = this.drawingService.gameOver;
   }

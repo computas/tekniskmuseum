@@ -1,30 +1,33 @@
-<div class="container">
-  <div class="play-container">
-    <div class="text-container">
-      <div class="avatar">
-        <img class="avatar-image" src="../../../assets/avatar-welcome.svg" alt="avatar" (click)="goToAdmin()" />
-      </div>
-      <div class="info-text">
-        <span>
-          Hei, jeg heter<span style="color: #fa852f; font-weight: 700;"> Kunstig Jens</span>. <br />
-          Kan du hjelpe meg å lære?
-        </span>
+<div class="container-background">
+  <div class="container">
+    <button class="logo" (click)="goToAdmin()">
+      <img src="assets/logo/IO-logo-inverted_transparent-bg.png" alt="logo" aria-label="Gå til admin side" />
+    </button>
+    <div class="play-container">
+      <div class="text-container">
+        <div class="avatar"><img class="avatar-image" src="assets/logo/io_logoanimasjon.gif" alt="avatar" /></div>
+        <div class="info-text">
+          <span>
+            Hei, jeg heter<span class="avatar-name"> IO</span>. <br />
+            Kan du hjelpe meg å lære?
+          </span>
 
-        <div class="button-container">
-          <a routerLink="/playgame/singleplayer" routerLinkActive="active">
-            <button mat-raised-button class="play-game-button">
-              <div class="button-text">
-                <mat-icon class="button-icon" aria-label="player one icon">person</mat-icon>1 spiller
-              </div>
-            </button>
-          </a>
-          <!-- <a routerLink="/playgame/multiplayer" routerLinkActive="active">
-            <button mat-raised-button class="play-game-button">
-              <div class="button-text">
-                <mat-icon class="button-icon" aria-label="player two icon">group</mat-icon>2 spillere
-              </div>
-            </button>
-          </a> -->
+          <div class="button-container">
+            <a routerLink="/playgame/singleplayer" routerLinkActive="active">
+              <button mat-raised-button class="play-game-button">
+                <div class="button-text">
+                  <mat-icon class="button-icon" aria-label="player one icon">person</mat-icon>1 spiller
+                </div>
+              </button>
+            </a>
+            <a routerLink="/playgame/multiplayer" routerLinkActive="active">
+              <button mat-raised-button class="play-game-button">
+                <div class="button-text">
+                  <mat-icon class="button-icon" aria-label="player two icon">group</mat-icon>2 spillere
+                </div>
+              </button>
+            </a>
+          </div>
         </div>
       </div>
     </div>

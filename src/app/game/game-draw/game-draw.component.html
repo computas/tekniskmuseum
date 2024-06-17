@@ -11,7 +11,7 @@
     </div>
     <button mat-icon-button color="primary" aria-label="icon button with a trash icon" (click)="clear()">
       <span class="material-icons">
-        <img src="../../../assets/eraser.svg" alt="Kiwi standing on oval" />
+        <mat-icon class="delete-icon" aria-label="delete icon">delete</mat-icon>
       </span>
     </button>
   </div>
@@ -33,7 +33,11 @@
 
 <div class="avatar-container">
   <div class="">
-    <img src="../../../assets/avatar-halv.svg" alt="Avatar guessing words" class="guessing-avatar" />
+    <img
+      src="assets/illustrations/IO_Illustrasjoner-1_1360x939.png"
+      alt="Avatar guessing words"
+      class="guessing-avatar"
+    />
   </div>
   <div class="guess-label me">
     <span>Hmm... <span *ngIf="AI_GUESS">kan det være &nbsp;</span>{{ AI_GUESS | uppercase }} </span>
