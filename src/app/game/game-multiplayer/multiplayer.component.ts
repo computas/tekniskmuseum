@@ -12,7 +12,6 @@ import { GameIntermediateResultComponent } from '../game-intermediate-result/gam
 import { GameDrawComponent } from '../game-draw/game-draw.component';
 import { GameWordToDrawComponent } from '../game-word-to-draw/game-word-to-draw.component';
 import { GameInfoComponent } from '../game-info/game-info.component';
-import { NgSwitch, NgSwitchCase, NgSwitchDefault } from '@angular/common';
 
 @Component({
   selector: 'app-multiplayer',
@@ -45,14 +44,11 @@ import { NgSwitch, NgSwitchCase, NgSwitchDefault } from '@angular/common';
   ],
   standalone: true,
   imports: [
-    NgSwitch,
-    NgSwitchCase,
     GameInfoComponent,
     GameWordToDrawComponent,
     GameDrawComponent,
     GameIntermediateResultComponent,
     GameResultComponent,
-    NgSwitchDefault,
     LobbyComponent,
   ],
 })

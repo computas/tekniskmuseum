@@ -1,46 +1,62 @@
 <div class="result-container-background">
   <div class="result-container">
     <div><img class="logo" src="assets/logo/IO-logo-inverted_transparent-bg.png" alt="logo" /></div>
-    <div *ngIf="ismultiplayer && hasWon" id="result-header" class="result-header-multi">
-      <h1 class="result-header-multi">
-        <span class="winner">Du vant!</span>
-        <span class="winner-points">&nbsp;Du fikk: {{ score }} poeng</span>
-      </h1>
-    </div>
-    <div *ngIf="ismultiplayer && !hasWon" id="result-header" class="result-header-multi">
-      <h1 class="result-header-multi">
-        <span class="loser">Du tapte</span>
-        <span class="loser-points">&nbsp;Du fikk: {{ score }} poeng</span>
-      </h1>
-    </div>
-    <h1 *ngIf="!ismultiplayer" id="result-header">Ditt resultat:</h1>
+    @if (ismultiplayer && hasWon) {
+      <div id="result-header" class="result-header-multi">
+        <h1 class="result-header-multi">
+          <span class="winner">Du vant!</span>
+          <span class="winner-points">&nbsp;Du fikk: {{ score }} poeng</span>
+        </h1>
+      </div>
+    }
+    @if (ismultiplayer && !hasWon) {
+      <div id="result-header" class="result-header-multi">
+        <h1 class="result-header-multi">
+          <span class="loser">Du tapte</span>
+          <span class="loser-points">&nbsp;Du fikk: {{ score }} poeng</span>
+        </h1>
+      </div>
+    }
+    @if (!ismultiplayer) {
+      <h1 id="result-header">Ditt resultat:</h1>
+    }
     <div class="result-section">
       <div id="result-card-container">
-        <div id="result-card" *ngFor="let result of results">
-          <img
-            mat-card-image
-            [src]="result.imageData"
-            [className]="result.hasWon ? 'game-result-img card-won' : 'game-result-img card-loss'"
-            alt=""
-          />
-          <p id="result-subtitile">
-            <span *ngIf="result.hasWon" class="material-icons" id="won"> done </span>
-            <span *ngIf="!result.hasWon" class="material-icons" id="loss"> clear </span>
-            <span *ngIf="result.word" class="result-word"
-              >{{ result.word | titlecase }}
-              <span *ngIf="ismultiplayer" class="multiplayer-score"> {{ result.score }} p</span></span
-            >
-          </p>
+        @for (result of results; track result) {
+          <div id="result-card">
+            <img
+              mat-card-image
+              [src]="result.imageData"
+              [className]="result.hasWon ? 'game-result-img card-won' : 'game-result-img card-loss'"
+              alt=""
+              />
+            <p id="result-subtitile">
+              @if (result.hasWon) {
+                <span class="material-icons" id="won"> done </span>
+              }
+              @if (!result.hasWon) {
+                <span class="material-icons" id="loss"> clear </span>
+              }
+              @if (result.word) {
+                <span class="result-word"
+                  >{{ result.word | titlecase }}
+                  @if (ismultiplayer) {
+                    <span class="multiplayer-score"> {{ result.score }} p</span>
+                    }</span
+                    >
+                  }
+                </p>
+              </div>
+            }
+          </div>
+        </div>
+        <div class="button-footer">
+          <a href="/" class="link-float"
+            ><button mat-raised-button class="btn btn-again">
+            <span class="material-icons icon"> autorenew </span>
+            Spill igjen
+          </button></a
+          >
         </div>
       </div>
     </div>
-    <div class="button-footer">
-      <a href="/" class="link-float"
-        ><button mat-raised-button class="btn btn-again">
-          <span class="material-icons icon"> autorenew </span>
-          Spill igjen
-        </button></a
-      >
-    </div>
-  </div>
-</div>
