@@ -1,14 +1,28 @@
-<div [ngSwitch]="gameLevel">
-  <div *ngSwitchCase="GAMELEVEL.howToPlay" [@enterAnimation]><app-game-info></app-game-info></div>
-  <div *ngSwitchCase="GAMELEVEL.waitingForWord" [@enterAnimation]><app-game-word-to-draw></app-game-word-to-draw></div>
-  <div *ngSwitchCase="GAMELEVEL.drawing" [@enterAnimation]><app-drawing></app-drawing></div>
-  <div *ngSwitchCase="GAMELEVEL.intermediateResult" [@enterAnimation]>
-    <app-game-intermediate-result></app-game-intermediate-result>
-  </div>
-  <div *ngSwitchCase="GAMELEVEL.showResult" [@enterAnimation]>
-    <app-game-result></app-game-result>
-  </div>
-  <div *ngSwitchDefault [@enterAnimation]>
-    <app-lobby></app-lobby>
-  </div>
+<div>
+  @switch (gameLevel) {
+    @case (GAMELEVEL.howToPlay) {
+      <div [@enterAnimation]><app-game-info></app-game-info></div>
+    }
+    @case (GAMELEVEL.waitingForWord) {
+      <div [@enterAnimation]><app-game-word-to-draw></app-game-word-to-draw></div>
+    }
+    @case (GAMELEVEL.drawing) {
+      <div [@enterAnimation]><app-drawing></app-drawing></div>
+    }
+    @case (GAMELEVEL.intermediateResult) {
+      <div [@enterAnimation]>
+        <app-game-intermediate-result></app-game-intermediate-result>
+      </div>
+    }
+    @case (GAMELEVEL.showResult) {
+      <div [@enterAnimation]>
+        <app-game-result></app-game-result>
+      </div>
+    }
+    @default {
+      <div [@enterAnimation]>
+        <app-lobby></app-lobby>
+      </div>
+    }
+  }
 </div>

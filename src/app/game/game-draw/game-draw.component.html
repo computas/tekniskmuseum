@@ -37,9 +37,11 @@
       src="assets/illustrations/IO_Illustrasjoner-1_1360x939.png"
       alt="Avatar guessing words"
       class="guessing-avatar"
-    />
+      />
   </div>
   <div class="guess-label me">
-    <span>Hmm... <span *ngIf="AI_GUESS">kan det være &nbsp;</span>{{ AI_GUESS | uppercase }} </span>
+    <span>Hmm... @if (AI_GUESS) {
+      <span>kan det være &nbsp;</span>
+    }{{ AI_GUESS | uppercase }} </span>
   </div>
 </div>

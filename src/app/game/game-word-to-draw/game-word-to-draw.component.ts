@@ -8,20 +8,14 @@ import { MultiplayerService, GAMELEVEL } from '../game-multiplayer/services/mult
 import { MatIcon } from '@angular/material/icon';
 import { MatButton } from '@angular/material/button';
 import { MatProgressSpinner } from '@angular/material/progress-spinner';
-import { NgIf, UpperCasePipe } from '@angular/common';
+import { UpperCasePipe } from '@angular/common';
 
 @Component({
-    selector: 'app-game-word-to-draw',
-    templateUrl: './game-word-to-draw.component.html',
-    styleUrls: ['./game-word-to-draw.component.scss'],
-    standalone: true,
-    imports: [
-        NgIf,
-        MatProgressSpinner,
-        MatButton,
-        MatIcon,
-        UpperCasePipe,
-    ],
+  selector: 'app-game-word-to-draw',
+  templateUrl: './game-word-to-draw.component.html',
+  styleUrls: ['./game-word-to-draw.component.scss'],
+  standalone: true,
+  imports: [MatProgressSpinner, MatButton, MatIcon, UpperCasePipe],
 })
 export class GameWordToDrawComponent implements OnInit, OnDestroy {
   constructor(
