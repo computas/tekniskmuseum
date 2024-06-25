@@ -4,11 +4,20 @@ import { routes } from '../../shared/models/routes';
 import { MultiplayerService, GAMELEVEL } from '../game-multiplayer/services/multiplayer.service';
 import { WebSocketService } from '../game-multiplayer/services/web-socket.service';
 import { SocketEndpoints } from '../../shared/models/websocketEndpoints';
+import { MatButton } from '@angular/material/button';
+import { MatIcon } from '@angular/material/icon';
+import { NgIf } from '@angular/common';
 
 @Component({
-  selector: 'app-game-info',
-  templateUrl: './game-info.component.html',
-  styleUrls: ['./game-info.component.scss'],
+    selector: 'app-game-info',
+    templateUrl: './game-info.component.html',
+    styleUrls: ['./game-info.component.scss'],
+    standalone: true,
+    imports: [
+        NgIf,
+        MatIcon,
+        MatButton,
+    ],
 })
 export class GameInfoComponent implements OnInit {
   @Output() getDrawWord = new EventEmitter();

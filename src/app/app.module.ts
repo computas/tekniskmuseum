@@ -22,31 +22,27 @@ import { DialogTemplateComponent } from './admin/dialog-template/dialog-template
 import { CommonModule } from '@angular/common';
 
 @NgModule({
-  declarations: [
-    AppComponent,
-    AdminComponent,
-    InfoComponent,
-    IdleTimeoutComponent,
-    InfoDialogComponent,
-    DialogTemplateComponent,
-  ],
-
-  imports: [
-    BrowserModule,
-    HttpClientModule,
-    AppRoutingModule,
-    WelcomeModule,
-    GameModule,
-    MultiplayerModule,
-    ServiceWorkerModule.register('ngsw-worker.js', { enabled: environment.production }),
-    MatSnackBarModule,
-    MatDialogModule,
-    MaterialImportsModule,
-    BrowserAnimationsModule,
-    CommonModule,
-  ],
-  providers: [HttpClientModule, InfoDialogComponent, AuthGuard, { provide: MAT_DIALOG_DATA, useValue: {} }],
-
-  bootstrap: [AppComponent],
+    declarations: [AppComponent],
+    imports: [
+        BrowserModule,
+        HttpClientModule,
+        AppRoutingModule,
+        WelcomeModule,
+        GameModule,
+        MultiplayerModule,
+        ServiceWorkerModule.register('ngsw-worker.js', { enabled: environment.production }),
+        MatSnackBarModule,
+        MatDialogModule,
+        MaterialImportsModule,
+        BrowserAnimationsModule,
+        CommonModule,
+        AdminComponent,
+        InfoComponent,
+        IdleTimeoutComponent,
+        InfoDialogComponent,
+        DialogTemplateComponent,
+    ],
+    providers: [HttpClientModule, InfoDialogComponent, AuthGuard, { provide: MAT_DIALOG_DATA, useValue: {} }],
+    bootstrap: [AppComponent],
 })
 export class AppModule {}

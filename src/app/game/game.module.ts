@@ -8,21 +8,18 @@ import { GameIntermediateResultComponent } from './game-intermediate-result/game
 import { GameResultComponent } from './game-result/game-result.component';
 import { GameWordToDrawComponent } from './game-word-to-draw/game-word-to-draw.component';
 @NgModule({
-  declarations: [
-    GameInfoComponent,
-    GameDrawComponent,
-    GameComponent,
-    GameIntermediateResultComponent,
-    GameResultComponent,
-    GameWordToDrawComponent,
-  ],
-  exports: [
-    GameInfoComponent,
-    GameWordToDrawComponent,
-    GameDrawComponent,
-    GameIntermediateResultComponent,
-    GameResultComponent,
-  ],
-  imports: [CommonModule, MaterialImportsModule],
+    exports: [
+        GameInfoComponent,
+        GameWordToDrawComponent,
+        GameDrawComponent,
+        GameIntermediateResultComponent,
+        GameResultComponent,
+    ],
+    imports: [CommonModule, MaterialImportsModule, GameInfoComponent,
+        GameDrawComponent,
+        GameComponent,
+        GameIntermediateResultComponent,
+        GameResultComponent,
+        GameWordToDrawComponent],
 })
 export class GameModule {}

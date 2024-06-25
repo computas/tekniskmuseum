@@ -5,7 +5,6 @@ import { MaterialImportsModule } from '../shared/material-imports/material-impor
 import { RouterModule } from '@angular/router';
 
 @NgModule({
-  declarations: [WelcomeComponent],
-  imports: [CommonModule, MaterialImportsModule, RouterModule],
+    imports: [CommonModule, MaterialImportsModule, RouterModule, WelcomeComponent],
 })
 export class WelcomeModule {}

@@ -7,7 +7,6 @@ import { AppRoutingModule } from '../../app-routing.module';
 import { GameModule } from '../game.module';
 
 @NgModule({
-  declarations: [LobbyComponent, MultiplayerComponent],
-  imports: [CommonModule, MaterialImportsModule, AppRoutingModule, GameModule],
+    imports: [CommonModule, MaterialImportsModule, AppRoutingModule, GameModule, LobbyComponent, MultiplayerComponent],
 })
 export class MultiplayerModule {}
