@@ -13,6 +13,8 @@ import { environment } from '../environments/environment';
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.scss'],
   animations: [routeTransitionAnimations],
+  standalone: true,
+  imports: [RouterOutlet],
 })
 export class AppComponent implements OnInit {
   title = 'Teknisk Museum';

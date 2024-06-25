@@ -4,11 +4,14 @@ import { LoginService } from '../login.service';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { InfoDialogComponent } from './../info-dialog/info-dialog.component';
 import { PairingService } from '../../game/game-multiplayer/services/pairing.service';
+import { MatButton } from '@angular/material/button';
 
 @Component({
-  selector: 'app-info',
-  templateUrl: './info.component.html',
-  styleUrls: ['./info.component.scss'],
+    selector: 'app-info',
+    templateUrl: './info.component.html',
+    styleUrls: ['./info.component.scss'],
+    standalone: true,
+    imports: [MatButton],
 })
 export class InfoComponent {
   datasetString = 'Nullstill treningssett til originalen';

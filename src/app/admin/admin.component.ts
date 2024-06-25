@@ -4,9 +4,10 @@ import { LoginService } from './login.service';
 import { MatSnackBar } from '@angular/material/snack-bar';
 
 @Component({
-  selector: 'app-admin',
-  templateUrl: './admin.component.html',
-  styleUrls: ['./admin.component.scss'],
+    selector: 'app-admin',
+    templateUrl: './admin.component.html',
+    styleUrls: ['./admin.component.scss'],
+    standalone: true,
 })
 export class AdminComponent {
   constructor(private router: Router, private loginService: LoginService, private _snackBar: MatSnackBar) {}

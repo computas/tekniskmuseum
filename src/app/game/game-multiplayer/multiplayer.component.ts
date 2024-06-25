@@ -6,6 +6,13 @@ import { MultiplayerService, GAMELEVEL } from './services/multiplayer.service';
 import { WebSocketService } from './services/web-socket.service';
 import { routes } from '../../shared/models/routes';
 import { Subscription } from 'rxjs';
+import { LobbyComponent } from './lobby/lobby.component';
+import { GameResultComponent } from '../game-result/game-result.component';
+import { GameIntermediateResultComponent } from '../game-intermediate-result/game-intermediate-result.component';
+import { GameDrawComponent } from '../game-draw/game-draw.component';
+import { GameWordToDrawComponent } from '../game-word-to-draw/game-word-to-draw.component';
+import { GameInfoComponent } from '../game-info/game-info.component';
+import { NgSwitch, NgSwitchCase, NgSwitchDefault } from '@angular/common';
 
 @Component({
   selector: 'app-multiplayer',
@@ -35,6 +42,18 @@ import { Subscription } from 'rxjs';
         animate('.4s ease-out', style({ transform: 'translateX(-100%)', opacity: 0 })),
       ]),
     ]),
+  ],
+  standalone: true,
+  imports: [
+    NgSwitch,
+    NgSwitchCase,
+    GameInfoComponent,
+    GameWordToDrawComponent,
+    GameDrawComponent,
+    GameIntermediateResultComponent,
+    GameResultComponent,
+    NgSwitchDefault,
+    LobbyComponent,
   ],
 })
 export class MultiplayerComponent implements OnInit, OnDestroy {

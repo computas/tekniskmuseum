@@ -3,11 +3,22 @@ import { DrawingService } from '../game-draw/services/drawing.service';
 import { Result } from '../../shared/models/interfaces';
 import { Router } from '@angular/router';
 import { MultiplayerService } from '../game-multiplayer/services/multiplayer.service';
+import { MatButton } from '@angular/material/button';
+import { MatCardImage } from '@angular/material/card';
+import { NgIf, NgFor, TitleCasePipe } from '@angular/common';
 
 @Component({
-  selector: 'app-game-result',
-  templateUrl: './game-result.component.html',
-  styleUrls: ['./game-result.component.scss'],
+    selector: 'app-game-result',
+    templateUrl: './game-result.component.html',
+    styleUrls: ['./game-result.component.scss'],
+    standalone: true,
+    imports: [
+        NgIf,
+        NgFor,
+        MatCardImage,
+        MatButton,
+        TitleCasePipe,
+    ],
 })
 export class GameResultComponent implements OnInit {
   results: Result[] = [];
