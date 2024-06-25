@@ -1,5 +1,4 @@
-import { NgModule } from '@angular/core';
-import { Routes, RouterModule } from '@angular/router';
+import { Routes } from '@angular/router';
 import { WelcomeComponent } from './welcome/welcome.component';
 import { GameComponent } from './game/game.component';
 import { routes as r } from './shared/models/routes';
@@ -7,10 +6,10 @@ import { GameResultComponent } from './game/game-result/game-result.component';
 import { GameDrawComponent } from './game/game-draw/game-draw.component';
 import { AdminComponent } from './admin/admin.component';
 import { InfoComponent } from './admin/info/info.component';
-import { AuthGuard } from './admin/auth-guard';
-import { MultiplayerComponent } from '../app/game/game-multiplayer/multiplayer.component';
+import { authGuard } from './admin/auth-guard';
+import { MultiplayerComponent } from './game/game-multiplayer/multiplayer.component';
 
-const routes: Routes = [
+export const routes: Routes = [
   {
     path: r.LANDING,
     component: WelcomeComponent,
@@ -44,12 +43,6 @@ const routes: Routes = [
   {
     path: 'admin/info',
     component: InfoComponent,
-    canActivate: [AuthGuard],
+    canActivate: [authGuard],
   },
 ];
-
-@NgModule({
-  imports: [RouterModule.forRoot(routes)],
-  exports: [RouterModule],
-})
-export class AppRoutingModule {}
