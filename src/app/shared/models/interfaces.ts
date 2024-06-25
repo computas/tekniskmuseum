@@ -15,3 +15,13 @@ export interface StartGamePlayerId {
 export interface GameLabel {
   label: string;
 }
+
+type Score = {
+  name: string;
+  score: number;
+}
+
+export type Highscore = {
+  daily: Score[];
+  total: Score[];
+}

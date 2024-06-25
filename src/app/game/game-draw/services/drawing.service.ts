@@ -115,6 +115,16 @@ export class DrawingService {
     this.results = [];
   }
 
+  postScore() {
+    const body = {
+      player_id: this.playerid,
+      name: null, // Can be used if we wish to display names in high score
+      score: this.totalScore.toString()
+    }
+
+    return this.http.post(`${this.baseUrl}/${endpoints.POSTSCORE}`, body).subscribe();
+  }
+
   addResult(result: Result) {
     this.results = [...this.results, result];
   }
@@ -125,6 +135,10 @@ export class DrawingService {
     this.gameOver = false;
     this.guessDone = false;
     this.results = [];
+  }
+
+  get totalScore(): number {
+    return this.results.map(res => res.score).reduce((sum, current) => sum+current, 0)
   }
 
   get lastResult(): Result {

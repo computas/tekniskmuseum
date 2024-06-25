@@ -38,6 +38,8 @@ export class GameResultComponent implements OnInit {
       });
     }
 
+    this.drawingService.postScore()
+    
     if (this.router.url === '/summary') {
       this.results = this.drawingService.get();
     } else if (this.router.url === '/summary/multiplayer') {
