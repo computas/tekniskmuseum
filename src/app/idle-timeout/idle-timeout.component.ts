@@ -1,14 +1,25 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
 import { Router } from '@angular/router';
-import { MatDialogRef } from '@angular/material/dialog';
+import { MatDialogRef, MatDialogContent, MatDialogActions } from '@angular/material/dialog';
 import { ViewEncapsulation } from '@angular/core';
 import { routes } from '../shared/models/routes';
+import { MatIcon } from '@angular/material/icon';
+import { MatButton } from '@angular/material/button';
+import { CdkScrollable } from '@angular/cdk/scrolling';
 
 @Component({
-  selector: 'app-idle-timeout',
-  templateUrl: './idle-timeout.component.html',
-  styleUrls: ['./idle-timeout.component.scss'],
-  encapsulation: ViewEncapsulation.None,
+    selector: 'app-idle-timeout',
+    templateUrl: './idle-timeout.component.html',
+    styleUrls: ['./idle-timeout.component.scss'],
+    encapsulation: ViewEncapsulation.None,
+    standalone: true,
+    imports: [
+        CdkScrollable,
+        MatDialogContent,
+        MatDialogActions,
+        MatButton,
+        MatIcon,
+    ],
 })
 export class IdleTimeoutComponent implements OnInit, OnDestroy {
   constructor(private router: Router, private dialogRef: MatDialogRef<IdleTimeoutComponent>) {}

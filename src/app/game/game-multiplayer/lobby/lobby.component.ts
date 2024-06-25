@@ -1,11 +1,25 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
 import { MultiplayerService } from '../services/multiplayer.service';
 import { Subscription } from 'rxjs';
+import { MatButton } from '@angular/material/button';
+import { RouterLink, RouterLinkActive } from '@angular/router';
+import { MatIcon } from '@angular/material/icon';
+import { MatProgressSpinner } from '@angular/material/progress-spinner';
+import { NgIf } from '@angular/common';
 
 @Component({
-  selector: 'app-lobby',
-  templateUrl: './lobby.component.html',
-  styleUrls: ['./lobby.component.scss'],
+    selector: 'app-lobby',
+    templateUrl: './lobby.component.html',
+    styleUrls: ['./lobby.component.scss'],
+    standalone: true,
+    imports: [
+        NgIf,
+        MatProgressSpinner,
+        MatIcon,
+        RouterLink,
+        RouterLinkActive,
+        MatButton,
+    ],
 })
 export class LobbyComponent implements OnInit, OnDestroy {
   waitingForOtherPlayer = true;

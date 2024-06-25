@@ -4,10 +4,20 @@ import { DrawingService } from '../game-draw/services/drawing.service';
 import { MultiplayerService, GAMELEVEL } from '../game-multiplayer/services/multiplayer.service';
 import { Router } from '@angular/router';
 import { routes } from '../../shared/models/routes';
+import { MatProgressSpinner } from '@angular/material/progress-spinner';
+import { MatButton } from '@angular/material/button';
+import { NgIf, UpperCasePipe } from '@angular/common';
 @Component({
-  selector: 'app-game-intermediate-result',
-  templateUrl: './game-intermediate-result.component.html',
-  styleUrls: ['./game-intermediate-result.component.scss'],
+    selector: 'app-game-intermediate-result',
+    templateUrl: './game-intermediate-result.component.html',
+    styleUrls: ['./game-intermediate-result.component.scss'],
+    standalone: true,
+    imports: [
+        NgIf,
+        MatButton,
+        MatProgressSpinner,
+        UpperCasePipe,
+    ],
 })
 export class GameIntermediateResultComponent implements OnInit, OnDestroy {
   result: Result | undefined;

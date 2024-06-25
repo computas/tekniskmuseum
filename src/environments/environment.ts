@@ -9,7 +9,7 @@ export const environment = {
   TEKNISKBACKEND_ENDPOINT: 'http://localhost:8000',
   inactivityTime: 600 * 1000,
   // Maximum length of value is 32 characters
-  PAIR_ID: 'local-1'
+  PAIR_ID: 'local-1',
 };
 
 /*
