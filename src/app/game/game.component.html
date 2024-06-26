@@ -1,19 +1,30 @@
-<!-- <div *ngIf="showHowToPlay" [@inOutAnimation]> -->
-<div *ngIf="showHowToPlay" [@enterAnimation]>
-  <app-game-info (getDifficultyPicker)="getDifficultyPicker()"></app-game-info>
-</div>
-<div *ngIf="showDifficultyPicker" [@enterAnimation]>
-  <app-game-pick-difficulty (getDrawWord)="getDrawWord()"></app-game-pick-difficulty>
-</div>
-<div *ngIf="newGame && !showIntermediateResult" [@enterAnimation]>
-  <app-drawing></app-drawing>
-</div>
-<div *ngIf="showIntermediateResult" [@enterAnimation]>
-  <app-game-intermediate-result (nextGuess)="nextGuess()" (finalResult)="finalResult()"></app-game-intermediate-result>
-</div>
-<div *ngIf="showFinalResult" [@enterAnimation]>
-  <app-game-result></app-game-result>
-</div>
-<div *ngIf="showWordToDraw" [@enterAnimation]>
-  <app-game-word-to-draw (drawWord)="startGame()"></app-game-word-to-draw>
-</div>
+@if (showHowToPlay) {
+  <div [@enterAnimation]>
+    <app-game-info (getDifficultyPicker)="getDifficultyPicker()"></app-game-info>
+  </div>
+}
+@if (showDifficultyPicker) {
+  <div [@enterAnimation]>
+    <app-game-pick-difficulty (getDrawWord)="getDrawWord()"></app-game-pick-difficulty>
+  </div>
+}
+@if (newGame && !showIntermediateResult) {
+  <div [@enterAnimation]>
+    <app-drawing></app-drawing>
+  </div>
+}
+@if (showIntermediateResult) {
+  <div [@enterAnimation]>
+    <app-game-intermediate-result (nextGuess)="nextGuess()" (finalResult)="finalResult()"></app-game-intermediate-result>
+  </div>
+}
+@if (showFinalResult) {
+  <div [@enterAnimation]>
+    <app-game-result></app-game-result>
+  </div>
+}
+@if (showWordToDraw) {
+  <div [@enterAnimation]>
+    <app-game-word-to-draw (drawWord)="startGame()"></app-game-word-to-draw>
+  </div>
+}

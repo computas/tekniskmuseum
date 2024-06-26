@@ -6,18 +6,13 @@ import { WebSocketService } from '../game-multiplayer/services/web-socket.servic
 import { SocketEndpoints } from '../../shared/models/websocketEndpoints';
 import { MatButton } from '@angular/material/button';
 import { MatIcon } from '@angular/material/icon';
-import { NgIf } from '@angular/common';
 
 @Component({
-    selector: 'app-game-info',
-    templateUrl: './game-info.component.html',
-    styleUrls: ['./game-info.component.scss'],
-    standalone: true,
-    imports: [
-        NgIf,
-        MatIcon,
-        MatButton,
-    ],
+  selector: 'app-game-info',
+  templateUrl: './game-info.component.html',
+  styleUrls: ['./game-info.component.scss'],
+  standalone: true,
+  imports: [MatIcon, MatButton],
 })
 export class GameInfoComponent implements OnInit {
   @Output() getDifficultyPicker = new EventEmitter();

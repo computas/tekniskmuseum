@@ -6,18 +6,13 @@ import { Router } from '@angular/router';
 import { routes } from '../../shared/models/routes';
 import { MatProgressSpinner } from '@angular/material/progress-spinner';
 import { MatButton } from '@angular/material/button';
-import { NgIf, UpperCasePipe } from '@angular/common';
+import { UpperCasePipe } from '@angular/common';
 @Component({
-    selector: 'app-game-intermediate-result',
-    templateUrl: './game-intermediate-result.component.html',
-    styleUrls: ['./game-intermediate-result.component.scss'],
-    standalone: true,
-    imports: [
-        NgIf,
-        MatButton,
-        MatProgressSpinner,
-        UpperCasePipe,
-    ],
+  selector: 'app-game-intermediate-result',
+  templateUrl: './game-intermediate-result.component.html',
+  styleUrls: ['./game-intermediate-result.component.scss'],
+  standalone: true,
+  imports: [MatButton, MatProgressSpinner, UpperCasePipe],
 })
 export class GameIntermediateResultComponent implements OnInit, OnDestroy {
   result: Result | undefined;

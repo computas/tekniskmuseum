@@ -6,21 +6,16 @@ import { DrawingService } from './services/drawing.service';
 import { MultiplayerService, GAMELEVEL } from '../game-multiplayer/services/multiplayer.service';
 import { Result } from '../../shared/models/interfaces';
 import { SoundService } from './services/sound.service';
-import { NgIf, UpperCasePipe } from '@angular/common';
+import { UpperCasePipe } from '@angular/common';
 import { MatIconButton } from '@angular/material/button';
 import { MatIcon } from '@angular/material/icon';
 
 @Component({
-    selector: 'app-drawing',
-    templateUrl: './game-draw.component.html',
-    styleUrls: ['./game-draw.component.scss'],
-    standalone: true,
-    imports: [
-        MatIcon,
-        MatIconButton,
-        NgIf,
-        UpperCasePipe,
-    ],
+  selector: 'app-drawing',
+  templateUrl: './game-draw.component.html',
+  styleUrls: ['./game-draw.component.scss'],
+  standalone: true,
+  imports: [MatIcon, MatIconButton, UpperCasePipe],
 })
 export class GameDrawComponent implements OnInit, OnDestroy {
   canvas = viewChild.required<ElementRef<HTMLCanvasElement>>('canvas');
