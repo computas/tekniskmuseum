@@ -1,0 +1,38 @@
+{
+    "WELCOME_MESSAGE": "Hi, my name is",
+    "HELP_ME_LEARN": "Can you help me learn?",
+    "PLAYER_MODE_SINGLE": "1 player",
+    "PLAYER_MODE_MULTI": "2 players",
+    "WAITING_FOR_PLAYER": "Waiting for player 2",
+    "ADMIN_ARIA_LABEL": "Go to admin page",
+
+    "HOW_TO_PLAY_SINGLE": "How to play:",
+    "HOW_TO_PLAY_MULTI": "How to play:",
+    "DRAW_WORD": "Draw a word",
+    "IO_GUESSES": "IO guesses",
+    "NUMBER_OF_ROUNDS": "Three rounds",
+    "BEST_OF_THREE": "Best of three wins!",
+    "BACK_BUTTON": "Back",
+    "START_BUTTON": "Start",
+
+    "DRAW_LABEL": "Draw: ",
+    "DELETE_ICON": "delete",
+    "AI_GUESS_LABEL": "Hmm... could it be ",
+
+    "WINNER_TEXT": "You won!",
+    "WINNER_POINTS_TEXT": "You got: ",
+    "POINTS": "points",
+    "LOSER_TEXT": "You lost",
+    "RESULT_TEXT": "Your result:",
+    "AGAIN_BUTTON": "Play again",
+    "ICON_DONE": "Done",
+
+    "SUMMARY_BUTTON": "Summary",
+    "NEXT_WORD_BUTTON": "Next word",
+
+    "AUTO_END_MESSAGE": "The game will automatically end in ",
+    "SECONDS": "seconds",
+    "STAY_BUTTON": "Stay",
+    "HOME_ICON": "To homepage",
+    "END_NOW_BUTTON": "End now"
+}
