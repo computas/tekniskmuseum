@@ -7,6 +7,8 @@ import { GameResultComponent } from './game-result/game-result.component';
 import { GameIntermediateResultComponent } from './game-intermediate-result/game-intermediate-result.component';
 import { GameDrawComponent } from './game-draw/game-draw.component';
 import { GameInfoComponent } from './game-info/game-info.component';
+import { GamePickDifficultyComponent } from './game-pick-difficulty/game-pick-difficulty.component';
+
 
 @Component({
   selector: 'app-game',
@@ -40,6 +42,7 @@ import { GameInfoComponent } from './game-info/game-info.component';
   standalone: true,
   imports: [
     GameInfoComponent,
+    GamePickDifficultyComponent,
     GameDrawComponent,
     GameIntermediateResultComponent,
     GameResultComponent,
@@ -49,6 +52,7 @@ import { GameInfoComponent } from './game-info/game-info.component';
 export class GameComponent implements OnInit, OnDestroy {
   newGame = false;
   guessDone = false;
+  showDifficultyPicker = false;
   showHowToPlay = true;
   showIntermediateResult = false;
   showFinalResult = false;
@@ -70,13 +74,17 @@ export class GameComponent implements OnInit, OnDestroy {
     });
   }
 
+  getDifficultyPicker() {
+    this.showDifficultyPicker = true;
+    this.showHowToPlay = false;
+  }
+  
   getDrawWord() {
     this.showWordToDraw = true;
-    this.showHowToPlay = false;
+    this.showDifficultyPicker = false;
   }
 
   startGame() {
-    this.showHowToPlay = false;
     this.showWordToDraw = false;
     this.newGame = true;
   }
@@ -98,3 +106,4 @@ export class GameComponent implements OnInit, OnDestroy {
     this.guessDone = false;
   }
 }
+

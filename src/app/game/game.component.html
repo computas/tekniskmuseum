@@ -1,7 +1,11 @@
-<!-- <div *ngIf="showHowToPlay" [@inOutAnimation]> -->
 @if (showHowToPlay) {
   <div [@enterAnimation]>
-    <app-game-info (getDrawWord)="getDrawWord()"></app-game-info>
+    <app-game-info (getDifficultyPicker)="getDifficultyPicker()"></app-game-info>
+  </div>
+}
+@if (showDifficultyPicker) {
+  <div [@enterAnimation]>
+    <app-game-pick-difficulty (getDrawWord)="getDrawWord()"></app-game-pick-difficulty>
   </div>
 }
 @if (newGame && !showIntermediateResult) {
