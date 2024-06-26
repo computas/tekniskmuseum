@@ -97,7 +97,7 @@ export class DrawingService {
   startGame(): Observable<GameLabel> {
     const headers = new HttpHeaders();
     headers.set('Access-Control-Allow-Origin', '*');
-    return this.http.get<StartGamePlayerId>(`${this.baseUrl}/${endpoints.STARTGAME}?difficulty_id=${this.difficulty}`, { headers: headers }).pipe(
+    return this.http.get<StartGamePlayerId>(`${this.baseUrl}/${endpoints.STARTGAME}?difficulty_id=${this._difficulty.value}`, { headers: headers }).pipe(
       switchMap((res) => {
         this.playerid = res.player_id;
         return this.getLabel();
