@@ -8,6 +8,7 @@ import { GameIntermediateResultComponent } from './game-intermediate-result/game
 import { GameDrawComponent } from './game-draw/game-draw.component';
 import { GameInfoComponent } from './game-info/game-info.component';
 import { NgIf } from '@angular/common';
+import { GamePickDifficultyComponent } from './game-pick-difficulty/game-pick-difficulty.component';
 
 @Component({
     selector: 'app-game',
@@ -42,6 +43,7 @@ import { NgIf } from '@angular/common';
     imports: [
         NgIf,
         GameInfoComponent,
+        GamePickDifficultyComponent,
         GameDrawComponent,
         GameIntermediateResultComponent,
         GameResultComponent,
@@ -51,6 +53,7 @@ import { NgIf } from '@angular/common';
 export class GameComponent implements OnInit, OnDestroy {
   newGame = false;
   guessDone = false;
+  showDifficultyPicker = false;
   showHowToPlay = true;
   showIntermediateResult = false;
   showFinalResult = false;
@@ -72,13 +75,17 @@ export class GameComponent implements OnInit, OnDestroy {
     });
   }
 
+  getDifficultyPicker() {
+    this.showDifficultyPicker = true;
+    this.showHowToPlay = false;
+  }
+  
   getDrawWord() {
     this.showWordToDraw = true;
-    this.showHowToPlay = false;
+    this.showDifficultyPicker = false;
   }
 
   startGame() {
-    this.showHowToPlay = false;
     this.showWordToDraw = false;
     this.newGame = true;
   }
@@ -100,3 +107,4 @@ export class GameComponent implements OnInit, OnDestroy {
     this.guessDone = false;
   }
 }
+
