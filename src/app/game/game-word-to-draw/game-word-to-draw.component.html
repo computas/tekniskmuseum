@@ -1,30 +1,42 @@
 <div class="word-container-background">
   <div class="word-container">
     <div><img class="logo" src="assets/logo/IO-logo-inverted_transparent-bg.png" alt="logo" /></div>
-    <h1 class="playernr" *ngIf="isMultiPlayer">Spiller {{ playernr }}</h1>
+    @if (isMultiPlayer) {
+      <h1 class="playernr">Spiller {{ playernr }}</h1>
+    }
     <div class="word-text">
       <div class="words-remaining">{{ guessUsed }}/3</div>
       <p class="word-draw">Tegn:</p>
-      <div *ngIf="loading">
-        <mat-spinner class="white-spinner" id="white"></mat-spinner>
-      </div>
-      <div *ngIf="word">
-        <h1 class="word-to-guess header">{{ word | uppercase }}</h1>
-        <div *ngIf="isMultiPlayer" class="timer header">
-          <span>{{ timeLeft }}</span>
+      @if (loading) {
+        <div>
+          <mat-spinner class="white-spinner" id="white"></mat-spinner>
         </div>
-      </div>
+      }
+      @if (word) {
+        <div>
+          <h1 class="word-to-guess header">{{ word | uppercase }}</h1>
+          @if (isMultiPlayer) {
+            <div class="timer header">
+              <span>{{ timeLeft }}</span>
+            </div>
+          }
+        </div>
+      }
     </div>
     <div class="word-footer">
       <div class="avatar">
         <img class="avatar-image" src="assets/illustrations/IO_Illustrasjoner-1_1360x939.png" alt="avatar" />
       </div>
-      <div *ngIf="!loading">
-        <button *ngIf="isSinglePlayer" mat-raised-button class="draw-word-button" (click)="drawWord.emit(true)">
-          Tegn
-          <mat-icon class="button-icon play_arrow" aria-label="play_arrow">arrow_forward_ios</mat-icon>
-        </button>
-      </div>
+      @if (!loading) {
+        <div>
+          @if (isSinglePlayer) {
+            <button mat-raised-button class="draw-word-button" (click)="drawWord.emit(true)">
+              Tegn
+              <mat-icon class="button-icon play_arrow" aria-label="play_arrow">arrow_forward_ios</mat-icon>
+            </button>
+          }
+        </div>
+      }
     </div>
   </div>
 </div>

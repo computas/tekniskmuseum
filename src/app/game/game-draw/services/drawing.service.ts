@@ -23,11 +23,13 @@ export class DrawingService {
   private readonly _gameOver = new BehaviorSubject<boolean>(false);
   private readonly _guessDone = new BehaviorSubject<boolean>(false);
   private readonly _results = new BehaviorSubject<Result[]>([]);
+  private readonly _difficulty = new BehaviorSubject<number>(1);
 
   readonly guessUsed$ = this._guessUsed.asObservable();
   readonly results$ = this._results.asObservable();
   readonly guessDone$ = this._guessDone.asObservable();
   readonly gameOver$ = this._gameOver.asObservable();
+  difficulty$ = this._difficulty.asObservable();
 
   resultsMock: Result[] = ResultsMock;
 
@@ -95,7 +97,7 @@ export class DrawingService {
   startGame(): Observable<GameLabel> {
     const headers = new HttpHeaders();
     headers.set('Access-Control-Allow-Origin', '*');
-    return this.http.get<StartGamePlayerId>(`${this.baseUrl}/${endpoints.STARTGAME}`, { headers: headers }).pipe(
+    return this.http.get<StartGamePlayerId>(`${this.baseUrl}/${endpoints.STARTGAME}?difficulty_id=${this._difficulty.value}`, { headers: headers }).pipe(
       switchMap((res) => {
         this.playerid = res.player_id;
         return this.getLabel();
@@ -180,5 +182,9 @@ export class DrawingService {
 
   set gameOver(val: boolean) {
     this._gameOver.next(val);
+  }
+
+  set difficulty(val: number) {
+    this._difficulty.next(val);
   }
 }

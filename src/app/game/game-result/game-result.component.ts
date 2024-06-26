@@ -5,21 +5,15 @@ import { Router } from '@angular/router';
 import { MultiplayerService } from '../game-multiplayer/services/multiplayer.service';
 import { MatButton } from '@angular/material/button';
 import { MatCardImage } from '@angular/material/card';
-import { NgIf, NgFor, TitleCasePipe } from '@angular/common';
+import { TitleCasePipe } from '@angular/common';
 import { Subscription } from 'rxjs';
 
 @Component({
-    selector: 'app-game-result',
-    templateUrl: './game-result.component.html',
-    styleUrls: ['./game-result.component.scss'],
-    standalone: true,
-    imports: [
-        NgIf,
-        NgFor,
-        MatCardImage,
-        MatButton,
-        TitleCasePipe,
-    ],
+  selector: 'app-game-result',
+  templateUrl: './game-result.component.html',
+  styleUrls: ['./game-result.component.scss'],
+  standalone: true,
+  imports: [MatCardImage, MatButton, TitleCasePipe],
 })
 export class GameResultComponent implements OnInit {
   results: Result[] = [];
