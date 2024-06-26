@@ -38,12 +38,37 @@
   justify-content: center;
 }
 #result-header {
-  text-align: center;
   color: $text_primary_color;
   font-size: 48px;
-  display: grid;
-  align-items: end;
-  margin: 0;
+  margin: 10px;
+  padding-bottom: 20px;
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+  align-items: flex-end;
+}
+
+#not-highscore-section {
+  display: flex;
+  flex-direction: row;
+}
+
+#score-header {
+  color: $text_primary_color;
+  font-family: 'AeonikLight';
+  font-size: 32px;
+}
+#highscore-text {
+  color: $text_primary_color;
+  font-family: 'AeonikRegular';
+  font-size: 24px;
+}
+#highscore-number {
+  color: $text_secondary_color;
+  font-family: 'AeonikBlack';
+  font-size: 36px;
+  font-style: italic;
+  margin-left: 10px;
 }
 
 .btn {
@@ -112,13 +137,7 @@ p {
 .game-result-img {
   width: 256px;
 }
-#result-header {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  flex-wrap: wrap;
-  align-items: flex-end;
-}
+
 .result-header-multi {
   text-align: center;
   color: #195272;
@@ -155,6 +174,7 @@ p {
 .result-section {
   align-items: center;
   display: flex;
+  flex-direction: column;
 }
 @media (max-width: 600px) {
   #result-header {

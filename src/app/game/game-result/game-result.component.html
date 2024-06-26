@@ -15,6 +15,20 @@
     </div>
     <h1 *ngIf="!ismultiplayer" id="result-header">Ditt resultat:</h1>
     <div class="result-section">
+      <h3 id="score-header">Poengsum: {{ score }} poeng</h3>
+      <div id="highscore-section">
+        <div *ngIf="newHighscore">
+          <h2 id="highscore-number" >Ny dagens highscore!</h2>
+        </div>
+        <div id="not-highscore-section" *ngIf="!newHighscore">
+          <h2 id="highscore-text">
+            Dagens highscore:
+          </h2>
+          <h2 id="highscore-number">
+            {{ todaysHighscore.toString() }}
+          </h2>
+        </div>
+      </div>
       <div id="result-card-container">
         <div id="result-card" *ngFor="let result of results">
           <img

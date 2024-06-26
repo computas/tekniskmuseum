@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Observable, BehaviorSubject } from 'rxjs';
 import { tap, switchMap } from 'rxjs/operators';
-import { Result, StartGamePlayerId, GameLabel } from '../../../shared/models/interfaces';
+import { Result, StartGamePlayerId, GameLabel, Highscore } from '../../../shared/models/interfaces';
 import { ResultsMock } from '../../../shared/mocks/results.mock';
 import { endpoints } from '../../../shared/models/endpoints';
 
@@ -109,6 +109,13 @@ export class DrawingService {
       .pipe(tap((res) => (this.label = res.label)));
   }
 
+  getHighscore(): Observable<Highscore>{
+    const headers = new HttpHeaders();
+    headers.set('Access-Control-Allow-Origin', '*');
+    return this.http
+    .get<Highscore>(`${this.baseUrl}/${endpoints.HIGHSCORE}`, { headers: headers })
+  }
+
   endGame() {
     this.guessDone = false;
     this.gameOver = false;
@@ -118,11 +125,9 @@ export class DrawingService {
   postScore() {
     const body = {
       player_id: this.playerid,
-      name: null, // Can be used if we wish to display names in high score
       score: this.totalScore.toString()
     }
-
-    return this.http.post(`${this.baseUrl}/${endpoints.POSTSCORE}`, body).subscribe();
+    return this.http.post(`${this.baseUrl}/${endpoints.POSTSCORE}`, body);
   }
 
   addResult(result: Result) {

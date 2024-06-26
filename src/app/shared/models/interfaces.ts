@@ -17,7 +17,7 @@ export interface GameLabel {
 }
 
 type Score = {
-  name: string;
+  id: number;
   score: number;
 }
 
