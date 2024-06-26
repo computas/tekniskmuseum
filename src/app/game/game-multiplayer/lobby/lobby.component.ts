@@ -5,21 +5,13 @@ import { MatButton } from '@angular/material/button';
 import { RouterLink, RouterLinkActive } from '@angular/router';
 import { MatIcon } from '@angular/material/icon';
 import { MatProgressSpinner } from '@angular/material/progress-spinner';
-import { NgIf } from '@angular/common';
 
 @Component({
-    selector: 'app-lobby',
-    templateUrl: './lobby.component.html',
-    styleUrls: ['./lobby.component.scss'],
-    standalone: true,
-    imports: [
-        NgIf,
-        MatProgressSpinner,
-        MatIcon,
-        RouterLink,
-        RouterLinkActive,
-        MatButton,
-    ],
+  selector: 'app-lobby',
+  templateUrl: './lobby.component.html',
+  styleUrls: ['./lobby.component.scss'],
+  standalone: true,
+  imports: [MatProgressSpinner, MatIcon, RouterLink, RouterLinkActive, MatButton],
 })
 export class LobbyComponent implements OnInit, OnDestroy {
   waitingForOtherPlayer = true;

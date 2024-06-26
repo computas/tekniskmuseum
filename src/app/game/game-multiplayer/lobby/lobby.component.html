@@ -2,12 +2,16 @@
   <div class="container">
     <div><img class="logo" src="assets/logo/IO-logo-inverted_transparent-bg.png" alt="logo" /></div>
     <div class="waiting-text">Venter på spiller 2</div>
-    <div *ngIf="waitingForOtherPlayer">
-      <mat-spinner></mat-spinner>
-    </div>
-    <div *ngIf="!waitingForOtherPlayer">
-      <mat-icon class="check-icon" aria-label="Example home icon">done</mat-icon>
-    </div>
+    @if (waitingForOtherPlayer) {
+      <div>
+        <mat-spinner></mat-spinner>
+      </div>
+    }
+    @if (!waitingForOtherPlayer) {
+      <div>
+        <mat-icon class="check-icon" aria-label="Example home icon">done</mat-icon>
+      </div>
+    }
     <a routerLink="/" routerLinkActive="active">
       <button mat-raised-button class="home-button">
         <div class="button-text">
