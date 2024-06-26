@@ -3,7 +3,7 @@ import { BehaviorSubject, interval, Observable, Subscription } from 'rxjs';
 import { ImageService } from './services/image.service';
 import { take } from 'rxjs/operators';
 import { DrawingService } from './services/drawing.service';
-import { MultiplayerService, GAMELEVEL } from '../game-multiplayer/services/multiplayer.service';
+import { MultiplayerService, GAMESTATE } from '../game-multiplayer/services/multiplayer.service';
 import { Result } from '../../shared/models/interfaces';
 import { SoundService } from './services/sound.service';
 import { UpperCasePipe } from '@angular/common';
@@ -34,10 +34,10 @@ export class GameDrawComponent implements OnInit, OnDestroy {
 
   isDrawing = false;
   hasLeftCanvas = false;
-  timeLeft = 20.0;
+  timeLeft = 20.0; //Fix
   isBlankImage = true;
 
-  score = 333;
+  score = 333; //Fix
 
   clockColor = 'initial';
   private readonly resultImageSize = 1024;
@@ -118,7 +118,7 @@ export class GameDrawComponent implements OnInit, OnDestroy {
     this.addResultAndResize(result).subscribe({
       next: (dataUrlHighRes) => {
         this.drawingService.lastResult.imageData = dataUrlHighRes;
-        this.multiplayerService.changestate(GAMELEVEL.intermediateResult);
+        this.multiplayerService.changestate(GAMESTATE.intermediateResult);
       },
     });
   }

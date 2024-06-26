@@ -4,7 +4,7 @@ import { take, tap } from 'rxjs/operators';
 import { DrawingService } from '../game-draw/services/drawing.service';
 import { Router } from '@angular/router';
 import { routes } from '../../shared/models/routes';
-import { MultiplayerService, GAMELEVEL } from '../game-multiplayer/services/multiplayer.service';
+import { MultiplayerService, GAMESTATE } from '../game-multiplayer/services/multiplayer.service';
 import { MatIcon } from '@angular/material/icon';
 import { MatButton } from '@angular/material/button';
 import { MatProgressSpinner } from '@angular/material/progress-spinner';
@@ -98,7 +98,7 @@ export class GameWordToDrawComponent implements OnInit, OnDestroy {
         tap(() => {
           this.timeLeft--;
           if (this.timeLeft <= 0) {
-            this.multiplayerService.stateInfo = { ...this.multiplayerService.stateInfo, gameLevel: GAMELEVEL.drawing };
+            this.multiplayerService.stateInfo = { ...this.multiplayerService.stateInfo, gameState: GAMESTATE.drawing };
           }
         })
       );

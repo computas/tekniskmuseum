@@ -1,7 +1,7 @@
 import { Component, OnInit, Output, EventEmitter } from '@angular/core';
 import { Router } from '@angular/router';
 import { routes } from '../../shared/models/routes';
-import { MultiplayerService, GAMELEVEL } from '../game-multiplayer/services/multiplayer.service';
+import { MultiplayerService, GAMESTATE } from '../game-multiplayer/services/multiplayer.service';
 import { WebSocketService } from '../game-multiplayer/services/web-socket.service';
 import { SocketEndpoints } from '../../shared/models/websocketEndpoints';
 import { MatButton } from '@angular/material/button';
@@ -43,7 +43,7 @@ export class GamePickDifficultyComponent {
           this.multiplayerService.stateInfo = {
             ...this.multiplayerService.stateInfo,
             label: res.label,
-            gameLevel: GAMELEVEL.waitingForWord,
+            gameState: GAMESTATE.waitingForWord,
           };
         }
       });

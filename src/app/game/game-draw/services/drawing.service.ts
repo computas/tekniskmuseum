@@ -11,7 +11,7 @@ import { endpoints } from '../../../shared/models/endpoints';
 })
 export class DrawingService {
   baseUrl = endpoints.TEKNISKBACKEND;
-  totalGuess = 3;
+  totalGuess = 3; //Fix
   playerid = '';
   labels = [];
   label = '';

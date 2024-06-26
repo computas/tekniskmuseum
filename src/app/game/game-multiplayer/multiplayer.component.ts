@@ -2,7 +2,7 @@ import { Component, OnInit, OnDestroy } from '@angular/core';
 import { trigger, style, animate, transition } from '@angular/animations';
 import { Router } from '@angular/router';
 
-import { MultiplayerService, GAMELEVEL } from './services/multiplayer.service';
+import { MultiplayerService, GAMESTATE } from './services/multiplayer.service';
 import { WebSocketService } from './services/web-socket.service';
 import { routes } from '../../shared/models/routes';
 import { Subscription } from 'rxjs';
@@ -53,8 +53,8 @@ import { GameInfoComponent } from '../game-info/game-info.component';
   ],
 })
 export class MultiplayerComponent implements OnInit, OnDestroy {
-  gameLevel: string | undefined;
-  GAMELEVEL = GAMELEVEL;
+  gameState: string | undefined;
+  GAMESTATE = GAMESTATE;
   constructor(
     private multiplayerService: MultiplayerService,
     private webSocketService: WebSocketService,
@@ -69,7 +69,7 @@ export class MultiplayerComponent implements OnInit, OnDestroy {
       this.multiplayerService.isMultiplayer = true;
     }
     this.webSocketService.startSockets();
-    this.gameLevel = this.multiplayerService.stateInfo.gameLevel;
+    this.gameState = this.multiplayerService.stateInfo.gameState;
     this.subs.add(
       this.multiplayerService.roundOverListener().subscribe(() => {
         this.multiplayerService.stateInfo = { ...this.multiplayerService.stateInfo, ready: true };
@@ -77,7 +77,7 @@ export class MultiplayerComponent implements OnInit, OnDestroy {
     );
     this.subs.add(
       this.multiplayerService.stateInfo$.subscribe((data) => {
-        this.gameLevel = data.gameLevel;
+        this.gameState = data.gameState;
       })
     );
     this.subs.add(

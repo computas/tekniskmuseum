@@ -5,7 +5,7 @@ import { map, take, tap } from 'rxjs/operators';
 import { SocketEndpoints } from '../../../shared/models/websocketEndpoints';
 import { PairingService } from './pairing.service';
 
-export enum GAMELEVEL {
+export enum GAMESTATE {
   lobby = 'LOBBY',
   drawing = 'DRAWING',
   intermediateResult = 'INTERMEDIATERESULT',
@@ -18,7 +18,7 @@ export interface GameState {
   player_id: string | undefined;
   game_id: string | undefined;
   ready: boolean | undefined;
-  gameLevel: GAMELEVEL | undefined;
+  gameState: GAMESTATE | undefined;
   guessUsed: number | undefined;
   score: number | undefined;
   label: string | undefined;
@@ -37,7 +37,7 @@ export class MultiplayerService {
 
   private initialState: GameState = {
     player_nr: undefined,
-    gameLevel: GAMELEVEL.lobby,
+    gameState: GAMESTATE.lobby,
     game_id: undefined,
     player_id: undefined,
     guessUsed: 0,
@@ -68,7 +68,7 @@ export class MultiplayerService {
           this.stateInfo = el;
         }
         if (el.ready) {
-          this.stateInfo = { ...this.stateInfo, ready: el.ready, gameLevel: GAMELEVEL.howToPlay };
+          this.stateInfo = { ...this.stateInfo, ready: el.ready, gameState: GAMESTATE.howToPlay };
         }
       })
     );
@@ -119,10 +119,10 @@ export class MultiplayerService {
     this.webSocketService.disconnect();
   }
 
-  changestate(gameLevel: GAMELEVEL) {
+  changestate(gameState: GAMESTATE) {
     this.stateInfo = {
       ...this.stateInfo,
-      gameLevel,
+      gameState,
     };
   }
 

@@ -1,7 +1,7 @@
 import { Component, OnInit, EventEmitter, Output, OnDestroy } from '@angular/core';
 import { Result } from '../../shared/models/interfaces';
 import { DrawingService } from '../game-draw/services/drawing.service';
-import { MultiplayerService, GAMELEVEL } from '../game-multiplayer/services/multiplayer.service';
+import { MultiplayerService, GAMESTATE } from '../game-multiplayer/services/multiplayer.service';
 import { Router } from '@angular/router';
 import { routes } from '../../shared/models/routes';
 import { MatProgressSpinner } from '@angular/material/progress-spinner';
@@ -48,7 +48,7 @@ export class GameIntermediateResultComponent implements OnInit, OnDestroy {
         if (res) {
           this.multiplayerService.stateInfo = {
             ...this.multiplayerService.stateInfo,
-            gameLevel: GAMELEVEL.waitingForWord,
+            gameState: GAMESTATE.waitingForWord,
           };
         }
       });
@@ -73,7 +73,7 @@ export class GameIntermediateResultComponent implements OnInit, OnDestroy {
     if (this.multiplayerService.isMultiplayer && this.multiplayerService.stateInfo.ready) {
       this.multiplayerService.stateInfo = {
         ...this.multiplayerService.stateInfo,
-        gameLevel: GAMELEVEL.waitingForWord,
+        gameState: GAMESTATE.waitingForWord,
       };
     } else {
       this.nextGuess.next(true);
@@ -84,7 +84,7 @@ export class GameIntermediateResultComponent implements OnInit, OnDestroy {
     if (this.multiplayerService.isMultiplayer && this.gameOver) {
       this.multiplayerService.stateInfo = {
         ...this.multiplayerService.stateInfo,
-        gameLevel: GAMELEVEL.showResult,
+        gameState: GAMESTATE.showResult,
       };
     } else {
       this.finalResult.next(true);
