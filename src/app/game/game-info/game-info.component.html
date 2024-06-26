@@ -3,10 +3,10 @@
     <div><img class="logo" src="assets/logo/IO-logo-inverted_transparent-bg.png" alt="logo" /></div>
     <div class="game-info-text-content">
       @if (isSinglePlayer) {
-        <h1 class="player-mode"><mat-icon>person</mat-icon>1 spiller</h1>
+        <h1 class="player-mode"><mat-icon>person</mat-icon>{{ 'PLAYER_MODE_SINGLE' | translate }}</h1>
       }
       @if (isMultiPlayer) {
-        <h1 class="player-mode"><mat-icon>people_alt</mat-icon>2 spillere</h1>
+        <h1 class="player-mode"><mat-icon>people_alt</mat-icon>{{ 'PLAYER_MODE_MULTI' | translate }}</h1>
       }
       <div class="game-info-text-content-list">
         <div class="avatar">
@@ -14,19 +14,19 @@
         </div>
         <div class="game-info-text-content-list-text">
           @if (isSinglePlayer) {
-            <h1 class="game-info-text-header">Slik spiller du:</h1>
+            <h1 class="game-info-text-header">{{ 'HOW_TO_PLAY_SINGLE' | translate }}</h1>
           }
           @if (isMultiPlayer) {
-            <h1 class="game-info-text-header">Slik spiller dere:</h1>
+            <h1 class="game-info-text-header">{{ 'HOW_TO_PLAY_MULTI' | translate }}</h1>
           }
           <ol class="game-info-text-list">
-            <li>Tegn ord</li>
-            <li>IO gjetter</li>
+            <li>{{ 'DRAW_WORD' | translate }}</li>
+            <li>{{ 'IO_GUESSES' | translate }}</li>
             @if (isSinglePlayer) {
-              <li>Tre runder</li>
+              <li>{{ 'NUMBER_OF_ROUNDS' | translate }}</li>
             }
             @if (isMultiPlayer) {
-              <li>Best av tre vinner!</li>
+              <li>{{ 'BEST_OF_THREE' | translate }}</li>
             }
           </ol>
         </div>
@@ -34,12 +34,12 @@
       <div class="game-info-footer">
         <button mat-raised-button class="button" id="back-button" (click)="goToLanding()">
           <div class="button-text">
-            <mat-icon class="button-icon" aria-label="Example home icon">arrow_back_ios</mat-icon>Tilbake
+            <mat-icon class="button-icon" aria-label="Example home icon">arrow_back_ios</mat-icon>{{ 'BACK_BUTTON' | translate }}
           </div>
         </button>
         <button mat-raised-button class="button" id="get-word-button" (click)="goToDifficultyPicker()">
           <div class="button-text">
-            Neste
+            {{ 'START_BUTTON' | translate }}
             <mat-icon class="button-icon play_arrow" aria-label="play_arrow">arrow_forward_ios</mat-icon>
           </div>
         </button>
