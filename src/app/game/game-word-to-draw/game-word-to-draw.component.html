@@ -5,7 +5,7 @@
       <h1 class="playernr">Spiller {{ playernr }}</h1>
     }
     <div class="word-text">
-      <div class="words-remaining">{{ guessUsed }}/3</div>
+      <div class="words-remaining">{{ guessUsed }}/{{ totalGuess }}</div>
       <p class="word-draw">Tegn:</p>
       @if (loading) {
         <div>

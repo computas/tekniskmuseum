@@ -25,18 +25,19 @@ export class GameWordToDrawComponent implements OnInit, OnDestroy {
   ) {}
   isSinglePlayer = false;
   isMultiPlayer = false;
-  @Output() drawWord = new EventEmitter();
-  word = '';
-  guessUsed = 1;
-
-  timeLeft = 5;
-
-  loading = true;
   playernr = '';
+  totalGuess = this.drawingService.totalGuess;
+  guessUsed = 1;
+  timeLeft = 5; //Fix
+  loading = true;
+  
+  word = '';
+  @Output() drawWord = new EventEmitter();
 
   subscriptions = new Subscription();
   timerSubscription: Subscription | undefined;
 
+  
   ngOnInit(): void {
     if (this.router.url === `/${routes.SINGLEPLAYER}`) {
       this.isSinglePlayer = true;

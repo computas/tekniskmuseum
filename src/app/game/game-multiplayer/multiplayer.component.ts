@@ -91,7 +91,7 @@ export class MultiplayerComponent implements OnInit, OnDestroy {
     this.subs.add(
       this.multiplayerService.endGameListener().subscribe((data: string) => {
         const otherplayer = JSON.parse(data);
-        this.multiplayerService._opponentScore.next(otherplayer);
+        this.multiplayerService.opponentScore.next(otherplayer);
       })
     );
   }

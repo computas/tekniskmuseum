@@ -50,7 +50,7 @@ export class MultiplayerService {
 
   readonly stateInfo$ = this._stateInfo.asObservable();
 
-  public _opponentScore = new ReplaySubject<any>(1);
+  public opponentScore = new ReplaySubject<any>(1);
 
   constructor(private webSocketService: WebSocketService, private pairing: PairingService) {}
 
