@@ -5,19 +5,30 @@ import { MatButton } from '@angular/material/button';
 import { RouterLink, RouterLinkActive } from '@angular/router';
 import { MatIcon } from '@angular/material/icon';
 import { MatProgressSpinner } from '@angular/material/progress-spinner';
+import { TranslationService } from '@/app/services/translation.service';
+import { TranslatePipe } from '@/app/pipes/translation.pipe';
 
 @Component({
   selector: 'app-lobby',
   templateUrl: './lobby.component.html',
   styleUrls: ['./lobby.component.scss'],
   standalone: true,
-  imports: [MatProgressSpinner, MatIcon, RouterLink, RouterLinkActive, MatButton],
+  imports: [
+    MatProgressSpinner, 
+    MatIcon, RouterLink, 
+    RouterLinkActive, 
+    MatButton,
+    TranslatePipe
+  ],
 })
 export class LobbyComponent implements OnInit, OnDestroy {
   waitingForOtherPlayer = true;
   subscriptions = new Subscription();
 
-  constructor(public multiPlayerService: MultiplayerService) {}
+  constructor(
+    public multiPlayerService: MultiplayerService,
+    private translationService: TranslationService
+  ) {}
 
   ngOnInit(): void {
     this.subscriptions.add(this.multiPlayerService.joinGame().subscribe());
@@ -28,6 +39,7 @@ export class LobbyComponent implements OnInit, OnDestroy {
         }
       })
     );
+    this.translationService.loadTranslations(this.translationService.getCurrentLang()).subscribe();
   }
 
   ngOnDestroy() {
