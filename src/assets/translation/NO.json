@@ -14,7 +14,11 @@
     "BEST_OF_THREE": "Best av tre vinner!",
     "BACK_BUTTON": "Tilbake",
     "NEXT_BUTTON": "Neste",
-    "START_BUTTON": "Start",
+
+    "DIFFICULTY_HEADER": "Hvilken vanskelighetsgrad vil du ha?",
+    "EASY_BUTTON": "Lett",
+    "MEDIUM_BUTTON": "Middels",
+    "HARD_BUTTON": "Vanskelig",
     
     "DRAW_LABEL": "Tegn: ",
     "DELETE_ICON": "Slett",

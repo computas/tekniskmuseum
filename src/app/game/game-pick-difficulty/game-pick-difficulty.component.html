@@ -7,21 +7,21 @@
             <img class="avatar-image" src="assets/illustrations/IO_Illustrasjoner-1_1360x939.png" alt="avatar" />
           </div>
           <div class="game-pick-difficulty-info-text">
-            <h1 class="game-pick-difficulty-text-header" >Hvilken vanskelighetsgrad vil du ha?</h1>
+            <h1 class="game-pick-difficulty-text-header">{{ 'DIFFICULTY_HEADER' | translate }}</h1>
             <div class="game-pick-difficulty-button-container">
               <button mat-raised-button class="button" id="easy-button" (click)="startDrawing(1)">
                 <div class="button-text">
-                  <mat-icon class="button-icon" aria-label="Example home icon">arrow_forward_ios</mat-icon>Lett
+                  <mat-icon class="button-icon" aria-label="Example home icon">arrow_forward_ios</mat-icon>{{ 'EASY_BUTTON' | translate }}
                 </div>
               </button>
               <button mat-raised-button class="button" id="medium-button" (click)="startDrawing(2)">
                 <div class="button-text">
-                  <mat-icon class="button-icon" aria-label="Example home icon">arrow_forward_ios</mat-icon>Middels
+                  <mat-icon class="button-icon" aria-label="Example home icon">arrow_forward_ios</mat-icon>{{ 'MEDIUM_BUTTON' | translate }}
                 </div>
               </button>
               <button mat-raised-button class="button" id="hard-button" (click)="startDrawing(3)">
                 <div class="button-text">
-                  <mat-icon class="button-icon" aria-label="Example home icon">arrow_forward_ios</mat-icon>Vanskelig
+                  <mat-icon class="button-icon" aria-label="Example home icon">arrow_forward_ios</mat-icon>{{ 'HARD_BUTTON' | translate }}
                 </div>
               </button>
             </div>

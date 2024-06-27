@@ -14,7 +14,11 @@
     "BEST_OF_THREE": "Best of three wins!",
     "BACK_BUTTON": "Back",
     "NEXT_BUTTON": "Next",
-    "START_BUTTON": "Start",
+
+    "DIFFICULTY_HEADER": "What difficulty level do you prefer?",
+    "EASY_BUTTON": "Easy",
+    "MEDIUM_BUTTON": "Medium",
+    "HARD_BUTTON": "Hard",
 
     "DRAW_LABEL": "Draw: ",
     "DELETE_ICON": "delete",
