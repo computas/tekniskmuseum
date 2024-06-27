@@ -21,8 +21,9 @@
     "HARD_BUTTON": "Hard",
 
     "DRAW_LABEL": "Draw: ",
-    "DELETE_ICON": "delete",
-    "AI_GUESS_LABEL": "Hmm... could it be ",
+    "DELETE_ICON": "Delete",
+    "AI_THINKING_LABEL": "Hmm... ",
+    "AI_GUESS_LABEL": "could it be ",
 
     "WINNER_TEXT": "You won!",
     "WINNER_POINTS_TEXT": "You got: ",

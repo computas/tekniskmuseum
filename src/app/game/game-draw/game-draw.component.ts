@@ -9,13 +9,20 @@ import { SoundService } from './services/sound.service';
 import { UpperCasePipe } from '@angular/common';
 import { MatIconButton } from '@angular/material/button';
 import { MatIcon } from '@angular/material/icon';
+import { TranslationService } from '@/app/services/translation.service';
+import { TranslatePipe } from '@/app/pipes/translation.pipe';
 
 @Component({
   selector: 'app-drawing',
   templateUrl: './game-draw.component.html',
   styleUrls: ['./game-draw.component.scss'],
   standalone: true,
-  imports: [MatIcon, MatIconButton, UpperCasePipe],
+  imports: [
+    MatIcon, 
+    MatIconButton, 
+    UpperCasePipe,
+    TranslatePipe
+  ],
 })
 export class GameDrawComponent implements OnInit, OnDestroy {
   canvas = viewChild.required<ElementRef<HTMLCanvasElement>>('canvas');
@@ -61,7 +68,8 @@ export class GameDrawComponent implements OnInit, OnDestroy {
     private imageService: ImageService,
     private drawingService: DrawingService,
     private multiplayerService: MultiplayerService,
-    private soundService: SoundService
+    private soundService: SoundService,
+    private translationService: TranslationService
   ) {}
 
   ngOnInit(): void {
@@ -80,6 +88,7 @@ export class GameDrawComponent implements OnInit, OnDestroy {
       this.setUpMultiplayer();
     }
     this.startGame();
+    this.translationService.loadTranslations(this.translationService.getCurrentLang()).subscribe();
   }
 
   setUpMultiplayer() {

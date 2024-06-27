@@ -22,7 +22,8 @@
     
     "DRAW_LABEL": "Tegn: ",
     "DELETE_ICON": "Slett",
-    "AI_GUESS_LABEL": "Hmm... kan det være",
+    "AI_THINKING_LABEL": "Hmm... ",
+    "AI_GUESS_LABEL": "kan det være",
     
     "WINNER_TEXT": "Du vant!",
     "WINNER_POINTS_TEXT": "Du fikk: ",
