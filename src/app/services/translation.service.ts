@@ -30,4 +30,8 @@ export class TranslationService {
     getCurrentLang(): string {
         return this.langSubject.getValue();
     }
+
+    changeLanguage(lang:string) {
+        this.loadTranslations(lang).subscribe();
+    }
 }

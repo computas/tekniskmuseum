@@ -9,6 +9,7 @@ import { bootstrapApplication } from '@angular/platform-browser';
 import { InfoDialogComponent } from './app/admin/info-dialog/info-dialog.component';
 import { withInterceptorsFromDi, provideHttpClient, HttpClient } from '@angular/common/http';
 import { provideRouter } from '@angular/router';
+import { TranslationService } from './app/services/translation.service';
 
 if (environment.production) {
   enableProdMode();
@@ -24,3 +25,7 @@ bootstrapApplication(AppComponent, {
     importProvidersFrom(HttpClient)
   ],
 }).catch((err) => console.error(err));
+
+// const translationService = new TranslationService(new HttpClient({ }));
+// const savedLanguage = localStorage.getItem('language') || 'EN';
+// translationService.changeLanguage(savedLanguage);
