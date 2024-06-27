@@ -7,6 +7,8 @@ import { MatButton } from '@angular/material/button';
 import { TranslationService } from '../services/translation.service';
 import { TranslatePipe } from '../pipes/translation.pipe';
 import { HttpClient } from '@angular/common/http';
+import { Observable } from 'rxjs';
+import { CommonModule } from '@angular/common';
 
 @Component({
     selector: 'app-welcome',
@@ -18,19 +20,23 @@ import { HttpClient } from '@angular/common/http';
         RouterLinkActive,
         MatButton,
         MatIcon,
-        TranslatePipe
+        TranslatePipe,
+        CommonModule
     ],
     providers: [TranslationService, HttpClient]
 })
 export class WelcomeComponent implements OnInit {
   private headerClicks = 0;
+  currentLang$: Observable<string>;
   
   constructor(
     private multiplayerService: MultiplayerService,
     private drawingService: DrawingService,
     private router: Router,
     private translationService: TranslationService
-  ) {}
+  ) {
+    this.currentLang$ = this.translationService.lang$
+  }
 
   ngOnInit() {
     this.multiplayerService.clearState();
