@@ -20,7 +20,9 @@
     "MEDIUM_BUTTON": "Medium",
     "HARD_BUTTON": "Hard",
 
+    "PLAYER_LABEL": "Player",
     "DRAW_LABEL": "Draw: ",
+    "DRAW_BUTTON": "Draw",
     "DELETE_ICON": "Delete",
     "AI_THINKING_LABEL": "Hmm... ",
     "AI_GUESS_LABEL": "could it be ",

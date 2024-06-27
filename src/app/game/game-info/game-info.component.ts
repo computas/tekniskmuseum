@@ -8,7 +8,6 @@ import { MatButton } from '@angular/material/button';
 import { MatIcon } from '@angular/material/icon';
 import { TranslationService } from '@/app/services/translation.service';
 import { TranslatePipe } from '@/app/pipes/translation.pipe';
-import { HttpClient } from '@angular/common/http';
 
 @Component({
   selector: 'app-game-info',

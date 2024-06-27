@@ -9,20 +9,30 @@ import { MatIcon } from '@angular/material/icon';
 import { MatButton } from '@angular/material/button';
 import { MatProgressSpinner } from '@angular/material/progress-spinner';
 import { UpperCasePipe } from '@angular/common';
+import { TranslationService } from '@/app/services/translation.service';
+import { TranslatePipe } from '@/app/pipes/translation.pipe';
 
 @Component({
   selector: 'app-game-word-to-draw',
   templateUrl: './game-word-to-draw.component.html',
   styleUrls: ['./game-word-to-draw.component.scss'],
   standalone: true,
-  imports: [MatProgressSpinner, MatButton, MatIcon, UpperCasePipe],
+  imports: [
+    MatProgressSpinner, 
+    MatButton, 
+    MatIcon, 
+    UpperCasePipe,
+    TranslatePipe
+  ],
 })
 export class GameWordToDrawComponent implements OnInit, OnDestroy {
   constructor(
     private drawingService: DrawingService,
     private multiplayerService: MultiplayerService,
-    private router: Router
+    private router: Router,
+    private translationService: TranslationService
   ) {}
+
   isSinglePlayer = false;
   isMultiPlayer = false;
   @Output() drawWord = new EventEmitter();
@@ -89,6 +99,7 @@ export class GameWordToDrawComponent implements OnInit, OnDestroy {
         })
       );
     }
+    this.translationService.loadTranslations(this.translationService.getCurrentLang()).subscribe();
   }
 
   startTimer() {
