@@ -45,7 +45,7 @@
                 class="next-word-button"
                 (click)="getSummary()"
                 >
-                Oppsummering
+                {{ 'SUMMARY_BUTTON' | translate }}
               </button>
             }
             @if (!gameOver && !waitingForPlayer) {
@@ -54,11 +54,11 @@
                 class="next-word-button"
                 (click)="newDrawing()"
                 >
-                Neste ord
+                {{ 'NEXT_WORD_BUTTON' | translate }}
               </button>
             }
             @if (isMultiplayer && waitingForPlayer) {
-              <h1 class="waiting">Venter på spiller</h1>
+              <h1 class="waiting">{{ 'WAITING_FOR_PLAYER' | translate }}</h1>
             }
           </div>
         }

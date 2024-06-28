@@ -6,6 +6,8 @@ import { MultiplayerService } from '../game-multiplayer/services/multiplayer.ser
 import { MatButton } from '@angular/material/button';
 import { MatCardImage } from '@angular/material/card';
 import { TitleCasePipe } from '@angular/common';
+import { TranslationService } from '@/app/services/translation.service';
+import { TranslatePipe } from '@/app/pipes/translation.pipe';
 import { Subscription } from 'rxjs';
 
 @Component({
@@ -13,7 +15,12 @@ import { Subscription } from 'rxjs';
   templateUrl: './game-result.component.html',
   styleUrls: ['./game-result.component.scss'],
   standalone: true,
-  imports: [MatCardImage, MatButton, TitleCasePipe],
+  imports: [
+    MatCardImage, 
+    MatButton, 
+    TitleCasePipe,
+    TranslatePipe
+  ],
 })
 export class GameResultComponent implements OnInit {
   results: Result[] = [];
@@ -30,7 +37,8 @@ export class GameResultComponent implements OnInit {
   constructor(
     private drawingService: DrawingService,
     private multiplayerService: MultiplayerService,
-    private router: Router
+    private router: Router,
+    private translationService: TranslationService
   ) {}
 
   ngOnInit(): void {
@@ -74,6 +82,7 @@ export class GameResultComponent implements OnInit {
     } else {
       this.results = this.drawingService.results;
     }
+    this.translationService.loadTranslations(this.translationService.getCurrentLang()).subscribe();
   }
   ngOnDestroy(): void {
     this.getHighscoreSubscription?.unsubscribe();

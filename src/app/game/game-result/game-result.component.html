@@ -4,21 +4,21 @@
     @if (ismultiplayer && hasWon) {
       <div id="result-header" class="result-header-multi">
         <h1 class="result-header-multi">
-          <span class="winner">Du vant!</span>
-          <span class="winner-points">&nbsp;Du fikk: {{ score }} poeng</span>
+          <span class="winner">{{ 'WINNER_TEXT' | translate }}</span>
+          <span class="winner-points">&nbsp;{{ 'POINTS_INFO_TEXT' | translate }} {{ score }} {{ 'POINTS' | translate }}</span>
         </h1>
       </div>
     }
     @if (ismultiplayer && !hasWon) {
       <div id="result-header" class="result-header-multi">
         <h1 class="result-header-multi">
-          <span class="loser">Du tapte</span>
-          <span class="loser-points">&nbsp;Du fikk: {{ score }} poeng</span>
+          <span class="loser">{{ 'LOSER_TEXT' | translate }}</span>
+          <span class="loser-points">&nbsp;{{ 'POINTS_INFO_TEXT' | translate }} {{ score }} {{ 'POINTS' | translate }}</span>
         </h1>
       </div>
     }
     @if (!ismultiplayer) {
-      <h1 id="result-header">Ditt resultat:</h1>
+      <h1 id="result-header">{{ 'RESULT_TEXT' | translate }}</h1>
     }
     <div class="result-section">
       <h3 id="score-header">Poengsum: {{ score }} poeng</h3>
@@ -71,7 +71,7 @@
           <a href="/" class="link-float"
             ><button mat-raised-button class="btn btn-again">
             <span class="material-icons icon"> autorenew </span>
-            Spill igjen
+            {{ 'PLAY_AGAIN_BUTTON' | translate }}
           </button></a
           >
         </div>

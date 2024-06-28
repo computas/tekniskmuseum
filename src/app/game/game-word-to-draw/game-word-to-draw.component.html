@@ -2,11 +2,11 @@
   <div class="word-container">
     <div><img class="logo" src="assets/logo/IO-logo-inverted_transparent-bg.png" alt="logo" /></div>
     @if (isMultiPlayer) {
-      <h1 class="playernr">Spiller {{ playernr }}</h1>
+      <h1 class="playernr">{{ 'PLAYER_LABEL' | translate }} {{ playernr }}</h1>
     }
     <div class="word-text">
       <div class="words-remaining">{{ guessUsed }}/3</div>
-      <p class="word-draw">Tegn:</p>
+      <p class="word-draw">{{ 'DRAW_LABEL' | translate }}</p>
       @if (loading) {
         <div>
           <mat-spinner class="white-spinner" id="white"></mat-spinner>
@@ -31,7 +31,7 @@
         <div>
           @if (isSinglePlayer) {
             <button mat-raised-button class="draw-word-button" (click)="drawWord.emit(true)">
-              Tegn
+              {{ 'DRAW_BUTTON' | translate }}
               <mat-icon class="button-icon play_arrow" aria-label="play_arrow">arrow_forward_ios</mat-icon>
             </button>
           }
