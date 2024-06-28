@@ -22,10 +22,7 @@ bootstrapApplication(AppComponent, {
     provideHttpClient(withInterceptorsFromDi()),
     provideRouter(routes),
     provideAnimations(),
-    importProvidersFrom(HttpClient)
+    importProvidersFrom(HttpClient),
+    TranslationService
   ],
 }).catch((err) => console.error(err));
-
-// const translationService = new TranslationService(new HttpClient({ }));
-// const savedLanguage = localStorage.getItem('language') || 'EN';
-// translationService.changeLanguage(savedLanguage);

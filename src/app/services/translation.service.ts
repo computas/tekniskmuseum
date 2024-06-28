@@ -8,7 +8,7 @@ import { map } from 'rxjs/operators';
 })
 export class TranslationService {
     private translations: any = {};
-    private langSubject = new BehaviorSubject<string>('EN');
+    private langSubject = new BehaviorSubject<string>('NO');
     lang$ = this.langSubject.asObservable();
 
     constructor(private http: HttpClient) { }
@@ -33,5 +33,7 @@ export class TranslationService {
 
     changeLanguage(lang:string) {
         this.loadTranslations(lang).subscribe();
+        localStorage.setItem('language', lang);
+        this.langSubject.next(lang);
     }
 }

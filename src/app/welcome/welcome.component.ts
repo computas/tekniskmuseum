@@ -41,7 +41,9 @@ export class WelcomeComponent implements OnInit {
   ngOnInit() {
     this.multiplayerService.clearState();
     this.drawingService.clearState();
+    const savedLanguage = localStorage.getItem('language') || 'NO';
     this.translationService.loadTranslations(this.translationService.getCurrentLang()).subscribe();
+    //this.translationService.loadTranslations(savedLanguage).subscribe();
   }
 
   goToAdmin() {
@@ -54,5 +56,6 @@ export class WelcomeComponent implements OnInit {
 
   changeLanguage(lang: string) {
     this.translationService.loadTranslations(lang).subscribe();
+    this.translationService.changeLanguage(lang);
   }
 }
