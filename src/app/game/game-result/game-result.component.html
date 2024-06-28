@@ -21,6 +21,23 @@
       <h1 id="result-header">Ditt resultat:</h1>
     }
     <div class="result-section">
+      <h3 id="score-header">Poengsum: {{ score }} poeng</h3>
+      <div id="highscore-section">
+        @if (newHighscore) {
+          <div>
+            <h2 id="highscore-number" >Ny dagens highscore!</h2>
+          </div>
+        } @else {
+          <div id="not-highscore-section">
+            <h2 id="highscore-text">
+              Dagens highscore:
+            </h2>
+            <h2 id="highscore-number">
+              {{ todaysHighscore.toString() }}
+            </h2>
+          </div>
+        }
+      </div>
       <div id="result-card-container">
         @for (result of results; track result) {
           <div id="result-card">
