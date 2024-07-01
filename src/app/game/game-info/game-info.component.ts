@@ -52,7 +52,6 @@ export class GameInfoComponent implements OnInit {
       });
       this.webSocketService.listen(SocketEndpoints.END_GAME).subscribe();
     }
-    //this.translationService.loadTranslations(this.translationService.getCurrentLang()).subscribe();
   }
 
   goToDifficultyPicker() {

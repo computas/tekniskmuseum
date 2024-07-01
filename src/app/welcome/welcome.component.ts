@@ -6,8 +6,7 @@ import { MatIcon } from '@angular/material/icon';
 import { MatButton } from '@angular/material/button';
 import { TranslationService } from '../services/translation.service';
 import { TranslatePipe } from '../pipes/translation.pipe';
-import { HttpClient } from '@angular/common/http';
-import { Observable } from 'rxjs';
+import { Observable, Subject, takeUntil } from 'rxjs';
 import { CommonModule } from '@angular/common';
 
 @Component({
@@ -23,11 +22,11 @@ import { CommonModule } from '@angular/common';
         TranslatePipe,
         CommonModule
     ],
-    providers: [TranslationService, HttpClient]
 })
 export class WelcomeComponent implements OnInit {
   private headerClicks = 0;
   currentLang$: Observable<string>;
+  private destroy$ = new Subject<void>();
   
   constructor(
     private multiplayerService: MultiplayerService,
@@ -42,8 +41,8 @@ export class WelcomeComponent implements OnInit {
     this.multiplayerService.clearState();
     this.drawingService.clearState();
     const savedLanguage = localStorage.getItem('language') || 'NO';
-    this.translationService.loadTranslations(this.translationService.getCurrentLang()).subscribe();
-    //this.translationService.loadTranslations(savedLanguage).subscribe();
+    //this.translationService.loadTranslations(this.translationService.getCurrentLang()).subscribe();
+    this.translationService.loadTranslations(savedLanguage).pipe(takeUntil(this.destroy$)).subscribe();
   }
 
   goToAdmin() {
@@ -55,7 +54,12 @@ export class WelcomeComponent implements OnInit {
   }
 
   changeLanguage(lang: string) {
-    this.translationService.loadTranslations(lang).subscribe();
+    //this.translationService.loadTranslations(lang).subscribe();
     this.translationService.changeLanguage(lang);
+  }
+  
+  ngOnDestroy() {
+    this.destroy$.next();
+    this.destroy$.complete();
   }
 }
