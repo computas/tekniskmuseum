@@ -4,11 +4,12 @@ import { take, tap } from 'rxjs/operators';
 import { DrawingService } from '../game-draw/services/drawing.service';
 import { Router } from '@angular/router';
 import { routes } from '../../shared/models/routes';
-import { MultiplayerService, GAMELEVEL } from '../game-multiplayer/services/multiplayer.service';
+import { MultiplayerService, GAMESTATE } from '../game-multiplayer/services/multiplayer.service';
 import { MatIcon } from '@angular/material/icon';
 import { MatButton } from '@angular/material/button';
 import { MatProgressSpinner } from '@angular/material/progress-spinner';
 import { UpperCasePipe } from '@angular/common';
+import { GameConfigService } from '../game-config.service';
 import { TranslationService } from '@/app/services/translation.service';
 import { TranslatePipe } from '@/app/pipes/translation.pipe';
 
@@ -26,26 +27,30 @@ import { TranslatePipe } from '@/app/pipes/translation.pipe';
   ],
 })
 export class GameWordToDrawComponent implements OnInit, OnDestroy {
+  config = this.gameConfigService.getConfig; //getting the current/default set game level values (easy mode)
+  
+  isSinglePlayer = false;
+  isMultiPlayer = false;
+  playernr = '';
+  totalRounds = this.config.rounds;
+  guessUsed = 1;
+  timeLeft = 5; 
+  
+  loading = true;
+  
+  word = '';
+  @Output() drawWord = new EventEmitter();
+  
+  subscriptions = new Subscription();
+  timerSubscription: Subscription | undefined;
+  
   constructor(
+    private gameConfigService: GameConfigService, 
     private drawingService: DrawingService,
     private multiplayerService: MultiplayerService,
     private router: Router,
     private translationService: TranslationService
   ) {}
-
-  isSinglePlayer = false;
-  isMultiPlayer = false;
-  @Output() drawWord = new EventEmitter();
-  word = '';
-  guessUsed = 1;
-
-  timeLeft = 5;
-
-  loading = true;
-  playernr = '';
-
-  subscriptions = new Subscription();
-  timerSubscription: Subscription | undefined;
 
   ngOnInit(): void {
     if (this.router.url === `/${routes.SINGLEPLAYER}`) {
@@ -109,7 +114,7 @@ export class GameWordToDrawComponent implements OnInit, OnDestroy {
         tap(() => {
           this.timeLeft--;
           if (this.timeLeft <= 0) {
-            this.multiplayerService.stateInfo = { ...this.multiplayerService.stateInfo, gameLevel: GAMELEVEL.drawing };
+            this.multiplayerService.stateInfo = { ...this.multiplayerService.stateInfo, gameState: GAMESTATE.drawing };
           }
         })
       );

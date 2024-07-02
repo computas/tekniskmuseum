@@ -1,20 +1,20 @@
 <div>
-  @switch (gameLevel) {
-    @case (GAMELEVEL.howToPlay) {
+  @switch (gameState) {
+    @case (GAMESTATE.howToPlay) {
       <div [@enterAnimation]><app-game-info></app-game-info></div>
     }
-    @case (GAMELEVEL.waitingForWord) {
+    @case (GAMESTATE.waitingForWord) {
       <div [@enterAnimation]><app-game-word-to-draw></app-game-word-to-draw></div>
     }
-    @case (GAMELEVEL.drawing) {
+    @case (GAMESTATE.drawing) {
       <div [@enterAnimation]><app-drawing></app-drawing></div>
     }
-    @case (GAMELEVEL.intermediateResult) {
+    @case (GAMESTATE.intermediateResult) {
       <div [@enterAnimation]>
         <app-game-intermediate-result></app-game-intermediate-result>
       </div>
     }
-    @case (GAMELEVEL.showResult) {
+    @case (GAMESTATE.showResult) {
       <div [@enterAnimation]>
         <app-game-result></app-game-result>
       </div>

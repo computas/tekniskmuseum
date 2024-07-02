@@ -2,7 +2,8 @@ import { environment } from '@/environments/environment';
 
 export const endpoints = {
   TEKNISKBACKEND: environment.TEKNISKBACKEND_ENDPOINT,
-  ENDGAME: 'endGame',
+  POSTSCORE: 'postScore',
+  HIGHSCORE: 'viewHighScore',
   CLASSIFY: 'classify',
   GETLABEL: 'getLabel',
   STARTGAME: 'startGame',

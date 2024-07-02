@@ -9,17 +9,17 @@
           <div class="game-pick-difficulty-info-text">
             <h1 class="game-pick-difficulty-text-header">{{ 'DIFFICULTY_HEADER' | translate }}</h1>
             <div class="game-pick-difficulty-button-container">
-              <button mat-raised-button class="button" id="easy-button" (click)="startDrawing(1)">
+              <button mat-raised-button class="button" id="easy-button" (click)="startDrawing('easy')">
                 <div class="button-text">
                   <mat-icon class="button-icon" aria-label="Example home icon">arrow_forward_ios</mat-icon>{{ 'EASY_BUTTON' | translate }}
                 </div>
               </button>
-              <button mat-raised-button class="button" id="medium-button" (click)="startDrawing(2)">
+              <button mat-raised-button class="button" id="medium-button" (click)="startDrawing('medium')">
                 <div class="button-text">
                   <mat-icon class="button-icon" aria-label="Example home icon">arrow_forward_ios</mat-icon>{{ 'MEDIUM_BUTTON' | translate }}
                 </div>
               </button>
-              <button mat-raised-button class="button" id="hard-button" (click)="startDrawing(3)">
+              <button mat-raised-button class="button" id="hard-button" (click)="startDrawing('hard')">
                 <div class="button-text">
                   <mat-icon class="button-icon" aria-label="Example home icon">arrow_forward_ios</mat-icon>{{ 'HARD_BUTTON' | translate }}
                 </div>
