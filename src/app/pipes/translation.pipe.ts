@@ -7,7 +7,6 @@ import { TranslationService } from '../services/translation.service';
     pure: false
 })
 export class TranslatePipe implements PipeTransform {
-    //constructor(private translationService: TranslationService) { }
     private translationService = inject(TranslationService);
     
     transform(value: string): string {

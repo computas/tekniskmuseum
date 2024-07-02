@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable, BehaviorSubject } from 'rxjs';
-import { map } from 'rxjs/operators';
+import { distinctUntilChanged, map } from 'rxjs/operators';
 
 @Injectable({
     providedIn: 'root'
@@ -9,12 +9,11 @@ import { map } from 'rxjs/operators';
 export class TranslationService {
     private translations: any = {};
     private langSubject = new BehaviorSubject<string>('NO');
-    lang$ = this.langSubject.asObservable();
+    lang$ = this.langSubject.asObservable().pipe(distinctUntilChanged());
 
     constructor(private http: HttpClient) { }
     
     loadTranslations(lang: string): Observable<any> {
-        console.log(`Loading translations for ${lang}`);    // SLETT MEG SENERE!
         return this.http.get(`/assets/translation/${lang}.json`).pipe(
             map(translations => {
                 this.translations = translations;
@@ -32,7 +31,7 @@ export class TranslationService {
         return this.langSubject.getValue();
     }
 
-    changeLanguage(lang:string) {
+    changeLanguage(lang: string) {
         // check to avoid infinite loops
         if (this.getCurrentLang() !== lang) {
             this.loadTranslations(lang).subscribe(() => {
@@ -40,11 +39,12 @@ export class TranslationService {
                 // send when the translation is loaded
                 this.langSubject.next(lang)
             })
-        } else {
-            console.log(`Loading is already ${lang}`);  //SLETT MEG SENERE
         }
-        // this.loadTranslations(lang).subscribe();
-        // localStorage.setItem('language', lang);
-        // this.langSubject.next(lang);
+    }
+
+    setLanguage(lang: string) {
+        if (this.getCurrentLang() !== lang) {
+            this.langSubject.next(lang);
+        }
     }
 }
