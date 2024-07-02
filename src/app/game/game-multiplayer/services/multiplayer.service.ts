@@ -46,7 +46,7 @@ export class MultiplayerService {
       `{ "pair_id": "${this.pairing.getPairID()}", "difficulty_id": "${difficulty_id}"}`
     );
     return this.webSocketService.listen(SocketEndpoints.JOIN_GAME).pipe(
-      tap((data: any) => {
+      tap((data: string | JoinGameData | JoinGameReady) => {
         const el: GameState = data as GameState;
         if (el && el.game_id) {
           this.stateInfo = el;
