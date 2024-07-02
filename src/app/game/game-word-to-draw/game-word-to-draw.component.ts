@@ -10,13 +10,21 @@ import { MatButton } from '@angular/material/button';
 import { MatProgressSpinner } from '@angular/material/progress-spinner';
 import { UpperCasePipe } from '@angular/common';
 import { GameConfigService } from '../game-config.service';
+import { TranslationService } from '@/app/services/translation.service';
+import { TranslatePipe } from '@/app/pipes/translation.pipe';
 
 @Component({
   selector: 'app-game-word-to-draw',
   templateUrl: './game-word-to-draw.component.html',
   styleUrls: ['./game-word-to-draw.component.scss'],
   standalone: true,
-  imports: [MatProgressSpinner, MatButton, MatIcon, UpperCasePipe],
+  imports: [
+    MatProgressSpinner, 
+    MatButton, 
+    MatIcon, 
+    UpperCasePipe,
+    TranslatePipe
+  ],
 })
 export class GameWordToDrawComponent implements OnInit, OnDestroy {
   config = this.gameConfigService.getConfig; //getting the current/default set game level values (easy mode)
@@ -40,9 +48,10 @@ export class GameWordToDrawComponent implements OnInit, OnDestroy {
     private gameConfigService: GameConfigService, 
     private drawingService: DrawingService,
     private multiplayerService: MultiplayerService,
-    private router: Router
+    private router: Router,
+    private translationService: TranslationService
   ) {}
-  
+
   ngOnInit(): void {
     if (this.router.url === `/${routes.SINGLEPLAYER}`) {
       this.isSinglePlayer = true;
@@ -95,6 +104,7 @@ export class GameWordToDrawComponent implements OnInit, OnDestroy {
         })
       );
     }
+    this.translationService.loadTranslations(this.translationService.getCurrentLang()).subscribe();
   }
 
   startTimer() {

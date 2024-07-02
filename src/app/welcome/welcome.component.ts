@@ -4,6 +4,12 @@ import { DrawingService } from '../game/game-draw/services/drawing.service';
 import { Router, RouterLink, RouterLinkActive } from '@angular/router';
 import { MatIcon } from '@angular/material/icon';
 import { MatButton } from '@angular/material/button';
+import { TranslationService } from '../services/translation.service';
+import { TranslatePipe } from '../pipes/translation.pipe';
+import { HttpClient } from '@angular/common/http';
+import { Observable } from 'rxjs';
+import { CommonModule } from '@angular/common';
+
 @Component({
     selector: 'app-welcome',
     templateUrl: './welcome.component.html',
@@ -14,19 +20,30 @@ import { MatButton } from '@angular/material/button';
         RouterLinkActive,
         MatButton,
         MatIcon,
+        TranslatePipe,
+        CommonModule
     ],
+    providers: [TranslationService, HttpClient]
 })
 export class WelcomeComponent implements OnInit {
   private headerClicks = 0;
+  currentLang$: Observable<string>;
+  
   constructor(
     private multiplayerService: MultiplayerService,
     private drawingService: DrawingService,
-    private router: Router
-  ) {}
+    private router: Router,
+    private translationService: TranslationService
+  ) {
+    this.currentLang$ = this.translationService.lang$
+  }
 
   ngOnInit() {
     this.multiplayerService.clearState();
     this.drawingService.clearState();
+    const savedLanguage = localStorage.getItem('language') || 'NO';
+    this.translationService.loadTranslations(this.translationService.getCurrentLang()).subscribe();
+    //this.translationService.loadTranslations(savedLanguage).subscribe();
   }
 
   goToAdmin() {
@@ -35,5 +52,10 @@ export class WelcomeComponent implements OnInit {
       this.headerClicks = 0;
       this.router.navigate(['admin/info']);
     }
+  }
+
+  changeLanguage(lang: string) {
+    this.translationService.loadTranslations(lang).subscribe();
+    this.translationService.changeLanguage(lang);
   }
 }

@@ -8,12 +8,20 @@ import { MatProgressSpinner } from '@angular/material/progress-spinner';
 import { MatButton } from '@angular/material/button';
 import { UpperCasePipe } from '@angular/common';
 import { GameConfigService } from '../game-config.service';
+import { TranslationService } from '@/app/services/translation.service';
+import { TranslatePipe } from '@/app/pipes/translation.pipe';
+
 @Component({
   selector: 'app-game-intermediate-result',
   templateUrl: './game-intermediate-result.component.html',
   styleUrls: ['./game-intermediate-result.component.scss'],
   standalone: true,
-  imports: [MatButton, MatProgressSpinner, UpperCasePipe],
+  imports: [
+    MatButton, 
+    MatProgressSpinner, 
+    UpperCasePipe,
+    TranslatePipe
+  ],
 })
 export class GameIntermediateResultComponent implements OnInit, OnDestroy {
   result: Result | undefined;
@@ -32,7 +40,8 @@ export class GameIntermediateResultComponent implements OnInit, OnDestroy {
     private gameConfigService: GameConfigService,
     private drawingService: DrawingService,
     private multiplayerService: MultiplayerService,
-    private router: Router
+    private router: Router,
+    private translationService: TranslationService
   ) {}
 
   ngOnInit(): void {
@@ -67,7 +76,9 @@ export class GameIntermediateResultComponent implements OnInit, OnDestroy {
         this.multiplayerService.endGame();
       }
     }
+    this.translationService.loadTranslations(this.translationService.getCurrentLang()).subscribe();
   }
+  
   ngOnDestroy() {
     if (this.isSinglePlayer) {
       this.drawingService.hasAddedSingleplayerResult = false;

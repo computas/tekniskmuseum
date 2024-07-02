@@ -8,7 +8,8 @@ import { MatButton } from '@angular/material/button';
 import { MatIcon } from '@angular/material/icon';
 import { NgIf } from '@angular/common';
 import { GameConfig, GameConfigService } from '../game-config.service';
-
+import { TranslationService } from '@/app/services/translation.service';
+import { TranslatePipe } from '@/app/pipes/translation.pipe';
 
 @Component({
     selector: 'app-game-pick-difficulty',
@@ -19,6 +20,7 @@ import { GameConfig, GameConfigService } from '../game-config.service';
       NgIf,
       MatIcon,
       MatButton,
+      TranslatePipe
   ],
 })
 export class GamePickDifficultyComponent {
@@ -34,7 +36,8 @@ export class GamePickDifficultyComponent {
     private gameConfigService: GameConfigService, 
     private router: Router,
     private multiplayerService: MultiplayerService,
-    private webSocketService: WebSocketService
+    private webSocketService: WebSocketService,
+    private translationService: TranslationService
   ) {}
 
   ngOnInit(): void {
@@ -56,6 +59,7 @@ export class GamePickDifficultyComponent {
       });
       this.webSocketService.listen(SocketEndpoints.END_GAME).subscribe();
     }
+    this.translationService.loadTranslations(this.translationService.getCurrentLang()).subscribe();
   }  
 
 

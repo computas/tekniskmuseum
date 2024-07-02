@@ -3,27 +3,37 @@
     <button class="logo" (click)="goToAdmin()">
       <img src="assets/logo/IO-logo-inverted_transparent-bg.png" alt="logo" aria-label="Gå til admin side" />
     </button>
+    <div class="language-button-container" >
+      <button class="language-button" (click)="changeLanguage('EN')" [class.selected]="(currentLang$ | async) === 'EN'">
+        <img src="assets/UK.svg" alt="UK flag" />
+        EN
+      </button>
+      <button class="language-button" (click)="changeLanguage('NO')" [class.selected]="(currentLang$ | async) === 'NO'">
+        <img src="assets/Norway.svg" alt="Norway flag" />
+        NO
+      </button>
+    </div>
     <div class="play-container">
       <div class="text-container">
         <div class="avatar"><img class="avatar-image" src="assets/logo/io_logoanimasjon.gif" alt="avatar" /></div>
         <div class="info-text">
           <span>
-            Hei, jeg heter<span class="avatar-name"> IO</span>. <br />
-            Kan du hjelpe meg å lære?
+            {{ 'WELCOME_MESSAGE' | translate }}<span class="avatar-name"> IO</span>. <br />
+            {{ 'HELP_ME_LEARN' | translate }}
           </span>
 
           <div class="button-container">
             <a routerLink="/playgame/singleplayer" routerLinkActive="active">
               <button mat-raised-button class="play-game-button">
                 <div class="button-text">
-                  <mat-icon class="button-icon" aria-label="player one icon">person</mat-icon>1 spiller
+                  <mat-icon class="button-icon" aria-label="player one icon">person</mat-icon>{{ 'PLAYER_MODE_SINGLE' | translate }}
                 </div>
               </button>
             </a>
             <a routerLink="/playgame/multiplayer" routerLinkActive="active">
               <button mat-raised-button class="play-game-button">
                 <div class="button-text">
-                  <mat-icon class="button-icon" aria-label="player two icon">group</mat-icon>2 spillere
+                  <mat-icon class="button-icon" aria-label="player two icon">group</mat-icon>{{ 'PLAYER_MODE_MULTI' | translate }}
                 </div>
               </button>
             </a>

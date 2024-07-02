@@ -10,16 +10,22 @@ import { UpperCasePipe } from '@angular/common';
 import { MatIconButton } from '@angular/material/button';
 import { MatIcon } from '@angular/material/icon';
 import { GameConfig, GameConfigService } from '../game-config.service';
+import { TranslationService } from '@/app/services/translation.service';
+import { TranslatePipe } from '@/app/pipes/translation.pipe';
 
 @Component({
   selector: 'app-drawing',
   templateUrl: './game-draw.component.html',
   styleUrls: ['./game-draw.component.scss'],
   standalone: true,
-  imports: [MatIcon, MatIconButton, UpperCasePipe],
+  imports: [
+    MatIcon, 
+    MatIconButton, 
+    UpperCasePipe,
+    TranslatePipe
+  ],
 })
 export class GameDrawComponent implements OnInit, OnDestroy {
-  //config = this.gameConfigService.getConfig();
   config!: GameConfig;
   subscriptions = new Subscription();
   
@@ -66,7 +72,8 @@ export class GameDrawComponent implements OnInit, OnDestroy {
     private multiplayerService: MultiplayerService,
     private drawingService: DrawingService,
     private imageService: ImageService,
-    private soundService: SoundService
+    private soundService: SoundService, 
+    private translationService: TranslationService
   ) {}
 
 
@@ -92,6 +99,7 @@ export class GameDrawComponent implements OnInit, OnDestroy {
       this.setUpMultiplayer();
     }
     this.startGame();
+    this.translationService.loadTranslations(this.translationService.getCurrentLang()).subscribe();
   }
 
   setUpMultiplayer() {

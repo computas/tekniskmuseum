@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Observable, BehaviorSubject } from 'rxjs';
 import { tap, switchMap } from 'rxjs/operators';
-import { Result, StartGamePlayerId, GameLabel } from '../../../shared/models/interfaces';
+import { Result, StartGamePlayerId, GameLabel, Highscore } from '../../../shared/models/interfaces';
 import { ResultsMock } from '../../../shared/mocks/results.mock';
 import { endpoints } from '../../../shared/models/endpoints';
 import { GameConfigService } from '../../game-config.service';
@@ -120,10 +120,25 @@ export class DrawingService {
       .pipe(tap((res) => (this.label = res.label)));
   }
 
+  getHighscore(): Observable<Highscore>{
+    const headers = new HttpHeaders();
+    headers.set('Access-Control-Allow-Origin', '*');
+    return this.http
+    .get<Highscore>(`${this.baseUrl}/${endpoints.HIGHSCORE}`, { headers: headers })
+  }
+
   endGame() {
     this.guessDone = false;
     this.gameOver = false;
     this.results = [];
+  }
+
+  postScore() {
+    const body = {
+      player_id: this.playerid,
+      score: this.totalScore.toString()
+    }
+    return this.http.post(`${this.baseUrl}/${endpoints.POSTSCORE}`, body);
   }
 
   addResult(result: Result) {
@@ -136,6 +151,10 @@ export class DrawingService {
     this.gameOver = false;
     this.guessDone = false;
     this.results = [];
+  }
+
+  get totalScore(): number {
+    return this.results.map(res => res.score).reduce((sum, current) => sum+current, 0)
   }
 
   get lastResult(): Result {

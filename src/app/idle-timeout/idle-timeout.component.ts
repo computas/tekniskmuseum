@@ -6,6 +6,8 @@ import { routes } from '../shared/models/routes';
 import { MatIcon } from '@angular/material/icon';
 import { MatButton } from '@angular/material/button';
 import { CdkScrollable } from '@angular/cdk/scrolling';
+import { TranslationService } from '../services/translation.service';
+import { TranslatePipe } from '../pipes/translation.pipe';
 
 @Component({
     selector: 'app-idle-timeout',
@@ -19,10 +21,15 @@ import { CdkScrollable } from '@angular/cdk/scrolling';
         MatDialogActions,
         MatButton,
         MatIcon,
+        TranslatePipe
     ],
 })
 export class IdleTimeoutComponent implements OnInit, OnDestroy {
-  constructor(private router: Router, private dialogRef: MatDialogRef<IdleTimeoutComponent>) {}
+  constructor(
+    private router: Router, 
+    private dialogRef: MatDialogRef<IdleTimeoutComponent>,
+    private translationService: TranslationService
+  ) {}
 
   startTime = 15;
   timer = 0;
@@ -37,6 +44,7 @@ export class IdleTimeoutComponent implements OnInit, OnDestroy {
         this.goHome();
       }
     }, 1000);
+    this.translationService.loadTranslations(this.translationService.getCurrentLang()).subscribe();
   }
 
   goHome() {
