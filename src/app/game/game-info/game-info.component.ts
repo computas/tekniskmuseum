@@ -8,7 +8,7 @@ import { MatButton } from '@angular/material/button';
 import { MatIcon } from '@angular/material/icon';
 import { TranslationService } from '@/app/services/translation.service';
 import { TranslatePipe } from '@/app/pipes/translation.pipe';
-import { GAMELEVEL } from '@/app/shared/models/interfaces';
+import { GAMESTATE } from '@/app/shared/models/interfaces';
 
 @Component({
   selector: 'app-game-info',
@@ -43,7 +43,7 @@ export class GameInfoComponent implements OnInit {
           this.multiplayerService.stateInfo = {
             ...this.multiplayerService.stateInfo,
             label: res,
-            gameLevel: GAMELEVEL.waitingForWord,
+            gameLevel: GAMESTATE.waitingForWord,
           };
         }
       });

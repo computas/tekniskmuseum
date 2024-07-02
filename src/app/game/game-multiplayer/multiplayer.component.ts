@@ -12,7 +12,7 @@ import { GameIntermediateResultComponent } from '../game-intermediate-result/gam
 import { GameDrawComponent } from '../game-draw/game-draw.component';
 import { GameWordToDrawComponent } from '../game-word-to-draw/game-word-to-draw.component';
 import { GameInfoComponent } from '../game-info/game-info.component';
-import { GAMELEVEL } from '@/app/shared/models/interfaces';
+import { GAMESTATE } from '@/app/shared/models/interfaces';
 
 @Component({
   selector: 'app-multiplayer',
@@ -54,8 +54,8 @@ import { GAMELEVEL } from '@/app/shared/models/interfaces';
   ],
 })
 export class MultiplayerComponent implements OnInit, OnDestroy {
-  gameLevel: string | undefined;
-  GAMELEVEL = GAMELEVEL;
+  gameState: string | undefined;
+  GAMESTATE = GAMESTATE;
   constructor(
     private multiplayerService: MultiplayerService,
     private webSocketService: WebSocketService,
@@ -70,7 +70,7 @@ export class MultiplayerComponent implements OnInit, OnDestroy {
       this.multiplayerService.isMultiplayer = true;
     }
     this.webSocketService.startSockets();
-    this.gameLevel = this.multiplayerService.stateInfo.gameLevel;
+    this.gameState = this.multiplayerService.stateInfo.gameState;
     this.subs.add(
       this.multiplayerService.roundOverListener().subscribe(() => {
         this.multiplayerService.stateInfo = { ...this.multiplayerService.stateInfo, ready: true };
@@ -78,7 +78,7 @@ export class MultiplayerComponent implements OnInit, OnDestroy {
     );
     this.subs.add(
       this.multiplayerService.stateInfo$.subscribe((data) => {
-        this.gameLevel = data.gameLevel;
+        this.gameState = data.gameState;
       })
     );
     this.subs.add(
@@ -92,7 +92,7 @@ export class MultiplayerComponent implements OnInit, OnDestroy {
     this.subs.add(
       this.multiplayerService.endGameListener().subscribe((data: string) => {
         const otherplayer = JSON.parse(data);
-        this.multiplayerService._opponentScore.next(otherplayer);
+        this.multiplayerService.opponentScore.next(otherplayer);
       })
     );
   }

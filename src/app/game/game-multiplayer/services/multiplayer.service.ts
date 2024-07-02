@@ -5,7 +5,7 @@ import { map, take, tap } from 'rxjs/operators';
 import { SocketEndpoints } from '../../../shared/models/websocketEndpoints';
 import { PairingService } from './pairing.service';
 import { JoinGameData, JoinGameReady, PredictionData } from '@/app/shared/models/backend-interfaces';
-import { GAMELEVEL, GameState, PlayerScore } from '@/app/shared/models/interfaces';
+import { GAMESTATE, GameState, PlayerScore } from '@/app/shared/models/interfaces';
 
 @Injectable({
   providedIn: 'root',
@@ -18,7 +18,7 @@ export class MultiplayerService {
 
   private initialState: GameState = {
     player_nr: undefined,
-    gameLevel: GAMELEVEL.lobby,
+    gameState: GAMESTATE.lobby,
     game_id: undefined,
     player_id: undefined,
     guessUsed: 0,
@@ -31,7 +31,7 @@ export class MultiplayerService {
 
   readonly stateInfo$ = this._stateInfo.asObservable();
 
-  public _opponentScore = new ReplaySubject<PlayerScore>(1);
+  public opponentScore = new ReplaySubject<PlayerScore>(1);
 
   constructor(private webSocketService: WebSocketService, private pairing: PairingService) {}
 
@@ -53,7 +53,7 @@ export class MultiplayerService {
           this.stateInfo = el;
         }
         if (el.ready) {
-          this.stateInfo = { ...this.stateInfo, ready: el.ready, gameLevel: GAMELEVEL.howToPlay };
+          this.stateInfo = { ...this.stateInfo, ready: el.ready, gameState: GAMESTATE.howToPlay };
         }
       })
     );
@@ -104,10 +104,10 @@ export class MultiplayerService {
     this.webSocketService.disconnect();
   }
 
-  changestate(gameLevel: GAMELEVEL) {
+  changestate(gameState: GAMESTATE) {
     this.stateInfo = {
       ...this.stateInfo,
-      gameLevel,
+      gameState,
     };
   }
 

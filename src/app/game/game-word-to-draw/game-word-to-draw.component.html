@@ -5,7 +5,7 @@
       <h1 class="playernr">{{ 'PLAYER_LABEL' | translate }} {{ playernr }}</h1>
     }
     <div class="word-text">
-      <div class="words-remaining">{{ guessUsed }}/3</div>
+      <div class="words-remaining">{{ guessUsed }}/{{ totalRounds }}</div>
       <p class="word-draw">{{ 'DRAW_LABEL' | translate }}</p>
       @if (loading) {
         <div>
