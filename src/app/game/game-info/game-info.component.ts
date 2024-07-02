@@ -43,7 +43,7 @@ export class GameInfoComponent implements OnInit {
           this.multiplayerService.stateInfo = {
             ...this.multiplayerService.stateInfo,
             label: res,
-            gameLevel: GAMESTATE.waitingForWord,
+            gameState: GAMESTATE.waitingForWord,
           };
         }
       });
