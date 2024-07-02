@@ -44,7 +44,7 @@ export class GameResultComponent implements OnInit {
   ngOnInit(): void {
     if (this.multiplayerService.isMultiplayer) {
       this.ismultiplayer = true;
-      this.multiplayerService._opponentScore.subscribe((val) => {
+      this.multiplayerService.opponentScore.subscribe((val) => {
         if (val) {
           if (this.multiplayerService.stateInfo.score) {
             this.hasWon = this.multiplayerService.stateInfo.score >= val.score;

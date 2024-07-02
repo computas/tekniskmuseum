@@ -1,14 +1,16 @@
 import { Component, OnInit, EventEmitter, Output, OnDestroy } from '@angular/core';
 import { Result } from '../../shared/models/interfaces';
 import { DrawingService } from '../game-draw/services/drawing.service';
-import { MultiplayerService, GAMELEVEL } from '../game-multiplayer/services/multiplayer.service';
+import { MultiplayerService, GAMESTATE } from '../game-multiplayer/services/multiplayer.service';
 import { Router } from '@angular/router';
 import { routes } from '../../shared/models/routes';
 import { MatProgressSpinner } from '@angular/material/progress-spinner';
 import { MatButton } from '@angular/material/button';
 import { UpperCasePipe } from '@angular/common';
+import { GameConfigService } from '../game-config.service';
 import { TranslationService } from '@/app/services/translation.service';
 import { TranslatePipe } from '@/app/pipes/translation.pipe';
+
 @Component({
   selector: 'app-game-intermediate-result',
   templateUrl: './game-intermediate-result.component.html',
@@ -31,7 +33,11 @@ export class GameIntermediateResultComponent implements OnInit, OnDestroy {
   waitingForPlayer = true;
   isMultiplayer = false;
   isSinglePlayer = false;
+
+  config = this.gameConfigService.getConfig;
+
   constructor(
+    private gameConfigService: GameConfigService,
     private drawingService: DrawingService,
     private multiplayerService: MultiplayerService,
     private router: Router,
@@ -56,11 +62,11 @@ export class GameIntermediateResultComponent implements OnInit, OnDestroy {
         if (res) {
           this.multiplayerService.stateInfo = {
             ...this.multiplayerService.stateInfo,
-            gameLevel: GAMELEVEL.waitingForWord,
+            gameState: GAMESTATE.waitingForWord,
           };
         }
       });
-      this.gameOver = this.drawingService.results.length === this.drawingService.totalGuess;
+      this.gameOver = this.drawingService.results.length === this.config.rounds; 
 
       if (this.gameOver) {
         const totalScore: any = this.drawingService.results.reduce((accumulator: any, currentValue: any) => {
@@ -83,7 +89,7 @@ export class GameIntermediateResultComponent implements OnInit, OnDestroy {
     if (this.multiplayerService.isMultiplayer && this.multiplayerService.stateInfo.ready) {
       this.multiplayerService.stateInfo = {
         ...this.multiplayerService.stateInfo,
-        gameLevel: GAMELEVEL.waitingForWord,
+        gameState: GAMESTATE.waitingForWord,
       };
     } else {
       this.nextGuess.next(true);
@@ -94,7 +100,7 @@ export class GameIntermediateResultComponent implements OnInit, OnDestroy {
     if (this.multiplayerService.isMultiplayer && this.gameOver) {
       this.multiplayerService.stateInfo = {
         ...this.multiplayerService.stateInfo,
-        gameLevel: GAMELEVEL.showResult,
+        gameState: GAMESTATE.showResult,
       };
     } else {
       this.finalResult.next(true);

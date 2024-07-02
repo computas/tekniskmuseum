@@ -1,13 +1,13 @@
-import { Component, OnInit, Output, EventEmitter } from '@angular/core';
+import { Component, Output, EventEmitter } from '@angular/core';
 import { Router } from '@angular/router';
 import { routes } from '../../shared/models/routes';
-import { MultiplayerService, GAMELEVEL } from '../game-multiplayer/services/multiplayer.service';
+import { MultiplayerService, GAMESTATE } from '../game-multiplayer/services/multiplayer.service';
 import { WebSocketService } from '../game-multiplayer/services/web-socket.service';
 import { SocketEndpoints } from '../../shared/models/websocketEndpoints';
 import { MatButton } from '@angular/material/button';
 import { MatIcon } from '@angular/material/icon';
 import { NgIf } from '@angular/common';
-import { DrawingService } from '../game-draw/services/drawing.service';
+import { GameConfig, GameConfigService } from '../game-config.service';
 import { TranslationService } from '@/app/services/translation.service';
 import { TranslatePipe } from '@/app/pipes/translation.pipe';
 
@@ -24,13 +24,16 @@ import { TranslatePipe } from '@/app/pipes/translation.pipe';
   ],
 })
 export class GamePickDifficultyComponent {
-  @Output() getDrawWord = new EventEmitter();
-
+  config = this.gameConfigService.getConfig; 
+  
   isSinglePlayer = false;
   isMultiPlayer = false;
 
+  @Output() getDrawWord = new EventEmitter();
+  @Output() difficultyPicked = new EventEmitter();
+
   constructor(
-    private drawingService: DrawingService,
+    private gameConfigService: GameConfigService, 
     private router: Router,
     private multiplayerService: MultiplayerService,
     private webSocketService: WebSocketService,
@@ -40,6 +43,9 @@ export class GamePickDifficultyComponent {
   ngOnInit(): void {
     if (this.router.url === `/${routes.SINGLEPLAYER}`) {
       this.isSinglePlayer = true;
+      this.gameConfigService.config$.subscribe((config: GameConfig) => {
+        this.config = config;
+      });
     } else {
       this.isMultiPlayer = true;
       this.multiplayerService.getLabel(false).subscribe((res: any) => {
@@ -47,22 +53,19 @@ export class GamePickDifficultyComponent {
           this.multiplayerService.stateInfo = {
             ...this.multiplayerService.stateInfo,
             label: res.label,
-            gameLevel: GAMELEVEL.waitingForWord,
+            gameState: GAMESTATE.waitingForWord,
           };
         }
       });
       this.webSocketService.listen(SocketEndpoints.END_GAME).subscribe();
     }
     this.translationService.loadTranslations(this.translationService.getCurrentLang()).subscribe();
-  }
-  
-  setDifficulty(difficulty: number) {
-    this.drawingService.difficulty = difficulty;
-  }
-  
-  startDrawing(difficulty: number) {
+  }  
+
+
+  startDrawing(difficulty: string) {
     if (this.isSinglePlayer) {
-      this.setDifficulty(difficulty)
+      this.gameConfigService.setDifficultyLevel(difficulty);
       this.getDrawWord.emit(true);
     } else {
       //TODO: Add difficulty in multiplayerService, this is not implemented
