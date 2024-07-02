@@ -3,10 +3,7 @@ import { Observable, BehaviorSubject } from 'rxjs';
 import { io, Socket } from 'socket.io-client';
 import { environment } from '@/environments/environment';
 import { SocketEndpoints } from '@/app/shared/models/websocketEndpoints';
-
-export interface PlayerDisconnectedData {
-  player_disconnected: boolean | undefined;
-}
+import { PlayerDisconnectedData } from '@/app/shared/models/interfaces';
 
 @Injectable({
   providedIn: 'root',

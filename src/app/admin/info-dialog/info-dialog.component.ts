@@ -2,17 +2,11 @@ import { Component } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { DialogTemplateComponent } from './../dialog-template/dialog-template.component';
 
-export interface DialogData {
-  iterationName: string;
-  timeCreated: string;
-  imageCount: string;
-}
-
 @Component({
-    selector: 'app-info-dialog',
-    templateUrl: './info-dialog.component.html',
-    styleUrls: ['./info-dialog.component.scss'],
-    standalone: true,
+  selector: 'app-info-dialog',
+  templateUrl: './info-dialog.component.html',
+  styleUrls: ['./info-dialog.component.scss'],
+  standalone: true,
 })
 export class InfoDialogComponent {
   constructor(public dialog: MatDialog) {}

@@ -1,7 +1,7 @@
 import { Component, OnInit, Output, EventEmitter } from '@angular/core';
 import { Router } from '@angular/router';
 import { routes } from '../../shared/models/routes';
-import { MultiplayerService, GAMELEVEL } from '../game-multiplayer/services/multiplayer.service';
+import { MultiplayerService } from '../game-multiplayer/services/multiplayer.service';
 import { WebSocketService } from '../game-multiplayer/services/web-socket.service';
 import { SocketEndpoints } from '../../shared/models/websocketEndpoints';
 import { MatButton } from '@angular/material/button';
@@ -10,6 +10,7 @@ import { NgIf } from '@angular/common';
 import { DrawingService } from '../game-draw/services/drawing.service';
 import { TranslationService } from '@/app/services/translation.service';
 import { TranslatePipe } from '@/app/pipes/translation.pipe';
+import { GAMELEVEL } from '@/app/shared/models/interfaces';
 
 @Component({
     selector: 'app-game-pick-difficulty',

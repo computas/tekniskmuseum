@@ -4,28 +4,9 @@ import { BehaviorSubject, ReplaySubject } from 'rxjs';
 import { map, take, tap } from 'rxjs/operators';
 import { SocketEndpoints } from '../../../shared/models/websocketEndpoints';
 import { PairingService } from './pairing.service';
+import { JoinGameData, JoinGameReady, PredictionData } from '@/app/shared/models/backend-interfaces';
+import { GAMELEVEL, GameState, PlayerScore } from '@/app/shared/models/interfaces';
 
-export enum GAMELEVEL {
-  lobby = 'LOBBY',
-  drawing = 'DRAWING',
-  intermediateResult = 'INTERMEDIATERESULT',
-  waitingForWord = 'WAITINGFORWORD',
-  howToPlay = 'HOWTOPLAY',
-  showResult = 'SHOWRESULT',
-}
-export interface GameState {
-  player_nr: string | undefined;
-  player_id: string | undefined;
-  game_id: string | undefined;
-  ready: boolean | undefined;
-  gameLevel: GAMELEVEL | undefined;
-  guessUsed: number | undefined;
-  score: number | undefined;
-  label: string | undefined;
-}
-export interface StateInfo {
-  ready: boolean;
-}
 @Injectable({
   providedIn: 'root',
 })

@@ -4,13 +4,14 @@ import { take, tap } from 'rxjs/operators';
 import { DrawingService } from '../game-draw/services/drawing.service';
 import { Router } from '@angular/router';
 import { routes } from '../../shared/models/routes';
-import { MultiplayerService, GAMELEVEL } from '../game-multiplayer/services/multiplayer.service';
+import { MultiplayerService } from '../game-multiplayer/services/multiplayer.service';
 import { MatIcon } from '@angular/material/icon';
 import { MatButton } from '@angular/material/button';
 import { MatProgressSpinner } from '@angular/material/progress-spinner';
 import { UpperCasePipe } from '@angular/common';
 import { TranslationService } from '@/app/services/translation.service';
 import { TranslatePipe } from '@/app/pipes/translation.pipe';
+import { GAMELEVEL } from '@/app/shared/models/interfaces';
 
 @Component({
   selector: 'app-game-word-to-draw',

@@ -5,23 +5,44 @@ export interface Result {
   gameState: string;
   guess: string;
   score: number;
-  serverRound?: number;
+  serverRound: number;
+  roundIsDone: boolean;
 }
 
-export interface StartGamePlayerId {
-  player_id: string;
+export enum GAMELEVEL {
+  lobby = 'LOBBY',
+  drawing = 'DRAWING',
+  intermediateResult = 'INTERMEDIATERESULT',
+  waitingForWord = 'WAITINGFORWORD',
+  howToPlay = 'HOWTOPLAY',
+  showResult = 'SHOWRESULT',
 }
 
-export interface GameLabel {
-  label: string;
+export interface GameState {
+  player_nr: string | undefined;
+  player_id: string | undefined;
+  game_id: string | undefined;
+  ready: boolean | undefined;
+  gameLevel: GAMELEVEL | undefined;
+  guessUsed: number | undefined;
+  score: number | undefined;
+  label: string | undefined;
+}
+export interface StateInfo {
+  ready: boolean;
 }
 
-type Score = {
-  id: number;
+export interface DialogData {
+  iterationName: string;
+  timeCreated: string;
+  imageCount: string;
+}
+
+export interface PlayerDisconnectedData {
+  player_disconnected: boolean | undefined;
+}
+
+export interface PlayerScore {
+  playerId: string;
   score: number;
-}
-
-export type Highscore = {
-  daily: Score[];
-  total: Score[];
 }
