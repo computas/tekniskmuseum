@@ -5,6 +5,7 @@ import { tap, switchMap } from 'rxjs/operators';
 import { Result, StartGamePlayerId, GameLabel } from '../../../shared/models/interfaces';
 import { ResultsMock } from '../../../shared/mocks/results.mock';
 import { endpoints } from '../../../shared/models/endpoints';
+import { TranslationService } from '@/app/services/translation.service';
 
 @Injectable({
   providedIn: 'root',
@@ -36,7 +37,7 @@ export class DrawingService {
   hasAddedSingleplayerResult = false;
   pred: any;
 
-  constructor(private http: HttpClient) {}
+  constructor(private http: HttpClient, private translationService: TranslationService) {}
 
   classify(answerInfo: FormData): Observable<any> {
     return this.http.post<FormData>(`${this.baseUrl}/${endpoints.CLASSIFY}`, answerInfo).pipe(
@@ -106,8 +107,9 @@ export class DrawingService {
   }
 
   getLabel(): Observable<GameLabel> {
+    const currentLang = this.translationService.getCurrentLang();
     return this.http
-      .post<GameLabel>(`${this.baseUrl}/${endpoints.GETLABEL}?player_id=${this.playerid}`, {})
+      .post<GameLabel>(`${this.baseUrl}/${endpoints.GETLABEL}?player_id=${this.playerid}&lang=${currentLang}`, {})
       .pipe(tap((res) => (this.label = res.label)));
   }
 
