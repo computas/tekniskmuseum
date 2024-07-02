@@ -1,24 +1,32 @@
 import { Component, OnInit } from '@angular/core';
 import { DrawingService } from '../../game-draw/services/drawing.service';
+import { TranslationService } from '@/app/services/translation.service';
+import { TranslatePipe } from '@/app/pipes/translation.pipe';
 
 @Component({
   selector: 'app-game-progress-bar',
   standalone: true,
-  imports: [],
+  imports: [
+    TranslatePipe
+  ],
   templateUrl: './game-progress-bar.component.html',
   styleUrl: './game-progress-bar.component.scss'
 })
 export class GameProgressBarComponent implements OnInit {
-  roundProgressText: string = ''
+  roundNumberProgress: string = ''
 
-  constructor(private drawingService: DrawingService){}
+  constructor(private drawingService: DrawingService, private translationService: TranslationService){}
   
   ngOnInit(): void {
-
+    this.translationService.lang$.subscribe(lang => {
+      this.translationService.loadTranslations(lang).subscribe();
+    });
+    this.roundNumberProgress = this.getRoundProgressText()
   }
 
   getRoundProgressText(): string {
-    
-    return ''
+    const currentRoundNumber = this.drawingService.guessUsed;
+    const numberOfRounds = this.drawingService.totalGuess
+    return `${currentRoundNumber} / ${numberOfRounds}`
   }
 }

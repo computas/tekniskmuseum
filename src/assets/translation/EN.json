@@ -42,5 +42,7 @@
   "AUTO_END_MESSAGE": "The game will automatically end in ",
   "SECONDS": "seconds",
   "STAY_BUTTON": "Stay",
-  "END_NOW_BUTTON": "End now"
+  "END_NOW_BUTTON": "End now",
+
+  "ROUND_NUMBER": "Round"
 }
