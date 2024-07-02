@@ -1,4 +1,12 @@
 @import './../../../../variables.scss';
+.feedback-container {
+    display: flex;
+    gap: 2rem;
+}
+
+.avatar {
+    max-width: 11rem;
+}
 
 .chat-bubble-container {
     background-color: $chat_bubble_o_bg_color;
@@ -9,6 +17,7 @@
     display: flex;
     flex-direction: column;
     gap: 0.8em;
+    align-self: flex-start;
 }
 
 .feedback-title {
