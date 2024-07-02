@@ -253,7 +253,7 @@ export class GameDrawComponent implements OnInit, OnDestroy {
             this.score = this.score - scoreDecrement;
             if (tics % 10 === 9) {
               this.timeLeft--;
-              if (this.timeLeft == this.config.timeToStartClassify) {
+              if (this.timeLeft < this.config.timeToStartClassify + 1) {
                 observer.next('classify');
               }
             }
