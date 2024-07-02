@@ -46,7 +46,7 @@ export class GameConfigService {
       case 'hard':
         this.setConfig = { 
           difficultyId: 3, 
-          rounds: 1, 
+          rounds: 3, 
           secondsPerRound: 20, 
           timeToStartClassify: 15
         }; 
