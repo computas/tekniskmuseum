@@ -1,4 +1,4 @@
-import { Component, Output, EventEmitter } from '@angular/core';
+import { Component, Output, EventEmitter, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { routes } from '../../shared/models/routes';
 import { MultiplayerService } from '../game-multiplayer/services/multiplayer.service';
@@ -19,7 +19,7 @@ import { GAMESTATE } from '@/app/shared/models/interfaces';
   standalone: true,
   imports: [NgIf, MatIcon, MatButton, TranslatePipe],
 })
-export class GamePickDifficultyComponent {
+export class GamePickDifficultyComponent implements OnInit {
   config = this.gameConfigService.getConfig;
 
   isSinglePlayer = false;
