@@ -272,11 +272,11 @@ export class GameDrawComponent implements OnInit, OnDestroy {
     });
   }
 
-  sortOnCertainty(res: any) {
-    const arr: any = [];
+  sortOnCertainty(res: PredictionData) {
+    const arr: Certainty[] = [];
     Object.entries(res.certainty).map((keyValue) => {
-      const [label, certainty] = keyValue;
-      arr.push({ label, certainty });
+      const [, certainty] = keyValue;
+      arr.push(certainty);
     });
     arr.sort((a: Certainty, b: Certainty) => {
       return b.certainty - a.certainty;

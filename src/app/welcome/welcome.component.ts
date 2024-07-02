@@ -11,37 +11,29 @@ import { Observable } from 'rxjs';
 import { CommonModule } from '@angular/common';
 
 @Component({
-    selector: 'app-welcome',
-    templateUrl: './welcome.component.html',
-    styleUrls: ['./welcome.component.scss'],
-    standalone: true,
-    imports: [
-        RouterLink,
-        RouterLinkActive,
-        MatButton,
-        MatIcon,
-        TranslatePipe,
-        CommonModule
-    ],
-    providers: [TranslationService, HttpClient]
+  selector: 'app-welcome',
+  templateUrl: './welcome.component.html',
+  styleUrls: ['./welcome.component.scss'],
+  standalone: true,
+  imports: [RouterLink, RouterLinkActive, MatButton, MatIcon, TranslatePipe, CommonModule],
+  providers: [TranslationService, HttpClient],
 })
 export class WelcomeComponent implements OnInit {
   private headerClicks = 0;
   currentLang$: Observable<string>;
-  
+
   constructor(
     private multiplayerService: MultiplayerService,
     private drawingService: DrawingService,
     private router: Router,
     private translationService: TranslationService
   ) {
-    this.currentLang$ = this.translationService.lang$
+    this.currentLang$ = this.translationService.lang$;
   }
 
   ngOnInit() {
     this.multiplayerService.clearState();
     this.drawingService.clearState();
-    const savedLanguage = localStorage.getItem('language') || 'NO';
     this.translationService.loadTranslations(this.translationService.getCurrentLang()).subscribe();
     //this.translationService.loadTranslations(savedLanguage).subscribe();
   }

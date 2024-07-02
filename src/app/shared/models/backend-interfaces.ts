@@ -40,3 +40,13 @@ export interface JoinGameData {
 export interface JoinGameReady {
   ready: boolean;
 }
+
+export interface AuthStatus {
+  success: string;
+}
+
+export interface StatusData {
+  CV_iteration_name: string;
+  CV_time_created: string;
+  BLOB_image_count: number;
+}
