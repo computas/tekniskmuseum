@@ -18,13 +18,7 @@ import { GAMELEVEL } from '@/app/shared/models/interfaces';
   templateUrl: './game-word-to-draw.component.html',
   styleUrls: ['./game-word-to-draw.component.scss'],
   standalone: true,
-  imports: [
-    MatProgressSpinner, 
-    MatButton, 
-    MatIcon, 
-    UpperCasePipe,
-    TranslatePipe
-  ],
+  imports: [MatProgressSpinner, MatButton, MatIcon, UpperCasePipe, TranslatePipe],
 })
 export class GameWordToDrawComponent implements OnInit, OnDestroy {
   constructor(

@@ -34,7 +34,7 @@ export class WebSocketService {
       console.error('error', reason);
     });
 
-    this.listen(SocketEndpoints.PLAYER_DISCONNECTED).subscribe((data: any) => {
+    this.listen(SocketEndpoints.PLAYER_DISCONNECTED).subscribe((data: string) => {
       const el: PlayerDisconnectedData = JSON.parse(data);
       if (el.player_disconnected) {
         this.playerDisconnected = true;
@@ -59,6 +59,8 @@ export class WebSocketService {
     });
   }
 
+  // Disable any type check for only this one because the spread parameter will take parameters of different types
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
   emit(eventName: string, ...rest: any) {
     this.socket?.emit(eventName, ...rest);
   }

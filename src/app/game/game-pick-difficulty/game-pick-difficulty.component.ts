@@ -13,18 +13,13 @@ import { TranslatePipe } from '@/app/pipes/translation.pipe';
 import { GAMELEVEL } from '@/app/shared/models/interfaces';
 
 @Component({
-    selector: 'app-game-pick-difficulty',
-    templateUrl: './game-pick-difficulty.component.html',
-    styleUrl: './game-pick-difficulty.component.scss',
-    standalone: true,
-    imports: [
-      NgIf,
-      MatIcon,
-      MatButton,
-      TranslatePipe
-  ],
+  selector: 'app-game-pick-difficulty',
+  templateUrl: './game-pick-difficulty.component.html',
+  styleUrl: './game-pick-difficulty.component.scss',
+  standalone: true,
+  imports: [NgIf, MatIcon, MatButton, TranslatePipe],
 })
-export class GamePickDifficultyComponent {
+export class GamePickDifficultyComponent implements OnInit {
   @Output() getDrawWord = new EventEmitter();
 
   isSinglePlayer = false;
@@ -43,11 +38,11 @@ export class GamePickDifficultyComponent {
       this.isSinglePlayer = true;
     } else {
       this.isMultiPlayer = true;
-      this.multiplayerService.getLabel(false).subscribe((res: any) => {
+      this.multiplayerService.getLabel(false).subscribe((res: string) => {
         if (res) {
           this.multiplayerService.stateInfo = {
             ...this.multiplayerService.stateInfo,
-            label: res.label,
+            label: res,
             gameLevel: GAMELEVEL.waitingForWord,
           };
         }
@@ -56,14 +51,14 @@ export class GamePickDifficultyComponent {
     }
     this.translationService.loadTranslations(this.translationService.getCurrentLang()).subscribe();
   }
-  
+
   setDifficulty(difficulty: number) {
     this.drawingService.difficulty = difficulty;
   }
-  
+
   startDrawing(difficulty: number) {
     if (this.isSinglePlayer) {
-      this.setDifficulty(difficulty)
+      this.setDifficulty(difficulty);
       this.getDrawWord.emit(true);
     } else {
       //TODO: Add difficulty in multiplayerService, this is not implemented
@@ -71,9 +66,7 @@ export class GamePickDifficultyComponent {
     }
   }
 
-  
   goToLanding() {
     this.router.navigate([routes.LANDING]);
   }
-
 }

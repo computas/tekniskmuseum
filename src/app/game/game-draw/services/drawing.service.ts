@@ -2,7 +2,8 @@ import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Observable, BehaviorSubject } from 'rxjs';
 import { tap, switchMap } from 'rxjs/operators';
-import { Result, StartGamePlayerId, GameLabel, Highscore } from '../../../shared/models/interfaces';
+import { StartGamePlayerId, GameLabel, Highscore, PredictionData } from '../../../shared/models/backend-interfaces';
+import { Result } from '../../../shared/models/interfaces';
 import { ResultsMock } from '../../../shared/mocks/results.mock';
 import { endpoints } from '../../../shared/models/endpoints';
 
@@ -34,17 +35,20 @@ export class DrawingService {
   resultsMock: Result[] = ResultsMock;
 
   hasAddedSingleplayerResult = false;
-  pred: any;
+  pred: PredictionData | undefined;
 
   constructor(private http: HttpClient) {}
 
-  classify(answerInfo: FormData): Observable<any> {
-    return this.http.post<FormData>(`${this.baseUrl}/${endpoints.CLASSIFY}`, answerInfo).pipe(
-      tap((res: any) => {
-        this.pred = res;
-        if (this.guessUsed <= res.serverRound && this.roundIsDone(res) && !this.hasAddedSingleplayerResult) {
-          res.roundIsDone = true;
-          const result: Result = this.createResult(res);
+  classify(answerInfo: FormData): Observable<PredictionData> {
+    return this.http.post<PredictionData>(`${this.baseUrl}/${endpoints.CLASSIFY}`, answerInfo).pipe(
+      tap((data: PredictionData) => {
+        this.pred = data;
+        if (
+          this.guessUsed <= data.serverRound &&
+          this.roundIsDone(data.hasWon, data.gameState) &&
+          !this.hasAddedSingleplayerResult
+        ) {
+          const result: Result = this.createResult(data);
           this.addResult(result);
           this.updateGameState();
         }
@@ -70,24 +74,28 @@ export class DrawingService {
       gameState: 'Done',
       guess: '',
       score: 0,
+      serverRound: 1,
+      roundIsDone: true,
     };
     return result;
   }
 
-  createResult(res: any): Result {
+  createResult(res: PredictionData): Result {
     const result: Result = {
       hasWon: res.hasWon,
       imageData: '',
       word: this.label,
       gameState: res.gameState,
       guess: res.guess,
-      score: res.score ? res.score : 0,
+      score: 0,
+      serverRound: res.serverRound,
+      roundIsDone: this.roundIsDone(res.hasWon, res.gameState),
     };
     return result;
   }
 
-  roundIsDone(res: any) {
-    return res.hasWon || res.gameState === 'Done';
+  roundIsDone(hasWon: boolean, gameState: string) {
+    return hasWon || gameState === 'Done';
   }
 
   get() {
@@ -97,12 +105,16 @@ export class DrawingService {
   startGame(): Observable<GameLabel> {
     const headers = new HttpHeaders();
     headers.set('Access-Control-Allow-Origin', '*');
-    return this.http.get<StartGamePlayerId>(`${this.baseUrl}/${endpoints.STARTGAME}?difficulty_id=${this._difficulty.value}`, { headers: headers }).pipe(
-      switchMap((res) => {
-        this.playerid = res.player_id;
-        return this.getLabel();
+    return this.http
+      .get<StartGamePlayerId>(`${this.baseUrl}/${endpoints.STARTGAME}?difficulty_id=${this._difficulty.value}`, {
+        headers: headers,
       })
-    );
+      .pipe(
+        switchMap((res) => {
+          this.playerid = res.player_id;
+          return this.getLabel();
+        })
+      );
   }
 
   getLabel(): Observable<GameLabel> {
@@ -111,11 +123,10 @@ export class DrawingService {
       .pipe(tap((res) => (this.label = res.label)));
   }
 
-  getHighscore(): Observable<Highscore>{
+  getHighscore(): Observable<Highscore> {
     const headers = new HttpHeaders();
     headers.set('Access-Control-Allow-Origin', '*');
-    return this.http
-    .get<Highscore>(`${this.baseUrl}/${endpoints.HIGHSCORE}`, { headers: headers })
+    return this.http.get<Highscore>(`${this.baseUrl}/${endpoints.HIGHSCORE}`, { headers: headers });
   }
 
   endGame() {
@@ -127,8 +138,8 @@ export class DrawingService {
   postScore() {
     const body = {
       player_id: this.playerid,
-      score: this.totalScore.toString()
-    }
+      score: this.totalScore.toString(),
+    };
     return this.http.post(`${this.baseUrl}/${endpoints.POSTSCORE}`, body);
   }
 
@@ -145,7 +156,7 @@ export class DrawingService {
   }
 
   get totalScore(): number {
-    return this.results.map(res => res.score).reduce((sum, current) => sum+current, 0)
+    return this.results.map((res) => res.score).reduce((sum, current) => sum + current, 0);
   }
 
   get lastResult(): Result {

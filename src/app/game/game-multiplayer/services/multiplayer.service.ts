@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { WebSocketService } from './web-socket.service';
-import { BehaviorSubject, ReplaySubject } from 'rxjs';
+import { BehaviorSubject, Observable, ReplaySubject } from 'rxjs';
 import { map, take, tap } from 'rxjs/operators';
 import { SocketEndpoints } from '../../../shared/models/websocketEndpoints';
 import { PairingService } from './pairing.service';
@@ -31,7 +31,7 @@ export class MultiplayerService {
 
   readonly stateInfo$ = this._stateInfo.asObservable();
 
-  public _opponentScore = new ReplaySubject<any>(1);
+  public _opponentScore = new ReplaySubject<PlayerScore>(1);
 
   constructor(private webSocketService: WebSocketService, private pairing: PairingService) {}
 
@@ -41,10 +41,14 @@ export class MultiplayerService {
   }
 
   joinGame(difficulty_id: number) {
-    this.webSocketService.emit(SocketEndpoints.JOIN_GAME, `{ "pair_id": "${this.pairing.getPairID()}", "difficulty_id": "${difficulty_id}"}`);
+    this.webSocketService.emit(
+      SocketEndpoints.JOIN_GAME,
+      `{ "pair_id": "${this.pairing.getPairID()}", "difficulty_id": "${difficulty_id}"}`
+    );
     return this.webSocketService.listen(SocketEndpoints.JOIN_GAME).pipe(
-      tap((data: any) => {
-        const el: GameState = data;
+      map((res) => JSON.parse(res) as JoinGameData | JoinGameReady),
+      tap((data: JoinGameData | JoinGameReady) => {
+        const el: GameState = data as GameState;
         if (el && el.game_id) {
           this.stateInfo = el;
         }
@@ -55,13 +59,13 @@ export class MultiplayerService {
     );
   }
 
-  getLabel(emit = true) {
+  getLabel(emit = true): Observable<string> {
     if (emit) {
       this.webSocketService.emit(SocketEndpoints.GET_LABEL, JSON.stringify({ game_id: this.stateInfo.game_id }));
     }
     return this.webSocketService.listen(SocketEndpoints.GET_LABEL).pipe(
       take(1),
-      map((res: any) => {
+      map((res: string) => {
         const data = JSON.parse(res);
         this.label = data;
         return this.label;
@@ -73,7 +77,7 @@ export class MultiplayerService {
     this.webSocketService.emit(SocketEndpoints.CLASSIFY, data, image);
   }
 
-  predictionListener() {
+  predictionListener(): Observable<PredictionData> {
     return this.webSocketService.listen(SocketEndpoints.PREDICTION);
   }
 

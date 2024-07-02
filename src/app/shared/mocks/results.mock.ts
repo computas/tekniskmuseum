@@ -8,6 +8,8 @@ export const ResultsMock: Result[] = [
     gameState: 'Done',
     guess: 'square',
     score: 60,
+    serverRound: 1,
+    roundIsDone: true,
   },
   {
     hasWon: false,
@@ -17,6 +19,8 @@ export const ResultsMock: Result[] = [
     gameState: 'Done',
     guess: 'square',
     score: 60,
+    serverRound: 1,
+    roundIsDone: true,
   },
   {
     hasWon: true,
@@ -26,5 +30,7 @@ export const ResultsMock: Result[] = [
     gameState: 'Done',
     guess: 'square',
     score: 60,
+    serverRound: 1,
+    roundIsDone: true,
   },
 ];
