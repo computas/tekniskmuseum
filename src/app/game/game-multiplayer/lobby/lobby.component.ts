@@ -31,7 +31,7 @@ export class LobbyComponent implements OnInit, OnDestroy {
   ) {}
 
   ngOnInit(): void {
-    this.subscriptions.add(this.multiPlayerService.joinGame().subscribe());
+    this.subscriptions.add(this.multiPlayerService.joinGame(2).subscribe());
     this.subscriptions.add(
       this.multiPlayerService.stateInfo$.subscribe((obs) => {
         if (obs.ready) {
