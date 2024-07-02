@@ -31,7 +31,8 @@ export class LobbyComponent implements OnInit, OnDestroy {
   ) {}
 
   ngOnInit(): void {
-    this.subscriptions.add(this.multiPlayerService.joinGame(2).subscribe());
+    const difficulty= 2; // Difficulty set to medium (1 for easy, 3 for hard)
+    this.subscriptions.add(this.multiPlayerService.joinGame(difficulty).subscribe());
     this.subscriptions.add(
       this.multiPlayerService.stateInfo$.subscribe((obs) => {
         if (obs.ready) {
