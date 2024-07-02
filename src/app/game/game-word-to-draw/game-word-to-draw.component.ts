@@ -12,7 +12,7 @@ import { UpperCasePipe } from '@angular/common';
 import { GameConfigService } from '../game-config.service';
 import { TranslationService } from '@/app/services/translation.service';
 import { TranslatePipe } from '@/app/pipes/translation.pipe';
-import { GAMELEVEL } from '@/app/shared/models/interfaces';
+import { GAMESTATE } from '@/app/shared/models/interfaces';
 
 @Component({
   selector: 'app-game-word-to-draw',

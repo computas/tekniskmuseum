@@ -38,7 +38,7 @@ export class DrawingService {
   hasAddedSingleplayerResult = false;
   pred: PredictionData | undefined;
 
-  constructor(private http: HttpClient) {}
+  constructor(private http: HttpClient, private gameConfigService: GameConfigService) {}
 
   classify(answerInfo: FormData): Observable<PredictionData> {
     return this.http.post<PredictionData>(`${this.baseUrl}/${endpoints.CLASSIFY}`, answerInfo).pipe(
@@ -49,7 +49,7 @@ export class DrawingService {
           this.roundIsDone(data.hasWon, data.gameState) &&
           !this.hasAddedSingleplayerResult
         ) {
-          const result: Result = this.createResult(res);
+          const result: Result = this.createResult(data);
           this.addResult(result);
           this.updateGameState();
         }

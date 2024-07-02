@@ -9,7 +9,7 @@ export interface Result {
   roundIsDone: boolean;
 }
 
-export enum GAMELEVEL {
+export enum GAMESTATE {
   lobby = 'LOBBY',
   drawing = 'DRAWING',
   intermediateResult = 'INTERMEDIATERESULT',
@@ -23,7 +23,7 @@ export interface GameState {
   player_id: string | undefined;
   game_id: string | undefined;
   ready: boolean | undefined;
-  gameLevel: GAMELEVEL | undefined;
+  gameState: GAMESTATE | undefined;
   guessUsed: number | undefined;
   score: number | undefined;
   label: string | undefined;
