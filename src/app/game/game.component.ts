@@ -8,6 +8,7 @@ import { GameIntermediateResultComponent } from './game-intermediate-result/game
 import { GameDrawComponent } from './game-draw/game-draw.component';
 import { GameInfoComponent } from './game-info/game-info.component';
 import { GamePickDifficultyComponent } from './game-pick-difficulty/game-pick-difficulty.component';
+import { GameConfigService } from './game-config.service';
 
 
 @Component({
@@ -65,7 +66,6 @@ export class GameComponent implements OnInit, OnDestroy {
     this.drawingService.endGame();
   }
   ngOnInit(): void {
-    this.drawingService.totalGuess = 3;
     this.drawingService.guessUsed = 1;
     this.drawingService.guessDone$.subscribe({
       next: (value) => {

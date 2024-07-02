@@ -9,6 +9,7 @@ import { MatIcon } from '@angular/material/icon';
 import { MatButton } from '@angular/material/button';
 import { MatProgressSpinner } from '@angular/material/progress-spinner';
 import { UpperCasePipe } from '@angular/common';
+import { GameConfigService } from '../game-config.service';
 
 @Component({
   selector: 'app-game-word-to-draw',
@@ -18,25 +19,29 @@ import { UpperCasePipe } from '@angular/common';
   imports: [MatProgressSpinner, MatButton, MatIcon, UpperCasePipe],
 })
 export class GameWordToDrawComponent implements OnInit, OnDestroy {
-  constructor(
-    private drawingService: DrawingService,
-    private multiplayerService: MultiplayerService,
-    private router: Router
-  ) {}
+  config = this.gameConfigService.getConfig; //getting the current/default set game level values (easy mode)
+  
   isSinglePlayer = false;
   isMultiPlayer = false;
   playernr = '';
-  totalGuess = this.drawingService.totalGuess;
+  totalRounds = this.config.rounds;
   guessUsed = 1;
-  timeLeft = 5; //Fix
+  timeLeft = 5; 
+  
   loading = true;
   
   word = '';
   @Output() drawWord = new EventEmitter();
-
+  
   subscriptions = new Subscription();
   timerSubscription: Subscription | undefined;
-
+  
+  constructor(
+    private gameConfigService: GameConfigService, 
+    private drawingService: DrawingService,
+    private multiplayerService: MultiplayerService,
+    private router: Router
+  ) {}
   
   ngOnInit(): void {
     if (this.router.url === `/${routes.SINGLEPLAYER}`) {

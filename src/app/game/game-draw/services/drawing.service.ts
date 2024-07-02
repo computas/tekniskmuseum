@@ -5,13 +5,17 @@ import { tap, switchMap } from 'rxjs/operators';
 import { Result, StartGamePlayerId, GameLabel } from '../../../shared/models/interfaces';
 import { ResultsMock } from '../../../shared/mocks/results.mock';
 import { endpoints } from '../../../shared/models/endpoints';
+import { GameConfigService } from '../../game-config.service';
 
 @Injectable({
   providedIn: 'root',
 })
+
 export class DrawingService {
   baseUrl = endpoints.TEKNISKBACKEND;
-  totalGuess = 3; //Fix
+  
+  config = this.gameConfigService.getConfig; 
+  
   playerid = '';
   labels = [];
   label = '';
@@ -23,22 +27,27 @@ export class DrawingService {
   private readonly _gameOver = new BehaviorSubject<boolean>(false);
   private readonly _guessDone = new BehaviorSubject<boolean>(false);
   private readonly _results = new BehaviorSubject<Result[]>([]);
-  private readonly _difficulty = new BehaviorSubject<number>(1);
-
+  
   readonly guessUsed$ = this._guessUsed.asObservable();
   readonly results$ = this._results.asObservable();
   readonly guessDone$ = this._guessDone.asObservable();
   readonly gameOver$ = this._gameOver.asObservable();
-  difficulty$ = this._difficulty.asObservable();
-
+  
   resultsMock: Result[] = ResultsMock;
-
+  
   hasAddedSingleplayerResult = false;
   pred: any;
+  
+  constructor(
+    private http: HttpClient,
+    private gameConfigService: GameConfigService
+  ) {
+    this.gameConfigService.config$.subscribe(updatedConfig => {
+      this.config = updatedConfig 
+    });
+  }
 
-  constructor(private http: HttpClient) {}
-
-  classify(answerInfo: FormData): Observable<any> {
+  classify(answerInfo: FormData): Observable<any> { 
     return this.http.post<FormData>(`${this.baseUrl}/${endpoints.CLASSIFY}`, answerInfo).pipe(
       tap((res: any) => {
         this.pred = res;
@@ -56,7 +65,7 @@ export class DrawingService {
     this.guessDone = true;
     this.guessUsed++;
     this.classificationDone = true;
-    const isDonePlaying = this.results.length === this.totalGuess;
+    const isDonePlaying = this.results.length === this.config.rounds; 
     if (isDonePlaying) {
       this.gameOver = isDonePlaying;
     }
@@ -97,7 +106,7 @@ export class DrawingService {
   startGame(): Observable<GameLabel> {
     const headers = new HttpHeaders();
     headers.set('Access-Control-Allow-Origin', '*');
-    return this.http.get<StartGamePlayerId>(`${this.baseUrl}/${endpoints.STARTGAME}?difficulty_id=${this._difficulty.value}`, { headers: headers }).pipe(
+    return this.http.get<StartGamePlayerId>(`${this.baseUrl}/${endpoints.STARTGAME}?difficulty_id=${this.config.difficultyId}`, { headers: headers }).pipe(
       switchMap((res) => {
         this.playerid = res.player_id;
         return this.getLabel();
@@ -163,9 +172,5 @@ export class DrawingService {
 
   set gameOver(val: boolean) {
     this._gameOver.next(val);
-  }
-
-  set difficulty(val: number) {
-    this._difficulty.next(val);
   }
 }
