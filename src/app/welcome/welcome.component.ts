@@ -41,6 +41,7 @@ export class WelcomeComponent implements OnInit {
     this.multiplayerService.clearState();
     this.drawingService.clearState();
     const savedLanguage = localStorage.getItem('language') || 'NO';
+    console.log(`Initializing with language ${savedLanguage}`);                      //SLETT MEG SENERE
     //this.translationService.loadTranslations(this.translationService.getCurrentLang()).subscribe();
     this.translationService.loadTranslations(savedLanguage).pipe(takeUntil(this.destroy$)).subscribe();
   }
@@ -54,6 +55,7 @@ export class WelcomeComponent implements OnInit {
   }
 
   changeLanguage(lang: string) {
+    console.log(`Changing language to ${lang} from welcome page`);                      //SLETT MEG SENERE
     //this.translationService.loadTranslations(lang).subscribe();
     this.translationService.changeLanguage(lang);
   }

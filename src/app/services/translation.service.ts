@@ -14,6 +14,7 @@ export class TranslationService {
     constructor(private http: HttpClient) { }
     
     loadTranslations(lang: string): Observable<any> {
+        console.log(`Loading translations for ${lang}`);    // SLETT MEG SENERE!
         return this.http.get(`/assets/translation/${lang}.json`).pipe(
             map(translations => {
                 this.translations = translations;
@@ -32,8 +33,18 @@ export class TranslationService {
     }
 
     changeLanguage(lang:string) {
-        this.loadTranslations(lang).subscribe();
-        localStorage.setItem('language', lang);
-        this.langSubject.next(lang);
+        // check to avoid infinite loops
+        if (this.getCurrentLang() !== lang) {
+            this.loadTranslations(lang).subscribe(() => {
+                localStorage.setItem('language', lang);
+                // send when the translation is loaded
+                this.langSubject.next(lang)
+            })
+        } else {
+            console.log(`Loading is already ${lang}`);  //SLETT MEG SENERE
+        }
+        // this.loadTranslations(lang).subscribe();
+        // localStorage.setItem('language', lang);
+        // this.langSubject.next(lang);
     }
 }
