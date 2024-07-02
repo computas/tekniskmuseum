@@ -59,8 +59,8 @@ export class MultiplayerService {
     this.isMultiplayer = false;
   }
 
-  joinGame() {
-    this.webSocketService.emit(SocketEndpoints.JOIN_GAME, `{ "pair_id": "${this.pairing.getPairID()}" }`);
+  joinGame(difficulty_id: number) {
+    this.webSocketService.emit(SocketEndpoints.JOIN_GAME, `{ "pair_id": "${this.pairing.getPairID()}", "difficulty_id": "${difficulty_id}"}`);
     return this.webSocketService.listen(SocketEndpoints.JOIN_GAME).pipe(
       tap((data: any) => {
         const el: GameState = data;
@@ -82,7 +82,7 @@ export class MultiplayerService {
       take(1),
       map((res: any) => {
         const data = JSON.parse(res);
-        this.label = data.label;
+        this.label = data;
         return this.label;
       })
     );
