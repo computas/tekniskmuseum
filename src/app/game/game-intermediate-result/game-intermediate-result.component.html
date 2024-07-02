@@ -4,7 +4,11 @@
     <div>
       <app-game-progress-bar></app-game-progress-bar>
       <app-game-drawing-feedback [hasCorrectGuess]="result?.hasWon"></app-game-drawing-feedback>
-      <
+      <app-game-drawing-display 
+        [drawingURL]="result?.imageData" 
+        [hasCorrectGuess]="result?.hasWon"
+        [roundScore]="result?.score"
+      ></app-game-drawing-display>
       
       @if (result) {
       <div class="intermediate-content">
