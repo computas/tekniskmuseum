@@ -3,6 +3,8 @@
     <div><img class="logo" src="assets/logo/IO-logo-inverted_transparent-bg.png" alt="logo" /></div>
     <div>
       <app-game-progress-bar></app-game-progress-bar>
+      <app-game-drawing-feedback [hasCorrectGuess]="result?.hasWon"></app-game-drawing-feedback>
+      
       @if (result) {
       <div class="intermediate-content">
         <div class="avatar-container">

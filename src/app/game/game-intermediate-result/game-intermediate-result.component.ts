@@ -11,12 +11,20 @@ import { GameConfigService } from '../game-config.service';
 import { TranslationService } from '@/app/services/translation.service';
 import { TranslatePipe } from '@/app/pipes/translation.pipe';
 import { GameProgressBarComponent } from './game-progress-bar/game-progress-bar.component';
+import { GameDrawingFeedbackComponent } from './game-drawing-feedback/game-drawing-feedback.component';
 @Component({
   selector: 'app-game-intermediate-result',
   templateUrl: './game-intermediate-result.component.html',
   styleUrls: ['./game-intermediate-result.component.scss'],
   standalone: true,
-  imports: [MatButton, MatProgressSpinner, UpperCasePipe, TranslatePipe, GameProgressBarComponent],
+  imports: [
+    MatButton,
+    MatProgressSpinner,
+    UpperCasePipe,
+    TranslatePipe,
+    GameProgressBarComponent,
+    GameDrawingFeedbackComponent,
+  ],
 })
 export class GameIntermediateResultComponent implements OnInit, OnDestroy {
   result: Result | undefined;
