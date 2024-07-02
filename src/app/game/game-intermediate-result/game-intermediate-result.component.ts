@@ -10,16 +10,18 @@ import { UpperCasePipe } from '@angular/common';
 import { GameConfigService } from '../game-config.service';
 import { TranslationService } from '@/app/services/translation.service';
 import { TranslatePipe } from '@/app/pipes/translation.pipe';
-
+import { GameProgressBarComponent } from './game-progress-bar/game-progress-bar.component';
 @Component({
   selector: 'app-game-intermediate-result',
   templateUrl: './game-intermediate-result.component.html',
   styleUrls: ['./game-intermediate-result.component.scss'],
   standalone: true,
-  imports: [MatButton, MatProgressSpinner, UpperCasePipe, TranslatePipe],
+  imports: [MatButton, MatProgressSpinner, UpperCasePipe, TranslatePipe, GameProgressBarComponent],
 })
 export class GameIntermediateResultComponent implements OnInit, OnDestroy {
   result: Result | undefined;
+  wonSentence = 'Hurra, jeg klarte å gjette at du tegnet ';
+  lostSentence = 'Beklager, jeg klarte ikke å gjette hva du tegnet';
   gameOver = false;
   @Output() nextGuess = new EventEmitter();
   @Output() finalResult = new EventEmitter();
@@ -38,7 +40,9 @@ export class GameIntermediateResultComponent implements OnInit, OnDestroy {
   ) {}
 
   ngOnInit(): void {
-    this.result = this.drawingService.lastResult;
+    //this.result = this.drawingService.lastResult; -- revert before merge --
+    this.result = this.drawingService.createDefaultResult(); // -- revert before merge --
+    this.drawingService.updateGameState();
     if (this.router.url === `/${routes.SINGLEPLAYER}`) {
       this.isSinglePlayer = true;
       this.gameOver = this.drawingService.gameOver;
@@ -62,7 +66,7 @@ export class GameIntermediateResultComponent implements OnInit, OnDestroy {
       this.gameOver = this.drawingService.results.length === this.config.rounds;
 
       if (this.gameOver) {
-        const totalScore: number = this.drawingService.results.reduce((accumulator: number, currentValue: Result) => {
+        const totalScore: any = this.drawingService.results.reduce((accumulator: any, currentValue: any) => {
           return accumulator + currentValue.score;
         }, 0);
         this.multiplayerService.stateInfo = { ...this.multiplayerService.stateInfo, score: totalScore };
