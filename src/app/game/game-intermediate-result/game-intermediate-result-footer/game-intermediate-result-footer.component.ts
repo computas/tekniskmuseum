@@ -10,11 +10,11 @@ import { MatIcon } from '@angular/material/icon';
   styleUrl: './game-intermediate-result-footer.component.scss',
 })
 export class GameIntermediateResultFooterComponent implements OnInit {
-  @Input() gameOver: boolean = false;
-  @Input() isMultiplayer: boolean = false;
-  @Input() waitingForPlayer: boolean = true;
+  @Input() gameOver = false;
+  @Input() isMultiplayer = false;
+  @Input() waitingForPlayer = true;
   onNextPageClick = output<NEXTPAGE>();
-  buttonTextKey: string = '';
+  buttonTextKey = '';
   nextPageIdentifier: NEXTPAGE | undefined;
 
   ngOnInit(): void {

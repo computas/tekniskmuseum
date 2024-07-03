@@ -78,7 +78,7 @@ export class GameIntermediateResultComponent implements OnInit, OnDestroy {
       this.gameOver = this.drawingService.results.length === this.config.rounds;
 
       if (this.gameOver) {
-        const totalScore: any = this.drawingService.results.reduce((accumulator: any, currentValue: any) => {
+        const totalScore: number = this.drawingService.results.reduce((accumulator: number, currentValue: Result) => {
           return accumulator + currentValue.score;
         }, 0);
         this.multiplayerService.stateInfo = { ...this.multiplayerService.stateInfo, score: totalScore };

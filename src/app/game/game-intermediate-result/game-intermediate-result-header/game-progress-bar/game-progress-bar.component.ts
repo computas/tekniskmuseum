@@ -12,7 +12,7 @@ import { TranslatePipe } from '@/app/pipes/translation.pipe';
   styleUrl: './game-progress-bar.component.scss',
 })
 export class GameProgressBarComponent implements OnInit {
-  roundNumberProgress: string = '';
+  roundNumberProgress = '';
 
   constructor(
     private gameConfigService: GameConfigService,
