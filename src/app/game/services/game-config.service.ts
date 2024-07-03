@@ -2,14 +2,14 @@ import { Injectable } from '@angular/core';
 import { BehaviorSubject } from 'rxjs';
 
 export interface GameLevelConfig {
-  difficultyId: number,
-  rounds: number,
-  secondsPerRound: number,
-  timeToStartClassify: number
+  difficultyId: number;
+  rounds: number;
+  secondsPerRound: number;
+  timeToStartClassify: number;
 }
 export interface ImageScoreConfig {
-  maxScore: number,
-  scoreDecrement: number
+  maxScore: number;
+  scoreDecrement: number;
 }
 
 @Injectable({
@@ -20,42 +20,41 @@ export class GameConfigService {
     difficultyId: 1,
     rounds: 3,
     secondsPerRound: 30,
-    timeToStartClassify: 23
+    timeToStartClassify: 23,
   }); // Easy mode as default
   difficultyLevel$ = this._difficultyLevel.asObservable();
-  
-  
+
   setDifficultyLevel(level: 'easy' | 'medium' | 'hard'): void {
     switch (level) {
       case 'easy':
-        this._setConfig = { 
-          difficultyId: 1, 
-          rounds: 3, 
-          secondsPerRound: 30, 
-          timeToStartClassify: 25
+        this._setConfig = {
+          difficultyId: 1,
+          rounds: 3,
+          secondsPerRound: 30,
+          timeToStartClassify: 25,
         };
         break;
       case 'medium':
-        this._setConfig = { 
-          difficultyId: 2, 
-          rounds: 3, 
-          secondsPerRound: 20, 
-          timeToStartClassify: 15
+        this._setConfig = {
+          difficultyId: 2,
+          rounds: 3,
+          secondsPerRound: 20,
+          timeToStartClassify: 15,
         };
         break;
       case 'hard':
-        this._setConfig = { 
-          difficultyId: 3, 
-          rounds: 3, 
-          secondsPerRound: 20, 
-          timeToStartClassify: 15
-        }; 
+        this._setConfig = {
+          difficultyId: 3,
+          rounds: 3,
+          secondsPerRound: 20,
+          timeToStartClassify: 15,
+        };
         break;
     }
   }
 
   set _setConfig(newConfigValues: GameLevelConfig) {
-    this._difficultyLevel.next(newConfigValues); 
+    this._difficultyLevel.next(newConfigValues);
   }
 
   get getConfig(): GameLevelConfig {
@@ -65,7 +64,7 @@ export class GameConfigService {
   getScoreSettings(): ImageScoreConfig {
     return {
       maxScore: 333,
-      scoreDecrement: 1.67336683417
-    }
+      scoreDecrement: 1.67336683417,
+    };
   }
 }

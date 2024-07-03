@@ -22,8 +22,8 @@ import { GAMESTATE } from '@/app/shared/models/interfaces';
   imports: [MatProgressSpinner, MatButton, MatIcon, UpperCasePipe, TranslatePipe],
 })
 export class GameWordToDrawComponent implements OnInit, OnDestroy {
-  config = this.gameConfigService.getConfig; 
-  
+  config = this.gameConfigService.getConfig;
+
   isSinglePlayer = false;
   isMultiPlayer = false;
   playernr = '';

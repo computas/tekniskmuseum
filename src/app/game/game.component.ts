@@ -9,7 +9,6 @@ import { GameDrawComponent } from './game-draw/game-draw.component';
 import { GameInfoComponent } from './game-info/game-info.component';
 import { GamePickDifficultyComponent } from './game-pick-difficulty/game-pick-difficulty.component';
 
-
 @Component({
   selector: 'app-game',
   templateUrl: './game.component.html',

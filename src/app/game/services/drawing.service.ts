@@ -44,8 +44,8 @@ export class DrawingService {
     private translationService: TranslationService,
     private gameConfigService: GameConfigService
   ) {
-    this.gameConfigService.difficultyLevel$.subscribe(updatedConfig => {
-      this.config = updatedConfig 
+    this.gameConfigService.difficultyLevel$.subscribe((updatedConfig) => {
+      this.config = updatedConfig;
     });
   }
 

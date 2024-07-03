@@ -13,13 +13,7 @@ import { TranslatePipe } from '@/app/core/translation.pipe';
   templateUrl: './lobby.component.html',
   styleUrls: ['./lobby.component.scss'],
   standalone: true,
-  imports: [
-    MatProgressSpinner, 
-    MatIcon, 
-    RouterLink, 
-    RouterLinkActive, 
-    MatButton, 
-    TranslatePipe],
+  imports: [MatProgressSpinner, MatIcon, RouterLink, RouterLinkActive, MatButton, TranslatePipe],
 })
 export class LobbyComponent implements OnInit, OnDestroy {
   waitingForOtherPlayer = true;

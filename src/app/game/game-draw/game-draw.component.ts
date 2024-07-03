@@ -42,13 +42,13 @@ export class GameDrawComponent implements OnInit, OnDestroy {
   isDrawing = false;
   hasLeftCanvas = false;
   isBlankImage = true;
-  
-  timeLeft = 0; 
+
+  timeLeft = 0;
 
   scoreValues = this.gameConfigService.getScoreSettings();
   score = this.scoreValues.maxScore;
   scoreDecrement = this.scoreValues.scoreDecrement;
-  
+
   clockColor = 'initial';
   private readonly resultImageSize = 1024;
   private readonly LINE_WIDTH = 6;
@@ -76,7 +76,7 @@ export class GameDrawComponent implements OnInit, OnDestroy {
 
   ngOnInit(): void {
     this.subscriptions.add(
-      this.gameConfigService.difficultyLevel$.subscribe(config => {
+      this.gameConfigService.difficultyLevel$.subscribe((config) => {
         this.config = config;
         this.timeLeft = config.secondsPerRound;
       })
@@ -242,7 +242,7 @@ export class GameDrawComponent implements OnInit, OnDestroy {
   private createDrawingTimer() {
     return new Observable((observer) => {
       let color = 'red';
-      const intervalDuration = 100; 
+      const intervalDuration = 100;
 
       const sub = interval(intervalDuration)
         .pipe(take(10 * this.config.secondsPerRound))
@@ -326,7 +326,8 @@ export class GameDrawComponent implements OnInit, OnDestroy {
     });
   }
 
-  classify(isMultiplayer = false) { //TODO: rename?
+  classify(isMultiplayer = false) {
+    //TODO: rename?
     const b64Image = this.canvas().nativeElement.toDataURL('image/png');
     const croppedCoordinates: number[] = this.imageService.crop(
       this.minX,
@@ -465,5 +466,3 @@ export class GameDrawComponent implements OnInit, OnDestroy {
     this._timeOut.next(val);
   }
 }
-
-

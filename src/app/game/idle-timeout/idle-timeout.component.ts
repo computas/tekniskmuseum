@@ -14,14 +14,7 @@ import { TranslatePipe } from '@/app/core/translation.pipe';
   styleUrls: ['./idle-timeout.component.scss'],
   encapsulation: ViewEncapsulation.None,
   standalone: true,
-  imports: [
-    CdkScrollable, 
-    MatDialogContent, 
-    MatDialogActions, 
-    MatButton, 
-    MatIcon, 
-    TranslatePipe
-  ],
+  imports: [CdkScrollable, MatDialogContent, MatDialogActions, MatButton, MatIcon, TranslatePipe],
 })
 export class IdleTimeoutComponent implements OnInit, OnDestroy {
   constructor(
