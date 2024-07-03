@@ -31,7 +31,7 @@ export class AppComponent implements OnInit {
     this.setDialogTimeout();
     this.userInactive.subscribe(() => {
       if (this.router.url !== '/' && this.router.url !== '/admin') {
-        //this.openDialog();                                          -- revert berfore merge --
+        this.openDialog();
       }
     });
   }

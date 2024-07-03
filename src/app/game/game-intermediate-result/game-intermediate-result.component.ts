@@ -54,8 +54,7 @@ export class GameIntermediateResultComponent implements OnInit, OnDestroy {
   ) {}
 
   ngOnInit(): void {
-    //this.result = this.drawingService.lastResult; -- revert before merge --
-    this.result = this.drawingService.createDefaultResult(); // -- revert before merge --
+    this.result = this.drawingService.lastResult;
     if (this.router.url === `/${routes.SINGLEPLAYER}`) {
       this.isSinglePlayer = true;
       this.gameOver = this.drawingService.gameOver;
