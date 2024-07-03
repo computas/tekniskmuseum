@@ -11,12 +11,11 @@ import { GameConfigService } from '../../game-config.service';
 @Injectable({
   providedIn: 'root',
 })
-
 export class DrawingService {
   baseUrl = endpoints.TEKNISKBACKEND;
-  
-  config = this.gameConfigService.getConfig; 
-  
+
+  config = this.gameConfigService.getConfig;
+
   playerid = '';
   labels = [];
   label = '';
@@ -28,29 +27,30 @@ export class DrawingService {
   private readonly _gameOver = new BehaviorSubject<boolean>(false);
   private readonly _guessDone = new BehaviorSubject<boolean>(false);
   private readonly _results = new BehaviorSubject<Result[]>([]);
-  
+
   readonly guessUsed$ = this._guessUsed.asObservable();
   readonly results$ = this._results.asObservable();
   readonly guessDone$ = this._guessDone.asObservable();
   readonly gameOver$ = this._gameOver.asObservable();
-  
+
   resultsMock: Result[] = ResultsMock;
-  
+
   hasAddedSingleplayerResult = false;
   pred: any;
-  
+
   constructor(
     private http: HttpClient,
     private translationService: TranslationService,
     private gameConfigService: GameConfigService
   ) {
-    this.gameConfigService.config$.subscribe(updatedConfig => {
-      this.config = updatedConfig 
+    this.gameConfigService.config$.subscribe((updatedConfig) => {
+      this.config = updatedConfig;
     });
   }
 
   classify(answerInfo: FormData): Observable<any> {
-    return this.http.post<FormData>(`${this.baseUrl}/${endpoints.CLASSIFY}`, answerInfo).pipe(
+    const currentLang = this.translationService.getCurrentLang();
+    return this.http.post<FormData>(`${this.baseUrl}/${endpoints.CLASSIFY}?lang=${currentLang}`, answerInfo).pipe(
       tap((res: any) => {
         this.pred = res;
         if (this.guessUsed <= res.serverRound && this.roundIsDone(res) && !this.hasAddedSingleplayerResult) {
@@ -67,7 +67,7 @@ export class DrawingService {
     this.guessDone = true;
     this.guessUsed++;
     this.classificationDone = true;
-    const isDonePlaying = this.results.length === this.config.rounds; 
+    const isDonePlaying = this.results.length === this.config.rounds;
     if (isDonePlaying) {
       this.gameOver = isDonePlaying;
     }
@@ -108,12 +108,16 @@ export class DrawingService {
   startGame(): Observable<GameLabel> {
     const headers = new HttpHeaders();
     headers.set('Access-Control-Allow-Origin', '*');
-    return this.http.get<StartGamePlayerId>(`${this.baseUrl}/${endpoints.STARTGAME}?difficulty_id=${this.config.difficultyId}`, { headers: headers }).pipe(
-      switchMap((res) => {
-        this.playerid = res.player_id;
-        return this.getLabel();
+    return this.http
+      .get<StartGamePlayerId>(`${this.baseUrl}/${endpoints.STARTGAME}?difficulty_id=${this.config.difficultyId}`, {
+        headers: headers,
       })
-    );
+      .pipe(
+        switchMap((res) => {
+          this.playerid = res.player_id;
+          return this.getLabel();
+        })
+      );
   }
 
   getLabel(): Observable<GameLabel> {
@@ -123,11 +127,10 @@ export class DrawingService {
       .pipe(tap((res) => (this.label = res.label)));
   }
 
-  getHighscore(): Observable<Highscore>{
+  getHighscore(): Observable<Highscore> {
     const headers = new HttpHeaders();
     headers.set('Access-Control-Allow-Origin', '*');
-    return this.http
-    .get<Highscore>(`${this.baseUrl}/${endpoints.HIGHSCORE}`, { headers: headers })
+    return this.http.get<Highscore>(`${this.baseUrl}/${endpoints.HIGHSCORE}`, { headers: headers });
   }
 
   endGame() {
@@ -139,8 +142,8 @@ export class DrawingService {
   postScore() {
     const body = {
       player_id: this.playerid,
-      score: this.totalScore.toString()
-    }
+      score: this.totalScore.toString(),
+    };
     return this.http.post(`${this.baseUrl}/${endpoints.POSTSCORE}`, body);
   }
 
@@ -157,7 +160,7 @@ export class DrawingService {
   }
 
   get totalScore(): number {
-    return this.results.map(res => res.score).reduce((sum, current) => sum+current, 0)
+    return this.results.map((res) => res.score).reduce((sum, current) => sum + current, 0);
   }
 
   get lastResult(): Result {
