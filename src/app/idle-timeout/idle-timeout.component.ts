@@ -10,23 +10,16 @@ import { TranslationService } from '../services/translation.service';
 import { TranslatePipe } from '../pipes/translation.pipe';
 
 @Component({
-    selector: 'app-idle-timeout',
-    templateUrl: './idle-timeout.component.html',
-    styleUrls: ['./idle-timeout.component.scss'],
-    encapsulation: ViewEncapsulation.None,
-    standalone: true,
-    imports: [
-        CdkScrollable,
-        MatDialogContent,
-        MatDialogActions,
-        MatButton,
-        MatIcon,
-        TranslatePipe
-    ],
+  selector: 'app-idle-timeout',
+  templateUrl: './idle-timeout.component.html',
+  styleUrls: ['./idle-timeout.component.scss'],
+  encapsulation: ViewEncapsulation.None,
+  standalone: true,
+  imports: [CdkScrollable, MatDialogContent, MatDialogActions, MatButton, MatIcon, TranslatePipe],
 })
 export class IdleTimeoutComponent implements OnInit, OnDestroy {
   constructor(
-    private router: Router, 
+    private router: Router,
     private dialogRef: MatDialogRef<IdleTimeoutComponent>,
     private translationService: TranslationService
   ) {}

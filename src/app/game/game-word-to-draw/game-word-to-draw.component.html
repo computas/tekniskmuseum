@@ -2,25 +2,24 @@
   <div class="word-container">
     <div><img class="logo" src="assets/logo/IO-logo-inverted_transparent-bg.png" alt="logo" /></div>
     @if (isMultiPlayer) {
-      <h1 class="playernr">{{ 'PLAYER_LABEL' | translate }} {{ playernr }}</h1>
+    <h1 class="playernr">{{ 'PLAYER_LABEL' | translate }} {{ playernr }}</h1>
     }
     <div class="word-text">
       <div class="words-remaining">{{ guessUsed }}/{{ totalRounds }}</div>
       <p class="word-draw">{{ 'DRAW_LABEL' | translate }}</p>
       @if (loading) {
-        <div>
-          <mat-spinner class="white-spinner" id="white"></mat-spinner>
+      <div>
+        <mat-spinner class="white-spinner" id="white"></mat-spinner>
+      </div>
+      } @if (word) {
+      <div>
+        <h1 class="word-to-guess header">{{ word | uppercase }}</h1>
+        @if (isMultiPlayer) {
+        <div class="timer header">
+          <span>{{ timeLeft }}</span>
         </div>
-      }
-      @if (word) {
-        <div>
-          <h1 class="word-to-guess header">{{ word | uppercase }}</h1>
-          @if (isMultiPlayer) {
-            <div class="timer header">
-              <span>{{ timeLeft }}</span>
-            </div>
-          }
-        </div>
+        }
+      </div>
       }
     </div>
     <div class="word-footer">
@@ -28,14 +27,14 @@
         <img class="avatar-image" src="assets/illustrations/IO_Illustrasjoner-1_1360x939.png" alt="avatar" />
       </div>
       @if (!loading) {
-        <div>
-          @if (isSinglePlayer) {
-            <button mat-raised-button class="draw-word-button" (click)="drawWord.emit(true)">
-              {{ 'DRAW_BUTTON' | translate }}
-              <mat-icon class="button-icon play_arrow" aria-label="play_arrow">arrow_forward_ios</mat-icon>
-            </button>
-          }
-        </div>
+      <div>
+        @if (isSinglePlayer) {
+        <button mat-raised-button class="draw-word-button" (click)="drawWord.emit(true)">
+          {{ 'DRAW_BUTTON' | translate }}
+          <mat-icon class="button-icon play_arrow" aria-label="play_arrow">arrow_forward_ios</mat-icon>
+        </button>
+        }
+      </div>
       }
     </div>
   </div>

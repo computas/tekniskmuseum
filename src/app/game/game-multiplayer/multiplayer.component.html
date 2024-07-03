@@ -1,28 +1,21 @@
 <div>
-  @switch (gameState) {
-    @case (GAMESTATE.howToPlay) {
-      <div [@enterAnimation]><app-game-info></app-game-info></div>
-    }
-    @case (GAMESTATE.waitingForWord) {
-      <div [@enterAnimation]><app-game-word-to-draw></app-game-word-to-draw></div>
-    }
-    @case (GAMESTATE.drawing) {
-      <div [@enterAnimation]><app-drawing></app-drawing></div>
-    }
-    @case (GAMESTATE.intermediateResult) {
-      <div [@enterAnimation]>
-        <app-game-intermediate-result></app-game-intermediate-result>
-      </div>
-    }
-    @case (GAMESTATE.showResult) {
-      <div [@enterAnimation]>
-        <app-game-result></app-game-result>
-      </div>
-    }
-    @default {
-      <div [@enterAnimation]>
-        <app-lobby></app-lobby>
-      </div>
-    }
-  }
+  @switch (gameState) { @case (GAMESTATE.howToPlay) {
+  <div [@enterAnimation]><app-game-info></app-game-info></div>
+  } @case (GAMESTATE.waitingForWord) {
+  <div [@enterAnimation]><app-game-word-to-draw></app-game-word-to-draw></div>
+  } @case (GAMESTATE.drawing) {
+  <div [@enterAnimation]><app-drawing></app-drawing></div>
+  } @case (GAMESTATE.intermediateResult) {
+  <div [@enterAnimation]>
+    <app-game-intermediate-result></app-game-intermediate-result>
+  </div>
+  } @case (GAMESTATE.showResult) {
+  <div [@enterAnimation]>
+    <app-game-result></app-game-result>
+  </div>
+  } @default {
+  <div [@enterAnimation]>
+    <app-lobby></app-lobby>
+  </div>
+  } }
 </div>

@@ -1,6 +1,8 @@
 <div class="drawing-container">
   <div class="drawing-header">
-    <h1><span class="drawing-header-text">{{ 'DRAW_LABEL' | translate }} </span>{{ guessWord | uppercase }}</h1>
+    <h1>
+      <span class="drawing-header-text">{{ 'DRAW_LABEL' | translate }} </span>{{ guessWord | uppercase }}
+    </h1>
     <div class="drawing-seconds">
       <div class="timer-container">
         <mat-icon class="timer-icon" aria-label="Example home icon">timer</mat-icon>
@@ -37,11 +39,13 @@
       src="assets/illustrations/IO_Illustrasjoner-1_1360x939.png"
       alt="Avatar guessing words"
       class="guessing-avatar"
-      />
+    />
   </div>
   <div class="guess-label me">
-    <span>{{ 'AI_THINKING_LABEL' | translate }} @if (AI_GUESS) {
+    <span
+      >{{ 'AI_THINKING_LABEL' | translate }} @if (AI_GUESS) {
       <span>{{ 'AI_GUESS_LABEL' | translate }} &nbsp;</span>
-    }{{ AI_GUESS | uppercase }} </span>
+      }{{ AI_GUESS | uppercase }}
+    </span>
   </div>
 </div>

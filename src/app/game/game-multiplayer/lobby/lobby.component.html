@@ -3,14 +3,13 @@
     <div><img class="logo" src="assets/logo/IO-logo-inverted_transparent-bg.png" alt="logo" /></div>
     <div class="waiting-text">{{ 'WAITING_FOR_PLAYER' | translate }}</div>
     @if (waitingForOtherPlayer) {
-      <div>
-        <mat-spinner></mat-spinner>
-      </div>
-    }
-    @if (!waitingForOtherPlayer) {
-      <div>
-        <mat-icon class="check-icon" aria-label="Example home icon">done</mat-icon>
-      </div>
+    <div>
+      <mat-spinner></mat-spinner>
+    </div>
+    } @if (!waitingForOtherPlayer) {
+    <div>
+      <mat-icon class="check-icon" aria-label="Example home icon">done</mat-icon>
+    </div>
     }
     <a routerLink="/" routerLinkActive="active">
       <button mat-raised-button class="home-button">

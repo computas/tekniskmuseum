@@ -23,6 +23,6 @@ bootstrapApplication(AppComponent, {
     provideRouter(routes),
     provideAnimations(),
     importProvidersFrom(HttpClient),
-    TranslationService
+    TranslationService,
   ],
 }).catch((err) => console.error(err));
