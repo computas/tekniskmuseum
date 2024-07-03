@@ -42,7 +42,7 @@ export class DrawingService {
     private http: HttpClient,
     private gameConfigService: GameConfigService
   ) {
-    this.gameConfigService.config$.subscribe(updatedConfig => {
+    this.gameConfigService.difficultyLevel$.subscribe(updatedConfig => {
       this.config = updatedConfig 
     });
   }

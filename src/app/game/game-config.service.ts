@@ -1,34 +1,34 @@
 import { Injectable } from '@angular/core';
 import { BehaviorSubject, Observable } from 'rxjs';
 
-export interface GameConfig {
+export interface GameLevelConfig {
   difficultyId: number,
-  rounds: number;
-  secondsPerRound: number;
-  timeToStartClassify: number;
+  rounds: number,
+  secondsPerRound: number,
+  timeToStartClassify: number
+}
+export interface ImageScoreConfig {
+  maxScore: number,
+  scoreDecrement: number
 }
 
 @Injectable({
   providedIn: 'root'
 })
 export class GameConfigService {
-  private _configValues: GameConfig = {
+  private readonly _difficultyLevel = new BehaviorSubject<GameLevelConfig>({
     difficultyId: 1,
     rounds: 3,
     secondsPerRound: 30,
     timeToStartClassify: 23
-  }; 
-
-  constructor() {}
-
-  private readonly _config = new BehaviorSubject<GameConfig>(this._configValues); // Easy mode as default
-  config$ = this._config.asObservable();
+  }); // Easy mode as default
+  difficultyLevel$ = this._difficultyLevel.asObservable();
   
   
-  setDifficultyLevel(level: string): void {
+  setDifficultyLevel(level: 'easy' | 'medium' | 'hard'): void {
     switch (level) {
       case 'easy':
-        this.setConfig = { 
+        this._setConfig = { 
           difficultyId: 1, 
           rounds: 3, 
           secondsPerRound: 30, 
@@ -36,7 +36,7 @@ export class GameConfigService {
         };
         break;
       case 'medium':
-        this.setConfig = { 
+        this._setConfig = { 
           difficultyId: 2, 
           rounds: 3, 
           secondsPerRound: 20, 
@@ -44,7 +44,7 @@ export class GameConfigService {
         };
         break;
       case 'hard':
-        this.setConfig = { 
+        this._setConfig = { 
           difficultyId: 3, 
           rounds: 3, 
           secondsPerRound: 20, 
@@ -54,12 +54,18 @@ export class GameConfigService {
     }
   }
 
-  set setConfig(newConfigValues: GameConfig) {
-    this._configValues = { ...this._configValues, ...newConfigValues };
-    this._config.next(newConfigValues); 
+  set _setConfig(newConfigValues: GameLevelConfig) {
+    this._difficultyLevel.next(newConfigValues); 
   }
 
-  get getConfig(): GameConfig {
-    return this._configValues;
+  get getConfig(): GameLevelConfig {
+    return this._difficultyLevel.value;
   }
+
+  getScoreSettings(): ImageScoreConfig {
+    return {
+      maxScore: 333,
+      scoreDecrement: 1.67336683417
+    }
+  } 
 }

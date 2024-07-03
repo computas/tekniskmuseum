@@ -7,7 +7,7 @@ import { SocketEndpoints } from '../../shared/models/websocketEndpoints';
 import { MatButton } from '@angular/material/button';
 import { MatIcon } from '@angular/material/icon';
 import { NgIf } from '@angular/common';
-import { GameConfig, GameConfigService } from '../game-config.service';
+import { GameLevelConfig, GameConfigService } from '../game-config.service';
 import { TranslationService } from '@/app/services/translation.service';
 import { TranslatePipe } from '@/app/pipes/translation.pipe';
 
@@ -43,7 +43,7 @@ export class GamePickDifficultyComponent {
   ngOnInit(): void {
     if (this.router.url === `/${routes.SINGLEPLAYER}`) {
       this.isSinglePlayer = true;
-      this.gameConfigService.config$.subscribe((config: GameConfig) => {
+      this.gameConfigService.difficultyLevel$.subscribe((config: GameLevelConfig) => {
         this.config = config;
       });
     } else {
@@ -63,7 +63,7 @@ export class GamePickDifficultyComponent {
   }  
 
 
-  startDrawing(difficulty: string) {
+  startDrawing(difficulty: 'easy' | 'medium' | 'hard') {
     if (this.isSinglePlayer) {
       this.gameConfigService.setDifficultyLevel(difficulty);
       this.getDrawWord.emit(true);
