@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable, BehaviorSubject } from 'rxjs';
-import { map } from 'rxjs/operators';
+import { distinctUntilChanged, map } from 'rxjs/operators';
 
 @Injectable({
     providedIn: 'root'
@@ -9,7 +9,7 @@ import { map } from 'rxjs/operators';
 export class TranslationService {
     private translations: any = {};
     private langSubject = new BehaviorSubject<string>('NO');
-    lang$ = this.langSubject.asObservable();
+    lang$ = this.langSubject.asObservable().pipe(distinctUntilChanged());
 
     constructor(private http: HttpClient) { }
     
@@ -31,9 +31,20 @@ export class TranslationService {
         return this.langSubject.getValue();
     }
 
-    changeLanguage(lang:string) {
-        this.loadTranslations(lang).subscribe();
-        localStorage.setItem('language', lang);
-        this.langSubject.next(lang);
+    changeLanguage(lang: string) {
+        // check to avoid infinite loops
+        if (this.getCurrentLang() !== lang) {
+            this.loadTranslations(lang).subscribe(() => {
+                localStorage.setItem('language', lang);
+                // send when the translation is loaded
+                this.langSubject.next(lang)
+            })
+        }
+    }
+
+    setLanguage(lang: string) {
+        if (this.getCurrentLang() !== lang) {
+            this.langSubject.next(lang);
+        }
     }
 }

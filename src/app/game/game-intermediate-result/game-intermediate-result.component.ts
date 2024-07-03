@@ -25,8 +25,6 @@ import { TranslatePipe } from '@/app/pipes/translation.pipe';
 })
 export class GameIntermediateResultComponent implements OnInit, OnDestroy {
   result: Result | undefined;
-  wonSentence = 'Hurra, jeg klarte å gjette at du tegnet ';
-  lostSentence = 'Beklager, jeg klarte ikke å gjette hva du tegnet';
   gameOver = false;
   @Output() nextGuess = new EventEmitter();
   @Output() finalResult = new EventEmitter();

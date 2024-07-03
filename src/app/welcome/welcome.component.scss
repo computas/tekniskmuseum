@@ -175,7 +175,6 @@ a {
   width: 40px;
 }
 
-
 .language-button-container {
   position: absolute;
   top: 20px;
@@ -193,11 +192,11 @@ a {
   align-items: center;
   gap: 10px;
   border-radius: 20px;
-  border: 1px solid var(--White, #FBFBFB);
+  border: 1px solid var(--White, #fbfbfb);
   background: var(--Black, #030303);
   box-shadow: 0px 4px 4px 0px rgba(0, 0, 0, 0.25);
-  color: var(--White, #FBFBFB);
-  font-family: Aeonik;
+  color: var(--White, #fbfbfb);
+  font-family: AeonikMedium;
   font-size: 24px;
   font-style: normal;
   font-weight: 700;
@@ -205,6 +204,6 @@ a {
 }
 
 .language-button.selected {
-  background: #FFF;
-  color: var(--Blue, #151CDB);
+  background: #fff;
+  color: var(--Blue, #151cdb);
 }
