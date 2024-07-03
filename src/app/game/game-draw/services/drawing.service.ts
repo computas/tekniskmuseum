@@ -17,8 +17,6 @@ export class DrawingService {
 
   config = this.gameConfigService.getConfig;
 
-  config = this.gameConfigService.getConfig;
-
   playerid = '';
   labels = [];
   label = '';
