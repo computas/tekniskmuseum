@@ -10,7 +10,7 @@ import { SoundService } from '../services/sound.service';
 import { UpperCasePipe } from '@angular/common';
 import { MatIconButton } from '@angular/material/button';
 import { MatIcon } from '@angular/material/icon';
-import { GameLevelConfig, GameConfigService, ImageScoreConfig } from '../services/game-config.service';
+import { GameLevelConfig, GameConfigService } from '../services/game-config.service';
 import { TranslationService } from '@/app/core/translation.service';
 import { TranslatePipe } from '@/app/core/translation.pipe';
 
