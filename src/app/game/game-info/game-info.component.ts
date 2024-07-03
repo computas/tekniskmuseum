@@ -31,7 +31,9 @@ export class GameInfoComponent implements OnInit {
 
   ngOnInit(): void {
     this.translationService.lang$.subscribe((lang) => {
-      this.translationService.loadTranslations(lang).subscribe();
+      this.translationService.loadTranslations(lang).subscribe(() => {
+        this.translationService.setLanguage(lang);
+      });
     });
 
     if (this.router.url === `/${routes.SINGLEPLAYER}`) {
@@ -49,7 +51,6 @@ export class GameInfoComponent implements OnInit {
       });
       this.webSocketService.listen(SocketEndpoints.END_GAME).subscribe();
     }
-    //this.translationService.loadTranslations(this.translationService.getCurrentLang()).subscribe();
   }
 
   goToDifficultyPicker() {

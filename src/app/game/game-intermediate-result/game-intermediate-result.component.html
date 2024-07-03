@@ -21,14 +21,14 @@
           @if (result.hasWon) {
           <div class="word-text">
             <h1>
-              {{ wonSentence }}@if (result.word) {
+              {{ 'WON_SENTENCE' | translate }}@if (result.word) {
               <b class="guessed-word">{{ this.result.word | uppercase }}</b>
               }!
             </h1>
           </div>
           } @if (!result.hasWon) {
           <div class="word-text">
-            <h1>{{ lostSentence }}</h1>
+            <h1>{{ 'LOST_SENTENCE' | translate }}</h1>
           </div>
           }
           <div class="result-img">

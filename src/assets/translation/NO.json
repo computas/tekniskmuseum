@@ -27,6 +27,8 @@
   "AI_THINKING_LABEL": "Hmm... ",
   "AI_GUESS_LABEL": "kan det være",
 
+  "WON_SENTENCE": "Hurra, jeg klarte å gjette at du tegnet ",
+  "LOST_SENTENCE": "Beklager, jeg klarte ikke å gjette hva du tegnet",
   "WINNER_TEXT": "Du vant!",
   "POINTS_INFO_TEXT": "Du fikk: ",
   "POINTS": "poeng",

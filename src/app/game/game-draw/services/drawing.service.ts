@@ -6,6 +6,7 @@ import { StartGamePlayerId, GameLabel, Highscore, PredictionData } from '../../.
 import { Result } from '../../../shared/models/interfaces';
 import { ResultsMock } from '../../../shared/mocks/results.mock';
 import { endpoints } from '../../../shared/models/endpoints';
+import { TranslationService } from '@/app/services/translation.service';
 import { GameConfigService } from '../../game-config.service';
 
 @Injectable({
@@ -13,6 +14,8 @@ import { GameConfigService } from '../../game-config.service';
 })
 export class DrawingService {
   baseUrl = endpoints.TEKNISKBACKEND;
+
+  config = this.gameConfigService.getConfig;
 
   config = this.gameConfigService.getConfig;
 
@@ -38,10 +41,19 @@ export class DrawingService {
   hasAddedSingleplayerResult = false;
   pred: PredictionData | undefined;
 
-  constructor(private http: HttpClient, private gameConfigService: GameConfigService) {}
+  constructor(
+    private http: HttpClient,
+    private translationService: TranslationService,
+    private gameConfigService: GameConfigService
+  ) {
+    this.gameConfigService.config$.subscribe((updatedConfig) => {
+      this.config = updatedConfig;
+    });
+  }
 
   classify(answerInfo: FormData): Observable<PredictionData> {
-    return this.http.post<PredictionData>(`${this.baseUrl}/${endpoints.CLASSIFY}`, answerInfo).pipe(
+    const currentLang = this.translationService.getCurrentLang();
+    return this.http.post<PredictionData>(`${this.baseUrl}/${endpoints.CLASSIFY}?lang=${currentLang}`, answerInfo).pipe(
       tap((data: PredictionData) => {
         this.pred = data;
         if (
@@ -119,8 +131,9 @@ export class DrawingService {
   }
 
   getLabel(): Observable<GameLabel> {
+    const currentLang = this.translationService.getCurrentLang();
     return this.http
-      .post<GameLabel>(`${this.baseUrl}/${endpoints.GETLABEL}?player_id=${this.playerid}`, {})
+      .post<GameLabel>(`${this.baseUrl}/${endpoints.GETLABEL}?player_id=${this.playerid}&lang=${currentLang}`, {})
       .pipe(tap((res) => (this.label = res.label)));
   }
 

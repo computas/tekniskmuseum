@@ -27,6 +27,8 @@
   "AI_THINKING_LABEL": "Hmm... ",
   "AI_GUESS_LABEL": "could it be ",
 
+  "WON_SENTENCE": "Hurrah, I guessed that you drew ",
+  "LOST_SENTENCE": "Sorry, I couldn't guess what you drew",
   "WINNER_TEXT": "You won!",
   "POINTS_INFO_TEXT": "You got: ",
   "POINTS": "points",
