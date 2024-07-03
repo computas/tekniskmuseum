@@ -14,7 +14,6 @@ import { GameDrawingFeedbackComponent } from './game-drawing-feedback/game-drawi
 import { GameDrawingDisplayComponent } from './game-drawing-display/game-drawing-display.component';
 import { GameIntermediateResultHeaderComponent } from './game-intermediate-result-header/game-intermediate-result-header.component';
 import { GameIntermediateResultFooterComponent } from './game-intermediate-result-footer/game-intermediate-result-footer.component';
-import { NEXTPAGE } from './game-intermediate-result-footer/next-page-identifier';
 @Component({
   selector: 'app-game-intermediate-result',
   templateUrl: './game-intermediate-result.component.html',
@@ -94,12 +93,12 @@ export class GameIntermediateResultComponent implements OnInit, OnDestroy {
     }
   }
 
-  nextPage(nextGameState: NEXTPAGE) {
+  nextPage(nextGameState: GAMESTATE) {
     switch (nextGameState) {
-      case NEXTPAGE.showResult:
+      case GAMESTATE.showResult:
         this.getSummary();
         break;
-      case NEXTPAGE.showWord:
+      case GAMESTATE.showWord:
         this.newDrawing();
         break;
     }

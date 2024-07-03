@@ -1,7 +1,7 @@
 import { Component, Input, OnInit, output } from '@angular/core';
 import { TranslatePipe } from '@/app/pipes/translation.pipe';
-import { NEXTPAGE } from './next-page-identifier';
 import { MatIcon } from '@angular/material/icon';
+import { GAMESTATE } from '@/app/shared/models/interfaces';
 @Component({
   selector: 'app-game-intermediate-result-footer',
   standalone: true,
@@ -13,9 +13,9 @@ export class GameIntermediateResultFooterComponent implements OnInit {
   @Input() gameOver = false;
   @Input() isMultiplayer = false;
   @Input() waitingForPlayer = true;
-  onNextPageClick = output<NEXTPAGE>();
+  onNextPageClick = output<GAMESTATE>();
   buttonTextKey = '';
-  nextPageIdentifier: NEXTPAGE | undefined;
+  nextPageIdentifier: GAMESTATE | undefined;
 
   ngOnInit(): void {
     this.buttonTextKey = this.getButtonTextKey();
@@ -31,11 +31,11 @@ export class GameIntermediateResultFooterComponent implements OnInit {
       return 'WAITING_FOR_PLAYER';
     }
     if (this.gameOver) {
-      this.nextPageIdentifier = NEXTPAGE.showResult;
+      this.nextPageIdentifier = GAMESTATE.showResult;
       return 'SUMMARY_BUTTON';
     }
     if (!this.gameOver) {
-      this.nextPageIdentifier = NEXTPAGE.showWord;
+      this.nextPageIdentifier = GAMESTATE.showWord;
       return 'NEXT_WORD_BUTTON';
     }
     return '';
