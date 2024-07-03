@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { GameProgressBarComponent } from '../game-progress-bar/game-progress-bar.component';
+import { GameProgressBarComponent } from './game-progress-bar/game-progress-bar.component';
 
 @Component({
   selector: 'app-game-intermediate-result-header',

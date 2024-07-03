@@ -10,10 +10,11 @@ import { UpperCasePipe } from '@angular/common';
 import { GameConfigService } from '../game-config.service';
 import { TranslationService } from '@/app/services/translation.service';
 import { TranslatePipe } from '@/app/pipes/translation.pipe';
-import { GameProgressBarComponent } from './game-progress-bar/game-progress-bar.component';
 import { GameDrawingFeedbackComponent } from './game-drawing-feedback/game-drawing-feedback.component';
 import { GameDrawingDisplayComponent } from './game-drawing-display/game-drawing-display.component';
 import { GameIntermediateResultHeaderComponent } from './game-intermediate-result-header/game-intermediate-result-header.component';
+import { GameIntermediateResultFooterComponent } from './game-intermediate-result-footer/game-intermediate-result-footer.component';
+import { NEXTPAGE } from './game-intermediate-result-footer/next-page-identifier';
 @Component({
   selector: 'app-game-intermediate-result',
   templateUrl: './game-intermediate-result.component.html',
@@ -24,11 +25,11 @@ import { GameIntermediateResultHeaderComponent } from './game-intermediate-resul
     MatProgressSpinner,
     UpperCasePipe,
     TranslatePipe,
-    GameProgressBarComponent,
     GameDrawingFeedbackComponent,
     GameDrawingDisplayComponent,
     GameIntermediateResultComponent,
     GameIntermediateResultHeaderComponent,
+    GameIntermediateResultFooterComponent,
   ],
 })
 export class GameIntermediateResultComponent implements OnInit, OnDestroy {
@@ -91,6 +92,17 @@ export class GameIntermediateResultComponent implements OnInit, OnDestroy {
   ngOnDestroy() {
     if (this.isSinglePlayer) {
       this.drawingService.hasAddedSingleplayerResult = false;
+    }
+  }
+
+  nextPage(nextGameState: NEXTPAGE) {
+    switch (nextGameState) {
+      case NEXTPAGE.showResult:
+        this.getSummary();
+        break;
+      case NEXTPAGE.showWord:
+        this.newDrawing();
+        break;
     }
   }
 

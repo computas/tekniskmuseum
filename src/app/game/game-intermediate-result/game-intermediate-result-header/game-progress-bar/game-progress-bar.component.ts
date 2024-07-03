@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import { DrawingService } from '../../game-draw/services/drawing.service';
-import { GameConfig, GameConfigService } from '../../game-config.service';
+import { DrawingService } from '../../../game-draw/services/drawing.service';
+import { GameConfig, GameConfigService } from '../../../game-config.service';
 import { TranslationService } from '@/app/services/translation.service';
 import { TranslatePipe } from '@/app/pipes/translation.pipe';
 

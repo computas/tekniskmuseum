@@ -8,6 +8,10 @@
       [hasCorrectGuess]="result?.hasWon"
       [roundScore]="result?.score"
     ></app-game-drawing-display>
+    <app-game-intermediate-result-footer
+      class="footer"
+      (onNextPageClick)="nextPage($event)"
+    ></app-game-intermediate-result-footer>
     <!--
       @if (result) {
       <div class="intermediate-content">

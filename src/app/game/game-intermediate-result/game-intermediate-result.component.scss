@@ -41,6 +41,11 @@
   justify-self: end;
 }
 
+.footer {
+  grid-row: 3 / 4;
+  grid-column: 1 / -1;
+}
+
 .won {
   border: 8px solid #68d466;
 }
