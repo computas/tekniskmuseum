@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, OnDestroy } from '@angular/core';
 import { MultiplayerService } from '../game/game-multiplayer/services/multiplayer.service';
 import { DrawingService } from '../game/game-draw/services/drawing.service';
 import { Router, RouterLink, RouterLinkActive } from '@angular/router';
@@ -8,6 +8,7 @@ import { TranslationService } from '../services/translation.service';
 import { TranslatePipe } from '../pipes/translation.pipe';
 import { Observable, Subject, takeUntil } from 'rxjs';
 import { CommonModule } from '@angular/common';
+import { HttpClient } from '@angular/common/http';
 
 @Component({
   selector: 'app-welcome',
@@ -17,7 +18,7 @@ import { CommonModule } from '@angular/common';
   imports: [RouterLink, RouterLinkActive, MatButton, MatIcon, TranslatePipe, CommonModule],
   providers: [TranslationService, HttpClient],
 })
-export class WelcomeComponent implements OnInit {
+export class WelcomeComponent implements OnInit, OnDestroy {
   private headerClicks = 0;
   currentLang$: Observable<string>;
   private destroy$ = new Subject<void>();
