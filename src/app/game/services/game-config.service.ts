@@ -67,5 +67,5 @@ export class GameConfigService {
       maxScore: 333,
       scoreDecrement: 1.67336683417
     }
-  } 
+  }
 }

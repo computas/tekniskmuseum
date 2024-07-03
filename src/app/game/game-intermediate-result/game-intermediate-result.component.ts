@@ -1,15 +1,15 @@
 import { Component, OnInit, EventEmitter, Output, OnDestroy } from '@angular/core';
 import { Result } from '../../shared/models/interfaces';
-import { DrawingService } from '../game-draw/services/drawing.service';
-import { MultiplayerService, GAMESTATE } from '../game-multiplayer/services/multiplayer.service';
+import { DrawingService } from '../services/drawing.service';
+import { MultiplayerService, GAMESTATE } from '../services/multiplayer.service';
 import { Router } from '@angular/router';
 import { routes } from '../../shared/models/routes';
 import { MatProgressSpinner } from '@angular/material/progress-spinner';
 import { MatButton } from '@angular/material/button';
 import { UpperCasePipe } from '@angular/common';
-import { GameConfigService } from '../game-config.service';
-import { TranslationService } from '@/app/services/translation.service';
-import { TranslatePipe } from '@/app/pipes/translation.pipe';
+import { GameConfigService } from '../services/game-config.service';
+import { TranslationService } from '@/app/core/translation.service';
+import { TranslatePipe } from '@/app/core/translation.pipe';
 
 @Component({
   selector: 'app-game-intermediate-result',

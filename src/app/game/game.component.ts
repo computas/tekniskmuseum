@@ -1,7 +1,7 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
 import { trigger, style, animate, transition } from '@angular/animations';
 
-import { DrawingService } from './game-draw/services/drawing.service';
+import { DrawingService } from './services/drawing.service';
 import { GameWordToDrawComponent } from './game-word-to-draw/game-word-to-draw.component';
 import { GameResultComponent } from './game-result/game-result.component';
 import { GameIntermediateResultComponent } from './game-intermediate-result/game-intermediate-result.component';

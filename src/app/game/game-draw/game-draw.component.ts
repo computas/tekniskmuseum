@@ -1,17 +1,17 @@
 import { Component, ElementRef, OnInit, Output, EventEmitter, OnDestroy, viewChild } from '@angular/core';
 import { BehaviorSubject, interval, Observable, Subscription } from 'rxjs';
-import { ImageService } from './services/image.service';
+import { ImageService } from '../services/image.service';
 import { take } from 'rxjs/operators';
-import { DrawingService } from './services/drawing.service';
-import { MultiplayerService, GAMESTATE } from '../game-multiplayer/services/multiplayer.service';
+import { DrawingService } from '../services/drawing.service';
+import { MultiplayerService, GAMESTATE } from '../services/multiplayer.service';
 import { Result } from '../../shared/models/interfaces';
-import { SoundService } from './services/sound.service';
+import { SoundService } from '../services/sound.service';
 import { UpperCasePipe } from '@angular/common';
 import { MatIconButton } from '@angular/material/button';
 import { MatIcon } from '@angular/material/icon';
-import { GameLevelConfig, GameConfigService, ImageScoreConfig } from '../game-config.service';
-import { TranslationService } from '@/app/services/translation.service';
-import { TranslatePipe } from '@/app/pipes/translation.pipe';
+import { GameLevelConfig, GameConfigService, ImageScoreConfig } from '../services/game-config.service';
+import { TranslationService } from '@/app/core/translation.service';
+import { TranslatePipe } from '@/app/core/translation.pipe';
 
 @Component({
   selector: 'app-drawing',

@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import { WebSocketService } from './web-socket.service';
 import { BehaviorSubject, ReplaySubject } from 'rxjs';
 import { map, take, tap } from 'rxjs/operators';
-import { SocketEndpoints } from '../../../shared/models/websocketEndpoints';
+import { SocketEndpoints } from '@/app/shared/models/websocketEndpoints';
 import { PairingService } from './pairing.service';
 
 export enum GAMESTATE {

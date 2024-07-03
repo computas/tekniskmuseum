@@ -1,13 +1,13 @@
 import { Component, OnInit, Output, EventEmitter } from '@angular/core';
 import { Router } from '@angular/router';
 import { routes } from '../../shared/models/routes';
-import { MultiplayerService, GAMESTATE } from '../game-multiplayer/services/multiplayer.service';
-import { WebSocketService } from '../game-multiplayer/services/web-socket.service';
+import { MultiplayerService, GAMESTATE } from '../services/multiplayer.service';
+import { WebSocketService } from '../services/web-socket.service';
 import { SocketEndpoints } from '../../shared/models/websocketEndpoints';
 import { MatButton } from '@angular/material/button';
 import { MatIcon } from '@angular/material/icon';
-import { TranslationService } from '@/app/services/translation.service';
-import { TranslatePipe } from '@/app/pipes/translation.pipe';
+import { TranslationService } from '@/app/core/translation.service';
+import { TranslatePipe } from '@/app/core/translation.pipe';
 
 @Component({
   selector: 'app-game-info',

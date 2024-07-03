@@ -1,5 +1,5 @@
 import { Pipe, PipeTransform,inject } from '@angular/core';
-import { TranslationService } from '../services/translation.service';
+import { TranslationService } from './translation.service';
 
 @Pipe({
     name: 'translate',
@@ -7,7 +7,6 @@ import { TranslationService } from '../services/translation.service';
     pure: false
 })
 export class TranslatePipe implements PipeTransform {
-    //constructor(private translationService: TranslationService) { }
     private translationService = inject(TranslationService);
     
     transform(value: string): string {

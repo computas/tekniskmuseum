@@ -1,11 +1,11 @@
 import { Component, OnInit } from '@angular/core';
-import { MultiplayerService } from '../game/game-multiplayer/services/multiplayer.service';
-import { DrawingService } from '../game/game-draw/services/drawing.service';
+import { MultiplayerService } from '../game/services/multiplayer.service';
+import { DrawingService } from '../game/services/drawing.service';
 import { Router, RouterLink, RouterLinkActive } from '@angular/router';
 import { MatIcon } from '@angular/material/icon';
 import { MatButton } from '@angular/material/button';
-import { TranslationService } from '../services/translation.service';
-import { TranslatePipe } from '../pipes/translation.pipe';
+import { TranslationService } from '../core/translation.service';
+import { TranslatePipe } from '../core/translation.pipe';
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { CommonModule } from '@angular/common';

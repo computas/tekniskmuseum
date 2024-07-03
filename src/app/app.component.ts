@@ -4,7 +4,7 @@ import { Router } from '@angular/router';
 import { MatDialog } from '@angular/material/dialog';
 import { RouterOutlet } from '@angular/router';
 
-import { IdleTimeoutComponent } from './idle-timeout/idle-timeout.component';
+import { IdleTimeoutComponent } from './game/idle-timeout/idle-timeout.component';
 import { routeTransitionAnimations } from './route-transition-animations';
 import { environment } from '../environments/environment';
 
