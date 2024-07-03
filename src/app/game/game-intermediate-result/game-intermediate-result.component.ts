@@ -1,7 +1,7 @@
 import { Component, OnInit, EventEmitter, Output, OnDestroy } from '@angular/core';
-import { Result } from '../../shared/models/interfaces';
+import { GAMESTATE, Result } from '../../shared/models/interfaces';
 import { DrawingService } from '../game-draw/services/drawing.service';
-import { MultiplayerService, GAMESTATE } from '../game-multiplayer/services/multiplayer.service';
+import { MultiplayerService } from '../game-multiplayer/services/multiplayer.service';
 import { Router } from '@angular/router';
 import { routes } from '../../shared/models/routes';
 import { MatProgressSpinner } from '@angular/material/progress-spinner';
@@ -16,12 +16,7 @@ import { TranslatePipe } from '@/app/pipes/translation.pipe';
   templateUrl: './game-intermediate-result.component.html',
   styleUrls: ['./game-intermediate-result.component.scss'],
   standalone: true,
-  imports: [
-    MatButton, 
-    MatProgressSpinner, 
-    UpperCasePipe,
-    TranslatePipe
-  ],
+  imports: [MatButton, MatProgressSpinner, UpperCasePipe, TranslatePipe],
 })
 export class GameIntermediateResultComponent implements OnInit, OnDestroy {
   result: Result | undefined;
@@ -64,10 +59,10 @@ export class GameIntermediateResultComponent implements OnInit, OnDestroy {
           };
         }
       });
-      this.gameOver = this.drawingService.results.length === this.config.rounds; 
+      this.gameOver = this.drawingService.results.length === this.config.rounds;
 
       if (this.gameOver) {
-        const totalScore: any = this.drawingService.results.reduce((accumulator: any, currentValue: any) => {
+        const totalScore: number = this.drawingService.results.reduce((accumulator: number, currentValue: Result) => {
           return accumulator + currentValue.score;
         }, 0);
         this.multiplayerService.stateInfo = { ...this.multiplayerService.stateInfo, score: totalScore };
@@ -76,7 +71,7 @@ export class GameIntermediateResultComponent implements OnInit, OnDestroy {
     }
     this.translationService.loadTranslations(this.translationService.getCurrentLang()).subscribe();
   }
-  
+
   ngOnDestroy() {
     if (this.isSinglePlayer) {
       this.drawingService.hasAddedSingleplayerResult = false;

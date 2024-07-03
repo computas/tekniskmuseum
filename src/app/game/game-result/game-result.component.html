@@ -2,78 +2,76 @@
   <div class="result-container">
     <div><img class="logo" src="assets/logo/IO-logo-inverted_transparent-bg.png" alt="logo" /></div>
     @if (ismultiplayer && hasWon) {
-      <div id="result-header" class="result-header-multi">
-        <h1 class="result-header-multi">
-          <span class="winner">{{ 'WINNER_TEXT' | translate }}</span>
-          <span class="winner-points">&nbsp;{{ 'POINTS_INFO_TEXT' | translate }} {{ score }} {{ 'POINTS' | translate }}</span>
-        </h1>
-      </div>
-    }
-    @if (ismultiplayer && !hasWon) {
-      <div id="result-header" class="result-header-multi">
-        <h1 class="result-header-multi">
-          <span class="loser">{{ 'LOSER_TEXT' | translate }}</span>
-          <span class="loser-points">&nbsp;{{ 'POINTS_INFO_TEXT' | translate }} {{ score }} {{ 'POINTS' | translate }}</span>
-        </h1>
-      </div>
-    }
-    @if (!ismultiplayer) {
-      <h1 id="result-header">{{ 'RESULT_TEXT' | translate }}</h1>
+    <div id="result-header" class="result-header-multi">
+      <h1 class="result-header-multi">
+        <span class="winner">{{ 'WINNER_TEXT' | translate }}</span>
+        <span class="winner-points"
+          >&nbsp;{{ 'POINTS_INFO_TEXT' | translate }} {{ score }} {{ 'POINTS' | translate }}</span
+        >
+      </h1>
+    </div>
+    } @if (ismultiplayer && !hasWon) {
+    <div id="result-header" class="result-header-multi">
+      <h1 class="result-header-multi">
+        <span class="loser">{{ 'LOSER_TEXT' | translate }}</span>
+        <span class="loser-points"
+          >&nbsp;{{ 'POINTS_INFO_TEXT' | translate }} {{ score }} {{ 'POINTS' | translate }}</span
+        >
+      </h1>
+    </div>
+    } @if (!ismultiplayer) {
+    <h1 id="result-header">{{ 'RESULT_TEXT' | translate }}</h1>
     }
     <div class="result-section">
       <h3 id="score-header">Poengsum: {{ score }} poeng</h3>
       <div id="highscore-section">
         @if (newHighscore) {
-          <div>
-            <h2 id="highscore-number" >Ny dagens highscore!</h2>
-          </div>
+        <div>
+          <h2 id="highscore-number">Ny dagens highscore!</h2>
+        </div>
         } @else {
-          <div id="not-highscore-section">
-            <h2 id="highscore-text">
-              Dagens highscore:
-            </h2>
-            <h2 id="highscore-number">
-              {{ todaysHighscore.toString() }}
-            </h2>
-          </div>
+        <div id="not-highscore-section">
+          <h2 id="highscore-text">Dagens highscore:</h2>
+          <h2 id="highscore-number">
+            {{ todaysHighscore.toString() }}
+          </h2>
+        </div>
         }
       </div>
       <div id="result-card-container">
         @for (result of results; track result) {
-          <div id="result-card">
-            <img
-              mat-card-image
-              [src]="result.imageData"
-              [className]="result.hasWon ? 'game-result-img card-won' : 'game-result-img card-loss'"
-              alt=""
-              />
-            <p id="result-subtitile">
-              @if (result.hasWon) {
-                <span class="material-icons" id="won"> done </span>
-              }
-              @if (!result.hasWon) {
-                <span class="material-icons" id="loss"> clear </span>
-              }
-              @if (result.word) {
-                <span class="result-word"
-                  >{{ result.word | titlecase }}
-                  @if (ismultiplayer) {
-                    <span class="multiplayer-score"> {{ result.score }} p</span>
-                    }</span
-                    >
-                  }
-                </p>
-              </div>
+        <div id="result-card">
+          <img
+            mat-card-image
+            [src]="result.imageData"
+            [className]="result.hasWon ? 'game-result-img card-won' : 'game-result-img card-loss'"
+            alt=""
+          />
+          <p id="result-subtitile">
+            @if (result.hasWon) {
+            <span class="material-icons" id="won"> done </span>
+            } @if (!result.hasWon) {
+            <span class="material-icons" id="loss"> clear </span>
+            } @if (result.word) {
+            <span class="result-word"
+              >{{ result.word | titlecase }}
+              @if (ismultiplayer) {
+              <span class="multiplayer-score"> {{ result.score }} p</span>
+              }</span
+            >
             }
-          </div>
+          </p>
         </div>
-        <div class="button-footer">
-          <a href="/" class="link-float"
-            ><button mat-raised-button class="btn btn-again">
-            <span class="material-icons icon"> autorenew </span>
-            {{ 'PLAY_AGAIN_BUTTON' | translate }}
-          </button></a
-          >
-        </div>
+        }
       </div>
     </div>
+    <div class="button-footer">
+      <a href="/" class="link-float"
+        ><button mat-raised-button class="btn btn-again">
+          <span class="material-icons icon"> autorenew </span>
+          {{ 'PLAY_AGAIN_BUTTON' | translate }}
+        </button></a
+      >
+    </div>
+  </div>
+</div>

@@ -1,7 +1,7 @@
-import { Component, Output, EventEmitter } from '@angular/core';
+import { Component, Output, EventEmitter, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { routes } from '../../shared/models/routes';
-import { MultiplayerService, GAMESTATE } from '../game-multiplayer/services/multiplayer.service';
+import { MultiplayerService } from '../game-multiplayer/services/multiplayer.service';
 import { WebSocketService } from '../game-multiplayer/services/web-socket.service';
 import { SocketEndpoints } from '../../shared/models/websocketEndpoints';
 import { MatButton } from '@angular/material/button';
@@ -10,22 +10,18 @@ import { NgIf } from '@angular/common';
 import { GameConfig, GameConfigService } from '../game-config.service';
 import { TranslationService } from '@/app/services/translation.service';
 import { TranslatePipe } from '@/app/pipes/translation.pipe';
+import { GAMESTATE } from '@/app/shared/models/interfaces';
 
 @Component({
-    selector: 'app-game-pick-difficulty',
-    templateUrl: './game-pick-difficulty.component.html',
-    styleUrl: './game-pick-difficulty.component.scss',
-    standalone: true,
-    imports: [
-      NgIf,
-      MatIcon,
-      MatButton,
-      TranslatePipe
-  ],
+  selector: 'app-game-pick-difficulty',
+  templateUrl: './game-pick-difficulty.component.html',
+  styleUrl: './game-pick-difficulty.component.scss',
+  standalone: true,
+  imports: [NgIf, MatIcon, MatButton, TranslatePipe],
 })
-export class GamePickDifficultyComponent {
-  config = this.gameConfigService.getConfig; 
-  
+export class GamePickDifficultyComponent implements OnInit {
+  config = this.gameConfigService.getConfig;
+
   isSinglePlayer = false;
   isMultiPlayer = false;
 
@@ -33,7 +29,7 @@ export class GamePickDifficultyComponent {
   @Output() difficultyPicked = new EventEmitter();
 
   constructor(
-    private gameConfigService: GameConfigService, 
+    private gameConfigService: GameConfigService,
     private router: Router,
     private multiplayerService: MultiplayerService,
     private webSocketService: WebSocketService,
@@ -48,11 +44,11 @@ export class GamePickDifficultyComponent {
       });
     } else {
       this.isMultiPlayer = true;
-      this.multiplayerService.getLabel(false).subscribe((res: any) => {
+      this.multiplayerService.getLabel(false).subscribe((res: string) => {
         if (res) {
           this.multiplayerService.stateInfo = {
             ...this.multiplayerService.stateInfo,
-            label: res.label,
+            label: res,
             gameState: GAMESTATE.waitingForWord,
           };
         }
@@ -60,8 +56,7 @@ export class GamePickDifficultyComponent {
       this.webSocketService.listen(SocketEndpoints.END_GAME).subscribe();
     }
     this.translationService.loadTranslations(this.translationService.getCurrentLang()).subscribe();
-  }  
-
+  }
 
   startDrawing(difficulty: string) {
     if (this.isSinglePlayer) {
@@ -73,9 +68,7 @@ export class GamePickDifficultyComponent {
     }
   }
 
-  
   goToLanding() {
     this.router.navigate([routes.LANDING]);
   }
-
 }

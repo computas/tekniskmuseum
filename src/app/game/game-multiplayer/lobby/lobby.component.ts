@@ -13,25 +13,16 @@ import { TranslatePipe } from '@/app/pipes/translation.pipe';
   templateUrl: './lobby.component.html',
   styleUrls: ['./lobby.component.scss'],
   standalone: true,
-  imports: [
-    MatProgressSpinner, 
-    MatIcon, RouterLink, 
-    RouterLinkActive, 
-    MatButton,
-    TranslatePipe
-  ],
+  imports: [MatProgressSpinner, MatIcon, RouterLink, RouterLinkActive, MatButton, TranslatePipe],
 })
 export class LobbyComponent implements OnInit, OnDestroy {
   waitingForOtherPlayer = true;
   subscriptions = new Subscription();
 
-  constructor(
-    public multiPlayerService: MultiplayerService,
-    private translationService: TranslationService
-  ) {}
+  constructor(public multiPlayerService: MultiplayerService, private translationService: TranslationService) {}
 
   ngOnInit(): void {
-    const difficulty= 2; // Difficulty set to medium (1 for easy, 3 for hard)
+    const difficulty = 2; // Difficulty set to medium (1 for easy, 3 for hard)
     this.subscriptions.add(this.multiPlayerService.joinGame(difficulty).subscribe());
     this.subscriptions.add(
       this.multiPlayerService.stateInfo$.subscribe((obs) => {
