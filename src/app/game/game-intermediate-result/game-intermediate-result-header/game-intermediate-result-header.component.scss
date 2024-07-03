@@ -1,16 +1,16 @@
-.intermediate-header {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  margin: 2.5em;
+.header {
+  display: grid;
+  grid-template-columns: repeat(8, 1fr);
 }
 
 .logo {
-  margin-right: auto;
+  grid-column: 1 / 2;
   height: 44px;
   width: 70px;
 }
 
 .game-progress-bar {
+  grid-column: 4 / 6;
+  align-self: center;
   justify-self: center;
 }

@@ -1,19 +1,14 @@
 <div class="intermediate-container-background">
   <div id="intermediate-container">
-    <app-game-intermediate-result-header></app-game-intermediate-result-header>
-    <div>
-      <div class="feedback-section">
-        <app-game-drawing-feedback
-          class="feedback-container"
-          [hasCorrectGuess]="result?.hasWon"
-        ></app-game-drawing-feedback>
-        <app-game-drawing-display
-          [drawingURL]="result?.imageData"
-          [hasCorrectGuess]="result?.hasWon"
-          [roundScore]="result?.score"
-        ></app-game-drawing-display>
-      </div>
-
+    <app-game-intermediate-result-header class="result-header"></app-game-intermediate-result-header>
+    <app-game-drawing-feedback class="avatar-feedback" [hasCorrectGuess]="result?.hasWon"></app-game-drawing-feedback>
+    <app-game-drawing-display
+      class="user-drawing-and-score"
+      [drawingURL]="result?.imageData"
+      [hasCorrectGuess]="result?.hasWon"
+      [roundScore]="result?.score"
+    ></app-game-drawing-display>
+    <!--
       @if (result) {
       <div class="intermediate-content">
         <div class="avatar-container">
@@ -56,6 +51,7 @@
       <ng-template #loading>
         <mat-spinner [diameter]="50" class="white-spinner"></mat-spinner>
       </ng-template>
-    </div>
+      
+      -->
   </div>
 </div>
