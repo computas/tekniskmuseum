@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { BehaviorSubject, Observable } from 'rxjs';
+import { BehaviorSubject } from 'rxjs';
 
 export interface GameLevelConfig {
   difficultyId: number,
@@ -13,7 +13,7 @@ export interface ImageScoreConfig {
 }
 
 @Injectable({
-  providedIn: 'root'
+  providedIn: 'root',
 })
 export class GameConfigService {
   private readonly _difficultyLevel = new BehaviorSubject<GameLevelConfig>({

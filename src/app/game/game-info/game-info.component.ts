@@ -1,24 +1,21 @@
 import { Component, OnInit, Output, EventEmitter } from '@angular/core';
 import { Router } from '@angular/router';
 import { routes } from '../../shared/models/routes';
-import { MultiplayerService, GAMESTATE } from '../services/multiplayer.service';
+import { MultiplayerService } from '../services/multiplayer.service';
 import { WebSocketService } from '../services/web-socket.service';
 import { SocketEndpoints } from '../../shared/models/websocketEndpoints';
 import { MatButton } from '@angular/material/button';
 import { MatIcon } from '@angular/material/icon';
 import { TranslationService } from '@/app/core/translation.service';
 import { TranslatePipe } from '@/app/core/translation.pipe';
+import { GAMESTATE } from '@/app/shared/models/interfaces';
 
 @Component({
   selector: 'app-game-info',
   templateUrl: './game-info.component.html',
   styleUrls: ['./game-info.component.scss'],
   standalone: true,
-  imports: [
-    MatIcon, 
-    MatButton,
-    TranslatePipe
-  ],
+  imports: [MatIcon, MatButton, TranslatePipe],
 })
 export class GameInfoComponent implements OnInit {
   @Output() getDifficultyPicker = new EventEmitter();
@@ -28,12 +25,12 @@ export class GameInfoComponent implements OnInit {
   constructor(
     private router: Router,
     private multiplayerService: MultiplayerService,
-    private webSocketService: WebSocketService, 
+    private webSocketService: WebSocketService,
     private translationService: TranslationService
   ) {}
 
   ngOnInit(): void {
-    this.translationService.lang$.subscribe(lang => {
+    this.translationService.lang$.subscribe((lang) => {
       this.translationService.loadTranslations(lang).subscribe(() => {
         this.translationService.setLanguage(lang);
       });
@@ -43,11 +40,11 @@ export class GameInfoComponent implements OnInit {
       this.isSinglePlayer = true;
     } else {
       this.isMultiPlayer = true;
-      this.multiplayerService.getLabel(false).subscribe((res: any) => {
+      this.multiplayerService.getLabel(false).subscribe((res: string) => {
         if (res) {
           this.multiplayerService.stateInfo = {
             ...this.multiplayerService.stateInfo,
-            label: res.label,
+            label: res,
             gameState: GAMESTATE.waitingForWord,
           };
         }

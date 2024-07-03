@@ -2,7 +2,7 @@ import { Component, OnInit, OnDestroy } from '@angular/core';
 import { trigger, style, animate, transition } from '@angular/animations';
 import { Router } from '@angular/router';
 
-import { MultiplayerService, GAMESTATE } from '../services/multiplayer.service';
+import { MultiplayerService } from '../services/multiplayer.service';
 import { WebSocketService } from '../services/web-socket.service';
 import { routes } from '../../shared/models/routes';
 import { Subscription } from 'rxjs';
@@ -12,6 +12,7 @@ import { GameIntermediateResultComponent } from '../game-intermediate-result/gam
 import { GameDrawComponent } from '../game-draw/game-draw.component';
 import { GameWordToDrawComponent } from '../game-word-to-draw/game-word-to-draw.component';
 import { GameInfoComponent } from '../game-info/game-info.component';
+import { GAMESTATE } from '@/app/shared/models/interfaces';
 
 @Component({
   selector: 'app-multiplayer',

@@ -77,7 +77,7 @@ export class GameComponent implements OnInit, OnDestroy {
     this.showDifficultyPicker = true;
     this.showHowToPlay = false;
   }
-  
+
   getDrawWord() {
     this.showWordToDraw = true;
     this.showDifficultyPicker = false;
@@ -105,4 +105,3 @@ export class GameComponent implements OnInit, OnDestroy {
     this.guessDone = false;
   }
 }
-

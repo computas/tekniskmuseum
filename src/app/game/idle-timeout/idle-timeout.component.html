@@ -4,7 +4,9 @@
   </p>
 </div>
 <div mat-dialog-actions class="actions">
-  <button mat-raised-button class="button" id="stay-button" (click)="closeDialog()">{{ 'STAY_BUTTON' | translate }}</button>
+  <button mat-raised-button class="button" id="stay-button" (click)="closeDialog()">
+    {{ 'STAY_BUTTON' | translate }}
+  </button>
   <button mat-raised-button class="button" id="home-button" (click)="goHome()">
     <div class="button-text"><mat-icon class="button-icon">home</mat-icon>{{ 'END_NOW_BUTTON' | translate }}</div>
   </button>

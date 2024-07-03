@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, OnDestroy } from '@angular/core';
 import { DrawingService } from '../services/drawing.service';
 import { Result } from '../../shared/models/interfaces';
 import { Router } from '@angular/router';
@@ -15,14 +15,9 @@ import { Subscription } from 'rxjs';
   templateUrl: './game-result.component.html',
   styleUrls: ['./game-result.component.scss'],
   standalone: true,
-  imports: [
-    MatCardImage, 
-    MatButton, 
-    TitleCasePipe,
-    TranslatePipe
-  ],
+  imports: [MatCardImage, MatButton, TitleCasePipe, TranslatePipe],
 })
-export class GameResultComponent implements OnInit {
+export class GameResultComponent implements OnInit, OnDestroy {
   results: Result[] = [];
   totalScore = 0;
   loading = false;
@@ -30,8 +25,8 @@ export class GameResultComponent implements OnInit {
   hasWon = false;
   ismultiplayer = false;
   score = 0;
-  todaysHighscore: number = 0;
-  newHighscore: boolean = false;
+  todaysHighscore = 0;
+  newHighscore = false;
   getHighscoreSubscription: Subscription | null = null;
   postHighscoreSubscription: Subscription | null = null;
   constructor(
@@ -55,12 +50,12 @@ export class GameResultComponent implements OnInit {
         }
       });
     } else {
-      this.score = this.drawingService.totalScore
+      this.score = this.drawingService.totalScore;
     }
 
     this.getHighscoreSubscription = this.drawingService.getHighscore().subscribe({
       next: (data) => {
-        const todaysScores = data.daily.map(daily=>daily.score);
+        const todaysScores = data.daily.map((daily) => daily.score);
         if (Math.max(...todaysScores) > 0) {
           this.todaysHighscore = Math.max(...todaysScores);
         }
@@ -68,11 +63,11 @@ export class GameResultComponent implements OnInit {
           this.newHighscore = true;
         }
       },
-      error: (error) => console.error("Error fetching today's highscore", error)
+      error: (error) => console.error("Error fetching today's highscore", error),
     });
 
     this.postHighscoreSubscription = this.drawingService.postScore().subscribe();
-    
+
     if (this.router.url === '/summary') {
       this.results = this.drawingService.get();
     } else if (this.router.url === '/summary/multiplayer') {

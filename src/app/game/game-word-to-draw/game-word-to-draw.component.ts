@@ -4,7 +4,7 @@ import { take, tap } from 'rxjs/operators';
 import { DrawingService } from '../services/drawing.service';
 import { Router } from '@angular/router';
 import { routes } from '../../shared/models/routes';
-import { MultiplayerService, GAMESTATE } from '../services/multiplayer.service';
+import { MultiplayerService } from '../services/multiplayer.service';
 import { MatIcon } from '@angular/material/icon';
 import { MatButton } from '@angular/material/button';
 import { MatProgressSpinner } from '@angular/material/progress-spinner';
@@ -12,19 +12,14 @@ import { UpperCasePipe } from '@angular/common';
 import { GameConfigService } from '../services/game-config.service';
 import { TranslationService } from '@/app/core/translation.service';
 import { TranslatePipe } from '@/app/core/translation.pipe';
+import { GAMESTATE } from '@/app/shared/models/interfaces';
 
 @Component({
   selector: 'app-game-word-to-draw',
   templateUrl: './game-word-to-draw.component.html',
   styleUrls: ['./game-word-to-draw.component.scss'],
   standalone: true,
-  imports: [
-    MatProgressSpinner, 
-    MatButton, 
-    MatIcon, 
-    UpperCasePipe,
-    TranslatePipe
-  ],
+  imports: [MatProgressSpinner, MatButton, MatIcon, UpperCasePipe, TranslatePipe],
 })
 export class GameWordToDrawComponent implements OnInit, OnDestroy {
   config = this.gameConfigService.getConfig; 
@@ -34,18 +29,18 @@ export class GameWordToDrawComponent implements OnInit, OnDestroy {
   playernr = '';
   totalRounds = this.config.rounds;
   guessUsed = 1;
-  timeLeft = 5; 
-  
+  timeLeft = 5;
+
   loading = true;
-  
+
   word = '';
   @Output() drawWord = new EventEmitter();
-  
+
   subscriptions = new Subscription();
   timerSubscription: Subscription | undefined;
-  
+
   constructor(
-    private gameConfigService: GameConfigService, 
+    private gameConfigService: GameConfigService,
     private drawingService: DrawingService,
     private multiplayerService: MultiplayerService,
     private router: Router,

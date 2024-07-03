@@ -14,7 +14,7 @@ name: Lint Code Base
 on:
   push:
     branches-ignore:
-      - "master"
+      - 'master'
 ###############
 # Set the Job #
 ###############

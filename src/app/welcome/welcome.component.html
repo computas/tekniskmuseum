@@ -3,7 +3,7 @@
     <button class="logo" (click)="goToAdmin()">
       <img src="assets/logo/IO-logo-inverted_transparent-bg.png" alt="logo" aria-label="Gå til admin side" />
     </button>
-    <div class="language-button-container" >
+    <div class="language-button-container">
       <button class="language-button" (click)="changeLanguage('EN')" [class.selected]="(currentLang$ | async) === 'EN'">
         <img src="assets/UK.svg" alt="UK flag" />
         EN
@@ -26,14 +26,16 @@
             <a routerLink="/playgame/singleplayer" routerLinkActive="active">
               <button mat-raised-button class="play-game-button">
                 <div class="button-text">
-                  <mat-icon class="button-icon" aria-label="player one icon">person</mat-icon>{{ 'PLAYER_MODE_SINGLE' | translate }}
+                  <mat-icon class="button-icon" aria-label="player one icon">person</mat-icon
+                  >{{ 'PLAYER_MODE_SINGLE' | translate }}
                 </div>
               </button>
             </a>
             <a routerLink="/playgame/multiplayer" routerLinkActive="active">
               <button mat-raised-button class="play-game-button">
                 <div class="button-text">
-                  <mat-icon class="button-icon" aria-label="player two icon">group</mat-icon>{{ 'PLAYER_MODE_MULTI' | translate }}
+                  <mat-icon class="button-icon" aria-label="player two icon">group</mat-icon
+                  >{{ 'PLAYER_MODE_MULTI' | translate }}
                 </div>
               </button>
             </a>

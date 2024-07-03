@@ -6,7 +6,7 @@ name: Lint & Build
 on:
   push:
     branches-ignore:
-      - "master"
+      - 'master'
 
 jobs:
   build:

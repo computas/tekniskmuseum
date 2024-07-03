@@ -4,16 +4,16 @@
   position: relative;
 }
 .result-container-background:before {
-  content: "";
+  content: '';
   top: 0;
   left: 0;
   width: 100%;
   height: 100%;
   position: absolute;
-  background-image: url("../../../assets/background/io_rutemoenster-inverted.png");
+  background-image: url('../../../assets/background/io_rutemoenster-inverted.png');
   background-size: cover;
   background-color: black;
-} 
+}
 .result-container {
   position: relative;
   min-height: 100vh;
@@ -153,7 +153,8 @@ p {
   color: $text_secondary_color;
   font-weight: 500;
 }
-.winner-points, .loser-points {
+.winner-points,
+.loser-points {
   font-size: 32px;
   color: $text_primary_color;
 }

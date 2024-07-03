@@ -3,8 +3,9 @@ import { BehaviorSubject, interval, Observable, Subscription } from 'rxjs';
 import { ImageService } from '../services/image.service';
 import { take } from 'rxjs/operators';
 import { DrawingService } from '../services/drawing.service';
-import { MultiplayerService, GAMESTATE } from '../services/multiplayer.service';
-import { Result } from '../../shared/models/interfaces';
+import { MultiplayerService } from '../services/multiplayer.service';
+import { Certainty, GAMESTATE, Result } from '../../shared/models/interfaces';
+import { PredictionData } from '../../shared/models/backend-interfaces';
 import { SoundService } from '../services/sound.service';
 import { UpperCasePipe } from '@angular/common';
 import { MatIconButton } from '@angular/material/button';
@@ -18,31 +19,26 @@ import { TranslatePipe } from '@/app/core/translation.pipe';
   templateUrl: './game-draw.component.html',
   styleUrls: ['./game-draw.component.scss'],
   standalone: true,
-  imports: [
-    MatIcon, 
-    MatIconButton, 
-    UpperCasePipe,
-    TranslatePipe
-  ],
+  imports: [MatIcon, MatIconButton, UpperCasePipe, TranslatePipe],
 })
 export class GameDrawComponent implements OnInit, OnDestroy {
   config!: GameLevelConfig;
   subscriptions = new Subscription();
-  
+
   canvas = viewChild.required<ElementRef<HTMLCanvasElement>>('canvas');
   countDown = viewChild.required<ElementRef<HTMLSpanElement>>('countDown');
   private ctx: CanvasRenderingContext2D | undefined;
-  
+
   @Output() isDoneDrawing = new EventEmitter();
-  
+
   x = 0;
   y = 0;
-  
+
   minX = 0;
   minY = 0;
   maxX = 0;
   maxY = 0;
-  
+
   isDrawing = false;
   hasLeftCanvas = false;
   isBlankImage = true;
@@ -56,28 +52,27 @@ export class GameDrawComponent implements OnInit, OnDestroy {
   clockColor = 'initial';
   private readonly resultImageSize = 1024;
   private readonly LINE_WIDTH = 6;
-  
+
   private readonly _timeOut = new BehaviorSubject<boolean>(false);
   readonly _timeOut$ = this._timeOut.asObservable();
-  
+
   guessWord = '';
   AI_GUESS = '';
-  
-  prediction: any;
+
+  prediction: PredictionData | undefined;
   result: Result | undefined;
   hasAddedResult = false;
-  
+
   hasUpdatedState = false;
-  
+
   constructor(
     private gameConfigService: GameConfigService,
     private multiplayerService: MultiplayerService,
     private drawingService: DrawingService,
     private imageService: ImageService,
-    private soundService: SoundService, 
+    private soundService: SoundService,
     private translationService: TranslationService
   ) {}
-
 
   ngOnInit(): void {
     this.subscriptions.add(
@@ -113,7 +108,7 @@ export class GameDrawComponent implements OnInit, OnDestroy {
   }
 
   predictionListener() {
-    return this.multiplayerService.predictionListener().subscribe((prediction: any) => {
+    return this.multiplayerService.predictionListener().subscribe((prediction: PredictionData) => {
       this.prediction = prediction;
       const sortedCertaintyArr = this.sortOnCertainty(prediction);
       this.updateAiGuess(sortedCertaintyArr);
@@ -128,7 +123,7 @@ export class GameDrawComponent implements OnInit, OnDestroy {
   roundOverListener() {
     return this.multiplayerService.roundOverListener().subscribe(() => {
       if (!this.hasAddedResult) {
-        this.updateResult(this.prediction.hasWon);
+        this.updateResult(this.prediction ? this.prediction.hasWon : false);
         this.hasAddedResult = true;
       }
     });
@@ -152,18 +147,20 @@ export class GameDrawComponent implements OnInit, OnDestroy {
     }
     const result: Result = {
       hasWon: won,
-      guess: won ? this.multiplayerService.stateInfo.label : this.prediction.guess,
+      guess: won ? this.multiplayerService.stateInfo.label ?? '' : this.prediction ? this.prediction.guess : '',
       imageData: '',
       gameState: 'Done',
       score,
       word: this.multiplayerService.stateInfo.label,
+      serverRound: this.prediction ? this.prediction.serverRound : 1,
+      roundIsDone: true,
     };
     return result;
   }
 
   addResultAndResize(res: Result): Observable<string> {
     this.drawingService.label = res.word ? res.word : '';
-    this.result = this.drawingService.createResult(res);
+    this.result = res;
     this.drawingService.addResult(this.result);
     const croppedCoordinates: number[] = this.imageService.crop(
       this.minX,
@@ -224,7 +221,7 @@ export class GameDrawComponent implements OnInit, OnDestroy {
               res = this.drawingService.createDefaultResult();
             } else {
               res = this.drawingService.createResult(this.drawingService.pred);
-              res.imageData = this.drawingService.pred.imageData;
+              res.imageData = this.result ? this.result.imageData : '';
               hasWon = this.drawingService.pred.hasWon;
             }
             this.soundService.playResultSound(hasWon);
@@ -276,15 +273,14 @@ export class GameDrawComponent implements OnInit, OnDestroy {
     });
   }
 
-
-  sortOnCertainty(res: any) {
-    const arr: any = [];
+  sortOnCertainty(res: PredictionData) {
+    const arr: Certainty[] = [];
     Object.entries(res.certainty).map((keyValue) => {
       const [label, certainty] = keyValue;
-      arr.push({ label, certainty });
+      arr.push({ label: label, certainty: certainty });
     });
-    arr.sort((a: any, b: any) => {
-      return b.value - a.value;
+    arr.sort((a: Certainty, b: Certainty) => {
+      return b.certainty - a.certainty;
     });
     if (5 < arr.length) {
       return arr.slice(0, 5);
@@ -292,7 +288,7 @@ export class GameDrawComponent implements OnInit, OnDestroy {
     return arr;
   }
 
-  updateAiGuess(sortedCertaintyArr: any[]) {
+  updateAiGuess(sortedCertaintyArr: Certainty[]) {
     if (sortedCertaintyArr && sortedCertaintyArr.length > 1) {
       const guess = sortedCertaintyArr[0].label;
       this.AI_GUESS = guess === this.guessWord ? sortedCertaintyArr[1].label : guess;
@@ -305,7 +301,7 @@ export class GameDrawComponent implements OnInit, OnDestroy {
     this.drawingService.classify(formData).subscribe((res) => {
       const sortedCertaintyArr = this.sortOnCertainty(res);
       this.updateAiGuess(sortedCertaintyArr);
-      if (res.roundIsDone) {
+      if (this.drawingService.roundIsDone(res.hasWon, res.gameState)) {
         this.soundService.playResultSound(res.hasWon);
         const score = this.score > 0 ? this.score : 0;
         this.drawingService.lastResult.score = Math.round(score);
@@ -321,7 +317,9 @@ export class GameDrawComponent implements OnInit, OnDestroy {
           .resize(this.canvas().nativeElement.toDataURL('image/png'), croppedCoordinates, this.resultImageSize)
           .subscribe({
             next: (dataUrlHighRes) => {
-              this.drawingService.pred.imageData = dataUrlHighRes;
+              if (this.result) {
+                this.result.imageData = dataUrlHighRes;
+              }
             },
           });
       }
@@ -361,8 +359,8 @@ export class GameDrawComponent implements OnInit, OnDestroy {
     return formData;
   }
 
-  getClientOffset(event: any) {
-    const { pageX, pageY } = event.touches ? event.touches[0] : event;
+  getClientOffset(event: MouseEvent | TouchEvent) {
+    const { pageX, pageY } = event instanceof TouchEvent ? event.touches[0] : event;
     const x = pageX - this.canvas().nativeElement.offsetLeft;
     const y = pageY - this.canvas().nativeElement.offsetTop;
 

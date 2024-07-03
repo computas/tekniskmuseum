@@ -1,31 +1,12 @@
 import { Injectable } from '@angular/core';
 import { WebSocketService } from './web-socket.service';
-import { BehaviorSubject, ReplaySubject } from 'rxjs';
+import { BehaviorSubject, Observable, ReplaySubject } from 'rxjs';
 import { map, take, tap } from 'rxjs/operators';
 import { SocketEndpoints } from '@/app/shared/models/websocketEndpoints';
 import { PairingService } from './pairing.service';
+import { JoinGameData, JoinGameReady, PredictionData } from '@/app/shared/models/backend-interfaces';
+import { GAMESTATE, GameState, PlayerScore } from '@/app/shared/models/interfaces';
 
-export enum GAMESTATE {
-  lobby = 'LOBBY',
-  drawing = 'DRAWING',
-  intermediateResult = 'INTERMEDIATERESULT',
-  waitingForWord = 'WAITINGFORWORD',
-  howToPlay = 'HOWTOPLAY',
-  showResult = 'SHOWRESULT',
-}
-export interface GameState {
-  player_nr: string | undefined;
-  player_id: string | undefined;
-  game_id: string | undefined;
-  ready: boolean | undefined;
-  gameState: GAMESTATE | undefined;
-  guessUsed: number | undefined;
-  score: number | undefined;
-  label: string | undefined;
-}
-export interface StateInfo {
-  ready: boolean;
-}
 @Injectable({
   providedIn: 'root',
 })
@@ -50,7 +31,7 @@ export class MultiplayerService {
 
   readonly stateInfo$ = this._stateInfo.asObservable();
 
-  public opponentScore = new ReplaySubject<any>(1);
+  public opponentScore = new ReplaySubject<PlayerScore>(1);
 
   constructor(private webSocketService: WebSocketService, private pairing: PairingService) {}
 
@@ -60,10 +41,13 @@ export class MultiplayerService {
   }
 
   joinGame(difficulty_id: number) {
-    this.webSocketService.emit(SocketEndpoints.JOIN_GAME, `{ "pair_id": "${this.pairing.getPairID()}", "difficulty_id": "${difficulty_id}"}`);
+    this.webSocketService.emit(
+      SocketEndpoints.JOIN_GAME,
+      `{ "pair_id": "${this.pairing.getPairID()}", "difficulty_id": "${difficulty_id}"}`
+    );
     return this.webSocketService.listen(SocketEndpoints.JOIN_GAME).pipe(
-      tap((data: any) => {
-        const el: GameState = data;
+      tap((data: string | JoinGameData | JoinGameReady) => {
+        const el: GameState = data as GameState;
         if (el && el.game_id) {
           this.stateInfo = el;
         }
@@ -74,13 +58,13 @@ export class MultiplayerService {
     );
   }
 
-  getLabel(emit = true) {
+  getLabel(emit = true): Observable<string> {
     if (emit) {
       this.webSocketService.emit(SocketEndpoints.GET_LABEL, JSON.stringify({ game_id: this.stateInfo.game_id }));
     }
     return this.webSocketService.listen(SocketEndpoints.GET_LABEL).pipe(
       take(1),
-      map((res: any) => {
+      map((res: string) => {
         const data = JSON.parse(res);
         this.label = data;
         return this.label;
@@ -92,7 +76,7 @@ export class MultiplayerService {
     this.webSocketService.emit(SocketEndpoints.CLASSIFY, data, image);
   }
 
-  predictionListener() {
+  predictionListener(): Observable<PredictionData> {
     return this.webSocketService.listen(SocketEndpoints.PREDICTION);
   }
 
