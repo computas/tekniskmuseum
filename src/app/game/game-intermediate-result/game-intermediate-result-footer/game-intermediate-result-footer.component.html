@@ -1,5 +1,10 @@
 <footer>
-  <button mat-raised-button class="next-word-button" (click)="nextPage()">
-    {{ buttonTextKey | translate }}
-  </button>
+  <div class="button-container">
+    <button class="next-page-button" (click)="nextPage()">
+      <div class="button-text">
+        {{ buttonTextKey | translate }}
+        <mat-icon class="button-icon play_arrow" aria-label="play_arrow">arrow_forward_ios</mat-icon>
+      </div>
+    </button>
+  </div>
 </footer>

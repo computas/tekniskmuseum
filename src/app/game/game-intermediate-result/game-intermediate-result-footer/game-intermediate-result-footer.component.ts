@@ -1,11 +1,11 @@
 import { Component, Input, OnInit, output } from '@angular/core';
 import { TranslatePipe } from '@/app/pipes/translation.pipe';
 import { NEXTPAGE } from './next-page-identifier';
-
+import { MatIcon } from '@angular/material/icon';
 @Component({
   selector: 'app-game-intermediate-result-footer',
   standalone: true,
-  imports: [TranslatePipe],
+  imports: [TranslatePipe, MatIcon],
   templateUrl: './game-intermediate-result-footer.component.html',
   styleUrl: './game-intermediate-result-footer.component.scss',
 })

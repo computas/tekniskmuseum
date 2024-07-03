@@ -18,7 +18,7 @@
 
 #intermediate-container {
   display: grid;
-  grid-template-rows: 80px 1fr 1fr;
+  grid-template-rows: 80px 1fr 1fr 80px;
   grid-template-columns: repeat(8, 1fr);
   position: relative;
   min-height: 100vh;
@@ -42,7 +42,7 @@
 }
 
 .footer {
-  grid-row: 3 / 4;
+  grid-row: 4 / -1;
   grid-column: 1 / -1;
 }
 
