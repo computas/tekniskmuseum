@@ -1,2 +1,4 @@
-<img class="user-drawing-board" [src]="drawingURL" alt="" [className]="hasCorrectGuess ? 'correct' : 'failed'" />
+<div [class]="['user-drawing-board', getFeedbackStyle()]">
+    <img class="user-drawing" [src]="drawingURL" alt="the users drawing" />
+</div>
 <p class="round-score-text">+ {{roundScore}} {{ 'POINTS' | translate }}</p>

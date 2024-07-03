@@ -1,0 +1,23 @@
+@import './../../../../variables.scss';
+
+.user-drawing-board {
+    border-radius: 0.6em;
+    background-color: white;
+    display: flex;
+    justify-content: center;
+    width: 26em;
+}
+
+.correct {
+    border: 0.5em solid $positive_feedback_color;
+}
+
+.incorrect {
+    border: 0.5em solid $negative_feedback_color;
+}
+
+.round-score-text {
+    text-align: center;
+    font-size: 1.25rem;
+    margin: 0.5em 0 0;
+}

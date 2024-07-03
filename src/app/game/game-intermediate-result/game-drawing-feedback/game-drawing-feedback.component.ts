@@ -12,7 +12,7 @@ import { Component, Input, OnInit } from '@angular/core';
   styleUrl: './game-drawing-feedback.component.scss'
 })
 export class GameDrawingFeedbackComponent implements OnInit {
-  @Input() hasCorrectGuess: boolean | undefined = false; // TODO check if it is possible to disregard undefined type for later
+  @Input() hasCorrectGuess: boolean | undefined; // TODO check if it is possible to disregard undefined type for later
   feedbackTitleKey: string = ''
   feedbackDescriptionKey: string = ''
   correctGuess = true

@@ -1,5 +1,14 @@
 @import '../../../variables.scss';
 
+.feedback-section {
+  display: flex;
+  gap: 3em;
+}
+
+.feedback-container {
+  align-self: center;
+}
+
 .won {
   border: 8px solid #68d466;
 }

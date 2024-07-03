@@ -3,12 +3,17 @@
     <div><img class="logo" src="assets/logo/IO-logo-inverted_transparent-bg.png" alt="logo" /></div>
     <div>
       <app-game-progress-bar></app-game-progress-bar>
-      <app-game-drawing-feedback [hasCorrectGuess]="result?.hasWon"></app-game-drawing-feedback>
-      <app-game-drawing-display 
-        [drawingURL]="result?.imageData" 
-        [hasCorrectGuess]="result?.hasWon"
-        [roundScore]="result?.score"
-      ></app-game-drawing-display>
+      <div class="feedback-section">
+        <app-game-drawing-feedback 
+          class="feedback-container"
+          [hasCorrectGuess]="result?.hasWon"
+        ></app-game-drawing-feedback>
+        <app-game-drawing-display 
+          [drawingURL]="result?.imageData" 
+          [hasCorrectGuess]="result?.hasWon"
+          [roundScore]="result?.score"
+        ></app-game-drawing-display>
+      </div>
       
       @if (result) {
       <div class="intermediate-content">

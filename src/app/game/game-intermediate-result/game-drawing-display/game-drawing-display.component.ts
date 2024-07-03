@@ -14,4 +14,20 @@ export class GameDrawingDisplayComponent {
   @Input() hasCorrectGuess: boolean | undefined;
   @Input() drawingURL: string | undefined;
   @Input() roundScore: number | undefined;
+
+  correctGuess =        true
+  incorrectGuess =      false
+  correctClassName =    'correct';
+  incorrectClassName =  'incorrect';
+
+  getFeedbackStyle(): string {
+    switch (this.hasCorrectGuess) {
+      case this.correctGuess:
+        return this.correctClassName;
+      case this.incorrectGuess:
+        return this.incorrectClassName;
+      default:
+        return ''
+    }
+  }
 }
