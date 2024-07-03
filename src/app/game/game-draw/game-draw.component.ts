@@ -4,8 +4,8 @@ import { ImageService } from './services/image.service';
 import { take } from 'rxjs/operators';
 import { DrawingService } from './services/drawing.service';
 import { MultiplayerService } from '../game-multiplayer/services/multiplayer.service';
-import { GAMESTATE, Result } from '../../shared/models/interfaces';
-import { Certainty, PredictionData } from '../../shared/models/backend-interfaces';
+import { Certainty, GAMESTATE, Result } from '../../shared/models/interfaces';
+import { PredictionData } from '../../shared/models/backend-interfaces';
 import { SoundService } from './services/sound.service';
 import { UpperCasePipe } from '@angular/common';
 import { MatIconButton } from '@angular/material/button';
@@ -275,8 +275,8 @@ export class GameDrawComponent implements OnInit, OnDestroy {
   sortOnCertainty(res: PredictionData) {
     const arr: Certainty[] = [];
     Object.entries(res.certainty).map((keyValue) => {
-      const [, certainty] = keyValue;
-      arr.push(certainty);
+      const [label, certainty] = keyValue;
+      arr.push({ label: label, certainty: certainty });
     });
     arr.sort((a: Certainty, b: Certainty) => {
       return b.certainty - a.certainty;

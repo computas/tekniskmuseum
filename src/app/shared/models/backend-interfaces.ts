@@ -17,13 +17,10 @@ export interface Highscore {
 }
 
 // export type Certainty = Record<string, number>;
-export interface Certainty {
-  label: string;
-  certainty: number;
-}
+export type Certainties = Record<string, number>;
 
 export interface PredictionData {
-  certainty: Certainty[];
+  certainty: Certainties;
   guess: string;
   correctLabel: string;
   hasWon: boolean;

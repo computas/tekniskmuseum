@@ -46,3 +46,10 @@ export interface PlayerScore {
   playerId: string;
   score: number;
 }
+
+export type SupportedLanguages = 'NO' | 'EN';
+
+export interface Certainty {
+  label: string;
+  certainty: number;
+}
