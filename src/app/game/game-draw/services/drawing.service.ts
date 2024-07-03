@@ -41,14 +41,13 @@ export class DrawingService {
   
   constructor(
     private http: HttpClient,
+    private translationService: TranslationService,
     private gameConfigService: GameConfigService
   ) {
     this.gameConfigService.config$.subscribe(updatedConfig => {
       this.config = updatedConfig 
     });
   }
-
-  constructor(private http: HttpClient, private translationService: TranslationService) {}
 
   classify(answerInfo: FormData): Observable<any> {
     return this.http.post<FormData>(`${this.baseUrl}/${endpoints.CLASSIFY}`, answerInfo).pipe(
