@@ -2,18 +2,19 @@ import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable, BehaviorSubject } from 'rxjs';
 import { distinctUntilChanged, map } from 'rxjs/operators';
+import { SupportedLanguages } from '../shared/models/interfaces';
 
 @Injectable({
   providedIn: 'root',
 })
 export class TranslationService {
   private translations: Record<string, string> = {};
-  private langSubject = new BehaviorSubject<string>('NO');
+  private langSubject = new BehaviorSubject<SupportedLanguages>('NO');
   lang$ = this.langSubject.asObservable().pipe(distinctUntilChanged());
 
   constructor(private http: HttpClient) {}
 
-  loadTranslations(lang: string): Observable<Record<string, string>> {
+  loadTranslations(lang: SupportedLanguages): Observable<Record<string, string>> {
     return this.http.get<Record<string, string>>(`/assets/translation/${lang}.json`).pipe(
       map((translations) => {
         this.translations = translations;
@@ -27,11 +28,11 @@ export class TranslationService {
     return this.translations[key] || key;
   }
 
-  getCurrentLang(): string {
+  getCurrentLang(): SupportedLanguages {
     return this.langSubject.getValue();
   }
 
-  changeLanguage(lang: string) {
+  changeLanguage(lang: SupportedLanguages) {
     // check to avoid infinite loops
     if (this.getCurrentLang() !== lang) {
       this.loadTranslations(lang).subscribe(() => {
@@ -42,7 +43,7 @@ export class TranslationService {
     }
   }
 
-  setLanguage(lang: string) {
+  setLanguage(lang: SupportedLanguages) {
     if (this.getCurrentLang() !== lang) {
       this.langSubject.next(lang);
     }

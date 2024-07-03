@@ -8,7 +8,7 @@ import { TranslationService } from '../services/translation.service';
 import { TranslatePipe } from '../pipes/translation.pipe';
 import { Observable, Subject, takeUntil } from 'rxjs';
 import { CommonModule } from '@angular/common';
-import { HttpClient } from '@angular/common/http';
+import { SupportedLanguages } from '../shared/models/interfaces';
 
 @Component({
   selector: 'app-welcome',
@@ -16,7 +16,6 @@ import { HttpClient } from '@angular/common/http';
   styleUrls: ['./welcome.component.scss'],
   standalone: true,
   imports: [RouterLink, RouterLinkActive, MatButton, MatIcon, TranslatePipe, CommonModule],
-  providers: [TranslationService, HttpClient],
 })
 export class WelcomeComponent implements OnInit, OnDestroy {
   private headerClicks = 0;
@@ -35,7 +34,7 @@ export class WelcomeComponent implements OnInit, OnDestroy {
   ngOnInit() {
     this.multiplayerService.clearState();
     this.drawingService.clearState();
-    const savedLanguage = localStorage.getItem('language') || 'NO';
+    const savedLanguage = (localStorage.getItem('language') as SupportedLanguages) || 'NO';
     this.translationService
       .loadTranslations(savedLanguage)
       .pipe(takeUntil(this.destroy$))
@@ -52,7 +51,7 @@ export class WelcomeComponent implements OnInit, OnDestroy {
     }
   }
 
-  changeLanguage(lang: string) {
+  changeLanguage(lang: SupportedLanguages) {
     this.translationService.changeLanguage(lang);
   }
 
