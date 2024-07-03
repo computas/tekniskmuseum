@@ -40,29 +40,19 @@
   min-height: 100vh;
   color: $text_primary_color;
   display: flex;
-  align-items: center;
-  justify-content: center;
   flex-direction: column;
 }
+
 .intermediate-container {
   display: flex;
   align-items: center;
   justify-content: center;
   flex-direction: column;
-  margin-top: 40px;
 }
 @media (min-width: 600px) {
   .intermediate-container {
     margin-top: 0px;
   }
-}
-.logo {
-  position: absolute;
-  top: 0;
-  left: 0;
-  margin: 35px;
-  height: 44px;
-  width: 70px;
 }
 .intermediate-content {
   display: flex;

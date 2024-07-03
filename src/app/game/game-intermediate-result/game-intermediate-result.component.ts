@@ -13,6 +13,7 @@ import { TranslatePipe } from '@/app/pipes/translation.pipe';
 import { GameProgressBarComponent } from './game-progress-bar/game-progress-bar.component';
 import { GameDrawingFeedbackComponent } from './game-drawing-feedback/game-drawing-feedback.component';
 import { GameDrawingDisplayComponent } from './game-drawing-display/game-drawing-display.component';
+import { GameIntermediateResultHeaderComponent } from './game-intermediate-result-header/game-intermediate-result-header.component';
 @Component({
   selector: 'app-game-intermediate-result',
   templateUrl: './game-intermediate-result.component.html',
@@ -26,6 +27,8 @@ import { GameDrawingDisplayComponent } from './game-drawing-display/game-drawing
     GameProgressBarComponent,
     GameDrawingFeedbackComponent,
     GameDrawingDisplayComponent,
+    GameIntermediateResultComponent,
+    GameIntermediateResultHeaderComponent,
   ],
 })
 export class GameIntermediateResultComponent implements OnInit, OnDestroy {
