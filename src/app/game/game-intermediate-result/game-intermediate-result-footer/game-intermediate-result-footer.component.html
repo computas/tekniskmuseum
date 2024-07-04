@@ -1,0 +1,16 @@
+<footer>
+  <div
+    role="button"
+    aria-disabled="true"
+    (keydown)="nextPage()"
+    (click)="nextPage()"
+    class="{{ isPlayerWaiting(buttonTextKey) ? 'disabled' : 'button-container' }}"
+  >
+    <button class="next-page-button">
+      <div class="button-text">
+        {{ buttonTextKey | translate }}
+        <mat-icon class="button-icon play_arrow" aria-label="play_arrow">arrow_forward_ios</mat-icon>
+      </div>
+    </button>
+  </div>
+</footer>
