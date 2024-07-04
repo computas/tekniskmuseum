@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import { BehaviorSubject } from 'rxjs';
 
 export interface GameLevelConfig {
-  difficultyId: number,
+  difficultyId: number;
   rounds: number;
   secondsPerRound: number;
   timeToStartClassify: number;
@@ -28,7 +28,7 @@ export class GameConfigService {
     defaultTimeBetweenClassify: 5,
     minimumTimeBetweenClassify: 3,
     minimumDrawnThreshold: 3000,
-    pixelsPerClassify: 2000
+    pixelsPerClassify: 2000,
   }); // Easy mode as default
   difficultyLevel$ = this._difficultyLevel.asObservable();
 
@@ -36,38 +36,38 @@ export class GameConfigService {
     switch (level) {
       case 'easy':
         this._setConfig = {
-          difficultyId: 1, 
-          rounds: 3, 
-          secondsPerRound: 30, 
+          difficultyId: 1,
+          rounds: 3,
+          secondsPerRound: 30,
           timeToStartClassify: 25,
           defaultTimeBetweenClassify: 5,
           minimumTimeBetweenClassify: 3,
           minimumDrawnThreshold: 3000,
-          pixelsPerClassify: 2000
+          pixelsPerClassify: 2000,
         };
         break;
       case 'medium':
         this._setConfig = {
-          difficultyId: 2, 
-          rounds: 3, 
-          secondsPerRound: 20, 
+          difficultyId: 2,
+          rounds: 3,
+          secondsPerRound: 20,
           timeToStartClassify: 16,
           defaultTimeBetweenClassify: 4,
           minimumTimeBetweenClassify: 2,
           minimumDrawnThreshold: 3500,
-          pixelsPerClassify: 2000
+          pixelsPerClassify: 2000,
         };
         break;
       case 'hard':
         this._setConfig = {
-          difficultyId: 3, 
-          rounds: 3, 
-          secondsPerRound: 20, 
+          difficultyId: 3,
+          rounds: 3,
+          secondsPerRound: 20,
           timeToStartClassify: 16,
           defaultTimeBetweenClassify: 4,
           minimumTimeBetweenClassify: 2,
           minimumDrawnThreshold: 3500,
-          pixelsPerClassify: 2000
+          pixelsPerClassify: 2000,
         };
         break;
     }

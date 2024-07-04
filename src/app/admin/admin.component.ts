@@ -11,7 +11,11 @@ import { AuthStatus } from '../shared/models/backend-interfaces';
   standalone: true,
 })
 export class AdminComponent {
-  constructor(private router: Router, private loginService: LoginService, private _snackBar: MatSnackBar) {}
+  constructor(
+    private router: Router,
+    private loginService: LoginService,
+    private _snackBar: MatSnackBar
+  ) {}
 
   login(username: string, password: string) {
     // Call on login service to authorize user

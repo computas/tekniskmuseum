@@ -44,7 +44,7 @@ export class GameDrawComponent implements OnInit, OnDestroy {
   isBlankImage = true;
 
   timeLeft = 0;
-  
+
   scoreValues = this.gameConfigService.getScoreSettings();
   score = this.scoreValues.maxScore;
   scoreDecrement = this.scoreValues.scoreDecrement;
@@ -53,8 +53,7 @@ export class GameDrawComponent implements OnInit, OnDestroy {
   drawnPixelsAtLastGuess = 0;
   drawnPixelsSinceLastGuess = 1;
   timeSinceLastGuess = 0;
-  
-  
+
   clockColor = 'initial';
   private readonly resultImageSize = 1024;
 

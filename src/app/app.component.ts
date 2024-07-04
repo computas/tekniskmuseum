@@ -25,7 +25,10 @@ export class AppComponent implements OnInit {
   isDialogOpen = false;
   inactivityTime = environment.inactivityTime;
 
-  constructor(private router: Router, public dialog: MatDialog) {}
+  constructor(
+    private router: Router,
+    public dialog: MatDialog
+  ) {}
 
   ngOnInit(): void {
     this.setDialogTimeout();
