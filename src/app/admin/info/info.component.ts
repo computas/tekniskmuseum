@@ -3,7 +3,7 @@ import { Router } from '@angular/router';
 import { LoginService } from '../login.service';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { InfoDialogComponent } from './../info-dialog/info-dialog.component';
-import { PairingService } from '../../game/game-multiplayer/services/pairing.service';
+import { PairingService } from '../../game/services/pairing.service';
 import { MatButton } from '@angular/material/button';
 import { StatusData } from '@/app/shared/models/backend-interfaces';
 

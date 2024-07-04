@@ -1,15 +1,15 @@
 import { Component, Output, EventEmitter, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { routes } from '../../shared/models/routes';
-import { MultiplayerService } from '../game-multiplayer/services/multiplayer.service';
-import { WebSocketService } from '../game-multiplayer/services/web-socket.service';
+import { MultiplayerService } from '../services/multiplayer.service';
+import { WebSocketService } from '../services/web-socket.service';
 import { SocketEndpoints } from '../../shared/models/websocketEndpoints';
 import { MatButton } from '@angular/material/button';
 import { MatIcon } from '@angular/material/icon';
 import { NgIf } from '@angular/common';
-import { GameConfig, GameConfigService } from '../game-config.service';
-import { TranslationService } from '@/app/services/translation.service';
-import { TranslatePipe } from '@/app/pipes/translation.pipe';
+import { GameLevelConfig, GameConfigService } from '../services/game-config.service';
+import { TranslationService } from '@/app/core/translation.service';
+import { TranslatePipe } from '@/app/core/translation.pipe';
 import { GAMESTATE } from '@/app/shared/models/interfaces';
 
 @Component({
@@ -39,7 +39,7 @@ export class GamePickDifficultyComponent implements OnInit {
   ngOnInit(): void {
     if (this.router.url === `/${routes.SINGLEPLAYER}`) {
       this.isSinglePlayer = true;
-      this.gameConfigService.config$.subscribe((config: GameConfig) => {
+      this.gameConfigService.difficultyLevel$.subscribe((config: GameLevelConfig) => {
         this.config = config;
       });
     } else {
@@ -58,7 +58,7 @@ export class GamePickDifficultyComponent implements OnInit {
     this.translationService.loadTranslations(this.translationService.getCurrentLang()).subscribe();
   }
 
-  startDrawing(difficulty: string) {
+  startDrawing(difficulty: 'easy' | 'medium' | 'hard') {
     if (this.isSinglePlayer) {
       this.gameConfigService.setDifficultyLevel(difficulty);
       this.getDrawWord.emit(true);

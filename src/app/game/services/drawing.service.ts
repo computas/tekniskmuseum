@@ -2,12 +2,12 @@ import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Observable, BehaviorSubject } from 'rxjs';
 import { tap, switchMap } from 'rxjs/operators';
-import { StartGamePlayerId, GameLabel, Highscore, PredictionData } from '../../../shared/models/backend-interfaces';
-import { Result } from '../../../shared/models/interfaces';
-import { ResultsMock } from '../../../shared/mocks/results.mock';
-import { endpoints } from '../../../shared/models/endpoints';
-import { TranslationService } from '@/app/services/translation.service';
-import { GameConfigService } from '../../game-config.service';
+import { StartGamePlayerId, GameLabel, Highscore, PredictionData } from '@/app/shared/models/backend-interfaces';
+import { Result } from '@/app/shared/models/interfaces';
+import { ResultsMock } from '@/app/shared/mocks/results.mock';
+import { endpoints } from '@/app/shared/models/endpoints';
+import { TranslationService } from '@/app/core/translation.service';
+import { GameConfigService } from './game-config.service';
 
 @Injectable({
   providedIn: 'root',
@@ -44,7 +44,7 @@ export class DrawingService {
     private translationService: TranslationService,
     private gameConfigService: GameConfigService
   ) {
-    this.gameConfigService.config$.subscribe((updatedConfig) => {
+    this.gameConfigService.difficultyLevel$.subscribe((updatedConfig) => {
       this.config = updatedConfig;
     });
   }

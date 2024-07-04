@@ -1,13 +1,13 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
-import { DrawingService } from '../game-draw/services/drawing.service';
+import { DrawingService } from '../services/drawing.service';
 import { Result } from '../../shared/models/interfaces';
 import { Router } from '@angular/router';
-import { MultiplayerService } from '../game-multiplayer/services/multiplayer.service';
+import { MultiplayerService } from '../services/multiplayer.service';
 import { MatButton } from '@angular/material/button';
 import { MatCardImage } from '@angular/material/card';
 import { TitleCasePipe } from '@angular/common';
-import { TranslationService } from '@/app/services/translation.service';
-import { TranslatePipe } from '@/app/pipes/translation.pipe';
+import { TranslationService } from '@/app/core/translation.service';
+import { TranslatePipe } from '@/app/core/translation.pipe';
 import { Subscription } from 'rxjs';
 
 @Component({
