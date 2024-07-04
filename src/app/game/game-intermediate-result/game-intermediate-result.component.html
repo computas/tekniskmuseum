@@ -15,50 +15,5 @@
       [isMultiplayer]="isMultiplayer"
       [isWaitingForPlayer]="waitingForPlayer"
     ></app-game-intermediate-result-footer>
-    <!--
-      @if (result) {
-      <div class="intermediate-content">
-        <div class="avatar-container">
-          <div class="avatar">
-            <img class="avatar-image" src="assets/illustrations/IO_Illustrasjoner-1_1360x939.png" alt="avatar" />
-          </div>
-        </div>
-        <div class="intermediate-container">
-          @if (result.hasWon) {
-          <div class="word-text">
-            <h1>
-              {{ wonSentence }}@if (result.word) {
-              <b class="guessed-word">{{ this.result.word | uppercase }}</b>
-              }!
-            </h1>
-          </div>
-          } @if (!result.hasWon) {
-          <div class="word-text">
-            <h1>{{ lostSentence }}</h1>
-          </div>
-          }
-          <div class="result-img">
-            <img [src]="result.imageData" alt="" [className]="result.hasWon ? 'won' : 'loss'" />
-          </div>
-        </div>
-        <div class="avatar-container-spacer"></div>
-        @if (gameOver && !waitingForPlayer) {
-        <button mat-raised-button class="next-word-button" (click)="getSummary()">
-          {{ 'SUMMARY_BUTTON' | translate }}
-        </button>
-        } @if (!gameOver && !waitingForPlayer) {
-        <button mat-raised-button class="next-word-button" (click)="newDrawing()">
-          {{ 'NEXT_WORD_BUTTON' | translate }}
-        </button>
-        } @if (isMultiplayer && waitingForPlayer) {
-        <h1 class="waiting">{{ 'WAITING_FOR_PLAYER' | translate }}</h1>
-        }
-      </div>
-      }
-      <ng-template #loading>
-        <mat-spinner [diameter]="50" class="white-spinner"></mat-spinner>
-      </ng-template>
-      
-      -->
   </div>
 </div>

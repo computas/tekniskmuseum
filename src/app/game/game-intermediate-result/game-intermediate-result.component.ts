@@ -1,12 +1,9 @@
-import { Component, OnInit, EventEmitter, Output, OnDestroy } from '@angular/core';
+import { Component, OnInit, EventEmitter, Output, OnDestroy, output } from '@angular/core';
 import { GAMESTATE, Result } from '../../shared/models/interfaces';
 import { DrawingService } from '../game-draw/services/drawing.service';
 import { MultiplayerService } from '../game-multiplayer/services/multiplayer.service';
 import { Router } from '@angular/router';
 import { routes } from '../../shared/models/routes';
-import { MatProgressSpinner } from '@angular/material/progress-spinner';
-import { MatButton } from '@angular/material/button';
-import { UpperCasePipe } from '@angular/common';
 import { GameConfigService } from '../game-config.service';
 import { TranslationService } from '@/app/services/translation.service';
 import { TranslatePipe } from '@/app/pipes/translation.pipe';
@@ -20,9 +17,6 @@ import { GameIntermediateResultFooterComponent } from './game-intermediate-resul
   styleUrls: ['./game-intermediate-result.component.scss'],
   standalone: true,
   imports: [
-    MatButton,
-    MatProgressSpinner,
-    UpperCasePipe,
     TranslatePipe,
     GameDrawingFeedbackComponent,
     GameDrawingDisplayComponent,
@@ -32,12 +26,10 @@ import { GameIntermediateResultFooterComponent } from './game-intermediate-resul
   ],
 })
 export class GameIntermediateResultComponent implements OnInit, OnDestroy {
+  nextGuess = output<void>();
+  finalResult = output<void>();
   result: Result | undefined;
-  wonSentence = 'Hurra, jeg klarte å gjette at du tegnet ';
-  lostSentence = 'Beklager, jeg klarte ikke å gjette hva du tegnet';
   gameOver = false;
-  @Output() nextGuess = new EventEmitter();
-  @Output() finalResult = new EventEmitter();
   waitingForPlayer = true;
   isMultiplayer = false;
   isSinglePlayer = false;
@@ -111,7 +103,7 @@ export class GameIntermediateResultComponent implements OnInit, OnDestroy {
         gameState: GAMESTATE.waitingForWord,
       };
     } else {
-      this.nextGuess.next(true);
+      this.nextGuess.emit();
     }
   }
 
@@ -122,7 +114,7 @@ export class GameIntermediateResultComponent implements OnInit, OnDestroy {
         gameState: GAMESTATE.showResult,
       };
     } else {
-      this.finalResult.next(true);
+      this.finalResult.emit();
     }
   }
 }

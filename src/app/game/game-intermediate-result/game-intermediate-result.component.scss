@@ -46,105 +46,12 @@
   grid-column: 1 / -1;
 }
 
-.won {
-  border: 8px solid #68d466;
-}
-.loss {
-  border: 8px solid #de1f1f;
-  display: flex;
-  justify-content: center;
-}
 .result-img > img {
   width: 256px;
   height: 256px;
 }
 
-.intermediate-container {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  flex-direction: column;
-}
-@media (min-width: 600px) {
-  .intermediate-container {
-    margin-top: 0px;
-  }
-}
-.intermediate-content {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  flex-direction: column;
-}
-@media (min-width: 600px) {
-  .intermediate-content {
-    flex-direction: row;
-  }
-}
 .guessed-word {
   font-family: AeonikBlack;
   color: $text_secondary_color;
-}
-.avatar-container {
-  width: 155px;
-  display: none;
-  margin-right: 20px;
-}
-@media (min-width: 600px) {
-  .avatar-container {
-    display: block;
-  }
-}
-.avatar-image {
-  height: 250px;
-}
-.avatar-container-spacer {
-  width: 155px;
-  display: none;
-}
-@media (min-width: 600px) {
-  .avatar-container-spacer {
-    display: block;
-  }
-}
-.next-word-button {
-  background: $button_background_color;
-  color: $button_content_color;
-  box-shadow: 0 8px 16px 0 rgba(0, 0, 0, 0.1), 0 6px 20px 0 rgba(0, 0, 0, 0.15);
-  margin-top: 30px;
-  font-size: 20px;
-  border-radius: 50px;
-  height: 40px;
-  min-width: 240px;
-  max-width: 400px;
-}
-.waiting {
-  margin-top: 30px;
-}
-@media (min-width: 600px) {
-  .next-word-button {
-    font-size: 36px;
-    height: 60px;
-    position: absolute;
-    bottom: 65px;
-    right: 65px;
-  }
-  .waiting {
-    font-size: 36px;
-    height: 60px;
-    position: absolute;
-    bottom: 65px;
-    right: 65px;
-  }
-}
-.word-text {
-  text-align: center;
-}
-.words-remaining {
-  position: absolute;
-  top: 0;
-  left: 0;
-  margin: 35px;
-  font-size: 2em;
-  font-style: italic;
 }
