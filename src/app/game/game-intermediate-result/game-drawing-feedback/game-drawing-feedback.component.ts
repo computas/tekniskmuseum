@@ -29,8 +29,6 @@ export class GameDrawingFeedbackComponent implements OnInit {
         this.feedbackTitleKey = 'ROUND_FEEDBACK_CORRECT_TITLE';
         this.feedbackDescriptionKey = 'ROUND_FEEDBACK_CORRECT_DESC_1';
         break;
-      default:
-      // TODO something went wrong text
     }
   }
 }
