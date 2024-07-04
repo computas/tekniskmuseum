@@ -10,9 +10,9 @@ import { GAMESTATE } from '@/app/shared/models/interfaces';
   styleUrl: './game-intermediate-result-footer.component.scss',
 })
 export class GameIntermediateResultFooterComponent implements OnInit {
-  @Input() gameOver = false;
+  @Input() isGameOver = false;
   @Input() isMultiplayer = false;
-  @Input() waitingForPlayer = true;
+  @Input() isWaitingForPlayer = true;
   onNextPageClick = output<GAMESTATE>();
   buttonTextKey = '';
   nextPageIdentifier: GAMESTATE | undefined;
@@ -27,14 +27,14 @@ export class GameIntermediateResultFooterComponent implements OnInit {
   }
 
   getButtonTextKey(): string {
-    if (this.isMultiplayer && this.waitingForPlayer) {
+    if (this.isMultiplayer && this.isWaitingForPlayer) {
       return 'WAITING_FOR_PLAYER';
     }
-    if (this.gameOver) {
+    if (this.isGameOver) {
       this.nextPageIdentifier = GAMESTATE.showResult;
       return 'SUMMARY_BUTTON';
     }
-    if (!this.gameOver) {
+    if (!this.isGameOver) {
       this.nextPageIdentifier = GAMESTATE.showWord;
       return 'NEXT_WORD_BUTTON';
     }

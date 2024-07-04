@@ -11,6 +11,9 @@
     <app-game-intermediate-result-footer
       class="footer"
       (onNextPageClick)="nextPage($event)"
+      [isGameOver]="gameOver"
+      [isMultiplayer]="isMultiplayer"
+      [isWaitingForPlayer]="waitingForPlayer"
     ></app-game-intermediate-result-footer>
     <!--
       @if (result) {

@@ -1,4 +1,3 @@
-import { TranslationService } from '@/app/services/translation.service';
 import { TranslatePipe } from '@/app/pipes/translation.pipe';
 import { Component, Input, OnInit } from '@angular/core';
 
@@ -16,10 +15,7 @@ export class GameDrawingFeedbackComponent implements OnInit {
   correctGuess = true;
   failedGuess = false;
 
-  constructor(private translationService: TranslationService) {}
-
   ngOnInit(): void {
-    this.translationService.loadTranslations(this.translationService.getCurrentLang()).subscribe();
     this.setFeedbackText();
   }
 

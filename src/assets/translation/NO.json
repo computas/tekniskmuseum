@@ -44,5 +44,11 @@
   "STAY_BUTTON": "Bli værende",
   "END_NOW_BUTTON": "Avslutt nå",
 
-  "ROUND_NUMBER": "Runde"
+  "ROUND_NUMBER": "Runde",
+  "ROUND_FEEDBACK_FAILED_TITLE": "Oisann!",
+  "ROUND_FEEDBACK_FAILED_DESC_1": "Jeg klarte ikke å gjette ordet du tegnet..",
+  "ROUND_FEEDBACK_FAILED_DESC_2": "Jeg kan være litt dum noen ganger..",
+
+  "ROUND_FEEDBACK_CORRECT_TITLE": "Bra tegnet!",
+  "ROUND_FEEDBACK_CORRECT_DESC_1": "Takket være deg klarte jeg å gjette riktig."
 }
