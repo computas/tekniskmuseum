@@ -3,15 +3,16 @@ import { Router } from '@angular/router';
 import { LoginService } from '../login.service';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { InfoDialogComponent } from './../info-dialog/info-dialog.component';
-import { PairingService } from '../../game/game-multiplayer/services/pairing.service';
+import { PairingService } from '../../game/services/pairing.service';
 import { MatButton } from '@angular/material/button';
+import { StatusData } from '@/app/shared/models/backend-interfaces';
 
 @Component({
-    selector: 'app-info',
-    templateUrl: './info.component.html',
-    styleUrls: ['./info.component.scss'],
-    standalone: true,
-    imports: [MatButton],
+  selector: 'app-info',
+  templateUrl: './info.component.html',
+  styleUrls: ['./info.component.scss'],
+  standalone: true,
+  imports: [MatButton],
 })
 export class InfoComponent {
   datasetString = 'Nullstill treningssett til originalen';
@@ -147,11 +148,11 @@ export class InfoComponent {
   getInformation() {
     this.resetAll();
     this.loginService.getStatus().subscribe(
-      (res: any) => {
+      (res: StatusData) => {
         const name = res.CV_iteration_name;
         const time = res.CV_time_created;
         const count = res.BLOB_image_count;
-        this._dialog.openDialog(name, time, count);
+        this._dialog.openDialog(name, time, count.toString());
       },
       () => {
         this.openSnackBar(this.errorMsg);

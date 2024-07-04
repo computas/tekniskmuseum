@@ -1,15 +1,13 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
 import { trigger, style, animate, transition } from '@angular/animations';
 
-import { DrawingService } from './game-draw/services/drawing.service';
+import { DrawingService } from './services/drawing.service';
 import { GameWordToDrawComponent } from './game-word-to-draw/game-word-to-draw.component';
 import { GameResultComponent } from './game-result/game-result.component';
 import { GameIntermediateResultComponent } from './game-intermediate-result/game-intermediate-result.component';
 import { GameDrawComponent } from './game-draw/game-draw.component';
 import { GameInfoComponent } from './game-info/game-info.component';
 import { GamePickDifficultyComponent } from './game-pick-difficulty/game-pick-difficulty.component';
-import { GameConfigService } from './game-config.service';
-
 
 @Component({
   selector: 'app-game',
@@ -78,7 +76,7 @@ export class GameComponent implements OnInit, OnDestroy {
     this.showDifficultyPicker = true;
     this.showHowToPlay = false;
   }
-  
+
   getDrawWord() {
     this.showWordToDraw = true;
     this.showDifficultyPicker = false;
@@ -106,4 +104,3 @@ export class GameComponent implements OnInit, OnDestroy {
     this.guessDone = false;
   }
 }
-

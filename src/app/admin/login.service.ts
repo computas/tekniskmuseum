@@ -1,6 +1,8 @@
 import { endpoints } from '../shared/models/endpoints';
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
+import { AuthStatus, StatusData } from '../shared/models/backend-interfaces';
+import { Observable } from 'rxjs';
 
 @Injectable({
   providedIn: 'root',
@@ -46,8 +48,8 @@ export class LoginService {
     );
   }
 
-  attemptLogin(formData: FormData) {
-    return this.http.post(`${endpoints.TEKNISKBACKEND}/${endpoints.AUTH}`, formData, {
+  attemptLogin(formData: FormData): Observable<AuthStatus> {
+    return this.http.post<AuthStatus>(`${endpoints.TEKNISKBACKEND}/${endpoints.AUTH}`, formData, {
       withCredentials: true,
     });
   }
@@ -83,7 +85,7 @@ export class LoginService {
   }
 
   getStatus() {
-    return this.http.post(
+    return this.http.post<StatusData>(
       `${endpoints.TEKNISKBACKEND}/${endpoints.ADMIN}/${endpoints.GETSTATUS}`,
       {},
       {

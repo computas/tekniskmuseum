@@ -9,7 +9,7 @@ import { bootstrapApplication } from '@angular/platform-browser';
 import { InfoDialogComponent } from './app/admin/info-dialog/info-dialog.component';
 import { withInterceptorsFromDi, provideHttpClient, HttpClient } from '@angular/common/http';
 import { provideRouter } from '@angular/router';
-import { TranslationService } from './app/services/translation.service';
+import { TranslationService } from './app/core/translation.service';
 
 if (environment.production) {
   enableProdMode();
@@ -23,6 +23,6 @@ bootstrapApplication(AppComponent, {
     provideRouter(routes),
     provideAnimations(),
     importProvidersFrom(HttpClient),
-    TranslationService
+    TranslationService,
   ],
 }).catch((err) => console.error(err));

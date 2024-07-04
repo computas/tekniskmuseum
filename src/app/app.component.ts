@@ -4,7 +4,7 @@ import { Router } from '@angular/router';
 import { MatDialog } from '@angular/material/dialog';
 import { RouterOutlet } from '@angular/router';
 
-import { IdleTimeoutComponent } from './idle-timeout/idle-timeout.component';
+import { IdleTimeoutComponent } from './game/idle-timeout/idle-timeout.component';
 import { routeTransitionAnimations } from './route-transition-animations';
 import { environment } from '../environments/environment';
 
@@ -20,7 +20,7 @@ export class AppComponent implements OnInit {
   title = 'Teknisk Museum';
 
   userActivity = 0;
-  userInactive = new Subject<any>();
+  userInactive = new Subject<boolean | undefined>();
 
   isDialogOpen = false;
   inactivityTime = environment.inactivityTime;

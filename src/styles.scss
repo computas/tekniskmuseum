@@ -4,22 +4,22 @@
 
 @font-face {
   font-family: AeonikMedium;
-  src: url("./assets/fonts/Aeonik/Aeonik-Medium.otf") format("opentype");
+  src: url('./assets/fonts/Aeonik/Aeonik-Medium.otf') format('opentype');
 }
 
 @font-face {
   font-family: AeonikRegular;
-  src: url("./assets/fonts/Aeonik/Aeonik-Regular.otf") format("opentype");
+  src: url('./assets/fonts/Aeonik/Aeonik-Regular.otf') format('opentype');
 }
 
 @font-face {
   font-family: AeonikLight;
-  src: url("./assets/fonts/Aeonik/Aeonik-Light.otf") format("opentype");
+  src: url('./assets/fonts/Aeonik/Aeonik-Light.otf') format('opentype');
 }
 
 @font-face {
   font-family: AeonikBlack;
-  src: url("./assets/fonts/Aeonik/Aeonik-Black.otf") format("opentype");
+  src: url('./assets/fonts/Aeonik/Aeonik-Black.otf') format('opentype');
 }
 
 body {
@@ -34,10 +34,11 @@ body {
 div {
   font-family: AeonikLight;
 }
-button, .button-text {
+button,
+.button-text {
   font-family: AeonikRegular;
 }
-.mat-typography h1{
+.mat-typography h1 {
   font-family: AeonikMedium;
 }
 .mat-progress-spinner circle,
