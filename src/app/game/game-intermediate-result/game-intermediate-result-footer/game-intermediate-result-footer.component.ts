@@ -2,6 +2,7 @@ import { Component, Input, OnInit, output } from '@angular/core';
 import { TranslatePipe } from '@/app/core/translation.pipe';
 import { MatIcon } from '@angular/material/icon';
 import { GAMESTATE } from '@/app/shared/models/interfaces';
+import { MultiplayerService } from '../../services/multiplayer.service';
 @Component({
   selector: 'app-game-intermediate-result-footer',
   standalone: true,
@@ -12,14 +13,24 @@ import { GAMESTATE } from '@/app/shared/models/interfaces';
 export class GameIntermediateResultFooterComponent implements OnInit {
   @Input() isGameOver = false;
   @Input() isMultiplayer = false;
-  @Input() isWaitingForPlayer = true;
   onNextPageClick = output<GAMESTATE>();
   buttonTextKey = '';
   nextPageIdentifier: GAMESTATE | undefined;
   waitingForPlayerState = 'WAITING_FOR_PLAYER';
+  isWaitingForPlayer = true;
+
+  constructor(private multiplayerService: MultiplayerService) {}
 
   ngOnInit(): void {
     this.buttonTextKey = this.getButtonTextKey();
+    if (this.multiplayerService.isMultiplayer) {
+      this.multiplayerService.stateInfo$.subscribe((res) => {
+        if (res.ready) {
+          this.isWaitingForPlayer = false;
+        }
+        this.buttonTextKey = this.getButtonTextKey();
+      });
+    }
   }
 
   nextPage(): void {
