@@ -1,28 +1,35 @@
-import { Component, OnInit, EventEmitter, Output, OnDestroy } from '@angular/core';
+import { Component, OnInit, OnDestroy, output } from '@angular/core';
 import { GAMESTATE, Result } from '../../shared/models/interfaces';
 import { DrawingService } from '../services/drawing.service';
 import { MultiplayerService } from '../services/multiplayer.service';
 import { Router } from '@angular/router';
 import { routes } from '../../shared/models/routes';
-import { MatProgressSpinner } from '@angular/material/progress-spinner';
-import { MatButton } from '@angular/material/button';
-import { UpperCasePipe } from '@angular/common';
 import { GameConfigService } from '../services/game-config.service';
 import { TranslationService } from '@/app/core/translation.service';
 import { TranslatePipe } from '@/app/core/translation.pipe';
-
+import { GameDrawingFeedbackComponent } from './game-drawing-feedback/game-drawing-feedback.component';
+import { GameDrawingDisplayComponent } from './game-drawing-display/game-drawing-display.component';
+import { GameIntermediateResultHeaderComponent } from './game-intermediate-result-header/game-intermediate-result-header.component';
+import { GameIntermediateResultFooterComponent } from './game-intermediate-result-footer/game-intermediate-result-footer.component';
 @Component({
   selector: 'app-game-intermediate-result',
   templateUrl: './game-intermediate-result.component.html',
   styleUrls: ['./game-intermediate-result.component.scss'],
   standalone: true,
-  imports: [MatButton, MatProgressSpinner, UpperCasePipe, TranslatePipe],
+  imports: [
+    TranslatePipe,
+    GameDrawingFeedbackComponent,
+    GameDrawingDisplayComponent,
+    GameIntermediateResultComponent,
+    GameIntermediateResultHeaderComponent,
+    GameIntermediateResultFooterComponent,
+  ],
 })
 export class GameIntermediateResultComponent implements OnInit, OnDestroy {
+  nextGuess = output<void>();
+  finalResult = output<void>();
   result: Result | undefined;
   gameOver = false;
-  @Output() nextGuess = new EventEmitter();
-  @Output() finalResult = new EventEmitter();
   waitingForPlayer = true;
   isMultiplayer = false;
   isSinglePlayer = false;
@@ -78,6 +85,17 @@ export class GameIntermediateResultComponent implements OnInit, OnDestroy {
     }
   }
 
+  nextPage(nextGameState: GAMESTATE) {
+    switch (nextGameState) {
+      case GAMESTATE.showResult:
+        this.getSummary();
+        break;
+      case GAMESTATE.showWord:
+        this.newDrawing();
+        break;
+    }
+  }
+
   newDrawing() {
     if (this.multiplayerService.isMultiplayer && this.multiplayerService.stateInfo.ready) {
       this.multiplayerService.stateInfo = {
@@ -85,7 +103,7 @@ export class GameIntermediateResultComponent implements OnInit, OnDestroy {
         gameState: GAMESTATE.waitingForWord,
       };
     } else {
-      this.nextGuess.next(true);
+      this.nextGuess.emit();
     }
   }
 
@@ -96,7 +114,7 @@ export class GameIntermediateResultComponent implements OnInit, OnDestroy {
         gameState: GAMESTATE.showResult,
       };
     } else {
-      this.finalResult.next(true);
+      this.finalResult.emit();
     }
   }
 }

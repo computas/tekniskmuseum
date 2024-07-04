@@ -42,5 +42,13 @@
   "AUTO_END_MESSAGE": "The game will automatically end in ",
   "SECONDS": "seconds",
   "STAY_BUTTON": "Stay",
-  "END_NOW_BUTTON": "End now"
+  "END_NOW_BUTTON": "End now",
+
+  "ROUND_NUMBER": "Round",
+  "ROUND_FEEDBACK_FAILED_TITLE": "Oooops!",
+  "ROUND_FEEDBACK_FAILED_DESC_1": "I couldn't guess the word you drew..",
+  "ROUND_FEEDBACK_FAILED_DESC_2": "I can be a bit slow sometimes.. I'll do better next time!",
+
+  "ROUND_FEEDBACK_CORRECT_TITLE": "Well drawn!",
+  "ROUND_FEEDBACK_CORRECT_DESC_1": "Thanks to you I guessed the correct word. Keep it up!"
 }

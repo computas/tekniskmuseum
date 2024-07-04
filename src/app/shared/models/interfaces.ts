@@ -16,6 +16,7 @@ export enum GAMESTATE {
   waitingForWord = 'WAITINGFORWORD',
   howToPlay = 'HOWTOPLAY',
   showResult = 'SHOWRESULT',
+  showWord = 'SHOWWORD',
 }
 
 export interface GameState {

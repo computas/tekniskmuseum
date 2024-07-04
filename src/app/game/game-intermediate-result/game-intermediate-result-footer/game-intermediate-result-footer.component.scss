@@ -1,0 +1,36 @@
+@import './../../../../variables.scss';
+
+footer {
+  display: grid;
+  grid-template-columns: repeat(8, 1fr);
+}
+
+.button-container,
+.disabled {
+  grid-column: 7 / -1;
+  justify-self: end;
+  padding: 0.7em;
+  border-radius: 1em;
+  background: linear-gradient(90deg, #151cdb 0%, #6b2eac 25%, #fd595d 50%, #bea97e 75%, #1bc0d2 100%);
+}
+
+.disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+}
+
+.next-page-button {
+  padding: 0.6em 0.8em;
+  background-color: rgba(0, 0, 0, 0.3);
+  color: $text_primary_color;
+  font-weight: bold;
+  font-size: 1.45rem;
+  border-radius: 0.3em;
+  letter-spacing: 0.05em;
+}
+
+.button-text {
+  display: flex;
+  align-items: center;
+  gap: 0.5em;
+}
