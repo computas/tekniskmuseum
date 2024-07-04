@@ -5,12 +5,18 @@ footer {
   grid-template-columns: repeat(8, 1fr);
 }
 
-.button-container {
+.button-container,
+.disabled {
   grid-column: 7 / -1;
   justify-self: end;
-  background: linear-gradient(90deg, #151cdb 0%, #6b2eac 25%, #fd595d 50%, #bea97e 75%, #1bc0d2 100%);
   padding: 0.7em;
   border-radius: 1em;
+  background: linear-gradient(90deg, #151cdb 0%, #6b2eac 25%, #fd595d 50%, #bea97e 75%, #1bc0d2 100%);
+}
+
+.disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
 }
 
 .next-page-button {

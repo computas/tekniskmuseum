@@ -1,6 +1,6 @@
 <footer>
-  <div class="button-container">
-    <button class="next-page-button" (click)="nextPage()">
+  <div (click)="nextPage()" class="{{ isPlayerWaiting(buttonTextKey) ? 'disabled' : 'button-container' }}">
+    <button class="next-page-button">
       <div class="button-text">
         {{ buttonTextKey | translate }}
         <mat-icon class="button-icon play_arrow" aria-label="play_arrow">arrow_forward_ios</mat-icon>

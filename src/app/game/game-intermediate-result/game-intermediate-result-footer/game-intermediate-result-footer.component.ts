@@ -16,6 +16,7 @@ export class GameIntermediateResultFooterComponent implements OnInit {
   onNextPageClick = output<GAMESTATE>();
   buttonTextKey = '';
   nextPageIdentifier: GAMESTATE | undefined;
+  waitingForPlayerState = 'WAITING_FOR_PLAYER';
 
   ngOnInit(): void {
     this.buttonTextKey = this.getButtonTextKey();
@@ -28,7 +29,7 @@ export class GameIntermediateResultFooterComponent implements OnInit {
 
   getButtonTextKey(): string {
     if (this.isMultiplayer && this.isWaitingForPlayer) {
-      return 'WAITING_FOR_PLAYER';
+      return this.waitingForPlayerState;
     }
     if (this.isGameOver) {
       this.nextPageIdentifier = GAMESTATE.showResult;
@@ -39,5 +40,9 @@ export class GameIntermediateResultFooterComponent implements OnInit {
       return 'NEXT_WORD_BUTTON';
     }
     return '';
+  }
+
+  isPlayerWaiting(state: string): boolean {
+    return state === this.waitingForPlayerState;
   }
 }
