@@ -32,9 +32,12 @@
   "WINNER_TEXT": "Du vant!",
   "POINTS_INFO_TEXT": "Du fikk: ",
   "POINTS": "poeng",
+  "TOTAL_POINTS": "Poengsum:",
   "LOSER_TEXT": "Du tapte",
   "RESULT_TEXT": "Ditt resultat:",
   "PLAY_AGAIN_BUTTON": "Spill igjen",
+  "NEW_HIGHSCORE_TEXT": "Du slo dagens rekord!",
+  "TODAYS_HIGHSCORE_TEXT": "Dagens rekord:",
 
   "SUMMARY_BUTTON": "Oppsummering",
   "NEXT_WORD_BUTTON": "Neste ord",

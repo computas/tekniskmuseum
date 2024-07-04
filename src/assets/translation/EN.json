@@ -32,9 +32,12 @@
   "WINNER_TEXT": "You won!",
   "POINTS_INFO_TEXT": "You got: ",
   "POINTS": "points",
+  "TOTAL_POINTS": "Total points:",
   "LOSER_TEXT": "You lost",
   "RESULT_TEXT": "Your result:",
   "PLAY_AGAIN_BUTTON": "Play again",
+  "NEW_HIGHSCORE_TEXT": "New daily highscore!",
+  "TODAYS_HIGHSCORE_TEXT": "Today's highscore:",
 
   "SUMMARY_BUTTON": "Summary",
   "NEXT_WORD_BUTTON": "Next word",
