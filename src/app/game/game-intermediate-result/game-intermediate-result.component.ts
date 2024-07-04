@@ -1,4 +1,4 @@
-import { Component, OnInit, EventEmitter, Output, OnDestroy, output } from '@angular/core';
+import { Component, OnInit, OnDestroy, output } from '@angular/core';
 import { GAMESTATE, Result } from '../../shared/models/interfaces';
 import { DrawingService } from '../game-draw/services/drawing.service';
 import { MultiplayerService } from '../game-multiplayer/services/multiplayer.service';
