@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import { WebSocketService } from './web-socket.service';
 import { BehaviorSubject, Observable, ReplaySubject } from 'rxjs';
 import { map, take, tap } from 'rxjs/operators';
-import { SocketEndpoints } from '../../../shared/models/websocketEndpoints';
+import { SocketEndpoints } from '@/app/shared/models/websocketEndpoints';
 import { PairingService } from './pairing.service';
 import { JoinGameData, JoinGameReady, PredictionData } from '@/app/shared/models/backend-interfaces';
 import { GAMESTATE, GameState, PlayerScore } from '@/app/shared/models/interfaces';

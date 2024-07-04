@@ -1,18 +1,18 @@
 import { Component, ElementRef, OnInit, Output, EventEmitter, OnDestroy, viewChild } from '@angular/core';
 import { BehaviorSubject, interval, Observable, Subscription } from 'rxjs';
-import { ImageService } from './services/image.service';
+import { ImageService } from '../services/image.service';
 import { take } from 'rxjs/operators';
-import { DrawingService } from './services/drawing.service';
-import { MultiplayerService } from '../game-multiplayer/services/multiplayer.service';
+import { DrawingService } from '../services/drawing.service';
+import { MultiplayerService } from '../services/multiplayer.service';
 import { Certainty, GAMESTATE, Result } from '../../shared/models/interfaces';
 import { PredictionData } from '../../shared/models/backend-interfaces';
-import { SoundService } from './services/sound.service';
+import { SoundService } from '../services/sound.service';
 import { UpperCasePipe } from '@angular/common';
 import { MatIconButton } from '@angular/material/button';
 import { MatIcon } from '@angular/material/icon';
-import { GameConfig, GameConfigService } from '../game-config.service';
-import { TranslationService } from '@/app/services/translation.service';
-import { TranslatePipe } from '@/app/pipes/translation.pipe';
+import { GameLevelConfig, GameConfigService } from '../services/game-config.service';
+import { TranslationService } from '@/app/core/translation.service';
+import { TranslatePipe } from '@/app/core/translation.pipe';
 
 @Component({
   selector: 'app-drawing',
@@ -22,7 +22,7 @@ import { TranslatePipe } from '@/app/pipes/translation.pipe';
   imports: [MatIcon, MatIconButton, UpperCasePipe, TranslatePipe],
 })
 export class GameDrawComponent implements OnInit, OnDestroy {
-  config!: GameConfig;
+  config!: GameLevelConfig;
   subscriptions = new Subscription();
 
   canvas = viewChild.required<ElementRef<HTMLCanvasElement>>('canvas');
@@ -44,11 +44,13 @@ export class GameDrawComponent implements OnInit, OnDestroy {
   isBlankImage = true;
 
   timeLeft = 0;
-  score = 333; //TODO: migrate (suggestion: move to game config?)
+
+  scoreValues = this.gameConfigService.getScoreSettings();
+  score = this.scoreValues.maxScore;
+  scoreDecrement = this.scoreValues.scoreDecrement;
 
   clockColor = 'initial';
   private readonly resultImageSize = 1024;
-
   private readonly LINE_WIDTH = 6;
 
   private readonly _timeOut = new BehaviorSubject<boolean>(false);
@@ -74,7 +76,7 @@ export class GameDrawComponent implements OnInit, OnDestroy {
 
   ngOnInit(): void {
     this.subscriptions.add(
-      this.gameConfigService.config$.subscribe((config) => {
+      this.gameConfigService.difficultyLevel$.subscribe((config) => {
         this.config = config;
         this.timeLeft = config.secondsPerRound;
       })
@@ -241,13 +243,12 @@ export class GameDrawComponent implements OnInit, OnDestroy {
     return new Observable((observer) => {
       let color = 'red';
       const intervalDuration = 100;
-      const scoreDecrement = 1.67336683417;
 
       const sub = interval(intervalDuration)
         .pipe(take(10 * this.config.secondsPerRound))
         .subscribe((tics) => {
           if (!this.drawingService.classificationDone) {
-            this.score = this.score - scoreDecrement;
+            this.score = this.score - this.scoreDecrement;
             if (tics % 10 === 9) {
               this.timeLeft--;
               if (this.timeLeft < this.config.timeToStartClassify + 1) {
@@ -326,7 +327,7 @@ export class GameDrawComponent implements OnInit, OnDestroy {
   }
 
   classify(isMultiplayer = false) {
-    //TODO: rename to logical name (e.g. 'prepareImage')
+    //TODO: rename?
     const b64Image = this.canvas().nativeElement.toDataURL('image/png');
     const croppedCoordinates: number[] = this.imageService.crop(
       this.minX,

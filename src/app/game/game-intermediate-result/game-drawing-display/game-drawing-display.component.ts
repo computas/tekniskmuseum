@@ -1,4 +1,4 @@
-import { TranslatePipe } from '@/app/pipes/translation.pipe';
+import { TranslatePipe } from '@/app/core/translation.pipe';
 import { Component, Input } from '@angular/core';
 
 @Component({

@@ -2,13 +2,12 @@ import { Component, OnInit, OnDestroy } from '@angular/core';
 import { Router } from '@angular/router';
 import { MatDialogRef, MatDialogContent, MatDialogActions } from '@angular/material/dialog';
 import { ViewEncapsulation } from '@angular/core';
-import { routes } from '../shared/models/routes';
+import { routes } from '../../shared/models/routes';
 import { MatIcon } from '@angular/material/icon';
 import { MatButton } from '@angular/material/button';
 import { CdkScrollable } from '@angular/cdk/scrolling';
-import { TranslationService } from '../services/translation.service';
-import { TranslatePipe } from '../pipes/translation.pipe';
-
+import { TranslationService } from '@/app/core/translation.service';
+import { TranslatePipe } from '@/app/core/translation.pipe';
 @Component({
   selector: 'app-idle-timeout',
   templateUrl: './idle-timeout.component.html',

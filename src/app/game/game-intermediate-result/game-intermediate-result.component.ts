@@ -1,12 +1,12 @@
 import { Component, OnInit, OnDestroy, output } from '@angular/core';
 import { GAMESTATE, Result } from '../../shared/models/interfaces';
-import { DrawingService } from '../game-draw/services/drawing.service';
-import { MultiplayerService } from '../game-multiplayer/services/multiplayer.service';
+import { DrawingService } from '../services/drawing.service';
+import { MultiplayerService } from '../services/multiplayer.service';
 import { Router } from '@angular/router';
 import { routes } from '../../shared/models/routes';
-import { GameConfigService } from '../game-config.service';
-import { TranslationService } from '@/app/services/translation.service';
-import { TranslatePipe } from '@/app/pipes/translation.pipe';
+import { GameConfigService } from '../services/game-config.service';
+import { TranslationService } from '@/app/core/translation.service';
+import { TranslatePipe } from '@/app/core/translation.pipe';
 import { GameDrawingFeedbackComponent } from './game-drawing-feedback/game-drawing-feedback.component';
 import { GameDrawingDisplayComponent } from './game-drawing-display/game-drawing-display.component';
 import { GameIntermediateResultHeaderComponent } from './game-intermediate-result-header/game-intermediate-result-header.component';

@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import { DrawingService } from '../../../game-draw/services/drawing.service';
-import { TranslatePipe } from '@/app/pipes/translation.pipe';
+import { DrawingService } from '../../../services/drawing.service';
+import { TranslatePipe } from '@/app/core/translation.pipe';
 
 @Component({
   selector: 'app-game-progress-bar',
