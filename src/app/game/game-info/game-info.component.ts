@@ -31,6 +31,7 @@ export class GameInfoComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
+    this.gameStateService.setCurrentPage(GAMESTATE.howToPlay);
     this.translationService.lang$.subscribe((lang) => {
       this.translationService.loadTranslations(lang).subscribe(() => {
         this.translationService.setLanguage(lang);
