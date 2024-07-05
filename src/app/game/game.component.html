@@ -6,7 +6,7 @@
 <div [@enterAnimation]>
   <app-game-pick-difficulty></app-game-pick-difficulty>
 </div>
-} @if (newGame && !showIntermediateResult) {
+} @if (showDrawingBoard) {
 <div [@enterAnimation]>
   <app-drawing></app-drawing>
 </div>
@@ -20,6 +20,6 @@
 </div>
 } @if (showWordToDraw) {
 <div [@enterAnimation]>
-  <app-game-word-to-draw (drawWord)="startGame()"></app-game-word-to-draw>
+  <app-game-word-to-draw></app-game-word-to-draw>
 </div>
 }

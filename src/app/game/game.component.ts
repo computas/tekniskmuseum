@@ -54,10 +54,11 @@ export class GameComponent implements OnInit, OnDestroy {
   newGame = false;
   guessDone = false;
   showDifficultyPicker = false;
-  showHowToPlay = true;
+  showHowToPlay = false;
   showIntermediateResult = false;
   showFinalResult = false;
   showWordToDraw = false;
+  showDrawingBoard = false;
 
   constructor(private gameStateService: GameStateService, private drawingService: DrawingService) {}
 
@@ -85,7 +86,8 @@ export class GameComponent implements OnInit, OnDestroy {
   updatePage(newPage: string) {
     this.showHowToPlay = GAMESTATE.howToPlay === newPage;
     this.showDifficultyPicker = GAMESTATE.difficultyPicker === newPage;
-    this.showWordToDraw = GAMESTATE.showWord == newPage;
+    this.showWordToDraw = GAMESTATE.showWord === newPage;
+    this.showDrawingBoard = GAMESTATE.drawingBoard === newPage;
   }
 
   ngOnDestroy(): void {

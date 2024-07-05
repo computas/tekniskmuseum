@@ -13,6 +13,7 @@ import { GameConfigService } from '../services/game-config.service';
 import { TranslationService } from '@/app/core/translation.service';
 import { TranslatePipe } from '@/app/core/translation.pipe';
 import { GAMESTATE } from '@/app/shared/models/interfaces';
+import { GameStateService } from '../services/game-state-service';
 
 @Component({
   selector: 'app-game-word-to-draw',
@@ -34,13 +35,13 @@ export class GameWordToDrawComponent implements OnInit, OnDestroy {
   loading = true;
 
   word = '';
-  @Output() drawWord = new EventEmitter();
 
   subscriptions = new Subscription();
   timerSubscription: Subscription | undefined;
 
   constructor(
     private gameConfigService: GameConfigService,
+    private gameStateService: GameStateService,
     private drawingService: DrawingService,
     private multiplayerService: MultiplayerService,
     private router: Router,
@@ -48,6 +49,7 @@ export class GameWordToDrawComponent implements OnInit, OnDestroy {
   ) {}
 
   ngOnInit(): void {
+    this.gameStateService.setCurrentPage(GAMESTATE.showWord);
     if (this.router.url === `/${routes.SINGLEPLAYER}`) {
       this.isSinglePlayer = true;
     } else {
@@ -100,6 +102,11 @@ export class GameWordToDrawComponent implements OnInit, OnDestroy {
       );
     }
     this.translationService.loadTranslations(this.translationService.getCurrentLang()).subscribe();
+  }
+
+  toDrawingBoard() {
+    // game should start here
+    this.gameStateService.setCurrentPage(GAMESTATE.drawingBoard);
   }
 
   startTimer() {
