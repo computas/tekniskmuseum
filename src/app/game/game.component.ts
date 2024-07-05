@@ -1,4 +1,4 @@
-import { Component, OnInit, OnDestroy } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { trigger, style, animate, transition } from '@angular/animations';
 import { GAMESTATE } from '../shared/models/interfaces';
 import { DrawingService } from './services/drawing.service';
@@ -49,29 +49,15 @@ import { GameStateService } from './services/game-state-service';
     GameWordToDrawComponent,
   ],
 })
-export class GameComponent implements OnInit, OnDestroy {
+export class GameComponent implements OnInit {
   currentPage = '';
-  newGame = false;
-  guessDone = false;
-  showDifficultyPicker = false;
-  showHowToPlay = false;
-  showIntermediateResult = false;
-  showFinalResult = false;
-  showWordToDraw = false;
-  showDrawingBoard = false;
+  GAMESTATE = GAMESTATE;
 
-  constructor(private gameStateService: GameStateService, private drawingService: DrawingService) {}
+  constructor(private gameStateService: GameStateService) {}
 
   ngOnInit(): void {
     this.currentPage = this.gameStateService.getCurrentPage();
     this.listenToPageChanges();
-
-    this.drawingService.guessUsed = 1;
-    this.drawingService.guessDone$.subscribe({
-      next: (value) => {
-        this.showIntermediateResult = value;
-      },
-    });
   }
 
   listenToPageChanges() {
@@ -84,38 +70,6 @@ export class GameComponent implements OnInit, OnDestroy {
   }
 
   updatePage(newPage: string) {
-    this.showHowToPlay = GAMESTATE.howToPlay === newPage;
-    this.showDifficultyPicker = GAMESTATE.difficultyPicker === newPage;
-    this.showWordToDraw = GAMESTATE.showWord === newPage;
-    this.showDrawingBoard = GAMESTATE.drawingBoard === newPage;
-    this.showIntermediateResult = GAMESTATE.intermediateResult === newPage;
-    this.showFinalResult = GAMESTATE.showResult === newPage;
-  }
-
-  ngOnDestroy(): void {
-    this.clearGameState();
-    this.drawingService.endGame();
-  }
-
-  startGame() {
-    this.showWordToDraw = false;
-    this.newGame = true;
-  }
-
-  nextGuess() {
-    this.clearGameState();
-    this.showWordToDraw = true;
-  }
-
-  finalResult() {
-    this.clearGameState();
-    this.showFinalResult = this.drawingService.gameOver;
-  }
-
-  clearGameState() {
-    this.newGame = false;
-    this.showIntermediateResult = false;
-    this.showFinalResult = false;
-    this.guessDone = false;
+    this.currentPage = newPage;
   }
 }

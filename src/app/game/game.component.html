@@ -1,25 +1,17 @@
-@if (showHowToPlay) {
-<div [@enterAnimation]>
-  <app-game-info></app-game-info>
-</div>
-} @if (showDifficultyPicker) {
-<div [@enterAnimation]>
-  <app-game-pick-difficulty></app-game-pick-difficulty>
-</div>
-} @if (showDrawingBoard) {
-<div [@enterAnimation]>
-  <app-drawing></app-drawing>
-</div>
-} @if (showIntermediateResult) {
+@switch (currentPage) { @case (GAMESTATE.howToPlay) {
+<div [@enterAnimation]><app-game-info></app-game-info></div>
+} @case (GAMESTATE.difficultyPicker) {
+<div [@enterAnimation]><app-game-pick-difficulty></app-game-pick-difficulty></div>
+} @case (GAMESTATE.showWord) {
+<div [@enterAnimation]><app-game-word-to-draw></app-game-word-to-draw></div>
+} @case (GAMESTATE.drawingBoard) {
+<div [@enterAnimation]><app-drawing></app-drawing></div>
+} @case (GAMESTATE.intermediateResult) {
 <div [@enterAnimation]>
   <app-game-intermediate-result></app-game-intermediate-result>
 </div>
-} @if (showFinalResult) {
+} @case (GAMESTATE.showResult) {
 <div [@enterAnimation]>
   <app-game-result></app-game-result>
 </div>
-} @if (showWordToDraw) {
-<div [@enterAnimation]>
-  <app-game-word-to-draw></app-game-word-to-draw>
-</div>
-}
+} }
