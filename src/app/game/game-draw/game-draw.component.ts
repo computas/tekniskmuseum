@@ -376,8 +376,7 @@ export class GameDrawComponent implements OnInit, OnDestroy {
       hasPassedMinimumTimeBetweenClassify &&
       hasPassedMinimumDrawnThreshold &&
       hasDrawnSinceLastClassify &&
-      !this.isDrawing &&
-      (hasPassedPixelsPerClassification || hasPassedDefaultTimeBetweenClassify)
+      ((hasPassedPixelsPerClassification && !this.isDrawing) || hasPassedDefaultTimeBetweenClassify)
     );
   }
 
