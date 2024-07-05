@@ -29,8 +29,8 @@ export class SpeechBubbleComponent implements OnInit {
   titleText: string | undefined = 'Hei! Jeg heter IO'; 
   bodyText: string  = 'Hjelp meg å lære? 🥹';
 
-  private _pointerSide: PointerSide = PointerSide.Bottom;
-  private _arrowAlignment: ArrowAlignment = ArrowAlignment.Center;
+  private _pointerSide: PointerSide = PointerSide.Top;
+  private _arrowAlignment: ArrowAlignment = ArrowAlignment.Right;
   private _isFlipped: boolean = false;
 
   @Input() set pointerSide(value: PointerSide) {
@@ -60,13 +60,8 @@ export class SpeechBubbleComponent implements OnInit {
     return this._isFlipped;
   }
 
-  //computedClasses: string = `${this._pointerSide}, ${this._arrowAlignment}, ${this._isFlipped ? 'flip' : ''}`.trim();
-
   computedClasses(): string[] {
-    //return `${this._pointerSide}, ${this._arrowAlignment}, ${this._isFlipped ? 'flip' : ''}`.trim();
-    //return ['speech-bubble', this._pointerSide, this._arrowAlignment, this._isFlipped ? 'flip' : ''];
-    return ['speech-bubble', 'ptop', 'acenter', 'flip'];
-    //return 'speech-bubble ptop acenter flip';
+    return ['speech-bubble', this._pointerSide, this._arrowAlignment, this._isFlipped ? 'flip' : ''];
   }
 
   constructor() {}
@@ -101,54 +96,3 @@ export class SpeechBubbleComponent implements OnInit {
     }
   }
 }
-
-
-
-/* 
-
-//
-
-UTEN FLIP
-top center
-right center
-bottom center
-left center
-
-WITH FLIP
-top left flip=right
-top right flip=left
-right top flip=down
-right bottom flip=up
-bottom left left/right
-bottom right left/right
-left top up/down
-left bottom up/down
-
-
-
-///// flip = true --> pointToCentre
-
-
-
-if 
-
-UTEN FLIP
-inTopCenter ~ [300-360, 0-60]
-inRightCenter ~ [75-105]
-inBottomCenter ~ [120-240]
-inLeftCenter ~ [255-285]
-
-
-MED FLIP
-inTopLeft ~ (285-300)
-inTopRight ~ (60-75)
-inRightBottom ~ ()
-inRightTop ~ ()
-inBottomRight ~ ()
-inBottomLeft ~ ()
-inLeftTop ~ ()
-inLeftBottom ~ ()
-
-
-
- */

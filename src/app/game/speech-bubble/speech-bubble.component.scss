@@ -1,8 +1,8 @@
 @import '../../../variables.scss';
 
 * {
-    color: black;
-    text-align: center;
+  color: black;
+  text-align: center;
 }
 
 .title {
@@ -14,12 +14,11 @@
   font-size: 48px;
 }
 
-
-[speech-bubble], [speech-bubble] * {
+.speech-bubble, .speech-bubble * {
   box-sizing: border-box;
 }
 
-[speech-bubble] {
+.speech-bubble {
   --bbColor: white;
   --bbArrowSize: 2.0rem;
   --bbBorderRadius: 1.0rem;
@@ -32,124 +31,124 @@
   line-height: 48px;
 }
 
-[speech-bubble]::before {
+.speech-bubble::before {
   content: '';
   position: absolute;
   background: var(--bbColor);
 }
 
-[speech-bubble][pbottom] {
+.speech-bubble.pbottom {
   margin-bottom: var(--bbArrowSize);
 }
 
-[speech-bubble][ptop] {
+.speech-bubble.ptop {
   margin-top: var(--bbArrowSize);
 }
 
-[speech-bubble][pleft] {
+.speech-bubble.pleft {
   margin-left: var(--bbArrowSize);
 }
 
-[speech-bubble][pright] {
+.speech-bubble.pright {
   margin-right: var(--bbArrowSize);
 }
 
-[speech-bubble][pbottom]::before,
-[speech-bubble][ptop]::before {
+.speech-bubble.pbottom::before,
+.speech-bubble.ptop::before {
   --width: calc(var(--bbArrowSize) / 2 * 3);
   height: var(--bbArrowSize);
   width: var(--width);
 }
 
-[speech-bubble][pbottom]::before {
+.speech-bubble.pbottom::before {
   top: calc(100% - 2px);
 }
 
-[speech-bubble][pbottom][aleft]::before {
+.speech-bubble.pbottom.aleft::before {
   left: 1rem;
   clip-path: polygon(25% 0, 100% 0, 0% 100%);
 }
 
-[speech-bubble][pbottom][acenter]::before {
+.speech-bubble.pbottom.acenter::before {
   left: calc(50% - var(--width) / 2);
   clip-path: polygon(12.5% 0, 87.5% 0, 50% 100%);
 }
 
-[speech-bubble][pbottom][aright]::before {
+.speech-bubble.pbottom.aright::before {
   right: 1rem;
   clip-path: polygon(0 0, 75% 0, 100% 100%);
 }
 
-[speech-bubble][ptop]::before {
+.speech-bubble.ptop::before {
   bottom: calc(100% - 2px);
 }
 
-[speech-bubble][ptop][aleft]::before {
+.speech-bubble.ptop.aleft::before {
   left: var(--bbPadding);
   clip-path: polygon(0 0, 100% 100%, 25% 100%);
 }
 
-[speech-bubble][ptop][acenter]::before {
+.speech-bubble.ptop.acenter::before {
   left: calc(50% - var(--width) / 2);
   clip-path: polygon(12.5% 100%, 50% 0, 87.5% 100%);
 }
 
-[speech-bubble][ptop][aright]::before {
+.speech-bubble.ptop.aright::before {
   right: var(--bbPadding);
   clip-path: polygon(0 100%, 100% 0, 75% 100%);
 }
 
-[speech-bubble][pleft]::before,
-[speech-bubble][pright]::before {
+.speech-bubble.pleft::before,
+.speech-bubble.pright::before {
   --height: calc(var(--bbArrowSize) / 2 * 3);
   width: var(--bbArrowSize);
   height: var(--height);
 }
 
-[speech-bubble][pright]::before {
+.speech-bubble.pright::before {
   left: calc(100% - 2px);
 }
 
-[speech-bubble][pright][atop]::before {
+.speech-bubble.pright.atop::before {
   top: var(--bbPadding);
   clip-path: polygon(100% 0, 0 100%, 0 25%);
 }
 
-[speech-bubble][pright][acenter]::before {
+.speech-bubble.pright.acenter::before {
   top: calc(50% - var(--height) / 2);
   clip-path: polygon(0 12.5%, 100% 50%, 0 87.5%);
 }
 
-[speech-bubble][pright][abottom]::before {
+.speech-bubble.pright.abottom::before {
   bottom: var(--bbPadding);
   clip-path: polygon(0 0, 100% 100%, 0 75%);
 }
 
-[speech-bubble][pleft]::before {
+.speech-bubble.pleft::before {
   right: calc(100% - 2px);
 }
 
-[speech-bubble][pleft][atop]::before {
+.speech-bubble.pleft.atop::before {
   top: var(--bbPadding);
   clip-path: polygon(0 0, 100% 25%, 100% 100%);
 }
 
-[speech-bubble][pleft][acenter]::before {
+.speech-bubble.pleft.acenter::before {
   top: calc(50% - var(--height) / 2);
   clip-path: polygon(0 50%, 100% 12.5%, 100% 87.5%);
 }
 
-[speech-bubble][pleft][abottom]::before {
+.speech-bubble.pleft.abottom::before {
   bottom: var(--bbPadding);
   clip-path: polygon(0 100%, 100% 0, 100% 75%);
 }
 
-[speech-bubble][pbottom][flip]::before,
-[speech-bubble][ptop][flip]::before {
+.speech-bubble.pbottom.flip::before,
+.speech-bubble.ptop.flip::before {
   transform: scaleX(-1);
 }
 
-[speech-bubble][pleft][flip]::before,
-[speech-bubble][pright][flip]::before {
+.speech-bubble.pleft.flip::before,
+.speech-bubble.pright.flip::before {
   transform: scaleY(-1);
 }
