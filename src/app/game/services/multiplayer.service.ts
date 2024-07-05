@@ -6,6 +6,7 @@ import { SocketEndpoints } from '@/app/shared/models/websocketEndpoints';
 import { PairingService } from './pairing.service';
 import { JoinGameData, JoinGameReady, PredictionData } from '@/app/shared/models/backend-interfaces';
 import { GAMESTATE, GameState, PlayerScore } from '@/app/shared/models/interfaces';
+import { TranslationService } from '@/app/core/translation.service';
 
 @Injectable({
   providedIn: 'root',
@@ -33,7 +34,11 @@ export class MultiplayerService {
 
   public opponentScore = new ReplaySubject<PlayerScore>(1);
 
-  constructor(private webSocketService: WebSocketService, private pairing: PairingService) {}
+  constructor(
+    private webSocketService: WebSocketService,
+    private pairing: PairingService,
+    private translationService: TranslationService
+  ) {}
 
   resetStateInfo() {
     this.stateInfo = this.initialState;
@@ -59,6 +64,7 @@ export class MultiplayerService {
   }
 
   getLabel(emit = true): Observable<string> {
+    const currentLang = this.translationService.getCurrentLang();
     if (emit) {
       this.webSocketService.emit(SocketEndpoints.GET_LABEL, JSON.stringify({ game_id: this.stateInfo.game_id }));
     }
@@ -66,8 +72,15 @@ export class MultiplayerService {
       take(1),
       map((res: string) => {
         const data = JSON.parse(res);
-        this.label = data;
-        return this.label;
+        const label = data['label'];
+        const norwegian_label = data['norwegian_label'];
+        if (currentLang === 'EN') {
+          this.label = label;
+          return label;
+        } else {
+          this.label = norwegian_label;
+          return norwegian_label;
+        }
       })
     );
   }
