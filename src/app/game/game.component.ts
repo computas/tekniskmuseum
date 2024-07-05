@@ -85,16 +85,12 @@ export class GameComponent implements OnInit, OnDestroy {
   updatePage(newPage: string) {
     this.showHowToPlay = GAMESTATE.howToPlay === newPage;
     this.showDifficultyPicker = GAMESTATE.difficultyPicker === newPage;
+    this.showWordToDraw = GAMESTATE.showWord == newPage;
   }
 
   ngOnDestroy(): void {
     this.clearGameState();
     this.drawingService.endGame();
-  }
-
-  getDrawWord() {
-    this.showWordToDraw = true;
-    this.showDifficultyPicker = false;
   }
 
   startGame() {

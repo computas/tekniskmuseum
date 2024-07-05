@@ -11,6 +11,7 @@ import { GameLevelConfig, GameConfigService } from '../services/game-config.serv
 import { TranslationService } from '@/app/core/translation.service';
 import { TranslatePipe } from '@/app/core/translation.pipe';
 import { GAMESTATE } from '@/app/shared/models/interfaces';
+import { GameStateService } from '../services/game-state-service';
 
 @Component({
   selector: 'app-game-pick-difficulty',
@@ -25,11 +26,9 @@ export class GamePickDifficultyComponent implements OnInit {
   isSinglePlayer = false;
   isMultiPlayer = false;
 
-  @Output() getDrawWord = new EventEmitter();
-  @Output() difficultyPicked = new EventEmitter();
-
   constructor(
     private gameConfigService: GameConfigService,
+    private gameStateService: GameStateService,
     private router: Router,
     private multiplayerService: MultiplayerService,
     private webSocketService: WebSocketService,
@@ -37,6 +36,7 @@ export class GamePickDifficultyComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
+    this.gameStateService.setCurrentPage(GAMESTATE.difficultyPicker);
     if (this.router.url === `/${routes.SINGLEPLAYER}`) {
       this.isSinglePlayer = true;
       this.gameConfigService.difficultyLevel$.subscribe((config: GameLevelConfig) => {
@@ -61,11 +61,11 @@ export class GamePickDifficultyComponent implements OnInit {
   startDrawing(difficulty: 'easy' | 'medium' | 'hard') {
     if (this.isSinglePlayer) {
       this.gameConfigService.setDifficultyLevel(difficulty);
-      this.getDrawWord.emit(true);
     } else {
       //TODO: Add difficulty in multiplayerService, this is not implemented
       this.multiplayerService.getLabel(true);
     }
+    this.gameStateService.setCurrentPage(GAMESTATE.showWord);
   }
 
   goToLanding() {

@@ -23,7 +23,12 @@ export class GameStateService {
 
   readonly currentPage$ = this._currentPage.asObservable();
 
-  constructor(private gameConfigService: GameConfigService) {}
+  constructor(private gameConfigService: GameConfigService) {
+    const pageBeforeRefresh = localStorage.getItem('currentPage') as GAMESTATE;
+    if (pageBeforeRefresh) {
+      this.setCurrentPage(pageBeforeRefresh);
+    }
+  }
 
   startGame() {
     this._currentRound.next(1);
@@ -47,7 +52,7 @@ export class GameStateService {
   }
 
   setSingleplayer() {
-    this._gameMode.next(GAMEMODE.multiplayer);
+    this._gameMode.next(GAMEMODE.singleplayer);
   }
 
   setMultiplayer() {
@@ -56,6 +61,7 @@ export class GameStateService {
 
   setCurrentPage(newState: GAMESTATE) {
     // TODO should this be logged to console?
+    localStorage.setItem('currentPage', newState); // save in case of page refresh
     this._currentPage.next(newState);
   }
 
