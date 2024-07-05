@@ -1,6 +1,6 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
 import { trigger, style, animate, transition } from '@angular/animations';
-
+import { GAMESTATE } from '../shared/models/interfaces';
 import { DrawingService } from './services/drawing.service';
 import { GameWordToDrawComponent } from './game-word-to-draw/game-word-to-draw.component';
 import { GameResultComponent } from './game-result/game-result.component';
@@ -8,6 +8,7 @@ import { GameIntermediateResultComponent } from './game-intermediate-result/game
 import { GameDrawComponent } from './game-draw/game-draw.component';
 import { GameInfoComponent } from './game-info/game-info.component';
 import { GamePickDifficultyComponent } from './game-pick-difficulty/game-pick-difficulty.component';
+import { GameStateService } from './services/game-state-service';
 
 @Component({
   selector: 'app-game',
@@ -49,6 +50,7 @@ import { GamePickDifficultyComponent } from './game-pick-difficulty/game-pick-di
   ],
 })
 export class GameComponent implements OnInit, OnDestroy {
+  currentPage = '';
   newGame = false;
   guessDone = false;
   showDifficultyPicker = false;
@@ -57,13 +59,12 @@ export class GameComponent implements OnInit, OnDestroy {
   showFinalResult = false;
   showWordToDraw = false;
 
-  constructor(private drawingService: DrawingService) {}
+  constructor(private gameStateService: GameStateService, private drawingService: DrawingService) {}
 
-  ngOnDestroy(): void {
-    this.clearGameState();
-    this.drawingService.endGame();
-  }
   ngOnInit(): void {
+    this.currentPage = this.gameStateService.getCurrentPage();
+    this.listenToPageChanges();
+
     this.drawingService.guessUsed = 1;
     this.drawingService.guessDone$.subscribe({
       next: (value) => {
@@ -72,9 +73,23 @@ export class GameComponent implements OnInit, OnDestroy {
     });
   }
 
-  getDifficultyPicker() {
-    this.showDifficultyPicker = true;
-    this.showHowToPlay = false;
+  listenToPageChanges() {
+    this.gameStateService.currentPage$.subscribe({
+      next: (newPage) => {
+        this.currentPage = newPage;
+        this.updatePage(this.currentPage);
+      },
+    });
+  }
+
+  updatePage(newPage: string) {
+    this.showHowToPlay = GAMESTATE.howToPlay === newPage;
+    this.showDifficultyPicker = GAMESTATE.difficultyPicker === newPage;
+  }
+
+  ngOnDestroy(): void {
+    this.clearGameState();
+    this.drawingService.endGame();
   }
 
   getDrawWord() {

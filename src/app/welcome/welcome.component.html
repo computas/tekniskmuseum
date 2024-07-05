@@ -15,7 +15,9 @@
     </div>
     <div class="play-container">
       <div class="text-container">
-        <div class="avatar"><img class="avatar-image" src="assets/logo/io_logoanimasjon.gif" alt="avatar" /></div>
+        <div class="avatar">
+          <img class="avatar-image" src="assets/logo/io_logoanimasjon.gif" alt="avatar" />
+        </div>
         <div class="info-text">
           <span>
             {{ 'WELCOME_MESSAGE' | translate }}<span class="avatar-name"> IO</span>. <br />
@@ -23,7 +25,7 @@
           </span>
 
           <div class="button-container">
-            <a routerLink="/playgame/singleplayer" routerLinkActive="active">
+            <a routerLink="/playgame/singleplayer" routerLinkActive="active" (click)="setSingleplayer()">
               <button mat-raised-button class="play-game-button">
                 <div class="button-text">
                   <mat-icon class="button-icon" aria-label="player one icon">person</mat-icon
@@ -31,7 +33,7 @@
                 </div>
               </button>
             </a>
-            <a routerLink="/playgame/multiplayer" routerLinkActive="active">
+            <a routerLink="/playgame/multiplayer" routerLinkActive="active" (click)="setMultiplayer()">
               <button mat-raised-button class="play-game-button">
                 <div class="button-text">
                   <mat-icon class="button-icon" aria-label="player two icon">group</mat-icon

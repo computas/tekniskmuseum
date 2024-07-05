@@ -8,7 +8,8 @@ import { TranslationService } from '../core/translation.service';
 import { TranslatePipe } from '../core/translation.pipe';
 import { Observable, Subject, takeUntil } from 'rxjs';
 import { CommonModule } from '@angular/common';
-import { SupportedLanguages } from '../shared/models/interfaces';
+import { GAMESTATE, SupportedLanguages } from '../shared/models/interfaces';
+import { GameStateService } from '../game/services/game-state-service';
 
 @Component({
   selector: 'app-welcome',
@@ -26,7 +27,8 @@ export class WelcomeComponent implements OnInit, OnDestroy {
     private multiplayerService: MultiplayerService,
     private drawingService: DrawingService,
     private router: Router,
-    private translationService: TranslationService
+    private translationService: TranslationService,
+    private gameStateService: GameStateService
   ) {
     this.currentLang$ = this.translationService.lang$;
   }
@@ -34,6 +36,7 @@ export class WelcomeComponent implements OnInit, OnDestroy {
   ngOnInit() {
     this.multiplayerService.clearState();
     this.drawingService.clearState();
+    this.gameStateService.clearState();
     const savedLanguage = (localStorage.getItem('language') as SupportedLanguages) || 'NO';
     this.translationService
       .loadTranslations(savedLanguage)
@@ -58,5 +61,14 @@ export class WelcomeComponent implements OnInit, OnDestroy {
   ngOnDestroy() {
     this.destroy$.next();
     this.destroy$.complete();
+  }
+
+  setSingleplayer() {
+    this.gameStateService.setSingleplayer();
+    this.gameStateService.setCurrentPage(GAMESTATE.howToPlay);
+  }
+
+  setMultiplayer() {
+    this.gameStateService.setMultiplayer();
   }
 }

@@ -1,4 +1,4 @@
-import { Component, OnInit, Output, EventEmitter } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { routes } from '../../shared/models/routes';
 import { MultiplayerService } from '../services/multiplayer.service';
@@ -9,6 +9,7 @@ import { MatIcon } from '@angular/material/icon';
 import { TranslationService } from '@/app/core/translation.service';
 import { TranslatePipe } from '@/app/core/translation.pipe';
 import { GAMESTATE } from '@/app/shared/models/interfaces';
+import { GameStateService } from '../services/game-state-service';
 
 @Component({
   selector: 'app-game-info',
@@ -18,7 +19,6 @@ import { GAMESTATE } from '@/app/shared/models/interfaces';
   imports: [MatIcon, MatButton, TranslatePipe],
 })
 export class GameInfoComponent implements OnInit {
-  @Output() getDifficultyPicker = new EventEmitter();
   isSinglePlayer = false;
   isMultiPlayer = false;
 
@@ -26,7 +26,8 @@ export class GameInfoComponent implements OnInit {
     private router: Router,
     private multiplayerService: MultiplayerService,
     private webSocketService: WebSocketService,
-    private translationService: TranslationService
+    private translationService: TranslationService,
+    private gameStateService: GameStateService
   ) {}
 
   ngOnInit(): void {
@@ -55,7 +56,7 @@ export class GameInfoComponent implements OnInit {
 
   goToDifficultyPicker() {
     if (this.isSinglePlayer) {
-      this.getDifficultyPicker.emit(true);
+      this.gameStateService.setCurrentPage(GAMESTATE.difficultyPicker);
     } else {
       //How to set difficulty in multiplayer?
       this.multiplayerService.getLabel(true);

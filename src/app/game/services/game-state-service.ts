@@ -12,20 +12,22 @@ enum GAMEMODE {
   providedIn: 'root',
 })
 export class GameStateService {
-  private _currentRound = new BehaviorSubject<number>(1);
-  private _gameMode = new BehaviorSubject<GAMEMODE>(GAMEMODE.singleplayer);
-  private _gameState = new BehaviorSubject<GAMESTATE>(GAMESTATE.lobby);
+  private _currentRound = new BehaviorSubject<number>(0);
+  private _gameMode = new BehaviorSubject<GAMEMODE>(GAMEMODE.multiplayer);
+  private readonly _currentPage = new BehaviorSubject<GAMESTATE>(GAMESTATE.lobby);
   private _isGameOver = new BehaviorSubject<boolean>(false);
 
   private _currentRound$ = this._currentRound.asObservable();
-  private _gameState$ = this._gameState.asObservable();
   private _gameMode$ = this._gameMode.asObservable();
   private _isGameOver$ = this._isGameOver.asObservable();
+
+  readonly currentPage$ = this._currentPage.asObservable();
 
   constructor(private gameConfigService: GameConfigService) {}
 
   startGame() {
     this._currentRound.next(1);
+    this._currentPage.next(GAMESTATE.showWord);
   }
 
   endGame() {
@@ -33,21 +35,28 @@ export class GameStateService {
     this._isGameOver.next(false);
   }
 
+  clearState() {
+    this._currentRound.next(0);
+    this._isGameOver.next(false);
+    this._gameMode.next(GAMEMODE.multiplayer);
+    this.setCurrentPage(GAMESTATE.lobby);
+  }
+
   nextRound() {
     this._currentRound.next(this._currentRound.value + 1);
   }
 
-  setSinglePlayer() {
-    this._gameMode.next(GAMEMODE.singleplayer);
+  setSingleplayer() {
+    this._gameMode.next(GAMEMODE.multiplayer);
   }
 
   setMultiplayer() {
     this._gameMode.next(GAMEMODE.multiplayer);
   }
 
-  setGameState(newState: GAMESTATE) {
+  setCurrentPage(newState: GAMESTATE) {
     // TODO should this be logged to console?
-    this._gameState.next(newState);
+    this._currentPage.next(newState);
   }
 
   // look further into this logic later
@@ -64,7 +73,7 @@ export class GameStateService {
     return this._gameMode.value;
   }
 
-  getGameState(): GAMESTATE {
-    return this._gameState.value;
+  getCurrentPage(): GAMESTATE {
+    return this._currentPage.value;
   }
 }
