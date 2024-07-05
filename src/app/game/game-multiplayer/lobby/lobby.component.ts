@@ -19,10 +19,7 @@ export class LobbyComponent implements OnInit, OnDestroy {
   waitingForOtherPlayer = true;
   subscriptions = new Subscription();
 
-  constructor(
-    public multiPlayerService: MultiplayerService,
-    private translationService: TranslationService
-  ) {}
+  constructor(public multiPlayerService: MultiplayerService, private translationService: TranslationService) {}
 
   ngOnInit(): void {
     const difficulty = 2; // Difficulty set to medium (1 for easy, 3 for hard)

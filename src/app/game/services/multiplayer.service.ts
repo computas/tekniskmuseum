@@ -33,10 +33,7 @@ export class MultiplayerService {
 
   public opponentScore = new ReplaySubject<PlayerScore>(1);
 
-  constructor(
-    private webSocketService: WebSocketService,
-    private pairing: PairingService
-  ) {}
+  constructor(private webSocketService: WebSocketService, private pairing: PairingService) {}
 
   resetStateInfo() {
     this.stateInfo = this.initialState;
