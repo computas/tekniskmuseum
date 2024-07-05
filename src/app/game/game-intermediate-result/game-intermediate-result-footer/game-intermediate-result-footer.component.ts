@@ -3,6 +3,7 @@ import { TranslatePipe } from '@/app/core/translation.pipe';
 import { MatIcon } from '@angular/material/icon';
 import { GAMESTATE } from '@/app/shared/models/interfaces';
 import { MultiplayerService } from '../../services/multiplayer.service';
+import { GameStateService } from '../../services/game-state-service';
 @Component({
   selector: 'app-game-intermediate-result-footer',
   standalone: true,
@@ -13,13 +14,12 @@ import { MultiplayerService } from '../../services/multiplayer.service';
 export class GameIntermediateResultFooterComponent implements OnInit {
   @Input() isGameOver = false;
   @Input() isMultiplayer = false;
-  onNextPageClick = output<GAMESTATE>();
   buttonTextKey = '';
   nextPageIdentifier: GAMESTATE | undefined;
   waitingForPlayerState = 'WAITING_FOR_PLAYER';
   isWaitingForPlayer = true;
 
-  constructor(private multiplayerService: MultiplayerService) {}
+  constructor(private gameStateService: GameStateService, private multiplayerService: MultiplayerService) {}
 
   ngOnInit(): void {
     this.buttonTextKey = this.getButtonTextKey();
@@ -35,7 +35,13 @@ export class GameIntermediateResultFooterComponent implements OnInit {
 
   nextPage(): void {
     if (!this.nextPageIdentifier) return;
-    this.onNextPageClick.emit(this.nextPageIdentifier);
+
+    if (this.gameStateService.isGameOver()) {
+      this.gameStateService.setCurrentPage(GAMESTATE.showResult);
+      return;
+    }
+
+    this.gameStateService.nextRound();
   }
 
   getButtonTextKey(): string {

@@ -11,6 +11,7 @@ import { GameDrawingFeedbackComponent } from './game-drawing-feedback/game-drawi
 import { GameDrawingDisplayComponent } from './game-drawing-display/game-drawing-display.component';
 import { GameIntermediateResultHeaderComponent } from './game-intermediate-result-header/game-intermediate-result-header.component';
 import { GameIntermediateResultFooterComponent } from './game-intermediate-result-footer/game-intermediate-result-footer.component';
+import { GameStateService } from '../services/game-state-service';
 @Component({
   selector: 'app-game-intermediate-result',
   templateUrl: './game-intermediate-result.component.html',
@@ -26,8 +27,6 @@ import { GameIntermediateResultFooterComponent } from './game-intermediate-resul
   ],
 })
 export class GameIntermediateResultComponent implements OnInit, OnDestroy {
-  nextGuess = output<void>();
-  finalResult = output<void>();
   result: Result | undefined;
   gameOver = false;
   waitingForPlayer = true;
@@ -38,6 +37,7 @@ export class GameIntermediateResultComponent implements OnInit, OnDestroy {
 
   constructor(
     private gameConfigService: GameConfigService,
+    private gameStateService: GameStateService,
     private drawingService: DrawingService,
     private multiplayerService: MultiplayerService,
     private router: Router,
@@ -45,6 +45,7 @@ export class GameIntermediateResultComponent implements OnInit, OnDestroy {
   ) {}
 
   ngOnInit(): void {
+    this.gameStateService.setCurrentPage(GAMESTATE.intermediateResult);
     this.result = this.drawingService.lastResult;
     if (this.router.url === `/${routes.SINGLEPLAYER}`) {
       this.isSinglePlayer = true;
@@ -102,8 +103,6 @@ export class GameIntermediateResultComponent implements OnInit, OnDestroy {
         ...this.multiplayerService.stateInfo,
         gameState: GAMESTATE.waitingForWord,
       };
-    } else {
-      this.nextGuess.emit();
     }
   }
 
@@ -113,8 +112,6 @@ export class GameIntermediateResultComponent implements OnInit, OnDestroy {
         ...this.multiplayerService.stateInfo,
         gameState: GAMESTATE.showResult,
       };
-    } else {
-      this.finalResult.emit();
     }
   }
 }

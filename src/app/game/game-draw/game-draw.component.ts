@@ -13,6 +13,7 @@ import { MatIcon } from '@angular/material/icon';
 import { GameLevelConfig, GameConfigService } from '../services/game-config.service';
 import { TranslationService } from '@/app/core/translation.service';
 import { TranslatePipe } from '@/app/core/translation.pipe';
+import { GameStateService } from '../services/game-state-service';
 
 @Component({
   selector: 'app-drawing',
@@ -28,8 +29,6 @@ export class GameDrawComponent implements OnInit, OnDestroy {
   canvas = viewChild.required<ElementRef<HTMLCanvasElement>>('canvas');
   countDown = viewChild.required<ElementRef<HTMLSpanElement>>('countDown');
   private ctx: CanvasRenderingContext2D | undefined;
-
-  @Output() isDoneDrawing = new EventEmitter();
 
   x = 0;
   y = 0;
@@ -67,6 +66,7 @@ export class GameDrawComponent implements OnInit, OnDestroy {
 
   constructor(
     private gameConfigService: GameConfigService,
+    private gameStateService: GameStateService,
     private multiplayerService: MultiplayerService,
     private drawingService: DrawingService,
     private imageService: ImageService,
@@ -75,6 +75,7 @@ export class GameDrawComponent implements OnInit, OnDestroy {
   ) {}
 
   ngOnInit(): void {
+    this.gameStateService.setCurrentPage(GAMESTATE.drawingBoard);
     this.subscriptions.add(
       this.gameConfigService.difficultyLevel$.subscribe((config) => {
         this.config = config;
@@ -109,6 +110,9 @@ export class GameDrawComponent implements OnInit, OnDestroy {
 
   predictionListener() {
     return this.multiplayerService.predictionListener().subscribe((prediction: PredictionData) => {
+      this.gameStateService.updateRoundNumber();
+      this.gameStateService.setCurrentPage(GAMESTATE.intermediateResult);
+
       this.prediction = prediction;
       const sortedCertaintyArr = this.sortOnCertainty(prediction);
       this.updateAiGuess(sortedCertaintyArr);
@@ -122,6 +126,8 @@ export class GameDrawComponent implements OnInit, OnDestroy {
 
   roundOverListener() {
     return this.multiplayerService.roundOverListener().subscribe(() => {
+      this.gameStateService.updateRoundNumber();
+      this.gameStateService.setCurrentPage(GAMESTATE.intermediateResult);
       if (!this.hasAddedResult) {
         this.updateResult(this.prediction ? this.prediction.hasWon : false);
         this.hasAddedResult = true;
@@ -302,6 +308,9 @@ export class GameDrawComponent implements OnInit, OnDestroy {
       const sortedCertaintyArr = this.sortOnCertainty(res);
       this.updateAiGuess(sortedCertaintyArr);
       if (this.drawingService.roundIsDone(res.hasWon, res.gameState)) {
+        this.gameStateService.updateRoundNumber();
+        this.gameStateService.setCurrentPage(GAMESTATE.intermediateResult);
+
         this.soundService.playResultSound(res.hasWon);
         const score = this.score > 0 ? this.score : 0;
         this.drawingService.lastResult.score = Math.round(score);

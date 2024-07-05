@@ -88,6 +88,8 @@ export class GameComponent implements OnInit, OnDestroy {
     this.showDifficultyPicker = GAMESTATE.difficultyPicker === newPage;
     this.showWordToDraw = GAMESTATE.showWord === newPage;
     this.showDrawingBoard = GAMESTATE.drawingBoard === newPage;
+    this.showIntermediateResult = GAMESTATE.intermediateResult === newPage;
+    this.showFinalResult = GAMESTATE.showResult === newPage;
   }
 
   ngOnDestroy(): void {

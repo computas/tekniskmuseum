@@ -48,7 +48,12 @@ export class GameStateService {
   }
 
   nextRound() {
+    this._currentPage.next(GAMESTATE.showWord);
+  }
+
+  updateRoundNumber() {
     this._currentRound.next(this._currentRound.value + 1);
+    console.log('ROUNDNUMBER: ' + this._currentRound.value);
   }
 
   setSingleplayer() {
@@ -66,9 +71,9 @@ export class GameStateService {
   }
 
   // look further into this logic later
-  isGameOver() {
+  isGameOver(): boolean {
     const numberOfRounds = this.gameConfigService.getConfig.rounds;
-    this._currentRound.value === numberOfRounds;
+    return this._currentRound.value === numberOfRounds;
   }
 
   getCurrentRound(): number {
