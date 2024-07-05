@@ -37,7 +37,7 @@ export class GameIntermediateResultFooterComponent implements OnInit {
     if (!this.nextPageIdentifier) return;
 
     if (this.gameStateService.isGameOver()) {
-      this.gameStateService.setCurrentPage(GAMESTATE.showResult);
+      this.gameStateService.goToPage(GAMESTATE.showResult);
       return;
     }
 

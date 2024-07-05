@@ -36,7 +36,7 @@ export class GamePickDifficultyComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
-    this.gameStateService.setCurrentPage(GAMESTATE.difficultyPicker);
+    this.gameStateService.goToPage(GAMESTATE.difficultyPicker);
     if (this.router.url === `/${routes.SINGLEPLAYER}`) {
       this.isSinglePlayer = true;
       this.gameConfigService.difficultyLevel$.subscribe((config: GameLevelConfig) => {
@@ -65,7 +65,7 @@ export class GamePickDifficultyComponent implements OnInit {
       //TODO: Add difficulty in multiplayerService, this is not implemented
       this.multiplayerService.getLabel(true);
     }
-    this.gameStateService.setCurrentPage(GAMESTATE.showWord);
+    this.gameStateService.goToPage(GAMESTATE.showWord);
   }
 
   goToLanding() {

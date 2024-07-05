@@ -65,7 +65,7 @@ export class WelcomeComponent implements OnInit, OnDestroy {
 
   setSingleplayer() {
     this.gameStateService.setSingleplayer();
-    this.gameStateService.setCurrentPage(GAMESTATE.howToPlay);
+    this.gameStateService.goToPage(GAMESTATE.howToPlay);
   }
 
   setMultiplayer() {

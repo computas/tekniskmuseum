@@ -75,7 +75,7 @@ export class GameDrawComponent implements OnInit, OnDestroy {
   ) {}
 
   ngOnInit(): void {
-    this.gameStateService.setCurrentPage(GAMESTATE.drawingBoard);
+    this.gameStateService.savePageToLocalStorage(GAMESTATE.drawingBoard);
     this.subscriptions.add(
       this.gameConfigService.difficultyLevel$.subscribe((config) => {
         this.config = config;
@@ -111,7 +111,7 @@ export class GameDrawComponent implements OnInit, OnDestroy {
   predictionListener() {
     return this.multiplayerService.predictionListener().subscribe((prediction: PredictionData) => {
       this.gameStateService.updateRoundNumber();
-      this.gameStateService.setCurrentPage(GAMESTATE.intermediateResult);
+      this.gameStateService.goToPage(GAMESTATE.intermediateResult);
 
       this.prediction = prediction;
       const sortedCertaintyArr = this.sortOnCertainty(prediction);
@@ -127,7 +127,7 @@ export class GameDrawComponent implements OnInit, OnDestroy {
   roundOverListener() {
     return this.multiplayerService.roundOverListener().subscribe(() => {
       this.gameStateService.updateRoundNumber();
-      this.gameStateService.setCurrentPage(GAMESTATE.intermediateResult);
+      this.gameStateService.goToPage(GAMESTATE.intermediateResult);
       if (!this.hasAddedResult) {
         this.updateResult(this.prediction ? this.prediction.hasWon : false);
         this.hasAddedResult = true;
@@ -309,7 +309,7 @@ export class GameDrawComponent implements OnInit, OnDestroy {
       this.updateAiGuess(sortedCertaintyArr);
       if (this.drawingService.roundIsDone(res.hasWon, res.gameState)) {
         this.gameStateService.updateRoundNumber();
-        this.gameStateService.setCurrentPage(GAMESTATE.intermediateResult);
+        this.gameStateService.goToPage(GAMESTATE.intermediateResult);
 
         this.soundService.playResultSound(res.hasWon);
         const score = this.score > 0 ? this.score : 0;

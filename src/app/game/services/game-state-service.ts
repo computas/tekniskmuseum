@@ -26,7 +26,7 @@ export class GameStateService {
   constructor(private gameConfigService: GameConfigService) {
     const pageBeforeRefresh = localStorage.getItem('currentPage') as GAMESTATE;
     if (pageBeforeRefresh) {
-      this.setCurrentPage(pageBeforeRefresh);
+      this.goToPage(pageBeforeRefresh);
     }
   }
 
@@ -44,7 +44,7 @@ export class GameStateService {
     this._currentRound.next(0);
     this._isGameOver.next(false);
     this._gameMode.next(GAMEMODE.multiplayer);
-    this.setCurrentPage(GAMESTATE.lobby);
+    this.goToPage(GAMESTATE.lobby);
   }
 
   nextRound() {
@@ -64,10 +64,14 @@ export class GameStateService {
     this._gameMode.next(GAMEMODE.multiplayer);
   }
 
-  setCurrentPage(newState: GAMESTATE) {
+  savePageToLocalStorage(newState: GAMESTATE) {
     // TODO should this be logged to console?
     localStorage.setItem('currentPage', newState); // save in case of page refresh
-    this._currentPage.next(newState);
+  }
+
+  goToPage(page: GAMESTATE) {
+    this._currentPage.next(page);
+    this.savePageToLocalStorage(page);
   }
 
   // look further into this logic later

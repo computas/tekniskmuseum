@@ -31,7 +31,7 @@ export class GameInfoComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
-    this.gameStateService.setCurrentPage(GAMESTATE.howToPlay);
+    this.gameStateService.savePageToLocalStorage(GAMESTATE.howToPlay);
     this.translationService.lang$.subscribe((lang) => {
       this.translationService.loadTranslations(lang).subscribe(() => {
         this.translationService.setLanguage(lang);
@@ -57,7 +57,7 @@ export class GameInfoComponent implements OnInit {
 
   goToDifficultyPicker() {
     if (this.isSinglePlayer) {
-      this.gameStateService.setCurrentPage(GAMESTATE.difficultyPicker);
+      this.gameStateService.goToPage(GAMESTATE.difficultyPicker);
     } else {
       //How to set difficulty in multiplayer?
       this.multiplayerService.getLabel(true);

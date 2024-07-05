@@ -49,7 +49,7 @@ export class GameWordToDrawComponent implements OnInit, OnDestroy {
   ) {}
 
   ngOnInit(): void {
-    this.gameStateService.setCurrentPage(GAMESTATE.showWord);
+    this.gameStateService.savePageToLocalStorage(GAMESTATE.showWord);
     if (this.router.url === `/${routes.SINGLEPLAYER}`) {
       this.isSinglePlayer = true;
     } else {
@@ -106,7 +106,7 @@ export class GameWordToDrawComponent implements OnInit, OnDestroy {
 
   toDrawingBoard() {
     // game should start here
-    this.gameStateService.setCurrentPage(GAMESTATE.drawingBoard);
+    this.gameStateService.goToPage(GAMESTATE.drawingBoard);
   }
 
   startTimer() {
