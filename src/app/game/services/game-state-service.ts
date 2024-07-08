@@ -58,11 +58,11 @@ export class GameStateService {
 
   nextRound() {
     this._currentPage.next(GAMESTATE.showWord);
+    this.updateRoundNumber();
   }
 
   updateRoundNumber() {
     this._currentRound.next(this._currentRound.value + 1);
-    console.log('ROUNDNUMBER: ' + this._currentRound.value);
   }
 
   setSingleplayer() {
