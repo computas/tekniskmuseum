@@ -1,47 +1,52 @@
 <div class="container-background">
   <div class="container">
-    <button class="logo" (click)="goToAdmin()">
-      <img src="assets/logo/IO-logo-inverted_transparent-bg.png" alt="logo" aria-label="Gå til admin side" />
-    </button>
-    <div class="language-button-container">
-      <button class="language-button" (click)="changeLanguage('EN')" [class.selected]="(currentLang$ | async) === 'EN'">
-        <img src="assets/UK.svg" alt="UK flag" />
-        EN
-      </button>
-      <button class="language-button" (click)="changeLanguage('NO')" [class.selected]="(currentLang$ | async) === 'NO'">
-        <img src="assets/Norway.svg" alt="Norway flag" />
-        NO
-      </button>
-    </div>
-    <div class="play-container">
-      <div class="text-container">
-        <div class="avatar"><img class="avatar-image" src="assets/logo/io_logoanimasjon.gif" alt="avatar" /></div>
-        <div class="info-text">
-          <span>
-            {{ 'WELCOME_MESSAGE' | translate }}<span class="avatar-name"> IO</span>. <br />
-            {{ 'HELP_ME_LEARN' | translate }}
-          </span>
 
-          <div class="button-container">
-            <a routerLink="/playgame/singleplayer" routerLinkActive="active">
-              <button mat-raised-button class="play-game-button">
-                <div class="button-text">
-                  <mat-icon class="button-icon" aria-label="player one icon">person</mat-icon
-                  >{{ 'PLAYER_MODE_SINGLE' | translate }}
-                </div>
-              </button>
-            </a>
-            <a routerLink="/playgame/multiplayer" routerLinkActive="active">
-              <button mat-raised-button class="play-game-button">
-                <div class="button-text">
-                  <mat-icon class="button-icon" aria-label="player two icon">group</mat-icon
-                  >{{ 'PLAYER_MODE_MULTI' | translate }}
-                </div>
-              </button>
-            </a>
-          </div>
-        </div>
+    <header class="header">
+      <button class="logo" (click)="goToAdmin()">
+        <img src="assets/logo/IO-logo-inverted_transparent-bg.png" alt="logo" aria-label="Gå til admin side" />
+      </button>
+      <div class="language-button-container">
+        <button class="language-button" (click)="changeLanguage('EN')" [class.selected]="(currentLang$ | async) === 'EN'">
+          <img src="assets/UK.svg" alt="UK flag" />
+          ENG
+        </button>
+        <button class="language-button" (click)="changeLanguage('NO')" [class.selected]="(currentLang$ | async) === 'NO'">
+          <img src="assets/Norway.svg" alt="Norway flag" />
+          NO
+        </button>
       </div>
+    </header>
+    
+    <div class="main-content">
+      <div class="I-figure" [@moveFigure]="stateFigureI">
+        <img src="assets/I-figure.svg" height="180px" />
+      </div>
+      <div class="info-text">
+        <div class="temp-bubble right" [@showBubble]="stateFirstBubbleO">{{ 'INTRO_MESSAGE' | translate }}<span class="avatar-name"> O</span>.</div>
+        <div class="temp-bubble left" [@showBubble]="stateFirstBubbleI">{{ 'INTRO_MESSAGE_2' | translate }}<span class="avatar-name"> I</span></div>
+        <div class="temp-bubble right" [@showBubble]="stateSecondBubbleO "><span class="avatar-name"> I</span>{{ 'INTRO_EXPLANATION' | translate }} <br /> {{ 'INTRO_EXPLANATION_2' | translate }} <br /></div>
+        <div class="temp-bubble left" [@showBubble]="stateSecondBubbleI"> {{ 'INTRO_CALL_TO_ACTION' | translate }}<span class="avatar-name"> O</span>{{ 'INTRO_CALL_TO_ACTION_2' | translate }} <br /></div>
+
+      </div>
+      <div class="O-figure" [@moveFigure]="stateFigureO">
+        <img src="assets/O-figure.svg" height="180px" />
+      </div>
+    </div>
+    <div class="button-container" [@showBubble]="stateButton">
+      <a routerLink="/playgame/singleplayer" routerLinkActive="active">
+        <button mat-raised-button class="play-game-button">
+          <div class="button-text">
+            <mat-icon class="button-icon" aria-label="player one icon">person</mat-icon>{{ 'PLAYER_MODE_SINGLE' | translate }}
+          </div>
+        </button>
+      </a>
+      <a routerLink="/playgame/multiplayer" routerLinkActive="active">
+        <button mat-raised-button class="play-game-button">
+          <div class="button-text">
+            <mat-icon class="button-icon" aria-label="player two icon">group</mat-icon>{{ 'PLAYER_MODE_MULTI' | translate }}
+          </div>
+        </button>
+      </a>
     </div>
   </div>
 </div>
