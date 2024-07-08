@@ -22,6 +22,11 @@
   src: url('./assets/fonts/Aeonik/Aeonik-Black.otf') format('opentype');
 }
 
+@font-face {
+  font-family: ICTHofmannRegular;
+  src: url('./assets/fonts/ICTHofmann/ICTHofmann-Regular.otf');
+}
+
 body {
   font-family: 'Barlow Condensed', sans-serif;
   -webkit-touch-callout: none; /* iOS Safari */
@@ -44,4 +49,8 @@ button,
 .mat-progress-spinner circle,
 .mat-spinner circle {
   stroke: $text_secondary_color;
+}
+
+.avatar-name {
+  font-family: ICTHofmannRegular;
 }
