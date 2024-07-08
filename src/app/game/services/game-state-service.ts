@@ -6,6 +6,7 @@ import { GameConfigService } from './game-config.service';
 enum GAMEMODE {
   singleplayer = 'SINGLEPLAYER',
   multiplayer = 'MULTIPLAYER',
+  notSet = 'NOTSET',
 }
 
 @Injectable({
@@ -13,18 +14,25 @@ enum GAMEMODE {
 })
 export class GameStateService {
   private _currentRound = new BehaviorSubject<number>(0);
-  private _gameMode = new BehaviorSubject<GAMEMODE>(GAMEMODE.multiplayer);
+  private _gameMode = new BehaviorSubject<GAMEMODE>(GAMEMODE.notSet);
   private readonly _currentPage = new BehaviorSubject<GAMESTATE>(GAMESTATE.lobby);
   private _isGameOver = new BehaviorSubject<boolean>(false);
-
-  private _currentRound$ = this._currentRound.asObservable();
-  private _gameMode$ = this._gameMode.asObservable();
-  private _isGameOver$ = this._isGameOver.asObservable();
 
   readonly currentPage$ = this._currentPage.asObservable();
 
   constructor(private gameConfigService: GameConfigService) {
     const pageBeforeRefresh = localStorage.getItem('currentPage') as GAMESTATE;
+    const wasRefreshedMidGame =
+      pageBeforeRefresh === GAMESTATE.intermediateResult ||
+      pageBeforeRefresh === GAMESTATE.drawingBoard ||
+      pageBeforeRefresh === GAMESTATE.showResult;
+
+    if (wasRefreshedMidGame) {
+      // all game progess will be lost - not saved in local store
+      this.goToPage(GAMESTATE.showWord);
+      return;
+    }
+
     if (pageBeforeRefresh) {
       this.goToPage(pageBeforeRefresh);
     }
@@ -43,7 +51,7 @@ export class GameStateService {
   clearState() {
     this._currentRound.next(0);
     this._isGameOver.next(false);
-    this._gameMode.next(GAMEMODE.multiplayer);
+    this._gameMode.next(GAMEMODE.notSet);
     this.goToPage(GAMESTATE.lobby);
   }
 
@@ -74,7 +82,6 @@ export class GameStateService {
     this.savePageToLocalStorage(page);
   }
 
-  // look further into this logic later
   isGameOver(): boolean {
     const numberOfRounds = this.gameConfigService.getConfig.rounds;
     return this._currentRound.value === numberOfRounds;
