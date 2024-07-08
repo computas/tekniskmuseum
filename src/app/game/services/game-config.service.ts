@@ -2,6 +2,21 @@ import { GameLevelConfig, ImageScoreConfig } from '@/app/shared/models/interface
 import { Injectable } from '@angular/core';
 import { BehaviorSubject } from 'rxjs';
 
+export interface GameLevelConfig {
+  difficultyId: number;
+  rounds: number;
+  secondsPerRound: number;
+  timeToStartClassify: number;
+  defaultTimeBetweenClassify: number;
+  minimumTimeBetweenClassify: number;
+  minimumDrawnThreshold: number;
+  pixelsPerClassify: number;
+}
+export interface ImageScoreConfig {
+  maxScore: number;
+  scoreDecrement: number;
+}
+
 @Injectable({
   providedIn: 'root',
 })
@@ -11,6 +26,10 @@ export class GameConfigService {
     rounds: 3,
     secondsPerRound: 30,
     timeToStartClassify: 23,
+    defaultTimeBetweenClassify: 5,
+    minimumTimeBetweenClassify: 3,
+    minimumDrawnThreshold: 3000,
+    pixelsPerClassify: 2000,
   }); // Easy mode as default
   difficultyLevel$ = this._difficultyLevel.asObservable();
 
@@ -22,6 +41,10 @@ export class GameConfigService {
           rounds: 3,
           secondsPerRound: 30,
           timeToStartClassify: 25,
+          defaultTimeBetweenClassify: 5,
+          minimumTimeBetweenClassify: 3,
+          minimumDrawnThreshold: 3000,
+          pixelsPerClassify: 2000,
         };
         break;
       case 'medium':
@@ -29,7 +52,11 @@ export class GameConfigService {
           difficultyId: 2,
           rounds: 3,
           secondsPerRound: 20,
-          timeToStartClassify: 15,
+          timeToStartClassify: 16,
+          defaultTimeBetweenClassify: 4,
+          minimumTimeBetweenClassify: 2,
+          minimumDrawnThreshold: 3500,
+          pixelsPerClassify: 2000,
         };
         break;
       case 'hard':
@@ -37,7 +64,11 @@ export class GameConfigService {
           difficultyId: 3,
           rounds: 3,
           secondsPerRound: 20,
-          timeToStartClassify: 15,
+          timeToStartClassify: 16,
+          defaultTimeBetweenClassify: 4,
+          minimumTimeBetweenClassify: 2,
+          minimumDrawnThreshold: 3500,
+          pixelsPerClassify: 2000,
         };
         break;
     }
