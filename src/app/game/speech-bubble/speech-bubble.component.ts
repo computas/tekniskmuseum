@@ -1,6 +1,6 @@
 import { CustomColorsIO } from '@/app/shared/customColors';
 import { ArrowAlignment, PointerSide } from '@/app/shared/models/interfaces';
-import { Component, Input, OnInit, SimpleChanges } from '@angular/core';
+import { Component, Input } from '@angular/core';
 
 @Component({
   selector: 'app-speech-bubble',
@@ -8,34 +8,36 @@ import { Component, Input, OnInit, SimpleChanges } from '@angular/core';
   styleUrls: ['./speech-bubble.component.scss'],
   standalone: true,
 })
-export class SpeechBubbleComponent implements OnInit {
+export class SpeechBubbleComponent {
   @Input() textColor: CustomColorsIO = CustomColorsIO.black; // Default color
   @Input() bubbleColor: CustomColorsIO = CustomColorsIO.pastelBlue; // Default color
   @Input() titleText: string | undefined = '';
-  @Input() bodyText: string = 'Hello world!';
+  @Input() bodyText = 'Hello world!';
 
   private _pointerSide: PointerSide = PointerSide.Top;
-  private _arrowAlignment: ArrowAlignment = ArrowAlignment.Left;
-  private _isFlipped: boolean = false;
 
   @Input() set pointerSide(value: PointerSide) {
     this._pointerSide = value;
-  }
-
-  @Input() set arrowAlignment(value: ArrowAlignment) {
-    this._arrowAlignment = value;
-  }
-
-  @Input() set isFlipped(value: boolean) {
-    this._isFlipped = value;
   }
 
   get pointerSide() {
     return this._pointerSide;
   }
 
+  private _arrowAlignment: ArrowAlignment = ArrowAlignment.Left;
+
+  @Input() set arrowAlignment(value: ArrowAlignment) {
+    this._arrowAlignment = value;
+  }
+
   get arrowAlignment() {
     return this._arrowAlignment;
+  }
+
+  private _isFlipped = false;
+
+  @Input() set isFlipped(value: boolean) {
+    this._isFlipped = value;
   }
 
   get isFlipped() {
@@ -46,8 +48,6 @@ export class SpeechBubbleComponent implements OnInit {
     this.validateConfiguration();
     return ['speech-bubble', this._pointerSide, this._arrowAlignment, this._isFlipped ? 'flip' : ''];
   }
-
-  ngOnInit(): void {}
 
   validateConfiguration() {
     const flipNotAllowedCombinations: { side: PointerSide; alignment: ArrowAlignment }[] = [
