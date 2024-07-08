@@ -56,3 +56,14 @@ export interface Certainty {
   label: string;
   certainty: number;
 }
+
+export interface GameLevelConfig {
+  difficultyId: Difficulty;
+  rounds: number;
+  secondsPerRound: number;
+  timeToStartClassify: number;
+}
+export interface ImageScoreConfig {
+  maxScore: number;
+  scoreDecrement: number;
+}
