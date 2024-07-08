@@ -67,6 +67,7 @@ export class GameResultComponent implements OnInit, OnDestroy {
             this.newHighscore = true;
           }
         },
+        error: (error) => console.error("Error fetching today's highscore", error),
       });
     } else {
       this.score = this.drawingService.totalScore;
