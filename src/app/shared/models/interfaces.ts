@@ -58,7 +58,7 @@ export interface Certainty {
 }
 
 export interface GameLevelConfig {
-  difficultyId: number;
+  difficultyId: Difficulty;
   rounds: number;
   secondsPerRound: number;
   timeToStartClassify: number;
