@@ -9,6 +9,7 @@ import { Component, Input, OnInit, SimpleChanges } from '@angular/core';
   standalone: true,
 })
 export class SpeechBubbleComponent implements OnInit {
+    @Input() textColor: CustomColorsIO = CustomColorsIO.black; // Default color
     @Input() bubbleColor: CustomColorsIO = CustomColorsIO.pastelBlue; // Default color
     @Input() titleText: string | undefined = ''; 
     @Input() bodyText: string  = 'Hello world!';

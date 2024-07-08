@@ -1,7 +1,7 @@
 @import '../../../variables.scss';
 
 * {
-  color: black;
+  color: --bbTextColor;
   text-align: center;
 }
 
@@ -20,11 +20,13 @@
 
 .speech-bubble {
   --bbColor: white;
+  --bbTextColor: black;
   --bbArrowSize: 2.0rem;
   --bbBorderRadius: 1.0rem;
   --bbPadding: 2.0rem;
 
   background: var(--bbColor);
+  color: var(--bbTextColor);
   border-radius: var(--bbBorderRadius);
   padding: var(--bbPadding);
   position: relative;
