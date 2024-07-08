@@ -4,13 +4,13 @@ import { ImageService } from '../services/image.service';
 import { take } from 'rxjs/operators';
 import { DrawingService } from '../services/drawing.service';
 import { MultiplayerService } from '../services/multiplayer.service';
-import { Certainty, GAMESTATE, Result } from '../../shared/models/interfaces';
+import { Certainty, GAMESTATE, GameLevelConfig, Result } from '../../shared/models/interfaces';
 import { PredictionData } from '../../shared/models/backend-interfaces';
 import { SoundService } from '../services/sound.service';
 import { UpperCasePipe } from '@angular/common';
 import { MatIconButton } from '@angular/material/button';
 import { MatIcon } from '@angular/material/icon';
-import { GameLevelConfig, GameConfigService } from '../services/game-config.service';
+import { GameConfigService } from '../services/game-config.service';
 import { TranslationService } from '@/app/core/translation.service';
 import { TranslatePipe } from '@/app/core/translation.pipe';
 
