@@ -65,7 +65,7 @@ export class GamePickDifficultyComponent implements OnInit {
       //TODO: Add difficulty in multiplayerService, this is not implemented
       this.multiplayerService.getLabel(true);
     }
-    this.gameStateService.goToPage(GAMESTATE.showWord);
+    this.gameStateService.startGame();
   }
 
   goToLanding() {

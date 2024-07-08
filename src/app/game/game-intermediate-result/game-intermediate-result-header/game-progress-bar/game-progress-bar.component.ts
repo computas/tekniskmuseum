@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { DrawingService } from '../../../services/drawing.service';
 import { TranslatePipe } from '@/app/core/translation.pipe';
+import { GameStateService } from '@/app/game/services/game-state-service';
 
 @Component({
   selector: 'app-game-progress-bar',
@@ -12,15 +13,14 @@ import { TranslatePipe } from '@/app/core/translation.pipe';
 export class GameProgressBarComponent implements OnInit {
   roundNumberProgress = '';
 
-  constructor(private drawingService: DrawingService) {}
+  constructor(private drawingService: DrawingService, private gameStateService: GameStateService) {}
 
   ngOnInit(): void {
     this.roundNumberProgress = this.getRoundProgressText();
   }
 
   getRoundProgressText(): string {
-    // -1, because guessUsed starts at 1 and gets incremented before round summary
-    const currentRoundNumber = this.drawingService.guessUsed - 1;
+    const currentRoundNumber = this.gameStateService.getCurrentRound();
     const numberOfRounds = this.drawingService.config.rounds;
     return `${currentRoundNumber} / ${numberOfRounds}`;
   }

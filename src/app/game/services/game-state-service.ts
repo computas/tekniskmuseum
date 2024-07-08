@@ -29,7 +29,8 @@ export class GameStateService {
 
     if (wasRefreshedMidGame) {
       // all game progess will be lost - not saved in local store
-      this.goToPage(GAMESTATE.showWord);
+      this.clearState();
+      this.startGame();
       return;
     }
 
