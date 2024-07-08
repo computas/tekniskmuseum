@@ -105,7 +105,6 @@ export class GameWordToDrawComponent implements OnInit, OnDestroy {
   }
 
   toDrawingBoard() {
-    // game should start here
     this.gameStateService.goToPage(GAMESTATE.drawingBoard);
   }
 

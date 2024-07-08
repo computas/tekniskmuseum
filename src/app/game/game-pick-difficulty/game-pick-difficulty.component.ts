@@ -36,7 +36,7 @@ export class GamePickDifficultyComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
-    this.gameStateService.goToPage(GAMESTATE.difficultyPicker);
+    this.gameStateService.savePageToLocalStorage(GAMESTATE.difficultyPicker);
     if (this.router.url === `/${routes.SINGLEPLAYER}`) {
       this.isSinglePlayer = true;
       this.gameConfigService.difficultyLevel$.subscribe((config: GameLevelConfig) => {
