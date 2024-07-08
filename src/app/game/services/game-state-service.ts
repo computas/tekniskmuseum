@@ -21,6 +21,7 @@ export class GameStateService {
   readonly currentPage$ = this._currentPage.asObservable();
 
   constructor(private gameConfigService: GameConfigService) {
+    const gameModeBeforeRefresh = localStorage.getItem('gameMode') as GAMEMODE;
     const pageBeforeRefresh = localStorage.getItem('currentPage') as GAMESTATE;
     const wasRefreshedMidGame =
       pageBeforeRefresh === GAMESTATE.intermediateResult ||
@@ -32,6 +33,9 @@ export class GameStateService {
       this.clearState();
       this.startGame();
       return;
+    }
+    if (gameModeBeforeRefresh) {
+      this._gameMode.next(gameModeBeforeRefresh);
     }
 
     if (pageBeforeRefresh) {
@@ -67,15 +71,21 @@ export class GameStateService {
 
   setSingleplayer() {
     this._gameMode.next(GAMEMODE.singleplayer);
+    this.saveGameModeToLocalStorage(GAMEMODE.singleplayer);
   }
 
   setMultiplayer() {
     this._gameMode.next(GAMEMODE.multiplayer);
+    this.saveGameModeToLocalStorage(GAMEMODE.multiplayer);
   }
 
   savePageToLocalStorage(newState: GAMESTATE) {
     // TODO should this be logged to console?
     localStorage.setItem('currentPage', newState); // save in case of page refresh
+  }
+
+  saveGameModeToLocalStorage(gameMode: GAMEMODE) {
+    localStorage.setItem('gameMode', gameMode);
   }
 
   goToPage(page: GAMESTATE) {
@@ -86,6 +96,10 @@ export class GameStateService {
   isGameOver(): boolean {
     const numberOfRounds = this.gameConfigService.getConfig.rounds;
     return this._currentRound.value === numberOfRounds;
+  }
+
+  isMultiplayer(): boolean {
+    return this._gameMode.value === GAMEMODE.multiplayer;
   }
 
   getCurrentRound(): number {

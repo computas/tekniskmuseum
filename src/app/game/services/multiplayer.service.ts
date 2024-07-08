@@ -14,7 +14,6 @@ import { TranslationService } from '@/app/core/translation.service';
 export class MultiplayerService {
   public loading = true;
   public label = '';
-  public isMultiplayer = false;
   roundIsOver = false;
 
   private initialState: GameState = {
@@ -42,7 +41,6 @@ export class MultiplayerService {
 
   resetStateInfo() {
     this.stateInfo = this.initialState;
-    this.isMultiplayer = false;
   }
 
   joinGame(difficulty_id: number) {
@@ -112,7 +110,6 @@ export class MultiplayerService {
 
   clearState() {
     this.stateInfo = this.initialState;
-    this.isMultiplayer = false;
     this.webSocketService.disconnect();
   }
 

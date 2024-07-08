@@ -9,6 +9,7 @@ import { TitleCasePipe } from '@angular/common';
 import { TranslationService } from '@/app/core/translation.service';
 import { TranslatePipe } from '@/app/core/translation.pipe';
 import { Subscription } from 'rxjs';
+import { GameStateService } from '../services/game-state-service';
 
 @Component({
   selector: 'app-game-result',
@@ -30,6 +31,7 @@ export class GameResultComponent implements OnInit, OnDestroy {
   getHighscoreSubscription: Subscription | null = null;
   postHighscoreSubscription: Subscription | null = null;
   constructor(
+    private gameStateService: GameStateService,
     private drawingService: DrawingService,
     private multiplayerService: MultiplayerService,
     private router: Router,
@@ -37,7 +39,7 @@ export class GameResultComponent implements OnInit, OnDestroy {
   ) {}
 
   ngOnInit(): void {
-    if (this.multiplayerService.isMultiplayer) {
+    if (this.gameStateService.isMultiplayer()) {
       this.ismultiplayer = true;
       this.multiplayerService.opponentScore.subscribe((val) => {
         if (val) {

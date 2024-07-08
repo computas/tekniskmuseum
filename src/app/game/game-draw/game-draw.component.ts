@@ -99,7 +99,7 @@ export class GameDrawComponent implements OnInit, OnDestroy {
     this.canvas().nativeElement.height = document.body.clientHeight - 100;
     this.resetMinMaxMouseValues();
     this.drawingService.guessDone = false;
-    if (this.multiplayerService.isMultiplayer) {
+    if (this.gameStateService.isMultiplayer()) {
       this.setUpMultiplayer();
     }
     this.startGame();
@@ -116,8 +116,6 @@ export class GameDrawComponent implements OnInit, OnDestroy {
 
   predictionListener() {
     return this.multiplayerService.predictionListener().subscribe((prediction: PredictionData) => {
-      this.gameStateService.goToPage(GAMESTATE.intermediateResult);
-
       this.prediction = prediction;
       const sortedCertaintyArr = this.sortOnCertainty(prediction);
       this.updateAiGuess(sortedCertaintyArr);
@@ -125,16 +123,17 @@ export class GameDrawComponent implements OnInit, OnDestroy {
         this.soundService.playResultSound(this.prediction.hasWon);
         this.updateResult(true);
         this.hasAddedResult = true;
+        this.gameStateService.goToPage(GAMESTATE.intermediateResult);
       }
     });
   }
 
   roundOverListener() {
     return this.multiplayerService.roundOverListener().subscribe(() => {
-      this.gameStateService.goToPage(GAMESTATE.intermediateResult);
       if (!this.hasAddedResult) {
         this.updateResult(this.prediction ? this.prediction.hasWon : false);
         this.hasAddedResult = true;
+        this.gameStateService.goToPage(GAMESTATE.intermediateResult);
       }
     });
   }
@@ -208,7 +207,7 @@ export class GameDrawComponent implements OnInit, OnDestroy {
     this.subscriptions.add(
       this.createDrawingTimer().subscribe({
         next: () => {
-          if (this.multiplayerService.isMultiplayer) {
+          if (this.gameStateService.isMultiplayer()) {
             this.classify(true);
           } else {
             if (!this.isBlankImage || (this.isBlankImage && this.timeLeft === 0)) {
@@ -220,11 +219,11 @@ export class GameDrawComponent implements OnInit, OnDestroy {
           this.clockColor = this.clockColor === 'initial' ? 'final' : 'initial';
           this.soundService.sound.stop();
           this.timeOut = true;
-          if (this.multiplayerService.isMultiplayer && !this.hasAddedResult) {
+          if (this.gameStateService.isMultiplayer() && !this.hasAddedResult) {
             this.updateResult(false);
             this.hasAddedResult = true;
           }
-          if (!this.multiplayerService.isMultiplayer && !this.drawingService.hasAddedSingleplayerResult) {
+          if (!this.gameStateService.isMultiplayer() && !this.drawingService.hasAddedSingleplayerResult) {
             let res;
             let hasWon = false;
             if (!this.drawingService.pred) {
@@ -244,7 +243,7 @@ export class GameDrawComponent implements OnInit, OnDestroy {
     if (this.drawingService.label) {
       this.guessWord = this.drawingService.label;
     }
-    if (this.multiplayerService.isMultiplayer) {
+    if (this.gameStateService.isMultiplayer()) {
       this.guessWord = this.multiplayerService.label;
     }
   }
@@ -278,7 +277,7 @@ export class GameDrawComponent implements OnInit, OnDestroy {
             }
           }
           if (this.timeLeft <= 0) {
-            if (this.multiplayerService.isMultiplayer) {
+            if (this.gameStateService.isMultiplayer()) {
               this.soundService.playResultSound(false);
             }
             observer.complete();

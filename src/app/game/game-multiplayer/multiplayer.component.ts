@@ -4,7 +4,6 @@ import { Router } from '@angular/router';
 
 import { MultiplayerService } from '../services/multiplayer.service';
 import { WebSocketService } from '../services/web-socket.service';
-import { routes } from '../../shared/models/routes';
 import { Subscription } from 'rxjs';
 import { LobbyComponent } from './lobby/lobby.component';
 import { GameResultComponent } from '../game-result/game-result.component';
@@ -13,6 +12,7 @@ import { GameDrawComponent } from '../game-draw/game-draw.component';
 import { GameWordToDrawComponent } from '../game-word-to-draw/game-word-to-draw.component';
 import { GameInfoComponent } from '../game-info/game-info.component';
 import { GAMESTATE } from '@/app/shared/models/interfaces';
+import { GameStateService } from '../services/game-state-service';
 
 @Component({
   selector: 'app-multiplayer',
@@ -57,6 +57,7 @@ export class MultiplayerComponent implements OnInit, OnDestroy {
   gameState: string | undefined;
   GAMESTATE = GAMESTATE;
   constructor(
+    private gameStateService: GameStateService,
     private multiplayerService: MultiplayerService,
     private webSocketService: WebSocketService,
     private router: Router
@@ -66,9 +67,6 @@ export class MultiplayerComponent implements OnInit, OnDestroy {
   subs = new Subscription();
 
   ngOnInit(): void {
-    if (this.router.url === `/${routes.MULTIPLAYER}`) {
-      this.multiplayerService.isMultiplayer = true;
-    }
     this.webSocketService.startSockets();
     this.gameState = this.multiplayerService.stateInfo.gameState;
     this.subs.add(

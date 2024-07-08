@@ -52,7 +52,7 @@ export class GameIntermediateResultComponent implements OnInit, OnDestroy {
       this.gameOver = this.drawingService.gameOver;
       this.waitingForPlayer = false;
     }
-    if (this.multiplayerService.isMultiplayer) {
+    if (this.gameStateService.isMultiplayer()) {
       this.isMultiplayer = true;
       this.multiplayerService.stateInfo$.subscribe((res) => {
         if (res.ready) {
@@ -98,7 +98,7 @@ export class GameIntermediateResultComponent implements OnInit, OnDestroy {
   }
 
   newDrawing() {
-    if (this.multiplayerService.isMultiplayer && this.multiplayerService.stateInfo.ready) {
+    if (this.gameStateService.isMultiplayer() && this.multiplayerService.stateInfo.ready) {
       this.multiplayerService.stateInfo = {
         ...this.multiplayerService.stateInfo,
         gameState: GAMESTATE.waitingForWord,
@@ -107,7 +107,7 @@ export class GameIntermediateResultComponent implements OnInit, OnDestroy {
   }
 
   getSummary() {
-    if (this.multiplayerService.isMultiplayer && this.gameOver) {
+    if (this.gameStateService.isMultiplayer() && this.gameOver) {
       this.multiplayerService.stateInfo = {
         ...this.multiplayerService.stateInfo,
         gameState: GAMESTATE.showResult,

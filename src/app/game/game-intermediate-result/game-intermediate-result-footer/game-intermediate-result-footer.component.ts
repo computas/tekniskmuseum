@@ -12,8 +12,6 @@ import { GameStateService } from '../../services/game-state-service';
   styleUrl: './game-intermediate-result-footer.component.scss',
 })
 export class GameIntermediateResultFooterComponent implements OnInit {
-  @Input() isGameOver = false;
-  @Input() isMultiplayer = false;
   buttonTextKey = '';
   nextPageIdentifier: GAMESTATE | undefined;
   waitingForPlayerState = 'WAITING_FOR_PLAYER';
@@ -23,7 +21,7 @@ export class GameIntermediateResultFooterComponent implements OnInit {
 
   ngOnInit(): void {
     this.buttonTextKey = this.getButtonTextKey();
-    if (this.multiplayerService.isMultiplayer) {
+    if (this.gameStateService.isMultiplayer()) {
       this.multiplayerService.stateInfo$.subscribe((res) => {
         if (res.ready) {
           this.isWaitingForPlayer = false;
@@ -36,6 +34,11 @@ export class GameIntermediateResultFooterComponent implements OnInit {
   nextPage(): void {
     if (!this.nextPageIdentifier) return;
 
+    if (this.gameStateService.isMultiplayer()) {
+      this.multiplayerService.changestate(GAMESTATE.showWord);
+      return;
+    }
+
     if (this.gameStateService.isGameOver()) {
       this.gameStateService.goToPage(GAMESTATE.showResult);
       return;
@@ -45,14 +48,14 @@ export class GameIntermediateResultFooterComponent implements OnInit {
   }
 
   getButtonTextKey(): string {
-    if (this.isMultiplayer && this.isWaitingForPlayer) {
+    if (this.gameStateService.isMultiplayer() && this.isWaitingForPlayer) {
       return this.waitingForPlayerState;
     }
-    if (this.isGameOver) {
+    if (this.gameStateService.isGameOver()) {
       this.nextPageIdentifier = GAMESTATE.showResult;
       return 'SUMMARY_BUTTON';
     }
-    if (!this.isGameOver) {
+    if (!this.gameStateService.isGameOver()) {
       this.nextPageIdentifier = GAMESTATE.showWord;
       return 'NEXT_WORD_BUTTON';
     }
