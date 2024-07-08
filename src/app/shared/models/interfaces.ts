@@ -53,3 +53,22 @@ export interface Certainty {
   label: string;
   certainty: number;
 }
+
+
+
+
+
+export enum PointerSide {
+  Top = 'ptop',
+  Right = 'pright',
+  Bottom = 'pbottom',
+  Left = 'pleft',
+}
+
+export enum ArrowAlignment {
+  Center = 'acenter',
+  Left = 'aleft',
+  Right = 'aright',
+  Top = 'atop',
+  Bottom = 'abottom',
+}

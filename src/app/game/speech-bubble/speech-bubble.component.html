@@ -1,10 +1,8 @@
-<!--<ng-container class="speech-bubble-wrapper" aria-label="Speech bubble"></ng-container>-->
-
 <div [class]="computedClasses()" [style.--bbColor]="bubbleColor">
     <ng-content select="[slot='title']">
-    <h1 class="title">{{ titleText }}</h1>
+        <h1 class="title">{{ titleText }}</h1>
     </ng-content>
     <ng-content select="[slot='body']">
-    <p class="body">{{ bodyText }}</p>
+        <p class="body">{{ bodyText }}</p>
     </ng-content>
 </div>
