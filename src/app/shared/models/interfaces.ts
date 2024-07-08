@@ -55,10 +55,6 @@ export interface Certainty {
   certainty: number;
 }
 
-
-
-
-
 export enum PointerSide {
   Top = 'ptop',
   Right = 'pright',

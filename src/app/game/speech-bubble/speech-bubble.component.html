@@ -1,8 +1,8 @@
 <div [class]="computedClasses()" [style.--bbColor]="bubbleColor" [style.--bbTextColor]="textColor">
-    <ng-content select="[slot='title']">
-        <h1 class="title">{{ titleText }}</h1>
-    </ng-content>
-    <ng-content select="[slot='body']">
-        <p class="body">{{ bodyText }}</p>
-    </ng-content>
+  <ng-content select="[slot='title']">
+    <h1 class="title">{{ titleText }}</h1>
+  </ng-content>
+  <ng-content select="[slot='body']">
+    <p class="body">{{ bodyText }}</p>
+  </ng-content>
 </div>

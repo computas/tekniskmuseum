@@ -14,16 +14,17 @@
   font-size: 48px;
 }
 
-.speech-bubble, .speech-bubble * {
+.speech-bubble,
+.speech-bubble * {
   box-sizing: border-box;
 }
 
 .speech-bubble {
   --bbColor: white;
   --bbTextColor: black;
-  --bbArrowSize: 2.0rem;
-  --bbBorderRadius: 1.0rem;
-  --bbPadding: 2.0rem;
+  --bbArrowSize: 2rem;
+  --bbBorderRadius: 1rem;
+  --bbPadding: 2rem;
 
   background: var(--bbColor);
   color: var(--bbTextColor);

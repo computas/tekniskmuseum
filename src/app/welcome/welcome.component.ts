@@ -10,9 +10,6 @@ import { Observable, Subject, takeUntil } from 'rxjs';
 import { CommonModule } from '@angular/common';
 import { SupportedLanguages } from '../shared/models/interfaces';
 import { SpeechBubbleComponent } from '../game/speech-bubble/speech-bubble.component';
-import { CustomColorsIO } from "@/app/shared/customColors";
-import { PointerSide } from '../shared/models/interfaces';
-import { ArrowAlignment } from '../shared/models/interfaces';
 
 @Component({
   selector: 'app-welcome',
