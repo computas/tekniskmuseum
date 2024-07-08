@@ -58,10 +58,14 @@ export interface Certainty {
 }
 
 export interface GameLevelConfig {
-  difficultyId: Difficulty;
+  difficultyId: number;
   rounds: number;
   secondsPerRound: number;
   timeToStartClassify: number;
+  defaultTimeBetweenClassify: number;
+  minimumTimeBetweenClassify: number;
+  minimumDrawnThreshold: number;
+  pixelsPerClassify: number;
 }
 export interface ImageScoreConfig {
   maxScore: number;

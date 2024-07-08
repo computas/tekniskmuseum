@@ -2,21 +2,6 @@ import { GameLevelConfig, ImageScoreConfig } from '@/app/shared/models/interface
 import { Injectable } from '@angular/core';
 import { BehaviorSubject } from 'rxjs';
 
-export interface GameLevelConfig {
-  difficultyId: number;
-  rounds: number;
-  secondsPerRound: number;
-  timeToStartClassify: number;
-  defaultTimeBetweenClassify: number;
-  minimumTimeBetweenClassify: number;
-  minimumDrawnThreshold: number;
-  pixelsPerClassify: number;
-}
-export interface ImageScoreConfig {
-  maxScore: number;
-  scoreDecrement: number;
-}
-
 @Injectable({
   providedIn: 'root',
 })
