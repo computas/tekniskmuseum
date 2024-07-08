@@ -49,8 +49,14 @@ export class GameDrawComponent implements OnInit, OnDestroy {
   score = this.scoreValues.maxScore;
   scoreDecrement = this.scoreValues.scoreDecrement;
 
+  drawnPixels = 0;
+  drawnPixelsAtLastGuess = 0;
+  drawnPixelsSinceLastGuess = 1;
+  timeSinceLastGuess = 0;
+
   clockColor = 'initial';
   private readonly resultImageSize = 1024;
+
   private readonly LINE_WIDTH = 6;
 
   private readonly _timeOut = new BehaviorSubject<boolean>(false);
@@ -251,7 +257,12 @@ export class GameDrawComponent implements OnInit, OnDestroy {
             this.score = this.score - this.scoreDecrement;
             if (tics % 10 === 9) {
               this.timeLeft--;
-              if (this.timeLeft < this.config.timeToStartClassify + 1) {
+              this.timeSinceLastGuess++;
+              this.countDrawnPixels();
+              this.drawnPixelsSinceLastGuess = this.drawnPixels - this.drawnPixelsAtLastGuess;
+
+              if (this.checkClassificationConditions() || this.timeLeft === 0) {
+                this.timeSinceLastGuess = 0;
                 observer.next('classify');
               }
             }
@@ -328,6 +339,7 @@ export class GameDrawComponent implements OnInit, OnDestroy {
 
   classify(isMultiplayer = false) {
     //TODO: rename?
+    this.drawnPixelsAtLastGuess = this.drawnPixels;
     const b64Image = this.canvas().nativeElement.toDataURL('image/png');
     const croppedCoordinates: number[] = this.imageService.crop(
       this.minX,
@@ -350,6 +362,22 @@ export class GameDrawComponent implements OnInit, OnDestroy {
         }
       },
     });
+  }
+
+  checkClassificationConditions() {
+    const hasPassedTimeToStartClassify = this.timeLeft <= this.config.timeToStartClassify;
+    const hasPassedMinimumTimeBetweenClassify = this.timeSinceLastGuess >= this.config.minimumTimeBetweenClassify;
+    const hasPassedMinimumDrawnThreshold = this.drawnPixels > this.config.minimumDrawnThreshold;
+    const hasDrawnSinceLastClassify = this.drawnPixelsSinceLastGuess > 0;
+    const hasPassedPixelsPerClassification = this.drawnPixelsSinceLastGuess >= this.config.pixelsPerClassify;
+    const hasPassedDefaultTimeBetweenClassify = this.timeSinceLastGuess >= this.config.defaultTimeBetweenClassify;
+    return (
+      hasPassedTimeToStartClassify &&
+      hasPassedMinimumTimeBetweenClassify &&
+      hasPassedMinimumDrawnThreshold &&
+      hasDrawnSinceLastClassify &&
+      ((hasPassedPixelsPerClassification && !this.isDrawing) || hasPassedDefaultTimeBetweenClassify)
+    );
   }
 
   createFormData(dataUrl: string): FormData {
@@ -437,11 +465,42 @@ export class GameDrawComponent implements OnInit, OnDestroy {
     }
   }
 
+  countDrawnPixels(): void {
+    if (this.ctx) {
+      const imageData = this.ctx.getImageData(
+        0,
+        0,
+        this.canvas().nativeElement.width,
+        this.canvas().nativeElement.height
+      );
+      let count = 0;
+      for (let i = 0; i < imageData.data.length; i += 4) {
+        // Check if the pixel is black (R=0, G=0, B=0) and fully opaque (A=255)
+        if (
+          imageData.data[i] === 0 &&
+          imageData.data[i + 1] === 0 &&
+          imageData.data[i + 2] === 0 &&
+          imageData.data[i + 3] === 255
+        ) {
+          count++;
+        }
+      }
+      this.drawnPixels = count;
+    }
+  }
+
+  resetPixelCountValues() {
+    this.drawnPixels = 0;
+    this.drawnPixelsAtLastGuess = 0;
+    this.drawnPixelsSinceLastGuess = 0;
+  }
+
   clear() {
     const canvas = this.canvas().nativeElement;
     this.ctx?.clearRect(0, 0, canvas.width, canvas.height);
     this.isBlankImage = true;
     this.resetMinMaxMouseValues();
+    this.resetPixelCountValues();
   }
 
   resetMinMaxMouseValues() {
