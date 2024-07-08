@@ -1,7 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { trigger, style, animate, transition } from '@angular/animations';
 import { GAMESTATE } from '../shared/models/interfaces';
-import { DrawingService } from './services/drawing.service';
 import { GameWordToDrawComponent } from './game-word-to-draw/game-word-to-draw.component';
 import { GameResultComponent } from './game-result/game-result.component';
 import { GameIntermediateResultComponent } from './game-intermediate-result/game-intermediate-result.component';

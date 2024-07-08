@@ -1,4 +1,4 @@
-import { Component, OnInit, OnDestroy, output } from '@angular/core';
+import { Component, OnInit, OnDestroy } from '@angular/core';
 import { GAMESTATE, Result } from '../../shared/models/interfaces';
 import { DrawingService } from '../services/drawing.service';
 import { MultiplayerService } from '../services/multiplayer.service';

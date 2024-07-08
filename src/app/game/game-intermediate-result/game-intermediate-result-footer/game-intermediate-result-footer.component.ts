@@ -1,4 +1,4 @@
-import { Component, Input, OnInit, output } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
 import { TranslatePipe } from '@/app/core/translation.pipe';
 import { MatIcon } from '@angular/material/icon';
 import { GAMESTATE } from '@/app/shared/models/interfaces';

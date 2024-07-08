@@ -1,4 +1,4 @@
-import { Component, Output, EventEmitter, OnInit } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { routes } from '../../shared/models/routes';
 import { MultiplayerService } from '../services/multiplayer.service';

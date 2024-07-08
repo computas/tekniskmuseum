@@ -1,4 +1,4 @@
-import { Component, OnInit, Output, EventEmitter, OnDestroy } from '@angular/core';
+import { Component, OnInit, OnDestroy } from '@angular/core';
 import { interval, Subscription } from 'rxjs';
 import { take, tap } from 'rxjs/operators';
 import { DrawingService } from '../services/drawing.service';
