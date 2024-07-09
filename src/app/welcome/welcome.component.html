@@ -1,84 +1,109 @@
 <div class="container-background">
   <div class="container">
-
     <header class="header">
       <button class="logo" (click)="goToAdmin()">
         <img src="assets/logo/IO-logo-inverted_transparent-bg.png" alt="logo" aria-label="Gå til admin side" />
       </button>
       <div class="language-button-container">
-        <button class="language-button" (click)="changeLanguage('EN')" [class.selected]="(currentLang$ | async) === 'EN'">
+        <button
+          class="language-button"
+          (click)="changeLanguage('EN')"
+          [class.selected]="(currentLang$ | async) === 'EN'"
+        >
           <img src="assets/UK.svg" alt="UK flag" />
           ENG
         </button>
-        <button class="language-button" (click)="changeLanguage('NO')" [class.selected]="(currentLang$ | async) === 'NO'">
+        <button
+          class="language-button"
+          (click)="changeLanguage('NO')"
+          [class.selected]="(currentLang$ | async) === 'NO'"
+        >
           <img src="assets/Norway.svg" alt="Norway flag" />
           NO
         </button>
       </div>
     </header>
-    
+
     <div class="main-content">
-      <div class="I-figure" [@moveFigure]="{value: stateFigureI, params: {y: moveDistanceI}}">
-        <img src="assets/I-figure.svg" height="180px" />
+      <div class="I-figure" [@moveFigure]="{ value: stateFigureI, params: { y: moveDistanceI } }">
+        <img src="assets/I-figure.svg" alt="I-figure" height="180px" />
       </div>
       <div class="info-text">
-        <app-speech-bubble [@showBubble]="stateFirstBubbleO"  class="speech-bubble right"
+        <app-speech-bubble
+          [@showBubble]="stateFirstBubbleO"
+          class="speech-bubble right"
           [pointerSide]="PointerSide.Bottom"
           [arrowAlignment]="ArrowAlignment.Right"
           [isFlipped]="false"
           [textColor]="CustomColorsIO.white"
           [bubbleColor]="CustomColorsIO.indigo"
           [bubbleSize]="'medium'"
-          >
-          <div slot='body-alt' class='speech-bubble-text'>{{ 'INTRO_MESSAGE' | translate }}<span slot='body-alt' class="avatar-name"> O</span></div>
+        >
+          <div slot="body-alt" class="speech-bubble-text">
+            {{ 'INTRO_MESSAGE' | translate }}<span slot="body-alt" class="avatar-name"> O</span>
+          </div>
         </app-speech-bubble>
 
-        <app-speech-bubble [@showBubble]="stateFirstBubbleI" class="speech-bubble left"
+        <app-speech-bubble
+          [@showBubble]="stateFirstBubbleI"
+          class="speech-bubble left"
           [pointerSide]="PointerSide.Bottom"
           [arrowAlignment]="ArrowAlignment.Left"
           [isFlipped]="false"
           [bubbleSize]="'medium'"
-          >
-          <div slot='body-alt' class='speech-bubble-text'>{{ 'INTRO_MESSAGE_2' | translate }}<span class="avatar-name"> I</span></div>
+        >
+          <div slot="body-alt" class="speech-bubble-text">
+            {{ 'INTRO_MESSAGE_2' | translate }}<span class="avatar-name"> I</span>
+          </div>
         </app-speech-bubble>
 
-
-        <app-speech-bubble [@showBubble]="stateSecondBubbleO " class="speech-bubble right"
+        <app-speech-bubble
+          [@showBubble]="stateSecondBubbleO"
+          class="speech-bubble right"
           [pointerSide]="PointerSide.Bottom"
           [arrowAlignment]="ArrowAlignment.Right"
           [isFlipped]="false"
           [textColor]="CustomColorsIO.white"
           [bubbleColor]="CustomColorsIO.indigo"
           [bubbleSize]="'medium'"
-          >
-          <div slot='body-alt' class='speech-bubble-text'> <span class="avatar-name"> I</span>{{ 'INTRO_EXPLANATION' | translate }} <br /> {{ 'INTRO_EXPLANATION_2' | translate }} <br /> </div>
+        >
+          <div slot="body-alt" class="speech-bubble-text">
+            <span class="avatar-name"> I</span>{{ 'INTRO_EXPLANATION' | translate }} <br />
+            {{ 'INTRO_EXPLANATION_2' | translate }} <br />
+          </div>
         </app-speech-bubble>
-        <app-speech-bubble [@showBubble]="stateSecondBubbleI" class="speech-bubble left"
+        <app-speech-bubble
+          [@showBubble]="stateSecondBubbleI"
+          class="speech-bubble left"
           [pointerSide]="PointerSide.Top"
           [arrowAlignment]="ArrowAlignment.Left"
           [isFlipped]="false"
           [bubbleSize]="'medium'"
-          >
-          <div slot='body-alt' class='speech-bubble-text'>{{ 'INTRO_CALL_TO_ACTION' | translate }}<span class="avatar-name"> O</span>{{ 'INTRO_CALL_TO_ACTION_2' | translate }} <br /></div>
+        >
+          <div slot="body-alt" class="speech-bubble-text">
+            {{ 'INTRO_CALL_TO_ACTION' | translate }}<span class="avatar-name"> O</span
+            >{{ 'INTRO_CALL_TO_ACTION_2' | translate }} <br />
+          </div>
         </app-speech-bubble>
-
       </div>
-      <div class="O-figure" #figureO [@moveFigure]="{value: stateFigureO, params: {y: moveDistanceO}}">
-        <img src="assets/O-figure.svg" height="180px" />
+      <div class="O-figure" #figureO [@moveFigure]="{ value: stateFigureO, params: { y: moveDistanceO } }">
+        <img src="assets/O-figure.svg" alt="O-figure" height="180px" />
       </div>
     </div>
     <div class="button-container" [@showBubble]="stateButton">
       <a routerLink="/playgame/singleplayer" routerLinkActive="active" (click)="setSingleplayer()">
         <button mat-raised-button class="play-game-button">
           <div class="button-text">
-            <mat-icon class="button-icon" aria-label="player one icon">person</mat-icon>{{ 'PLAYER_MODE_SINGLE' | translate }}
+            <mat-icon class="button-icon" aria-label="player one icon">person</mat-icon
+            >{{ 'PLAYER_MODE_SINGLE' | translate }}
           </div>
         </button>
       </a>
       <a routerLink="/playgame/multiplayer" routerLinkActive="active" (click)="setMultiplayer()">
         <button mat-raised-button class="play-game-button">
           <div class="button-text">
-            <mat-icon class="button-icon" aria-label="player two icon">group</mat-icon>{{ 'PLAYER_MODE_MULTI' | translate }}
+            <mat-icon class="button-icon" aria-label="player two icon">group</mat-icon
+            >{{ 'PLAYER_MODE_MULTI' | translate }}
           </div>
         </button>
       </a>

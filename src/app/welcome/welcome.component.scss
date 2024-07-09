@@ -1,6 +1,5 @@
 @import '../../variables.scss';
 
-
 .container-background {
   position: relative;
 }
@@ -72,7 +71,6 @@
   background: #fff;
   color: var(--Blue, #151cdb);
 }
-
 
 .main-content {
   flex: 1;
@@ -183,5 +181,3 @@
   height: 100%;
   width: 40px;
 }
-
-
