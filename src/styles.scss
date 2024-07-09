@@ -27,6 +27,11 @@
   src: url('./assets/fonts/ICTHofmann/ICTHofmann-Regular.otf');
 }
 
+@font-face {
+  font-family: AeonikBold;
+  src: url('./assets/fonts/Aeonik/Aeonik-Bold.otf') format('opentype');
+}
+
 body {
   font-family: 'Barlow Condensed', sans-serif;
   -webkit-touch-callout: none; /* iOS Safari */
