@@ -8,6 +8,7 @@ import {
   HighscoreData,
   JoinGameData,
   JoinGameReady,
+  MultiplayerClassifyParams,
   PredictionData,
   Score,
 } from '@/app/shared/models/backend-interfaces';
@@ -92,7 +93,7 @@ export class MultiplayerService {
     );
   }
 
-  classify(data: { game_id?: string; time_left: number }, image: Blob) {
+  classify(data: MultiplayerClassifyParams, image: Blob) {
     this.webSocketService.emit(SocketEndpoints.CLASSIFY, data, image);
   }
 
