@@ -1,19 +1,39 @@
 @import '../../../variables.scss';
 
 * {
-  color: --bbTextColor;
   text-align: center;
   text-shadow: none;
+  
+}
+
+.title, .body  {
+  font-size: var(--bbFontSize);
+  line-height: var(--bbLineHeight);
 }
 
 .title {
-  font-family: 'Aeonik-Bold';
-  font-size: 48px;
+  font-family: AeonikBold;
 }
 
-.body {
-  font-size: 48px;
+.large{
+  --bbFontSize: 48px;
+  --bbLineHeight: 48px;
+  --bbPadding: 2rem;
+  --bbMaxWidth: 60vw;
 }
+.medium{
+  --bbFontSize: 36px;
+  --bbLineHeight: 36px;
+  --bbPadding: 1rem;
+  --bbMaxWidth: 50vw;
+}
+.small{
+  --bbFontSize: 28px;
+  --bbLineHeight: 28px;
+  --bbPadding: 1rem;
+  --bbMaxWidth: 50vw;
+}
+
 
 .speech-bubble,
 .speech-bubble * {
@@ -25,14 +45,16 @@
   --bbTextColor: black;
   --bbArrowSize: 2rem;
   --bbBorderRadius: 1rem;
-  --bbPadding: 2rem;
+  --bbPaddingX: 2rem;
 
   background: var(--bbColor);
   color: var(--bbTextColor);
   border-radius: var(--bbBorderRadius);
   padding: var(--bbPadding);
+  padding-left: var(--bbPaddingX);
+  padding-right: var(--bbPaddingX);
+  max-width: var(--bbMaxWidth);
   position: relative;
-  line-height: 48px;
 }
 
 .speech-bubble::before {
