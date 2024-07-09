@@ -8,8 +8,7 @@ import { TranslationService } from '../core/translation.service';
 import { TranslatePipe } from '../core/translation.pipe';
 import { Observable, Subject, takeUntil } from 'rxjs';
 import { CommonModule } from '@angular/common';
-import { GAMESTATE, SupportedLanguages } from '../shared/models/interfaces';
-import { SpeechBubbleComponent } from '../game/speech-bubble/speech-bubble.component';
+import { GAMESTATE } from '../shared/models/interfaces';
 import { GameStateService } from '../game/services/game-state-service';
 import { SupportedLanguages } from '../shared/models/interfaces';
 
