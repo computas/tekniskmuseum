@@ -1,4 +1,4 @@
-import { Component, OnInit, Output, EventEmitter } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { routes } from '../../shared/models/routes';
 import { MultiplayerService } from '../services/multiplayer.service';
@@ -9,6 +9,7 @@ import { MatIcon } from '@angular/material/icon';
 import { TranslationService } from '@/app/core/translation.service';
 import { TranslatePipe } from '@/app/core/translation.pipe';
 import { GAMESTATE } from '@/app/shared/models/interfaces';
+import { GameStateService } from '../services/game-state-service';
 
 @Component({
   selector: 'app-game-info',
@@ -18,7 +19,6 @@ import { GAMESTATE } from '@/app/shared/models/interfaces';
   imports: [MatIcon, MatButton, TranslatePipe],
 })
 export class GameInfoComponent implements OnInit {
-  @Output() getDifficultyPicker = new EventEmitter();
   isSinglePlayer = false;
   isMultiPlayer = false;
 
@@ -26,36 +26,34 @@ export class GameInfoComponent implements OnInit {
     private router: Router,
     private multiplayerService: MultiplayerService,
     private webSocketService: WebSocketService,
-    private translationService: TranslationService
+    private translationService: TranslationService,
+    private gameStateService: GameStateService
   ) {}
 
   ngOnInit(): void {
+    this.gameStateService.savePageToLocalStorage(GAMESTATE.howToPlay);
     this.translationService.lang$.subscribe((lang) => {
       this.translationService.loadTranslations(lang).subscribe(() => {
         this.translationService.setLanguage(lang);
       });
     });
 
-    if (this.router.url === `/${routes.SINGLEPLAYER}`) {
-      this.isSinglePlayer = true;
-    } else {
-      this.isMultiPlayer = true;
-      this.multiplayerService.getLabel(false).subscribe((res: string) => {
-        if (res) {
-          this.multiplayerService.stateInfo = {
-            ...this.multiplayerService.stateInfo,
-            label: res,
-            gameState: GAMESTATE.waitingForWord,
-          };
-        }
-      });
-      this.webSocketService.listen(SocketEndpoints.END_GAME).subscribe();
-    }
+    this.isSinglePlayer = this.gameStateService.isSingleplayer();
+    this.isMultiPlayer = this.gameStateService.isMultiplayer();
+
+    if (this.isSinglePlayer) return;
+
+    this.multiplayerService.getLabel(false).subscribe((res: string) => {
+      if (res) {
+        this.gameStateService.startGame();
+      }
+    });
+    this.webSocketService.listen(SocketEndpoints.END_GAME).subscribe();
   }
 
   goToDifficultyPicker() {
     if (this.isSinglePlayer) {
-      this.getDifficultyPicker.emit(true);
+      this.gameStateService.goToPage(GAMESTATE.difficultyPicker);
     } else {
       //How to set difficulty in multiplayer?
       this.multiplayerService.getLabel(true);

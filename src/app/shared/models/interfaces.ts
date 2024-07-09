@@ -11,10 +11,12 @@ export interface Result {
 
 export enum GAMESTATE {
   lobby = 'LOBBY',
+  howToPlay = 'HOWTOPLAY',
+  difficultyPicker = 'CHOOSEDIFFICULTY',
+  drawingBoard = 'DRAWINGBOARD',
   drawing = 'DRAWING',
   intermediateResult = 'INTERMEDIATERESULT',
   waitingForWord = 'WAITINGFORWORD',
-  howToPlay = 'HOWTOPLAY',
   showResult = 'SHOWRESULT',
   showWord = 'SHOWWORD',
 }

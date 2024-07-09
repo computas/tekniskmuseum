@@ -7,6 +7,7 @@ import { MatIcon } from '@angular/material/icon';
 import { MatProgressSpinner } from '@angular/material/progress-spinner';
 import { TranslationService } from '@/app/core/translation.service';
 import { TranslatePipe } from '@/app/core/translation.pipe';
+import { GameStateService } from '../../services/game-state-service';
 
 @Component({
   selector: 'app-lobby',
@@ -19,7 +20,11 @@ export class LobbyComponent implements OnInit, OnDestroy {
   waitingForOtherPlayer = true;
   subscriptions = new Subscription();
 
-  constructor(public multiPlayerService: MultiplayerService, private translationService: TranslationService) {}
+  constructor(
+    private gameStateService: GameStateService,
+    public multiPlayerService: MultiplayerService,
+    private translationService: TranslationService
+  ) {}
 
   ngOnInit(): void {
     const difficulty = 2; // Difficulty set to medium (1 for easy, 3 for hard)
