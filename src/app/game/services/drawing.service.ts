@@ -2,7 +2,13 @@ import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Observable, BehaviorSubject } from 'rxjs';
 import { tap, switchMap } from 'rxjs/operators';
-import { StartGamePlayerId, GameLabel, Highscore, PredictionData } from '@/app/shared/models/backend-interfaces';
+import {
+  StartGamePlayerId,
+  GameLabel,
+  HighscoreData,
+  PredictionData,
+  Score,
+} from '@/app/shared/models/backend-interfaces';
 import { Result } from '@/app/shared/models/interfaces';
 import { ResultsMock } from '@/app/shared/mocks/results.mock';
 import { endpoints } from '@/app/shared/models/endpoints';
@@ -135,10 +141,13 @@ export class DrawingService {
       .pipe(tap((res) => (this.label = res.label)));
   }
 
-  getHighscore(): Observable<Highscore> {
+  getHighscore(): Observable<HighscoreData> {
+    const difficultyId = this.config.difficultyId;
     const headers = new HttpHeaders();
     headers.set('Access-Control-Allow-Origin', '*');
-    return this.http.get<Highscore>(`${this.baseUrl}/${endpoints.HIGHSCORE}`, { headers: headers });
+    return this.http.get<HighscoreData>(`${this.baseUrl}/${endpoints.HIGHSCORE}?difficulty_id=${difficultyId}`, {
+      headers: headers,
+    });
   }
 
   endGame() {
@@ -148,11 +157,15 @@ export class DrawingService {
   }
 
   postScore() {
-    const body = {
+    const difficultyId = this.config.difficultyId;
+    const body: Score = {
       player_id: this.playerid,
       score: this.totalScore.toString(),
+      difficulty_id: difficultyId,
     };
-    return this.http.post(`${this.baseUrl}/${endpoints.POSTSCORE}`, body);
+    const headers = new HttpHeaders();
+    headers.set('Access-Control-Allow-Origin', '*');
+    return this.http.post(`${this.baseUrl}/${endpoints.POSTSCORE}`, body, { headers: headers });
   }
 
   addResult(result: Result) {
