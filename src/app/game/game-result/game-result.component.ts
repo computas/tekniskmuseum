@@ -17,6 +17,7 @@ import {
   state,
   // ...
 } from '@angular/animations';
+import { HighscoreData } from '@/app/shared/models/backend-interfaces';
 
 @Component({
   selector: 'app-game-result',
@@ -41,6 +42,7 @@ export class GameResultComponent implements OnInit, OnDestroy {
   ismultiplayer = false;
   score = 0;
   todaysHighscore = 0;
+  opponentScore = 0;
   newHighscore = false;
   getHighscoreSubscription: Subscription | null = null;
   postHighscoreSubscription: Subscription | null = null;
@@ -58,6 +60,7 @@ export class GameResultComponent implements OnInit, OnDestroy {
       this.multiplayerService.opponentScore.subscribe((val) => {
         if (val) {
           if (this.multiplayerService.stateInfo.score) {
+            this.opponentScore = val.score;
             this.hasWon = this.multiplayerService.stateInfo.score >= val.score;
             this.score = this.multiplayerService.stateInfo.score;
           } else {
@@ -65,24 +68,39 @@ export class GameResultComponent implements OnInit, OnDestroy {
           }
         }
       });
+
+      this.multiplayerService.postScore(this.drawingService.playerid);
+      this.getHighscoreSubscription = this.multiplayerService.getHighscore().subscribe({
+        next: (highscoreData: HighscoreData) => {
+          const todaysScores = highscoreData.daily.map((daily) => daily.score);
+          if (Math.max(...todaysScores) > 0) {
+            this.todaysHighscore = Math.max(...todaysScores);
+          }
+          if (
+            this.drawingService.totalScore >= this.todaysHighscore &&
+            this.drawingService.totalScore >= this.opponentScore
+          ) {
+            this.newHighscore = true;
+          }
+        },
+        error: (error) => console.error("Error fetching today's highscore", error),
+      });
     } else {
       this.score = this.drawingService.totalScore;
+      this.postHighscoreSubscription = this.drawingService.postScore().subscribe();
+      this.getHighscoreSubscription = this.drawingService.getHighscore().subscribe({
+        next: (data) => {
+          const todaysScores = data.daily.map((daily) => daily.score);
+          if (Math.max(...todaysScores) > 0) {
+            this.todaysHighscore = Math.max(...todaysScores);
+          }
+          if (this.drawingService.totalScore >= this.todaysHighscore) {
+            this.newHighscore = true;
+          }
+        },
+        error: (error) => console.error("Error fetching today's highscore", error),
+      });
     }
-
-    this.getHighscoreSubscription = this.drawingService.getHighscore().subscribe({
-      next: (data) => {
-        const todaysScores = data.daily.map((daily) => daily.score);
-        if (Math.max(...todaysScores) > 0) {
-          this.todaysHighscore = Math.max(...todaysScores);
-        }
-        if (this.drawingService.totalScore > this.todaysHighscore) {
-          this.newHighscore = true;
-        }
-      },
-      error: (error) => console.error("Error fetching today's highscore", error),
-    });
-
-    this.postHighscoreSubscription = this.drawingService.postScore().subscribe();
 
     if (this.router.url === '/summary') {
       this.results = this.drawingService.get();

@@ -4,8 +4,14 @@ import { BehaviorSubject, Observable, ReplaySubject } from 'rxjs';
 import { map, take, tap } from 'rxjs/operators';
 import { SocketEndpoints } from '@/app/shared/models/websocketEndpoints';
 import { PairingService } from './pairing.service';
-import { JoinGameData, JoinGameReady, PredictionData } from '@/app/shared/models/backend-interfaces';
-import { GAMESTATE, GameState, PlayerScore } from '@/app/shared/models/interfaces';
+import {
+  HighscoreData,
+  JoinGameData,
+  JoinGameReady,
+  PredictionData,
+  Score,
+} from '@/app/shared/models/backend-interfaces';
+import { Difficulty, GAMESTATE, GameState, PlayerScore } from '@/app/shared/models/interfaces';
 import { TranslationService } from '@/app/core/translation.service';
 
 @Injectable({
@@ -108,6 +114,37 @@ export class MultiplayerService {
       player_id: this.stateInfo.player_id,
     });
     this.webSocketService.emit(SocketEndpoints.END_GAME, result);
+  }
+
+  postScore(player_id: string) {
+    const multiPlayerId: Difficulty = 4;
+    let result: Score = {
+      player_id: player_id,
+      score: '0',
+      difficulty_id: multiPlayerId,
+    };
+    if (this.stateInfo.player_id !== undefined && this.stateInfo.score !== undefined) {
+      result = {
+        player_id: this.stateInfo.player_id,
+        score: this.stateInfo.score.toString(),
+        difficulty_id: multiPlayerId,
+      };
+    }
+    const body = JSON.stringify(result);
+    this.webSocketService.emit(SocketEndpoints.POST_SCORE, body);
+  }
+
+  getHighscore(emit = true): Observable<HighscoreData> {
+    if (emit) {
+      this.webSocketService.emit(SocketEndpoints.VIEW_HIGHSORE, JSON.stringify({ game_id: this.stateInfo.game_id }));
+    }
+    return this.webSocketService.listen(SocketEndpoints.VIEW_HIGHSORE).pipe(
+      take(1),
+      map((res: string) => {
+        const data: HighscoreData = JSON.parse(res);
+        return data;
+      })
+    );
   }
 
   clearState() {
