@@ -2,8 +2,6 @@ import { Component, OnInit, OnDestroy } from '@angular/core';
 import { GAMESTATE, Result } from '../../shared/models/interfaces';
 import { DrawingService } from '../services/drawing.service';
 import { MultiplayerService } from '../services/multiplayer.service';
-import { Router } from '@angular/router';
-import { routes } from '../../shared/models/routes';
 import { GameConfigService } from '../services/game-config.service';
 import { TranslationService } from '@/app/core/translation.service';
 import { TranslatePipe } from '@/app/core/translation.pipe';
@@ -29,8 +27,6 @@ import { GameStateService } from '../services/game-state-service';
 export class GameIntermediateResultComponent implements OnInit, OnDestroy {
   result: Result | undefined;
   gameOver = false;
-  waitingForPlayer = true;
-  isSinglePlayer = false;
 
   config = this.gameConfigService.getConfig;
 
@@ -39,44 +35,37 @@ export class GameIntermediateResultComponent implements OnInit, OnDestroy {
     private gameStateService: GameStateService,
     private drawingService: DrawingService,
     private multiplayerService: MultiplayerService,
-    private router: Router,
     private translationService: TranslationService
   ) {}
 
   ngOnInit(): void {
     this.gameStateService.savePageToLocalStorage(GAMESTATE.intermediateResult);
     this.result = this.drawingService.lastResult;
-    if (this.router.url === `/${routes.SINGLEPLAYER}`) {
-      this.isSinglePlayer = true;
-      this.gameOver = this.drawingService.gameOver;
-      this.waitingForPlayer = false;
-    }
-    if (this.gameStateService.isMultiplayer()) {
-      this.multiplayerService.stateInfo$.subscribe((res) => {
-        if (res.ready) {
-          this.waitingForPlayer = false;
-        }
-      });
-      this.multiplayerService.getLabel(false).subscribe((res) => {
-        if (res) {
-          this.gameStateService.nextRound();
-        }
-      });
-
-      if (this.gameStateService.isGameOver()) {
-        const totalScore: number = this.drawingService.results.reduce((accumulator: number, currentValue: Result) => {
-          return accumulator + currentValue.score;
-        }, 0);
-        this.multiplayerService.stateInfo = { ...this.multiplayerService.stateInfo, score: totalScore };
-        this.multiplayerService.endGame();
-      }
-    }
     this.translationService.loadTranslations(this.translationService.getCurrentLang()).subscribe();
+    if (this.gameStateService.isSingleplayer()) return;
+
+    this.multiplayerService.getLabel(false).subscribe((res) => {
+      if (res) {
+        this.gameStateService.nextRound();
+      }
+    });
+
+    if (this.gameStateService.isGameOver()) {
+      this.prepareMultiplayerResults();
+    }
   }
 
   ngOnDestroy() {
-    if (this.isSinglePlayer) {
+    if (this.gameStateService.isSingleplayer()) {
       this.drawingService.hasAddedSingleplayerResult = false;
     }
+  }
+
+  prepareMultiplayerResults() {
+    const totalScore: number = this.drawingService.results.reduce((accumulator: number, currentValue: Result) => {
+      return accumulator + currentValue.score;
+    }, 0);
+    this.multiplayerService.stateInfo = { ...this.multiplayerService.stateInfo, score: totalScore };
+    this.multiplayerService.endGame();
   }
 }
