@@ -1,6 +1,6 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
 import { DrawingService } from '../services/drawing.service';
-import { Result } from '../../shared/models/interfaces';
+import { ArrowAlignment, PointerSide, Result } from '../../shared/models/interfaces';
 import { Router } from '@angular/router';
 import { MultiplayerService } from '../services/multiplayer.service';
 import { MatButton } from '@angular/material/button';
@@ -18,18 +18,21 @@ import {
   // ...
 } from '@angular/animations';
 import { HighscoreData } from '@/app/shared/models/backend-interfaces';
+import { SpeechBubbleComponent } from '../speech-bubble/speech-bubble.component';
+import { CustomColorsIO } from '@/app/shared/customColors';
+import { MatIcon } from '@angular/material/icon';
 
 @Component({
   selector: 'app-game-result',
   templateUrl: './game-result.component.html',
   styleUrls: ['./game-result.component.scss'],
   standalone: true,
-  imports: [MatCardImage, MatButton, TitleCasePipe, TranslatePipe],
+  imports: [MatCardImage, MatIcon, MatButton, TitleCasePipe, TranslatePipe, SpeechBubbleComponent],
   animations: [
     trigger('fadeIn', [
       state('hidden', style({ opacity: 0 })),
       state('visible', style({ opacity: 1 })),
-      transition('hidden => visible', [animate('1s')]),
+      transition('hidden => visible', [animate('1.5s')]),
     ]),
   ],
 })
@@ -46,7 +49,15 @@ export class GameResultComponent implements OnInit, OnDestroy {
   newHighscore = false;
   getHighscoreSubscription: Subscription | null = null;
   postHighscoreSubscription: Subscription | null = null;
-  iState = 'hidden';
+
+  IState = 'hidden';
+  OState = 'hidden';
+
+  CustomColorsIO = CustomColorsIO;
+  PointerSide = PointerSide;
+  ArrowAlignment = ArrowAlignment;
+  titleText = 'Bra jobba! Du og O er et bra team';
+
   constructor(
     private drawingService: DrawingService,
     private multiplayerService: MultiplayerService,
@@ -121,7 +132,10 @@ export class GameResultComponent implements OnInit, OnDestroy {
 
   startAnimation() {
     setTimeout(() => {
-      this.iState = 'visible';
-    }, 200);
+      this.IState = 'visible';
+    }, 500);
+    setTimeout(() => {
+      this.OState = 'visible';
+    }, 1500);
   }
 }

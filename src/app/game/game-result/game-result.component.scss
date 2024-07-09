@@ -38,27 +38,12 @@
   gap: 5rem;
   margin: 0 auto;
 }
-#result-header {
-  color: $text_primary_color;
-  font-size: 48px;
-  margin: 10px;
-  padding-bottom: 20px;
-  display: flex;
-  justify-content: center;
-  flex-wrap: wrap;
-  align-items: flex-end;
-}
 
 #not-highscore-section {
   display: flex;
   flex-direction: row;
 }
 
-#score-header {
-  color: $text_primary_color;
-  font-family: 'AeonikLight';
-  font-size: 32px;
-}
 #highscore-text {
   color: $text_primary_color;
   font-family: 'AeonikRegular';
@@ -73,28 +58,13 @@
 }
 
 .btn {
-  height: 60px;
-  min-width: 240px;
-  font-size: 30px;
-  padding: 0.6em 0.8em;
-  background-color: rgba(0, 0, 0, 0.3);
-  color: $text_primary_color;
-  font-weight: bold;
-  font-size: 1.45rem;
-  border-radius: 0.3em;
-  letter-spacing: 0.05em;
+  display: inline-flex;
+  box-shadow: 0 8px 16px 0 rgba(0, 0, 0, 0.1), 0 6px 20px 0 rgba(0, 0, 0, 0.15);
+  border-radius: 50px;
+  margin-top: 10px;
+  padding: 2rem 3rem;
 }
-.btn-again {
-  background-color: $button_background_color;
-  color: $button_content_color;
-}
-.button-footer {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-  justify-items: center;
-  column-gap: 1em;
-  row-gap: 1em;
-}
+
 .card-won {
   border: 4px solid #68d466;
   border-radius: 16px;
@@ -103,16 +73,7 @@
   border: 4px solid #de1f1f;
   border-radius: 16px;
 }
-.start-new-game-button {
-  float: right;
-  width: 200px;
-  color: #195272;
-  border: 1px solid;
-}
-p {
-  font-style: italic;
-  font-weight: normal;
-}
+
 #result-subtitle {
   display: flex;
   justify-content: space-between;
@@ -123,25 +84,15 @@ p {
   font-size: 30px;
   line-height: 43px;
 }
-#won {
-  color: #68d466;
-  font-size: 36px;
-}
-#loss {
-  color: #de1f1f;
-  font-size: 36px;
-}
-.home-text {
-  color: #14213d;
-}
-#text-header {
-  text-align: center;
-  margin: 12px;
-  border-bottom: 1px solid;
-  color: #195272;
-}
+
 .icon {
-  font-size: 40px;
+  margin-right: 16px;
+  font-size: 36px;
+  background: linear-gradient(to top, #2514d1 0%, #f14a64 50%, #de7d6e 90%);
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+  height: 100%;
+  width: 40px;
 }
 .game-result-img {
   width: 18rem;
@@ -155,26 +106,8 @@ p {
   margin: 0;
   padding: 0 24px;
 }
-.winner {
-  color: $text_secondary_color;
-  font-weight: 500;
-}
-.loser {
-  color: $text_secondary_color;
-  font-weight: 500;
-}
-.winner-points,
-.loser-points {
-  font-size: 32px;
-  color: $text_primary_color;
-}
-.winner-img {
-  height: 100px;
-}
-.loser-img {
-  height: 100px;
-}
-.multiplayer-score {
+
+.score {
   color: var(--White, #fbfbfb);
   font-family: Aeonik;
   font-size: 24px;
@@ -212,19 +145,6 @@ p {
   margin: 0 auto;
 }
 
-#i-text-box {
-  display: flex;
-  flex-direction: column;
-  height: 0rem;
-  padding: 4rem 8rem;
-  justify-content: center;
-  align-items: center;
-  flex-shrink: 0;
-  border-radius: 36px;
-  background: #d9d9d9;
-  margin: auto 0;
-}
-
 #i-text-box-line-1 {
   color: var(--Black, #030303);
   text-align: center;
@@ -235,33 +155,11 @@ p {
   line-height: normal;
 }
 
-#i-text-box-line-2 {
-  color: var(--Black, #030303);
-  font-family: Aeonik;
-  font-size: 24px;
-  font-style: normal;
-  font-weight: 500;
-  line-height: normal;
-}
-
 #o-text-box-container {
   display: flex;
   flex-direction: row;
   margin: 0 auto;
   gap: 3rem;
-}
-
-#o-text-box {
-  display: flex;
-  flex-direction: column;
-  padding: 3rem 1rem;
-  justify-content: center;
-  align-items: center;
-  height: 0rem;
-  padding: 3rem 2rem;
-  border-radius: 40px;
-  background: var(--O-text-color, #d9d9d9);
-  margin: auto 0;
 }
 
 #summary-buttons-container {
@@ -271,18 +169,31 @@ p {
   margin: 0 auto;
 }
 
-#o {
-  background: var(--Icon-gradient-2, linear-gradient(180deg, #fd595d 0%, #e4a969 50%, #1bc0d2 100%));
-  background-clip: text;
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-  font-family: 'HofmannRegular';
-  font-style: normal;
-  line-height: normal;
-}
-
 #text-box-points {
   color: $text_secondary_color;
   font-style: italic;
   font-weight: 400;
+}
+
+.btn-text {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  font-size: 36px;
+  font-style: normal;
+  font-weight: 700;
+  line-height: normal;
+}
+
+.o-avatar {
+  background: var(--Icon-gradient-2, linear-gradient(180deg, #fd595d 0%, #e4a969 50%, #1bc0d2 100%));
+  background-clip: text;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  font-family: 'ICT Hofmann';
+  font-size: 64px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: normal;
 }
