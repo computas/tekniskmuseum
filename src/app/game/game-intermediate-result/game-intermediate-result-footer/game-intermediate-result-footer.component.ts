@@ -14,20 +14,22 @@ import { GameStateService } from '../../services/game-state-service';
 export class GameIntermediateResultFooterComponent implements OnInit {
   buttonTextKey = '';
   waitingForPlayerState = 'WAITING_FOR_PLAYER';
-  isWaitingForPlayer = true;
+  isWaitingForPlayer = false;
 
   constructor(private gameStateService: GameStateService, private multiplayerService: MultiplayerService) {}
 
   ngOnInit(): void {
     this.buttonTextKey = this.getButtonTextKey();
-    if (this.gameStateService.isMultiplayer()) {
-      this.multiplayerService.stateInfo$.subscribe((res) => {
-        if (res.ready) {
-          this.isWaitingForPlayer = false;
-        }
-        this.buttonTextKey = this.getButtonTextKey();
-      });
-    }
+
+    if (this.gameStateService.isSingleplayer()) return;
+
+    this.isWaitingForPlayer = true;
+    this.multiplayerService.stateInfo$.subscribe((res) => {
+      if (res.ready) {
+        this.isWaitingForPlayer = false;
+      }
+      this.buttonTextKey = this.getButtonTextKey();
+    });
   }
 
   nextPage(): void {

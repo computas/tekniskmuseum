@@ -2,8 +2,6 @@ import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { routes } from '../../shared/models/routes';
 import { MultiplayerService } from '../services/multiplayer.service';
-import { WebSocketService } from '../services/web-socket.service';
-import { SocketEndpoints } from '../../shared/models/websocketEndpoints';
 import { MatButton } from '@angular/material/button';
 import { MatIcon } from '@angular/material/icon';
 import { NgIf } from '@angular/common';
@@ -31,31 +29,23 @@ export class GamePickDifficultyComponent implements OnInit {
     private gameStateService: GameStateService,
     private router: Router,
     private multiplayerService: MultiplayerService,
-    private webSocketService: WebSocketService,
     private translationService: TranslationService
   ) {}
 
   ngOnInit(): void {
     this.gameStateService.savePageToLocalStorage(GAMESTATE.difficultyPicker);
-    if (this.router.url === `/${routes.SINGLEPLAYER}`) {
-      this.isSinglePlayer = true;
+    this.translationService.loadTranslations(this.translationService.getCurrentLang()).subscribe();
+    this.isSinglePlayer = this.gameStateService.isSingleplayer();
+    this.isMultiPlayer = this.gameStateService.isMultiplayer();
+
+    if (this.isSinglePlayer) {
       this.gameConfigService.difficultyLevel$.subscribe((config: GameLevelConfig) => {
         this.config = config;
       });
-    } else {
-      this.isMultiPlayer = true;
-      this.multiplayerService.getLabel(false).subscribe((res: string) => {
-        if (res) {
-          this.multiplayerService.stateInfo = {
-            ...this.multiplayerService.stateInfo,
-            label: res,
-            gameState: GAMESTATE.waitingForWord,
-          };
-        }
-      });
-      this.webSocketService.listen(SocketEndpoints.END_GAME).subscribe();
+      return;
     }
-    this.translationService.loadTranslations(this.translationService.getCurrentLang()).subscribe();
+
+    // implement pick difficulty for multiplayer
   }
 
   startDrawing(difficulty: 'easy' | 'medium' | 'hard') {

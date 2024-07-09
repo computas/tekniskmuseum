@@ -38,22 +38,17 @@ export class GameInfoComponent implements OnInit {
       });
     });
 
-    if (this.router.url === `/${routes.SINGLEPLAYER}`) {
-      this.isSinglePlayer = true;
-    } else {
-      this.isMultiPlayer = true;
-      this.multiplayerService.getLabel(false).subscribe((res: string) => {
-        if (res) {
-          this.gameStateService.startGame();
-          this.multiplayerService.stateInfo = {
-            ...this.multiplayerService.stateInfo,
-            label: res,
-            gameState: GAMESTATE.waitingForWord,
-          };
-        }
-      });
-      this.webSocketService.listen(SocketEndpoints.END_GAME).subscribe();
-    }
+    this.isSinglePlayer = this.gameStateService.isSingleplayer();
+    this.isMultiPlayer = this.gameStateService.isMultiplayer();
+
+    if (this.isSinglePlayer) return;
+
+    this.multiplayerService.getLabel(false).subscribe((res: string) => {
+      if (res) {
+        this.gameStateService.startGame();
+      }
+    });
+    this.webSocketService.listen(SocketEndpoints.END_GAME).subscribe();
   }
 
   goToDifficultyPicker() {

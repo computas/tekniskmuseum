@@ -2,8 +2,6 @@ import { Component, OnInit, OnDestroy } from '@angular/core';
 import { interval, Subscription } from 'rxjs';
 import { take, tap } from 'rxjs/operators';
 import { DrawingService } from '../services/drawing.service';
-import { Router } from '@angular/router';
-import { routes } from '../../shared/models/routes';
 import { MultiplayerService } from '../services/multiplayer.service';
 import { MatIcon } from '@angular/material/icon';
 import { MatButton } from '@angular/material/button';
@@ -44,17 +42,14 @@ export class GameWordToDrawComponent implements OnInit, OnDestroy {
     private gameStateService: GameStateService,
     private drawingService: DrawingService,
     private multiplayerService: MultiplayerService,
-    private router: Router,
     private translationService: TranslationService
   ) {}
 
   ngOnInit(): void {
     this.gameStateService.savePageToLocalStorage(GAMESTATE.showWord);
-    if (this.router.url === `/${routes.SINGLEPLAYER}`) {
-      this.isSinglePlayer = true;
-    } else {
-      this.isMultiPlayer = true;
-    }
+    this.translationService.loadTranslations(this.translationService.getCurrentLang()).subscribe();
+    this.isSinglePlayer = this.gameStateService.isSingleplayer();
+    this.isMultiPlayer = this.gameStateService.isMultiplayer();
     if (this.isSinglePlayer) {
       if (this.drawingService.gameHasStarted) {
         this.subscriptions.add(
@@ -83,7 +78,7 @@ export class GameWordToDrawComponent implements OnInit, OnDestroy {
         );
       }
     }
-    if (this.gameStateService.isMultiplayer()) {
+    if (this.isMultiPlayer) {
       const player = this.multiplayerService.stateInfo.player_nr;
       this.playernr = player === 'player_1' ? '1' : '2';
       this.guessUsed = this.drawingService.guessUsed;
@@ -101,7 +96,6 @@ export class GameWordToDrawComponent implements OnInit, OnDestroy {
         })
       );
     }
-    this.translationService.loadTranslations(this.translationService.getCurrentLang()).subscribe();
   }
 
   toDrawingBoard() {

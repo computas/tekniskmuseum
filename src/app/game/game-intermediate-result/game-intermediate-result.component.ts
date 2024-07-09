@@ -2,7 +2,6 @@ import { Component, OnInit, OnDestroy } from '@angular/core';
 import { GAMESTATE, Result } from '../../shared/models/interfaces';
 import { DrawingService } from '../services/drawing.service';
 import { MultiplayerService } from '../services/multiplayer.service';
-import { GameConfigService } from '../services/game-config.service';
 import { TranslationService } from '@/app/core/translation.service';
 import { TranslatePipe } from '@/app/core/translation.pipe';
 import { GameDrawingFeedbackComponent } from './game-drawing-feedback/game-drawing-feedback.component';
@@ -26,12 +25,8 @@ import { GameStateService } from '../services/game-state-service';
 })
 export class GameIntermediateResultComponent implements OnInit, OnDestroy {
   result: Result | undefined;
-  gameOver = false;
-
-  config = this.gameConfigService.getConfig;
 
   constructor(
-    private gameConfigService: GameConfigService,
     private gameStateService: GameStateService,
     private drawingService: DrawingService,
     private multiplayerService: MultiplayerService,
@@ -42,6 +37,7 @@ export class GameIntermediateResultComponent implements OnInit, OnDestroy {
     this.gameStateService.savePageToLocalStorage(GAMESTATE.intermediateResult);
     this.result = this.drawingService.lastResult;
     this.translationService.loadTranslations(this.translationService.getCurrentLang()).subscribe();
+
     if (this.gameStateService.isSingleplayer()) return;
 
     this.multiplayerService.getLabel(false).subscribe((res) => {
@@ -51,7 +47,7 @@ export class GameIntermediateResultComponent implements OnInit, OnDestroy {
     });
 
     if (this.gameStateService.isGameOver()) {
-      this.prepareMultiplayerResults();
+      this.prepareMultiplayerEndResults();
     }
   }
 
@@ -61,7 +57,7 @@ export class GameIntermediateResultComponent implements OnInit, OnDestroy {
     }
   }
 
-  prepareMultiplayerResults() {
+  prepareMultiplayerEndResults() {
     const totalScore: number = this.drawingService.results.reduce((accumulator: number, currentValue: Result) => {
       return accumulator + currentValue.score;
     }, 0);
