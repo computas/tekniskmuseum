@@ -19,6 +19,8 @@ export enum GAMESTATE {
   showWord = 'SHOWWORD',
 }
 
+export type Difficulty = 1 | 2 | 3 | 4; // 4 for multiplayer
+
 export interface GameState {
   player_nr: string | undefined;
   player_id: string | undefined;
@@ -68,4 +70,19 @@ export enum ArrowAlignment {
   Right = 'aright',
   Top = 'atop',
   Bottom = 'abottom',
+}
+
+export interface GameLevelConfig {
+  difficultyId: Difficulty;
+  rounds: number;
+  secondsPerRound: number;
+  timeToStartClassify: number;
+  defaultTimeBetweenClassify: number;
+  minimumTimeBetweenClassify: number;
+  minimumDrawnThreshold: number;
+  pixelsPerClassify: number;
+}
+export interface ImageScoreConfig {
+  maxScore: number;
+  scoreDecrement: number;
 }
