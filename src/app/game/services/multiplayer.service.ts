@@ -8,10 +8,11 @@ import {
   HighscoreData,
   JoinGameData,
   JoinGameReady,
+  MultiplayerClassifyParams,
   PredictionData,
   Score,
 } from '@/app/shared/models/backend-interfaces';
-import { Difficulty, GAMESTATE, GameState, PlayerScore, SupportedLanguages } from '@/app/shared/models/interfaces';
+import { Difficulty, GAMESTATE, GameState, PlayerScore } from '@/app/shared/models/interfaces';
 import { TranslationService } from '@/app/core/translation.service';
 
 @Injectable({
@@ -91,7 +92,7 @@ export class MultiplayerService {
     );
   }
 
-  classify(data: { game_id?: string; time_left: number; lang: SupportedLanguages }, image: Blob) {
+  classify(data: MultiplayerClassifyParams, image: Blob) {
     this.webSocketService.emit(SocketEndpoints.CLASSIFY, data, image);
   }
 

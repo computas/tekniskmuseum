@@ -1,4 +1,4 @@
-import { Difficulty } from './interfaces';
+import { Difficulty, SupportedLanguages } from './interfaces';
 
 export interface StartGamePlayerId {
   player_id: string;
@@ -54,4 +54,10 @@ export interface StatusData {
   CV_iteration_name: string;
   CV_time_created: string;
   BLOB_image_count: number;
+}
+
+export interface MultiplayerClassifyParams {
+  game_id?: string;
+  time_left: number;
+  lang: SupportedLanguages;
 }
