@@ -9,6 +9,7 @@ import { TranslatePipe } from '../core/translation.pipe';
 import { Observable, Subject, takeUntil } from 'rxjs';
 import { CommonModule } from '@angular/common';
 import { SupportedLanguages } from '../shared/models/interfaces';
+import { ArrowAlignment, PointerSide } from '@/app/shared/models/interfaces';
 import {
   trigger,
   state,
@@ -17,6 +18,7 @@ import {
   transition,
 } from '@angular/animations';
 import { SpeechBubbleComponent } from '../game/speech-bubble/speech-bubble.component';
+import { CustomColorsIO } from '../shared/customColors';
 
 @Component({
   selector: 'app-welcome',
@@ -24,11 +26,12 @@ import { SpeechBubbleComponent } from '../game/speech-bubble/speech-bubble.compo
   styleUrls: ['./welcome.component.scss'],
   standalone: true,
   imports: [RouterLink, RouterLinkActive, MatButton, MatIcon, TranslatePipe, CommonModule, SpeechBubbleComponent],
+
   animations: [
     trigger('moveFigure', [
       state('hidden', style({opacity: 0})),
       state('visible', style({opacity: 1 })),
-      state('moved', style({ transform: 'translateY(228px)' })),
+      state('moved', style({ transform: 'translateY({{y}}px)' }), {params: {y: '0'}}),
       transition('hidden => visible', [animate('1s')]),
       transition('visible => moved', [animate('1s')]),
     ]),
@@ -50,6 +53,14 @@ export class WelcomeComponent implements OnInit, OnDestroy {
   stateFirstBubbleO = 'hidden'
   stateSecondBubbleO = 'hidden'
   stateButton = 'hidden'
+
+  moveDistanceI: number = 228;
+  moveDistanceO: number = 228;
+  
+
+  PointerSide = PointerSide;
+  ArrowAlignment = ArrowAlignment;
+  CustomColorsIO = CustomColorsIO;
 
   constructor(
     private multiplayerService: MultiplayerService,
