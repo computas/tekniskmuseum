@@ -68,14 +68,14 @@
       </div>
     </div>
     <div class="button-container" [@showBubble]="stateButton">
-      <a routerLink="/playgame/singleplayer" routerLinkActive="active">
+      <a routerLink="/playgame/singleplayer" routerLinkActive="active" (click)="setSingleplayer()">
         <button mat-raised-button class="play-game-button">
           <div class="button-text">
             <mat-icon class="button-icon" aria-label="player one icon">person</mat-icon>{{ 'PLAYER_MODE_SINGLE' | translate }}
           </div>
         </button>
       </a>
-      <a routerLink="/playgame/multiplayer" routerLinkActive="active">
+      <a routerLink="/playgame/multiplayer" routerLinkActive="active" (click)="setMultiplayer()">
         <button mat-raised-button class="play-game-button">
           <div class="button-text">
             <mat-icon class="button-icon" aria-label="player two icon">group</mat-icon>{{ 'PLAYER_MODE_MULTI' | translate }}
