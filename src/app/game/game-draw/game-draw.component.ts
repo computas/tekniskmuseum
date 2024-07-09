@@ -4,7 +4,7 @@ import { ImageService } from '../services/image.service';
 import { take } from 'rxjs/operators';
 import { DrawingService } from '../services/drawing.service';
 import { MultiplayerService } from '../services/multiplayer.service';
-import { Certainty, GAMESTATE, GameLevelConfig, Result } from '../../shared/models/interfaces';
+import { Certainty, GAMESTATE, GameLevelConfig, Result, SupportedLanguages } from '../../shared/models/interfaces';
 import { PredictionData } from '../../shared/models/backend-interfaces';
 import { SoundService } from '../services/sound.service';
 import { UpperCasePipe } from '@angular/common';
@@ -351,9 +351,10 @@ export class GameDrawComponent implements OnInit, OnDestroy {
     this.imageService.resize(b64Image, croppedCoordinates).subscribe({
       next: (dataUrl) => {
         if (isMultiplayer) {
-          const body: { game_id?: string; time_left: number } = {
+          const body: { game_id?: string; time_left: number; lang: SupportedLanguages } = {
             game_id: this.multiplayerService.stateInfo.game_id,
             time_left: this.timeLeft,
+            lang: this.translationService.getCurrentLang(),
           };
           const image = this.imageService.createBlob(dataUrl);
           this.multiplayerService.classify(body, image);
