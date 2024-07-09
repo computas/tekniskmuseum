@@ -83,7 +83,7 @@ export class GameWordToDrawComponent implements OnInit, OnDestroy {
         );
       }
     }
-    if (this.isMultiPlayer) {
+    if (this.gameStateService.isMultiplayer()) {
       const player = this.multiplayerService.stateInfo.player_nr;
       this.playernr = player === 'player_1' ? '1' : '2';
       this.guessUsed = this.drawingService.guessUsed;
@@ -116,6 +116,7 @@ export class GameWordToDrawComponent implements OnInit, OnDestroy {
           this.timeLeft--;
           if (this.timeLeft <= 0) {
             this.multiplayerService.stateInfo = { ...this.multiplayerService.stateInfo, gameState: GAMESTATE.drawing };
+            this.toDrawingBoard();
           }
         })
       );

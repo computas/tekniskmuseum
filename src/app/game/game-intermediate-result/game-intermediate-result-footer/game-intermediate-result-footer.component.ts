@@ -1,4 +1,4 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { TranslatePipe } from '@/app/core/translation.pipe';
 import { MatIcon } from '@angular/material/icon';
 import { GAMESTATE } from '@/app/shared/models/interfaces';
@@ -13,7 +13,6 @@ import { GameStateService } from '../../services/game-state-service';
 })
 export class GameIntermediateResultFooterComponent implements OnInit {
   buttonTextKey = '';
-  nextPageIdentifier: GAMESTATE | undefined;
   waitingForPlayerState = 'WAITING_FOR_PLAYER';
   isWaitingForPlayer = true;
 
@@ -32,19 +31,20 @@ export class GameIntermediateResultFooterComponent implements OnInit {
   }
 
   nextPage(): void {
-    if (!this.nextPageIdentifier) return;
-
-    if (this.gameStateService.isMultiplayer()) {
-      this.multiplayerService.changestate(GAMESTATE.showWord);
-      return;
-    }
+    if (this.isWaitingForPlayer) return; // in multiplayer - wait for other player
 
     if (this.gameStateService.isGameOver()) {
-      this.gameStateService.goToPage(GAMESTATE.showResult);
+      this.gameStateService.showSummary();
       return;
     }
 
-    this.gameStateService.nextRound();
+    const isOngoingMultiplayerGame = this.gameStateService.isMultiplayer() && !this.gameStateService.isGameOver();
+    if (isOngoingMultiplayerGame) {
+      this.gameStateService.goToPage(GAMESTATE.showWord); // can't use nextRound here bc it will increment roundnumber twice
+      return;
+    }
+
+    this.gameStateService.nextRound(); // ongoing singleplayer game
   }
 
   getButtonTextKey(): string {
@@ -52,17 +52,18 @@ export class GameIntermediateResultFooterComponent implements OnInit {
       return this.waitingForPlayerState;
     }
     if (this.gameStateService.isGameOver()) {
-      this.nextPageIdentifier = GAMESTATE.showResult;
       return 'SUMMARY_BUTTON';
     }
     if (!this.gameStateService.isGameOver()) {
-      this.nextPageIdentifier = GAMESTATE.showWord;
       return 'NEXT_WORD_BUTTON';
     }
     return '';
   }
 
-  isPlayerWaiting(state: string): boolean {
-    return state === this.waitingForPlayerState;
+  buttonStyle(): string {
+    if (this.isWaitingForPlayer) {
+      return 'disabled';
+    }
+    return 'button-container';
   }
 }

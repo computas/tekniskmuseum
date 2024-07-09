@@ -33,7 +33,6 @@ export class LobbyComponent implements OnInit, OnDestroy {
       this.multiPlayerService.stateInfo$.subscribe((obs) => {
         if (obs.ready) {
           this.waitingForOtherPlayer = false;
-          this.gameStateService.startGame();
         }
       })
     );

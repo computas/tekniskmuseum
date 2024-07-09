@@ -7,6 +7,7 @@ import { PairingService } from './pairing.service';
 import { JoinGameData, JoinGameReady, PredictionData } from '@/app/shared/models/backend-interfaces';
 import { GAMESTATE, GameState, PlayerScore } from '@/app/shared/models/interfaces';
 import { TranslationService } from '@/app/core/translation.service';
+import { GameStateService } from './game-state-service';
 
 @Injectable({
   providedIn: 'root',
@@ -34,6 +35,7 @@ export class MultiplayerService {
   public opponentScore = new ReplaySubject<PlayerScore>(1);
 
   constructor(
+    private gameStateService: GameStateService,
     private webSocketService: WebSocketService,
     private pairing: PairingService,
     private translationService: TranslationService
@@ -56,6 +58,7 @@ export class MultiplayerService {
         }
         if (el.ready) {
           this.stateInfo = { ...this.stateInfo, ready: el.ready, gameState: GAMESTATE.howToPlay };
+          this.gameStateService.goToPage(GAMESTATE.howToPlay);
         }
       })
     );

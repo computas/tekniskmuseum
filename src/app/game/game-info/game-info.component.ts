@@ -44,6 +44,7 @@ export class GameInfoComponent implements OnInit {
       this.isMultiPlayer = true;
       this.multiplayerService.getLabel(false).subscribe((res: string) => {
         if (res) {
+          this.gameStateService.startGame();
           this.multiplayerService.stateInfo = {
             ...this.multiplayerService.stateInfo,
             label: res,

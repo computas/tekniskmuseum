@@ -108,9 +108,7 @@ export class GameDrawComponent implements OnInit, OnDestroy {
 
   setUpMultiplayer() {
     this.multiplayerService.stateInfo = { ...this.multiplayerService.stateInfo, ready: false };
-
     this.subscriptions.add(this.predictionListener());
-
     this.subscriptions.add(this.roundOverListener());
   }
 
@@ -122,7 +120,6 @@ export class GameDrawComponent implements OnInit, OnDestroy {
       if (this.prediction && this.prediction.hasWon && !this.hasAddedResult) {
         this.soundService.playResultSound(this.prediction.hasWon);
         this.updateResult(true);
-        this.hasAddedResult = true;
         this.gameStateService.goToPage(GAMESTATE.intermediateResult);
       }
     });
@@ -132,21 +129,20 @@ export class GameDrawComponent implements OnInit, OnDestroy {
     return this.multiplayerService.roundOverListener().subscribe(() => {
       if (!this.hasAddedResult) {
         this.updateResult(this.prediction ? this.prediction.hasWon : false);
-        this.hasAddedResult = true;
-        this.gameStateService.goToPage(GAMESTATE.intermediateResult);
       }
     });
   }
 
   updateResult(won: boolean) {
     const result: Result = this.createResult(won);
-    this.drawingService.guessUsed++;
+    this.drawingService.guessUsed++; // TODO replace this with gameStateService?
     this.addResultAndResize(result).subscribe({
       next: (dataUrlHighRes) => {
         this.drawingService.lastResult.imageData = dataUrlHighRes;
-        this.multiplayerService.changestate(GAMESTATE.intermediateResult);
+        this.gameStateService.goToPage(GAMESTATE.intermediateResult);
       },
     });
+    this.hasAddedResult = true;
   }
 
   createResult(won: boolean) {
@@ -221,9 +217,8 @@ export class GameDrawComponent implements OnInit, OnDestroy {
           this.timeOut = true;
           if (this.gameStateService.isMultiplayer() && !this.hasAddedResult) {
             this.updateResult(false);
-            this.hasAddedResult = true;
           }
-          if (!this.gameStateService.isMultiplayer() && !this.drawingService.hasAddedSingleplayerResult) {
+          if (this.gameStateService.isSingleplayer() && !this.drawingService.hasAddedSingleplayerResult) {
             let res;
             let hasWon = false;
             if (!this.drawingService.pred) {

@@ -30,7 +30,6 @@ export class GameIntermediateResultComponent implements OnInit, OnDestroy {
   result: Result | undefined;
   gameOver = false;
   waitingForPlayer = true;
-  isMultiplayer = false;
   isSinglePlayer = false;
 
   config = this.gameConfigService.getConfig;
@@ -53,7 +52,6 @@ export class GameIntermediateResultComponent implements OnInit, OnDestroy {
       this.waitingForPlayer = false;
     }
     if (this.gameStateService.isMultiplayer()) {
-      this.isMultiplayer = true;
       this.multiplayerService.stateInfo$.subscribe((res) => {
         if (res.ready) {
           this.waitingForPlayer = false;
@@ -61,15 +59,11 @@ export class GameIntermediateResultComponent implements OnInit, OnDestroy {
       });
       this.multiplayerService.getLabel(false).subscribe((res) => {
         if (res) {
-          this.multiplayerService.stateInfo = {
-            ...this.multiplayerService.stateInfo,
-            gameState: GAMESTATE.waitingForWord,
-          };
+          this.gameStateService.nextRound();
         }
       });
-      this.gameOver = this.drawingService.results.length === this.config.rounds;
 
-      if (this.gameOver) {
+      if (this.gameStateService.isGameOver()) {
         const totalScore: number = this.drawingService.results.reduce((accumulator: number, currentValue: Result) => {
           return accumulator + currentValue.score;
         }, 0);
@@ -83,35 +77,6 @@ export class GameIntermediateResultComponent implements OnInit, OnDestroy {
   ngOnDestroy() {
     if (this.isSinglePlayer) {
       this.drawingService.hasAddedSingleplayerResult = false;
-    }
-  }
-
-  nextPage(nextGameState: GAMESTATE) {
-    switch (nextGameState) {
-      case GAMESTATE.showResult:
-        this.getSummary();
-        break;
-      case GAMESTATE.showWord:
-        this.newDrawing();
-        break;
-    }
-  }
-
-  newDrawing() {
-    if (this.gameStateService.isMultiplayer() && this.multiplayerService.stateInfo.ready) {
-      this.multiplayerService.stateInfo = {
-        ...this.multiplayerService.stateInfo,
-        gameState: GAMESTATE.waitingForWord,
-      };
-    }
-  }
-
-  getSummary() {
-    if (this.gameStateService.isMultiplayer() && this.gameOver) {
-      this.multiplayerService.stateInfo = {
-        ...this.multiplayerService.stateInfo,
-        gameState: GAMESTATE.showResult,
-      };
     }
   }
 }

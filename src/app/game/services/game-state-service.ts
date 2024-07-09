@@ -88,14 +88,21 @@ export class GameStateService {
     localStorage.setItem('gameMode', gameMode);
   }
 
+  showSummary() {
+    this.goToPage(GAMESTATE.showResult);
+  }
+
   goToPage(page: GAMESTATE) {
     this._currentPage.next(page);
     this.savePageToLocalStorage(page);
   }
 
   isGameOver(): boolean {
-    const numberOfRounds = this.gameConfigService.getConfig.rounds;
-    return this._currentRound.value === numberOfRounds;
+    const roundsInGame = this.gameConfigService.getConfig.rounds;
+    return this._currentRound.value === roundsInGame;
+  }
+  isSingleplayer(): boolean {
+    return this._gameMode.value === GAMEMODE.singleplayer;
   }
 
   isMultiplayer(): boolean {
