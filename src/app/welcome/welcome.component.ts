@@ -11,18 +11,52 @@ import { CommonModule } from '@angular/common';
 import { GAMESTATE } from '../shared/models/interfaces';
 import { GameStateService } from '../game/services/game-state-service';
 import { SupportedLanguages } from '../shared/models/interfaces';
+import { ArrowAlignment, PointerSide } from '@/app/shared/models/interfaces';
+import { trigger, state, style, animate, transition } from '@angular/animations';
+import { SpeechBubbleComponent } from '../game/speech-bubble/speech-bubble.component';
+import { CustomColorsIO } from '../shared/customColors';
 
 @Component({
   selector: 'app-welcome',
   templateUrl: './welcome.component.html',
   styleUrls: ['./welcome.component.scss'],
   standalone: true,
-  imports: [RouterLink, RouterLinkActive, MatButton, MatIcon, TranslatePipe, CommonModule],
+  imports: [RouterLink, RouterLinkActive, MatButton, MatIcon, TranslatePipe, CommonModule, SpeechBubbleComponent],
+
+  animations: [
+    trigger('moveFigure', [
+      state('hidden', style({ opacity: 0 })),
+      state('visible', style({ opacity: 1 })),
+      state('moved', style({ transform: 'translateY({{y}}px)' }), { params: { y: '0' } }),
+      transition('hidden => visible', [animate('1s')]),
+      transition('visible => moved', [animate('1s')]),
+    ]),
+    trigger('showBubble', [
+      state('hidden', style({ opacity: 0 })),
+      state('visible', style({ opacity: 1 })),
+      transition('hidden => visible', [animate('1s')]),
+    ]),
+  ],
 })
 export class WelcomeComponent implements OnInit, OnDestroy {
   private headerClicks = 0;
   currentLang$: Observable<string>;
   private destroy$ = new Subject<void>();
+
+  stateFigureI = 'hidden';
+  stateFigureO = 'hidden';
+  stateFirstBubbleI = 'hidden';
+  stateSecondBubbleI = 'hidden';
+  stateFirstBubbleO = 'hidden';
+  stateSecondBubbleO = 'hidden';
+  stateButton = 'hidden';
+
+  moveDistanceI = 135;
+  moveDistanceO = 245;
+
+  PointerSide = PointerSide;
+  ArrowAlignment = ArrowAlignment;
+  CustomColorsIO = CustomColorsIO;
 
   constructor(
     private multiplayerService: MultiplayerService,
@@ -39,12 +73,15 @@ export class WelcomeComponent implements OnInit, OnDestroy {
     this.drawingService.clearState();
     this.gameStateService.clearState();
     const savedLanguage = (localStorage.getItem('language') as SupportedLanguages) || 'NO';
+
     this.translationService
       .loadTranslations(savedLanguage)
       .pipe(takeUntil(this.destroy$))
       .subscribe(() => {
         this.translationService.setLanguage(savedLanguage);
       });
+
+    this.startAnimation();
   }
 
   goToAdmin() {
@@ -57,6 +94,26 @@ export class WelcomeComponent implements OnInit, OnDestroy {
 
   changeLanguage(lang: SupportedLanguages) {
     this.translationService.changeLanguage(lang);
+  }
+
+  startAnimation() {
+    setTimeout(() => {
+      this.stateFirstBubbleO = 'visible';
+      this.stateFigureO = 'visible';
+    }, 500);
+    setTimeout(() => {
+      this.stateFirstBubbleI = 'visible';
+      this.stateFigureI = 'visible';
+    }, 2000);
+    setTimeout(() => {
+      this.stateSecondBubbleO = 'visible';
+      this.stateFigureO = 'moved';
+    }, 4000);
+    setTimeout(() => {
+      this.stateSecondBubbleI = 'visible';
+      this.stateFigureI = 'moved';
+      this.stateButton = 'visible';
+    }, 8000);
   }
 
   ngOnDestroy() {
