@@ -16,13 +16,14 @@ import {
   animate,
   transition,
 } from '@angular/animations';
+import { SpeechBubbleComponent } from '../game/speech-bubble/speech-bubble.component';
 
 @Component({
   selector: 'app-welcome',
   templateUrl: './welcome.component.html',
   styleUrls: ['./welcome.component.scss'],
   standalone: true,
-  imports: [RouterLink, RouterLinkActive, MatButton, MatIcon, TranslatePipe, CommonModule],
+  imports: [RouterLink, RouterLinkActive, MatButton, MatIcon, TranslatePipe, CommonModule, SpeechBubbleComponent],
   animations: [
     trigger('moveFigure', [
       state('hidden', style({opacity: 0})),

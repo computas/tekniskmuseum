@@ -1,3 +1,5 @@
+import { Difficulty } from './interfaces';
+
 export interface StartGamePlayerId {
   player_id: string;
 }
@@ -6,14 +8,20 @@ export interface GameLabel {
   label: string;
 }
 
-interface Score {
+interface Highscore {
   id: number;
   score: number;
 }
 
-export interface Highscore {
-  daily: Score[];
-  total: Score[];
+export interface HighscoreData {
+  daily: Highscore[];
+  total: Highscore[];
+}
+
+export interface Score {
+  player_id: string;
+  score: string;
+  difficulty_id: Difficulty;
 }
 
 // export type Certainty = Record<string, number>;
