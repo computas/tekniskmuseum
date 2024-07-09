@@ -21,6 +21,7 @@ import { HighscoreData } from '@/app/shared/models/backend-interfaces';
 import { SpeechBubbleComponent } from '../speech-bubble/speech-bubble.component';
 import { CustomColorsIO } from '@/app/shared/customColors';
 import { MatIcon } from '@angular/material/icon';
+import { GameStateService } from '../services/game-state-service';
 
 @Component({
   selector: 'app-game-result',
@@ -59,6 +60,7 @@ export class GameResultComponent implements OnInit, OnDestroy {
   titleText = 'Bra jobba! Du og O er et bra team';
 
   constructor(
+    private gameStateService: GameStateService,
     private drawingService: DrawingService,
     private multiplayerService: MultiplayerService,
     private router: Router,
@@ -66,7 +68,7 @@ export class GameResultComponent implements OnInit, OnDestroy {
   ) {}
 
   ngOnInit(): void {
-    if (this.multiplayerService.isMultiplayer) {
+    if (this.gameStateService.isMultiplayer()) {
       this.ismultiplayer = true;
       this.multiplayerService.opponentScore.subscribe((val) => {
         if (val) {

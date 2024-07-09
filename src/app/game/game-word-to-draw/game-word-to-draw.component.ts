@@ -1,9 +1,7 @@
-import { Component, OnInit, Output, EventEmitter, OnDestroy } from '@angular/core';
+import { Component, OnInit, OnDestroy } from '@angular/core';
 import { interval, Subscription } from 'rxjs';
 import { take, tap } from 'rxjs/operators';
 import { DrawingService } from '../services/drawing.service';
-import { Router } from '@angular/router';
-import { routes } from '../../shared/models/routes';
 import { MultiplayerService } from '../services/multiplayer.service';
 import { MatIcon } from '@angular/material/icon';
 import { MatButton } from '@angular/material/button';
@@ -13,6 +11,7 @@ import { GameConfigService } from '../services/game-config.service';
 import { TranslationService } from '@/app/core/translation.service';
 import { TranslatePipe } from '@/app/core/translation.pipe';
 import { GAMESTATE } from '@/app/shared/models/interfaces';
+import { GameStateService } from '../services/game-state-service';
 
 @Component({
   selector: 'app-game-word-to-draw',
@@ -34,25 +33,23 @@ export class GameWordToDrawComponent implements OnInit, OnDestroy {
   loading = true;
 
   word = '';
-  @Output() drawWord = new EventEmitter();
 
   subscriptions = new Subscription();
   timerSubscription: Subscription | undefined;
 
   constructor(
     private gameConfigService: GameConfigService,
+    private gameStateService: GameStateService,
     private drawingService: DrawingService,
     private multiplayerService: MultiplayerService,
-    private router: Router,
     private translationService: TranslationService
   ) {}
 
   ngOnInit(): void {
-    if (this.router.url === `/${routes.SINGLEPLAYER}`) {
-      this.isSinglePlayer = true;
-    } else {
-      this.isMultiPlayer = true;
-    }
+    this.gameStateService.savePageToLocalStorage(GAMESTATE.showWord);
+    this.translationService.loadTranslations(this.translationService.getCurrentLang()).subscribe();
+    this.isSinglePlayer = this.gameStateService.isSingleplayer();
+    this.isMultiPlayer = this.gameStateService.isMultiplayer();
     if (this.isSinglePlayer) {
       if (this.drawingService.gameHasStarted) {
         this.subscriptions.add(
@@ -99,7 +96,10 @@ export class GameWordToDrawComponent implements OnInit, OnDestroy {
         })
       );
     }
-    this.translationService.loadTranslations(this.translationService.getCurrentLang()).subscribe();
+  }
+
+  toDrawingBoard() {
+    this.gameStateService.goToPage(GAMESTATE.drawingBoard);
   }
 
   startTimer() {
@@ -110,6 +110,7 @@ export class GameWordToDrawComponent implements OnInit, OnDestroy {
           this.timeLeft--;
           if (this.timeLeft <= 0) {
             this.multiplayerService.stateInfo = { ...this.multiplayerService.stateInfo, gameState: GAMESTATE.drawing };
+            this.toDrawingBoard();
           }
         })
       );
