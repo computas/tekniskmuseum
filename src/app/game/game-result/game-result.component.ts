@@ -9,6 +9,14 @@ import { TitleCasePipe } from '@angular/common';
 import { TranslationService } from '@/app/core/translation.service';
 import { TranslatePipe } from '@/app/core/translation.pipe';
 import { Subscription } from 'rxjs';
+import {
+  trigger,
+  style,
+  animate,
+  transition,
+  state,
+  // ...
+} from '@angular/animations';
 
 @Component({
   selector: 'app-game-result',
@@ -16,6 +24,13 @@ import { Subscription } from 'rxjs';
   styleUrls: ['./game-result.component.scss'],
   standalone: true,
   imports: [MatCardImage, MatButton, TitleCasePipe, TranslatePipe],
+  animations: [
+    trigger('fadeIn', [
+      state('hidden', style({ opacity: 0 })),
+      state('visible', style({ opacity: 1 })),
+      transition('hidden => visible', [animate('1s')]),
+    ]),
+  ],
 })
 export class GameResultComponent implements OnInit, OnDestroy {
   results: Result[] = [];
@@ -29,6 +44,7 @@ export class GameResultComponent implements OnInit, OnDestroy {
   newHighscore = false;
   getHighscoreSubscription: Subscription | null = null;
   postHighscoreSubscription: Subscription | null = null;
+  iState = 'hidden';
   constructor(
     private drawingService: DrawingService,
     private multiplayerService: MultiplayerService,
@@ -77,10 +93,17 @@ export class GameResultComponent implements OnInit, OnDestroy {
     } else {
       this.results = this.drawingService.results;
     }
+    this.startAnimation();
     this.translationService.loadTranslations(this.translationService.getCurrentLang()).subscribe();
   }
   ngOnDestroy(): void {
     this.getHighscoreSubscription?.unsubscribe();
     this.postHighscoreSubscription?.unsubscribe();
+  }
+
+  startAnimation() {
+    setTimeout(() => {
+      this.iState = 'visible';
+    }, 200);
   }
 }

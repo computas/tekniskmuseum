@@ -1,77 +1,70 @@
 <div class="result-container-background">
   <div class="result-container">
-    <div><img class="logo" src="assets/logo/IO-logo-inverted_transparent-bg.png" alt="logo" /></div>
-    @if (ismultiplayer && hasWon) {
-    <div id="result-header" class="result-header-multi">
-      <h1 class="result-header-multi">
-        <span class="winner">{{ 'WINNER_TEXT' | translate }}</span>
-        <span class="winner-points"
-          >&nbsp;{{ 'POINTS_INFO_TEXT' | translate }} {{ score }} {{ 'POINTS' | translate }}</span
-        >
-      </h1>
+    <div [@fadeIn]="iState" id="i-text-box-container">
+      <svg xmlns="http://www.w3.org/2000/svg" width="41" height="130" viewBox="0 0 41 200" fill="none">
+        <path
+          d="M0 181.429L3.14276 18.5711C3.14276 8.28525 11.1426 -1.96817e-06 21.7147 -1.96817e-06C32.2857 -1.96817e-06 40.5711 8.28525 40.5711 18.5711C40.5711 26.571 35.4284 33.1427 28.2855 36.2854L14.8569 42.0002C7.71456 44.8568 3.14276 51.7146 3.14276 59.4284C3.14276 61.429 3.14276 63.1426 4.85719 68.2857L39.7141 176C40.2856 177.714 40.5711 179.428 40.5711 181.429C40.5711 191.714 32.2857 200 21.7147 200H18.571C8.31459 200 0 191.686 0 181.429Z"
+          fill="#FBFBFB"
+        />
+      </svg>
+      <div id="i-text-box">
+        <p id="i-text-box-line-1">Bra jobba! Du og <span id="o">O</span> er et bra team</p>
+        <p id="i-text-box-line-2">
+          Dere fikk <span id="text-box-points">{{ score }} poeng </span>
+        </p>
+      </div>
     </div>
-    } @if (ismultiplayer && !hasWon) {
-    <div id="result-header" class="result-header-multi">
-      <h1 class="result-header-multi">
-        <span class="loser">{{ 'LOSER_TEXT' | translate }}</span>
-        <span class="loser-points"
-          >&nbsp;{{ 'POINTS_INFO_TEXT' | translate }} {{ score }} {{ 'POINTS' | translate }}</span
-        >
-      </h1>
-    </div>
-    } @if (!ismultiplayer) {
-    <h1 id="result-header">{{ 'RESULT_TEXT' | translate }}</h1>
-    }
     <div class="result-section">
-      <h3 id="score-header">{{ 'TOTAL_POINTS' | translate }} {{ score }} {{ 'points' | translate }}</h3>
       <div id="highscore-section">
-        @if (newHighscore) {
-        <div>
-          <h2 id="highscore-number">{{ 'NEW_HIGHSCORE_TEXT' | translate }}</h2>
-        </div>
-        } @else {
         <div id="not-highscore-section">
           <h2 id="highscore-text">{{ 'TODAYS_HIGHSCORE_TEXT' | translate }}</h2>
-          <h2 id="highscore-number">
-            {{ todaysHighscore.toString() }}
-          </h2>
+          <h2 id="highscore-number">{{ todaysHighscore.toString() }} poeng</h2>
         </div>
-        }
-      </div>
-      <div id="result-card-container">
-        @for (result of results; track result) {
-        <div id="result-card">
-          <img
-            mat-card-image
-            [src]="result.imageData"
-            [className]="result.hasWon ? 'game-result-img card-won' : 'game-result-img card-loss'"
-            alt=""
-          />
-          <p id="result-subtitile">
-            @if (result.hasWon) {
-            <span class="material-icons" id="won"> done </span>
-            } @if (!result.hasWon) {
-            <span class="material-icons" id="loss"> clear </span>
-            } @if (result.word) {
-            <span class="result-word"
-              >{{ result.word | titlecase }}
-              @if (ismultiplayer) {
-              <span class="multiplayer-score"> {{ result.score }} p</span>
-              }</span
-            >
-            }
-          </p>
-        </div>
-        }
       </div>
     </div>
-    <div class="button-footer">
-      <a href="/" class="link-float"
-        ><button mat-raised-button class="btn btn-again">
-          <span class="material-icons icon"> autorenew </span>
+    <div id="result-card-container">
+      @for (result of results; track result) {
+      <div id="result-card">
+        <img
+          mat-card-image
+          [src]="result.imageData"
+          [className]="result.hasWon ? 'game-result-img card-won' : 'game-result-img card-loss'"
+          alt=""
+        />
+        <p id="result-subtitle">
+          @if (result.word) {
+          <span class="result-word">{{ result.word | titlecase }} </span>
+          <span class="multiplayer-score"> {{ result.score }} p</span>
+          }
+        </p>
+      </div>
+      }
+    </div>
+    <div id="o-text-box-container">
+      <div id="o-text-box">
+        <p id="i-text-box-line-1">Nå blir det lettere for meg å gjette neste gang!</p>
+      </div>
+      <svg xmlns="http://www.w3.org/2000/svg" width="200" height="130" viewBox="0 0 200 200" fill="none">
+        <path
+          d="M59.7143 159.428H141.143C151.714 159.428 159.715 150.285 159.715 140.286L159.429 59.143C159.429 48.8572 151.143 40.8573 140.857 40.5711H59.7143C49.4285 40.5711 41.4287 48.5719 40.8573 58.5716V140.286C40.8573 150.857 49.4285 159.428 59.7143 159.428ZM41.7147 186.857L1.14297 65.7145C0.28616 62.8573 0 61.1428 0 59.143C0 53.9997 2.28593 49.1425 5.714 45.9998L46.2857 5.42867C49.7146 1.99998 54.5718 -1.96817e-06 59.7143 -1.96817e-06H140.857C146.286 -1.96817e-06 150.857 1.99998 154.286 5.42867L194.571 45.7144C197.999 49.1425 200 53.9997 200 59.143C200 61.1428 199.714 63.1426 199.143 65.143L158.571 186.857V187.143C156.286 194.286 149.144 200 140.857 200H59.7143C51.4285 200 44.286 194.286 41.7147 186.857Z"
+          fill="#FBFBFB"
+        />
+      </svg>
+    </div>
+
+    <div id="summary-buttons-container">
+      <a href="/playgame/singleplayer">
+        <button mat-raised-button class="btn btn-again">
+          <!--<span class="material-icons icon"> autorenew </span>-->
           {{ 'PLAY_AGAIN_BUTTON' | translate }}
-        </button></a
-      >
+        </button>
+      </a>
+      <a href="/">
+        <button mat-raised-button class="btn btn-home">
+          <!--<span class="material-icons icon"> home </span>-->
+          {{ 'END_GAME_BUTTON' | translate }}
+        </button>
+      </a>
     </div>
   </div>
 </div>
