@@ -12,8 +12,9 @@ export class SpeechBubbleComponent {
   @Input() textColor: CustomColorsIO = CustomColorsIO.black; // Default color
   @Input() bubbleColor: CustomColorsIO = CustomColorsIO.pastelBlue; // Default color
   @Input() titleText: string | undefined = '';
-  @Input() bodyText = 'Hello world!';
+  @Input() bodyText: string | undefined = 'Hello world!';
 
+  // Arrow location and direction
   private _pointerSide: PointerSide = PointerSide.Top;
 
   @Input() set pointerSide(value: PointerSide) {
@@ -44,9 +45,25 @@ export class SpeechBubbleComponent {
     return this._isFlipped;
   }
 
+  // Bubble format
+  private _bubbleSize: 'small' | 'medium' | 'large' = 'large';
+
+  @Input()
+  set bubbleSize(value: 'small' | 'medium' | 'large') {
+    this._bubbleSize = this.formatString(value) as 'small' | 'medium' | 'large';
+  }
+
+  get bubbleSize(): 'small' | 'medium' | 'large' {
+    return this._bubbleSize;
+  }
+
+  formatString(value: string): string {
+    return value?.trim().toLowerCase();
+  }
+
   computedClasses(): string[] {
     this.validateConfiguration();
-    return ['speech-bubble', this._pointerSide, this._arrowAlignment, this._isFlipped ? 'flip' : ''];
+    return ['speech-bubble', this._pointerSide, this._arrowAlignment, this._isFlipped ? 'flip' : '', this._bubbleSize];
   }
 
   validateConfiguration() {
