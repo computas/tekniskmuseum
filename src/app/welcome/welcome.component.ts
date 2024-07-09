@@ -11,13 +11,14 @@ import { CommonModule } from '@angular/common';
 import { GAMESTATE, SupportedLanguages } from '../shared/models/interfaces';
 import { SpeechBubbleComponent } from '../game/speech-bubble/speech-bubble.component';
 import { GameStateService } from '../game/services/game-state-service';
+import { SupportedLanguages } from '../shared/models/interfaces';
 
 @Component({
   selector: 'app-welcome',
   templateUrl: './welcome.component.html',
   styleUrls: ['./welcome.component.scss'],
   standalone: true,
-  imports: [RouterLink, RouterLinkActive, MatButton, MatIcon, TranslatePipe, CommonModule, SpeechBubbleComponent],
+  imports: [RouterLink, RouterLinkActive, MatButton, MatIcon, TranslatePipe, CommonModule],
 })
 export class WelcomeComponent implements OnInit, OnDestroy {
   private headerClicks = 0;
