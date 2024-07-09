@@ -7,6 +7,7 @@ import { TranslatePipe } from '@/app/core/translation.pipe';
 import { GameDrawingFeedbackComponent } from './game-drawing-feedback/game-drawing-feedback.component';
 import { GameDrawingDisplayComponent } from './game-drawing-display/game-drawing-display.component';
 import { GameIntermediateResultHeaderComponent } from './game-intermediate-result-header/game-intermediate-result-header.component';
+import { GameExampleDrawingsComponent } from './game-example-drawings/game-example-drawings.component';
 import { GameIntermediateResultFooterComponent } from './game-intermediate-result-footer/game-intermediate-result-footer.component';
 import { GameStateService } from '../services/game-state-service';
 @Component({
@@ -20,6 +21,7 @@ import { GameStateService } from '../services/game-state-service';
     GameDrawingDisplayComponent,
     GameIntermediateResultComponent,
     GameIntermediateResultHeaderComponent,
+    GameExampleDrawingsComponent,
     GameIntermediateResultFooterComponent,
   ],
 })
