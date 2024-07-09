@@ -18,52 +18,49 @@
     </header>
     
     <div class="main-content">
-      <div class="I-figure" #figureI [@moveFigure]="{value: stateFigureI, params: {y: moveDistanceI}}">
+      <div class="I-figure" [@moveFigure]="{value: stateFigureI, params: {y: moveDistanceI}}">
         <img src="assets/I-figure.svg" height="180px" />
       </div>
       <div class="info-text">
-        <app-speech-bubble #firstBubbleO [@showBubble]="stateFirstBubbleO"  class="speech-bubble right"
+        <app-speech-bubble [@showBubble]="stateFirstBubbleO"  class="speech-bubble right"
           [pointerSide]="PointerSide.Bottom"
           [arrowAlignment]="ArrowAlignment.Right"
           [isFlipped]="false"
-          [bodyText]="'INTRO_MESSAGE' | translate "
           [textColor]="CustomColorsIO.white"
-          [bubbleColor]="CustomColorsIO.cobaltBlue"
+          [bubbleColor]="CustomColorsIO.indigo"
+          [bubbleSize]="'medium'"
           >
+          <div slot='body-alt' class='speech-bubble-text'>{{ 'INTRO_MESSAGE' | translate }}<span slot='body-alt' class="avatar-name"> O</span></div>
         </app-speech-bubble>
 
-        <app-speech-bubble #firstBubbleI [@showBubble]="stateFirstBubbleI" class="speech-bubble left"
+        <app-speech-bubble [@showBubble]="stateFirstBubbleI" class="speech-bubble left"
           [pointerSide]="PointerSide.Bottom"
           [arrowAlignment]="ArrowAlignment.Left"
           [isFlipped]="false"
-          [bodyText]="'INTRO_MESSAGE_2' | translate"
+          [bubbleSize]="'medium'"
           >
+          <div slot='body-alt' class='speech-bubble-text'>{{ 'INTRO_MESSAGE_2' | translate }}<span class="avatar-name"> I</span></div>
         </app-speech-bubble>
 
 
-        <app-speech-bubble #secondBubbleO  [@showBubble]="stateSecondBubbleO " class="speech-bubble right"
+        <app-speech-bubble [@showBubble]="stateSecondBubbleO " class="speech-bubble right"
           [pointerSide]="PointerSide.Bottom"
           [arrowAlignment]="ArrowAlignment.Right"
           [isFlipped]="false"
-          [bodyText]="'INTRO_EXPLANATION' | translate "
           [textColor]="CustomColorsIO.white"
-          [bubbleColor]="CustomColorsIO.cobaltBlue"
+          [bubbleColor]="CustomColorsIO.indigo"
+          [bubbleSize]="'medium'"
           >
+          <div slot='body-alt' class='speech-bubble-text'> <span class="avatar-name"> I</span>{{ 'INTRO_EXPLANATION' | translate }} <br /> {{ 'INTRO_EXPLANATION_2' | translate }} <br /> </div>
         </app-speech-bubble>
-
-
-        <app-speech-bubble #secondBubbleI [@showBubble]="stateSecondBubbleI" class="speech-bubble left"
+        <app-speech-bubble [@showBubble]="stateSecondBubbleI" class="speech-bubble left"
           [pointerSide]="PointerSide.Top"
           [arrowAlignment]="ArrowAlignment.Left"
           [isFlipped]="false"
-          [bodyText]="'INTRO_CALL_TO_ACTION' | translate "
+          [bubbleSize]="'medium'"
           >
+          <div slot='body-alt' class='speech-bubble-text'>{{ 'INTRO_CALL_TO_ACTION' | translate }}<span class="avatar-name"> O</span>{{ 'INTRO_CALL_TO_ACTION_2' | translate }} <br /></div>
         </app-speech-bubble>
-        
-        <!-- <div class="temp-bubble right" [@showBubble]="stateFirstBubbleO">{{ 'INTRO_MESSAGE' | translate }}<span class="avatar-name"> O</span>.</div>
-        <div class="temp-bubble left" [@showBubble]="stateFirstBubbleI">{{ 'INTRO_MESSAGE_2' | translate }}<span class="avatar-name"> I</span></div>
-        <div class="temp-bubble right" [@showBubble]="stateSecondBubbleO "><span class="avatar-name"> I</span>{{ 'INTRO_EXPLANATION' | translate }} <br /> {{ 'INTRO_EXPLANATION_2' | translate }} <br /></div>
-        <div class="temp-bubble left" [@showBubble]="stateSecondBubbleI"> {{ 'INTRO_CALL_TO_ACTION' | translate }}<span class="avatar-name"> O</span>{{ 'INTRO_CALL_TO_ACTION_2' | translate }} <br /></div> -->
 
       </div>
       <div class="O-figure" #figureO [@moveFigure]="{value: stateFigureO, params: {y: moveDistanceO}}">

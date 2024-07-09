@@ -46,6 +46,7 @@ export class WelcomeComponent implements OnInit, OnDestroy {
   private headerClicks = 0;
   currentLang$: Observable<string>;
   private destroy$ = new Subject<void>();
+  
   stateFigureI = 'hidden';
   stateFigureO = 'hidden';
   stateFirstBubbleI = 'hidden'
@@ -54,9 +55,8 @@ export class WelcomeComponent implements OnInit, OnDestroy {
   stateSecondBubbleO = 'hidden'
   stateButton = 'hidden'
 
-  moveDistanceI: number = 228;
-  moveDistanceO: number = 228;
-  
+  moveDistanceI: number = 135;
+  moveDistanceO: number = 245;
 
   PointerSide = PointerSide;
   ArrowAlignment = ArrowAlignment;
@@ -82,7 +82,8 @@ export class WelcomeComponent implements OnInit, OnDestroy {
       .subscribe(() => {
         this.translationService.setLanguage(savedLanguage);
       });
-      this.startAnimation();
+    
+    this.startAnimation();
   }
 
   goToAdmin() {
@@ -96,7 +97,6 @@ export class WelcomeComponent implements OnInit, OnDestroy {
   changeLanguage(lang: SupportedLanguages) {
     this.translationService.changeLanguage(lang);
   }
-
 
   startAnimation() {
     setTimeout(() => {
@@ -115,7 +115,7 @@ export class WelcomeComponent implements OnInit, OnDestroy {
       this.stateSecondBubbleI = 'visible'
       this.stateFigureI = 'moved'
       this.stateButton = 'visible'
-    }, 7000);
+    }, 8000);
   }
 
   ngOnDestroy() {
