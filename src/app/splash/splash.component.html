@@ -2,8 +2,21 @@
     <button class="logo">
         <img src="assets/logo/IO-logo-inverted_transparent-bg.png" alt="logo" />
     </button>
-
-    <img src="assets/I-teaching-O.svg" alt="Norway flag" />
-
-    <div class="play-text">{{ 'PRESS_TO_START' | translate }}</div>
+  
+    <app-speech-bubble
+        class="speech-bubble"
+        [textColor]="textColor"
+        [bodyText]="'Slik ser et eple ut, O!'"
+        [pointerSide]="PointerSide.Bottom"
+        [arrowAlignment]="ArrowAlignment.Left"
+        [bubbleSize]="'large'">
+    </app-speech-bubble>
+  
+    <img class="teaching-image" src="assets/I-teaching-O.svg" alt="I teaching O" />
+  
+    <div class="play-text">Trykk for å spille</div>
 </div>
+
+<!-- Bør heller ta inn translation pipe:
+[bodyText]="'SPEECH_BUBBLE_TEXT' | translate"
+<div class="play-text">{{ 'PRESS_TO_START' | translate }}</div> -->

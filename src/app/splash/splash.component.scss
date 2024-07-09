@@ -1,46 +1,58 @@
 @import '../../variables.scss';
 
 .container-background {
-  position: relative;
-  width: 100%;
-  height: 100vh;
-  background-image: url('../../assets/background/io_rutemoenster-inverted.png');
-  background-size: cover;
-  background-color: black;
-  display: flex;
-  align-items: center;
-  justify-content: center;
+    position: relative;
+    width: 100%;
+    height: 100vh;
+    background-image: url('../../assets/background/io_rutemoenster-inverted.png');
+    background-size: cover;
+    background-color: black;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 20px;
 }
 
 .logo {
-  position: absolute;
-  top: 0;
-  left: 0;
-  margin: 35px;
-  height: 44px;
-  width: 70px;
-  cursor: pointer;
+    position: absolute;
+    top: 0;
+    left: 0;
+    margin: 35px;
+    height: 44px;
+    width: 70px;
+    cursor: pointer;
 
-  img {
-    width: 100%;
-  }
+    img {
+        width: 100%;
+    }
+}
+
+.speech-bubble {
+    align-self: flex-start;
+    margin-left: 570px;
+    margin-bottom: 30px;
+}
+
+.teaching-image {
+    margin-top: 20px;
+    margin-bottom: 200px;
 }
 
 .play-text {
-    position: absolute;
-    top: 75%;
     color: $text_primary_color;
     text-align: center;
-    width: 100%;
     font-family: AeonikMedium;
     font-size: 35px;
     font-weight: 300;
     line-height: 35px;
     text-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
     font-style: italic;
-  
+    margin-top: 20px;
+    margin-bottom: 20px;
+
     @media (min-width: 600px) {
-      font-size: 90px;
-      line-height: 60px;
+        font-size: 90px;
+        line-height: 60px;
     }
-  }
+}
