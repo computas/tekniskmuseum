@@ -9,6 +9,7 @@ import { TranslatePipe } from '../core/translation.pipe';
 import { Observable, Subject, takeUntil } from 'rxjs';
 import { CommonModule } from '@angular/common';
 import { GAMESTATE, SupportedLanguages } from '../shared/models/interfaces';
+import { SpeechBubbleComponent } from '../game/speech-bubble/speech-bubble.component';
 import { GameStateService } from '../game/services/game-state-service';
 
 @Component({
@@ -16,7 +17,7 @@ import { GameStateService } from '../game/services/game-state-service';
   templateUrl: './welcome.component.html',
   styleUrls: ['./welcome.component.scss'],
   standalone: true,
-  imports: [RouterLink, RouterLinkActive, MatButton, MatIcon, TranslatePipe, CommonModule],
+  imports: [RouterLink, RouterLinkActive, MatButton, MatIcon, TranslatePipe, CommonModule, SpeechBubbleComponent],
 })
 export class WelcomeComponent implements OnInit, OnDestroy {
   private headerClicks = 0;

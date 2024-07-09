@@ -5,10 +5,10 @@ import { MultiplayerService } from '../services/multiplayer.service';
 import { MatButton } from '@angular/material/button';
 import { MatIcon } from '@angular/material/icon';
 import { NgIf } from '@angular/common';
-import { GameLevelConfig, GameConfigService } from '../services/game-config.service';
+import { GameConfigService } from '../services/game-config.service';
 import { TranslationService } from '@/app/core/translation.service';
 import { TranslatePipe } from '@/app/core/translation.pipe';
-import { GAMESTATE } from '@/app/shared/models/interfaces';
+import { GameLevelConfig, GAMESTATE } from '@/app/shared/models/interfaces';
 import { GameStateService } from '../services/game-state-service';
 
 @Component({
