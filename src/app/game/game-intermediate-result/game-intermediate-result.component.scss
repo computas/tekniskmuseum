@@ -58,5 +58,6 @@
 
 .example-drawings {
   grid-row: 3 / 4;
-  grid-column: 2 / 8;
+  grid-column: 1 / -1;
+  align-content: center;
 }

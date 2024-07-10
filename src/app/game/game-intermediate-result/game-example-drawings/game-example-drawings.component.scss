@@ -1,7 +1,12 @@
+.drawing-container {
+  display: flex;
+  justify-content: space-between;
+}
+
 .example-drawings-list {
   display: flex;
   list-style: none;
-  justify-content: space-between;
+  gap: 3em;
 }
 
 .example-drawing {
