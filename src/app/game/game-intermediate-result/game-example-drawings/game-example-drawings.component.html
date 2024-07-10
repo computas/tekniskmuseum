@@ -1,4 +1,17 @@
 <div class="drawing-container">
+  <app-speech-bubble
+    class="speech-bubble right"
+    [pointerSide]="PointerSide.Top"
+    [arrowAlignment]="ArrowAlignment.Left"
+    [isFlipped]="false"
+    [textColor]="CustomColorsIO.black"
+    [bubbleColor]="CustomColorsIO.teal"
+    [bubbleSize]="'small'"
+  >
+    <div slot="body-alt" class="speech-bubble-text">
+      {{ getMessage() }}
+    </div>
+  </app-speech-bubble>
   <ul class="example-drawings-list">
     @for (exampleDrawing of exampleDrawings; track exampleDrawing) {
     <li class="example-drawing">{{ exampleDrawing }}<img [src]="exampleDrawing" /></li>

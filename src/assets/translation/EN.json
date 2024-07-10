@@ -59,5 +59,10 @@
   "ROUND_FEEDBACK_FAILED_DESC_2": "I can be a bit slow sometimes.. I'll do better next time!",
 
   "ROUND_FEEDBACK_CORRECT_TITLE": "Well drawn!",
-  "ROUND_FEEDBACK_CORRECT_DESC_1": "Thanks to you I guessed the correct word. Keep it up!"
+  "ROUND_FEEDBACK_CORRECT_DESC_1": "Thanks to you I guessed the correct word. Keep it up!",
+
+  "EXAMPLE_DRAWINGS_FB_CORRECT_P1": "I have learned that",
+  "EXAMPLE_DRAWINGS_FB_CORRECT_P2": "looks like this!",
+  "EXAMPLE_DRAWINGS_FB_FAILED_P1": "Because I have learned that",
+  "EXAMPLE_DRAWINGS_FB_FAILED_P2": "looks like this!"
 }

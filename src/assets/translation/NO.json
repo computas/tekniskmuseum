@@ -61,5 +61,10 @@
   "ROUND_FEEDBACK_FAILED_DESC_2": "Jeg kan være litt dum noen ganger..",
 
   "ROUND_FEEDBACK_CORRECT_TITLE": "Bra tegnet!",
-  "ROUND_FEEDBACK_CORRECT_DESC_1": "Takket være deg klarte jeg å gjette riktig."
+  "ROUND_FEEDBACK_CORRECT_DESC_1": "Takket være deg klarte jeg å gjette riktig.",
+
+  "EXAMPLE_DRAWINGS_FB_CORRECT_P1": "Jeg har lært at",
+  "EXAMPLE_DRAWINGS_FB_CORRECT_P2": "ser sånn ut!",
+  "EXAMPLE_DRAWINGS_FB_FAILED_P1": "For jeg har lært at",
+  "EXAMPLE_DRAWINGS_FB_FAILED_P2": "ser sånn ut!"
 }
