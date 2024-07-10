@@ -1,6 +1,6 @@
-import { TranslationService } from '@/app/core/translation.service';
 import { endpoints } from '@/app/shared/models/endpoints';
-import { HttpClient, HttpHeaders } from '@angular/common/http';
+import { SupportedLanguages } from '@/app/shared/models/interfaces';
+import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 
@@ -9,28 +9,14 @@ import { Observable } from 'rxjs';
 })
 export class ExampleDrawingService {
   baseUrl = endpoints.TEKNISKBACKEND;
-  private exampleDrawings: string[] = [];
 
-  constructor(private http: HttpClient, private translationService: TranslationService) {}
+  constructor(private http: HttpClient) {}
 
-  getExampleDrawings(numberOfDrawings: number, label: string): Observable<string[]> {
-    if (this.hasNorwegianLabel()) {
-      label = this.getTranslatedLabel(label);
-    }
-
+  getExampleDrawings(numberOfDrawings: number, label: string, lang: SupportedLanguages): Observable<string[]> {
     const body = '';
     return this.http.post<string[]>(
-      `${this.baseUrl}/${endpoints.GETEXAMPLEDRAWINGS}?n=${numberOfDrawings}&label=${label}`,
+      `${this.baseUrl}/${endpoints.GETEXAMPLEDRAWINGS}?n=${numberOfDrawings}&label=${label}&lang=${lang}`,
       body
     );
-  }
-
-  private getTranslatedLabel(label: string): string {
-    this.translationService.loadTranslations('EN');
-    return this.translationService.getTranslation(label);
-  }
-
-  private hasNorwegianLabel(): boolean {
-    return this.translationService.getCurrentLang() === 'NO';
   }
 }

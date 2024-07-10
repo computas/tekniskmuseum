@@ -17,6 +17,7 @@ import * as EN from '../../../../assets/translation/EN.json';
   styleUrl: './game-example-drawings.component.scss',
 })
 export class GameExampleDrawingsComponent implements OnInit {
+  language: SupportedLanguages = this.translationService.getCurrentLang();
   exampleDrawings: string[] = [];
   label: string = '';
   PointerSide = PointerSide;
@@ -29,15 +30,14 @@ export class GameExampleDrawingsComponent implements OnInit {
   ) {}
   ngOnInit(): void {
     this.label = this.drawingService.label;
-    this.exampleDrawingService.getExampleDrawings(3, this.label).subscribe((res) => {
+    this.exampleDrawingService.getExampleDrawings(3, this.label, this.language).subscribe((res) => {
       this.exampleDrawings = res;
     });
   }
 
   getMessage(): string {
-    const language: SupportedLanguages = this.translationService.getCurrentLang();
-    const hasCorrectGuess = true; //this.drawingService.lastResult.hasWon;
-    return this.getTranslatedMessage(this.label, language, hasCorrectGuess);
+    const hasCorrectGuess = this.drawingService.lastResult.hasWon;
+    return this.getTranslatedMessage(this.label, this.language, hasCorrectGuess);
   }
 
   getTranslatedMessage(label: string, lang: SupportedLanguages, hasCorrectGuess: boolean): string {
