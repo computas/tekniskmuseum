@@ -10,12 +10,13 @@
       <app-speech-bubble
         [pointerSide]="PointerSide.Left"
         [arrowAlignment]="ArrowAlignment.Top"
-        [isFlipped]="false"
         [titleText]="titleText"
         [bodyText]="'Dere fikk ' + score + ' poeng'"
         [textColor]="CustomColorsIO.black"
         [bubbleColor]="CustomColorsIO.pastelBlue"
-      ></app-speech-bubble>
+        [bubbleSize]="'medium'"
+        ><h1 slot="title">Bra jobba! Du og <span id="o-avatar">O</span> er et godt team!</h1></app-speech-bubble
+      >
     </div>
     <div class="result-section">
       <div id="highscore-section">
@@ -48,13 +49,13 @@
         id="o-speech-bubble"
         [pointerSide]="PointerSide.Right"
         [arrowAlignment]="ArrowAlignment.Center"
-        [isFlipped]="true"
         [titleText]="'Nå blir det lettere for meg å gjette neste gang!'"
         [bodyText]="''"
-        [textColor]="CustomColorsIO.black"
-        [bubbleColor]="CustomColorsIO.pastelBlue"
+        [textColor]="CustomColorsIO.white"
+        [bubbleColor]="CustomColorsIO.indigo"
+        [bubbleSize]="'medium'"
       ></app-speech-bubble>
-      <svg xmlns="http://www.w3.org/2000/svg" width="200" height="130" viewBox="0 0 200 200" fill="none">
+      <svg xmlns="http://www.w3.org/2000/svg" width="200" height="100" viewBox="0 0 200 200" fill="none">
         <path
           d="M59.7143 159.428H141.143C151.714 159.428 159.715 150.285 159.715 140.286L159.429 59.143C159.429 48.8572 151.143 40.8573 140.857 40.5711H59.7143C49.4285 40.5711 41.4287 48.5719 40.8573 58.5716V140.286C40.8573 150.857 49.4285 159.428 59.7143 159.428ZM41.7147 186.857L1.14297 65.7145C0.28616 62.8573 0 61.1428 0 59.143C0 53.9997 2.28593 49.1425 5.714 45.9998L46.2857 5.42867C49.7146 1.99998 54.5718 -1.96817e-06 59.7143 -1.96817e-06H140.857C146.286 -1.96817e-06 150.857 1.99998 154.286 5.42867L194.571 45.7144C197.999 49.1425 200 53.9997 200 59.143C200 61.1428 199.714 63.1426 199.143 65.143L158.571 186.857V187.143C156.286 194.286 149.144 200 140.857 200H59.7143C51.4285 200 44.286 194.286 41.7147 186.857Z"
           fill="#FBFBFB"
@@ -63,22 +64,19 @@
     </div>
 
     <div id="summary-buttons-container">
-      <a href="/playgame/singleplayer">
-        <button mat-raised-button class="btn">
-          <div class="btn-text">
-            <mat-icon class="material-icons icon">autorenew</mat-icon>
-            {{ 'PLAY_AGAIN_BUTTON' | translate }}
-          </div>
-        </button>
-      </a>
-      <a href="/">
-        <button mat-raised-button class="btn">
-          <div class="btn-text">
-            <mat-icon class="material-icons icon">home</mat-icon>
-            {{ 'END_GAME_BUTTON' | translate }}
-          </div>
-        </button>
-      </a>
+      <button mat-raised-button (click)="endGame()" class="btn">
+        <div class="btn-text">
+          <mat-icon class="material-icons icon">autorenew</mat-icon>
+          {{ 'PLAY_AGAIN_BUTTON' | translate }}
+        </div>
+      </button>
+
+      <button mat-raised-button (click)="endGame()" class="btn">
+        <div class="btn-text">
+          <mat-icon class="material-icons icon">home</mat-icon>
+          {{ 'END_GAME_BUTTON' | translate }}
+        </div>
+      </button>
     </div>
   </div>
 </div>

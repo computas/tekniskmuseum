@@ -141,7 +141,7 @@
 
 #i-text-box-container {
   display: flex;
-  gap: 3rem;
+  gap: 2rem;
   margin: 0 auto;
 }
 
@@ -159,7 +159,7 @@
   display: flex;
   flex-direction: row;
   margin: 0 auto;
-  gap: 3rem;
+  gap: 2rem;
 }
 
 #summary-buttons-container {
@@ -184,16 +184,22 @@
   font-style: normal;
   font-weight: 700;
   line-height: normal;
+  font-family: AeonikLight;
 }
 
-.o-avatar {
+#o-avatar {
   background: var(--Icon-gradient-2, linear-gradient(180deg, #fd595d 0%, #e4a969 50%, #1bc0d2 100%));
   background-clip: text;
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
   font-family: 'ICT Hofmann';
-  font-size: 64px;
+  font-size: 48px;
   font-style: normal;
   font-weight: 400;
   line-height: normal;
+}
+
+app-speech-bubble h1 {
+  font-size: 36px;
+  font-family: AeonikBold;
 }
