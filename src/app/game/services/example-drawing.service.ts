@@ -1,7 +1,8 @@
 import { TranslationService } from '@/app/core/translation.service';
 import { endpoints } from '@/app/shared/models/endpoints';
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
+import { Observable } from 'rxjs';
 
 @Injectable({
   providedIn: 'root',
@@ -12,21 +13,16 @@ export class ExampleDrawingService {
 
   constructor(private http: HttpClient, private translationService: TranslationService) {}
 
-  getExampleDrawings(numberOfDrawings: number, label: string) {
+  getExampleDrawings(numberOfDrawings: number, label: string): Observable<string[]> {
     if (this.hasNorwegianLabel()) {
       label = this.getTranslatedLabel(label);
     }
 
     const body = '';
-    this.http
-      .post<string[]>(`${this.baseUrl}/${endpoints.GETEXAMPLEDRAWINGS}/?n=${numberOfDrawings}&label=${label}`, body, {
-        observe: 'response',
-      })
-      .subscribe((res) => {
-        console.log('Response body: ' + res.body);
-      });
-
-    return;
+    return this.http.post<string[]>(
+      `${this.baseUrl}/${endpoints.GETEXAMPLEDRAWINGS}?n=${numberOfDrawings}&label=${label}`,
+      body
+    );
   }
 
   private getTranslatedLabel(label: string): string {

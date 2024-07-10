@@ -18,6 +18,7 @@ import * as EN from '../../../../assets/translation/EN.json';
 })
 export class GameExampleDrawingsComponent implements OnInit {
   exampleDrawings: string[] = [];
+  label: string = '';
   PointerSide = PointerSide;
   ArrowAlignment = ArrowAlignment;
   CustomColorsIO = CustomColorsIO;
@@ -27,17 +28,16 @@ export class GameExampleDrawingsComponent implements OnInit {
     private exampleDrawingService: ExampleDrawingService
   ) {}
   ngOnInit(): void {
-    this.exampleDrawingService.getExampleDrawings(2, 'helicopter');
-    for (let i = 0; i < 3; i++) {
-      this.exampleDrawings.push('test' + i + '.jpg');
-    }
+    this.label = this.drawingService.label;
+    this.exampleDrawingService.getExampleDrawings(3, this.label).subscribe((res) => {
+      this.exampleDrawings = res;
+    });
   }
 
   getMessage(): string {
-    const label = 'fjell'; // this.drawingService.label;
     const language: SupportedLanguages = this.translationService.getCurrentLang();
     const hasCorrectGuess = true; //this.drawingService.lastResult.hasWon;
-    return this.getTranslatedMessage(label, language, hasCorrectGuess);
+    return this.getTranslatedMessage(this.label, language, hasCorrectGuess);
   }
 
   getTranslatedMessage(label: string, lang: SupportedLanguages, hasCorrectGuess: boolean): string {

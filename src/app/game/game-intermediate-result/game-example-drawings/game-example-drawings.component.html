@@ -14,7 +14,7 @@
   </app-speech-bubble>
   <ul class="example-drawings-list">
     @for (exampleDrawing of exampleDrawings; track exampleDrawing) {
-    <li class="example-drawing">{{ exampleDrawing }}<img [src]="exampleDrawing" /></li>
+    <li class="example-drawing"><img class="example-drawing-img" [src]="exampleDrawing" /></li>
     }
   </ul>
 </div>
