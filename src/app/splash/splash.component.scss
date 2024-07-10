@@ -29,12 +29,6 @@
     }
 }
 
-.speech-bubble-adjusted {
-    position: relative;
-    left: -10px; 
-    margin-bottom: 20px;
-}
-
 .teaching-image {
     max-width: 80%;
     height: auto;
@@ -60,7 +54,7 @@
     }
 
     @media (min-width: 1024px) {
-        font-size: 50px;
+        font-size: 70px;
         line-height: 50px;
     }
 }
@@ -72,10 +66,6 @@
 
     .logo {
         margin: 35px;
-    }
-
-    .speech-bubble-adjusted {
-        left: -20px;
     }
 
     .teaching-image {
@@ -90,10 +80,6 @@
 
     .logo {
         margin: 35px;
-    }
-
-    .speech-bubble-adjusted {
-        left: -30px;
     }
 
     .teaching-image {

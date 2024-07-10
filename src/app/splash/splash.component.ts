@@ -6,21 +6,21 @@ import { CustomColorsIO } from '../shared/customColors';
 import { ArrowAlignment, PointerSide } from '../shared/models/interfaces';
 
 @Component({
-  selector: 'app-splash',
-  templateUrl: './splash.component.html',
-  styleUrls: ['./splash.component.scss'],
-  standalone: true,
-  imports: [SpeechBubbleComponent, TranslatePipe],
+    selector: 'app-splash',
+    templateUrl: './splash.component.html',
+    styleUrls: ['./splash.component.scss'],
+    standalone: true,
+    imports: [SpeechBubbleComponent, TranslatePipe],
 })
 export class SplashComponent {
-  textColor: CustomColorsIO = CustomColorsIO.black;
-  PointerSide = PointerSide;
-  ArrowAlignment = ArrowAlignment;
-  CustomColorsIO = CustomColorsIO;
+    textColor: CustomColorsIO = CustomColorsIO.black;
+    PointerSide = PointerSide;
+    ArrowAlignment = ArrowAlignment;
+    CustomColorsIO = CustomColorsIO;
 
-  constructor(private router: Router) {}
+    constructor(private router: Router) {}
 
-  navigateToWelcome() {
-    this.router.navigate(['/welcome']);
-  }
+    navigateToWelcome() {
+        this.router.navigate(['/welcome']);
+    }
 }
