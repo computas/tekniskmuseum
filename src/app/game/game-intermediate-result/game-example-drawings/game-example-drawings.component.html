@@ -1,1 +1,7 @@
-<p>game-example-drawings works!</p>
+<div class="drawing-container">
+  <ul class="example-drawings-list">
+    @for (exampleDrawing of exampleDrawings; track exampleDrawing) {
+    <li class="example-drawing">{{ exampleDrawing }}<img [src]="exampleDrawing" /></li>
+    }
+  </ul>
+</div>

@@ -1,0 +1,12 @@
+.example-drawings-list {
+  display: flex;
+  list-style: none;
+  justify-content: space-between;
+}
+
+.example-drawing {
+  height: 256px;
+  width: 256px;
+  background: white;
+  border-radius: 1em;
+}
