@@ -12,13 +12,14 @@
     align-items: center;
     justify-content: center;
     padding: 20px;
+    box-sizing: border-box;
 }
 
 .logo {
     position: absolute;
     top: 0;
     left: 0;
-    margin: 35px;
+    margin: 20px;
     height: 44px;
     width: 70px;
     cursor: pointer;
@@ -28,31 +29,74 @@
     }
 }
 
-.speech-bubble {
-    align-self: flex-start;
-    margin-left: 570px;
-    margin-bottom: 30px;
+.speech-bubble-adjusted {
+    position: relative;
+    left: -10px; 
+    margin-bottom: 20px;
 }
 
 .teaching-image {
+    max-width: 80%;
+    height: auto;
     margin-top: 20px;
-    margin-bottom: 200px;
+    margin-bottom: 20px;
 }
 
 .play-text {
     color: $text_primary_color;
     text-align: center;
     font-family: AeonikMedium;
-    font-size: 35px;
+    font-size: 25px;
     font-weight: 300;
-    line-height: 35px;
+    line-height: 25px;
     text-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
     font-style: italic;
     margin-top: 20px;
     margin-bottom: 20px;
 
     @media (min-width: 600px) {
-        font-size: 90px;
-        line-height: 60px;
+        font-size: 35px;
+        line-height: 35px;
+    }
+
+    @media (min-width: 1024px) {
+        font-size: 50px;
+        line-height: 50px;
+    }
+}
+
+@media (min-width: 600px) {
+    .container-background {
+        padding: 40px;
+    }
+
+    .logo {
+        margin: 35px;
+    }
+
+    .speech-bubble-adjusted {
+        left: -20px;
+    }
+
+    .teaching-image {
+        max-width: 70%;
+    }
+}
+
+@media (min-width: 1024px) {
+    .container-background {
+        padding: 60px;
+    }
+
+    .logo {
+        margin: 35px;
+    }
+
+    .speech-bubble-adjusted {
+        left: -30px;
+    }
+
+    .teaching-image {
+        max-width: 60%;
     }
 }
