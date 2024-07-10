@@ -10,12 +10,16 @@
       <app-speech-bubble
         [pointerSide]="PointerSide.Left"
         [arrowAlignment]="ArrowAlignment.Top"
-        [titleText]="titleText"
-        [bodyText]="'Dere fikk ' + score + ' poeng'"
+        [titleText]="''"
+        [bodyText]="''"
         [textColor]="CustomColorsIO.black"
         [bubbleColor]="CustomColorsIO.pastelBlue"
         [bubbleSize]="'medium'"
-        ><h1 slot="title">Bra jobba! Du og <span id="o-avatar">O</span> er et godt team!</h1></app-speech-bubble
+      >
+        <ng-content slot="body-alt">
+          <h1>{{ 'SUMMARY_I_1' | translate }} <span id="o-avatar">O</span> {{ 'SUMMARY_I_2' | translate }}</h1>
+          <p id="i-chat-bubble-body">{{ 'SUMMARY_I_3' | translate }} {{ score }} {{ 'SUMMARY_I_4' | translate }}</p>
+        </ng-content></app-speech-bubble
       >
     </div>
     <div class="result-section">
@@ -49,7 +53,7 @@
         id="o-speech-bubble"
         [pointerSide]="PointerSide.Right"
         [arrowAlignment]="ArrowAlignment.Center"
-        [titleText]="'Nå blir det lettere for meg å gjette neste gang!'"
+        [titleText]="'SUMMARY_O' | translate"
         [bodyText]="''"
         [textColor]="CustomColorsIO.white"
         [bubbleColor]="CustomColorsIO.indigo"

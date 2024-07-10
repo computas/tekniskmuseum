@@ -54,5 +54,11 @@
   "ROUND_FEEDBACK_FAILED_DESC_2": "I can be a bit slow sometimes.. I'll do better next time!",
 
   "ROUND_FEEDBACK_CORRECT_TITLE": "Well drawn!",
-  "ROUND_FEEDBACK_CORRECT_DESC_1": "Thanks to you I guessed the correct word. Keep it up!"
+  "ROUND_FEEDBACK_CORRECT_DESC_1": "Thanks to you I guessed the correct word. Keep it up!",
+
+  "SUMMARY_I_1": "Good job! You and",
+  "SUMMARY_I_2": "are a good team!",
+  "SUMMARY_I_3": "You got",
+  "SUMMARY_I_4": "points",
+  "SUMMARY_O": "I will have an easier time guessing next time!"
 }
