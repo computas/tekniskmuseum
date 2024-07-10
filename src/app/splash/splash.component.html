@@ -1,20 +1,21 @@
-<div class="container-background" (click)="navigateToWelcome()">
-    <button class="logo">
-        <img src="assets/logo/IO-logo-inverted_transparent-bg.png" alt="logo" />
-    </button>
-  
-    <app-speech-bubble
-        class="speech-bubble"
-        [textColor]="textColor"
-        [bodyText]="'Slik ser et eple ut, O!'"
-        [pointerSide]="PointerSide.Bottom"
-        [arrowAlignment]="ArrowAlignment.Left"
-        [bubbleSize]="'large'">
-    </app-speech-bubble>
-  
-    <img class="teaching-image" src="assets/I-teaching-O.svg" alt="I teaching O" />
-  
-    <div class="play-text">Trykk for å spille</div>
+<div class="container-background" (click)="navigateToWelcome()" (keypress)="navigateToWelcome()" tabindex="0">
+  <button class="logo">
+    <img src="assets/logo/IO-logo-inverted_transparent-bg.png" alt="logo" />
+  </button>
+
+  <app-speech-bubble
+    class="speech-bubble"
+    [textColor]="textColor"
+    [bodyText]="'Slik ser et eple ut, O!'"
+    [pointerSide]="PointerSide.Bottom"
+    [arrowAlignment]="ArrowAlignment.Left"
+    [bubbleSize]="'large'"
+  >
+  </app-speech-bubble>
+
+  <img class="teaching-image" src="assets/I-teaching-O.svg" alt="I teaching O" />
+
+  <div class="play-text">Trykk for å spille</div>
 </div>
 
 <!-- Bør heller ta inn translation pipe:

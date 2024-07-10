@@ -25,6 +25,6 @@ bootstrapApplication(AppComponent, {
     provideAnimations(),
     importProvidersFrom(HttpClient),
     TranslationService,
-    SplashComponent
+    SplashComponent,
   ],
 }).catch((err) => console.error(err));
