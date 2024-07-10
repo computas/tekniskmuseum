@@ -18,12 +18,11 @@
 
 #intermediate-container {
   display: grid;
-  grid-template-rows: 6vh 44fr 44fr 6vh;
+  grid-template-rows: 6vh 44fr 38fr 12vh;
   grid-template-columns: repeat(8, 1fr);
   position: relative;
-  min-height: 100vh;
   color: $text_primary_color;
-  padding: 2.5em;
+  padding: 1.7em;
 }
 
 .result-header {

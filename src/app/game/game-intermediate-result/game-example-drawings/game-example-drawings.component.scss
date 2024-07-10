@@ -9,13 +9,17 @@
   gap: 3em;
 }
 
-.example-drawing {
-  height: 256px;
-  width: 256px;
+.example-drawing-li {
   background: white;
   border-radius: 1em;
 }
 
 .example-drawing-img {
+  height: 25vh;
+  width: 25vh;
   border-radius: 1em;
+}
+
+.speech-bubble-text {
+  font-size: 2rem;
 }

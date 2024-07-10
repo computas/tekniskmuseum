@@ -2,11 +2,11 @@
   <app-speech-bubble
     class="speech-bubble right"
     [pointerSide]="PointerSide.Top"
-    [arrowAlignment]="ArrowAlignment.Left"
+    [arrowAlignment]="ArrowAlignment.Center"
     [isFlipped]="false"
     [textColor]="CustomColorsIO.black"
     [bubbleColor]="CustomColorsIO.teal"
-    [bubbleSize]="'small'"
+    [bubbleSize]="'large'"
   >
     <div slot="body-alt" class="speech-bubble-text">
       {{ getMessage() }}
@@ -14,7 +14,7 @@
   </app-speech-bubble>
   <ul class="example-drawings-list">
     @for (exampleDrawing of exampleDrawings; track exampleDrawing) {
-    <li class="example-drawing"><img class="example-drawing-img" [src]="exampleDrawing" /></li>
+    <li class="example-drawing-li"><img class="example-drawing-img" [src]="exampleDrawing" /></li>
     }
   </ul>
 </div>
