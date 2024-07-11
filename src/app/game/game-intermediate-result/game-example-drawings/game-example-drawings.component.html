@@ -14,7 +14,9 @@
   </app-speech-bubble>
   <ul class="example-drawings-list">
     @for (exampleDrawing of exampleDrawings; track exampleDrawing) {
-    <li class="example-drawing-li"><img class="example-drawing-img" [src]="exampleDrawing" /></li>
+    <li class="example-drawing-li">
+      <img class="example-drawing-img" [src]="exampleDrawing" alt="example drawing of the chosen label" />
+    </li>
     }
   </ul>
 </div>

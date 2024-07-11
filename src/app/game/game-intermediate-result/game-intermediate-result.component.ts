@@ -27,6 +27,7 @@ import { GameStateService } from '../services/game-state-service';
 })
 export class GameIntermediateResultComponent implements OnInit, OnDestroy {
   result: Result | undefined;
+  isSingleplayer = false;
 
   constructor(
     private gameStateService: GameStateService,
@@ -37,6 +38,7 @@ export class GameIntermediateResultComponent implements OnInit, OnDestroy {
 
   ngOnInit(): void {
     this.gameStateService.savePageToLocalStorage(GAMESTATE.intermediateResult);
+    this.isSingleplayer = this.gameStateService.isSingleplayer();
     this.result = this.drawingService.lastResult;
     this.translationService.loadTranslations(this.translationService.getCurrentLang()).subscribe();
 

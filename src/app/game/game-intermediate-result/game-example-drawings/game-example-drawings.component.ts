@@ -19,7 +19,7 @@ import * as EN from '../../../../assets/translation/EN.json';
 export class GameExampleDrawingsComponent implements OnInit {
   language: SupportedLanguages = this.translationService.getCurrentLang();
   exampleDrawings: string[] = [];
-  label: string = '';
+  label = '';
   PointerSide = PointerSide;
   ArrowAlignment = ArrowAlignment;
   CustomColorsIO = CustomColorsIO;
