@@ -145,16 +145,6 @@
   margin: 0 auto;
 }
 
-#i-text-box-line-1 {
-  color: var(--Black, #030303);
-  text-align: center;
-  font-family: Aeonik;
-  font-size: 32px;
-  font-style: normal;
-  font-weight: 700;
-  line-height: normal;
-}
-
 #o-text-box-container {
   display: flex;
   flex-direction: row;
@@ -192,7 +182,7 @@
   background-clip: text;
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
-  font-family: 'ICT Hofmann';
+  font-family: ICTHofmannRegular;
   font-size: 48px;
   font-style: normal;
   font-weight: 400;
