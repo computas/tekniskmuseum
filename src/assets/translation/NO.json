@@ -69,5 +69,9 @@
   "SUMMARY_I_2": "er et godt team!",
   "SUMMARY_I_3": "Dere fikk",
   "SUMMARY_I_4": "poeng",
-  "SUMMARY_O": "Nå blir det lettere for meg å gjette neste gang!"
+  "SUMMARY_O": "Nå blir det lettere for meg å gjette neste gang!",
+
+  "EXAMPLE_DRAWINGS_FB_CORRECT_P1": "Jeg har lært at",
+  "EXAMPLE_DRAWINGS_FB_P2": "ser sånn ut!",
+  "EXAMPLE_DRAWINGS_FB_FAILED_P1": "For jeg har lært at"
 }
