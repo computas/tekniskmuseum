@@ -5,8 +5,9 @@
   background-color: white;
   display: flex;
   justify-content: center;
-  width: 26em;
-  height: 256px; // this height comes size set in game-intermediate-result.scss .result-img > img
+  align-items: center;
+  width: 28em;
+  height: 42vh; // this height comes size set in game-intermediate-result.scss .result-img > img
 }
 
 .correct {
@@ -18,7 +19,8 @@
 }
 
 .round-score-text {
+  font-family: 'AeonikBold';
   text-align: center;
-  font-size: 1.25rem;
+  font-size: 1.5rem;
   margin: 0.5em 0 0;
 }
