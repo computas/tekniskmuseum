@@ -10,6 +10,10 @@
   height: 42vh; // this height comes size set in game-intermediate-result.scss .result-img > img
 }
 
+.user-drawing {
+  height: 100%;
+}
+
 .correct {
   border: 0.5em solid $positive_feedback_color;
 }
