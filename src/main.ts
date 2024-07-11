@@ -10,6 +10,7 @@ import { InfoDialogComponent } from './app/admin/info-dialog/info-dialog.compone
 import { withInterceptorsFromDi, provideHttpClient, HttpClient } from '@angular/common/http';
 import { provideRouter } from '@angular/router';
 import { TranslationService } from './app/core/translation.service';
+import { SplashComponent } from './app/splash/splash.component';
 
 if (environment.production) {
   enableProdMode();
@@ -24,5 +25,6 @@ bootstrapApplication(AppComponent, {
     provideAnimations(),
     importProvidersFrom(HttpClient),
     TranslationService,
+    SplashComponent,
   ],
 }).catch((err) => console.error(err));

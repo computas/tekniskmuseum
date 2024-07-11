@@ -23,6 +23,11 @@
 }
 
 @font-face {
+  font-family: ICTHofmannRegular;
+  src: url('./assets/fonts/ICTHofmann/ICTHofmann-Regular.otf');
+}
+
+@font-face {
   font-family: AeonikBold;
   src: url('./assets/fonts/Aeonik/Aeonik-Bold.otf') format('opentype');
 }
@@ -55,4 +60,8 @@ button,
 .mat-progress-spinner circle,
 .mat-spinner circle {
   stroke: $text_secondary_color;
+}
+
+.avatar-name {
+  font-family: ICTHofmannRegular;
 }

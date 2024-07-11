@@ -1,5 +1,13 @@
 {
-  "WELCOME_MESSAGE": "Hei, jeg heter",
+  "PRESS_TO_PLAY": "Trykk for å spille",
+  "I_TEACHING_O": "Slik ser et eple ut",
+  "INTRO_MESSAGE": "Hei, jeg er ",
+  "INTRO_MESSAGE_2": "Og jeg er ",
+  "INTRO_EXPLANATION": " har vist meg mange tegninger.",
+  "INTRO_EXPLANATION_2": "Sånn har jeg lært hvordan ting ser ut.",
+  "INTRO_CALL_TO_ACTION": "Tegn selv og se hva",
+  "INTRO_CALL_TO_ACTION_2": " har lært",
+
   "HELP_ME_LEARN": "Kan du hjelpe meg å lære?",
   "PLAYER_MODE_SINGLE": "1 spiller",
   "PLAYER_MODE_MULTI": "2 spillere",
