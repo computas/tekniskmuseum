@@ -29,11 +29,19 @@
     }
 }
 
+.speech-bubble-container {
+    display: flex;
+    justify-content: flex-start;
+    width: 100%;
+    margin-bottom: 20px;
+    padding-left: 25%; 
+}
+
 .teaching-image {
     max-width: 80%;
     height: auto;
     margin-top: 20px;
-    margin-bottom: 20px;
+    margin-bottom: 40px;
 }
 
 .play-text {
@@ -54,7 +62,7 @@
     }
 
     @media (min-width: 1024px) {
-        font-size: 70px;
+        font-size: 50px;
         line-height: 50px;
     }
 }

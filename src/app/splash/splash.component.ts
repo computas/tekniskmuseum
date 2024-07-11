@@ -28,7 +28,7 @@ export class SplashComponent implements OnInit, OnDestroy {
         this.interval = setInterval(() => {
         this.isFirstSvg = !this.isFirstSvg;
         this.isFirstSpeechBubble = !this.isFirstSpeechBubble;
-        }, 3000);
+        }, 4000);
     }
     
     ngOnDestroy() {

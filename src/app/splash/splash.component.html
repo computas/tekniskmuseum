@@ -11,16 +11,18 @@
             [bodyText]="'I_TEACHING_O' | translate"
             [pointerSide]="PointerSide.Bottom"
             [arrowAlignment]="ArrowAlignment.Left"
-            [bubbleSize]="'large'">
+            [bubbleSize]="'medium'"> 
         </app-speech-bubble>
         <app-speech-bubble
             *ngIf="!isFirstSpeechBubble"
             class="speech-bubble-adjusted"
             [textColor]="textColor"
             [bodyText]="'I_TEACHING_O_2' | translate"
-            [pointerSide]="PointerSide.Top"
+            [textColor]="CustomColorsIO.white"
+            [bubbleColor]="CustomColorsIO.indigo"
+            [pointerSide]="PointerSide.Bottom"
             [arrowAlignment]="ArrowAlignment.Right"
-            [bubbleSize]="'large'">
+            [bubbleSize]="'medium'">
         </app-speech-bubble>
     </div>
 
