@@ -8,6 +8,12 @@
   "INTRO_CALL_TO_ACTION": "Tegn selv og se hva",
   "INTRO_CALL_TO_ACTION_2": " har lært",
 
+  "DIFFICULTY_MOTIVATION": "Så gøy at du blir med og tegner",
+  "DIFFICULTY_QUESTION": "Hvor vanskelig ord vil du tegne?",
+  "EASY_BUTTON": "Lett",
+  "MEDIUM_BUTTON": "Middels",
+  "HARD_BUTTON": "Vanskelig",
+
   "HELP_ME_LEARN": "Kan du hjelpe meg å lære?",
   "PLAYER_MODE_SINGLE": "1 spiller",
   "PLAYER_MODE_MULTI": "2 spillere",
@@ -22,11 +28,6 @@
   "BEST_OF_THREE": "Best av tre vinner!",
   "BACK_BUTTON": "Tilbake",
   "NEXT_BUTTON": "Neste",
-
-  "DIFFICULTY_HEADER": "Hvilken vanskelighetsgrad vil du ha?",
-  "EASY_BUTTON": "Lett",
-  "MEDIUM_BUTTON": "Middels",
-  "HARD_BUTTON": "Vanskelig",
 
   "PLAYER_LABEL": "Spiller",
   "DRAW_LABEL": "Tegn: ",
@@ -44,6 +45,7 @@
   "LOSER_TEXT": "Du tapte",
   "RESULT_TEXT": "Ditt resultat:",
   "PLAY_AGAIN_BUTTON": "Spill igjen",
+  "END_GAME_BUTTON": "Avslutt spill",
   "NEW_HIGHSCORE_TEXT": "Du slo dagens rekord!",
   "TODAYS_HIGHSCORE_TEXT": "Dagens rekord:",
 
@@ -61,5 +63,15 @@
   "ROUND_FEEDBACK_FAILED_DESC_2": "Jeg kan være litt dum noen ganger..",
 
   "ROUND_FEEDBACK_CORRECT_TITLE": "Bra tegnet!",
-  "ROUND_FEEDBACK_CORRECT_DESC_1": "Takket være deg klarte jeg å gjette riktig."
+  "ROUND_FEEDBACK_CORRECT_DESC_1": "Takket være deg klarte jeg å gjette riktig.",
+
+  "SUMMARY_I_1": "Bra jobba! Du og",
+  "SUMMARY_I_2": "er et godt team!",
+  "SUMMARY_I_3": "Dere fikk",
+  "SUMMARY_I_4": "poeng",
+  "SUMMARY_O": "Nå blir det lettere for meg å gjette neste gang!",
+
+  "EXAMPLE_DRAWINGS_FB_CORRECT_P1": "Jeg har lært at",
+  "EXAMPLE_DRAWINGS_FB_P2": "ser sånn ut!",
+  "EXAMPLE_DRAWINGS_FB_FAILED_P1": "For jeg har lært at"
 }
