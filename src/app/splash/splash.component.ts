@@ -39,5 +39,4 @@ export class SplashComponent implements OnInit, OnDestroy {
 
     navigateToWelcome() {
         this.router.navigate(['/welcome']);
-    }
-    }
+}

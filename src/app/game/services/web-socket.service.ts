@@ -4,6 +4,7 @@ import { io, Socket } from 'socket.io-client';
 import { environment } from '@/environments/environment';
 import { SocketEndpoints } from '@/app/shared/models/websocketEndpoints';
 import { PlayerDisconnectedData } from '@/app/shared/models/interfaces';
+import { GameStateService } from '../services/game-state-service';
 
 @Injectable({
   providedIn: 'root',
@@ -15,6 +16,8 @@ export class WebSocketService {
 
   private readonly _playerDisconnected = new BehaviorSubject<boolean>(false);
   readonly playerDisconnected$ = this._playerDisconnected.asObservable();
+
+  constructor(private gameStateService: GameStateService) {}
 
   startSockets() {
     this.socket = io(environment.WS_ENDPOINT);
@@ -36,7 +39,7 @@ export class WebSocketService {
 
     this.listen(SocketEndpoints.PLAYER_DISCONNECTED).subscribe((data: string) => {
       const el: PlayerDisconnectedData = JSON.parse(data);
-      if (el.player_disconnected) {
+      if (el.player_disconnected && !this.gameStateService.isGameOver()) {
         this.playerDisconnected = true;
         this.disconnect();
       }

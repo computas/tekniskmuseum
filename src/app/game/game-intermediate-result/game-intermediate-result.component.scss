@@ -18,12 +18,12 @@
 
 #intermediate-container {
   display: grid;
-  grid-template-rows: 80px 1fr 1fr 80px;
+  grid-template-rows: 6vh 44fr 38fr 12vh;
   grid-template-columns: repeat(8, 1fr);
   position: relative;
-  min-height: 100vh;
   color: $text_primary_color;
-  padding: 2.5em;
+  padding: 1.7em;
+  min-height: 100vh;
 }
 
 .result-header {
@@ -54,4 +54,10 @@
 .guessed-word {
   font-family: AeonikBlack;
   color: $text_secondary_color;
+}
+
+.example-drawings {
+  grid-row: 3 / 4;
+  grid-column: 1 / -1;
+  align-content: center;
 }

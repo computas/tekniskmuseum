@@ -15,4 +15,5 @@ export const endpoints = {
   PING: 'ping',
   GETSTATUS: 'status',
   LOGOUT: 'logout',
+  GETEXAMPLEDRAWINGS: 'getExampleDrawings',
 };

@@ -10,6 +10,12 @@
   "INTRO_CALL_TO_ACTION": "Draw and see what ",
   "INTRO_CALL_TO_ACTION_2": " has learned",
 
+  "DIFFICULTY_MOTIVATION": "Let's draw!",
+  "DIFFICULTY_QUESTION": "What difficulty level do you prefer?",
+  "EASY_BUTTON": "Easy",
+  "MEDIUM_BUTTON": "Medium",
+  "HARD_BUTTON": "Hard",
+
   "HELP_ME_LEARN": "Can you help me learn?",
   "PLAYER_MODE_SINGLE": "1 player",
   "PLAYER_MODE_MULTI": "2 players",
@@ -24,11 +30,6 @@
   "BEST_OF_THREE": "Best of three wins!",
   "BACK_BUTTON": "Back",
   "NEXT_BUTTON": "Next",
-
-  "DIFFICULTY_HEADER": "What difficulty level do you prefer?",
-  "EASY_BUTTON": "Easy",
-  "MEDIUM_BUTTON": "Medium",
-  "HARD_BUTTON": "Hard",
 
   "PLAYER_LABEL": "Player",
   "DRAW_LABEL": "Draw: ",
@@ -46,6 +47,7 @@
   "LOSER_TEXT": "You lost",
   "RESULT_TEXT": "Your result:",
   "PLAY_AGAIN_BUTTON": "Play again",
+  "END_GAME_BUTTON": "End game",
   "NEW_HIGHSCORE_TEXT": "New daily highscore!",
   "TODAYS_HIGHSCORE_TEXT": "Today's highscore:",
 
@@ -63,5 +65,15 @@
   "ROUND_FEEDBACK_FAILED_DESC_2": "I can be a bit slow sometimes.. I'll do better next time!",
 
   "ROUND_FEEDBACK_CORRECT_TITLE": "Well drawn!",
-  "ROUND_FEEDBACK_CORRECT_DESC_1": "Thanks to you I guessed the correct word. Keep it up!"
+  "ROUND_FEEDBACK_CORRECT_DESC_1": "Thanks to you I guessed the correct word. Keep it up!",
+
+  "SUMMARY_I_1": "Good job! You and",
+  "SUMMARY_I_2": "are a good team!",
+  "SUMMARY_I_3": "You got",
+  "SUMMARY_I_4": "points",
+  "SUMMARY_O": "I will have an easier time guessing next time!",
+
+  "EXAMPLE_DRAWINGS_FB_CORRECT_P1": "I have learned that",
+  "EXAMPLE_DRAWINGS_FB_P2": "looks like this!",
+  "EXAMPLE_DRAWINGS_FB_FAILED_P1": "Because I have learned that"
 }
