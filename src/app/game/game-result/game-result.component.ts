@@ -1,6 +1,6 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
 import { DrawingService } from '../services/drawing.service';
-import { Result } from '../../shared/models/interfaces';
+import { ArrowAlignment, PointerSide, Result } from '../../shared/models/interfaces';
 import { Router } from '@angular/router';
 import { MultiplayerService } from '../services/multiplayer.service';
 import { MatButton } from '@angular/material/button';
@@ -9,7 +9,18 @@ import { TitleCasePipe } from '@angular/common';
 import { TranslationService } from '@/app/core/translation.service';
 import { TranslatePipe } from '@/app/core/translation.pipe';
 import { Subscription } from 'rxjs';
+import {
+  trigger,
+  style,
+  animate,
+  transition,
+  state,
+  // ...
+} from '@angular/animations';
 import { HighscoreData } from '@/app/shared/models/backend-interfaces';
+import { SpeechBubbleComponent } from '../speech-bubble/speech-bubble.component';
+import { CustomColorsIO } from '@/app/shared/customColors';
+import { MatIcon } from '@angular/material/icon';
 import { GameStateService } from '../services/game-state-service';
 
 @Component({
@@ -17,7 +28,14 @@ import { GameStateService } from '../services/game-state-service';
   templateUrl: './game-result.component.html',
   styleUrls: ['./game-result.component.scss'],
   standalone: true,
-  imports: [MatCardImage, MatButton, TitleCasePipe, TranslatePipe],
+  imports: [MatCardImage, MatIcon, MatButton, TitleCasePipe, TranslatePipe, SpeechBubbleComponent],
+  animations: [
+    trigger('fadeIn', [
+      state('hidden', style({ opacity: 0 })),
+      state('visible', style({ opacity: 1 })),
+      transition('hidden => visible', [animate('1.5s')]),
+    ]),
+  ],
 })
 export class GameResultComponent implements OnInit, OnDestroy {
   results: Result[] = [];
@@ -32,6 +50,15 @@ export class GameResultComponent implements OnInit, OnDestroy {
   newHighscore = false;
   getHighscoreSubscription: Subscription | null = null;
   postHighscoreSubscription: Subscription | null = null;
+
+  IState = 'hidden';
+  OState = 'hidden';
+
+  CustomColorsIO = CustomColorsIO;
+  PointerSide = PointerSide;
+  ArrowAlignment = ArrowAlignment;
+  titleText = 'Bra jobba! Du og O er et bra team';
+
   constructor(
     private gameStateService: GameStateService,
     private drawingService: DrawingService,
@@ -71,6 +98,7 @@ export class GameResultComponent implements OnInit, OnDestroy {
         },
         error: (error) => console.error("Error fetching today's highscore", error),
       });
+      this.multiplayerService.clearState();
     } else {
       this.score = this.drawingService.totalScore;
       this.postHighscoreSubscription = this.drawingService.postScore().subscribe();
@@ -97,10 +125,37 @@ export class GameResultComponent implements OnInit, OnDestroy {
     } else {
       this.results = this.drawingService.results;
     }
+    this.startAnimation();
     this.translationService.loadTranslations(this.translationService.getCurrentLang()).subscribe();
   }
   ngOnDestroy(): void {
     this.getHighscoreSubscription?.unsubscribe();
     this.postHighscoreSubscription?.unsubscribe();
+  }
+
+  playAgain(): void {
+    if (this.ismultiplayer) {
+      this.multiplayerService.clearState();
+    }
+
+    this.drawingService.clearState();
+    this.gameStateService.restartGame();
+  }
+
+  endGame(): void {
+    if (this.ismultiplayer) {
+      this.multiplayerService.clearState();
+    }
+    this.gameStateService.endGame();
+    this.router.navigate(['/welcome']);
+  }
+
+  startAnimation() {
+    setTimeout(() => {
+      this.IState = 'visible';
+    }, 500);
+    setTimeout(() => {
+      this.OState = 'visible';
+    }, 1500);
   }
 }
