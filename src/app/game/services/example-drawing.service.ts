@@ -12,11 +12,7 @@ export class ExampleDrawingService {
 
   constructor(private http: HttpClient) {}
 
-  getExampleDrawings(numberOfDrawings: number, label: string, lang: SupportedLanguages): Observable<string[]> {
-    const body = '';
-    return this.http.post<string[]>(
-      `${this.baseUrl}/${endpoints.GETEXAMPLEDRAWINGS}?n=${numberOfDrawings}&label=${label}&lang=${lang}`,
-      body
-    );
+  getExampleDrawings(body: { n: number; label: string; lang: SupportedLanguages }): Observable<string[]> {
+    return this.http.post<string[]>(`${this.baseUrl}/${endpoints.GETEXAMPLEDRAWINGS}`, body);
   }
 }

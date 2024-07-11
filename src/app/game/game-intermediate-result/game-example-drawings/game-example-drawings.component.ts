@@ -31,8 +31,9 @@ export class GameExampleDrawingsComponent implements OnInit, OnDestroy {
   ) {}
   ngOnInit(): void {
     this.label = this.drawingService.label;
+    const getExampleDrawingsParams = { n: 3, label: this.label, lang: this.language };
     this.subscriptions.add(
-      this.exampleDrawingService.getExampleDrawings(3, this.label, this.language).subscribe((res) => {
+      this.exampleDrawingService.getExampleDrawings(getExampleDrawingsParams).subscribe((res) => {
         this.exampleDrawings = res;
       })
     );
