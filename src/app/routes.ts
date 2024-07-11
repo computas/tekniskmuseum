@@ -1,4 +1,5 @@
 import { Routes } from '@angular/router';
+import { SplashComponent } from './splash/splash.component';
 import { WelcomeComponent } from './welcome/welcome.component';
 import { GameComponent } from './game/game.component';
 import { routes as r } from './shared/models/routes';
@@ -11,7 +12,12 @@ import { MultiplayerComponent } from './game/game-multiplayer/multiplayer.compon
 
 export const routes: Routes = [
   {
-    path: r.LANDING,
+    path: '',
+    component: SplashComponent,
+    data: { animationState: 'splash' },
+  },
+  {
+    path: 'welcome',
     component: WelcomeComponent,
     data: { animationState: 'welcome' },
   },
