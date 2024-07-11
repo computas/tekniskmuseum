@@ -1,6 +1,7 @@
 {
-  "PRESS_TO_PLAY": "Trykk for å spille",
-  "I_TEACHING_O": "Slik ser et eple ut",
+  "PRESS_TO_PLAY": "TRYKK FOR Å SPILLE",
+  "I_TEACHING_O": "Slik ser et EPLE ut, O!",
+  "I_TEACHING_O_2": "Jeg trodde dette var EPLE, jeg...",
   "INTRO_MESSAGE": "Hei, jeg er ",
   "INTRO_MESSAGE_2": "Og jeg er ",
   "INTRO_EXPLANATION": " har vist meg mange tegninger.",

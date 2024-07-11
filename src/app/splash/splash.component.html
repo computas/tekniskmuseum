@@ -3,21 +3,29 @@
         <img src="assets/logo/IO-logo-inverted_transparent-bg.png" alt="logo" />
     </button>
     
-    <app-speech-bubble
-        class="speech-bubble"
-        [textColor]="textColor"
-        [bodyText]="'Slik ser et eple ut, O!'"
-        [pointerSide]="PointerSide.Bottom"
-        [arrowAlignment]="ArrowAlignment.Left"
-        [bubbleSize]="'large'"
-    >
-    </app-speech-bubble>
-    
-    <img class="teaching-image" src="assets/I-teaching-O.svg" alt="I teaching O" />
-    
-    <div class="play-text">Trykk for å spille</div>
-</div>
+    <div class="speech-bubble-container">
+        <app-speech-bubble
+            *ngIf="isFirstSpeechBubble"
+            class="speech-bubble-adjusted"
+            [textColor]="textColor"
+            [bodyText]="'I_TEACHING_O' | translate"
+            [pointerSide]="PointerSide.Bottom"
+            [arrowAlignment]="ArrowAlignment.Left"
+            [bubbleSize]="'large'">
+        </app-speech-bubble>
+        <app-speech-bubble
+            *ngIf="!isFirstSpeechBubble"
+            class="speech-bubble-adjusted"
+            [textColor]="textColor"
+            [bodyText]="'I_TEACHING_O_2' | translate"
+            [pointerSide]="PointerSide.Top"
+            [arrowAlignment]="ArrowAlignment.Right"
+            [bubbleSize]="'large'">
+        </app-speech-bubble>
+    </div>
 
-<!-- Bør heller ta inn translation pipe:
-[bodyText]="'SPEECH_BUBBLE_TEXT' | translate"
-<div class="play-text">{{ 'PRESS_TO_START' | translate }}</div> -->
+    <img *ngIf="isFirstSvg" class="teaching-image" src="assets/I-teaching-O.svg" alt="I teaching O" />
+    <img *ngIf="!isFirstSvg" class="teaching-image" src="assets/I-teaching-O-2.svg" alt="I teaching O 2" />
+
+    <div class="play-text">{{ 'PRESS_TO_PLAY' | translate }}</div>
+</div>

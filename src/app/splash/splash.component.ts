@@ -1,5 +1,6 @@
-import { Component } from '@angular/core';
+import { Component, OnInit, OnDestroy } from '@angular/core';
 import { Router } from '@angular/router';
+import { CommonModule } from '@angular/common';
 import { TranslatePipe } from '../core/translation.pipe';
 import { SpeechBubbleComponent } from '../game/speech-bubble/speech-bubble.component';
 import { CustomColorsIO } from '../shared/customColors';
@@ -10,17 +11,33 @@ import { ArrowAlignment, PointerSide } from '../shared/models/interfaces';
     templateUrl: './splash.component.html',
     styleUrls: ['./splash.component.scss'],
     standalone: true,
-    imports: [SpeechBubbleComponent, TranslatePipe],
+    imports: [CommonModule, SpeechBubbleComponent, TranslatePipe]
 })
-export class SplashComponent {
+export class SplashComponent implements OnInit, OnDestroy {
     textColor: CustomColorsIO = CustomColorsIO.black;
     PointerSide = PointerSide;
     ArrowAlignment = ArrowAlignment;
     CustomColorsIO = CustomColorsIO;
-
+    isFirstSpeechBubble: boolean = true;
+    isFirstSvg: boolean = true;
+    interval: any;
+    
     constructor(private router: Router) {}
+
+    ngOnInit() {
+        this.interval = setInterval(() => {
+        this.isFirstSvg = !this.isFirstSvg;
+        this.isFirstSpeechBubble = !this.isFirstSpeechBubble;
+        }, 3000);
+    }
+    
+    ngOnDestroy() {
+        if (this.interval) {
+        clearInterval(this.interval);
+        }
+    }
 
     navigateToWelcome() {
         this.router.navigate(['/welcome']);
     }
-}
+    }
