@@ -86,7 +86,7 @@ export class GameStateService {
     this.clearState();
     if (mode === GAMEMODE.singleplayer) {
       this.setSingleplayer();
-      this.goToPage(GAMESTATE.difficultyPicker);
+      this.startGame();
     } else if (mode === GAMEMODE.multiplayer) {
       this.setMultiplayer();
     }

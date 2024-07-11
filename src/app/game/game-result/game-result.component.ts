@@ -134,7 +134,10 @@ export class GameResultComponent implements OnInit, OnDestroy {
   }
 
   playAgain(): void {
+    if (this.ismultiplayer) {
     this.multiplayerService.clearState();
+    }
+
     this.drawingService.clearState();
     this.gameStateService.restartGame();
   }
