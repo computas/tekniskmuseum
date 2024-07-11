@@ -8,9 +8,18 @@
     [bubbleColor]="CustomColorsIO.teal"
     [bubbleSize]="'large'"
   >
+    @if(hasCorrectGuess) {
     <div slot="body-alt" class="speech-bubble-text">
-      {{ getMessage() }}
+      {{ 'EXAMPLE_DRAWINGS_FB_CORRECT_P1' | translate }} {{ label }}
+      {{ 'EXAMPLE_DRAWINGS_FB_CORRECT_P2' | translate }}
     </div>
+    } @else {
+    <div slot="body-alt" class="speech-bubble-text">
+      {{ 'EXAMPLE_DRAWINGS_FB_FAILED_P1' | translate }} {{ label }}
+      {{ 'EXAMPLE_DRAWINGS_FB_FAILED_P2' | translate }}
+    </div>
+
+    }
   </app-speech-bubble>
   <ul class="example-drawings-list">
     @for (exampleDrawing of exampleDrawings; track exampleDrawing) {

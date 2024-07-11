@@ -6,8 +6,6 @@ import { CustomColorsIO } from '@/app/shared/customColors';
 import { TranslatePipe } from '@/app/core/translation.pipe';
 import { DrawingService } from '../../services/drawing.service';
 import { TranslationService } from '@/app/core/translation.service';
-import * as NO from '../../../../assets/translation/NO.json';
-import * as EN from '../../../../assets/translation/EN.json';
 
 @Component({
   selector: 'app-game-example-drawings',
@@ -23,6 +21,7 @@ export class GameExampleDrawingsComponent implements OnInit {
   PointerSide = PointerSide;
   ArrowAlignment = ArrowAlignment;
   CustomColorsIO = CustomColorsIO;
+  hasCorrectGuess = this.drawingService.lastResult.hasWon;
   constructor(
     private translationService: TranslationService,
     private drawingService: DrawingService,
@@ -33,31 +32,5 @@ export class GameExampleDrawingsComponent implements OnInit {
     this.exampleDrawingService.getExampleDrawings(3, this.label, this.language).subscribe((res) => {
       this.exampleDrawings = res;
     });
-  }
-
-  getMessage(): string {
-    const hasCorrectGuess = this.drawingService.lastResult.hasWon;
-    return this.getTranslatedMessage(this.label, this.language, hasCorrectGuess);
-  }
-
-  getTranslatedMessage(label: string, lang: SupportedLanguages, hasCorrectGuess: boolean): string {
-    if (hasCorrectGuess) {
-      switch (lang) {
-        case 'NO':
-          return `${NO.EXAMPLE_DRAWINGS_FB_CORRECT_P1} ${label} ${NO.EXAMPLE_DRAWINGS_FB_CORRECT_P2}`;
-        case 'EN':
-          return `${EN.EXAMPLE_DRAWINGS_FB_CORRECT_P1} ${label} ${EN.EXAMPLE_DRAWINGS_FB_CORRECT_P2}`;
-        default:
-          return '';
-      }
-    }
-    switch (lang) {
-      case 'NO':
-        return `${NO.EXAMPLE_DRAWINGS_FB_FAILED_P1} ${label} ${NO.EXAMPLE_DRAWINGS_FB_FAILED_P2}`;
-      case 'EN':
-        return `${EN.EXAMPLE_DRAWINGS_FB_FAILED_P1} ${label} ${EN.EXAMPLE_DRAWINGS_FB_FAILED_P2}`;
-      default:
-        return '';
-    }
   }
 }
