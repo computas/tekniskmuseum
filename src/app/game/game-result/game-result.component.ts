@@ -135,7 +135,7 @@ export class GameResultComponent implements OnInit, OnDestroy {
 
   playAgain(): void {
     if (this.ismultiplayer) {
-    this.multiplayerService.clearState();
+      this.multiplayerService.clearState();
     }
 
     this.drawingService.clearState();
@@ -147,7 +147,7 @@ export class GameResultComponent implements OnInit, OnDestroy {
       this.multiplayerService.clearState();
     }
     this.gameStateService.endGame();
-    this.router.navigate(['/']);
+    this.router.navigate(['/welcome']);
   }
 
   startAnimation() {
