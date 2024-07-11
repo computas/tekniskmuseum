@@ -1,7 +1,27 @@
 <div class="feedback-container">
   <img class="avatar" src="assets/avatars/o-avatar.png" alt="O avatar" />
-  <div class="chat-bubble-container">
-    <h2 class="feedback-title">{{ feedbackTitleKey | translate }}</h2>
-    <p class="feedback-desc">{{ feedbackDescriptionKey | translate }}</p>
+  <div class="feedback-speech-bubble-container">
+    <app-speech-bubble
+      class="speech-bubble right"
+      [pointerSide]="PointerSide.Bottom"
+      [arrowAlignment]="ArrowAlignment.Left"
+      [isFlipped]="false"
+      [textColor]="CustomColorsIO.black"
+      [bubbleColor]="CustomColorsIO.pastelBlue"
+      [bubbleSize]="'medium'"
+    >
+      <h2 slot="body-alt" class="feedback-title">{{ feedbackTitleKey | translate }}</h2>
+    </app-speech-bubble>
+    <app-speech-bubble
+      class="speech-bubble right"
+      [pointerSide]="PointerSide.Top"
+      [arrowAlignment]="ArrowAlignment.Left"
+      [isFlipped]="false"
+      [textColor]="CustomColorsIO.black"
+      [bubbleColor]="CustomColorsIO.pastelBlue"
+      [bubbleSize]="'medium'"
+    >
+      <p slot="body-alt" class="feedback-desc">{{ feedbackDescriptionKey | translate }}</p>
+    </app-speech-bubble>
   </div>
 </div>
