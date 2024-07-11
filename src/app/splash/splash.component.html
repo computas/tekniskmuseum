@@ -8,7 +8,7 @@
             *ngIf="isFirstSpeechBubble"
             class="speech-bubble-adjusted"
             [textColor]="textColor"
-            [bodyText]="'I_TEACHING_O' | translate"
+            [bodyText]="'Slik ser et EPLE ut!'"
             [pointerSide]="PointerSide.Bottom"
             [arrowAlignment]="ArrowAlignment.Left"
             [bubbleSize]="'medium'"> 
@@ -17,7 +17,7 @@
             *ngIf="!isFirstSpeechBubble"
             class="speech-bubble-adjusted"
             [textColor]="textColor"
-            [bodyText]="'I_TEACHING_O_2' | translate"
+            [bodyText]="'Jeg trodde dette var EPLE, jeg...'"
             [textColor]="CustomColorsIO.white"
             [bubbleColor]="CustomColorsIO.indigo"
             [pointerSide]="PointerSide.Bottom"
@@ -29,5 +29,10 @@
     <img *ngIf="isFirstSvg" class="teaching-image" src="assets/I-teaching-O.svg" alt="I teaching O" />
     <img *ngIf="!isFirstSvg" class="teaching-image" src="assets/I-teaching-O-2.svg" alt="I teaching O 2" />
 
-    <div class="play-text">{{ 'PRESS_TO_PLAY' | translate }}</div>
+    <div class="play-text">TRYKK FOR Å SPILLE</div>
 </div>
+
+<!-- Må gjøres om fra inline-tekst!!
+[bodyText]="'I_TEACHING_O' | translate"
+[bodyText]="'I_TEACHING_O_2' | translate"
+{{ 'PRESS_TO_PLAY' | translate }} -->
