@@ -8,6 +8,12 @@
   "INTRO_CALL_TO_ACTION": "Tegn selv og se hva",
   "INTRO_CALL_TO_ACTION_2": " har lært",
 
+  "DIFFICULTY_MOTIVATION": "Så gøy at du blir med og tegner",
+  "DIFFICULTY_QUESTION": "Hvor vanskelig ord vil du tegne?",
+  "EASY_BUTTON": "Lett",
+  "MEDIUM_BUTTON": "Middels",
+  "HARD_BUTTON": "Vanskelig",
+
   "HELP_ME_LEARN": "Kan du hjelpe meg å lære?",
   "PLAYER_MODE_SINGLE": "1 spiller",
   "PLAYER_MODE_MULTI": "2 spillere",
@@ -22,11 +28,6 @@
   "BEST_OF_THREE": "Best av tre vinner!",
   "BACK_BUTTON": "Tilbake",
   "NEXT_BUTTON": "Neste",
-
-  "DIFFICULTY_HEADER": "Hvilken vanskelighetsgrad vil du ha?",
-  "EASY_BUTTON": "Lett",
-  "MEDIUM_BUTTON": "Middels",
-  "HARD_BUTTON": "Vanskelig",
 
   "PLAYER_LABEL": "Spiller",
   "DRAW_LABEL": "Tegn: ",
