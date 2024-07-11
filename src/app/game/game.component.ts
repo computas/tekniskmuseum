@@ -8,6 +8,8 @@ import { GameDrawComponent } from './game-draw/game-draw.component';
 import { GameInfoComponent } from './game-info/game-info.component';
 import { GamePickDifficultyComponent } from './game-pick-difficulty/game-pick-difficulty.component';
 import { GameStateService } from './services/game-state-service';
+import { LobbyComponent } from './game-multiplayer/lobby/lobby.component';
+import { WelcomeComponent } from '../welcome/welcome.component';
 
 @Component({
   selector: 'app-game',
@@ -46,6 +48,8 @@ import { GameStateService } from './services/game-state-service';
     GameIntermediateResultComponent,
     GameResultComponent,
     GameWordToDrawComponent,
+    LobbyComponent,
+    WelcomeComponent,
   ],
 })
 export class GameComponent implements OnInit {
