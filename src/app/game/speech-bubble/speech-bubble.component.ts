@@ -116,12 +116,6 @@ export class SpeechBubbleComponent {
           `Illegal combination: ${this._pointerSide} and ${this._arrowAlignment} cannot be flipped. Setting default combination.`
         );
         this._isFlipped = false;
-      } else {
-        console.log(
-          `Legal combination: ${this._pointerSide} and ${this._arrowAlignment} ${
-            this._isFlipped ? 'with' : 'without'
-          } flip.`
-        );
       }
     } else {
       console.warn(

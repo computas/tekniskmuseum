@@ -1,4 +1,4 @@
-import { Component, OnInit, OnDestroy } from '@angular/core';
+import { Component, OnInit, OnDestroy, Input } from '@angular/core';
 import { MultiplayerService } from '../../services/multiplayer.service';
 import { Subscription } from 'rxjs';
 import { MatButton } from '@angular/material/button';
@@ -17,6 +17,7 @@ import { GameStateService } from '../../services/game-state-service';
   imports: [MatProgressSpinner, MatIcon, RouterLink, RouterLinkActive, MatButton, TranslatePipe],
 })
 export class LobbyComponent implements OnInit, OnDestroy {
+  @Input() initializeComponent?: () => void;
   waitingForOtherPlayer = true;
   subscriptions = new Subscription();
 
@@ -27,6 +28,9 @@ export class LobbyComponent implements OnInit, OnDestroy {
   ) {}
 
   ngOnInit(): void {
+    if (this.initializeComponent) {
+      this.initializeComponent();
+    }
     const difficulty = 2; // Difficulty set to medium (1 for easy, 3 for hard)
     this.subscriptions.add(this.multiPlayerService.joinGame(difficulty).subscribe());
     this.subscriptions.add(

@@ -14,4 +14,8 @@
 <div [@enterAnimation]>
   <app-game-result></app-game-result>
 </div>
+} @case (GAMESTATE.lobby) {
+<div [@enterAnimation]>
+  <app-welcome></app-welcome>
+</div>
 } }

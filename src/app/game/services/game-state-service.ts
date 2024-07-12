@@ -50,6 +50,7 @@ export class GameStateService {
 
   endGame() {
     this._currentRound.next(0);
+    this._currentPage.next(GAMESTATE.lobby);
     this._isGameOver.next(false);
   }
 
@@ -57,7 +58,7 @@ export class GameStateService {
     this._currentRound.next(0);
     this._isGameOver.next(false);
     this._gameMode.next(GAMEMODE.notSet);
-    this.goToPage(GAMESTATE.lobby);
+    this.savePageToLocalStorage(GAMESTATE.lobby);
   }
 
   nextRound() {
@@ -77,6 +78,18 @@ export class GameStateService {
   setMultiplayer() {
     this._gameMode.next(GAMEMODE.multiplayer);
     this.saveGameModeToLocalStorage(GAMEMODE.multiplayer);
+  }
+
+  restartGame() {
+    const mode = this._gameMode.value;
+    this._currentPage.next(GAMESTATE.lobby);
+    this.clearState();
+    if (mode === GAMEMODE.singleplayer) {
+      this.setSingleplayer();
+      this.startGame();
+    } else if (mode === GAMEMODE.multiplayer) {
+      this.setMultiplayer();
+    }
   }
 
   savePageToLocalStorage(newState: GAMESTATE) {

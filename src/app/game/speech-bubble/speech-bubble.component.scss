@@ -15,6 +15,10 @@
   font-family: AeonikBold;
 }
 
+.body {
+  font-family: AeonikRegular;
+}
+
 .large {
   --bbFontSize: 48px;
   --bbLineHeight: 48px;
@@ -22,8 +26,8 @@
   --bbMaxWidth: 60vw;
 }
 .medium {
-  --bbFontSize: 36px;
-  --bbLineHeight: 36px;
+  --bbFontSize: 40px;
+  --bbLineHeight: 40px;
   --bbPadding: 1rem;
   --bbMaxWidth: 60vw;
 }
