@@ -1,6 +1,7 @@
 .drawing-container {
   display: flex;
   justify-content: space-between;
+  gap: 3em;
 }
 
 .example-drawings-list {
@@ -11,6 +12,8 @@
 
 .example-drawing-li {
   background: white;
+  height: 25vh;
+  width: 25vh;
   border-radius: 1em;
 }
 
@@ -21,6 +24,7 @@
 }
 
 .speech-bubble-text {
+  font-family: AeonikRegular;
   font-size: 2rem;
-  line-height: 2rem;
+  line-height: 2.5rem;
 }
