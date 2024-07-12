@@ -1,35 +1,38 @@
 <div class="drawingContainer">
   <div class="drawingHeader">
     <div id="iAvatarContainer">
-      <app-i-avatar
-        [color]="CustomColorsIO.pastelBlue"
-      />
+      <app-i-avatar [color]="CustomColorsIO.pastelBlue" />
       <app-speech-bubble
         [pointerSide]="PointerSide.Left"
         [arrowAlignment]="ArrowAlignment.Center"
         [isFlipped]="false"
         [textColor]="CustomColorsIO.black"
-        [bubbleColor]="CustomColorsIO.pastelBlue" 
-        [bubbleSize]="'small'" 
+        [bubbleColor]="CustomColorsIO.pastelBlue"
+        [bubbleSize]="'small'"
       >
-        <p slot="body-alt"> 
-          <span class="drawing-header-text">{{ 'DRAW_LABEL' | translate }} </span> 
-          <span id="guessWord">{{ guessWord | uppercase }} </span> 
+        <p slot="body-alt">
+          <span class="drawing-header-text">{{ 'DRAW_LABEL' | translate }} </span>
+          <span id="guessWord">{{ guessWord | uppercase }} </span>
         </p>
       </app-speech-bubble>
     </div>
-      <div #countDown id="timerContainer">
-        <mat-icon class="timerIcon" aria-label="Example home icon">timer</mat-icon>
-          {{ timeLeft }}
-      </div>
+    <div #countDown id="timerContainer">
+      <mat-icon class="timerIcon" aria-label="Example home icon">timer</mat-icon>
+      {{ timeLeft }}
+    </div>
   </div>
   <div id="drawingSurface" class="canvasContainer">
     <ng-content drawingHeader id="drawingInfo">
       <button mat-raised-button id="deleteButton" (click)="clear()">
-          <span class="buttonText">
-            <img src="../assets/icons/icons8-trash-144_white.png" class="deleteIcon" aria-label="delete icon">
-            <span id="deleteText"> Slett </span>
-          </span>    
+        <span class="buttonText">
+          <img
+            alt="Trash can icon"
+            src="../assets/icons/icons8-trash-144_white.png"
+            class="deleteIcon"
+            aria-label="delete icon"
+          />
+          <span id="deleteText"> Slett </span>
+        </span>
       </button>
       <div id="oAvatarContainer">
         <app-speech-bubble
@@ -37,35 +40,36 @@
           [arrowAlignment]="ArrowAlignment.Center"
           [isFlipped]="false"
           [textColor]="CustomColorsIO.white"
-          [bubbleColor]="CustomColorsIO.indigo" 
-          [bubbleSize]="'small'" 
+          [bubbleColor]="CustomColorsIO.indigo"
+          [bubbleSize]="'small'"
         >
           <p class="guessText" slot="body-alt">
-            {{ 'AI_THINKING_LABEL' | translate }} 
+            {{ 'AI_THINKING_LABEL' | translate }}
             @if (AI_GUESS) {
-              {{ 'AI_GUESS_LABEL' | translate }} <!-- style smaller -->
+            {{ 'AI_GUESS_LABEL' | translate }}
+            <!-- style smaller -->
             }
             <span> {{ AI_GUESS | uppercase }} </span>
           </p>
         </app-speech-bubble>
-        <app-o-avatar 
+        <app-o-avatar
           alt="Character 'O' guessing what is drawn on the canvas"
           class="guessingAvatar"
           [color]="CustomColorsIO.indigo"
         />
       </div>
     </ng-content>
-      <canvas
-        id="drawingCanvas"
-        (mousedown)="start($event)"
-        (mouseup)="stop($event)"
-        (mousemove)="draw($event)"
-        (mouseleave)="leaveCanvas($event)"
-        (mouseenter)="enterCanvas($event)"
-        (touchstart)="start($event)"
-        (touchmove)="draw($event)"
-        (touchend)="stop($event)"
-        #canvas
-      ></canvas>
+    <canvas
+      id="drawingCanvas"
+      (mousedown)="start($event)"
+      (mouseup)="stop($event)"
+      (mousemove)="draw($event)"
+      (mouseleave)="leaveCanvas($event)"
+      (mouseenter)="enterCanvas($event)"
+      (touchstart)="start($event)"
+      (touchmove)="draw($event)"
+      (touchend)="stop($event)"
+      #canvas
+    ></canvas>
   </div>
 </div>

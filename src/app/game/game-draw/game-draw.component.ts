@@ -1,10 +1,17 @@
-import { Component, ElementRef, OnInit, OnDestroy, viewChild } from '@angular/core';
+import { Component, ElementRef, OnInit, OnDestroy } from '@angular/core';
 import { BehaviorSubject, interval, Observable, Subscription } from 'rxjs';
 import { ImageService } from '../services/image.service';
 import { take } from 'rxjs/operators';
 import { DrawingService } from '../services/drawing.service';
 import { MultiplayerService } from '../services/multiplayer.service';
-import {ArrowAlignment, Certainty, GAMESTATE, GameLevelConfig, PointerSide, Result } from '../../shared/models/interfaces';
+import {
+  ArrowAlignment,
+  Certainty,
+  GAMESTATE,
+  GameLevelConfig,
+  PointerSide,
+  Result,
+} from '../../shared/models/interfaces';
 import { MultiplayerClassifyParams, PredictionData } from '../../shared/models/backend-interfaces';
 import { SoundService } from '../services/sound.service';
 import { UpperCasePipe } from '@angular/common';
@@ -25,7 +32,15 @@ import { ViewChild } from '@angular/core';
   templateUrl: './game-draw.component.html',
   styleUrls: ['./game-draw.component.scss'],
   standalone: true,
-  imports: [MatIcon, MatIconButton, UpperCasePipe, TranslatePipe, SpeechBubbleComponent, IAvatarComponent, OAvatarComponent],
+  imports: [
+    MatIcon,
+    MatIconButton,
+    UpperCasePipe,
+    TranslatePipe,
+    SpeechBubbleComponent,
+    IAvatarComponent,
+    OAvatarComponent,
+  ],
 })
 export class GameDrawComponent implements OnInit, OnDestroy {
   config!: GameLevelConfig;
@@ -104,8 +119,7 @@ export class GameDrawComponent implements OnInit, OnDestroy {
       throw new Error('getContext failed');
     }
     this.ctx = ctx;
-    this.canvas.nativeElement.width =
-      this.canvas.nativeElement.parentElement?.offsetWidth || document.body.clientWidth;
+    this.canvas.nativeElement.width = this.canvas.nativeElement.parentElement?.offsetWidth || document.body.clientWidth;
     this.canvas.nativeElement.height = document.body.clientHeight - 100;
     this.resetMinMaxMouseValues();
     this.drawingService.guessDone = false;
@@ -404,7 +418,7 @@ export class GameDrawComponent implements OnInit, OnDestroy {
     const rect = this.canvas.nativeElement.getBoundingClientRect();
     const x = clientX - rect.left;
     const y = clientY - rect.top;
-  
+
     return { x, y };
   }
 
@@ -479,12 +493,7 @@ export class GameDrawComponent implements OnInit, OnDestroy {
 
   countDrawnPixels(): void {
     if (this.ctx) {
-      const imageData = this.ctx.getImageData(
-        0,
-        0,
-        this.canvas.nativeElement.width,
-        this.canvas.nativeElement.height
-      );
+      const imageData = this.ctx.getImageData(0, 0, this.canvas.nativeElement.width, this.canvas.nativeElement.height);
       let count = 0;
       for (let i = 0; i < imageData.data.length; i += 4) {
         // Check if the pixel is black (R=0, G=0, B=0) and fully opaque (A=255)
