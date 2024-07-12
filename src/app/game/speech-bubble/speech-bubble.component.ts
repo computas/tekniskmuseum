@@ -12,7 +12,7 @@ export class SpeechBubbleComponent {
   @Input() textColor: CustomColorsIO = CustomColorsIO.black; // Default color
   @Input() bubbleColor: CustomColorsIO = CustomColorsIO.pastelBlue; // Default color
   @Input() titleText: string | undefined = '';
-  @Input() bodyText: string | undefined = 'Hello world!';
+  @Input() bodyText: string | undefined = '';
 
   // Arrow location and direction
   private _pointerSide: PointerSide = PointerSide.Top;

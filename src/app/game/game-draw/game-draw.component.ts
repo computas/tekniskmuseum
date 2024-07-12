@@ -4,7 +4,7 @@ import { ImageService } from '../services/image.service';
 import { take } from 'rxjs/operators';
 import { DrawingService } from '../services/drawing.service';
 import { MultiplayerService } from '../services/multiplayer.service';
-import { Certainty, GAMESTATE, GameLevelConfig, Result } from '../../shared/models/interfaces';
+import { ArrowAlignment, Certainty, GAMESTATE, GameLevelConfig, PointerSide, Result } from '../../shared/models/interfaces';
 import { PredictionData } from '../../shared/models/backend-interfaces';
 import { SoundService } from '../services/sound.service';
 import { UpperCasePipe } from '@angular/common';
@@ -13,20 +13,25 @@ import { MatIcon } from '@angular/material/icon';
 import { GameConfigService } from '../services/game-config.service';
 import { TranslationService } from '@/app/core/translation.service';
 import { TranslatePipe } from '@/app/core/translation.pipe';
+import { CustomColorsIO } from '@/app/shared/customColors';
+import { SpeechBubbleComponent } from '../speech-bubble/speech-bubble.component';
+import { OAvatarComponent } from '@/assets/avatars/o-avatar/o-avatar.component';
+import { IAvatarComponent } from '@/assets/avatars/i-avatar/i-avatar.component';
+import { ViewChild } from '@angular/core';
 
 @Component({
   selector: 'app-drawing',
   templateUrl: './game-draw.component.html',
   styleUrls: ['./game-draw.component.scss'],
   standalone: true,
-  imports: [MatIcon, MatIconButton, UpperCasePipe, TranslatePipe],
+  imports: [MatIcon, MatIconButton, UpperCasePipe, TranslatePipe, SpeechBubbleComponent, IAvatarComponent, OAvatarComponent],
 })
 export class GameDrawComponent implements OnInit, OnDestroy {
   config!: GameLevelConfig;
   subscriptions = new Subscription();
 
-  canvas = viewChild.required<ElementRef<HTMLCanvasElement>>('canvas');
-  countDown = viewChild.required<ElementRef<HTMLSpanElement>>('countDown');
+  @ViewChild('canvas', { static: true }) canvas!: ElementRef<HTMLCanvasElement>;
+  @ViewChild('countDown', { static: true }) countDown!: ElementRef<HTMLSpanElement>;
   private ctx: CanvasRenderingContext2D | undefined;
 
   @Output() isDoneDrawing = new EventEmitter();
@@ -69,6 +74,11 @@ export class GameDrawComponent implements OnInit, OnDestroy {
   result: Result | undefined;
   hasAddedResult = false;
 
+  //Speech bubble imports
+  CustomColorsIO = CustomColorsIO;
+  PointerSide = PointerSide;
+  ArrowAlignment = ArrowAlignment;
+
   hasUpdatedState = false;
 
   constructor(
@@ -88,14 +98,14 @@ export class GameDrawComponent implements OnInit, OnDestroy {
       })
     );
     this.multiplayerService.roundIsOver = false;
-    const ctx = this.canvas().nativeElement.getContext('2d');
+    const ctx = this.canvas.nativeElement.getContext('2d');
     if (!ctx) {
       throw new Error('getContext failed');
     }
     this.ctx = ctx;
-    this.canvas().nativeElement.width =
-      this.canvas().nativeElement.parentElement?.offsetWidth || document.body.clientWidth;
-    this.canvas().nativeElement.height = document.body.clientHeight - 100;
+    this.canvas.nativeElement.width =
+      this.canvas.nativeElement.parentElement?.offsetWidth || document.body.clientWidth;
+    this.canvas.nativeElement.height = document.body.clientHeight - 100;
     this.resetMinMaxMouseValues();
     this.drawingService.guessDone = false;
     if (this.multiplayerService.isMultiplayer) {
@@ -176,7 +186,7 @@ export class GameDrawComponent implements OnInit, OnDestroy {
       this.LINE_WIDTH
     );
     return this.imageService.resize(
-      this.canvas().nativeElement.toDataURL('image/png'),
+      this.canvas.nativeElement.toDataURL('image/png'),
       croppedCoordinates,
       this.resultImageSize
     );
@@ -267,7 +277,7 @@ export class GameDrawComponent implements OnInit, OnDestroy {
               }
             }
             if (this.timeLeft <= 5) {
-              this.countDown().nativeElement.style.color = color;
+              this.countDown.nativeElement.style.color = color;
               color = color === 'white' ? 'red' : 'white';
               this.soundService.playTickSound();
               this.soundService.playTick = true;
@@ -317,7 +327,7 @@ export class GameDrawComponent implements OnInit, OnDestroy {
         const score = this.score > 0 ? this.score : 0;
         this.drawingService.lastResult.score = Math.round(score);
         this.imageService
-          .resize(this.canvas().nativeElement.toDataURL('image/png'), croppedCoordinates, this.resultImageSize)
+          .resize(this.canvas.nativeElement.toDataURL('image/png'), croppedCoordinates, this.resultImageSize)
           .subscribe({
             next: (dataUrlHighRes) => {
               this.drawingService.lastResult.imageData = dataUrlHighRes;
@@ -325,7 +335,7 @@ export class GameDrawComponent implements OnInit, OnDestroy {
           });
       } else {
         this.imageService
-          .resize(this.canvas().nativeElement.toDataURL('image/png'), croppedCoordinates, this.resultImageSize)
+          .resize(this.canvas.nativeElement.toDataURL('image/png'), croppedCoordinates, this.resultImageSize)
           .subscribe({
             next: (dataUrlHighRes) => {
               if (this.result) {
@@ -340,7 +350,7 @@ export class GameDrawComponent implements OnInit, OnDestroy {
   classify(isMultiplayer = false) {
     //TODO: rename?
     this.drawnPixelsAtLastGuess = this.drawnPixels;
-    const b64Image = this.canvas().nativeElement.toDataURL('image/png');
+    const b64Image = this.canvas.nativeElement.toDataURL('image/png');
     const croppedCoordinates: number[] = this.imageService.crop(
       this.minX,
       this.minY,
@@ -389,10 +399,11 @@ export class GameDrawComponent implements OnInit, OnDestroy {
   }
 
   getClientOffset(event: MouseEvent | TouchEvent) {
-    const { pageX, pageY } = event instanceof TouchEvent ? event.touches[0] : event;
-    const x = pageX - this.canvas().nativeElement.offsetLeft;
-    const y = pageY - this.canvas().nativeElement.offsetTop;
-
+    const { clientX, clientY } = event instanceof TouchEvent ? event.touches[0] : event;
+    const rect = this.canvas.nativeElement.getBoundingClientRect();
+    const x = clientX - rect.left;
+    const y = clientY - rect.top;
+  
     return { x, y };
   }
 
@@ -457,11 +468,11 @@ export class GameDrawComponent implements OnInit, OnDestroy {
     if (this.minY < 0) {
       this.minY = 0;
     }
-    if (this.maxX > this.canvas().nativeElement.width) {
-      this.maxX = this.canvas().nativeElement.width;
+    if (this.maxX > this.canvas.nativeElement.width) {
+      this.maxX = this.canvas.nativeElement.width;
     }
-    if (this.maxY > this.canvas().nativeElement.height) {
-      this.maxY = this.canvas().nativeElement.height;
+    if (this.maxY > this.canvas.nativeElement.height) {
+      this.maxY = this.canvas.nativeElement.height;
     }
   }
 
@@ -470,8 +481,8 @@ export class GameDrawComponent implements OnInit, OnDestroy {
       const imageData = this.ctx.getImageData(
         0,
         0,
-        this.canvas().nativeElement.width,
-        this.canvas().nativeElement.height
+        this.canvas.nativeElement.width,
+        this.canvas.nativeElement.height
       );
       let count = 0;
       for (let i = 0; i < imageData.data.length; i += 4) {
@@ -496,7 +507,7 @@ export class GameDrawComponent implements OnInit, OnDestroy {
   }
 
   clear() {
-    const canvas = this.canvas().nativeElement;
+    const canvas = this.canvas.nativeElement;
     this.ctx?.clearRect(0, 0, canvas.width, canvas.height);
     this.isBlankImage = true;
     this.resetMinMaxMouseValues();
@@ -504,8 +515,8 @@ export class GameDrawComponent implements OnInit, OnDestroy {
   }
 
   resetMinMaxMouseValues() {
-    this.minX = this.canvas().nativeElement.width;
-    this.minY = this.canvas().nativeElement.height;
+    this.minX = this.canvas.nativeElement.width;
+    this.minY = this.canvas.nativeElement.height;
     this.maxX = 0;
     this.maxY = 0;
   }
