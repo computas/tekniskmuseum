@@ -1,35 +1,37 @@
 <div class="container-background" (click)="navigateToWelcome()" (keypress)="navigateToWelcome()" tabindex="0">
-    <button class="logo">
-        <img src="assets/logo/IO-logo-inverted_transparent-bg.png" alt="logo" />
-    </button>
-    
-    <div class="speech-bubble-container">
-        <app-speech-bubble
-            *ngIf="isFirstSpeechBubble"
-            class="speech-bubble-adjusted"
-            [textColor]="textColor"
-            [bodyText]="'Slik ser et EPLE ut!'"
-            [pointerSide]="PointerSide.Bottom"
-            [arrowAlignment]="ArrowAlignment.Left"
-            [bubbleSize]="'medium'"> 
-        </app-speech-bubble>
-        <app-speech-bubble
-            *ngIf="!isFirstSpeechBubble"
-            class="speech-bubble-adjusted"
-            [textColor]="textColor"
-            [bodyText]="'Jeg trodde dette var EPLE, jeg...'"
-            [textColor]="CustomColorsIO.white"
-            [bubbleColor]="CustomColorsIO.indigo"
-            [pointerSide]="PointerSide.Bottom"
-            [arrowAlignment]="ArrowAlignment.Right"
-            [bubbleSize]="'medium'">
-        </app-speech-bubble>
-    </div>
+  <button class="logo">
+    <img src="assets/logo/IO-logo-inverted_transparent-bg.png" alt="logo" />
+  </button>
 
-    <img *ngIf="isFirstSvg" class="teaching-image" src="assets/I-teaching-O.svg" alt="I teaching O" />
-    <img *ngIf="!isFirstSvg" class="teaching-image" src="assets/I-teaching-O-2.svg" alt="I teaching O 2" />
+  <div class="speech-bubble-container">
+    <app-speech-bubble
+      *ngIf="isFirstSpeechBubble"
+      class="speech-bubble-adjusted"
+      [textColor]="textColor"
+      [bodyText]="'Slik ser et EPLE ut!'"
+      [pointerSide]="PointerSide.Bottom"
+      [arrowAlignment]="ArrowAlignment.Left"
+      [bubbleSize]="'medium'"
+    >
+    </app-speech-bubble>
+    <app-speech-bubble
+      *ngIf="!isFirstSpeechBubble"
+      class="speech-bubble-adjusted"
+      [textColor]="textColor"
+      [bodyText]="'Jeg trodde dette var EPLE, jeg...'"
+      [textColor]="CustomColorsIO.white"
+      [bubbleColor]="CustomColorsIO.indigo"
+      [pointerSide]="PointerSide.Bottom"
+      [arrowAlignment]="ArrowAlignment.Right"
+      [bubbleSize]="'medium'"
+    >
+    </app-speech-bubble>
+  </div>
 
-    <div class="play-text">TRYKK FOR Å SPILLE</div>
+  <img *ngIf="isFirstSvg" class="teaching-image" src="assets/I-teaching-O.svg" alt="I teaching O" />
+  <img *ngIf="!isFirstSvg" class="teaching-image" src="assets/I-teaching-O-2.svg" alt="I teaching O 2" />
+
+  <div class="play-text">TRYKK FOR Å SPILLE</div>
 </div>
 
 <!-- Må gjøres om fra inline-tekst!!

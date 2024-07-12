@@ -7,37 +7,37 @@ import { CustomColorsIO } from '../shared/customColors';
 import { ArrowAlignment, PointerSide } from '../shared/models/interfaces';
 
 @Component({
-    selector: 'app-splash',
-    templateUrl: './splash.component.html',
-    styleUrls: ['./splash.component.scss'],
-    standalone: true,
-    imports: [CommonModule, SpeechBubbleComponent, TranslatePipe]
+  selector: 'app-splash',
+  templateUrl: './splash.component.html',
+  styleUrls: ['./splash.component.scss'],
+  standalone: true,
+  imports: [CommonModule, SpeechBubbleComponent, TranslatePipe],
 })
 export class SplashComponent implements OnInit, OnDestroy {
-    textColor: CustomColorsIO = CustomColorsIO.black;
-    PointerSide = PointerSide;
-    ArrowAlignment = ArrowAlignment;
-    CustomColorsIO = CustomColorsIO;
-    isFirstSpeechBubble: boolean = true;
-    isFirstSvg: boolean = true;
-    interval: any;
-    
-    constructor(private router: Router) {}
+  textColor: CustomColorsIO = CustomColorsIO.black;
+  PointerSide = PointerSide;
+  ArrowAlignment = ArrowAlignment;
+  CustomColorsIO = CustomColorsIO;
+  isFirstSpeechBubble = true;
+  isFirstSvg = true;
+  interval: ReturnType<typeof setInterval> | null = null;
 
-    ngOnInit() {
-        this.interval = setInterval(() => {
-        this.isFirstSvg = !this.isFirstSvg;
-        this.isFirstSpeechBubble = !this.isFirstSpeechBubble;
-        }, 4000);
-    }
-    
-    ngOnDestroy() {
-        if (this.interval) {
-        clearInterval(this.interval);
-        }
-    }
+  constructor(private router: Router) {}
 
-    navigateToWelcome() {
-        this.router.navigate(['/welcome']);
+  ngOnInit() {
+    this.interval = setInterval(() => {
+      this.isFirstSvg = !this.isFirstSvg;
+      this.isFirstSpeechBubble = !this.isFirstSpeechBubble;
+    }, 4000);
+  }
+
+  ngOnDestroy() {
+    if (this.interval) {
+      clearInterval(this.interval);
     }
-    }
+  }
+
+  navigateToWelcome() {
+    this.router.navigate(['/welcome']);
+  }
+}
