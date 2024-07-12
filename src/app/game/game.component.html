@@ -1,25 +1,21 @@
-@if (showHowToPlay) {
+@switch (currentPage) { @case (GAMESTATE.howToPlay) {
+<div [@enterAnimation]><app-game-info></app-game-info></div>
+} @case (GAMESTATE.difficultyPicker) {
+<div [@enterAnimation]><app-game-pick-difficulty></app-game-pick-difficulty></div>
+} @case (GAMESTATE.showWord) {
+<div [@enterAnimation]><app-game-word-to-draw></app-game-word-to-draw></div>
+} @case (GAMESTATE.drawingBoard) {
+<div [@enterAnimation]><app-drawing></app-drawing></div>
+} @case (GAMESTATE.intermediateResult) {
 <div [@enterAnimation]>
-  <app-game-info (getDifficultyPicker)="getDifficultyPicker()"></app-game-info>
+  <app-game-intermediate-result></app-game-intermediate-result>
 </div>
-} @if (showDifficultyPicker) {
-<div [@enterAnimation]>
-  <app-game-pick-difficulty (getDrawWord)="getDrawWord()"></app-game-pick-difficulty>
-</div>
-} @if (newGame && !showIntermediateResult) {
-<div [@enterAnimation]>
-  <app-drawing></app-drawing>
-</div>
-} @if (showIntermediateResult) {
-<div [@enterAnimation]>
-  <app-game-intermediate-result (nextGuess)="nextGuess()" (finalResult)="finalResult()"></app-game-intermediate-result>
-</div>
-} @if (showFinalResult) {
+} @case (GAMESTATE.showResult) {
 <div [@enterAnimation]>
   <app-game-result></app-game-result>
 </div>
-} @if (showWordToDraw) {
+} @case (GAMESTATE.lobby) {
 <div [@enterAnimation]>
-  <app-game-word-to-draw (drawWord)="startGame()"></app-game-word-to-draw>
+  <app-welcome></app-welcome>
 </div>
-}
+} }

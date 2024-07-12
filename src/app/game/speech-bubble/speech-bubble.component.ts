@@ -11,8 +11,8 @@ import { Component, Input } from '@angular/core';
 export class SpeechBubbleComponent {
   @Input() textColor: CustomColorsIO = CustomColorsIO.black; // Default color
   @Input() bubbleColor: CustomColorsIO = CustomColorsIO.pastelBlue; // Default color
-  @Input() titleText: string | undefined = '';
-  @Input() bodyText: string | undefined = '';
+  @Input() titleText: string | undefined;
+  @Input() bodyText: string | undefined;
 
   // Arrow location and direction
   private _pointerSide: PointerSide = PointerSide.Top;
@@ -116,12 +116,6 @@ export class SpeechBubbleComponent {
           `Illegal combination: ${this._pointerSide} and ${this._arrowAlignment} cannot be flipped. Setting default combination.`
         );
         this._isFlipped = false;
-      } else {
-        console.log(
-          `Legal combination: ${this._pointerSide} and ${this._arrowAlignment} ${
-            this._isFlipped ? 'with' : 'without'
-          } flip.`
-        );
       }
     } else {
       console.warn(

@@ -1,9 +1,9 @@
 <div>
   @switch (gameState) { @case (GAMESTATE.howToPlay) {
   <div [@enterAnimation]><app-game-info></app-game-info></div>
-  } @case (GAMESTATE.waitingForWord) {
+  } @case (GAMESTATE.showWord) {
   <div [@enterAnimation]><app-game-word-to-draw></app-game-word-to-draw></div>
-  } @case (GAMESTATE.drawing) {
+  } @case (GAMESTATE.drawingBoard) {
   <div [@enterAnimation]><app-drawing></app-drawing></div>
   } @case (GAMESTATE.intermediateResult) {
   <div [@enterAnimation]>
@@ -15,7 +15,7 @@
   </div>
   } @default {
   <div [@enterAnimation]>
-    <app-lobby></app-lobby>
+    <app-lobby [initializeComponent]="initializeComponent"></app-lobby>
   </div>
   } }
 </div>

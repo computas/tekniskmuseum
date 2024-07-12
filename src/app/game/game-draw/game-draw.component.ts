@@ -1,11 +1,11 @@
-import { Component, ElementRef, OnInit, Output, EventEmitter, OnDestroy, viewChild } from '@angular/core';
+import { Component, ElementRef, OnInit, OnDestroy, viewChild } from '@angular/core';
 import { BehaviorSubject, interval, Observable, Subscription } from 'rxjs';
 import { ImageService } from '../services/image.service';
 import { take } from 'rxjs/operators';
 import { DrawingService } from '../services/drawing.service';
 import { MultiplayerService } from '../services/multiplayer.service';
-import { ArrowAlignment, Certainty, GAMESTATE, GameLevelConfig, PointerSide, Result } from '../../shared/models/interfaces';
-import { PredictionData } from '../../shared/models/backend-interfaces';
+import {ArrowAlignment, Certainty, GAMESTATE, GameLevelConfig, PointerSide, Result } from '../../shared/models/interfaces';
+import { MultiplayerClassifyParams, PredictionData } from '../../shared/models/backend-interfaces';
 import { SoundService } from '../services/sound.service';
 import { UpperCasePipe } from '@angular/common';
 import { MatIconButton } from '@angular/material/button';
@@ -13,6 +13,7 @@ import { MatIcon } from '@angular/material/icon';
 import { GameConfigService } from '../services/game-config.service';
 import { TranslationService } from '@/app/core/translation.service';
 import { TranslatePipe } from '@/app/core/translation.pipe';
+import { GameStateService } from '../services/game-state-service';
 import { CustomColorsIO } from '@/app/shared/customColors';
 import { SpeechBubbleComponent } from '../speech-bubble/speech-bubble.component';
 import { OAvatarComponent } from '@/assets/avatars/o-avatar/o-avatar.component';
@@ -33,8 +34,6 @@ export class GameDrawComponent implements OnInit, OnDestroy {
   @ViewChild('canvas', { static: true }) canvas!: ElementRef<HTMLCanvasElement>;
   @ViewChild('countDown', { static: true }) countDown!: ElementRef<HTMLSpanElement>;
   private ctx: CanvasRenderingContext2D | undefined;
-
-  @Output() isDoneDrawing = new EventEmitter();
 
   x = 0;
   y = 0;
@@ -83,6 +82,7 @@ export class GameDrawComponent implements OnInit, OnDestroy {
 
   constructor(
     private gameConfigService: GameConfigService,
+    private gameStateService: GameStateService,
     private multiplayerService: MultiplayerService,
     private drawingService: DrawingService,
     private imageService: ImageService,
@@ -91,6 +91,7 @@ export class GameDrawComponent implements OnInit, OnDestroy {
   ) {}
 
   ngOnInit(): void {
+    this.gameStateService.savePageToLocalStorage(GAMESTATE.drawingBoard);
     this.subscriptions.add(
       this.gameConfigService.difficultyLevel$.subscribe((config) => {
         this.config = config;
@@ -108,7 +109,7 @@ export class GameDrawComponent implements OnInit, OnDestroy {
     this.canvas.nativeElement.height = document.body.clientHeight - 100;
     this.resetMinMaxMouseValues();
     this.drawingService.guessDone = false;
-    if (this.multiplayerService.isMultiplayer) {
+    if (this.gameStateService.isMultiplayer()) {
       this.setUpMultiplayer();
     }
     this.startGame();
@@ -117,9 +118,7 @@ export class GameDrawComponent implements OnInit, OnDestroy {
 
   setUpMultiplayer() {
     this.multiplayerService.stateInfo = { ...this.multiplayerService.stateInfo, ready: false };
-
     this.subscriptions.add(this.predictionListener());
-
     this.subscriptions.add(this.roundOverListener());
   }
 
@@ -131,7 +130,7 @@ export class GameDrawComponent implements OnInit, OnDestroy {
       if (this.prediction && this.prediction.hasWon && !this.hasAddedResult) {
         this.soundService.playResultSound(this.prediction.hasWon);
         this.updateResult(true);
-        this.hasAddedResult = true;
+        this.gameStateService.goToPage(GAMESTATE.intermediateResult);
       }
     });
   }
@@ -140,20 +139,20 @@ export class GameDrawComponent implements OnInit, OnDestroy {
     return this.multiplayerService.roundOverListener().subscribe(() => {
       if (!this.hasAddedResult) {
         this.updateResult(this.prediction ? this.prediction.hasWon : false);
-        this.hasAddedResult = true;
       }
     });
   }
 
   updateResult(won: boolean) {
     const result: Result = this.createResult(won);
-    this.drawingService.guessUsed++;
+    this.drawingService.guessUsed++; // TODO replace this with gameStateService?
     this.addResultAndResize(result).subscribe({
       next: (dataUrlHighRes) => {
         this.drawingService.lastResult.imageData = dataUrlHighRes;
-        this.multiplayerService.changestate(GAMESTATE.intermediateResult);
+        this.gameStateService.goToPage(GAMESTATE.intermediateResult);
       },
     });
+    this.hasAddedResult = true;
   }
 
   createResult(won: boolean) {
@@ -214,7 +213,7 @@ export class GameDrawComponent implements OnInit, OnDestroy {
     this.subscriptions.add(
       this.createDrawingTimer().subscribe({
         next: () => {
-          if (this.multiplayerService.isMultiplayer) {
+          if (this.gameStateService.isMultiplayer()) {
             this.classify(true);
           } else {
             if (!this.isBlankImage || (this.isBlankImage && this.timeLeft === 0)) {
@@ -226,11 +225,10 @@ export class GameDrawComponent implements OnInit, OnDestroy {
           this.clockColor = this.clockColor === 'initial' ? 'final' : 'initial';
           this.soundService.sound.stop();
           this.timeOut = true;
-          if (this.multiplayerService.isMultiplayer && !this.hasAddedResult) {
+          if (this.gameStateService.isMultiplayer() && !this.hasAddedResult) {
             this.updateResult(false);
-            this.hasAddedResult = true;
           }
-          if (!this.multiplayerService.isMultiplayer && !this.drawingService.hasAddedSingleplayerResult) {
+          if (this.gameStateService.isSingleplayer() && !this.drawingService.hasAddedSingleplayerResult) {
             let res;
             let hasWon = false;
             if (!this.drawingService.pred) {
@@ -250,7 +248,7 @@ export class GameDrawComponent implements OnInit, OnDestroy {
     if (this.drawingService.label) {
       this.guessWord = this.drawingService.label;
     }
-    if (this.multiplayerService.isMultiplayer) {
+    if (this.gameStateService.isMultiplayer()) {
       this.guessWord = this.multiplayerService.label;
     }
   }
@@ -284,7 +282,7 @@ export class GameDrawComponent implements OnInit, OnDestroy {
             }
           }
           if (this.timeLeft <= 0) {
-            if (this.multiplayerService.isMultiplayer) {
+            if (this.gameStateService.isMultiplayer()) {
               this.soundService.playResultSound(false);
             }
             observer.complete();
@@ -323,6 +321,8 @@ export class GameDrawComponent implements OnInit, OnDestroy {
       const sortedCertaintyArr = this.sortOnCertainty(res);
       this.updateAiGuess(sortedCertaintyArr);
       if (this.drawingService.roundIsDone(res.hasWon, res.gameState)) {
+        this.gameStateService.goToPage(GAMESTATE.intermediateResult);
+
         this.soundService.playResultSound(res.hasWon);
         const score = this.score > 0 ? this.score : 0;
         this.drawingService.lastResult.score = Math.round(score);
@@ -361,9 +361,10 @@ export class GameDrawComponent implements OnInit, OnDestroy {
     this.imageService.resize(b64Image, croppedCoordinates).subscribe({
       next: (dataUrl) => {
         if (isMultiplayer) {
-          const body: { game_id?: string; time_left: number } = {
+          const body: MultiplayerClassifyParams = {
             game_id: this.multiplayerService.stateInfo.game_id,
             time_left: this.timeLeft,
+            lang: this.translationService.getCurrentLang(),
           };
           const image = this.imageService.createBlob(dataUrl);
           this.multiplayerService.classify(body, image);

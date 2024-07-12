@@ -8,11 +8,13 @@ import {
   HighscoreData,
   JoinGameData,
   JoinGameReady,
+  MultiplayerClassifyParams,
   PredictionData,
   Score,
 } from '@/app/shared/models/backend-interfaces';
 import { Difficulty, GAMESTATE, GameState, PlayerScore } from '@/app/shared/models/interfaces';
 import { TranslationService } from '@/app/core/translation.service';
+import { GameStateService } from './game-state-service';
 
 @Injectable({
   providedIn: 'root',
@@ -20,7 +22,6 @@ import { TranslationService } from '@/app/core/translation.service';
 export class MultiplayerService {
   public loading = true;
   public label = '';
-  public isMultiplayer = false;
   roundIsOver = false;
 
   private initialState: GameState = {
@@ -41,6 +42,7 @@ export class MultiplayerService {
   public opponentScore = new ReplaySubject<PlayerScore>(1);
 
   constructor(
+    private gameStateService: GameStateService,
     private webSocketService: WebSocketService,
     private pairing: PairingService,
     private translationService: TranslationService
@@ -48,7 +50,6 @@ export class MultiplayerService {
 
   resetStateInfo() {
     this.stateInfo = this.initialState;
-    this.isMultiplayer = false;
   }
 
   joinGame(difficulty_id: number) {
@@ -64,6 +65,7 @@ export class MultiplayerService {
         }
         if (el.ready) {
           this.stateInfo = { ...this.stateInfo, ready: el.ready, gameState: GAMESTATE.howToPlay };
+          this.gameStateService.goToPage(GAMESTATE.howToPlay);
         }
       })
     );
@@ -91,7 +93,7 @@ export class MultiplayerService {
     );
   }
 
-  classify(data: { game_id?: string; time_left: number }, image: Blob) {
+  classify(data: MultiplayerClassifyParams, image: Blob) {
     this.webSocketService.emit(SocketEndpoints.CLASSIFY, data, image);
   }
 
@@ -149,7 +151,6 @@ export class MultiplayerService {
 
   clearState() {
     this.stateInfo = this.initialState;
-    this.isMultiplayer = false;
     this.webSocketService.disconnect();
   }
 
