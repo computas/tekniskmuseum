@@ -1,4 +1,7 @@
 <header class="header">
-  <img class="logo" src="assets/logo/IO-logo-inverted_transparent-bg.png" alt="logo" />
+  <button class="home-btn" (click)="goToHomePage()">
+    <img class="home-icon" src="../../../../assets/house.svg" alt="a house icon with round edges" />
+    {{ 'END_GAME_BUTTON' | translate }}
+  </button>
   <app-game-progress-bar class="game-progress-bar"></app-game-progress-bar>
 </header>
