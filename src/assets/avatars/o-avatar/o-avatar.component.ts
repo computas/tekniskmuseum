@@ -9,7 +9,6 @@ import { Component, Input } from '@angular/core';
 })
 export class OAvatarComponent {
   @Input() color: CustomColorsIO = CustomColorsIO.black; // Default color
-
-  height = 192;
-  width = 192;
+  @Input() width: number = 192; // Default width
+  @Input() height: number = 192; // Default height
 }

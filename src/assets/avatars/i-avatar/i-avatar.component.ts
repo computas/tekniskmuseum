@@ -9,4 +9,6 @@ import { Component, Input } from '@angular/core';
 })
 export class IAvatarComponent {
   @Input() color: CustomColorsIO = CustomColorsIO.black; // Default color
+  @Input() width: number = 39; // Default width
+  @Input() height: number = 192; // Default height
 }
