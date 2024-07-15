@@ -27,32 +27,38 @@ import { CustomColorsIO } from '../shared/customColors';
     trigger('moveFigure', [
       state('hidden', style({ opacity: 0 })),
       state('visible', style({ opacity: 1 })),
-      state('moved', style({ transform: 'translateY({{y}}px)' }), { params: { y: '0' } }),
-      transition('hidden => visible', [animate('1s')]),
-      transition('visible => moved', [animate('1s')]),
+      state('anticipate', style({ transform: 'translateY(-20px)' })),
+      state('break', style({ transform: 'translateY({{breakY}}px)' }), { params: { breakY: '0' } }),
+      state('end', style({ transform: 'translateY({{y}}px)' }), { params: { y: '0' } }),
+      transition('hidden => visible', [animate('0.7s')]),
+      transition('visible => anticipate', [animate('0.4s')]),
+      transition('anticipate => break', [animate('0.4s ease-in')]),
+      transition('break => end', [animate('0.1s')]),
     ]),
-    trigger('showBubble', [
+    trigger('makeVisible', [
       state('hidden', style({ opacity: 0 })),
       state('visible', style({ opacity: 1 })),
-      transition('hidden => visible', [animate('1s')]),
+      transition('hidden => visible', animate('0.3s {{delay}}ms'), { params: { delay: 450 } }),
     ]),
   ],
 })
 export class WelcomeComponent implements OnInit, OnDestroy {
-  private headerClicks = 0;
   currentLang$: Observable<string>;
   private destroy$ = new Subject<void>();
+  private animationTimeouts: NodeJS.Timeout[] = [];
+
+  moveDistanceI = 125;
+  moveDistanceO = 200;
+  normalDelay = 350;
 
   stateFigureI = 'hidden';
   stateFigureO = 'hidden';
-  stateFirstBubbleI = 'hidden';
-  stateSecondBubbleI = 'hidden';
-  stateFirstBubbleO = 'hidden';
-  stateSecondBubbleO = 'hidden';
-  stateButton = 'hidden';
-
-  moveDistanceI = 135;
-  moveDistanceO = 245;
+  stateFirstBubbleI = { value: 'hidden', params: { delay: 0 } };
+  stateSecondBubbleI = { value: 'hidden', params: { delay: 0 } };
+  stateFirstBubbleO = { value: 'hidden', params: { delay: 0 } };
+  stateSecondBubbleO = { value: 'hidden', params: { delay: 0 } };
+  stateButtons = { value: 'hidden', params: { delay: 0 } };
+  buttonIsVisible = false;
 
   PointerSide = PointerSide;
   ArrowAlignment = ArrowAlignment;
@@ -84,36 +90,89 @@ export class WelcomeComponent implements OnInit, OnDestroy {
     this.startAnimation();
   }
 
-  goToAdmin() {
-    this.headerClicks++;
-    if (this.headerClicks === 7) {
-      this.headerClicks = 0;
-      this.router.navigate(['admin/info']);
-    }
-  }
-
   changeLanguage(lang: SupportedLanguages) {
     this.translationService.changeLanguage(lang);
   }
 
   startAnimation() {
-    setTimeout(() => {
-      this.stateFirstBubbleO = 'visible';
-      this.stateFigureO = 'visible';
-    }, 500);
-    setTimeout(() => {
-      this.stateFirstBubbleI = 'visible';
-      this.stateFigureI = 'visible';
-    }, 2000);
-    setTimeout(() => {
-      this.stateSecondBubbleO = 'visible';
-      this.stateFigureO = 'moved';
-    }, 4000);
-    setTimeout(() => {
-      this.stateSecondBubbleI = 'visible';
-      this.stateFigureI = 'moved';
-      this.stateButton = 'visible';
-    }, 8000);
+    const steps = [
+      {
+        delay: 500,
+        action: () => {
+          this.stateFirstBubbleO = { value: 'visible', params: { delay: this.normalDelay } };
+          this.stateFigureO = 'visible';
+        },
+      },
+      {
+        delay: 1000,
+        action: () => {
+          this.stateFirstBubbleI = { value: 'visible', params: { delay: this.normalDelay } };
+          this.stateFigureI = 'visible';
+        },
+      },
+      {
+        delay: 1000,
+        action: () => {
+          this.stateFigureO = 'anticipate';
+        },
+      },
+      {
+        delay: 100,
+        action: () => {
+          this.stateSecondBubbleO = { value: 'visible', params: { delay: this.normalDelay } };
+          this.stateFigureO = 'break';
+        },
+      },
+      {
+        delay: 450,
+        action: () => {
+          this.stateFigureO = 'end';
+        },
+      },
+      {
+        delay: 1000,
+        action: () => {
+          this.stateFigureI = 'anticipate';
+        },
+      },
+      {
+        delay: 100,
+        action: () => {
+          this.stateSecondBubbleI = { value: 'visible', params: { delay: this.normalDelay } };
+          this.stateFigureI = 'break';
+        },
+      },
+      {
+        delay: 450,
+        action: () => {
+          this.stateFigureI = 'end';
+          this.buttonIsVisible = true;
+          this.stateButtons = { value: 'visible', params: { delay: this.normalDelay } };
+        },
+      },
+    ];
+
+    let totalDelay = 0;
+
+    steps.forEach((step) => {
+      totalDelay += step.delay;
+      const timeout = setTimeout(step.action, totalDelay);
+      this.animationTimeouts.push(timeout);
+    });
+  }
+
+  skipAnimation() {
+    this.animationTimeouts.forEach((timeout) => clearTimeout(timeout));
+    this.animationTimeouts = [];
+
+    this.stateFirstBubbleO = { value: 'visible', params: { delay: 0 } };
+    this.stateFirstBubbleI = { value: 'visible', params: { delay: 0 } };
+    this.stateSecondBubbleI = { value: 'visible', params: { delay: 0 } };
+    this.stateSecondBubbleO = { value: 'visible', params: { delay: 0 } };
+    this.stateFigureI = 'end';
+    this.stateFigureO = 'end';
+    this.stateButtons = { value: 'visible', params: { delay: 0 } };
+    this.buttonIsVisible = true;
   }
 
   ngOnDestroy() {
