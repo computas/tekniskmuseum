@@ -6,6 +6,7 @@
     "baseUrl": "./",
     "outDir": "./dist/out-tsc",
     "strict": true,
+    "types": ["node"],
     "noImplicitOverride": true,
     "noPropertyAccessFromIndexSignature": true,
     "noImplicitReturns": true,
