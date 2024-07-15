@@ -58,7 +58,7 @@ export class GameStateService {
     this._currentRound.next(0);
     this._isGameOver.next(false);
     this._gameMode.next(GAMEMODE.notSet);
-    this.savePageToLocalStorage(GAMESTATE.lobby);
+    this.savePageToLocalStorage(GAMESTATE.homeScreen);
   }
 
   nextRound() {
