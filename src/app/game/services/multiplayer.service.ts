@@ -64,8 +64,9 @@ export class MultiplayerService {
           this.stateInfo = el;
         }
         if (el.ready) {
-          this.stateInfo = { ...this.stateInfo, ready: el.ready, gameState: GAMESTATE.howToPlay };
-          this.gameStateService.goToPage(GAMESTATE.howToPlay);
+          this.stateInfo = { ...this.stateInfo, ready: el.ready, gameState: GAMESTATE.showWord };
+          this.gameStateService.goToPage(GAMESTATE.showWord);
+          this.gameStateService.startGame();
         }
       })
     );
