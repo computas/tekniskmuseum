@@ -1,6 +1,8 @@
 {
-  "PRESS_TO_PLAY": "Trykk for å spille",
-  "I_TEACHING_O": "Slik ser et eple ut",
+  "PRESS_TO_PLAY": "TRYKK FOR Å SPILLE",
+  "I_TEACHING_O": "Slik ser et EPLE ut!",
+  "I_TEACHING_O_2": "Jeg trodde dette var EPLE, jeg...",
+
   "INTRO_MESSAGE": "Hei, jeg er ",
   "INTRO_MESSAGE_2": "Og jeg er ",
   "INTRO_EXPLANATION": " har vist meg mange tegninger.",
@@ -45,6 +47,7 @@
   "LOSER_TEXT": "Du tapte",
   "RESULT_TEXT": "Ditt resultat:",
   "PLAY_AGAIN_BUTTON": "Spill igjen",
+  "END_GAME_BUTTON": "Avslutt spill",
   "NEW_HIGHSCORE_TEXT": "Du slo dagens rekord!",
   "TODAYS_HIGHSCORE_TEXT": "Dagens rekord:",
 
@@ -62,5 +65,15 @@
   "ROUND_FEEDBACK_FAILED_DESC_2": "Jeg kan være litt dum noen ganger..",
 
   "ROUND_FEEDBACK_CORRECT_TITLE": "Bra tegnet!",
-  "ROUND_FEEDBACK_CORRECT_DESC_1": "Takket være deg klarte jeg å gjette riktig."
+  "ROUND_FEEDBACK_CORRECT_DESC_1": "Takket være deg klarte jeg å gjette riktig.",
+
+  "SUMMARY_I_1": "Bra jobba! Du og",
+  "SUMMARY_I_2": "er et godt team!",
+  "SUMMARY_I_3": "Dere fikk",
+  "SUMMARY_I_4": "poeng",
+  "SUMMARY_O": "Nå blir det lettere for meg å gjette neste gang!",
+
+  "EXAMPLE_DRAWINGS_FB_CORRECT_P1": "Jeg har lært at",
+  "EXAMPLE_DRAWINGS_FB_P2": "ser sånn ut!",
+  "EXAMPLE_DRAWINGS_FB_FAILED_P1": "For jeg har lært at"
 }

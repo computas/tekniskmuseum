@@ -61,12 +61,18 @@ export class MultiplayerComponent implements OnInit, OnDestroy {
     private multiplayerService: MultiplayerService,
     private webSocketService: WebSocketService,
     private router: Router
-  ) {}
+  ) {
+    this.initializeComponent = this.initializeComponent.bind(this);
+  }
   destination = '/';
   otherPlayer = undefined;
   subs = new Subscription();
 
   ngOnInit(): void {
+    this.initializeComponent();
+  }
+
+  initializeComponent(): void {
     this.webSocketService.startSockets();
     this.gameState = this.multiplayerService.stateInfo.gameState;
     this.subs.add(
