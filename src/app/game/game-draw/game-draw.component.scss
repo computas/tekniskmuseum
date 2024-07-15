@@ -4,16 +4,6 @@
   --bbFontSizeSmall: 28px;
   --bbFontSizeMedium: 36px;
   --bbFontSizeLarge: 48px;
-  --bbInfoTextColor: rgb(181, 181, 181);
-
-  font-size: var(--bbFontSizeMedium);
-
-  #oAvatarContainer {
-    p,
-    span {
-      font-size: var(--bbFontSizeSmall);
-    }
-  }
 }
 
 body {
@@ -23,10 +13,14 @@ body {
   padding: 0;
 }
 
-.drawingContainer {
-  padding-top: 24px;
+#drawingContainer {
+  padding-top: 1rem;
   padding-left: 3%;
   padding-right: 3%;
+}
+
+span {
+  font-size: var(--bbFontSizeMedium);
 }
 
 #timerContainer {
@@ -34,109 +28,89 @@ body {
   flex-direction: row;
   justify-content: center;
   align-items: center;
-  color: var(--bbInfoTextColor);
-  margin-top: 5%;
+  color: $text_light_grey;
+  margin-top: 3%;
   margin-right: 2.3%;
+
+  #timerIcon {
+    height: auto;
+    width: auto;
+    color: $text_light_grey;
+    transform: scale(2);
+    width: var(--bbFontSizeMedium);
+  }
 }
 
-.timerIcon {
-  height: auto;
-  width: auto;
-  color: var(--bbInfoTextColor);
-}
-
-.drawingHeader {
+.topContent {
   display: flex;
   flex-direction: row;
   align-items: flex-start;
   justify-content: space-between;
   align-content: stretch;
-  font-size: --bbFontSizeMedium;
-}
-
-#guessWord {
-  font-size: --bbFontSizeMedium;
-  color: $text_secondary_color;
+  font-size: var(--bbFontSizeLarge);
 }
 
 .drawing-seconds {
   display: flex;
   justify-items: flex-end;
   align-items: right;
-  padding-inline: 10px;
-  margin-right: 60px;
 }
 
 .base-timer__circle {
   fill: none;
   stroke: none;
 }
+
 .base-timer__path-elapsed {
   stroke-width: 10px;
-  stroke: grey;
 }
 
 #drawingSurface {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+
+  padding: auto;
+  overflow: hidden;
+
   margin-left: 6vw;
   margin-top: -13vh;
   margin-bottom: 10vh;
 
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-}
-
-#deleteButton {
-  margin-top: 2vh;
-  left: 18vh;
-  position: absolute;
-
-  box-shadow: 0 8px 16px 0 rgba(0, 0, 0, 0.1), 0 6px 20px 0 rgba(0, 0, 0, 0.15);
-  background-color: rgb(222, 13, 13);
-  color: white;
-  padding: 10px;
-  padding-right: 20px;
-  border-radius: 50px;
-  height: auto;
-  min-width: 50px;
-  max-width: 400px;
-}
-
-#buttonText {
-  font-size: --bbFontSizeMedium;
-  display: flex;
-  flex-direction: row;
-  align-items: baseline;
-  justify-content: space-between;
-}
-
-.deleteIcon {
-  margin-bottom: -0.2em;
-  width: 1.2em;
-  height: 1.2em;
-}
-
-#deleteText {
-  line-height: var(--bbFontSizeLarge);
-}
-
-#drawingInfo {
-  z-index: 100;
-}
-
-.canvasContainer {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  padding: auto;
-  overflow: hidden;
   width: 94%;
   height: calc(75vh);
 }
 
+#deleteButton {
+  position: absolute;
+  margin-top: 2vh;
+  height: auto;
+  min-width: 12em;
+  max-width: 40em;
+  left: 18vh;
+  box-shadow: 0 8px 16px 0 rgba(0, 0, 0, 0.1), 0 6px 20px 0 rgba(0, 0, 0, 0.15);
+  padding: 10px;
+  padding-right: 20px;
+  border-radius: 50px;
+
+  background-color: rgb(222, 13, 13);
+  color: white;
+
+  #buttonContent {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    padding-left: 0.1em;
+    padding-right: 0.1em;
+  }
+  #deleteIcon {
+    width: 1.2em;
+    height: 1.2em;
+  }
+}
+
 canvas {
   touch-action: none;
-  border: 1px solid #e5e5e5;
   background-color: white;
 }
 
@@ -145,7 +119,6 @@ canvas {
   flex-direction: row;
   align-items: flex-start;
   justify-content: left;
-
   margin-top: 2vh;
   left: 2vh;
 
@@ -154,8 +127,11 @@ canvas {
   app-speech-bubble {
     span {
       font-family: AeonikMedium;
-      font-size: --bbFontSizeMedium;
+      font-size: var(--bbFontSizeMedium);
       line-height: 0rem;
+    }
+    #guessWord {
+      color: $text_secondary_color;
     }
   }
 }
@@ -163,11 +139,9 @@ canvas {
 #oAvatarContainer {
   display: flex;
   flex-direction: row;
-
   position: absolute;
   right: 4vw;
   margin-top: 2vh;
-
   -webkit-user-select: none; /* Chrome all / Safari all */
   -moz-user-select: none; /* Firefox all */
   -ms-user-select: none; /* IE 10+ */
@@ -176,15 +150,10 @@ canvas {
 
   p,
   span {
-    font-size: --bbFontSizeSmall;
+    font-size: var(--bbFontSizeSmall);
   }
 
   span {
     font-family: AeonikBold;
   }
-}
-
-.guessText,
-span {
-  font-size: --bbFontSizeMedium;
 }

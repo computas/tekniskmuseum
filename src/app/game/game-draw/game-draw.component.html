@@ -1,5 +1,5 @@
-<div class="drawingContainer">
-  <div class="drawingHeader">
+<div id="drawingContainer">
+  <div class="topContent">
     <div id="iAvatarContainer">
       <app-i-avatar [color]="CustomColorsIO.pastelBlue" />
       <app-speech-bubble
@@ -17,21 +17,21 @@
       </app-speech-bubble>
     </div>
     <div #countDown id="timerContainer">
-      <mat-icon class="timerIcon" aria-label="Example home icon">timer</mat-icon>
+      <mat-icon #timerIcon id="timerIcon" aria-label="Timer icon">timer</mat-icon>
       {{ timeLeft }}
     </div>
   </div>
-  <div id="drawingSurface" class="canvasContainer">
-    <ng-content drawingHeader id="drawingInfo">
-      <button mat-raised-button id="deleteButton" (click)="clear()">
-        <span class="buttonText">
+  <div id="drawingSurface">
+    <ng-content class="topContent" id="drawingInfo">
+      <button class="mat-raised-button" id="deleteButton" (click)="clear()">
+        <span id="buttonContent">
           <img
             alt="Trash can icon"
             src="../assets/icons/icons8-trash-144_white.png"
-            class="deleteIcon"
+            id="deleteIcon"
             aria-label="delete icon"
           />
-          <span id="deleteText"> Slett </span>
+          <span id="deleteText"> {{ 'CLEAR_BUTTON' | translate }} </span>
         </span>
       </button>
       <div id="oAvatarContainer">
@@ -43,13 +43,12 @@
           [bubbleColor]="CustomColorsIO.indigo"
           [bubbleSize]="'small'"
         >
-          <p class="guessText" slot="body-alt">
+          <p id="guessText" slot="body-alt">
             {{ 'AI_THINKING_LABEL' | translate }}
             @if (AI_GUESS) {
             {{ 'AI_GUESS_LABEL' | translate }}
-            <!-- style smaller -->
             }
-            <span> {{ AI_GUESS | uppercase }} </span>
+            <span #aiGuess>{{ AI_GUESS | uppercase }}</span>
           </p>
         </app-speech-bubble>
         <app-o-avatar
@@ -60,6 +59,7 @@
       </div>
     </ng-content>
     <canvas
+      #canvas
       id="drawingCanvas"
       (mousedown)="start($event)"
       (mouseup)="stop($event)"
@@ -69,7 +69,6 @@
       (touchstart)="start($event)"
       (touchmove)="draw($event)"
       (touchend)="stop($event)"
-      #canvas
     ></canvas>
   </div>
 </div>

@@ -48,6 +48,7 @@ export class GameDrawComponent implements OnInit, OnDestroy {
 
   @ViewChild('canvas', { static: true }) canvas!: ElementRef<HTMLCanvasElement>;
   @ViewChild('countDown', { static: true }) countDown!: ElementRef<HTMLSpanElement>;
+  @ViewChild('timerIcon', { static: true, read: ElementRef }) timerIcon!: ElementRef<HTMLElement>;
   private ctx: CanvasRenderingContext2D | undefined;
 
   x = 0;
@@ -290,6 +291,7 @@ export class GameDrawComponent implements OnInit, OnDestroy {
             }
             if (this.timeLeft <= 5) {
               this.countDown.nativeElement.style.color = color;
+              this.timerIcon.nativeElement.style.color = color;
               color = color === 'white' ? 'red' : 'white';
               this.soundService.playTickSound();
               this.soundService.playTick = true;
