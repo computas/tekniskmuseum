@@ -37,6 +37,15 @@
   src: url('./assets/fonts/Hofmann/ICTHofmann-Regular.otf') format('opentype');
 }
 
+html,
+body {
+  touch-action: pan-x pan-y;
+  -ms-touch-action: pan-x pan-y;
+  overflow: hidden;
+  width: 100%;
+  height: 100%;
+}
+
 body {
   font-family: 'Barlow Condensed', sans-serif;
   -webkit-touch-callout: none; /* iOS Safari */
