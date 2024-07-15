@@ -1,4 +1,4 @@
-import { Component, OnInit, OnDestroy, Renderer2 } from '@angular/core';
+import { Component, OnInit, OnDestroy } from '@angular/core';
 import { MultiplayerService } from '../game/services/multiplayer.service';
 import { DrawingService } from '../game/services/drawing.service';
 import { Router, RouterLink, RouterLinkActive } from '@angular/router';
@@ -27,19 +27,18 @@ import { CustomColorsIO } from '../shared/customColors';
     trigger('moveFigure', [
       state('hidden', style({ opacity: 0 })),
       state('visible', style({ opacity: 1 })),
-      state('anticipate', style({transform: 'translateY(-20px)'})),
+      state('anticipate', style({ transform: 'translateY(-20px)' })),
       state('break', style({ transform: 'translateY({{breakY}}px)' }), { params: { breakY: '0' } }),
       state('end', style({ transform: 'translateY({{y}}px)' }), { params: { y: '0' } }),
       transition('hidden => visible', [animate('0.7s')]),
       transition('visible => anticipate', [animate('0.4s')]),
       transition('anticipate => break', [animate('0.4s ease-in')]),
       transition('break => end', [animate('0.1s')]),
-
     ]),
     trigger('makeVisible', [
       state('hidden', style({ opacity: 0 })),
-      state('visible', style({opacity: 1})),
-      transition('hidden => visible', animate('0.3s {{delay}}ms'), {params: {delay: 450}})
+      state('visible', style({ opacity: 1 })),
+      transition('hidden => visible', animate('0.3s {{delay}}ms'), { params: { delay: 450 } }),
     ]),
   ],
 })
@@ -54,11 +53,11 @@ export class WelcomeComponent implements OnInit, OnDestroy {
 
   stateFigureI = 'hidden';
   stateFigureO = 'hidden';
-  stateFirstBubbleI = {value: 'hidden', params: {delay: 0}}
-  stateSecondBubbleI = {value: 'hidden', params: {delay: 0}};
-  stateFirstBubbleO ={value: 'hidden', params: {delay: 0}};
-  stateSecondBubbleO = {value: 'hidden', params: {delay: 0}};
-  stateButtons = {value: 'hidden', params: {delay: 0}};
+  stateFirstBubbleI = { value: 'hidden', params: { delay: 0 } };
+  stateSecondBubbleI = { value: 'hidden', params: { delay: 0 } };
+  stateFirstBubbleO = { value: 'hidden', params: { delay: 0 } };
+  stateSecondBubbleO = { value: 'hidden', params: { delay: 0 } };
+  stateButtons = { value: 'hidden', params: { delay: 0 } };
   buttonIsVisible = false;
 
   PointerSide = PointerSide;
@@ -97,19 +96,65 @@ export class WelcomeComponent implements OnInit, OnDestroy {
 
   startAnimation() {
     const steps = [
-      { delay: 500, action: () => { this.stateFirstBubbleO = {value: 'visible', params: {delay: this.normalDelay}}; this.stateFigureO = 'visible'; } },
-      { delay: 1000, action: () => { this.stateFirstBubbleI = {value: 'visible', params: {delay: this.normalDelay}}; this.stateFigureI = 'visible'; } },
-      { delay: 1000, action: () => { this.stateFigureO = 'anticipate'; } },
-      { delay: 100, action: () => { this.stateSecondBubbleO = {value: 'visible', params: {delay: this.normalDelay}}; this.stateFigureO = 'break'; } },
-      { delay: 450, action: () => { this.stateFigureO = 'end'} },
-      { delay: 1000, action: () => { this.stateFigureI = 'anticipate'; } },
-      { delay: 100, action: () => { this.stateSecondBubbleI = {value: 'visible', params: {delay: this.normalDelay}}; this.stateFigureI = 'break';} },
-      { delay: 450, action: () => { this.stateFigureI = 'end';  this.buttonIsVisible = true; this.stateButtons = {value: 'visible', params: {delay: this.normalDelay}}; } },
+      {
+        delay: 500,
+        action: () => {
+          this.stateFirstBubbleO = { value: 'visible', params: { delay: this.normalDelay } };
+          this.stateFigureO = 'visible';
+        },
+      },
+      {
+        delay: 1000,
+        action: () => {
+          this.stateFirstBubbleI = { value: 'visible', params: { delay: this.normalDelay } };
+          this.stateFigureI = 'visible';
+        },
+      },
+      {
+        delay: 1000,
+        action: () => {
+          this.stateFigureO = 'anticipate';
+        },
+      },
+      {
+        delay: 100,
+        action: () => {
+          this.stateSecondBubbleO = { value: 'visible', params: { delay: this.normalDelay } };
+          this.stateFigureO = 'break';
+        },
+      },
+      {
+        delay: 450,
+        action: () => {
+          this.stateFigureO = 'end';
+        },
+      },
+      {
+        delay: 1000,
+        action: () => {
+          this.stateFigureI = 'anticipate';
+        },
+      },
+      {
+        delay: 100,
+        action: () => {
+          this.stateSecondBubbleI = { value: 'visible', params: { delay: this.normalDelay } };
+          this.stateFigureI = 'break';
+        },
+      },
+      {
+        delay: 450,
+        action: () => {
+          this.stateFigureI = 'end';
+          this.buttonIsVisible = true;
+          this.stateButtons = { value: 'visible', params: { delay: this.normalDelay } };
+        },
+      },
     ];
-  
+
     let totalDelay = 0;
-  
-    steps.forEach(step => {
+
+    steps.forEach((step) => {
       totalDelay += step.delay;
       const timeout = setTimeout(step.action, totalDelay);
       this.animationTimeouts.push(timeout);
@@ -117,16 +162,16 @@ export class WelcomeComponent implements OnInit, OnDestroy {
   }
 
   skipAnimation() {
-    this.animationTimeouts.forEach(timeout => clearTimeout(timeout));
+    this.animationTimeouts.forEach((timeout) => clearTimeout(timeout));
     this.animationTimeouts = [];
 
-    this.stateFirstBubbleO = {value: 'visible', params: {delay: 0}};
-    this.stateFirstBubbleI = {value: 'visible', params: {delay: 0}};
-    this.stateSecondBubbleI = {value: 'visible', params: {delay: 0}};
-    this.stateSecondBubbleO = {value: 'visible', params: {delay: 0}};
-    this.stateFigureI = 'end'
+    this.stateFirstBubbleO = { value: 'visible', params: { delay: 0 } };
+    this.stateFirstBubbleI = { value: 'visible', params: { delay: 0 } };
+    this.stateSecondBubbleI = { value: 'visible', params: { delay: 0 } };
+    this.stateSecondBubbleO = { value: 'visible', params: { delay: 0 } };
+    this.stateFigureI = 'end';
     this.stateFigureO = 'end';
-    this.stateButtons = {value: 'visible', params: {delay: 0}};
+    this.stateButtons = { value: 'visible', params: { delay: 0 } };
     this.buttonIsVisible = true;
   }
 

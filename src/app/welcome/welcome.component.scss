@@ -1,5 +1,20 @@
 @import '../../variables.scss';
 
+.container-background {
+  position: relative;
+}
+.container-background:before {
+  content: '';
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  position: absolute;
+  background-image: url('../../assets/background/io_rutemoenster-inverted.png');
+  background-size: cover;
+  background-color: black;
+}
+
 .container {
   position: relative;
   display: flex;
@@ -98,7 +113,6 @@
   align-self: flex-end;
 }
 
-
 .I-figure {
   min-width: 100px;
   display: flex;
@@ -127,7 +141,6 @@
   gap: 75px;
   margin-bottom: 50px;
 }
-
 
 .play-game-button {
   box-shadow: 0 8px 16px 0 rgba(0, 0, 0, 0.1), 0 6px 20px 0 rgba(0, 0, 0, 0.15);

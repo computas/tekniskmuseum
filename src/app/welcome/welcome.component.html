@@ -24,10 +24,15 @@
       </div>
     </header>
 
-    <div class="main-content" (click)="skipAnimation()">
-      <div class="text-content" >
-        <div class="I-figure" >
-          <img src="assets/I-figure.svg" alt="I-figure" height="170px" [@moveFigure]="{value: stateFigureI, params: {y: moveDistanceI, breakY: moveDistanceI + 20}}" />
+    <div class="main-content" (click)="skipAnimation()" (keypress)="skipAnimation()" tabindex="0">
+      <div class="text-content">
+        <div class="I-figure">
+          <img
+            src="assets/I-figure.svg"
+            alt="I-figure"
+            height="170px"
+            [@moveFigure]="{ value: stateFigureI, params: { y: moveDistanceI, breakY: moveDistanceI + 20 } }"
+          />
         </div>
         <div class="speech-bubbles">
           <app-speech-bubble
@@ -44,7 +49,7 @@
               {{ 'INTRO_MESSAGE' | translate }}<span slot="body-alt" class="avatar-name"> O</span>
             </div>
           </app-speech-bubble>
-  
+
           <app-speech-bubble
             [@makeVisible]="stateFirstBubbleI"
             class="speech-bubble left"
@@ -57,7 +62,7 @@
               {{ 'INTRO_MESSAGE_2' | translate }}<span class="avatar-name"> I</span>
             </div>
           </app-speech-bubble>
-  
+
           <app-speech-bubble
             [@makeVisible]="stateSecondBubbleO"
             class="speech-bubble right"
@@ -87,19 +92,38 @@
             </div>
           </app-speech-bubble>
         </div>
-        <div class="O-figure" #figureO >
-          <img src="assets/O-figure.svg"  alt="O-figure" height="170px" [@moveFigure]="{value: stateFigureO, params: {y: moveDistanceO, breakY: moveDistanceO + 20}}" />
+        <div class="O-figure" #figureO>
+          <img
+            src="assets/O-figure.svg"
+            alt="O-figure"
+            height="170px"
+            [@moveFigure]="{ value: stateFigureO, params: { y: moveDistanceO, breakY: moveDistanceO + 20 } }"
+          />
         </div>
       </div>
     </div>
-    <div class="button-container" [@makeVisible]="stateButtons" >
-      <button mat-raised-button [disabled]="!buttonIsVisible" routerLink="/playgame/singleplayer" routerLinkActive="active" (click)="setSingleplayer()" class="play-game-button">
+    <div class="button-container" [@makeVisible]="stateButtons">
+      <button
+        mat-raised-button
+        [disabled]="!buttonIsVisible"
+        routerLink="/playgame/singleplayer"
+        routerLinkActive="active"
+        (click)="setSingleplayer()"
+        class="play-game-button"
+      >
         <div class="button-text">
           <mat-icon class="button-icon" aria-label="player one icon">person</mat-icon
           >{{ 'PLAYER_MODE_SINGLE' | translate }}
         </div>
       </button>
-      <button mat-raised-button [disabled]="!buttonIsVisible" routerLink="/playgame/multiplayer" routerLinkActive="active" (click)="setMultiplayer()" class="play-game-button">
+      <button
+        mat-raised-button
+        [disabled]="!buttonIsVisible"
+        routerLink="/playgame/multiplayer"
+        routerLinkActive="active"
+        (click)="setMultiplayer()"
+        class="play-game-button"
+      >
         <div class="button-text">
           <mat-icon class="button-icon" aria-label="player two icon">group</mat-icon
           >{{ 'PLAYER_MODE_MULTI' | translate }}
