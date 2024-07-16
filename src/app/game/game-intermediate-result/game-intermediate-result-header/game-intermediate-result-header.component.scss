@@ -29,6 +29,14 @@
   gap: 0.5rem;
 }
 
+.home-btn:hover {
+  background: #eee;
+}
+
+.home-btn:active {
+  background: #ddd;
+}
+
 .home-icon {
   height: 1.25rem;
   width: 1.25rem;
