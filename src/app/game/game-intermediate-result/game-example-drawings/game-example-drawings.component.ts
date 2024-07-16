@@ -7,6 +7,9 @@ import { TranslatePipe } from '@/app/core/translation.pipe';
 import { DrawingService } from '../../services/drawing.service';
 import { TranslationService } from '@/app/core/translation.service';
 import { Subscription } from 'rxjs';
+import { ExampleDrawingsData } from '@/app/shared/models/backend-interfaces';
+import { GameStateService } from '../../services/game-state-service';
+import { MultiplayerService } from '../../services/multiplayer.service';
 
 @Component({
   selector: 'app-game-example-drawings',
@@ -27,13 +30,25 @@ export class GameExampleDrawingsComponent implements OnInit, OnDestroy {
   constructor(
     private translationService: TranslationService,
     private drawingService: DrawingService,
-    private exampleDrawingService: ExampleDrawingService
+    private exampleDrawingService: ExampleDrawingService,
+    private gameStateService: GameStateService,
+    private multiplayerService: MultiplayerService
   ) {}
   ngOnInit(): void {
     this.label = this.drawingService.label;
-    const getExampleDrawingsParams = { n: 3, label: this.label, lang: this.language };
+
+    const exampleDrawingsParams: ExampleDrawingsData = this.getExampleDrawingsParams();
+    if (this.gameStateService.isSingleplayer()) {
+      this.subscriptions.add(
+        this.exampleDrawingService.getExampleDrawings(exampleDrawingsParams).subscribe((res) => {
+          this.exampleDrawings = res;
+        })
+      );
+      return;
+    }
+
     this.subscriptions.add(
-      this.exampleDrawingService.getExampleDrawings(getExampleDrawingsParams).subscribe((res) => {
+      this.multiplayerService.getExampleDrawings(exampleDrawingsParams).subscribe((res) => {
         this.exampleDrawings = res;
       })
     );
@@ -41,5 +56,19 @@ export class GameExampleDrawingsComponent implements OnInit, OnDestroy {
 
   ngOnDestroy(): void {
     this.subscriptions.unsubscribe();
+  }
+
+  getExampleDrawingsParams(): ExampleDrawingsData {
+    let gameId: string | undefined = '';
+    if (this.gameStateService.isMultiplayer()) {
+      gameId = this.multiplayerService.stateInfo.game_id;
+    }
+
+    return {
+      game_id: gameId,
+      number_of_images: 3,
+      label: this.label,
+      lang: this.language,
+    };
   }
 }
