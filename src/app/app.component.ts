@@ -14,7 +14,7 @@ import { environment } from '../environments/environment';
   styleUrls: ['./app.component.scss'],
   animations: [routeTransitionAnimations],
   standalone: true,
-  imports: [ RouterOutlet ],
+  imports: [RouterOutlet],
 })
 export class AppComponent implements OnInit {
   title = 'Teknisk Museum';
@@ -31,7 +31,6 @@ export class AppComponent implements OnInit {
     this.setDialogTimeout();
     this.userInactive.subscribe(() => {
       if (this.router.url === '/welcome') {
-        // return to '/' after inactivityTime
         this.router.navigate(['/']);
       } else if (this.router.url !== '/' && this.router.url !== '/admin') {
         this.openDialog();
