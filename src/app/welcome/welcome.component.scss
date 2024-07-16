@@ -14,6 +14,7 @@
   background-size: cover;
   background-color: black;
 }
+
 .container {
   position: relative;
   display: flex;
@@ -24,17 +25,16 @@
 
 .header {
   width: 100%;
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  padding: 20px;
+  padding: 60px;
 }
 
 .logo {
-  margin-left: 35px;
+  position: absolute;
+  top: 0;
+  left: 0;
+  margin: 35px;
   height: 44px;
   width: 70px;
-  cursor: default;
 
   img {
     width: 100%;
@@ -42,6 +42,10 @@
 }
 
 .language-button-container {
+  position: absolute;
+  top: 0;
+  right: 0;
+  margin: 25px;
   display: inline-flex;
   align-items: flex-start;
   gap: 12px;
@@ -75,60 +79,30 @@
 .main-content {
   flex: 1;
   display: flex;
-  justify-content: space-evenly;
-  align-items: center;
-  // margin-bottom: 30px;
-  margin-right: 100px;
-  min-width: 1300px;
-}
-
-.I-figure,
-.O-figure {
-  flex: 1;
-  display: flex;
   justify-content: center;
-}
-
-.I-figure {
-  display: flex;
-  justify-content: end;
-  margin-right: 40px;
-  margin-top: 120px;
-}
-
-.O-figure {
-  margin-left: 30px;
-  margin-bottom: 160px;
-}
-
-.info-text {
-  flex: 5;
-  display: flex;
-  flex-direction: column;
   align-items: center;
-  text-align: center;
-  color: $text_primary_color;
-  font-size: 24px;
-  font-weight: 300;
-  line-height: 30px;
-  text-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
-  /*justify-content: space-between;
-  height: 100%; */
-}
-@media (min-width: 600px) {
-  .info-text {
-    font-size: 38px;
-    line-height: 40px;
-  }
 }
 
-.avatar-name {
-  font-family: ICTHofmannRegular;
+.text-content {
+  display: flex;
+  justify-content: start;
+  width: 1200px;
+  padding-bottom: 50px;
 }
 
-.speech-bubble-text {
-  font-family: AeonikRegular;
-  font-size: 40px;
+.speech-bubbles {
+  flex: 5;
+  display: inline-flex;
+  flex-direction: column;
+}
+
+.speech-bubbles > :nth-child(1) {
+  margin-bottom: -50px;
+}
+
+.speech-bubbles > :nth-child(3) {
+  margin-top: 1rem;
+  margin-bottom: -1rem;
 }
 
 .speech-bubble.left {
@@ -139,36 +113,44 @@
   align-self: flex-end;
 }
 
+.I-figure {
+  min-width: 100px;
+  display: flex;
+  justify-content: flex-end;
+  margin-right: 30px;
+  margin-top: 150px;
+}
+
+.O-figure {
+  display: flex;
+  justify-content: flex-end;
+  min-width: 190px;
+  margin-top: 60px;
+}
+
+.speech-bubble-text {
+  font-size: 38px;
+  line-height: 38px;
+  font-family: AeonikRegular;
+}
+
 .button-container {
   margin-top: 0;
   display: inline-flex;
   align-items: center;
   gap: 75px;
-  margin-bottom: 75px;
-}
-
-app-speech-bubble {
-  margin-top: -20px;
+  margin-bottom: 50px;
 }
 
 .play-game-button {
-  background: $button_background_color;
-  color: $button_content_color;
   box-shadow: 0 8px 16px 0 rgba(0, 0, 0, 0.1), 0 6px 20px 0 rgba(0, 0, 0, 0.15);
-  margin-top: 20px;
-  font-size: 20px;
+  font-size: 36px;
   border-radius: 50px;
-  height: 50px;
-  min-width: 240px;
-  max-width: 300px;
-}
-@media (min-width: 600px) {
-  .play-game-button {
-    font-size: 36px;
-    height: 76px;
-    min-width: 249px;
-    max-width: 300px;
-  }
+  height: 70px;
+  margin-top: 10px;
+  min-width: 200px;
+  max-width: 400px;
+  background: $button_background_color;
 }
 
 .button-text {
@@ -176,10 +158,11 @@ app-speech-bubble {
   flex-direction: row;
   justify-content: center;
   align-items: center;
+  color: $button_content_color;
 }
 .button-icon {
   margin-right: 16px;
-  font-size: 36px;
+  font-size: 40px;
   background: linear-gradient(to top, #2514d1 0%, #f14a64 50%, #de7d6e 90%);
   background-clip: text;
   -webkit-text-fill-color: transparent;
