@@ -30,7 +30,9 @@ export class AppComponent implements OnInit {
   ngOnInit(): void {
     this.setDialogTimeout();
     this.userInactive.subscribe(() => {
-      if (this.router.url !== '/' && this.router.url !== '/admin') {
+      if (this.router.url === '/welcome') {
+        this.router.navigate(['/']);
+      } else if (this.router.url !== '/' && this.router.url !== '/admin') {
         this.openDialog();
       }
     });
