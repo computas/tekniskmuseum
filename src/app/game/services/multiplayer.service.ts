@@ -5,6 +5,7 @@ import { map, take, tap } from 'rxjs/operators';
 import { SocketEndpoints } from '@/app/shared/models/websocketEndpoints';
 import { PairingService } from './pairing.service';
 import {
+  ExampleDrawingsData,
   HighscoreData,
   JoinGameData,
   JoinGameReady,
@@ -64,8 +65,9 @@ export class MultiplayerService {
           this.stateInfo = el;
         }
         if (el.ready) {
-          this.stateInfo = { ...this.stateInfo, ready: el.ready, gameState: GAMESTATE.howToPlay };
-          this.gameStateService.goToPage(GAMESTATE.howToPlay);
+          this.stateInfo = { ...this.stateInfo, ready: el.ready, gameState: GAMESTATE.showWord };
+          this.gameStateService.goToPage(GAMESTATE.showWord);
+          this.gameStateService.startGame();
         }
       })
     );
@@ -95,6 +97,17 @@ export class MultiplayerService {
 
   classify(data: MultiplayerClassifyParams, image: Blob) {
     this.webSocketService.emit(SocketEndpoints.CLASSIFY, data, image);
+  }
+
+  getExampleDrawings(requestData: ExampleDrawingsData): Observable<string[]> {
+    this.webSocketService.emit(SocketEndpoints.GET_EXAMPLE_DRAWINGS, JSON.stringify(requestData));
+    return this.webSocketService.listen(SocketEndpoints.GET_EXAMPLE_DRAWINGS).pipe(
+      take(1),
+      map((res: string) => {
+        const data = JSON.parse(res);
+        return data;
+      })
+    );
   }
 
   predictionListener(): Observable<PredictionData> {

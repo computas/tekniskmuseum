@@ -1,10 +1,13 @@
 import { TranslatePipe } from '@/app/core/translation.pipe';
+import { SpeechBubbleComponent } from '../../speech-bubble/speech-bubble.component';
 import { Component, Input, OnInit } from '@angular/core';
+import { ArrowAlignment, PointerSide } from '@/app/shared/models/interfaces';
+import { CustomColorsIO } from '../../../shared/customColors';
 
 @Component({
   selector: 'app-game-drawing-feedback',
   standalone: true,
-  imports: [TranslatePipe],
+  imports: [TranslatePipe, SpeechBubbleComponent],
   templateUrl: './game-drawing-feedback.component.html',
   styleUrl: './game-drawing-feedback.component.scss',
 })
@@ -14,6 +17,9 @@ export class GameDrawingFeedbackComponent implements OnInit {
   feedbackDescriptionKey = '';
   correctGuess = true;
   failedGuess = false;
+  PointerSide = PointerSide;
+  ArrowAlignment = ArrowAlignment;
+  CustomColorsIO = CustomColorsIO;
 
   ngOnInit(): void {
     this.setFeedbackText();

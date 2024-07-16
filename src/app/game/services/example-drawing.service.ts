@@ -1,5 +1,5 @@
+import { ExampleDrawingsData } from '@/app/shared/models/backend-interfaces';
 import { endpoints } from '@/app/shared/models/endpoints';
-import { SupportedLanguages } from '@/app/shared/models/interfaces';
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
@@ -12,7 +12,7 @@ export class ExampleDrawingService {
 
   constructor(private http: HttpClient) {}
 
-  getExampleDrawings(body: { n: number; label: string; lang: SupportedLanguages }): Observable<string[]> {
+  getExampleDrawings(body: ExampleDrawingsData): Observable<string[]> {
     return this.http.post<string[]>(`${this.baseUrl}/${endpoints.GETEXAMPLEDRAWINGS}`, body);
   }
 }
