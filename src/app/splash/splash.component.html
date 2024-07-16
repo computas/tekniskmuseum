@@ -4,37 +4,33 @@
   </button>
 
   <div class="speech-bubble-container">
-    <app-speech-bubble
-      *ngIf="isFirstSpeechBubble"
-      class="speech-bubble-adjusted"
-      [textColor]="textColor"
-      [bodyText]="'Slik ser et EPLE ut!'"
-      [pointerSide]="PointerSide.Bottom"
-      [arrowAlignment]="ArrowAlignment.Left"
-      [bubbleSize]="'medium'"
-    >
-    </app-speech-bubble>
-    <app-speech-bubble
-      *ngIf="!isFirstSpeechBubble"
-      class="speech-bubble-adjusted"
-      [textColor]="textColor"
-      [bodyText]="'Jeg trodde dette var EPLE, jeg...'"
-      [textColor]="CustomColorsIO.white"
-      [bubbleColor]="CustomColorsIO.indigo"
-      [pointerSide]="PointerSide.Bottom"
-      [arrowAlignment]="ArrowAlignment.Right"
-      [bubbleSize]="'medium'"
-    >
-    </app-speech-bubble>
+    @if (isFirstSpeechBubble) {
+      <app-speech-bubble
+        class="speech-bubble-adjusted"
+        [textColor]="textColor"
+        [bodyText]="'Slik ser et EPLE ut'"
+        [pointerSide]="PointerSide.Bottom"
+        [arrowAlignment]="ArrowAlignment.Left"
+        [bubbleSize]="'medium'"> 
+      </app-speech-bubble>
+    } @else {
+      <app-speech-bubble
+        class="speech-bubble-adjusted"
+        [textColor]="CustomColorsIO.white"
+        [bubbleColor]="CustomColorsIO.indigo"
+        [bodyText]="'Jeg trodde dette var et EPLE...'"
+        [pointerSide]="PointerSide.Bottom"
+        [arrowAlignment]="ArrowAlignment.Right"
+        [bubbleSize]="'medium'">
+      </app-speech-bubble>
+    }
   </div>
 
-  <img *ngIf="isFirstSvg" class="teaching-image" src="assets/I-teaching-O.svg" alt="I teaching O" />
-  <img *ngIf="!isFirstSvg" class="teaching-image" src="assets/I-teaching-O-2.svg" alt="I teaching O 2" />
+  @if (isFirstSvg) {
+    <img class="teaching-image" src="assets/I-teaching-O.svg" alt="I teaching O" />
+  } @else {
+    <img class="teaching-image" src="assets/I-teaching-O-2.svg" alt="I teaching O 2" />
+  }
 
   <div class="play-text">TRYKK FOR Å SPILLE</div>
 </div>
-
-<!-- Må gjøres om fra inline-tekst!!
-[bodyText]="'I_TEACHING_O' | translate"
-[bodyText]="'I_TEACHING_O_2' | translate"
-{{ 'PRESS_TO_PLAY' | translate }} -->
