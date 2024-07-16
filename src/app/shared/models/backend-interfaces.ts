@@ -42,6 +42,13 @@ export interface JoinGameData {
   game_id: string;
 }
 
+export interface ExampleDrawingsData {
+  game_id: string | undefined;
+  number_of_images: number;
+  label: string;
+  lang: SupportedLanguages;
+}
+
 export interface JoinGameReady {
   ready: boolean;
 }
