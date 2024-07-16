@@ -65,4 +65,33 @@ export class AppComponent implements OnInit {
     clearTimeout(this.userActivity);
     this.setDialogTimeout();
   }
+
+  @HostListener('touchstart', ['$event'])
+  onTouchStart(event: TouchEvent): void {
+    if (event.touches.length > 1) {
+      event.preventDefault();
+    }
+  }
+
+  @HostListener('touchmove', ['$event'])
+  onTouchMove(event: TouchEvent): void {
+    if (event.touches.length > 1) {
+      event.preventDefault();
+    }
+  }
+
+  @HostListener('gesturestart', ['$event'])
+  onGestureStart(event: Event): void {
+    event.preventDefault();
+  }
+
+  @HostListener('gesturechange', ['$event'])
+  onGestureChange(event: Event): void {
+    event.preventDefault();
+  }
+
+  @HostListener('gestureend', ['$event'])
+  onGestureEnd(event: Event): void {
+    event.preventDefault();
+  }
 }
