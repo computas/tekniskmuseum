@@ -18,16 +18,50 @@ export class SplashComponent implements OnInit, OnDestroy {
   PointerSide = PointerSide;
   ArrowAlignment = ArrowAlignment;
   CustomColorsIO = CustomColorsIO;
-  isFirstSpeechBubble = true;
-  isFirstSvg = true;
   interval: ReturnType<typeof setInterval> | null = null;
+
+  speechBubbles = [
+    'I_TEACHING_O_1',
+    'I_TEACHING_O_2',
+    'I_TEACHING_O_3'
+  ];
+  svgs = [
+    'assets/I-teaching-O-1.svg',
+    'assets/I-teaching-O-2.svg',
+    'assets/I-teaching-O-2.svg'
+  ];
+
+  currentBubbleIndex = 0;
+
+  get currentBubbleText(): string {
+    return this.speechBubbles[this.currentBubbleIndex];
+  }
+
+  get currentSvg(): string {
+    return this.svgs[this.currentBubbleIndex];
+  }
+
+  get currentBubbleColor(): CustomColorsIO {
+    return this.currentBubbleIndex === 1 ? CustomColorsIO.indigo : CustomColorsIO.cobaltBlue;
+  }
+
+  get currentBubbleTextColor(): CustomColorsIO {
+    return CustomColorsIO.white;
+  }
+
+  get currentPointerSide(): PointerSide {
+    return PointerSide.Bottom;
+  }
+
+  get currentArrowAlignment(): ArrowAlignment {
+    return this.currentBubbleIndex === 1 ? ArrowAlignment.Right : ArrowAlignment.Left;
+  }
 
   constructor(private router: Router) {}
 
   ngOnInit() {
     this.interval = setInterval(() => {
-      this.isFirstSvg = !this.isFirstSvg;
-      this.isFirstSpeechBubble = !this.isFirstSpeechBubble;
+      this.currentBubbleIndex = (this.currentBubbleIndex + 1) % this.speechBubbles.length;
     }, 4000);
   }
 
