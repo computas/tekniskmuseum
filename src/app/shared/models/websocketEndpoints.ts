@@ -8,4 +8,5 @@ export const SocketEndpoints = {
   PLAYER_DISCONNECTED: 'playerDisconnected',
   POST_SCORE: 'postScore',
   VIEW_HIGHSORE: 'viewHighScore',
+  GET_EXAMPLE_DRAWINGS: 'getExampleDrawings',
 };
