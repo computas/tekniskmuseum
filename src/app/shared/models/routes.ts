@@ -7,4 +7,5 @@ export const routes = {
   RESULT: 'result',
   TEKNISKBACKEND: environment.TEKNISKBACKEND_ENDPOINT,
   DRAWING: 'drawing',
+  WELCOME: 'welcome',
 };

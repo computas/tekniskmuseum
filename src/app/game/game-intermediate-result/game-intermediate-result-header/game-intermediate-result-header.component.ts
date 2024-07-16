@@ -17,6 +17,6 @@ export class GameIntermediateResultHeaderComponent {
 
   goToHomePage() {
     this.gameStateService.clearState();
-    this.router.navigate([routes.LANDING]);
+    this.router.navigate([routes.WELCOME]);
   }
 }
