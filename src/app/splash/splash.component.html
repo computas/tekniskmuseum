@@ -3,19 +3,21 @@
     <img src="assets/logo/IO-logo-inverted_transparent-bg.png" alt="logo" />
   </button>
 
-  <div class="speech-bubble-container">
-    <app-speech-bubble
-      class="speech-bubble-adjusted"
-      [textColor]="currentBubbleTextColor"
-      [bubbleColor]="currentBubbleColor"
-      [bodyText]="currentBubbleText"
-      [pointerSide]="currentPointerSide"
-      [arrowAlignment]="currentArrowAlignment"
-      [bubbleSize]="'medium'">
-    </app-speech-bubble>
-  </div>
+  @if (!animating) {
+    <div class="speech-bubble-container" [@fadeInOut]>
+      <app-speech-bubble
+        class="speech-bubble-adjusted"
+        [textColor]="currentBubbleTextColor"
+        [bubbleColor]="currentBubbleColor"
+        [bodyText]="currentBubbleText"
+        [pointerSide]="currentPointerSide"
+        [arrowAlignment]="currentArrowAlignment"
+        [bubbleSize]="'medium'">
+      </app-speech-bubble>
+    </div>
 
-  <img class="teaching-image" [src]="currentSvg" alt="Teaching Image" />
+    <img class="teaching-image" [@fadeInOut] [src]="currentSvg" alt="Teaching Image" />
+  }
   
-  <div class="play-text">{{ 'TRYKK FOR Å SPILLE' }}</div>
+  <div class="play-text">{{ pressToPlayText }}</div>
 </div>

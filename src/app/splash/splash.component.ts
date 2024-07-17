@@ -1,10 +1,11 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
 import { Router } from '@angular/router';
 import { CommonModule } from '@angular/common';
-import { HttpClient } from '@angular/common/http'; // Ny import for HttpClient
+import { HttpClient } from '@angular/common/http';
 import { SpeechBubbleComponent } from '../game/speech-bubble/speech-bubble.component';
 import { CustomColorsIO } from '../shared/customColors';
 import { ArrowAlignment, PointerSide } from '../shared/models/interfaces';
+import { trigger, state, style, animate, transition } from '@angular/animations';
 
 @Component({
   selector: 'app-splash',
@@ -12,6 +13,18 @@ import { ArrowAlignment, PointerSide } from '../shared/models/interfaces';
   styleUrls: ['./splash.component.scss'],
   standalone: true,
   imports: [CommonModule, SpeechBubbleComponent],
+  animations: [
+    trigger('fadeInOut', [
+      state('in', style({ opacity: 1 })),
+      transition('void => *', [
+        style({ opacity: 0 }),
+        animate(1100)
+      ]),
+      transition('* => void', [
+        animate(700, style({ opacity: 0 }))
+      ])
+    ])
+  ]
 })
 export class SplashComponent implements OnInit, OnDestroy {
   textColor: CustomColorsIO = CustomColorsIO.black;
@@ -19,15 +32,16 @@ export class SplashComponent implements OnInit, OnDestroy {
   ArrowAlignment = ArrowAlignment;
   CustomColorsIO = CustomColorsIO;
   interval: ReturnType<typeof setInterval> | null = null;
+  currentBubbleIndex = 0;
+  animating = false;
 
   speechBubbles: string[] = [];
+  pressToPlayText: string = '';
   svgs = [
     'assets/I-teaching-O-1.svg',
     'assets/I-teaching-O-2.svg',
     'assets/I-teaching-O-2.svg'
   ];
-
-  currentBubbleIndex = 0;
 
   constructor(private router: Router, private http: HttpClient) {}
 
@@ -35,8 +49,16 @@ export class SplashComponent implements OnInit, OnDestroy {
     this.loadTexts();
 
     this.interval = setInterval(() => {
-      this.currentBubbleIndex = (this.currentBubbleIndex + 1) % this.speechBubbles.length;
-    }, 4000);
+      if (this.currentBubbleIndex === this.speechBubbles.length - 1) {
+        this.animating = true;
+        setTimeout(() => {
+          this.currentBubbleIndex = 0;
+          this.animating = false;
+        }, 1100);
+      } else {
+        this.currentBubbleIndex++;
+      }
+    }, 3500);
   }
 
   ngOnDestroy() {
@@ -48,7 +70,7 @@ export class SplashComponent implements OnInit, OnDestroy {
   navigateToWelcome() {
     this.router.navigate(['/welcome']);
   }
-  
+
   private loadTexts() {
     this.http.get<Record<string, string>>('assets/translation/NO.json').subscribe(translations => {
       this.speechBubbles = [
@@ -56,6 +78,7 @@ export class SplashComponent implements OnInit, OnDestroy {
         translations['I_TEACHING_O_2'],
         translations['I_TEACHING_O_3']
       ];
+      this.pressToPlayText = translations['PRESS_TO_PLAY'];
     });
   }
 
