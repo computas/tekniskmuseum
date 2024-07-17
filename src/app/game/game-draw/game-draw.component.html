@@ -1,7 +1,11 @@
 <div id="drawingContainer">
   <div class="topContent">
     <div id="iAvatarContainer">
-      <app-i-avatar [color]="CustomColorsIO.pastelBlue" [height]="190" />
+      <app-i-avatar 
+        [color]="CustomColorsIO.pastelBlue" 
+        [height]="100" 
+        [width]="60"
+      />
       <app-speech-bubble
         [pointerSide]="PointerSide.Left"
         [arrowAlignment]="ArrowAlignment.Center"
@@ -11,15 +15,37 @@
         [bubbleSize]="'small'"
       >
         <p slot="body-alt">
-          <span class="drawing-header-text">{{ 'DRAW_LABEL' | translate }} </span>
+          <span id="drawLabel">{{ 'DRAW_LABEL' | translate }} </span>
           <span id="guessWord">{{ guessWord | uppercase }} </span>
         </p>
       </app-speech-bubble>
     </div>
-    <div #countDown id="timerContainer">
-      <mat-icon #timerIcon id="timerIcon" aria-label="Timer icon">timer</mat-icon>
-      {{ timeLeft }}
+    <div id="oAvatarContainer">
+      <app-speech-bubble
+        [pointerSide]="PointerSide.Right"
+        [arrowAlignment]="ArrowAlignment.Center"
+        [isFlipped]="false"
+        [textColor]="CustomColorsIO.white"
+        [bubbleColor]="CustomColorsIO.indigo"
+        [bubbleSize]="'small'"
+      >
+        <p id="guessText" slot="body-alt">
+          {{ 'AI_THINKING_LABEL' | translate }}
+          @if (AI_GUESS) {
+          {{ 'AI_GUESS_LABEL' | translate }}
+          }
+          <span #aiGuess id="aiGuess">{{ AI_GUESS | uppercase }}</span>
+        </p>
+      </app-speech-bubble>
+      <app-o-avatar
+        alt="Character 'O' guessing what is drawn on the canvas"
+        class="guessingAvatar"
+        [color]="CustomColorsIO.indigo"
+        [height]="100"
+        [width]="120"
+      />
     </div>
+    
   </div>
   <div id="drawingSurface">
     <ng-content class="topContent" id="drawingInfo">
@@ -34,30 +60,11 @@
           <span id="deleteText"> {{ 'CLEAR_BUTTON' | translate }} </span>
         </span>
       </button>
-      <div id="oAvatarContainer">
-        <app-speech-bubble
-          [pointerSide]="PointerSide.Right"
-          [arrowAlignment]="ArrowAlignment.Center"
-          [isFlipped]="false"
-          [textColor]="CustomColorsIO.white"
-          [bubbleColor]="CustomColorsIO.indigo"
-          [bubbleSize]="'small'"
-        >
-          <p id="guessText" slot="body-alt">
-            {{ 'AI_THINKING_LABEL' | translate }}
-            @if (AI_GUESS) {
-            {{ 'AI_GUESS_LABEL' | translate }}
-            }
-            <span #aiGuess>{{ AI_GUESS | uppercase }}</span>
-          </p>
-        </app-speech-bubble>
-        <app-o-avatar
-          alt="Character 'O' guessing what is drawn on the canvas"
-          class="guessingAvatar"
-          [color]="CustomColorsIO.indigo"
-          [height]="120"
-          [width]="130"
-        />
+      <div id="timerContainer">
+        <div #countDown id="countDown">
+          <mat-icon #timerIcon id="timerIcon" aria-label="Timer icon">timer</mat-icon>
+          {{ timeLeft }}
+        </div>
       </div>
     </ng-content>
     <canvas
