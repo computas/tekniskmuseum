@@ -22,7 +22,6 @@ export class ExampleDrawingService {
     };
 
     this.http.post<string[]>(`${this.baseUrl}/${endpoints.GETEXAMPLEDRAWINGS}`, body).subscribe((res) => {
-      console.log('uploaded example drawings');
       this.exampleDrawings = res;
     });
   }
