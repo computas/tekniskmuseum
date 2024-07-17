@@ -31,10 +31,15 @@ export class GameExampleDrawingsComponent implements OnInit, OnDestroy {
     private translationService: TranslationService,
     private drawingService: DrawingService,
     private exampleDrawingService: ExampleDrawingService,
+    private gameStateService: GameStateService,
     private multiplayerService: MultiplayerService
   ) {}
   ngOnInit(): void {
-    this.exampleDrawings = this.exampleDrawingService.getExampleDrawings();
+    if (this.gameStateService.isSingleplayer()) {
+      this.exampleDrawings = this.exampleDrawingService.getExampleDrawings();
+      return;
+    }
+    this.exampleDrawings = this.multiplayerService.getExampleDrawings();
   }
 
   ngOnDestroy(): void {

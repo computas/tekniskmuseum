@@ -101,7 +101,12 @@ export class GameWordToDrawComponent implements OnInit, OnDestroy {
   }
 
   toDrawingBoard() {
-    this.exampleDrawingService.preLoadExampleDrawings(3, this.label, this.translationService.getCurrentLang());
+    if (this.gameStateService.isSingleplayer()) {
+      this.exampleDrawingService.preLoadExampleDrawings(3, this.label, this.translationService.getCurrentLang());
+    } else {
+      // 6 images because we want the players to have different examples: 2 players x 3 imgs = 6 imgs
+      this.multiplayerService.preLoadExampleDrawings(6, this.label, this.translationService.getCurrentLang());
+    }
     this.gameStateService.goToPage(GAMESTATE.drawingBoard);
   }
 

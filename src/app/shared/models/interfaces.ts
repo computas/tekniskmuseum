@@ -9,6 +9,11 @@ export interface Result {
   roundIsDone: boolean;
 }
 
+export enum PLAYERNR {
+  playerOne = 'player_1',
+  playerTwo = 'player_2',
+}
+
 export enum GAMESTATE {
   lobby = 'LOBBY',
   howToPlay = 'HOWTOPLAY',
@@ -21,10 +26,15 @@ export enum GAMESTATE {
   showWord = 'SHOWWORD',
 }
 
+export enum PLAYERNR {
+  player1 = 'player_1',
+  player2 = 'player_2',
+}
+
 export type Difficulty = 1 | 2 | 3 | 4; // 4 for multiplayer
 
 export interface GameState {
-  player_nr: string | undefined;
+  player_nr: PLAYERNR | undefined;
   player_id: string | undefined;
   game_id: string | undefined;
   ready: boolean | undefined;
