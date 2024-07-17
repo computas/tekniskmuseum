@@ -9,11 +9,6 @@ export interface Result {
   roundIsDone: boolean;
 }
 
-export enum PLAYERNR {
-  playerOne = 'player_1',
-  playerTwo = 'player_2',
-}
-
 export enum GAMESTATE {
   lobby = 'LOBBY',
   howToPlay = 'HOWTOPLAY',
