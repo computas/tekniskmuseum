@@ -23,7 +23,7 @@ export class IdleTimeoutComponent implements OnInit, OnDestroy {
     private translationService: TranslationService
   ) {}
 
-  startTime = 15;
+  startTime = 100;
   timer = 0;
   countdown = 0;
 
