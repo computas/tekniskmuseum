@@ -1,7 +1,7 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
 import { Router } from '@angular/router';
 import { CommonModule } from '@angular/common';
-import { TranslatePipe } from '../core/translation.pipe';
+import { HttpClient } from '@angular/common/http'; // Ny import for HttpClient
 import { SpeechBubbleComponent } from '../game/speech-bubble/speech-bubble.component';
 import { CustomColorsIO } from '../shared/customColors';
 import { ArrowAlignment, PointerSide } from '../shared/models/interfaces';
@@ -11,7 +11,7 @@ import { ArrowAlignment, PointerSide } from '../shared/models/interfaces';
   templateUrl: './splash.component.html',
   styleUrls: ['./splash.component.scss'],
   standalone: true,
-  imports: [CommonModule, SpeechBubbleComponent, TranslatePipe],
+  imports: [CommonModule, SpeechBubbleComponent],
 })
 export class SplashComponent implements OnInit, OnDestroy {
   textColor: CustomColorsIO = CustomColorsIO.black;
@@ -20,11 +20,7 @@ export class SplashComponent implements OnInit, OnDestroy {
   CustomColorsIO = CustomColorsIO;
   interval: ReturnType<typeof setInterval> | null = null;
 
-  speechBubbles = [
-    'I_TEACHING_O_1',
-    'I_TEACHING_O_2',
-    'I_TEACHING_O_3'
-  ];
+  speechBubbles: string[] = [];
   svgs = [
     'assets/I-teaching-O-1.svg',
     'assets/I-teaching-O-2.svg',
@@ -32,6 +28,36 @@ export class SplashComponent implements OnInit, OnDestroy {
   ];
 
   currentBubbleIndex = 0;
+
+  constructor(private router: Router, private http: HttpClient) {}
+
+  ngOnInit() {
+    this.loadTexts();
+
+    this.interval = setInterval(() => {
+      this.currentBubbleIndex = (this.currentBubbleIndex + 1) % this.speechBubbles.length;
+    }, 4000);
+  }
+
+  ngOnDestroy() {
+    if (this.interval) {
+      clearInterval(this.interval);
+    }
+  }
+
+  navigateToWelcome() {
+    this.router.navigate(['/welcome']);
+  }
+  
+  private loadTexts() {
+    this.http.get<Record<string, string>>('assets/translation/NO.json').subscribe(translations => {
+      this.speechBubbles = [
+        translations['I_TEACHING_O_1'],
+        translations['I_TEACHING_O_2'],
+        translations['I_TEACHING_O_3']
+      ];
+    });
+  }
 
   get currentBubbleText(): string {
     return this.speechBubbles[this.currentBubbleIndex];
@@ -55,23 +81,5 @@ export class SplashComponent implements OnInit, OnDestroy {
 
   get currentArrowAlignment(): ArrowAlignment {
     return this.currentBubbleIndex === 1 ? ArrowAlignment.Right : ArrowAlignment.Left;
-  }
-
-  constructor(private router: Router) {}
-
-  ngOnInit() {
-    this.interval = setInterval(() => {
-      this.currentBubbleIndex = (this.currentBubbleIndex + 1) % this.speechBubbles.length;
-    }, 4000);
-  }
-
-  ngOnDestroy() {
-    if (this.interval) {
-      clearInterval(this.interval);
-    }
-  }
-
-  navigateToWelcome() {
-    this.router.navigate(['/welcome']);
   }
 }

@@ -8,7 +8,7 @@
       class="speech-bubble-adjusted"
       [textColor]="currentBubbleTextColor"
       [bubbleColor]="currentBubbleColor"
-      [bodyText]="currentBubbleText | translate"
+      [bodyText]="currentBubbleText"
       [pointerSide]="currentPointerSide"
       [arrowAlignment]="currentArrowAlignment"
       [bubbleSize]="'medium'">
@@ -17,35 +17,5 @@
 
   <img class="teaching-image" [src]="currentSvg" alt="Teaching Image" />
   
-  <div class="play-text">{{ 'PRESS_TO_PLAY' | translate }}</div>
+  <div class="play-text">{{ 'TRYKK FOR Å SPILLE' }}</div>
 </div>
-
-
-<!-- <div class="speech-bubble-container">
-  @if (isFirstSpeechBubble) {
-    <app-speech-bubble
-      class="speech-bubble-adjusted"
-      [textColor]="textColor"
-      [bodyText]="'I_TEACHING_O_1' | translate"
-      [pointerSide]="PointerSide.Bottom"
-      [arrowAlignment]="ArrowAlignment.Left"
-      [bubbleSize]="'medium'"> 
-    </app-speech-bubble>
-  } @else {
-    <app-speech-bubble
-      class="speech-bubble-adjusted"
-      [textColor]="CustomColorsIO.white"
-      [bubbleColor]="CustomColorsIO.indigo"
-      [bodyText]="'I_TEACHING_O_2' | translate"
-      [pointerSide]="PointerSide.Bottom"
-      [arrowAlignment]="ArrowAlignment.Right"
-      [bubbleSize]="'medium'">
-    </app-speech-bubble>
-  }
-</div>
-
-@if (isFirstSvg) {
-  <img class="teaching-image" src="assets/I-teaching-O-1.svg" alt="I teaching O 1" />
-} @else {
-  <img class="teaching-image" src="assets/I-teaching-O-2.svg" alt="I teaching O 2" />
-} -->
