@@ -1,0 +1,15 @@
+<mat-dialog-content id="exitGameText">
+  <p>
+    {{ 'CONFIRM_EXIT_MESSAGE' | translate }}
+  </p>
+</mat-dialog-content>
+<mat-dialog-actions id="exitGameActions">
+  <button mat-raised-button class="confirmExitIdleButton" id="confirmExitHomeButton" (click)="goToWelcomePage()">
+    <span id="confirmExitHomeButtonText"
+      ><mat-icon id="confirmExitIdleButtonIcon">home</mat-icon>{{ 'END_NOW_BUTTON' | translate }}</span
+    >
+  </button>
+  <button mat-raised-button class="confirmExitIdleButton" id="stayButton" (click)="closeDialog()">
+    {{ 'STAY_BUTTON' | translate }}
+  </button>
+</mat-dialog-actions>
