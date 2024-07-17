@@ -4,20 +4,21 @@
   </button>
 
   @if (!animating) {
-    <div class="speech-bubble-container" [@fadeInOut]>
-      <app-speech-bubble
-        class="speech-bubble-adjusted"
-        [textColor]="currentBubbleTextColor"
-        [bubbleColor]="currentBubbleColor"
-        [bodyText]="currentBubbleText"
-        [pointerSide]="currentPointerSide"
-        [arrowAlignment]="currentArrowAlignment"
-        [bubbleSize]="'medium'">
-      </app-speech-bubble>
-    </div>
+  <div class="speech-bubble-container" [@fadeInOut]>
+    <app-speech-bubble
+      class="speech-bubble-adjusted"
+      [textColor]="currentBubbleTextColor"
+      [bubbleColor]="currentBubbleColor"
+      [bodyText]="currentBubbleText"
+      [pointerSide]="currentPointerSide"
+      [arrowAlignment]="currentArrowAlignment"
+      [bubbleSize]="'medium'"
+    >
+    </app-speech-bubble>
+  </div>
 
-    <img class="teaching-image" [@fadeInOut] [src]="currentSvg" alt="Teaching Image" />
+  <img class="teaching-image" [@fadeInOut] [src]="currentSvg" alt="Teaching Image" />
   }
-  
+
   <div class="play-text">{{ pressToPlayText }}</div>
 </div>

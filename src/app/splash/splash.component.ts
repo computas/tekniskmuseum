@@ -16,15 +16,10 @@ import { trigger, state, style, animate, transition } from '@angular/animations'
   animations: [
     trigger('fadeInOut', [
       state('in', style({ opacity: 1 })),
-      transition('void => *', [
-        style({ opacity: 0 }),
-        animate(1100)
-      ]),
-      transition('* => void', [
-        animate(700, style({ opacity: 0 }))
-      ])
-    ])
-  ]
+      transition('void => *', [style({ opacity: 0 }), animate(1100)]),
+      transition('* => void', [animate(700, style({ opacity: 0 }))]),
+    ]),
+  ],
 })
 export class SplashComponent implements OnInit, OnDestroy {
   textColor: CustomColorsIO = CustomColorsIO.black;
@@ -36,12 +31,12 @@ export class SplashComponent implements OnInit, OnDestroy {
   animating = false;
 
   speechBubbles: string[] = [];
-  pressToPlayText: string = '';
+  pressToPlayText = {};
   svgs = [
     'assets/I-teaching-O-1.svg',
     'assets/I-teaching-O-2.svg',
     'assets/I-teaching-O-2.svg',
-    'assets/I-teaching-O-2.svg'
+    'assets/I-teaching-O-2.svg',
   ];
 
   constructor(private router: Router, private http: HttpClient) {}
@@ -73,12 +68,12 @@ export class SplashComponent implements OnInit, OnDestroy {
   }
 
   private loadTexts() {
-    this.http.get<Record<string, string>>('assets/translation/NO.json').subscribe(translations => {
+    this.http.get<Record<string, string>>('assets/translation/NO.json').subscribe((translations) => {
       this.speechBubbles = [
         translations['I_TEACHING_O_1'],
         translations['I_TEACHING_O_2'],
         translations['I_TEACHING_O_3'],
-        translations['I_TEACHING_O_4']
+        translations['I_TEACHING_O_4'],
       ];
       this.pressToPlayText = translations['PRESS_TO_PLAY'];
     });
@@ -93,7 +88,9 @@ export class SplashComponent implements OnInit, OnDestroy {
   }
 
   get currentBubbleColor(): CustomColorsIO {
-    return (this.currentBubbleIndex === 1 || this.currentBubbleIndex === 3) ? CustomColorsIO.indigo : CustomColorsIO.cobaltBlue;
+    return this.currentBubbleIndex === 1 || this.currentBubbleIndex === 3
+      ? CustomColorsIO.indigo
+      : CustomColorsIO.cobaltBlue;
   }
 
   get currentBubbleTextColor(): CustomColorsIO {
@@ -105,7 +102,6 @@ export class SplashComponent implements OnInit, OnDestroy {
   }
 
   get currentArrowAlignment(): ArrowAlignment {
-    return (this.currentBubbleIndex === 1 || this.currentBubbleIndex === 3) ? ArrowAlignment.Right : ArrowAlignment.Left;
-
+    return this.currentBubbleIndex === 1 || this.currentBubbleIndex === 3 ? ArrowAlignment.Right : ArrowAlignment.Left;
   }
 }
