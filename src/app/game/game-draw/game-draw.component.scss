@@ -1,113 +1,153 @@
 @import '../../../variables.scss';
 
-#drawing-canvas {
-  position: absolute;
-  touch-action: none;
-  border: 1px solid #e5e5e5;
-  margin: auto;
+body {
+  overflow: hidden;
+  height: 100%;
+  margin: 0;
+  padding: 0;
 }
-.timer-container {
+
+#drawingContainer {
+  padding-top: 1%;
+  padding-left: 1.5%;
+  padding-right: 3%;
+}
+
+span {
+  font-size: var(--fontSizeMedium);
+}
+
+#timerContainer {
   display: flex;
   flex-direction: row;
   justify-content: center;
   align-items: center;
-  color: #949494;
+  color: $text_light_grey;
+  margin-top: 3%;
+  margin-right: 2.3%;
+
+  #timerIcon {
+    height: auto;
+    width: auto;
+    color: $text_light_grey;
+    transform: scale(2);
+    width: var(--fontSizeMedium);
+  }
 }
-.timer-icon {
-  margin-right: 10px;
-}
-.drawing-container {
-  margin: auto;
-  width: 90%;
-  padding-top: 24px;
-}
-.drawing-header {
+
+.topContent {
   display: flex;
+  flex-direction: row;
+  align-items: flex-start;
   justify-content: space-between;
+  align-content: stretch;
+  font-size: var(--fontSizeLarge);
 }
-.drawing-header > h1 {
-  color: $text_secondary_color;
-  margin: 0;
-}
-.drawing-header-text {
-  color: #949494;
-}
+
 .drawing-seconds {
   display: flex;
-  align-items: center;
-  font-size: 22px;
+  justify-items: flex-end;
+  align-items: right;
 }
-.drawing-seconds > span {
-  margin-right: 10px;
-}
-.base-timer {
-  position: relative;
-  height: 30px;
-  width: 30px;
-}
+
 .base-timer__circle {
   fill: none;
   stroke: none;
 }
+
 .base-timer__path-elapsed {
   stroke-width: 10px;
-  stroke: grey;
 }
 
-.avatar-container {
+#drawingSurface {
   display: flex;
+  flex-direction: column;
+  align-items: center;
+
+  padding: auto;
+  overflow: hidden;
+
+  margin-left: 6vw;
+  margin-top: -13vh;
+  margin-bottom: 10vh;
+
+  width: 94%;
+  height: calc(75vh);
+}
+
+#deleteButton {
   position: absolute;
-  bottom: 0;
+  margin-top: 2vh;
+  height: auto;
+  min-width: 12em;
+  max-width: 40em;
+  left: 18vh;
+  box-shadow: 0 8px 16px 0 rgba(0, 0, 0, 0.1), 0 6px 20px 0 rgba(0, 0, 0, 0.15);
+  padding: 10px;
+  padding-right: 20px;
+  border-radius: 50px;
+
+  background-color: rgb(222, 13, 13);
+  color: white;
+
+  #buttonContent {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    padding-left: 0.1em;
+    padding-right: 0.1em;
+  }
+  #deleteIcon {
+    width: 1.2em;
+    height: 1.2em;
+  }
+}
+
+canvas {
+  touch-action: none;
+  background-color: white;
+}
+
+#iAvatarContainer {
+  display: flex;
+  flex-direction: row;
+  align-items: flex-start;
+  justify-content: left;
+  margin-top: 2vh;
+  left: 2vh;
+
+  z-index: -1;
+
+  app-speech-bubble {
+    span {
+      font-family: AeonikMedium;
+      font-size: var(--fontSizeMedium);
+      line-height: 0rem;
+    }
+    #guessWord {
+      color: $text_secondary_color;
+    }
+  }
+}
+
+#oAvatarContainer {
+  display: flex;
+  flex-direction: row;
+  position: absolute;
+  right: 4vw;
+  margin-top: 2vh;
   -webkit-user-select: none; /* Chrome all / Safari all */
   -moz-user-select: none; /* Firefox all */
   -ms-user-select: none; /* IE 10+ */
   user-select: none;
   pointer-events: none;
-}
-.guess-label {
-  align-self: flex-end;
-  color: black;
-  background-color: $button_background_secondary_color;
-  font-size: 36px;
-  line-height: 43px;
-  height: 50%;
-  border-radius: 20px;
-  box-shadow: 0 0 6px #b2b2b2;
-  display: inline-block;
-  padding: 10px 18px;
-  vertical-align: top;
-  margin-bottom: 24px;
-}
-.guess-label::before {
-  background-color: $button_background_secondary_color;
-}
-.clip-container {
-  width: 100px;
-  height: 100px;
-}
-.clip {
-  width: 200px;
-  height: 200px;
-  background: #195272;
-  clip-path: polygon(100% 0, 100% 100%, 20% 100%, 20% 68%, 0 56%, 20% 46%, 20% 0);
-}
-.me::before {
-  box-shadow: -2px 2px 2px 0 rgba(178, 178, 178, 0.4);
-  left: -9px;
-}
-.guessing-avatar {
-  display: flex;
-  height: 150px;
-}
-@media only screen and (max-width: 600px) {
-  .guess-label {
-    font-size: 18px;
-    line-height: normal;
+
+  p,
+  span {
+    font-size: var(--fontSizeSmall);
   }
-  .guessing-avatar {
-    width: 120px;
+
+  span {
+    font-family: AeonikBold;
   }
-}
-.delete-icon {
-  color: grey;
 }

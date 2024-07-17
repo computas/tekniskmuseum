@@ -30,7 +30,9 @@ export class AppComponent implements OnInit {
   ngOnInit(): void {
     this.setDialogTimeout();
     this.userInactive.subscribe(() => {
-      if (this.router.url !== '/' && this.router.url !== '/admin') {
+      if (this.router.url === '/welcome') {
+        this.router.navigate(['/']);
+      } else if (this.router.url !== '/' && this.router.url !== '/admin') {
         this.openDialog();
       }
     });
@@ -62,5 +64,34 @@ export class AppComponent implements OnInit {
   refreshUserState() {
     clearTimeout(this.userActivity);
     this.setDialogTimeout();
+  }
+
+  @HostListener('touchstart', ['$event'])
+  onTouchStart(event: TouchEvent): void {
+    if (event.touches.length > 1) {
+      event.preventDefault();
+    }
+  }
+
+  @HostListener('touchmove', ['$event'])
+  onTouchMove(event: TouchEvent): void {
+    if (event.touches.length > 1) {
+      event.preventDefault();
+    }
+  }
+
+  @HostListener('gesturestart', ['$event'])
+  onGestureStart(event: Event): void {
+    event.preventDefault();
+  }
+
+  @HostListener('gesturechange', ['$event'])
+  onGestureChange(event: Event): void {
+    event.preventDefault();
+  }
+
+  @HostListener('gestureend', ['$event'])
+  onGestureEnd(event: Event): void {
+    event.preventDefault();
   }
 }

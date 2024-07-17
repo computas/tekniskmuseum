@@ -1,13 +1,13 @@
-<div mat-dialog-content class="content">
+<div mat-dialog-content id="countdownText">
   <p>
     {{ 'AUTO_END_MESSAGE' | translate }} <strong>{{ timer }}</strong> {{ 'SECONDS' | translate }}
   </p>
 </div>
-<div mat-dialog-actions class="actions">
-  <button mat-raised-button class="button" id="stay-button" (click)="closeDialog()">
-    {{ 'STAY_BUTTON' | translate }}
+<div mat-dialog-actions id="actions">
+  <button mat-raised-button class="idleButton" id="homeButton" (click)="goHome()">
+    <span id="homeButtonText"><mat-icon id="idleButtonIcon">home</mat-icon>{{ 'END_NOW_BUTTON' | translate }}</span>
   </button>
-  <button mat-raised-button class="button" id="home-button" (click)="goHome()">
-    <div class="button-text"><mat-icon class="button-icon">home</mat-icon>{{ 'END_NOW_BUTTON' | translate }}</div>
+  <button mat-raised-button class="idleButton" id="stayButton" (click)="closeDialog()">
+    {{ 'STAY_BUTTON' | translate }}
   </button>
 </div>
