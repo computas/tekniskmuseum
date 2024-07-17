@@ -7,7 +7,7 @@ export const environment = {
   // WS_ENDPOINT: 'wss://tekniskback-mp.azurewebsites.net',
   WS_ENDPOINT: 'ws://localhost:5000',
   TEKNISKBACKEND_ENDPOINT: 'http://localhost:8000',
-  inactivityTime: 25 *  1000, // 25 seconds
+  inactivityTime: 25 * 1000, // 25 seconds
   // Maximum length of value is 32 characters
   PAIR_ID: 'local-1',
 };
