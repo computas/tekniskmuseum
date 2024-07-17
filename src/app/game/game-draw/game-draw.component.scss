@@ -1,11 +1,5 @@
 @import '../../../variables.scss';
 
-* {
-  --bbFontSizeSmall: 28px;
-  --bbFontSizeMedium: 36px;
-  --bbFontSizeLarge: 48px;
-}
-
 body {
   overflow: hidden;
   height: 100%;
@@ -14,13 +8,13 @@ body {
 }
 
 #drawingContainer {
-  padding-top: 1rem;
-  padding-left: 3%;
+  padding-top: 1%;
+  padding-left: 1.5%;
   padding-right: 3%;
 }
 
 span {
-  font-size: var(--bbFontSizeMedium);
+  font-size: var(--fontSizeMedium);
 }
 
 #timerContainer {
@@ -37,7 +31,7 @@ span {
     width: auto;
     color: $text_light_grey;
     transform: scale(2);
-    width: var(--bbFontSizeMedium);
+    width: var(--fontSizeMedium);
   }
 }
 
@@ -47,7 +41,7 @@ span {
   align-items: flex-start;
   justify-content: space-between;
   align-content: stretch;
-  font-size: var(--bbFontSizeLarge);
+  font-size: var(--fontSizeLarge);
 }
 
 .drawing-seconds {
@@ -127,7 +121,7 @@ canvas {
   app-speech-bubble {
     span {
       font-family: AeonikMedium;
-      font-size: var(--bbFontSizeMedium);
+      font-size: var(--fontSizeMedium);
       line-height: 0rem;
     }
     #guessWord {
@@ -150,7 +144,7 @@ canvas {
 
   p,
   span {
-    font-size: var(--bbFontSizeSmall);
+    font-size: var(--fontSizeSmall);
   }
 
   span {

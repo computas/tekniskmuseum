@@ -37,10 +37,12 @@
 .game-info-seconds {
   display: flex;
   align-items: center;
+
+  span {
+    margin-right: 10px;
+  }
 }
-.game-info-seconds > span {
-  margin-right: 10px;
-}
+
 .game-info-text-content {
   display: flex;
   flex-direction: column;
@@ -105,15 +107,17 @@
   height: 44px;
   width: 70px;
 }
+
 .button {
   box-shadow: 0 8px 16px 0 rgba(0, 0, 0, 0.1), 0 6px 20px 0 rgba(0, 0, 0, 0.15);
   font-size: 20px;
-  border-radius: 50px;
+  border-radius: var(--buttonBorderRadius);
   height: 40px;
   margin-top: 10px;
   min-width: 240px;
   max-width: 400px;
 }
+
 @media (min-width: 600px) {
   .button {
     font-size: 30px;
