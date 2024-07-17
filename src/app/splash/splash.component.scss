@@ -38,10 +38,9 @@
 }
 
 .teaching-image {
-  max-width: 80%;
   height: auto;
   margin-top: 20px;
-  margin-bottom: 40px;
+  margin-bottom: 130px;
 }
 
 @keyframes pulse {
@@ -63,9 +62,9 @@
   font-size: 25px;
   line-height: 25px;
   text-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
-  font-style: italic;
+  //font-style: italic;
   margin-top: 20px;
-  margin-bottom: 20px;
+  margin-bottom: 60px;
   position: absolute;
   bottom: 40px;
   animation: pulse 1.8s infinite;

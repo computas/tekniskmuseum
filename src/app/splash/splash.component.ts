@@ -40,6 +40,7 @@ export class SplashComponent implements OnInit, OnDestroy {
   svgs = [
     'assets/I-teaching-O-1.svg',
     'assets/I-teaching-O-2.svg',
+    'assets/I-teaching-O-2.svg',
     'assets/I-teaching-O-2.svg'
   ];
 
@@ -58,7 +59,7 @@ export class SplashComponent implements OnInit, OnDestroy {
       } else {
         this.currentBubbleIndex++;
       }
-    }, 3500);
+    }, 3300);
   }
 
   ngOnDestroy() {
@@ -76,7 +77,8 @@ export class SplashComponent implements OnInit, OnDestroy {
       this.speechBubbles = [
         translations['I_TEACHING_O_1'],
         translations['I_TEACHING_O_2'],
-        translations['I_TEACHING_O_3']
+        translations['I_TEACHING_O_3'],
+        translations['I_TEACHING_O_4']
       ];
       this.pressToPlayText = translations['PRESS_TO_PLAY'];
     });
@@ -91,7 +93,7 @@ export class SplashComponent implements OnInit, OnDestroy {
   }
 
   get currentBubbleColor(): CustomColorsIO {
-    return this.currentBubbleIndex === 1 ? CustomColorsIO.indigo : CustomColorsIO.cobaltBlue;
+    return (this.currentBubbleIndex === 1 || this.currentBubbleIndex === 3) ? CustomColorsIO.indigo : CustomColorsIO.cobaltBlue;
   }
 
   get currentBubbleTextColor(): CustomColorsIO {
@@ -103,6 +105,7 @@ export class SplashComponent implements OnInit, OnDestroy {
   }
 
   get currentArrowAlignment(): ArrowAlignment {
-    return this.currentBubbleIndex === 1 ? ArrowAlignment.Right : ArrowAlignment.Left;
+    return (this.currentBubbleIndex === 1 || this.currentBubbleIndex === 3) ? ArrowAlignment.Right : ArrowAlignment.Left;
+
   }
 }
