@@ -83,22 +83,17 @@ export class GameResultComponent implements OnInit, OnDestroy {
       });
 
       this.multiplayerService.postScore(this.drawingService.playerid);
-      this.getHighscoreSubscription = this.multiplayerService.getHighscore().subscribe({
-        next: (highscoreData: HighscoreData) => {
+      this.getHighscoreSubscription = this.multiplayerService
+        .getHighscore()
+        .subscribe((highscoreData: HighscoreData) => {
           const todaysScores = highscoreData.daily.map((daily) => daily.score);
           if (Math.max(...todaysScores) > 0) {
             this.todaysHighscore = Math.max(...todaysScores);
           }
-          if (
-            this.drawingService.totalScore >= this.todaysHighscore &&
-            this.drawingService.totalScore >= this.opponentScore
-          ) {
+          if (this.score >= this.todaysHighscore && this.score >= this.opponentScore) {
             this.newHighscore = true;
           }
-        },
-        error: (error) => console.error("Error fetching today's highscore", error),
-      });
-      this.multiplayerService.clearState();
+        });
     } else {
       this.score = this.drawingService.totalScore;
       this.postHighscoreSubscription = this.drawingService.postScore().subscribe();
@@ -131,6 +126,7 @@ export class GameResultComponent implements OnInit, OnDestroy {
   ngOnDestroy(): void {
     this.getHighscoreSubscription?.unsubscribe();
     this.postHighscoreSubscription?.unsubscribe();
+    this.multiplayerService.clearState();
   }
 
   playAgain(): void {
