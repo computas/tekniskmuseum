@@ -7,7 +7,6 @@ import { TranslatePipe } from '@/app/core/translation.pipe';
 import { DrawingService } from '../../services/drawing.service';
 import { TranslationService } from '@/app/core/translation.service';
 import { Subscription } from 'rxjs';
-import { ExampleDrawingsData } from '@/app/shared/models/backend-interfaces';
 import { GameStateService } from '../../services/game-state-service';
 import { MultiplayerService } from '../../services/multiplayer.service';
 

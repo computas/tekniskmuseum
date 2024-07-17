@@ -2,9 +2,6 @@ import { ExampleDrawingsData } from '@/app/shared/models/backend-interfaces';
 import { endpoints } from '@/app/shared/models/endpoints';
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { Observable } from 'rxjs';
-import { GameStateService } from './game-state-service';
-import { MultiplayerService } from './multiplayer.service';
 import { SupportedLanguages } from '@/app/shared/models/interfaces';
 
 @Injectable({
