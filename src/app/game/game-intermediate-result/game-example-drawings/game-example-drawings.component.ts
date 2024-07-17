@@ -31,44 +31,13 @@ export class GameExampleDrawingsComponent implements OnInit, OnDestroy {
     private translationService: TranslationService,
     private drawingService: DrawingService,
     private exampleDrawingService: ExampleDrawingService,
-    private gameStateService: GameStateService,
     private multiplayerService: MultiplayerService
   ) {}
   ngOnInit(): void {
-    this.label = this.drawingService.label;
-
-    const exampleDrawingsParams: ExampleDrawingsData = this.getExampleDrawingsParams();
-    if (this.gameStateService.isSingleplayer()) {
-      this.subscriptions.add(
-        this.exampleDrawingService.getExampleDrawings(exampleDrawingsParams).subscribe((res) => {
-          this.exampleDrawings = res;
-        })
-      );
-      return;
-    }
-
-    this.subscriptions.add(
-      this.multiplayerService.getExampleDrawings(exampleDrawingsParams).subscribe((res) => {
-        this.exampleDrawings = res;
-      })
-    );
+    this.exampleDrawings = this.exampleDrawingService.getExampleDrawings();
   }
 
   ngOnDestroy(): void {
     this.subscriptions.unsubscribe();
-  }
-
-  getExampleDrawingsParams(): ExampleDrawingsData {
-    let gameId: string | undefined = '';
-    if (this.gameStateService.isMultiplayer()) {
-      gameId = this.multiplayerService.stateInfo.game_id;
-    }
-
-    return {
-      game_id: gameId,
-      number_of_images: 3,
-      label: this.label,
-      lang: this.language,
-    };
   }
 }

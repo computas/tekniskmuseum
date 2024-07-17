@@ -3,16 +3,34 @@ import { endpoints } from '@/app/shared/models/endpoints';
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
+import { GameStateService } from './game-state-service';
+import { MultiplayerService } from './multiplayer.service';
+import { SupportedLanguages } from '@/app/shared/models/interfaces';
 
 @Injectable({
   providedIn: 'root',
 })
 export class ExampleDrawingService {
-  baseUrl = endpoints.TEKNISKBACKEND;
+  private readonly baseUrl = endpoints.TEKNISKBACKEND;
+  private exampleDrawings: string[] = [];
 
   constructor(private http: HttpClient) {}
 
-  getExampleDrawings(body: ExampleDrawingsData): Observable<string[]> {
-    return this.http.post<string[]>(`${this.baseUrl}/${endpoints.GETEXAMPLEDRAWINGS}`, body);
+  preLoadExampleDrawings(numberOfImages: number, label: string, lang: SupportedLanguages) {
+    const body: ExampleDrawingsData = {
+      game_id: '',
+      number_of_images: numberOfImages,
+      label: label,
+      lang: lang,
+    };
+
+    this.http.post<string[]>(`${this.baseUrl}/${endpoints.GETEXAMPLEDRAWINGS}`, body).subscribe((res) => {
+      console.log('uploaded example drawings');
+      this.exampleDrawings = res;
+    });
+  }
+
+  getExampleDrawings(): string[] {
+    return this.exampleDrawings;
   }
 }
