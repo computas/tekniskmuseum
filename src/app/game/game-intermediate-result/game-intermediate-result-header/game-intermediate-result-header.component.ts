@@ -1,10 +1,8 @@
-import { Component } from '@angular/core';
+import { Component, inject } from '@angular/core';
 import { GameProgressBarComponent } from './game-progress-bar/game-progress-bar.component';
-import { Router } from '@angular/router';
-import { routes } from '@/app/shared/models/routes';
 import { TranslatePipe } from '@/app/core/translation.pipe';
-import { GameStateService } from '../../services/game-state-service';
-import { MultiplayerService } from '../../services/multiplayer.service';
+import { MatDialog } from '@angular/material/dialog';
+import { ConfirmExitDialogComponent } from './confirm-exit-dialog/confirm-exit-dialog.component';
 
 @Component({
   selector: 'app-game-intermediate-result-header',
@@ -14,19 +12,9 @@ import { MultiplayerService } from '../../services/multiplayer.service';
   styleUrl: './game-intermediate-result-header.component.scss',
 })
 export class GameIntermediateResultHeaderComponent {
-  constructor(
-    private router: Router,
-    private gameStateService: GameStateService,
-    private multiplayerService: MultiplayerService
-  ) {}
+  readonly dialog = inject(MatDialog);
 
-  goToWelcomePage() {
-    this.gameStateService.clearState();
-
-    if (this.gameStateService.isMultiplayer()) {
-      this.multiplayerService.clearState();
-    }
-
-    this.router.navigate([routes.WELCOME]);
+  openDialog(): void {
+    this.dialog.open(ConfirmExitDialogComponent);
   }
 }
