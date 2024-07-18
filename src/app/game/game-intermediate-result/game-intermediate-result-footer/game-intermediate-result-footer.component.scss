@@ -9,8 +9,9 @@ footer {
 .disabled {
   grid-column: 7 / -1;
   justify-self: end;
-  padding: 0.7em;
-  border-radius: 1em;
+  padding: 0.5em;
+  border-radius: var(--buttonBorderRadius);
+  border: 3px solid white;
   background: linear-gradient(90deg, #151cdb 0%, #6b2eac 25%, #fd595d 50%, #bea97e 75%, #1bc0d2 100%);
 }
 
@@ -20,13 +21,13 @@ footer {
 }
 
 .next-page-button {
-  padding: 0.6em 0.8em;
+  cursor: inherit;
+  padding: 0.1em 0.5em;
   background-color: rgba(0, 0, 0, 0.3);
   color: $text_primary_color;
-  font-weight: bold;
-  font-size: 1.45rem;
-  border-radius: 0.3em;
-  letter-spacing: 0.05em;
+  font-family: AeonikRegular;
+  font-size: var(--fontSizeMedium);
+  border-radius: var(--buttonBorderRadius);
 }
 .button-container:hover {
   text-decoration: none;
@@ -53,5 +54,5 @@ footer {
 .button-text {
   display: flex;
   align-items: center;
-  gap: 0.5em;
+  gap: 0.3em;
 }

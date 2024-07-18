@@ -4,6 +4,10 @@
   gap: 3em;
 }
 
+.speech-bubble {
+  margin-left: auto; // this pushes the bubble to the right
+}
+
 .label {
   font-family: 'AeonikMedium';
   text-transform: uppercase;
@@ -18,7 +22,7 @@
 .example-drawing-li {
   background: white;
   height: 174px;
-  width: 226;
+  width: 226px;
   border-radius: 1em;
   display: flex;
   justify-content: center;
@@ -31,7 +35,10 @@
 }
 
 .speech-bubble-text {
-  font-family: AeonikRegular;
-  font-size: 2rem;
-  line-height: 2.5rem;
+  font-family: AeonikLight;
+  font-size: var(--fontSizeSpeechBubble);
+}
+
+.o-avatar {
+  margin-top: 2em;
 }
