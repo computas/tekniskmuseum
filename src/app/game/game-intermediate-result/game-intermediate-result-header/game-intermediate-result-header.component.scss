@@ -6,7 +6,8 @@
 }
 
 .logo {
-  grid-column: 1 / 2;
+  justify-self: end;
+  grid-column: 7 / -1;
   height: 44px;
   width: 70px;
 }
