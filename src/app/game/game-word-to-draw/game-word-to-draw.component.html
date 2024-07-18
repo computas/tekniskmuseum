@@ -1,6 +1,15 @@
 <div class="word-container-background">
   <div class="word-container">
-    <div><img class="logo" src="assets/logo/IO-logo-inverted_transparent-bg.png" alt="logo" /></div>
+
+    <button class="home-btn" (click)="goToWelcomePage()">
+      <img class="home-icon" src="../../../../assets/house.svg" alt="a house icon with round edges" />
+      {{ 'END_GAME_BUTTON' | translate }}
+    </button>
+
+    <div class="logo-container">
+      <img class="logo" src="assets/logo/IO-logo-inverted_transparent-bg.png" alt="logo" />
+    </div>
+
     @if (isMultiPlayer) {
     <h1 class="playernr">{{ 'PLAYER_LABEL' | translate }} {{ playernr }}</h1>
     }
@@ -23,9 +32,6 @@
       }
     </div>
     <div class="word-footer">
-      <div class="avatar">
-        <img class="avatar-image" src="assets/illustrations/IO_Illustrasjoner-1_1360x939.png" alt="avatar" />
-      </div>
       @if (!loading) {
       <div>
         @if (isSinglePlayer) {
