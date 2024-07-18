@@ -14,7 +14,7 @@
         [bodyText]="''"
         [textColor]="CustomColorsIO.black"
         [bubbleColor]="CustomColorsIO.pastelBlue"
-        [bubbleSize]="'medium'"
+        [bubbleSize]="'small'"
       >
         <ng-content slot="body-alt">
           <h1>{{ 'SUMMARY_I_1' | translate }} <span id="o-avatar">O</span> {{ 'SUMMARY_I_2' | translate }}</h1>
@@ -25,8 +25,12 @@
     <div class="result-section">
       <div id="highscore-section">
         <div id="not-highscore-section">
+          @if (newHighscore) {
+          <h2 id="highscore-number">{{ 'NEW_HIGHSCORE_TEXT' | translate }}</h2>
+          } @else {
           <h2 id="highscore-text">{{ 'TODAYS_HIGHSCORE_TEXT' | translate }}</h2>
-          <h2 id="highscore-number">{{ todaysHighscore.toString() }} poeng</h2>
+          <h2 id="highscore-number">{{ todaysHighscore.toString() }} {{ 'POINTS' | translate }}</h2>
+          }
         </div>
       </div>
     </div>
@@ -57,7 +61,7 @@
         [bodyText]="''"
         [textColor]="CustomColorsIO.white"
         [bubbleColor]="CustomColorsIO.indigo"
-        [bubbleSize]="'medium'"
+        [bubbleSize]="'small'"
       ></app-speech-bubble>
       <svg xmlns="http://www.w3.org/2000/svg" width="200" height="100" viewBox="0 0 200 200" fill="none">
         <path
