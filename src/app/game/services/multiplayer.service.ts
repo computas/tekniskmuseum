@@ -13,7 +13,14 @@ import {
   PredictionData,
   Score,
 } from '@/app/shared/models/backend-interfaces';
-import { Difficulty, GAMESTATE, GameState, PlayerScore } from '@/app/shared/models/interfaces';
+import {
+  Difficulty,
+  GAMESTATE,
+  GameState,
+  PLAYERNR,
+  PlayerScore,
+  SupportedLanguages,
+} from '@/app/shared/models/interfaces';
 import { TranslationService } from '@/app/core/translation.service';
 import { GameStateService } from './game-state-service';
 
@@ -24,6 +31,7 @@ export class MultiplayerService {
   public loading = true;
   public label = '';
   roundIsOver = false;
+  private exampleDrawings: string[] = [];
 
   private initialState: GameState = {
     player_nr: undefined,
@@ -99,15 +107,37 @@ export class MultiplayerService {
     this.webSocketService.emit(SocketEndpoints.CLASSIFY, data, image);
   }
 
-  getExampleDrawings(requestData: ExampleDrawingsData): Observable<string[]> {
-    this.webSocketService.emit(SocketEndpoints.GET_EXAMPLE_DRAWINGS, JSON.stringify(requestData));
-    return this.webSocketService.listen(SocketEndpoints.GET_EXAMPLE_DRAWINGS).pipe(
-      take(1),
-      map((res: string) => {
-        const data = JSON.parse(res);
-        return data;
-      })
-    );
+  preLoadExampleDrawings(numberOfImages: number, label: string, lang: SupportedLanguages) {
+    const data: ExampleDrawingsData = {
+      game_id: this.stateInfo.game_id,
+      number_of_images: numberOfImages,
+      label: label,
+      lang: lang,
+    };
+
+    this.webSocketService.emit(SocketEndpoints.GET_EXAMPLE_DRAWINGS, JSON.stringify(data));
+    this.webSocketService
+      .listen(SocketEndpoints.GET_EXAMPLE_DRAWINGS)
+      .pipe(
+        take(1),
+        map((res: string) => {
+          const data = JSON.parse(res);
+          return data;
+        })
+      )
+      .subscribe((res) => {
+        this.exampleDrawings = res;
+      });
+  }
+
+  getExampleDrawings(): string[] {
+    const sliceIndex = this.exampleDrawings.length / 2; // images per player
+
+    if (this.stateInfo.player_nr === PLAYERNR.player1) {
+      return this.exampleDrawings.slice(0, sliceIndex);
+    }
+
+    return this.exampleDrawings.slice(sliceIndex);
   }
 
   predictionListener(): Observable<PredictionData> {

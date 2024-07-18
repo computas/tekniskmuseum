@@ -61,6 +61,8 @@
   "STAY_BUTTON": "Stay",
   "END_NOW_BUTTON": "End now",
 
+  "CONFIRM_EXIT_MESSAGE": "Are you sure you want to exit the game?",
+
   "ROUND_NUMBER": "Round",
   "ROUND_FEEDBACK_FAILED_TITLE": "Oooops!",
   "ROUND_FEEDBACK_FAILED_DESC_1": "I couldn't guess the word you drew..",

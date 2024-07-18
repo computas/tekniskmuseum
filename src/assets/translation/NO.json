@@ -61,6 +61,8 @@
   "STAY_BUTTON": "Bli værende",
   "END_NOW_BUTTON": "Avslutt nå",
 
+  "CONFIRM_EXIT_MESSAGE": "Er du sikker på at du vil avslutte spillet?",
+
   "ROUND_NUMBER": "Runde",
   "ROUND_FEEDBACK_FAILED_TITLE": "Oisann!",
   "ROUND_FEEDBACK_FAILED_DESC_1": "Jeg klarte ikke å gjette ordet du tegnet..",
