@@ -75,5 +75,7 @@
 
   "EXAMPLE_DRAWINGS_FB_CORRECT_P1": "I have learned that",
   "EXAMPLE_DRAWINGS_FB_P2": "looks like this!",
-  "EXAMPLE_DRAWINGS_FB_FAILED_P1": "Because I have learned that"
+  "EXAMPLE_DRAWINGS_FB_FAILED_P1": "Because I have learned that",
+
+  "OF": "of"
 }
