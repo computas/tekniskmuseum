@@ -18,8 +18,8 @@
 
 #intermediate-container {
   display: grid;
-  grid-template-rows: 6vh 44fr 38fr 12vh;
-  grid-template-columns: repeat(8, 1fr);
+  grid-template-rows: 10vh 44vh 34vh 12vh;
+  grid-template-columns: repeat(12, 1fr);
   position: relative;
   color: $text_primary_color;
   padding: 0.6em 1.2em;
@@ -32,12 +32,12 @@
 }
 
 .avatar-feedback {
-  grid-column: 2 / 5;
-  align-self: center;
+  grid-column: 2 / 7;
+  justify-self: start;
 }
 
 .user-drawing-and-score {
-  grid-column: 5 / 8;
+  grid-column: 9 / 12;
   justify-self: end;
 }
 

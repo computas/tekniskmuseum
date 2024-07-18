@@ -12,6 +12,8 @@ $text_light_grey: #b5b5b5;
 //Chat bubbles
 $chat_bubble_o_bg_color: #d9d9d9;
 $chat_bubble_bg_color_pastelBlue: #bce1e6;
+$chat_bubble_color_i: #35399f;
+$chat_bubble_color_o: #673b9f;
 
 //Feedback colors
 $negative_feedback_color: #fd595d;
@@ -21,6 +23,8 @@ $positive_feedback_color: #bef891;
   --fontSizeSmall: 28px;
   --fontSizeMedium: 36px;
   --fontSizeLarge: 48px;
+
+  --fontSizeSpeechBubble: 40px;
 
   --buttonBorderRadius: 10rem;
 }

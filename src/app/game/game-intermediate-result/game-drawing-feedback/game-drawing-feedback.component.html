@@ -1,27 +1,16 @@
 <div class="feedback-container">
-  <img class="avatar" src="assets/avatars/o-avatar.png" alt="O avatar" />
-  <div class="feedback-speech-bubble-container">
-    <app-speech-bubble
-      class="speech-bubble right"
-      [pointerSide]="PointerSide.Bottom"
-      [arrowAlignment]="ArrowAlignment.Left"
-      [isFlipped]="false"
-      [textColor]="CustomColorsIO.white"
-      [bubbleColor]="CustomColorsIO.indigo"
-      [bubbleSize]="'medium'"
-    >
-      <h2 slot="body-alt" class="feedback-title">{{ feedbackTitleKey | translate }}</h2>
-    </app-speech-bubble>
-    <app-speech-bubble
-      class="speech-bubble right"
-      [pointerSide]="PointerSide.Top"
-      [arrowAlignment]="ArrowAlignment.Left"
-      [isFlipped]="false"
-      [textColor]="CustomColorsIO.white"
-      [bubbleColor]="CustomColorsIO.indigo"
-      [bubbleSize]="'medium'"
-    >
-      <p slot="body-alt" class="feedback-desc">{{ feedbackDescriptionKey | translate }}</p>
-    </app-speech-bubble>
-  </div>
+  <app-i-avatar class="i-avatar" [color]="CustomColorsIO.white"></app-i-avatar>
+  <app-speech-bubble
+    class="speech-bubble right"
+    [pointerSide]="PointerSide.Bottom"
+    [arrowAlignment]="ArrowAlignment.Left"
+    [isFlipped]="false"
+    [textColor]="CustomColorsIO.white"
+    [bubbleColor]="CustomColorsIO.iColor"
+    [bubbleSize]="'small'"
+  >
+    <h2 slot="body-alt" class="feedback-title">{{ feedbackTitleKey | translate }}</h2>
+    <p slot="body-alt" class="feedback-desc"><span class="o-text">O</span> {{ feedbackDescriptionKey | translate }}</p>
+    <p slot="body-alt" class="label">{{ label | translate }}</p>
+  </app-speech-bubble>
 </div>

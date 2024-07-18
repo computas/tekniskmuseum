@@ -61,7 +61,7 @@
 
   "ROUND_NUMBER": "Runde",
   "ROUND_FEEDBACK_FAILED_TITLE": "Oisann!",
-  "ROUND_FEEDBACK_FAILED_DESC_1": "Jeg klarte ikke å gjette ordet du tegnet..",
+  "ROUND_FEEDBACK_FAILED_DESC_1": "klarte ikke å gjette at du tegnet:",
   "ROUND_FEEDBACK_FAILED_DESC_2": "Jeg kan være litt dum noen ganger..",
 
   "ROUND_FEEDBACK_CORRECT_TITLE": "Bra tegnet!",
