@@ -8,18 +8,38 @@ import { MatProgressSpinner } from '@angular/material/progress-spinner';
 import { TranslationService } from '@/app/core/translation.service';
 import { TranslatePipe } from '@/app/core/translation.pipe';
 import { GameStateService } from '../../services/game-state-service';
+import { SpeechBubbleComponent } from '../../speech-bubble/speech-bubble.component';
+import { CustomColorsIO } from '@/app/shared/customColors';
+import { PointerSide, ArrowAlignment } from '@/app/shared/models/interfaces';
+import { IAvatarComponent } from '@/assets/avatars/i-avatar/i-avatar.component';
 
 @Component({
   selector: 'app-lobby',
   templateUrl: './lobby.component.html',
   styleUrls: ['./lobby.component.scss'],
   standalone: true,
-  imports: [MatProgressSpinner, MatIcon, RouterLink, RouterLinkActive, MatButton, TranslatePipe],
+  imports: [
+    MatProgressSpinner,
+    MatIcon,
+    RouterLink,
+    RouterLinkActive,
+    MatButton,
+    TranslatePipe,
+    SpeechBubbleComponent,
+    IAvatarComponent,
+  ],
 })
 export class LobbyComponent implements OnInit, OnDestroy {
   @Input() initializeComponent?: () => void;
   waitingForOtherPlayer = true;
   subscriptions = new Subscription();
+
+  colorOfI = CustomColorsIO.white;
+
+  // Speech Bubble imports
+  CustomColorsIO = CustomColorsIO;
+  PointerSide = PointerSide;
+  ArrowAlignment = ArrowAlignment;
 
   constructor(
     private gameStateService: GameStateService,
