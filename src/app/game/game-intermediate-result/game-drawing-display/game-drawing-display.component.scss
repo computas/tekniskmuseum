@@ -1,30 +1,47 @@
 @import './../../../../variables.scss';
 
+.container {
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: end;
+  justify-content: space-between;
+}
+
 .user-drawing-board {
   border-radius: 0.6em;
+  padding: 0.4em; // this is what controls the width of the border
   background-color: white;
+  width: 390px;
+  height: 280px;
+}
+
+.frame {
+  height: 100%;
+  width: 100%;
+  background: white;
+  border-radius: 0.3em;
   display: flex;
   justify-content: center;
   align-items: center;
-  width: 28em;
-  height: 38vh;
 }
 
 .user-drawing {
   height: 100%;
+  max-width: 100%;
 }
 
 .correct {
-  border: 0.5em solid $positive_feedback_color;
+  background-color: $positive_feedback_color;
 }
 
 .incorrect {
-  border: 0.5em solid $negative_feedback_color;
+  background-color: $negative_feedback_color;
 }
 
 .round-score-text {
   font-family: 'AeonikBold';
   text-align: center;
-  font-size: 1.5rem;
+  font-size: var(--fontSizeMedium);
   margin: 0.5em 0 0;
 }
