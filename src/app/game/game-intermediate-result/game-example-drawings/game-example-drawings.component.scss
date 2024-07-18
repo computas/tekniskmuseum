@@ -4,6 +4,11 @@
   gap: 3em;
 }
 
+.label {
+  font-family: 'AeonikMedium';
+  text-transform: uppercase;
+}
+
 .example-drawings-list {
   display: flex;
   list-style: none;
@@ -12,23 +17,21 @@
 
 .example-drawing-li {
   background: white;
-  height: 25vh;
-  width: 25vh;
+  height: 174px;
+  width: 226;
   border-radius: 1em;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 
 .example-drawing-img {
-  height: 25vh;
-  width: 25vh;
-  border-radius: 1em;
+  height: 100%;
+  max-width: 100%;
 }
 
 .speech-bubble-text {
   font-family: AeonikRegular;
   font-size: 2rem;
   line-height: 2.5rem;
-}
-
-.speech-bubble {
-  margin-left: auto;
 }

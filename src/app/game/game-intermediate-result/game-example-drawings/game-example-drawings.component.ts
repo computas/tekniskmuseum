@@ -10,11 +10,12 @@ import { Subscription } from 'rxjs';
 import { ExampleDrawingsData } from '@/app/shared/models/backend-interfaces';
 import { GameStateService } from '../../services/game-state-service';
 import { MultiplayerService } from '../../services/multiplayer.service';
+import { OAvatarComponent } from '@/assets/avatars/o-avatar/o-avatar.component';
 
 @Component({
   selector: 'app-game-example-drawings',
   standalone: true,
-  imports: [SpeechBubbleComponent, TranslatePipe],
+  imports: [SpeechBubbleComponent, TranslatePipe, OAvatarComponent],
   templateUrl: './game-example-drawings.component.html',
   styleUrl: './game-example-drawings.component.scss',
 })
@@ -25,7 +26,7 @@ export class GameExampleDrawingsComponent implements OnInit, OnDestroy {
   PointerSide = PointerSide;
   ArrowAlignment = ArrowAlignment;
   CustomColorsIO = CustomColorsIO;
-  hasCorrectGuess = this.drawingService.lastResult.hasWon;
+  hasCorrectGuess = true; // this.drawingService.lastResult.hasWon;
   subscriptions = new Subscription();
   constructor(
     private translationService: TranslationService,
@@ -36,7 +37,6 @@ export class GameExampleDrawingsComponent implements OnInit, OnDestroy {
   ) {}
   ngOnInit(): void {
     this.label = this.drawingService.label;
-
     const exampleDrawingsParams: ExampleDrawingsData = this.getExampleDrawingsParams();
     if (this.gameStateService.isSingleplayer()) {
       this.subscriptions.add(
