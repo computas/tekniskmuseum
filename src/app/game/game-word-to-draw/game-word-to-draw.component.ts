@@ -12,9 +12,11 @@ import { TranslationService } from '@/app/core/translation.service';
 import { TranslatePipe } from '@/app/core/translation.pipe';
 import { GAMESTATE } from '@/app/shared/models/interfaces';
 import { GameStateService } from '../services/game-state-service';
-import { Router } from '@angular/router';
 import { IAvatarComponent } from '@/assets/avatars/i-avatar/i-avatar.component';
 import { SpeechBubbleComponent } from '../speech-bubble/speech-bubble.component';
+import { CustomColorsIO } from '@/app/shared/customColors';
+import { PointerSide, ArrowAlignment } from '@/app/shared/models/interfaces';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-game-word-to-draw',
@@ -39,6 +41,10 @@ export class GameWordToDrawComponent implements OnInit, OnDestroy {
 
   subscriptions = new Subscription();
   timerSubscription: Subscription | undefined;
+
+  CustomColorsIO = CustomColorsIO;
+  PointerSide = PointerSide;
+  ArrowAlignment = ArrowAlignment;
 
   constructor(
     private gameConfigService: GameConfigService,
@@ -106,10 +112,6 @@ export class GameWordToDrawComponent implements OnInit, OnDestroy {
     this.gameStateService.goToPage(GAMESTATE.drawingBoard);
   }
 
-  goToWelcomePage() {
-    this.router.navigate(['/welcome']);
-  }
-
   startTimer() {
     return interval(1000)
       .pipe(take(5))
@@ -122,6 +124,10 @@ export class GameWordToDrawComponent implements OnInit, OnDestroy {
           }
         })
       );
+  }
+
+  goToWelcomePage() {
+    this.router.navigate(['/welcome']);
   }
 
   ngOnDestroy() {
