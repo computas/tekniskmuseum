@@ -22,13 +22,24 @@ import { SpeechBubbleComponent } from '../speech-bubble/speech-bubble.component'
 import { CustomColorsIO } from '@/app/shared/customColors';
 import { MatIcon } from '@angular/material/icon';
 import { GameStateService } from '../services/game-state-service';
+import { IAvatarComponent } from '@/assets/avatars/i-avatar/i-avatar.component';
+import { OAvatarComponent } from '@/assets/avatars/o-avatar/o-avatar.component';
 
 @Component({
   selector: 'app-game-result',
   templateUrl: './game-result.component.html',
   styleUrls: ['./game-result.component.scss'],
   standalone: true,
-  imports: [MatCardImage, MatIcon, MatButton, TitleCasePipe, TranslatePipe, SpeechBubbleComponent],
+  imports: [
+    MatCardImage,
+    MatIcon,
+    MatButton,
+    TitleCasePipe,
+    TranslatePipe,
+    SpeechBubbleComponent,
+    IAvatarComponent,
+    OAvatarComponent,
+  ],
   animations: [
     trigger('fadeIn', [
       state('hidden', style({ opacity: 0 })),

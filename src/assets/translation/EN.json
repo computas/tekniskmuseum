@@ -51,7 +51,7 @@
   "PLAY_AGAIN_BUTTON": "Play again",
   "END_GAME_BUTTON": "End game",
   "NEW_HIGHSCORE_TEXT": "New daily highscore!",
-  "TODAYS_HIGHSCORE_TEXT": "Today's highscore:",
+  "TODAYS_HIGHSCORE_TEXT": "Today's highscore: ",
 
   "SUMMARY_BUTTON": "Summary",
   "NEXT_WORD_BUTTON": "Next word",
@@ -71,10 +71,9 @@
   "ROUND_FEEDBACK_CORRECT_TITLE": "Well drawn!",
   "ROUND_FEEDBACK_CORRECT_DESC_1": "Thanks to you I guessed the correct word. Keep it up!",
 
-  "SUMMARY_I_1": "Good job! You and",
-  "SUMMARY_I_2": "are a good team!",
-  "SUMMARY_I_3": "You got",
-  "SUMMARY_I_4": "points",
+  "SUMMARY_I_1": "Fantastic! You and",
+  "SUMMARY_I_2": "got",
+  "SUMMARY_I_3": "points",
   "SUMMARY_O": "I will have an easier time guessing next time!",
 
   "EXAMPLE_DRAWINGS_FB_CORRECT_P1": "I have learned that",

@@ -35,7 +35,7 @@
 }
 #result-card-container {
   display: flex;
-  gap: 5rem;
+  gap: 2rem;
   margin: 0 auto;
 }
 
@@ -47,7 +47,7 @@
 #highscore-text {
   color: $text_primary_color;
   font-family: 'AeonikRegular';
-  font-size: 24px;
+  font-size: 28px;
 }
 #highscore-number {
   color: $text_secondary_color;
@@ -58,11 +58,23 @@
 }
 
 .btn {
-  display: inline-flex;
-  box-shadow: 0 8px 16px 0 rgba(0, 0, 0, 0.1), 0 6px 20px 0 rgba(0, 0, 0, 0.15);
-  border-radius: 50px;
-  margin-top: 10px;
-  padding: 2rem 3rem;
+  display: flex;
+  padding: 0.625rem 2.1875rem;
+  justify-content: center;
+  align-items: center;
+  gap: 0.3125rem;
+  border-radius: 35px;
+  border: 5px solid var(--Icon-gradient, #ebaea5);
+  background: var(--White, #fbfbfb);
+  box-shadow: 0px 4px 4px 0px rgba(0, 0, 0, 0.25);
+}
+
+.btn-secondary {
+  border-radius: 2.1875rem;
+  border: 3px solid rgba(239, 239, 239, 0.54);
+
+  background: var(--Black, #030303);
+  box-shadow: 0px 4px 4px 0px rgba(0, 0, 0, 0.25);
 }
 
 .card-won {
@@ -83,20 +95,18 @@
   font-weight: 500;
   font-size: 30px;
   line-height: 43px;
+  padding: 0 0.5rem;
+  margin-bottom: 0.4rem;
 }
 
 .icon {
-  margin-right: 16px;
-  font-size: 36px;
-  background: linear-gradient(to top, #2514d1 0%, #f14a64 50%, #de7d6e 90%);
-  background-clip: text;
-  -webkit-text-fill-color: transparent;
-  height: 100%;
-  width: 40px;
+  width: 43px;
+  height: 43px;
+  flex-shrink: 0;
 }
 .game-result-img {
-  width: 16rem;
-  height: 12rem;
+  width: 17rem;
+  height: 13rem;
 }
 
 .result-header-multi {
@@ -109,11 +119,19 @@
 
 .score {
   color: var(--White, #fbfbfb);
-  font-family: AeonikLight;
+  font-family: AeonikRegular;
   font-size: 24px;
   font-style: italic;
-  font-weight: 300;
+  font-weight: 500;
   line-height: normal;
+}
+
+.loss {
+  color: #de1f1f;
+}
+
+.win {
+  color: #68d466;
 }
 .result-word {
   color: var(--White, #fbfbfb);
@@ -121,14 +139,13 @@
   font-family: AeonikLight;
   font-size: 24px;
   font-style: normal;
-  font-weight: 700;
+  font-weight: 400;
   line-height: normal;
 }
 .result-section {
   align-items: center;
   display: flex;
   flex-direction: column;
-  margin: 1rem 0;
 }
 @media (max-width: 600px) {
   #result-header {
@@ -143,6 +160,7 @@
   display: flex;
   gap: 2rem;
   margin: 0 auto;
+  margin-bottom: 2rem;
 }
 
 #o-text-box-container {
@@ -150,6 +168,7 @@
   flex-direction: row;
   margin: 0 auto;
   gap: 2rem;
+  margin-bottom: 1rem;
 }
 
 #summary-buttons-container {
@@ -167,35 +186,64 @@
 
 .btn-text {
   display: flex;
-  flex-direction: row;
+  padding: 0px 5px;
   justify-content: center;
   align-items: center;
-  font-size: 28px;
-  font-style: normal;
-  font-weight: 700;
-  line-height: normal;
-  font-family: AeonikLight;
-}
-
-#o-avatar {
-  background: var(--Icon-gradient-2, linear-gradient(180deg, #fd595d 0%, #e4a969 50%, #1bc0d2 100%));
-  background-clip: text;
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-  font-family: ICTHofmannRegular;
-  font-size: 48px;
+  gap: 10px;
+  color: var(--Cobalt-blue, #151cdb);
+  font-family: AeonikRegular;
+  font-size: 32px;
   font-style: normal;
   font-weight: 400;
   line-height: normal;
 }
 
+.btn-text-secondary {
+  color: var(--White, #fbfbfb);
+  font-size: 2rem;
+}
+
+#o-avatar {
+  font-family: ICTHofmannRegular;
+  font-size: 40px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: normal;
+}
+
+app-speech-bubble {
+  --bbMaxWidth: 100vw;
+}
+
 app-speech-bubble h1 {
-  font-size: 28px;
+  font-size: 40px;
   font-family: AeonikBold;
-  margin-bottom: 4px;
+  margin-bottom: 0.8rem;
 }
 
 app-speech-bubble p {
   font-size: 24px;
   font-family: AeonikLight;
+}
+
+#result-card {
+  background: rgba(12, 14, 43, 0.38);
+  border-radius: 20px;
+}
+
+app-o-avatar {
+  position: absolute;
+  right: -5rem;
+}
+
+app-i-avatar {
+  position: absolute;
+  left: -5rem;
+}
+
+#o-speech-bubble h1 {
+  font-size: 32px;
+  font-weight: 400;
+  font-family: AeonikRegular;
+  margin: 0.5rem 0;
 }

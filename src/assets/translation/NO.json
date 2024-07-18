@@ -49,9 +49,9 @@
   "LOSER_TEXT": "Du tapte",
   "RESULT_TEXT": "Ditt resultat:",
   "PLAY_AGAIN_BUTTON": "Spill igjen",
-  "END_GAME_BUTTON": "Avslutt spill",
+  "END_GAME_BUTTON": "Avslutt",
   "NEW_HIGHSCORE_TEXT": "Du slo dagens rekord!",
-  "TODAYS_HIGHSCORE_TEXT": "Dagens rekord:",
+  "TODAYS_HIGHSCORE_TEXT": "Dagens highscore: ",
 
   "SUMMARY_BUTTON": "Oppsummering",
   "NEXT_WORD_BUTTON": "Neste ord",
@@ -71,11 +71,10 @@
   "ROUND_FEEDBACK_CORRECT_TITLE": "Bra tegnet!",
   "ROUND_FEEDBACK_CORRECT_DESC_1": "Takket være deg klarte jeg å gjette riktig.",
 
-  "SUMMARY_I_1": "Bra jobba! Du og",
-  "SUMMARY_I_2": "er et godt team!",
-  "SUMMARY_I_3": "Dere fikk",
-  "SUMMARY_I_4": "poeng",
-  "SUMMARY_O": "Nå blir det lettere for meg å gjette neste gang!",
+  "SUMMARY_I_1": "Fantastisk! Du og",
+  "SUMMARY_I_2": "fikk",
+  "SUMMARY_I_3": "poeng",
+  "SUMMARY_O": "Takk for tegningene, de skal jeg lære av til neste gang!",
 
   "EXAMPLE_DRAWINGS_FB_CORRECT_P1": "Jeg har lært at",
   "EXAMPLE_DRAWINGS_FB_P2": "ser sånn ut!",

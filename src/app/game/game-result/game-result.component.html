@@ -1,88 +1,85 @@
 <div class="result-container-background">
   <div class="result-container">
-    <div [@fadeIn]="IState" id="i-text-box-container">
-      <svg xmlns="http://www.w3.org/2000/svg" width="41" height="130" viewBox="0 0 41 200" fill="none">
-        <path
-          d="M0 181.429L3.14276 18.5711C3.14276 8.28525 11.1426 -1.96817e-06 21.7147 -1.96817e-06C32.2857 -1.96817e-06 40.5711 8.28525 40.5711 18.5711C40.5711 26.571 35.4284 33.1427 28.2855 36.2854L14.8569 42.0002C7.71456 44.8568 3.14276 51.7146 3.14276 59.4284C3.14276 61.429 3.14276 63.1426 4.85719 68.2857L39.7141 176C40.2856 177.714 40.5711 179.428 40.5711 181.429C40.5711 191.714 32.2857 200 21.7147 200H18.571C8.31459 200 0 191.686 0 181.429Z"
-          fill="#FBFBFB"
-        />
-      </svg>
-      <app-speech-bubble
-        [pointerSide]="PointerSide.Left"
-        [arrowAlignment]="ArrowAlignment.Top"
-        [titleText]="''"
-        [bodyText]="''"
-        [textColor]="CustomColorsIO.black"
-        [bubbleColor]="CustomColorsIO.pastelBlue"
-        [bubbleSize]="'small'"
-      >
-        <ng-content slot="body-alt">
-          <h1>{{ 'SUMMARY_I_1' | translate }} <span id="o-avatar">O</span> {{ 'SUMMARY_I_2' | translate }}</h1>
-          <p id="i-chat-bubble-body">{{ 'SUMMARY_I_3' | translate }} {{ score }} {{ 'SUMMARY_I_4' | translate }}</p>
-        </ng-content></app-speech-bubble
-      >
-    </div>
     <div class="result-section">
       <div id="highscore-section">
         <div id="not-highscore-section">
           @if (newHighscore) {
           <h2 id="highscore-number">{{ 'NEW_HIGHSCORE_TEXT' | translate }}</h2>
           } @else {
-          <h2 id="highscore-text">{{ 'TODAYS_HIGHSCORE_TEXT' | translate }}</h2>
-          <h2 id="highscore-number">{{ todaysHighscore.toString() }} {{ 'POINTS' | translate }}</h2>
+          <h2 id="highscore-text">
+            {{ 'TODAYS_HIGHSCORE_TEXT' | translate }} {{ todaysHighscore.toString() }} {{ 'POINTS' | translate }}
+          </h2>
           }
         </div>
       </div>
     </div>
-    <div id="result-card-container">
-      @for (result of results; track result) {
-      <div id="result-card">
-        <img
-          mat-card-image
-          [src]="result.imageData"
-          [className]="result.hasWon ? 'game-result-img card-won' : 'game-result-img card-loss'"
-          alt=""
-        />
-        <p id="result-subtitle">
-          @if (result.word) {
-          <span class="result-word">{{ result.word | titlecase }} </span>
-          <span class="score"> {{ result.score }} p</span>
-          }
-        </p>
-      </div>
-      }
+    <div [@fadeIn]="IState" id="i-text-box-container">
+      <app-i-avatar [height]="190" [width]="38" [color]="CustomColorsIO.white" />
+      <app-speech-bubble
+        [pointerSide]="PointerSide.Left"
+        [arrowAlignment]="ArrowAlignment.Top"
+        [titleText]="''"
+        [bodyText]="''"
+        [textColor]="CustomColorsIO.white"
+        [bubbleColor]="CustomColorsIO.pastelBlue"
+        [bubbleSize]="'large'"
+      >
+        <ng-content slot="body-alt">
+          <h1>
+            {{ 'SUMMARY_I_1' | translate }} <span id="o-avatar">O</span> {{ 'SUMMARY_I_2' | translate }} {{ score }}
+            {{ 'SUMMARY_I_3' | translate }}
+          </h1>
+          <div id="result-card-container">
+            @for (result of results; track result) {
+            <div id="result-card">
+              <img
+                mat-card-image
+                [src]="result.imageData"
+                [className]="result.hasWon ? 'game-result-img card-won' : 'game-result-img card-loss'"
+                alt=""
+              />
+              <p id="result-subtitle">
+                @if (result.word) {
+                <span class="result-word">{{ result.word | titlecase }} </span>
+                <span [className]="result.hasWon ? 'score win' : 'score loss'"> {{ result.score }} p</span>
+                }
+              </p>
+            </div>
+            }
+          </div>
+        </ng-content></app-speech-bubble
+      >
     </div>
+
     <div [@fadeIn]="OState" id="o-text-box-container">
       <app-speech-bubble
         id="o-speech-bubble"
         [pointerSide]="PointerSide.Right"
         [arrowAlignment]="ArrowAlignment.Center"
-        [titleText]="'SUMMARY_O' | translate"
+        [titleText]="''"
         [bodyText]="''"
         [textColor]="CustomColorsIO.white"
         [bubbleColor]="CustomColorsIO.indigo"
-        [bubbleSize]="'small'"
-      ></app-speech-bubble>
-      <svg xmlns="http://www.w3.org/2000/svg" width="200" height="100" viewBox="0 0 200 200" fill="none">
-        <path
-          d="M59.7143 159.428H141.143C151.714 159.428 159.715 150.285 159.715 140.286L159.429 59.143C159.429 48.8572 151.143 40.8573 140.857 40.5711H59.7143C49.4285 40.5711 41.4287 48.5719 40.8573 58.5716V140.286C40.8573 150.857 49.4285 159.428 59.7143 159.428ZM41.7147 186.857L1.14297 65.7145C0.28616 62.8573 0 61.1428 0 59.143C0 53.9997 2.28593 49.1425 5.714 45.9998L46.2857 5.42867C49.7146 1.99998 54.5718 -1.96817e-06 59.7143 -1.96817e-06H140.857C146.286 -1.96817e-06 150.857 1.99998 154.286 5.42867L194.571 45.7144C197.999 49.1425 200 53.9997 200 59.143C200 61.1428 199.714 63.1426 199.143 65.143L158.571 186.857V187.143C156.286 194.286 149.144 200 140.857 200H59.7143C51.4285 200 44.286 194.286 41.7147 186.857Z"
-          fill="#FBFBFB"
-        />
-      </svg>
+        [bubbleSize]="'medium'"
+      >
+        <ng-content slot="body-alt">
+          <h1>
+            {{ 'SUMMARY_O' | translate }}
+          </h1>
+        </ng-content>
+      </app-speech-bubble>
+      <app-o-avatar [height]="130" [width]="130" [color]="CustomColorsIO.white" />
     </div>
 
     <div id="summary-buttons-container">
-      <button mat-raised-button (click)="playAgain()" class="btn">
-        <div class="btn-text">
-          <mat-icon class="material-icons icon">autorenew</mat-icon>
-          {{ 'PLAY_AGAIN_BUTTON' | translate }}
+      <button (click)="endGame()" class="btn btn-secondary">
+        <div class="btn-text btn-text-secondary">
+          {{ 'END_GAME_BUTTON' | translate }}
         </div>
       </button>
-
-      <button mat-raised-button (click)="endGame()" class="btn">
+      <button (click)="playAgain()" class="btn">
         <div class="btn-text">
-          <mat-icon class="material-icons icon">home</mat-icon>
-          {{ 'END_GAME_BUTTON' | translate }}
+          {{ 'PLAY_AGAIN_BUTTON' | translate }}
         </div>
       </button>
     </div>
