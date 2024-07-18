@@ -17,7 +17,7 @@ export const routes: Routes = [
     data: { animationState: 'splash' },
   },
   {
-    path: 'welcome',
+    path: r.WELCOME,
     component: WelcomeComponent,
     data: { animationState: 'welcome' },
   },

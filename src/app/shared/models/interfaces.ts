@@ -11,6 +11,7 @@ export interface Result {
 
 export enum GAMESTATE {
   lobby = 'LOBBY',
+  homeScreen = 'HOMESCREEN',
   howToPlay = 'HOWTOPLAY',
   difficultyPicker = 'CHOOSEDIFFICULTY',
   drawingBoard = 'DRAWINGBOARD',
