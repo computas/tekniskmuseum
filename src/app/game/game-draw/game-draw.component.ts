@@ -73,6 +73,7 @@ export class GameDrawComponent implements OnInit, OnDestroy {
   drawnPixelsAtLastGuess = 0;
   drawnPixelsSinceLastGuess = 1;
   timeSinceLastGuess = 0;
+  secondsUsed = 0;
 
   clockColor = 'initial';
   private readonly resultImageSize = 1024;
@@ -107,6 +108,7 @@ export class GameDrawComponent implements OnInit, OnDestroy {
   ) {}
 
   ngOnInit(): void {
+    this.secondsUsed = 0;
     this.gameStateService.savePageToLocalStorage(GAMESTATE.drawingBoard);
     this.subscriptions.add(
       this.gameConfigService.difficultyLevel$.subscribe((config) => {
@@ -253,9 +255,9 @@ export class GameDrawComponent implements OnInit, OnDestroy {
               res.imageData = this.result ? this.result.imageData : '';
               hasWon = this.drawingService.pred.hasWon;
             }
-            this.soundService.playResultSound(hasWon);
             this.drawingService.addResult(res);
             this.drawingService.updateGameState();
+            this.soundService.playResultSound(hasWon);
           }
         },
       })
@@ -279,6 +281,7 @@ export class GameDrawComponent implements OnInit, OnDestroy {
           if (!this.drawingService.classificationDone) {
             this.score = this.score - this.scoreDecrement;
             if (tics % 10 === 9) {
+              this.addTimeUsed();
               this.timeLeft--;
               this.timeSinceLastGuess++;
               this.countDrawnPixels();
@@ -306,6 +309,11 @@ export class GameDrawComponent implements OnInit, OnDestroy {
         });
       return () => sub.unsubscribe();
     });
+  }
+
+  addTimeUsed() {
+    this.secondsUsed++;
+    this.drawingService.setSecondsUsed(this.secondsUsed);
   }
 
   sortOnCertainty(res: PredictionData) {

@@ -1,5 +1,6 @@
 import { TranslatePipe } from '@/app/core/translation.pipe';
-import { Component, Input } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
+import { DrawingService } from '../../services/drawing.service';
 
 @Component({
   selector: 'app-game-drawing-display',
@@ -8,10 +9,18 @@ import { Component, Input } from '@angular/core';
   templateUrl: './game-drawing-display.component.html',
   styleUrl: './game-drawing-display.component.scss',
 })
-export class GameDrawingDisplayComponent {
+export class GameDrawingDisplayComponent implements OnInit {
   @Input() hasCorrectGuess: boolean | undefined;
   @Input() drawingURL: string | undefined;
   @Input() roundScore: number | undefined;
+  secondsUsed = 0;
+
+  constructor(private drawingService: DrawingService) {}
+
+  ngOnInit(): void {
+    this.secondsUsed = this.drawingService.getSecondsUsed();
+    this.drawingService.resetSecondsUsed();
+  }
 
   correctGuess = true;
   incorrectGuess = false;
@@ -27,5 +36,12 @@ export class GameDrawingDisplayComponent {
       default:
         return '';
     }
+  }
+
+  greenText(): string {
+    if (this.hasCorrectGuess) {
+      return 'green-text';
+    }
+    return '';
   }
 }

@@ -4,7 +4,6 @@
   height: 100%;
   display: flex;
   flex-direction: column;
-  align-items: end;
   justify-content: space-between;
 }
 
@@ -39,9 +38,22 @@
   background-color: $negative_feedback_color;
 }
 
+.score-and-time-container {
+  margin: 0.8em 0 0;
+  display: flex;
+  justify-content: space-between;
+}
+
+.seconds-used {
+  font-size: var(--fontSizeSmall);
+}
+
 .round-score-text {
+  margin-left: auto; // this pushes points to right when the second counter isn't displayed
   font-family: 'AeonikBold';
-  text-align: center;
   font-size: var(--fontSizeMedium);
-  margin: 0.5em 0 0;
+}
+
+.green-text {
+  color: $positive_feedback_color;
 }

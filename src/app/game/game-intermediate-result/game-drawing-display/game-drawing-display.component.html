@@ -4,5 +4,10 @@
       <img class="user-drawing" [src]="drawingURL" alt="the user's drawing" />
     </div>
   </div>
-  <p [class]="['round-score-text']">+{{ roundScore }}p</p>
+  <div class="score-and-time-container">
+    @if (hasCorrectGuess) {
+    <p class="seconds-used">{{ secondsUsed }}s</p>
+    }
+    <p [class]="['round-score-text', greenText()]">+{{ roundScore }}p</p>
+  </div>
 </div>
