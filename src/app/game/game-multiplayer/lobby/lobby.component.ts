@@ -34,12 +34,15 @@ export class LobbyComponent implements OnInit, OnDestroy {
   waitingForOtherPlayer = true;
   subscriptions = new Subscription();
 
-  colorOfI = CustomColorsIO.white;
-
   // Speech Bubble imports
   CustomColorsIO = CustomColorsIO;
   PointerSide = PointerSide;
   ArrowAlignment = ArrowAlignment;
+
+  //Setting the colors of I
+  colorOfI = CustomColorsIO.white;
+  bubbleColorI = CustomColorsIO.pastelBlue;
+  textColorI = CustomColorsIO.black;
 
   constructor(
     private gameStateService: GameStateService,
