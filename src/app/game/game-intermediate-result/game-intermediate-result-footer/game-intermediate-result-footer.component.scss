@@ -25,7 +25,6 @@ footer {
   padding: 0.1em 0.5em;
   background-color: rgba(0, 0, 0, 0.3);
   color: $text_primary_color;
-  font-family: AeonikRegular;
   font-size: var(--fontSizeMedium);
   border-radius: var(--buttonBorderRadius);
 }
@@ -54,5 +53,11 @@ footer {
 .button-text {
   display: flex;
   align-items: center;
+  justify-content: center;
   gap: 0.3em;
+  font-family: AeonikRegular;
+}
+
+.button-icon {
+  height: 40px;
 }
