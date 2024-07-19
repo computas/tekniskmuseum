@@ -3,7 +3,9 @@
     <button class="next-page-button">
       <div class="button-text">
         {{ buttonTextKey | translate }}
+        @if (!isWaitingForPlayer) {
         <img class="button-icon" src="../../../../assets/arrow-right-solid.svg" />
+        }
       </div>
     </button>
   </div>

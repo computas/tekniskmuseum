@@ -28,7 +28,7 @@ export class GameDrawingFeedbackComponent implements OnInit {
 
   ngOnInit(): void {
     this.setFeedbackText();
-    this.label = 'tiger'; // this.drawingService.label;
+    this.label = this.drawingService.label;
   }
 
   setFeedbackText() {
