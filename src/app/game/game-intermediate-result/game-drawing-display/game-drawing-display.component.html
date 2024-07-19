@@ -8,6 +8,6 @@
     @if (hasCorrectGuess) {
     <p class="seconds-used">{{ secondsUsed }}s</p>
     }
-    <p [class]="['round-score-text', greenText()]">+{{ roundScore }}p</p>
+    <p [class]="['round-score-text', greenScoreStyle()]">+{{ roundScore }}p</p>
   </div>
 </div>

@@ -38,7 +38,8 @@ export class GameDrawingDisplayComponent implements OnInit {
     }
   }
 
-  greenText(): string {
+  greenScoreStyle(): string {
+    // returns a css style class on correct guess
     if (this.hasCorrectGuess) {
       return 'green-text';
     }
