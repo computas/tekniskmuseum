@@ -78,6 +78,7 @@ export class GameStateService {
   setMultiplayer() {
     this._gameMode.next(GAMEMODE.multiplayer);
     this.saveGameModeToLocalStorage(GAMEMODE.multiplayer);
+    this.gameConfigService.setDifficultyLevel('medium');
   }
 
   restartGame() {

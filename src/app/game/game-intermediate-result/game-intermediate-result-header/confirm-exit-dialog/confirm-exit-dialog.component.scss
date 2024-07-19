@@ -1,0 +1,61 @@
+@import '../../../../../variables.scss';
+
+.cdk-overlay-container .cdk-overlay-pane {
+  border-radius: 1.5rem;
+  overflow: hidden;
+  padding-left: var(--boxPaddingX);
+  padding-right: var(--boxPaddingX);
+
+  width: 40vw;
+  height: 30vh;
+}
+
+#exitGameText {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: inherit;
+  height: 10vh;
+  font-size: var(--fontSizeSmall); // make to variable
+}
+
+.confirmExitIdleButton {
+  box-shadow: 0 8px 16px 0 rgba(0, 0, 0, 0.1), 0 6px 20px 0 rgba(0, 0, 0, 0.15);
+  font-family: AeonikMedium;
+  font-size: var(--fontSizeSmall);
+  border-radius: 10rem;
+  align-items: center;
+  height: 3.5rem;
+  margin-bottom: 1rem;
+  width: 13rem;
+  background: $button_background_color;
+}
+
+.confirmExitIdleButton :focus {
+  background-color: $button_background_color;
+}
+
+#exitGameActions {
+  width: inherit;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-around;
+}
+
+#confirmExitHomeButtonText {
+  color: $button_background_color;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+}
+#confirmExitIdleButtonIcon {
+  color: $button_background_color;
+  margin-right: 0.5rem;
+  height: var(--fontSizeSmall);
+}
+
+#confirmExitHomeButton {
+  background-color: #ff2f2f;
+}

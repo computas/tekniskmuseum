@@ -178,6 +178,7 @@ export class DrawingService {
     this.guessUsed = 1;
     this.gameOver = false;
     this.guessDone = false;
+    this.hasAddedSingleplayerResult = false;
     this.results = [];
   }
 

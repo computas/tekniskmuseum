@@ -1,7 +1,9 @@
 {
-  "PRESS_TO_PLAY": "Press to play",
-  "I_TEACHING_O": "This is what an APPLE looks like!",
+  "PRESS_TO_PLAY": "PRESS TO PLAY",
+  "I_TEACHING_O_1": "This is what an APPLE looks like!",
   "I_TEACHING_O_2": "I thought this was an APPLE...",
+  "I_TEACHING_O_3": "Yes, they are both APPLES!",
+  "I_TEACHING_O_4": "Ah, teach me image recognition!",
 
   "INTRO_MESSAGE": "Hi, I am ",
   "INTRO_MESSAGE_2": "And I am ",
@@ -58,6 +60,8 @@
   "SECONDS": "seconds",
   "STAY_BUTTON": "Stay",
   "END_NOW_BUTTON": "End now",
+
+  "CONFIRM_EXIT_MESSAGE": "Are you sure you want to exit the game?",
 
   "ROUND_NUMBER": "Round",
   "ROUND_FEEDBACK_FAILED_TITLE": "Oooops!",
