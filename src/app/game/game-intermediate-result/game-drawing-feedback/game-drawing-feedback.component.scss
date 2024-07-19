@@ -1,12 +1,13 @@
 @import './../../../../variables.scss';
 .feedback-container {
   display: flex;
-  gap: 2em;
+  gap: 1em;
   height: 100%;
+  margin-top: 3em;
 }
 
 .i-avatar {
-  align-self: flex-end;
+  align-self: center;
   max-width: 11rem;
 }
 
