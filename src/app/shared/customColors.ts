@@ -15,4 +15,6 @@ export enum CustomColorsIO {
   gold = '#D2AB72',
   teal = '#80B19D',
   turquoise = '#1BC0D2',
+  iColor = '#35399f',
+  oColor = '#673B9F',
 }
