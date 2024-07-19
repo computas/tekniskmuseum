@@ -22,7 +22,7 @@
   "PLAYER_MODE_SINGLE": "1 spiller",
   "PLAYER_MODE_MULTI": "2 spillere",
   "ADMIN_ARIA_LABEL": "Gå til admin side",
-  "WAITING_FOR_PLAYER": "Venter på spiller 2",
+  "WAITING_FOR_PLAYER": "Venter",
 
   "HOW_TO_PLAY_SINGLE": "Slik spiller du:",
   "HOW_TO_PLAY_MULTI": "Slik spiller dere:",
@@ -49,12 +49,12 @@
   "LOSER_TEXT": "Du tapte",
   "RESULT_TEXT": "Ditt resultat:",
   "PLAY_AGAIN_BUTTON": "Spill igjen",
-  "END_GAME_BUTTON": "Avslutt spill",
+  "END_GAME_BUTTON": "Avslutt",
   "NEW_HIGHSCORE_TEXT": "Du slo dagens rekord!",
   "TODAYS_HIGHSCORE_TEXT": "Dagens rekord:",
 
   "SUMMARY_BUTTON": "Oppsummering",
-  "NEXT_WORD_BUTTON": "Neste ord",
+  "NEXT_WORD_BUTTON": "Neste",
 
   "AUTO_END_MESSAGE": "Spillet vil automatisk avslutte om ",
   "SECONDS": "sekunder",
@@ -65,7 +65,7 @@
 
   "ROUND_NUMBER": "Runde",
   "ROUND_FEEDBACK_FAILED_TITLE": "Oisann!",
-  "ROUND_FEEDBACK_FAILED_DESC_1": "Jeg klarte ikke å gjette ordet du tegnet..",
+  "ROUND_FEEDBACK_FAILED_DESC_1": "klarte ikke å gjette at du tegnet:",
   "ROUND_FEEDBACK_FAILED_DESC_2": "Jeg kan være litt dum noen ganger..",
 
   "ROUND_FEEDBACK_CORRECT_TITLE": "Bra tegnet!",
@@ -78,6 +78,8 @@
   "SUMMARY_O": "Nå blir det lettere for meg å gjette neste gang!",
 
   "EXAMPLE_DRAWINGS_FB_CORRECT_P1": "Jeg har lært at",
-  "EXAMPLE_DRAWINGS_FB_P2": "ser sånn ut!",
-  "EXAMPLE_DRAWINGS_FB_FAILED_P1": "For jeg har lært at"
+  "EXAMPLE_DRAWINGS_FB_P2": "ser sånn ut:",
+  "EXAMPLE_DRAWINGS_FB_FAILED_P1": "For jeg har lært at",
+
+  "OF": "av"
 }
