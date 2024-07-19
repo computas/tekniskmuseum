@@ -39,22 +39,60 @@
   margin: 0 auto;
 }
 
-#not-highscore-section {
+#highscore-section {
   display: flex;
   flex-direction: row;
+  align-items: center;
+  gap: 1rem;
+  width: 100%;
+  margin-bottom: 1rem;
+}
+
+#highscore-section p {
+  position: relative;
+  margin-right: auto;
+  left: 2rem;
+  color: var(--White, #fbfbfb);
+  text-align: center;
+  font-family: AeonikRegular;
+  font-size: 24px;
+  font-style: normal;
+  font-weight: 500;
+  line-height: normal;
+  margin-bottom: 0;
+}
+
+#not-highscore-section {
+  position: absolute;
+  display: flex;
+  flex-direction: row;
+  flex-grow: 1;
+  margin: 0 auto;
+  justify-content: center;
+  left: 50%;
+  transform: translateX(-50%);
 }
 
 #highscore-text {
   color: $text_primary_color;
   font-family: 'AeonikRegular';
   font-size: 28px;
+  margin-bottom: 0;
 }
 #highscore-number {
-  color: $text_secondary_color;
-  font-family: 'AeonikBlack';
-  font-size: 36px;
+  text-align: center;
+  -webkit-text-stroke-width: 2;
+  -webkit-text-stroke-color: #000;
+  font-family: AeonikBold;
+  font-size: 44px;
   font-style: italic;
-  margin-left: 10px;
+  font-weight: 700;
+  line-height: normal;
+  background: linear-gradient(90deg, #b06ef5 0%, #ff8386 0%, #e8d5b0 66.5%);
+  background-clip: text;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  padding: 0 0.5rem;
 }
 
 .btn {
@@ -105,8 +143,8 @@
   flex-shrink: 0;
 }
 .game-result-img {
-  width: 17rem;
-  height: 13rem;
+  width: 19rem;
+  height: 14rem;
 }
 
 .result-header-multi {
@@ -205,7 +243,7 @@
 
 #o-avatar {
   font-family: ICTHofmannRegular;
-  font-size: 40px;
+  font-size: 36px;
   font-style: normal;
   font-weight: 400;
   line-height: normal;
@@ -216,9 +254,15 @@ app-speech-bubble {
 }
 
 app-speech-bubble h1 {
-  font-size: 40px;
+  font-size: 36px;
   font-family: AeonikBold;
   margin-bottom: 0.8rem;
+  color: var(--I-text-color, #fbfbfb);
+  font-family: AeonikRegular;
+  font-size: 36px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: 40px;
 }
 
 app-speech-bubble p {
@@ -246,4 +290,33 @@ app-i-avatar {
   font-weight: 400;
   font-family: AeonikRegular;
   margin: 0.5rem 0;
+}
+
+#points {
+  color: var(--White, #fbfbfb);
+  font-family: AeonikBold;
+  font-size: 44px;
+  font-style: italic;
+  font-weight: 700;
+  line-height: 40px;
+}
+
+#highscore-points {
+  color: #fbfbfb;
+  font-family: AeonikMedium;
+  font-size: 28px;
+  font-style: italic;
+  font-weight: 700;
+  line-height: normal;
+}
+
+#win-text {
+  color: var(--I-text-color, #fbfbfb);
+
+  text-align: center;
+  font-family: AeonikRegular;
+  font-size: 36px;
+  font-style: normal;
+  font-weight: 700;
+  line-height: 40px; /* 111.111% */
 }

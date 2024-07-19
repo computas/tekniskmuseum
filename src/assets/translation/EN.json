@@ -14,9 +14,11 @@
 
   "DIFFICULTY_MOTIVATION": "Let's draw!",
   "DIFFICULTY_QUESTION": "What difficulty level do you prefer?",
+  "DIFFICULTY": "Difficulty",
   "EASY_BUTTON": "Easy",
   "MEDIUM_BUTTON": "Medium",
   "HARD_BUTTON": "Hard",
+  "MULTIPLAYER": "Multiplayer",
 
   "HELP_ME_LEARN": "Can you help me learn?",
   "PLAYER_MODE_SINGLE": "1 player",
@@ -50,7 +52,7 @@
   "RESULT_TEXT": "Your result:",
   "PLAY_AGAIN_BUTTON": "Play again",
   "END_GAME_BUTTON": "End game",
-  "NEW_HIGHSCORE_TEXT": "New daily highscore!",
+  "NEW_HIGHSCORE_TEXT": "NEW HIGHSCORE!",
   "TODAYS_HIGHSCORE_TEXT": "Today's highscore: ",
 
   "SUMMARY_BUTTON": "Summary",
@@ -75,6 +77,18 @@
   "SUMMARY_I_2": "got",
   "SUMMARY_I_3": "points",
   "SUMMARY_O": "I will have an easier time guessing next time!",
+
+  "SUMMARY_I_NEW_HIGHSCORE_1": "Fantastic",
+  "SUMMARY_I_NEW_HIGHSCORE_2": "points!",
+
+  "SUMMARY_I_NO_POINTS_1": "Oh no! You and",
+  "SUMMARY_I_NO_POINTS_2": "got",
+  "SUMMARY_I_NO_POINTS_3": "0 points",
+  "SUMMARY_O_NO_POINTS": "Press Play again, and we can try again!",
+
+  "SUMMARY_I_MULTIPLAYER_WIN_1": "Fantastic, you won!",
+  "SUMMARY_I_MULTIPLAYER_WIN_2": "You got",
+  "SUMMARY_I_MULTIPLAYER_LOSS": "You lost! You got",
 
   "EXAMPLE_DRAWINGS_FB_CORRECT_P1": "I have learned that",
   "EXAMPLE_DRAWINGS_FB_P2": "looks like this!",
