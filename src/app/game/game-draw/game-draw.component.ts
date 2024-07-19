@@ -271,7 +271,7 @@ export class GameDrawComponent implements OnInit, OnDestroy {
   private createDrawingTimer() {
     return new Observable((observer) => {
       let color = 'red';
-      const intervalDuration = 100;
+      const intervalDuration = this.gameConfigService.getConfig.intervalDuration;
 
       const sub = interval(intervalDuration)
         .pipe(take(10 * this.config.secondsPerRound))
