@@ -15,6 +15,7 @@ export class GameConfigService {
     minimumTimeBetweenClassify: 3,
     minimumDrawnThreshold: 3000,
     pixelsPerClassify: 2000,
+    intervalDuration: 100,
   }); // Easy mode as default
   difficultyLevel$ = this._difficultyLevel.asObservable();
 
@@ -30,6 +31,7 @@ export class GameConfigService {
           minimumTimeBetweenClassify: 3,
           minimumDrawnThreshold: 3000,
           pixelsPerClassify: 2000,
+          intervalDuration: 100,
         };
         break;
       case 'medium':
@@ -42,6 +44,7 @@ export class GameConfigService {
           minimumTimeBetweenClassify: 2,
           minimumDrawnThreshold: 3500,
           pixelsPerClassify: 2000,
+          intervalDuration: 100,
         };
         break;
       case 'hard':
@@ -54,6 +57,7 @@ export class GameConfigService {
           minimumTimeBetweenClassify: 2,
           minimumDrawnThreshold: 3500,
           pixelsPerClassify: 2000,
+          intervalDuration: 100,
         };
         break;
     }
@@ -68,9 +72,12 @@ export class GameConfigService {
   }
 
   getScoreSettings(): ImageScoreConfig {
+    const maxScore = 333;
+    const intervalDuration = this.getConfig.intervalDuration;
     return {
-      maxScore: 3000,
-      scoreDecrement: 1.67336683417,
+      maxScore: maxScore,
+      scoreDecrement: maxScore / ((this.getConfig.secondsPerRound * 1000) / intervalDuration),
+
     };
   }
 }

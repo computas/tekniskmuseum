@@ -1,31 +1,31 @@
 <div class="drawing-container">
   <app-speech-bubble
     class="speech-bubble"
-    [pointerSide]="PointerSide.Top"
+    [pointerSide]="PointerSide.Right"
     [arrowAlignment]="ArrowAlignment.Center"
-    [isFlipped]="false"
+    [isFlipped]="true"
     [textColor]="CustomColorsIO.white"
-    [bubbleColor]="CustomColorsIO.indigo"
+    [bubbleColor]="CustomColorsIO.oColor"
     [bubbleSize]="'medium'"
   >
     @if(hasCorrectGuess) {
-    <div slot="body-alt" class="speech-bubble-text">
-      {{ 'EXAMPLE_DRAWINGS_FB_CORRECT_P1' | translate }} {{ label }}
+    <p slot="body-alt" class="speech-bubble-text">
+      {{ 'EXAMPLE_DRAWINGS_FB_CORRECT_P1' | translate }} <span class="label">{{ label }}</span>
       {{ 'EXAMPLE_DRAWINGS_FB_P2' | translate }}
-    </div>
+    </p>
     } @else {
-    <div slot="body-alt" class="speech-bubble-text">
-      {{ 'EXAMPLE_DRAWINGS_FB_FAILED_P1' | translate }} {{ label }}
+    <p slot="body-alt" class="speech-bubble-text">
+      {{ 'EXAMPLE_DRAWINGS_FB_FAILED_P1' | translate }} <span class="label">{{ label }}</span>
       {{ 'EXAMPLE_DRAWINGS_FB_P2' | translate }}
-    </div>
-
+    </p>
     }
+    <ul slot="body-alt" class="example-drawings-list">
+      @for (exampleDrawing of exampleDrawings; track exampleDrawing) {
+      <li class="example-drawing-li">
+        <img class="example-drawing-img" [src]="exampleDrawing" alt="example drawing of the chosen label" />
+      </li>
+      }
+    </ul>
   </app-speech-bubble>
-  <ul class="example-drawings-list">
-    @for (exampleDrawing of exampleDrawings; track exampleDrawing) {
-    <li class="example-drawing-li">
-      <img class="example-drawing-img" [src]="exampleDrawing" alt="example drawing of the chosen label" />
-    </li>
-    }
-  </ul>
+  <app-o-avatar class="o-avatar" [height]="150" [width]="150" [color]="CustomColorsIO.white"></app-o-avatar>
 </div>

@@ -1,22 +1,39 @@
-<div class="container-background">
-  <div class="container">
-    <div><img class="logo" src="assets/logo/IO-logo-inverted_transparent-bg.png" alt="logo" /></div>
-    <div class="waiting-text">{{ 'WAITING_FOR_PLAYER' | translate }}</div>
-    @if (waitingForOtherPlayer) {
-    <div>
-      <mat-spinner></mat-spinner>
-    </div>
-    } @if (!waitingForOtherPlayer) {
-    <div>
-      <mat-icon class="check-icon" aria-label="Example home icon">done</mat-icon>
-    </div>
-    }
-    <a routerLink="/" routerLinkActive="active">
-      <button mat-raised-button class="home-button">
-        <div class="button-text">
-          <mat-icon class="button-icon" aria-label="Example home icon">home</mat-icon>{{ 'BACK_BUTTON' | translate }}
-        </div>
+<div id="lobbyBackground">
+  <div id="lobbyContent">
+    <div id="topContent">
+      <img class="logo" src="assets/logo/IO-logo-inverted_transparent-bg.png" alt="logo" />
+      <button mat-raised-button id="homeButton" routerLink="/welcome" routerLinkActive="active">
+        <span class="buttonText">
+          <mat-icon class="buttonIcon" aria-label="Home icon" alt="Go back button">home</mat-icon>
+          {{ 'BACK_BUTTON' | translate }}
+        </span>
       </button>
-    </a>
+    </div>
+
+    <div id="waitingForPlayerInfo">
+      <app-i-avatar [height]="200" [width]="100" [color]="colorOfI" />
+      <app-speech-bubble
+        [pointerSide]="PointerSide.Left"
+        [arrowAlignment]="ArrowAlignment.Top"
+        [isFlipped]="false"
+        [textColor]="textColorI"
+        [bubbleColor]="bubbleColorI"
+        [bubbleSize]="'large'"
+      >
+        <div slot="body-alt" id="speechBubbleContent">
+          <p id="waitingText">
+            {{ 'WAITING_FOR_PLAYER' | translate }}
+          </p>
+
+          @if (waitingForOtherPlayer) {
+          <div id="loader"></div>
+          } @if (!waitingForOtherPlayer) {
+          <span>
+            <mat-icon class="checkIcon" aria-label="Checkmark icon"> done </mat-icon>
+          </span>
+          }
+        </div>
+      </app-speech-bubble>
+    </div>
   </div>
 </div>

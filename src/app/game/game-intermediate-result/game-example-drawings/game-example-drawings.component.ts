@@ -9,11 +9,12 @@ import { TranslationService } from '@/app/core/translation.service';
 import { Subscription } from 'rxjs';
 import { GameStateService } from '../../services/game-state-service';
 import { MultiplayerService } from '../../services/multiplayer.service';
+import { OAvatarComponent } from '@/assets/avatars/o-avatar/o-avatar.component';
 
 @Component({
   selector: 'app-game-example-drawings',
   standalone: true,
-  imports: [SpeechBubbleComponent, TranslatePipe],
+  imports: [SpeechBubbleComponent, TranslatePipe, OAvatarComponent],
   templateUrl: './game-example-drawings.component.html',
   styleUrl: './game-example-drawings.component.scss',
 })
@@ -34,6 +35,7 @@ export class GameExampleDrawingsComponent implements OnInit, OnDestroy {
     private multiplayerService: MultiplayerService
   ) {}
   ngOnInit(): void {
+    this.label = this.drawingService.label;
     if (this.gameStateService.isSingleplayer()) {
       this.exampleDrawings = this.exampleDrawingService.getExampleDrawings();
       return;
