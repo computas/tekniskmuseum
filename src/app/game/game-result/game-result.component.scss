@@ -1,5 +1,10 @@
 @import '../../../variables.scss';
 
+* {
+  --resultFontSizeVerySmall: 24px;
+  --resultFontSizeMediumSmall: 32px;
+}
+
 .result-container-background {
   position: relative;
   display: flex;
@@ -37,10 +42,10 @@
 
   img {
     width: 100%;
-}
+  }
 }
 
-#highscore-section {
+#header {
   display: flex;
   flex-direction: row;
   align-items: center;
@@ -49,21 +54,21 @@
   margin-bottom: 1rem;
 }
 
-#highscore-section p {
+#header p {
   position: relative;
   margin-right: auto;
   left: 2rem;
   color: var(--White, #fbfbfb);
   text-align: center;
   font-family: AeonikRegular;
-  font-size: 24px;
+  font-size: var(--resultFontSizeVerySmall);
   font-style: normal;
   font-weight: 500;
   line-height: normal;
   margin-bottom: 0;
 }
 
-#not-highscore-section {
+#highscore-section {
   position: absolute;
   display: flex;
   flex-direction: row;
@@ -74,18 +79,28 @@
   transform: translateX(-50%);
 }
 
-#highscore-text {
+#header-text {
   color: $text_primary_color;
   font-family: 'AeonikRegular';
-  font-size: 28px;
+  font-size: var(--fontSizeSmall);
   margin-bottom: 0;
 }
+
+#highscore-points {
+  color: #fbfbfb;
+  font-family: AeonikMedium;
+  font-size: var(--fontSizeSmall);
+  font-style: italic;
+  font-weight: 700;
+  line-height: normal;
+}
+
 #highscore-number {
   text-align: center;
   -webkit-text-stroke-width: 2;
   -webkit-text-stroke-color: #000;
   font-family: AeonikBold;
-  font-size: 44px;
+  font-size: var(--fontSizeLarge);
   font-style: italic;
   font-weight: 700;
   line-height: normal;
@@ -94,6 +109,186 @@
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
   padding: 0 0.5rem;
+}
+
+#i-text-box-container {
+  display: flex;
+  gap: 2rem;
+  margin: 0 auto;
+  margin-bottom: 2rem;
+}
+
+#win-text {
+  color: var(--I-text-color, #fbfbfb);
+  text-align: center;
+  font-family: AeonikRegular;
+  font-size: var(--fontSizeMedium);
+  font-style: normal;
+  font-weight: 700;
+  line-height: 40px; /* 111.111% */
+}
+
+#result-card-container {
+  display: flex;
+  gap: 2rem;
+  margin: 0 auto;
+}
+
+app-speech-bubble {
+  --bbMaxWidth: 100vw;
+}
+
+app-speech-bubble h1 {
+  font-size: var(--fontSizeMedium);
+  font-family: AeonikBold;
+  margin-bottom: 0.8rem;
+  color: var(--I-text-color, #fbfbfb);
+  font-family: AeonikRegular;
+  font-style: normal;
+  font-weight: 400;
+  line-height: 40px;
+}
+
+app-speech-bubble p {
+  font-size: var(--resultFontSizeVerySmall);
+  font-family: AeonikLight;
+}
+
+#points {
+  color: var(--White, #fbfbfb);
+  font-family: AeonikBold;
+  font-size: var(--fontSizeLarge);
+  font-style: italic;
+  font-weight: 700;
+  line-height: 40px;
+}
+
+#result-card {
+  background: rgba(12, 14, 43, 0.38);
+  border-radius: 20px;
+}
+
+.game-result-img {
+  width: 19rem;
+  height: 14rem;
+}
+
+.card-won {
+  border: 4px solid #68d466;
+  border-radius: 16px;
+}
+.card-loss {
+  border: 4px solid #de1f1f;
+  border-radius: 16px;
+}
+
+#result-subtitle {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0 0.5rem;
+  margin-bottom: 0.4rem;
+}
+
+.score {
+  color: var(--White, #fbfbfb);
+  font-family: AeonikRegular;
+  font-size: 24px;
+  font-style: italic;
+  font-weight: 500;
+  line-height: normal;
+}
+
+.loss {
+  color: #de1f1f;
+}
+
+.win {
+  color: #68d466;
+}
+
+#o-text-box-container {
+  display: flex;
+  flex-direction: row;
+  margin: 0 auto;
+  gap: 2rem;
+  margin-bottom: 1rem;
+  justify-content: flex-end;
+  width: 100%;
+}
+
+#o-avatar {
+  font-family: ICTHofmannRegular;
+  font-size: var(--fontSizeMedium);
+  font-style: normal;
+  font-weight: 400;
+  line-height: normal;
+}
+
+app-o-avatar {
+  position: absolute;
+  right: -5rem;
+}
+
+app-i-avatar {
+  position: absolute;
+  left: -4rem;
+}
+
+#o-speech-bubble {
+  position: relative;
+  width: auto;
+  right: 5rem;
+}
+
+#o-speech-bubble h1 {
+  font-size: var(--resultFontSizeMediumSmall);
+  font-weight: 400;
+  font-family: AeonikRegular;
+  margin: 0.5rem 0;
+}
+
+.result-header-multi {
+  text-align: center;
+  color: #195272;
+  font-size: 48px;
+  margin: 0;
+  padding: 0 24px;
+}
+.result-word {
+  color: var(--White, #fbfbfb);
+  text-align: center;
+  font-family: AeonikLight;
+  font-size: var(--resultFontSizeVerySmall);
+  font-style: normal;
+  font-weight: 400;
+  line-height: normal;
+}
+.result-section {
+  align-items: center;
+  display: flex;
+  flex-direction: column;
+}
+@media (max-width: 600px) {
+  #result-header {
+    padding: 24px;
+  }
+  .link-float {
+    padding-bottom: 24px;
+  }
+}
+
+#summary-buttons-container {
+  display: flex;
+  flex-direction: row;
+  gap: 3rem;
+  margin: 0 auto;
+}
+
+#text-box-points {
+  color: $text_secondary_color;
+  font-style: italic;
+  font-weight: 400;
 }
 
 .btn {
@@ -116,113 +311,6 @@
   box-shadow: 0px 4px 4px 0px rgba(0, 0, 0, 0.25);
 }
 
-.card-won {
-  border: 4px solid #68d466;
-  border-radius: 16px;
-}
-.card-loss {
-  border: 4px solid #de1f1f;
-  border-radius: 16px;
-}
-
-#result-subtitle {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-
-  font-style: normal;
-  font-weight: 500;
-  font-size: 30px;
-  line-height: 43px;
-  padding: 0 0.5rem;
-  margin-bottom: 0.4rem;
-}
-
-.icon {
-  width: 43px;
-  height: 43px;
-  flex-shrink: 0;
-}
-.game-result-img {
-  width: 19rem;
-  height: 14rem;
-}
-
-.result-header-multi {
-  text-align: center;
-  color: #195272;
-  font-size: 48px;
-  margin: 0;
-  padding: 0 24px;
-}
-
-.score {
-  color: var(--White, #fbfbfb);
-  font-family: AeonikRegular;
-  font-size: 24px;
-  font-style: italic;
-  font-weight: 500;
-  line-height: normal;
-}
-
-.loss {
-  color: #de1f1f;
-}
-
-.win {
-  color: #68d466;
-}
-.result-word {
-  color: var(--White, #fbfbfb);
-  text-align: center;
-  font-family: AeonikLight;
-  font-size: 24px;
-  font-style: normal;
-  font-weight: 400;
-  line-height: normal;
-}
-.result-section {
-  align-items: center;
-  display: flex;
-  flex-direction: column;
-}
-@media (max-width: 600px) {
-  #result-header {
-    padding: 24px;
-  }
-  .link-float {
-    padding-bottom: 24px;
-  }
-}
-
-#i-text-box-container {
-  display: flex;
-  gap: 2rem;
-  margin: 0 auto;
-  margin-bottom: 2rem;
-}
-
-#o-text-box-container {
-  display: flex;
-  flex-direction: row;
-  margin: 0 auto;
-  gap: 2rem;
-  margin-bottom: 1rem;
-}
-
-#summary-buttons-container {
-  display: flex;
-  flex-direction: row;
-  gap: 3rem;
-  margin: 0 auto;
-}
-
-#text-box-points {
-  color: $text_secondary_color;
-  font-style: italic;
-  font-weight: 400;
-}
-
 .btn-text {
   display: flex;
   padding: 0px 5px;
@@ -231,7 +319,7 @@
   gap: 10px;
   color: var(--Cobalt-blue, #151cdb);
   font-family: AeonikRegular;
-  font-size: 32px;
+  font-size: var(--resultFontSizeMediumSmall);
   font-style: normal;
   font-weight: 400;
   line-height: normal;
@@ -239,85 +327,4 @@
 
 .btn-text-secondary {
   color: var(--White, #fbfbfb);
-  font-size: 2rem;
-}
-
-#o-avatar {
-  font-family: ICTHofmannRegular;
-  font-size: 36px;
-  font-style: normal;
-  font-weight: 400;
-  line-height: normal;
-}
-
-app-speech-bubble {
-  --bbMaxWidth: 100vw;
-}
-
-app-speech-bubble h1 {
-  font-size: 36px;
-  font-family: AeonikBold;
-  margin-bottom: 0.8rem;
-  color: var(--I-text-color, #fbfbfb);
-  font-family: AeonikRegular;
-  font-size: 36px;
-  font-style: normal;
-  font-weight: 400;
-  line-height: 40px;
-}
-
-app-speech-bubble p {
-  font-size: 24px;
-  font-family: AeonikLight;
-}
-
-#result-card {
-  background: rgba(12, 14, 43, 0.38);
-  border-radius: 20px;
-}
-
-app-o-avatar {
-  position: absolute;
-  right: -5rem;
-}
-
-app-i-avatar {
-  position: absolute;
-  left: -5rem;
-}
-
-#o-speech-bubble h1 {
-  font-size: 32px;
-  font-weight: 400;
-  font-family: AeonikRegular;
-  margin: 0.5rem 0;
-}
-
-#points {
-  color: var(--White, #fbfbfb);
-  font-family: AeonikBold;
-  font-size: 44px;
-  font-style: italic;
-  font-weight: 700;
-  line-height: 40px;
-}
-
-#highscore-points {
-  color: #fbfbfb;
-  font-family: AeonikMedium;
-  font-size: 28px;
-  font-style: italic;
-  font-weight: 700;
-  line-height: normal;
-}
-
-#win-text {
-  color: var(--I-text-color, #fbfbfb);
-
-  text-align: center;
-  font-family: AeonikRegular;
-  font-size: 36px;
-  font-style: normal;
-  font-weight: 700;
-  line-height: 40px; /* 111.111% */
 }

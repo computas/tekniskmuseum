@@ -69,7 +69,7 @@ export class GameConfigService {
 
   getScoreSettings(): ImageScoreConfig {
     return {
-      maxScore: 333,
+      maxScore: 3000,
       scoreDecrement: 1.67336683417,
     };
   }

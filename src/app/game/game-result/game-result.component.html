@@ -4,8 +4,8 @@
   </button>
   <div class="result-container">
     <div class="result-section">
-      <div id="highscore-section">
-        <p id="highscore-text">
+      <div id="header">
+        <p id="header-text">
           @if (!ismultiplayer) {
           {{ 'DIFFICULTY' | translate }}: @switch (difficulty) { @case (1){
           {{ 'EASY_BUTTON' | translate }}
@@ -17,11 +17,11 @@
           {{ 'EASY_BUTTON' | translate }}
           } } }
         </p>
-        <div id="not-highscore-section">
+        <div id="highscore-section">
           @if (newHighscore) {
           <h2 id="highscore-number">{{ 'NEW_HIGHSCORE_TEXT' | translate }}</h2>
           } @else {
-          <h2 id="highscore-text">
+          <h2 id="header-text">
             {{ 'TODAYS_HIGHSCORE_TEXT' | translate }}
             <span id="highscore-points"> {{ todaysHighscore.toString() }} {{ 'POINTS' | translate }}</span>
           </h2>
