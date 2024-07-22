@@ -10,40 +10,20 @@ import { Subscription } from 'rxjs';
 import { GameStateService } from '../../services/game-state-service';
 import { MultiplayerService } from '../../services/multiplayer.service';
 import { OAvatarComponent } from '@/assets/avatars/o-avatar/o-avatar.component';
+import { CorrectGuessComponent } from './correct-guess/correct-guess.component';
+import { WrongGuessComponent } from './wrong-guess/wrong-guess.component';
 
 @Component({
   selector: 'app-game-example-drawings',
   standalone: true,
-  imports: [SpeechBubbleComponent, TranslatePipe, OAvatarComponent],
+  imports: [SpeechBubbleComponent, TranslatePipe, OAvatarComponent, CorrectGuessComponent, WrongGuessComponent],
   templateUrl: './game-example-drawings.component.html',
   styleUrl: './game-example-drawings.component.scss',
 })
-export class GameExampleDrawingsComponent implements OnInit, OnDestroy {
-  language: SupportedLanguages = this.translationService.getCurrentLang();
-  exampleDrawings: string[] = [];
-  label = '';
-  PointerSide = PointerSide;
-  ArrowAlignment = ArrowAlignment;
-  CustomColorsIO = CustomColorsIO;
-  hasCorrectGuess = this.drawingService.lastResult.hasWon;
-  subscriptions = new Subscription();
-  constructor(
-    private translationService: TranslationService,
-    private drawingService: DrawingService,
-    private exampleDrawingService: ExampleDrawingService,
-    private gameStateService: GameStateService,
-    private multiplayerService: MultiplayerService
-  ) {}
+export class GameExampleDrawingsComponent implements OnInit {
+  hasCorrectGuess: boolean = false;
+  constructor(private drawingService: DrawingService) {}
   ngOnInit(): void {
-    this.label = this.drawingService.label;
-    if (this.gameStateService.isSingleplayer()) {
-      this.exampleDrawings = this.exampleDrawingService.getExampleDrawings();
-      return;
-    }
-    this.exampleDrawings = this.multiplayerService.getExampleDrawings();
-  }
-
-  ngOnDestroy(): void {
-    this.subscriptions.unsubscribe();
+    this.hasCorrectGuess = this.drawingService.lastResult.hasWon;
   }
 }
