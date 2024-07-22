@@ -7,6 +7,8 @@ import { RouterOutlet } from '@angular/router';
 import { IdleTimeoutComponent } from './game/idle-timeout/idle-timeout.component';
 import { routeTransitionAnimations } from './route-transition-animations';
 import { environment } from '../environments/environment';
+import { GameStateService } from './game/services/game-state-service';
+import { GAMESTATE } from './shared/models/interfaces';
 
 @Component({
   selector: 'app-root',
@@ -25,11 +27,17 @@ export class AppComponent implements OnInit {
   isDialogOpen = false;
   inactivityTime = environment.inactivityTime;
 
-  constructor(private router: Router, public dialog: MatDialog) {}
+  constructor(private gameStateService: GameStateService, private router: Router, public dialog: MatDialog) {}
 
   ngOnInit(): void {
     this.setDialogTimeout();
     this.userInactive.subscribe(() => {
+      if (this.gameStateService.getCurrentPage() === GAMESTATE.drawingBoard) {
+        clearTimeout(this.userActivity);
+        this.setDialogTimeout();
+        return;
+      }
+
       if (this.router.url === '/welcome') {
         this.router.navigate(['/']);
       } else if (this.router.url !== '/' && this.router.url !== '/admin') {
