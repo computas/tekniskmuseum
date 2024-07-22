@@ -22,13 +22,24 @@ import { SpeechBubbleComponent } from '../speech-bubble/speech-bubble.component'
 import { CustomColorsIO } from '@/app/shared/customColors';
 import { MatIcon } from '@angular/material/icon';
 import { GameStateService } from '../services/game-state-service';
+import { IAvatarComponent } from '@/assets/avatars/i-avatar/i-avatar.component';
+import { OAvatarComponent } from '@/assets/avatars/o-avatar/o-avatar.component';
 
 @Component({
   selector: 'app-game-result',
   templateUrl: './game-result.component.html',
   styleUrls: ['./game-result.component.scss'],
   standalone: true,
-  imports: [MatCardImage, MatIcon, MatButton, TitleCasePipe, TranslatePipe, SpeechBubbleComponent],
+  imports: [
+    MatCardImage,
+    MatIcon,
+    MatButton,
+    TitleCasePipe,
+    TranslatePipe,
+    SpeechBubbleComponent,
+    IAvatarComponent,
+    OAvatarComponent,
+  ],
   animations: [
     trigger('fadeIn', [
       state('hidden', style({ opacity: 0 })),
@@ -48,6 +59,7 @@ export class GameResultComponent implements OnInit, OnDestroy {
   todaysHighscore = 0;
   opponentScore = 0;
   newHighscore = false;
+  difficulty = 0;
   getHighscoreSubscription: Subscription | null = null;
   postHighscoreSubscription: Subscription | null = null;
 
@@ -81,7 +93,7 @@ export class GameResultComponent implements OnInit, OnDestroy {
           }
         }
       });
-
+      this.difficulty = this.gameStateService.getDifficulty();
       this.multiplayerService.postScore(this.drawingService.playerid);
       this.getHighscoreSubscription = this.multiplayerService
         .getHighscore()
@@ -90,7 +102,7 @@ export class GameResultComponent implements OnInit, OnDestroy {
           if (Math.max(...todaysScores) > 0) {
             this.todaysHighscore = Math.max(...todaysScores);
           }
-          if (this.score >= this.todaysHighscore && this.score >= this.opponentScore) {
+          if (this.score >= this.todaysHighscore && this.score >= this.opponentScore && this.score > 0) {
             this.newHighscore = true;
           }
         });
@@ -109,6 +121,9 @@ export class GameResultComponent implements OnInit, OnDestroy {
         },
         error: (error) => console.error("Error fetching today's highscore", error),
       });
+    }
+    if (this.opponentScore > this.todaysHighscore) {
+      this.todaysHighscore = this.opponentScore;
     }
 
     if (this.router.url === '/summary') {
