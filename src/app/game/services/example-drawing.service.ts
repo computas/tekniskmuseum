@@ -26,7 +26,10 @@ export class ExampleDrawingService {
     });
   }
 
-  getExampleDrawings(): string[] {
-    return this.exampleDrawings;
+  getExampleDrawings(numberOfDrawings: number): string[] {
+    if (numberOfDrawings >= this.exampleDrawings.length) {
+      return this.exampleDrawings;
+    }
+    return this.exampleDrawings.slice(0, numberOfDrawings);
   }
 }

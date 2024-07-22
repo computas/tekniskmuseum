@@ -33,7 +33,7 @@ export class CorrectGuessComponent implements OnInit {
   ngOnInit(): void {
     this.label = this.drawingService.label;
     if (this.gameStateService.isSingleplayer()) {
-      this.exampleDrawings = this.exampleDrawingService.getExampleDrawings();
+      this.exampleDrawings = this.exampleDrawingService.getExampleDrawings(3);
       return;
     }
     this.exampleDrawings = this.multiplayerService.getExampleDrawings();
