@@ -78,6 +78,7 @@ export class GameStateService {
   setMultiplayer() {
     this._gameMode.next(GAMEMODE.multiplayer);
     this.saveGameModeToLocalStorage(GAMEMODE.multiplayer);
+    this.gameConfigService.setDifficultyLevel('medium');
   }
 
   restartGame() {
@@ -132,5 +133,9 @@ export class GameStateService {
 
   getCurrentPage(): GAMESTATE {
     return this._currentPage.value;
+  }
+
+  getDifficulty(): number {
+    return this.gameConfigService.getConfig.difficultyId;
   }
 }
