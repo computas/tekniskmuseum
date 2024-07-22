@@ -77,7 +77,6 @@ export class GameConfigService {
     return {
       maxScore: maxScore,
       scoreDecrement: maxScore / ((this.getConfig.secondsPerRound * 1000) / intervalDuration),
-
     };
   }
 }
