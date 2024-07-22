@@ -70,6 +70,7 @@ export enum PointerSide {
   Right = 'pright',
   Bottom = 'pbottom',
   Left = 'pleft',
+  NotAssigned = '',
 }
 
 export enum ArrowAlignment {
@@ -78,6 +79,7 @@ export enum ArrowAlignment {
   Right = 'aright',
   Top = 'atop',
   Bottom = 'abottom',
+  NotAssigned = '',
 }
 
 export interface GameLevelConfig {

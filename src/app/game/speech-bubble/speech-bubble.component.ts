@@ -37,6 +37,12 @@ export class SpeechBubbleComponent {
 
   private _isFlipped = false;
 
+  private _hidePointer = false;
+
+  @Input() set hidePointer(value: boolean) {
+    this._hidePointer = value;
+  }
+
   @Input() set isFlipped(value: boolean) {
     this._isFlipped = value;
   }
@@ -63,6 +69,12 @@ export class SpeechBubbleComponent {
 
   computedClasses(): string[] {
     this.validateConfiguration();
+
+    if (this._hidePointer) {
+      this._arrowAlignment = ArrowAlignment.NotAssigned;
+      this._pointerSide = PointerSide.NotAssigned;
+    }
+
     return ['speech-bubble', this._pointerSide, this._arrowAlignment, this._isFlipped ? 'flip' : '', this._bubbleSize];
   }
 
