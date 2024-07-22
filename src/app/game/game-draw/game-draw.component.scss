@@ -1,6 +1,5 @@
 @import '../../../variables.scss';
 
-
 // - ALL ------------------------------------------------------------
 
 body {
@@ -17,7 +16,12 @@ body {
 }
 
 span {
-  font-size: var(--fontSizeMedium);
+  font-size: var(--fontSizeSmall);
+}
+
+.icon {
+  width: var(--fontSizeSmall);
+  transform: scale(1);
 }
 
 .topContent {
@@ -28,7 +32,6 @@ span {
   align-content: stretch;
 }
 
-
 // - INSIDE ------------------------------------------------------------
 
 #timerContainer {
@@ -36,21 +39,21 @@ span {
   color: $text_darker_grey;
 
   right: 5vw;
-  margin-top: 4vh;
+  margin-top: 3vh;
 }
 
-#countDown{
+#countDown {
   display: flex;
-  flex-direction: row;
-
-  font-size: var(--fontSizeLarge);
+  flex-direction: row-reverse;
+  align-items: center;
+  gap: 0.5rem;
 
   #timerIcon {
-    height: auto;
-    width: auto;
-    color: $text_darker_grey;
-    transform: scale(2);
-    width: var(--fontSizeMedium);
+    padding-top: 0.3rem;
+  }
+
+  #timeLeft {
+    font-size: var(--fontSizeMedium);
   }
 }
 
@@ -80,37 +83,44 @@ span {
 
   margin-top: 2vh;
   margin-left: 1.5vw;
-  margin-right: 1.5vw; 
+  margin-right: 1.5vw;
 
   width: calc(94vw);
-  height: calc(72vh);
+  height: calc(76vh);
 }
 
 #deleteButton {
   position: absolute;
   margin-top: 2vh;
-  left: 4vw;
-  height: auto;
-  min-width: 12em;
+  left: 4.5vw;
+
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+
+  //height: auto;
+  min-width: 10em;
   max-width: 40em;
   box-shadow: 0 8px 16px 0 rgba(0, 0, 0, 0.1), 0 6px 20px 0 rgba(0, 0, 0, 0.15);
   padding: 10px;
   padding-right: 20px;
   border-radius: 50px;
 
-  background-color: $negative_feedback_color_bright;
-  color: white;
+  background-color: #ffd6d6;
+  color: $negative_feedback_color_bright;
 
   #buttonContent {
     display: flex;
     flex-direction: row;
-    justify-content: space-between;
-    padding-left: 0.1em;
-    padding-right: 0.1em;
+    align-items: center;
+    gap: 0.5rem;
+
+    font-size: var(--fontSizeSmall);
   }
+
   #deleteIcon {
-    width: 1.2em;
-    height: 1.2em;
+    padding-left: 0.1rem;
+    padding-bottom: 0.1rem;
   }
 }
 
@@ -119,8 +129,6 @@ canvas {
   background-color: white;
 }
 
-
-
 // - OUTSIDE ------------------------------------------------------------
 
 #iAvatarContainer {
@@ -128,18 +136,15 @@ canvas {
   flex-direction: row;
   align-self: flex-start;
   justify-content: left;
-  margin-top: 2vh;
+  //margin-top: 2vh;
   left: 2vh;
 
-  app-speech-bubble {
-    span {
-      font-size: var(--fontSizeMedium);
-      line-height: var(--fontSizeMedium);
-
-    }
-    #guessWord{
-      font-family: AeonikMedium;
-    }
+  p,
+  span {
+    font-size: var(--fontSizeSmall);
+  }
+  #guessWord {
+    font-family: AeonikMedium;
   }
 }
 
@@ -157,15 +162,13 @@ canvas {
   p,
   span {
     font-size: var(--fontSizeSmall);
-    line-height: var(--fontSizeMedium);
-
   }
 
   span {
     font-family: AeonikBold;
   }
+}
 
-  #aiGuess{
-    font-size: var(--fontSizeMedium)
-  }
+app-speech-bubble {
+  margin-top: 2.8vh;
 }
