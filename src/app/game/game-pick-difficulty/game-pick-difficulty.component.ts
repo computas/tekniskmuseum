@@ -24,12 +24,13 @@ import { trigger, state, style, animate, transition } from '@angular/animations'
     trigger('show', [
       state('hidden', style({ opacity: 0 })),
       state('visible', style({ opacity: 1 })),
-      transition('hidden => visible', [animate('800ms')]),
+      transition('hidden => visible', [animate('0.3s')]),
     ]),
   ],
 })
 export class GamePickDifficultyComponent implements OnInit {
   config = this.gameConfigService.getConfig;
+  private animationTimeouts: NodeJS.Timeout[] = [];
 
   PointerSide = PointerSide;
   ArrowAlignment = ArrowAlignment;
@@ -40,6 +41,7 @@ export class GamePickDifficultyComponent implements OnInit {
   stateFirstBubbleI = 'hidden';
   stateFirstBubbleO = 'hidden';
   stateButtons = 'hidden';
+  buttonsAreDisabled = true;
 
   constructor(
     private gameConfigService: GameConfigService,
@@ -60,15 +62,52 @@ export class GamePickDifficultyComponent implements OnInit {
   }
 
   startAnimation() {
-    setTimeout(() => {
-      this.stateFirstBubbleO = 'visible';
-      this.stateFigureO = 'visible';
-    }, 500);
-    setTimeout(() => {
-      this.stateFirstBubbleI = 'visible';
-      this.stateFigureI = 'visible';
-      this.stateButtons = 'visible';
-    }, 2000);
+    const steps = [
+      {
+        delay: 500,
+        action: () => {
+          this.stateFigureO = 'visible';
+        },
+      },
+      {
+        delay: 350,
+        action: () => {
+          this.stateFirstBubbleO = 'visible';
+        },
+      },
+      {
+        delay: 750,
+        action: () => {
+          this.stateFigureI = 'visible';
+        },
+      },
+      {
+        delay: 350,
+        action: () => {
+          this.stateButtons = 'visible';
+          this.buttonsAreDisabled = false;
+          this.stateFirstBubbleI = 'visible';
+        },
+      },
+    ];
+    let totalDelay = 0;
+    steps.forEach((step) => {
+      totalDelay += step.delay;
+      const timeout = setTimeout(step.action, totalDelay);
+      this.animationTimeouts.push(timeout);
+    });
+  }
+
+  skipAnimation() {
+    this.animationTimeouts.forEach((timeout) => clearTimeout(timeout));
+    this.animationTimeouts = [];
+
+    this.stateFirstBubbleO = 'visible';
+    this.stateFirstBubbleI = 'visible';
+    this.stateFigureI = 'visible';
+    this.stateFigureO = 'visible';
+    this.stateButtons = 'visible';
+    this.buttonsAreDisabled = false;
   }
 
   startDrawing(difficulty: 'easy' | 'medium' | 'hard') {
