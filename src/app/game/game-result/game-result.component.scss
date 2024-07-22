@@ -25,18 +25,19 @@
   gap: 0.5rem;
   margin: auto 0;
 }
+
 .logo {
   position: absolute;
   top: 0;
-  left: 0;
-  margin: 35px;
+  right: 0;
+  margin: 20px;
   height: 44px;
   width: 70px;
+  cursor: pointer;
+
+  img {
+    width: 100%;
 }
-#result-card-container {
-  display: flex;
-  gap: 2rem;
-  margin: 0 auto;
 }
 
 #highscore-section {
