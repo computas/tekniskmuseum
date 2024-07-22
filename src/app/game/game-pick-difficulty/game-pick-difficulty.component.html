@@ -1,5 +1,5 @@
 <div class="container-background">
-  <div class="container">
+  <div class="container" (click)="skipAnimation()" (keypress)="skipAnimation()" tabindex="0">
     <header class="header">
       <button class="logo">
         <img src="assets/logo/IO-logo-inverted_transparent-bg.png" alt="logo" aria-label="Gå til admin side" />
@@ -34,17 +34,35 @@
             >
             </app-speech-bubble>
             <div class="button-container" [@show]="stateButtons">
-              <button mat-raised-button class="button" id="easy-button" (click)="startDrawing('easy')">
+              <button
+                mat-raised-button
+                [disabled]="buttonsAreDisabled"
+                class="button"
+                id="easy-button"
+                (click)="startDrawing('easy')"
+              >
                 <div class="button-text">
                   {{ 'EASY_BUTTON' | translate }}
                 </div>
               </button>
-              <button mat-raised-button class="button" id="medium-button" (click)="startDrawing('medium')">
+              <button
+                mat-raised-button
+                [disabled]="buttonsAreDisabled"
+                class="button"
+                id="medium-button"
+                (click)="startDrawing('medium')"
+              >
                 <div class="button-text">
                   {{ 'MEDIUM_BUTTON' | translate }}
                 </div>
               </button>
-              <button mat-raised-button class="button" id="hard-button" (click)="startDrawing('hard')">
+              <button
+                mat-raised-button
+                [disabled]="buttonsAreDisabled"
+                class="button"
+                id="hard-button"
+                (click)="startDrawing('hard')"
+              >
                 <div class="button-text">
                   {{ 'HARD_BUTTON' | translate }}
                 </div>
