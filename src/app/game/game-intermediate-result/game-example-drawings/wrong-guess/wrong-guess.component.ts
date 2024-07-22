@@ -1,14 +1,15 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { SpeechBubbleComponent } from '@/app/game/speech-bubble/speech-bubble.component';
 import { OAvatarComponent } from '@/assets/avatars/o-avatar/o-avatar.component';
-import { ArrowAlignment, PointerSide } from '@/app/shared/models/interfaces';
+import { ArrowAlignment, PLAYERNR, PointerSide } from '@/app/shared/models/interfaces';
 import { CustomColorsIO } from '@/app/shared/customColors';
 import { TranslatePipe } from '@/app/core/translation.pipe';
 import { ExampleDrawingService } from '@/app/game/services/example-drawing.service';
 import { DrawingService } from '@/app/game/services/drawing.service';
 import { TranslationService } from '@/app/core/translation.service';
-import { Observable, Subscription } from 'rxjs';
+import { map, Observable, Subscription, take } from 'rxjs';
 import { GameStateService } from '@/app/game/services/game-state-service';
+import { MultiplayerService } from '@/app/game/services/multiplayer.service';
 
 @Component({
   selector: 'app-wrong-guess',
@@ -24,43 +25,55 @@ export class WrongGuessComponent implements OnInit, OnDestroy {
   label: string | undefined = '';
   guess = '';
   exampleDrawings: string[] = [];
-  guessedDrawings: string[] = [];
+  guessedDrawings: string[] = ['empty', 'empty'];
   aiGuessSubscription: Subscription = new Subscription();
 
   constructor(
     private exampleDrawingService: ExampleDrawingService,
     private drawingService: DrawingService,
     private translationService: TranslationService,
-    private gameStateService: GameStateService
+    private gameStateService: GameStateService,
+    private multiplayerService: MultiplayerService
   ) {}
 
   ngOnInit(): void {
-    this.exampleDrawings = this.exampleDrawingService.getExampleDrawings(2);
     this.label = this.drawingService.lastResult.word;
     this.guess = this.drawingService.lastResult.guess;
 
     if (this.gameStateService.isSingleplayer()) {
-      this.getSinglePlayerExamples();
+      this.exampleDrawings = this.exampleDrawingService.getExampleDrawings(2);
+      this.getSingleplayerExamples();
     } else {
-      // get multiplayer examples
+      this.getMultiplayerExamples();
+      this.exampleDrawings = this.multiplayerService.getExampleDrawings(2);
     }
-    // TODO handle scenario when ai hasn't guessed at all?
-    /*
-    for (let i = 0; i < 2; i++) {
-      this.exampleDrawings.push('example' + i + '.jpg');
-      this.guessedDrawings.push('guess' + i + '.jpg');
-    }
-      */
   }
 
   ngOnDestroy(): void {
     this.aiGuessSubscription.unsubscribe();
   }
 
-  getSinglePlayerExamples() {
+  getSingleplayerExamples() {
     this.aiGuessSubscription.add(
       this.exampleDrawingService
         .getExampleDrawingsFromLabel(2, this.guess, this.translationService.getCurrentLang())
+        .subscribe((res) => {
+          this.guessedDrawings = res;
+        })
+    );
+  }
+
+  getMultiplayerExamples() {
+    this.aiGuessSubscription.add(
+      this.multiplayerService
+        .getExampleDrawingsFromLabel(2, this.guess, this.translationService.getCurrentLang())
+        .pipe(
+          take(1),
+          map((res: string) => {
+            const data = JSON.parse(res);
+            return data;
+          })
+        )
         .subscribe((res) => {
           this.guessedDrawings = res;
         })

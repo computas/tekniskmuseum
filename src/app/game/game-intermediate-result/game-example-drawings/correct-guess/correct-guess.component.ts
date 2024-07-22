@@ -36,6 +36,6 @@ export class CorrectGuessComponent implements OnInit {
       this.exampleDrawings = this.exampleDrawingService.getExampleDrawings(3);
       return;
     }
-    this.exampleDrawings = this.multiplayerService.getExampleDrawings();
+    this.exampleDrawings = this.multiplayerService.getExampleDrawings(3);
   }
 }

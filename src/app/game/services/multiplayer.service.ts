@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { WebSocketService } from './web-socket.service';
 import { BehaviorSubject, Observable, ReplaySubject } from 'rxjs';
-import { map, take, tap } from 'rxjs/operators';
+import { first, map, take, tap } from 'rxjs/operators';
 import { SocketEndpoints } from '@/app/shared/models/websocketEndpoints';
 import { PairingService } from './pairing.service';
 import {
@@ -107,6 +107,27 @@ export class MultiplayerService {
     this.webSocketService.emit(SocketEndpoints.CLASSIFY, data, image);
   }
 
+  getExampleDrawingsFromLabel(numberOfImages: number, label: string, lang: SupportedLanguages): Observable<string> {
+    const data: ExampleDrawingsData = {
+      game_id: this.stateInfo.game_id,
+      number_of_images: numberOfImages,
+      label: label,
+      lang: lang,
+    };
+
+    switch (this.stateInfo.player_nr) {
+      case PLAYERNR.player1:
+        this.webSocketService.emit(SocketEndpoints.GET_EXAMPLE_DRAWINGS_P1, JSON.stringify(data));
+        return this.webSocketService.listen(SocketEndpoints.GET_EXAMPLE_DRAWINGS_P1);
+      case PLAYERNR.player2:
+        this.webSocketService.emit(SocketEndpoints.GET_EXAMPLE_DRAWINGS_P2, JSON.stringify(data));
+        return this.webSocketService.listen(SocketEndpoints.GET_EXAMPLE_DRAWINGS_P2);
+      default:
+        this.webSocketService.emit(SocketEndpoints.GET_EXAMPLE_DRAWINGS, JSON.stringify(data));
+        return this.webSocketService.listen(SocketEndpoints.GET_EXAMPLE_DRAWINGS);
+    }
+  }
+
   preLoadExampleDrawings(numberOfImages: number, label: string, lang: SupportedLanguages) {
     const data: ExampleDrawingsData = {
       game_id: this.stateInfo.game_id,
@@ -130,14 +151,14 @@ export class MultiplayerService {
       });
   }
 
-  getExampleDrawings(): string[] {
-    const sliceIndex = this.exampleDrawings.length / 2; // images per player
-
+  getExampleDrawings(imagesPerPlayer: number): string[] {
+    let firstHalfEnding = imagesPerPlayer;
     if (this.stateInfo.player_nr === PLAYERNR.player1) {
-      return this.exampleDrawings.slice(0, sliceIndex);
+      return this.exampleDrawings.slice(0, firstHalfEnding);
     }
 
-    return this.exampleDrawings.slice(sliceIndex);
+    const secondHalfEnding = firstHalfEnding + imagesPerPlayer;
+    return this.exampleDrawings.slice(firstHalfEnding, secondHalfEnding);
   }
 
   predictionListener(): Observable<PredictionData> {
