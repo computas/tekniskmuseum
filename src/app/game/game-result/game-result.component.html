@@ -7,15 +7,19 @@
       <div id="header">
         <p id="header-text">
           @if (!ismultiplayer) {
-          {{ 'DIFFICULTY' | translate }}: @switch (difficulty) { @case (1){
-          {{ 'EASY_BUTTON' | translate }}
-          } @case(2) {
-          {{ 'MEDIUM_BUTTON' | translate }}
-          } @case(3) {
-          {{ 'HARD_BUTTON' | translate }}
-          } @default {
-          {{ 'EASY_BUTTON' | translate }}
-          } } }
+          {{ 'DIFFICULTY' | translate }}:
+          <span id="difficulty-text">
+            @switch (difficulty) { @case (1){
+            {{ 'EASY_BUTTON' | translate }}
+            } @case(2) {
+            {{ 'MEDIUM_BUTTON' | translate }}
+            } @case(3) {
+            {{ 'HARD_BUTTON' | translate }}
+            } @default {
+            {{ 'EASY_BUTTON' | translate }}
+            } }</span
+          >
+          }
         </p>
         <div id="highscore-section">
           @if (newHighscore) {
@@ -43,7 +47,7 @@
         <ng-content slot="body-alt">
           <h1>
             @if (ismultiplayer && score >= opponentScore && score > 0) {
-            <span id="win-text">{{ 'SUMMARY_I_MULTIPLAYER_WIN_1' | translate }}</span>
+            {{ 'SUMMARY_I_MULTIPLAYER_WIN_1' | translate }}
             {{ 'SUMMARY_I_MULTIPLAYER_WIN_2' | translate }}
             <span id="points">{{ score }} {{ 'POINTS' | translate }} </span>
             } @else if (ismultiplayer && score < opponentScore) {

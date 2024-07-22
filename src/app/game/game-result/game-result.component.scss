@@ -3,6 +3,7 @@
 * {
   --resultFontSizeVerySmall: 24px;
   --resultFontSizeMediumSmall: 32px;
+  --resultFontSizeLarge: 44px;
 }
 
 .result-container-background {
@@ -62,9 +63,6 @@
   text-align: center;
   font-family: AeonikRegular;
   font-size: var(--resultFontSizeVerySmall);
-  font-style: normal;
-  font-weight: 500;
-  line-height: normal;
   margin-bottom: 0;
 }
 
@@ -86,12 +84,16 @@
   margin-bottom: 0;
 }
 
+#difficulty-text {
+  font-family: AeonikMedium;
+  font-style: italic;
+}
+
 #highscore-points {
   color: #fbfbfb;
-  font-family: AeonikMedium;
+  font-family: AeonikBold;
   font-size: var(--fontSizeSmall);
   font-style: italic;
-  font-weight: 700;
   line-height: normal;
 }
 
@@ -100,9 +102,8 @@
   -webkit-text-stroke-width: 2;
   -webkit-text-stroke-color: #000;
   font-family: AeonikBold;
-  font-size: var(--fontSizeLarge);
+  font-size: var(--resultFontSizeLarge);
   font-style: italic;
-  font-weight: 700;
   line-height: normal;
   background: linear-gradient(90deg, #b06ef5 0%, #ff8386 0%, #e8d5b0 66.5%);
   background-clip: text;
@@ -118,34 +119,17 @@
   margin-bottom: 2rem;
 }
 
-#win-text {
-  color: var(--I-text-color, #fbfbfb);
-  text-align: center;
-  font-family: AeonikRegular;
-  font-size: var(--fontSizeMedium);
-  font-style: normal;
-  font-weight: 700;
-  line-height: 40px; /* 111.111% */
-}
-
 #result-card-container {
   display: flex;
   gap: 2rem;
   margin: 0 auto;
 }
 
-app-speech-bubble {
-  --bbMaxWidth: 100vw;
-}
-
 app-speech-bubble h1 {
   font-size: var(--fontSizeMedium);
-  font-family: AeonikBold;
   margin-bottom: 0.8rem;
   color: var(--I-text-color, #fbfbfb);
   font-family: AeonikRegular;
-  font-style: normal;
-  font-weight: 400;
   line-height: 40px;
 }
 
@@ -157,9 +141,7 @@ app-speech-bubble p {
 #points {
   color: var(--White, #fbfbfb);
   font-family: AeonikBold;
-  font-size: var(--fontSizeLarge);
-  font-style: italic;
-  font-weight: 700;
+  font-size: var(--resultFontSizeLarge);
   line-height: 40px;
 }
 
@@ -192,10 +174,9 @@ app-speech-bubble p {
 
 .score {
   color: var(--White, #fbfbfb);
-  font-family: AeonikRegular;
+  font-family: AeonikMedium;
   font-size: 24px;
   font-style: italic;
-  font-weight: 500;
   line-height: normal;
 }
 
@@ -219,10 +200,6 @@ app-speech-bubble p {
 
 #o-avatar {
   font-family: ICTHofmannRegular;
-  font-size: var(--fontSizeMedium);
-  font-style: normal;
-  font-weight: 400;
-  line-height: normal;
 }
 
 app-o-avatar {
@@ -243,7 +220,6 @@ app-i-avatar {
 
 #o-speech-bubble h1 {
   font-size: var(--resultFontSizeMediumSmall);
-  font-weight: 400;
   font-family: AeonikRegular;
   margin: 0.5rem 0;
 }
@@ -258,11 +234,8 @@ app-i-avatar {
 .result-word {
   color: var(--White, #fbfbfb);
   text-align: center;
-  font-family: AeonikLight;
+  font-family: AeonikRegular;
   font-size: var(--resultFontSizeVerySmall);
-  font-style: normal;
-  font-weight: 400;
-  line-height: normal;
 }
 .result-section {
   align-items: center;
@@ -283,12 +256,6 @@ app-i-avatar {
   flex-direction: row;
   gap: 3rem;
   margin: 0 auto;
-}
-
-#text-box-points {
-  color: $text_secondary_color;
-  font-style: italic;
-  font-weight: 400;
 }
 
 .btn {
@@ -320,9 +287,6 @@ app-i-avatar {
   color: var(--Cobalt-blue, #151cdb);
   font-family: AeonikRegular;
   font-size: var(--resultFontSizeMediumSmall);
-  font-style: normal;
-  font-weight: 400;
-  line-height: normal;
 }
 
 .btn-text-secondary {
