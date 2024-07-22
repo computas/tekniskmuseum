@@ -12,16 +12,13 @@ import { GameStateService } from '@/app/game/services/game-state-service';
 })
 export class GameProgressBarComponent implements OnInit {
   roundNumberProgress = '';
+  currentRoundNumber = 0;
+  totalRounds = 0;
 
   constructor(private drawingService: DrawingService, private gameStateService: GameStateService) {}
 
   ngOnInit(): void {
-    this.roundNumberProgress = this.getRoundProgressText();
-  }
-
-  getRoundProgressText(): string {
-    const currentRoundNumber = this.gameStateService.getCurrentRound();
-    const numberOfRounds = this.drawingService.config.rounds;
-    return `${currentRoundNumber} / ${numberOfRounds}`;
+    this.currentRoundNumber = this.gameStateService.getCurrentRound();
+    this.totalRounds = this.drawingService.config.rounds;
   }
 }

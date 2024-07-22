@@ -21,7 +21,7 @@
   "HELP_ME_LEARN": "Can you help me learn?",
   "PLAYER_MODE_SINGLE": "1 player",
   "PLAYER_MODE_MULTI": "2 players",
-  "WAITING_FOR_PLAYER": "Waiting for player 2",
+  "WAITING_FOR_PLAYER": "Waiting",
   "ADMIN_ARIA_LABEL": "Go to admin page",
 
   "HOW_TO_PLAY_SINGLE": "How to play:",
@@ -54,7 +54,7 @@
   "TODAYS_HIGHSCORE_TEXT": "Today's highscore:",
 
   "SUMMARY_BUTTON": "Summary",
-  "NEXT_WORD_BUTTON": "Next word",
+  "NEXT_WORD_BUTTON": "Next",
 
   "AUTO_END_MESSAGE": "The game will automatically end in ",
   "SECONDS": "seconds",
@@ -65,7 +65,7 @@
 
   "ROUND_NUMBER": "Round",
   "ROUND_FEEDBACK_FAILED_TITLE": "Oooops!",
-  "ROUND_FEEDBACK_FAILED_DESC_1": "I couldn't guess the word you drew..",
+  "ROUND_FEEDBACK_FAILED_DESC_1": "couldn't guess that you drew:",
   "ROUND_FEEDBACK_FAILED_DESC_2": "I can be a bit slow sometimes.. I'll do better next time!",
 
   "ROUND_FEEDBACK_CORRECT_TITLE": "Well drawn!",
@@ -78,6 +78,8 @@
   "SUMMARY_O": "I will have an easier time guessing next time!",
 
   "EXAMPLE_DRAWINGS_FB_CORRECT_P1": "I have learned that",
-  "EXAMPLE_DRAWINGS_FB_P2": "looks like this!",
-  "EXAMPLE_DRAWINGS_FB_FAILED_P1": "Because I have learned that"
+  "EXAMPLE_DRAWINGS_FB_P2": "looks like this:",
+  "EXAMPLE_DRAWINGS_FB_FAILED_P1": "Because I have learned that",
+
+  "OF": "of"
 }

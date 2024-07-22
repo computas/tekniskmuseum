@@ -1,30 +1,59 @@
 @import './../../../../variables.scss';
 
+.container {
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
 .user-drawing-board {
   border-radius: 0.6em;
+  padding: 0.4em; // this is what controls the width of the border
   background-color: white;
+  width: 390px;
+  height: 280px;
+}
+
+.frame {
+  height: 100%;
+  width: 100%;
+  background: white;
+  border-radius: 0.3em;
   display: flex;
   justify-content: center;
   align-items: center;
-  width: 28em;
-  height: 38vh;
 }
 
 .user-drawing {
   height: 100%;
+  max-width: 100%;
 }
 
 .correct {
-  border: 0.5em solid $positive_feedback_color;
+  background-color: $positive_feedback_color;
 }
 
 .incorrect {
-  border: 0.5em solid $negative_feedback_color;
+  background-color: $negative_feedback_color;
+}
+
+.score-and-time-container {
+  margin: 0.8em 0 0;
+  display: flex;
+  justify-content: space-between;
+}
+
+.seconds-used {
+  font-size: var(--fontSizeSmall);
 }
 
 .round-score-text {
+  margin-left: auto; // this pushes points to right when the second counter isn't displayed
   font-family: 'AeonikBold';
-  text-align: center;
-  font-size: 1.5rem;
-  margin: 0.5em 0 0;
+  font-size: var(--fontSizeMedium);
+}
+
+.green-text {
+  color: $positive_feedback_color;
 }

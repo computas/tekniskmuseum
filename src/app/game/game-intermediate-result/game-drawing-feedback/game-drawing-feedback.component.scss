@@ -2,24 +2,42 @@
 .feedback-container {
   display: flex;
   gap: 1em;
+  height: 100%;
+  margin-top: 3em;
 }
 
-.avatar {
-  align-self: flex-end;
+.i-avatar {
+  align-self: center;
   max-width: 11rem;
-}
-
-.feedback-speech-bubble-container {
-  display: flex;
-  flex-direction: column;
-  gap: 1em;
 }
 
 .feedback-title,
 .feedback-desc {
-  font-family: AeonikRegular;
-  font-size: 1.5rem;
-  line-height: 2rem;
+  font-family: AeonikLight;
+  font-size: var(--fontSizeSpeechBubble);
+  line-height: 1em;
+  text-align: left;
   margin: 0;
   padding: 0;
+}
+
+.feedback-title {
+  padding-top: 0.1em;
+}
+
+.o-text {
+  font-family: 'ICTHofmannRegular';
+}
+
+.feedback-desc {
+  margin-top: 0.2em;
+  font-family: AeonikLight;
+}
+
+.label {
+  text-transform: uppercase;
+  margin-top: 0.5em;
+  text-align: left;
+  font-family: AeonikMedium;
+  font-size: var(--fontSizeSpeechBubble);
 }
