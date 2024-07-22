@@ -16,7 +16,7 @@ export class WrongGuessComponent {
   PointerSide = PointerSide;
   ArrowAlignment = ArrowAlignment;
   CustomColorsIO = CustomColorsIO;
-  label = '';
+  label = 'Tiger';
   exampleDrawings: string[] = [];
   guessedDrawings: string[] = [];
 }

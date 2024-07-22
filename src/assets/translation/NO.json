@@ -79,7 +79,8 @@
 
   "EXAMPLE_DRAWINGS_FB_CORRECT_P1": "Jeg har lært at",
   "EXAMPLE_DRAWINGS_FB_P2": "ser sånn ut:",
-  "EXAMPLE_DRAWINGS_FB_FAILED_P1": "For jeg har lært at",
 
-  "OF": "av"
+  "OF": "av",
+  "EXAMPLE_DRAWINGS_FAILED_B1": "Jeg trodde du tegnet",
+  "EXAMPLE_DRAWINGS_FAILED_B2": "For jeg har lært at dette er"
 }

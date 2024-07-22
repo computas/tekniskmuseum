@@ -5,6 +5,7 @@
 }
 
 .label {
+  display: block;
   font-family: 'AeonikMedium';
   text-transform: uppercase;
 }
@@ -32,8 +33,10 @@
 }
 
 .speech-bubble-text {
+  margin: 0;
   font-family: AeonikLight;
   font-size: var(--fontSizeSpeechBubble);
+  line-height: var(--fontSizeSpeechBubble);
 }
 
 .o-avatar {

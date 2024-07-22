@@ -10,8 +10,8 @@
     [hidePointer]="true"
   >
     <p slot="body-alt" class="speech-bubble-text">
-      {{ 'EXAMPLE_DRAWINGS_FB_CORRECT_P1' | translate }} <span class="label">{{ label }}</span>
-      {{ 'EXAMPLE_DRAWINGS_FB_P2' | translate }}
+      {{ 'EXAMPLE_DRAWINGS_FAILED_B1' | translate }}
+      <span class="label">{{ label }}</span>
     </p>
     <ul slot="body-alt" class="example-drawings-list">
       @for (guessedDrawing of guessedDrawings; track guessedDrawing) {
@@ -31,8 +31,7 @@
     [bubbleSize]="'small'"
   >
     <p slot="body-alt" class="speech-bubble-text">
-      {{ 'EXAMPLE_DRAWINGS_FB_CORRECT_P1' | translate }} <span class="label">{{ label }}</span>
-      {{ 'EXAMPLE_DRAWINGS_FB_P2' | translate }}
+      {{ 'EXAMPLE_DRAWINGS_FAILED_B2' | translate }} <span class="label">{{ label }}</span>
     </p>
     <ul slot="body-alt" class="example-drawings-list">
       @for (exampleDrawing of exampleDrawings; track exampleDrawing) {
