@@ -86,9 +86,9 @@
   "SUMMARY_I_NO_POINTS_3": "0 points",
   "SUMMARY_O_NO_POINTS": "Press Play again, and we can try again!",
 
-  "SUMMARY_I_MULTIPLAYER_WIN_1": "Fantastic, you won!",
-  "SUMMARY_I_MULTIPLAYER_WIN_2": "You got",
+  "SUMMARY_I_MULTIPLAYER_WIN_1": "Fantastic, you won! You got",
   "SUMMARY_I_MULTIPLAYER_LOSS": "You lost! You got",
+  "SUMMARY_I_MULTIPLAYER_DRAW": "It's a draw! You got",
 
   "EXAMPLE_DRAWINGS_FB_CORRECT_P1": "I have learned that",
   "EXAMPLE_DRAWINGS_FB_P2": "looks like this:",

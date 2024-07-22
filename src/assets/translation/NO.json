@@ -86,9 +86,9 @@
   "SUMMARY_I_NO_POINTS_3": "0 poeng",
   "SUMMARY_O_NO_POINTS": "Trykk på spill igjen, så kan vi prøve på nytt!",
 
-  "SUMMARY_I_MULTIPLAYER_WIN_1": "Fantastisk, du vant!",
-  "SUMMARY_I_MULTIPLAYER_WIN_2": "Du fikk",
+  "SUMMARY_I_MULTIPLAYER_WIN": "Fantastisk, du vant! Du fikk",
   "SUMMARY_I_MULTIPLAYER_LOSS": "Du tapte! Du fikk",
+  "SUMMARY_I_MULTIPLAYER_DRAW": "Uavgjort! Du fikk",
 
   "EXAMPLE_DRAWINGS_FB_CORRECT_P1": "Jeg har lært at",
   "EXAMPLE_DRAWINGS_FB_P2": "ser sånn ut:",

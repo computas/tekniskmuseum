@@ -46,10 +46,12 @@
       >
         <ng-content slot="body-alt">
           <h1>
-            @if (ismultiplayer && score >= opponentScore && score > 0) {
-            {{ 'SUMMARY_I_MULTIPLAYER_WIN_1' | translate }}
-            {{ 'SUMMARY_I_MULTIPLAYER_WIN_2' | translate }}
+            @if (ismultiplayer && score > opponentScore && score > 0) {
+            {{ 'SUMMARY_I_MULTIPLAYER_WIN' | translate }}
             <span id="points">{{ score }} {{ 'POINTS' | translate }} </span>
+            }@else if (ismultiplayer && score === opponentScore) {
+            {{ 'SUMMARY_I_MULTIPLAYER_DRAW' | translate }}
+            <span id="points">{{ score }} {{ 'POINTS' | translate }}</span>
             } @else if (ismultiplayer && score < opponentScore) {
             {{ 'SUMMARY_I_MULTIPLAYER_LOSS' | translate }}
             <span id="points"> {{ score }} {{ 'POINTS' | translate }} </span>
