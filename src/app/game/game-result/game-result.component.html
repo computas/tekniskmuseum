@@ -39,22 +39,18 @@
       >
         <ng-content slot="body-alt">
           <h1>
-            @if (ismultiplayer && score >= opponentScore) {
+            @if (ismultiplayer && score >= opponentScore && score > 0) {
             <span id="win-text">{{ 'SUMMARY_I_MULTIPLAYER_WIN_1' | translate }}</span>
             {{ 'SUMMARY_I_MULTIPLAYER_WIN_2' | translate }}
             <span id="points">{{ score }} {{ 'POINTS' | translate }} </span>
             } @else if (ismultiplayer && score < opponentScore) {
             {{ 'SUMMARY_I_MULTIPLAYER_LOSS' | translate }}
             <span id="points"> {{ score }} {{ 'POINTS' | translate }} </span>
-            } @else if (newHighscore && score > 0) {
-            {{ 'SUMMARY_I_NEW_HIGHSCORE_1' | translate }}
-            {{ score }}
-            {{ 'SUMMARY_I_NEW_HIGHSCORE_2' | translate }}
             } @else if (score === 0) { {{ 'SUMMARY_I_NO_POINTS_1' | translate }} <span id="o-avatar">O</span>
             {{ 'SUMMARY_I_NO_POINTS_2' | translate }} <span id="points">{{ 'SUMMARY_I_NO_POINTS_3' | translate }}</span>
             } @else {
-            {{ 'SUMMARY_I_1' | translate }} <span id="o-avatar">O</span>
-            <span id="points">{{ 'SUMMARY_I_2' | translate }} {{ score }} {{ 'SUMMARY_I_3' | translate }}</span>
+            {{ 'SUMMARY_I_1' | translate }} <span id="o-avatar">O</span> {{ 'SUMMARY_I_2' | translate }}
+            <span id="points"> {{ score }} {{ 'SUMMARY_I_3' | translate }}</span>
             }
           </h1>
           <div id="result-card-container">
