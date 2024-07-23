@@ -13,13 +13,26 @@ import { TranslatePipe } from '@/app/core/translation.pipe';
 import { GAMESTATE } from '@/app/shared/models/interfaces';
 import { GameStateService } from '../services/game-state-service';
 import { ExampleDrawingService } from '../services/example-drawing.service';
+import { Router } from '@angular/router';
+import { IAvatarComponent } from '@/assets/avatars/i-avatar/i-avatar.component';
+import { SpeechBubbleComponent } from '../speech-bubble/speech-bubble.component';
+import { CustomColorsIO } from '@/app/shared/customColors';
+import { PointerSide, ArrowAlignment } from '@/app/shared/models/interfaces';
 
 @Component({
   selector: 'app-game-word-to-draw',
   templateUrl: './game-word-to-draw.component.html',
   styleUrls: ['./game-word-to-draw.component.scss'],
   standalone: true,
-  imports: [MatProgressSpinner, MatButton, MatIcon, UpperCasePipe, TranslatePipe],
+  imports: [
+    MatProgressSpinner,
+    MatButton,
+    MatIcon,
+    UpperCasePipe,
+    TranslatePipe,
+    IAvatarComponent,
+    SpeechBubbleComponent,
+  ],
 })
 export class GameWordToDrawComponent implements OnInit, OnDestroy {
   config = this.gameConfigService.getConfig;
@@ -32,11 +45,16 @@ export class GameWordToDrawComponent implements OnInit, OnDestroy {
   timeLeft = 5;
 
   loading = true;
+  difficulty = 0;
 
   label = '';
 
   subscriptions = new Subscription();
   timerSubscription: Subscription | undefined;
+
+  CustomColorsIO = CustomColorsIO;
+  PointerSide = PointerSide;
+  ArrowAlignment = ArrowAlignment;
 
   constructor(
     private gameConfigService: GameConfigService,
@@ -44,7 +62,8 @@ export class GameWordToDrawComponent implements OnInit, OnDestroy {
     private drawingService: DrawingService,
     private multiplayerService: MultiplayerService,
     private translationService: TranslationService,
-    private exampleDrawingService: ExampleDrawingService
+    private exampleDrawingService: ExampleDrawingService,
+    private router: Router
   ) {}
 
   ngOnInit(): void {
@@ -52,6 +71,8 @@ export class GameWordToDrawComponent implements OnInit, OnDestroy {
     this.translationService.loadTranslations(this.translationService.getCurrentLang()).subscribe();
     this.isSinglePlayer = this.gameStateService.isSingleplayer();
     this.isMultiPlayer = this.gameStateService.isMultiplayer();
+    this.difficulty = this.gameStateService.getDifficulty();
+
     if (this.isSinglePlayer) {
       if (this.drawingService.gameHasStarted) {
         this.subscriptions.add(
@@ -110,6 +131,10 @@ export class GameWordToDrawComponent implements OnInit, OnDestroy {
     this.gameStateService.goToPage(GAMESTATE.drawingBoard);
   }
 
+  goToWelcomePage() {
+    this.router.navigate(['/welcome']);
+  }
+
   startTimer() {
     return interval(1000)
       .pipe(take(5))
@@ -126,5 +151,12 @@ export class GameWordToDrawComponent implements OnInit, OnDestroy {
 
   ngOnDestroy() {
     this.subscriptions.unsubscribe();
+  }
+
+  buttonStyle(): string {
+    if (!this.loading && !this.isMultiPlayer) {
+      return 'button-container';
+    }
+    return 'button-container disabled';
   }
 }
