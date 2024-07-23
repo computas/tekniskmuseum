@@ -1,5 +1,7 @@
 @import '../../../variables.scss';
 
+// - ALL ------------------------------------------------------------
+
 body {
   overflow: hidden;
   height: 100%;
@@ -14,25 +16,12 @@ body {
 }
 
 span {
-  font-size: var(--fontSizeMedium);
+  font-size: var(--fontSizeSmall);
 }
 
-#timerContainer {
-  display: flex;
-  flex-direction: row;
-  justify-content: center;
-  align-items: center;
-  color: $text_light_grey;
-  margin-top: 3%;
-  margin-right: 2.3%;
-
-  #timerIcon {
-    height: auto;
-    width: auto;
-    color: $text_light_grey;
-    transform: scale(2);
-    width: var(--fontSizeMedium);
-  }
+.icon {
+  width: var(--fontSizeSmall);
+  transform: scale(1);
 }
 
 .topContent {
@@ -41,7 +30,31 @@ span {
   align-items: flex-start;
   justify-content: space-between;
   align-content: stretch;
-  font-size: var(--fontSizeLarge);
+}
+
+// - INSIDE ------------------------------------------------------------
+
+#timerContainer {
+  position: absolute;
+  color: $text_darker_grey;
+
+  right: 5vw;
+  margin-top: 3vh;
+}
+
+#countDown {
+  display: flex;
+  flex-direction: row-reverse;
+  align-items: center;
+  gap: 0.5rem;
+
+  #timerIcon {
+    padding-top: 0.3rem;
+  }
+
+  #timeLeft {
+    font-size: var(--fontSizeMedium);
+  }
 }
 
 .drawing-seconds {
@@ -63,43 +76,51 @@ span {
   display: flex;
   flex-direction: column;
   align-items: center;
+  justify-content: flex-start;
 
   padding: auto;
   overflow: hidden;
 
-  margin-left: 6vw;
-  margin-top: -13vh;
-  margin-bottom: 10vh;
+  margin-top: 2vh;
+  margin-left: 1.5vw;
+  margin-right: 1.5vw;
 
-  width: 94%;
-  height: calc(75vh);
+  width: calc(94vw);
+  height: calc(76vh);
 }
 
 #deleteButton {
   position: absolute;
   margin-top: 2vh;
-  height: auto;
-  min-width: 12em;
+  left: 4.5vw;
+
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+
+  //height: auto;
+  min-width: 10em;
   max-width: 40em;
-  left: 18vh;
   box-shadow: 0 8px 16px 0 rgba(0, 0, 0, 0.1), 0 6px 20px 0 rgba(0, 0, 0, 0.15);
   padding: 10px;
   padding-right: 20px;
   border-radius: 50px;
 
-  background-color: rgb(222, 13, 13);
-  color: white;
+  background-color: #ffd6d6;
+  color: $negative_feedback_color_bright;
 
   #buttonContent {
     display: flex;
     flex-direction: row;
-    justify-content: space-between;
-    padding-left: 0.1em;
-    padding-right: 0.1em;
+    align-items: center;
+    gap: 0.5rem;
+
+    font-size: var(--fontSizeSmall);
   }
+
   #deleteIcon {
-    width: 1.2em;
-    height: 1.2em;
+    padding-left: 0.1rem;
+    padding-bottom: 0.1rem;
   }
 }
 
@@ -108,39 +129,35 @@ canvas {
   background-color: white;
 }
 
+// - OUTSIDE ------------------------------------------------------------
+
 #iAvatarContainer {
   display: flex;
   flex-direction: row;
-  align-items: flex-start;
+  align-self: flex-start;
   justify-content: left;
-  margin-top: 2vh;
+  //margin-top: 2vh;
   left: 2vh;
 
-  z-index: -1;
-
-  app-speech-bubble {
-    span {
-      font-family: AeonikMedium;
-      font-size: var(--fontSizeMedium);
-      line-height: 0rem;
-    }
-    #guessWord {
-      color: $text_secondary_color;
-    }
+  p,
+  span {
+    font-size: var(--fontSizeSmall);
+  }
+  #guessWord {
+    font-family: AeonikMedium;
   }
 }
 
 #oAvatarContainer {
   display: flex;
   flex-direction: row;
-  position: absolute;
-  right: 4vw;
-  margin-top: 2vh;
-  -webkit-user-select: none; /* Chrome all / Safari all */
-  -moz-user-select: none; /* Firefox all */
-  -ms-user-select: none; /* IE 10+ */
-  user-select: none;
-  pointer-events: none;
+  align-self: flex-end;
+  justify-content: right;
+  //-webkit-user-select: none; /* Chrome all / Safari all */
+  //-moz-user-select: none; /* Firefox all */
+  //-ms-user-select: none; /* IE 10+ */
+  //user-select: none;
+  //pointer-events: none;
 
   p,
   span {
@@ -150,4 +167,8 @@ canvas {
   span {
     font-family: AeonikBold;
   }
+}
+
+app-speech-bubble {
+  margin-top: 2.8vh;
 }

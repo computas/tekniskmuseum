@@ -10,10 +10,10 @@ export class GameConfigService {
     difficultyId: 1,
     rounds: 3,
     secondsPerRound: 30,
-    timeToStartClassify: 23,
-    defaultTimeBetweenClassify: 5,
-    minimumTimeBetweenClassify: 3,
-    minimumDrawnThreshold: 3000,
+    timeToStartClassify: 27,
+    defaultTimeBetweenClassify: 3,
+    minimumTimeBetweenClassify: 2,
+    minimumDrawnThreshold: 2500,
     pixelsPerClassify: 2000,
     intervalDuration: 100,
   }); // Easy mode as default
@@ -26,10 +26,10 @@ export class GameConfigService {
           difficultyId: 1,
           rounds: 3,
           secondsPerRound: 30,
-          timeToStartClassify: 25,
-          defaultTimeBetweenClassify: 5,
-          minimumTimeBetweenClassify: 3,
-          minimumDrawnThreshold: 3000,
+          timeToStartClassify: 27,
+          defaultTimeBetweenClassify: 3,
+          minimumTimeBetweenClassify: 2,
+          minimumDrawnThreshold: 2500,
           pixelsPerClassify: 2000,
           intervalDuration: 100,
         };
@@ -39,8 +39,8 @@ export class GameConfigService {
           difficultyId: 2,
           rounds: 3,
           secondsPerRound: 20,
-          timeToStartClassify: 16,
-          defaultTimeBetweenClassify: 4,
+          timeToStartClassify: 17,
+          defaultTimeBetweenClassify: 3,
           minimumTimeBetweenClassify: 2,
           minimumDrawnThreshold: 3500,
           pixelsPerClassify: 2000,
@@ -52,8 +52,8 @@ export class GameConfigService {
           difficultyId: 3,
           rounds: 3,
           secondsPerRound: 20,
-          timeToStartClassify: 16,
-          defaultTimeBetweenClassify: 4,
+          timeToStartClassify: 17,
+          defaultTimeBetweenClassify: 3,
           minimumTimeBetweenClassify: 2,
           minimumDrawnThreshold: 3500,
           pixelsPerClassify: 2000,
@@ -77,7 +77,6 @@ export class GameConfigService {
     return {
       maxScore: maxScore,
       scoreDecrement: maxScore / ((this.getConfig.secondsPerRound * 1000) / intervalDuration),
-
     };
   }
 }
