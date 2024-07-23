@@ -22,6 +22,8 @@ import { SpeechBubbleComponent } from '../speech-bubble/speech-bubble.component'
 import { CustomColorsIO } from '@/app/shared/customColors';
 import { MatIcon } from '@angular/material/icon';
 import { GameStateService } from '../services/game-state-service';
+import confetti from 'canvas-confetti';
+import { confettiSettings, iConfettiFigure, oConfettiFigure } from '@/assets/avatars/confetti-config';
 import { IAvatarComponent } from '@/assets/avatars/i-avatar/i-avatar.component';
 import { OAvatarComponent } from '@/assets/avatars/o-avatar/o-avatar.component';
 
@@ -59,6 +61,8 @@ export class GameResultComponent implements OnInit, OnDestroy {
   todaysHighscore = 0;
   opponentScore = 0;
   newHighscore = false;
+  confettiDuration = 2 * 1000;
+  confettiEndTime = Date.now() + this.confettiDuration;
   difficulty = 0;
   getHighscoreSubscription: Subscription | null = null;
   postHighscoreSubscription: Subscription | null = null;
@@ -93,6 +97,10 @@ export class GameResultComponent implements OnInit, OnDestroy {
           }
         }
       });
+      if (this.hasWon) {
+        this.blowConfetti();
+      }
+
       this.difficulty = this.gameStateService.getDifficulty();
       this.multiplayerService.postScore(this.drawingService.playerid);
       this.getHighscoreSubscription = this.multiplayerService
@@ -117,6 +125,7 @@ export class GameResultComponent implements OnInit, OnDestroy {
           }
           if (this.drawingService.totalScore >= this.todaysHighscore) {
             this.newHighscore = true;
+            this.blowConfetti();
           }
         },
         error: (error) => console.error("Error fetching today's highscore", error),
@@ -137,6 +146,28 @@ export class GameResultComponent implements OnInit, OnDestroy {
     }
     this.startAnimation();
     this.translationService.loadTranslations(this.translationService.getCurrentLang()).subscribe();
+  }
+  blowConfetti(): void {
+    const confettiEndTime = Date.now() + this.confettiDuration;
+    (function frame() {
+      confetti({
+        ...confettiSettings,
+        scalar: 4,
+        angle: 60,
+        origin: { x: 0, y: 0.8 },
+        shapes: [iConfettiFigure],
+      });
+      confetti({
+        ...confettiSettings,
+        scalar: 3,
+        angle: 120,
+        origin: { x: 1, y: 0.8 },
+        shapes: [oConfettiFigure],
+      });
+      if (Date.now() < confettiEndTime) {
+        requestAnimationFrame(frame);
+      }
+    })();
   }
   ngOnDestroy(): void {
     this.getHighscoreSubscription?.unsubscribe();
