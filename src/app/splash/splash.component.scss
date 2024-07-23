@@ -15,20 +15,6 @@
   box-sizing: border-box;
 }
 
-.logo {
-  position: absolute;
-  top: 0;
-  left: 0;
-  margin: 20px;
-  height: 44px;
-  width: 70px;
-  cursor: pointer;
-
-  img {
-    width: 100%;
-  }
-}
-
 .speech-bubble-container {
   display: flex;
   justify-content: flex-start;
@@ -85,10 +71,6 @@
     padding: 40px;
   }
 
-  .logo {
-    margin: 35px;
-  }
-
   .teaching-image {
     max-width: 70%;
   }
@@ -97,10 +79,6 @@
 @media (min-width: 1024px) {
   .container-background {
     padding: 60px;
-  }
-
-  .logo {
-    margin: 35px;
   }
 
   .teaching-image {

@@ -76,3 +76,17 @@ button,
 .avatar-name {
   font-family: ICTHofmannRegular;
 }
+
+.logo {
+  position: absolute;
+  top: 0;
+  right: 0;
+  margin: 20px;
+  width: var(--logoWidth);
+  height: var(--logoHeight);
+  cursor: default;
+
+  img {
+    width: 100%;
+  }
+}
