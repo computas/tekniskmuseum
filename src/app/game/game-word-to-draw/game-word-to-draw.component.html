@@ -10,31 +10,40 @@
     </div>
 
     @if (isMultiPlayer) {
-    <h1 class="playernr">{{ 'PLAYER_LABEL' | translate }} {{ playernr }}</h1>
+      <h1 class="playernr">{{ 'PLAYER_LABEL' | translate }} {{ playernr }}</h1>
     }
 
     <div class="i-container">
       <app-i-avatar class="i-avatar" [color]="CustomColorsIO.white" [width]="50" [height]="200"></app-i-avatar>
     </div>
 
-    <div class="word-text">
-      <div class="words-remaining">{{ guessUsed }}/{{ totalRounds }}</div>
-      <p class="word-draw">{{ 'DRAW_LABEL' | translate }}</p>
-      @if (loading) {
-      <div>
-        <mat-spinner class="white-spinner" id="white"></mat-spinner>
-      </div>
-      } @if (word) {
-      <div>
-        <h1 class="word-to-guess header">{{ word | uppercase }}</h1>
-        @if (isMultiPlayer) {
-        <div class="timer header">
-          <span>{{ timeLeft }}</span>
+    <app-speech-bubble
+      [textColor]="CustomColorsIO.white"
+      [bubbleColor]="CustomColorsIO.pastelBlue"
+      [pointerSide]="PointerSide.Left"
+      [arrowAlignment]="ArrowAlignment.Top"
+      [bubbleSize]="'large'"
+    >
+      <ng-container slot="body-alt">
+        <div class="word-text">
+          <p class="word-draw">{{ 'DRAW_LABEL' | translate }}</p>
+          @if (loading) {
+            <div>
+              <mat-spinner class="white-spinner" id="white"></mat-spinner>
+            </div>
+          } @if (word) {
+            <div>
+              <h1 class="word-to-guess header">{{ word | uppercase }}</h1>
+              @if (isMultiPlayer) {
+                <div class="timer header">
+                  <span>{{ timeLeft }}</span>
+                </div>
+              }
+            </div>
+          }
         </div>
-        }
-      </div>
-      }
-    </div>
+      </ng-container>
+    </app-speech-bubble>
 
     <footer>
       <div class="footer-content">
@@ -43,26 +52,26 @@
             {{ 'DIFFICULTY' | translate }}:
             <span id="difficulty-text">
               @switch (difficulty) { @case (1) {
-              {{ 'EASY_BUTTON' | translate }}
+                {{ 'EASY_BUTTON' | translate }}
               } @case (2) {
-              {{ 'MEDIUM_BUTTON' | translate }}
+                {{ 'MEDIUM_BUTTON' | translate }}
               } @case (3) {
-              {{ 'HARD_BUTTON' | translate }}
+                {{ 'HARD_BUTTON' | translate }}
               } @default {
-              {{ 'EASY_BUTTON' | translate }}
+                {{ 'EASY_BUTTON' | translate }}
               } }
             </span>
           </p>
         </div>
         @if (!loading) {
-        <div class="button-container" tabindex="0" (keydown)="toDrawingBoard()" (click)="toDrawingBoard()">
-          <button class="next-page-button">
-            <div class="button-text">
-              {{ 'DRAW_BUTTON' | translate }}
-              <mat-icon class="button-icon play_arrow" aria-label="play_arrow">arrow_forward_ios</mat-icon>
-            </div>
-          </button>
-        </div>
+          <div class="button-container" tabindex="0" (keydown)="toDrawingBoard()" (click)="toDrawingBoard()">
+            <button class="next-page-button">
+              <div class="button-text">
+                {{ 'DRAW_BUTTON' | translate }}
+                <mat-icon class="button-icon play_arrow" aria-label="play_arrow">arrow_forward_ios</mat-icon>
+              </div>
+            </button>
+          </div>
         }
       </div>
     </footer>

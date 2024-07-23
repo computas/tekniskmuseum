@@ -16,6 +16,7 @@ import { Router } from '@angular/router';
 import { IAvatarComponent } from '@/assets/avatars/i-avatar/i-avatar.component';
 import { SpeechBubbleComponent } from '../speech-bubble/speech-bubble.component';
 import { CustomColorsIO } from '@/app/shared/customColors';
+import { PointerSide, ArrowAlignment } from '@/app/shared/models/interfaces';
 
 @Component({
   selector: 'app-game-word-to-draw',
@@ -51,6 +52,8 @@ export class GameWordToDrawComponent implements OnInit, OnDestroy {
   timerSubscription: Subscription | undefined;
 
   CustomColorsIO = CustomColorsIO;
+  PointerSide = PointerSide;
+  ArrowAlignment = ArrowAlignment;
 
   constructor(
     private gameConfigService: GameConfigService,
