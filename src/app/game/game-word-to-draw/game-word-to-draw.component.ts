@@ -15,6 +15,7 @@ import { GameStateService } from '../services/game-state-service';
 import { Router } from '@angular/router';
 import { IAvatarComponent } from '@/assets/avatars/i-avatar/i-avatar.component';
 import { SpeechBubbleComponent } from '../speech-bubble/speech-bubble.component';
+import { CustomColorsIO } from '@/app/shared/customColors';
 
 @Component({
   selector: 'app-game-word-to-draw',
@@ -48,6 +49,8 @@ export class GameWordToDrawComponent implements OnInit, OnDestroy {
 
   subscriptions = new Subscription();
   timerSubscription: Subscription | undefined;
+
+  CustomColorsIO = CustomColorsIO;
 
   constructor(
     private gameConfigService: GameConfigService,

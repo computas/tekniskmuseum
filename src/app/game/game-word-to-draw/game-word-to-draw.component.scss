@@ -74,6 +74,16 @@
   align-items: center;
 }
 
+.i-container {
+  position: absolute;
+  bottom: 20px;
+  left: 20px;
+}
+
+.i-avatar {
+  height: 150px;
+}
+
 .draw-word-button {
   background: linear-gradient(90deg, rgba(0, 194, 255, 1) 0%, rgba(253, 187, 45, 1) 100%);
   color: white;
