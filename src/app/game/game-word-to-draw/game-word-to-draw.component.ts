@@ -144,4 +144,11 @@ export class GameWordToDrawComponent implements OnInit, OnDestroy {
   ngOnDestroy() {
     this.subscriptions.unsubscribe();
   }
+
+  buttonStyle(): string {
+    if (!this.loading && !this.isMultiPlayer) {
+      return 'button-container';
+    }
+    return 'button-container disabled';
+  }
 }

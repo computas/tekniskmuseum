@@ -2,6 +2,15 @@
 
 .word-container-background {
   position: relative;
+}
+
+.word-container-background:before {
+  content: '';
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  position: absolute;
   background-image: url('../../../assets/background/io_rutemoenster-inverted.png');
   background-size: cover;
   background-color: black;
@@ -103,16 +112,6 @@
   font-size: 1.5rem;
 }
 
-@media (min-width: 600px) {
-  .next-page-button {
-    font-size: 36px;
-    height: 60px;
-    position: absolute;
-    bottom: 65px;
-    right: 65px;
-  }
-}
-
 .avatar {
   position: absolute;
   bottom: 0;
@@ -153,19 +152,17 @@ footer {
 
 .footer-content {
   display: flex;
-  justify-content: space-between;
   align-items: center;
+  justify-content: flex-end;
   width: 100%;
-  max-width: 1200px;
 }
 
 .button-container {
+  justify-self: end;
   padding: 0.7em;
   border-radius: 1em;
   background: linear-gradient(90deg, #151cdb 0%, #6b2eac 25%, #fd595d 50%, #bea97e 75%, #1bc0d2 100%);
-  display: flex;
-  justify-content: center;
-  align-items: center;
+  margin-right: 1rem;
 }
 
 .next-page-button {
@@ -177,6 +174,27 @@ footer {
   border-radius: 0.3em;
   letter-spacing: 0.05em;
 }
+.button-container:hover {
+  text-decoration: none;
+  color: #fff;
+}
+.button-container:before {
+  position: absolute;
+  content: '';
+  display: inline-block;
+  top: -180px;
+  left: 5px;
+  width: 30px;
+  height: 100%;
+  animation: shiny-btn1 3s ease-in-out infinite;
+}
+.button-container:hover {
+  opacity: 0.9;
+}
+.button-container:active {
+  box-shadow: 4px 4px 6px 0 rgba(255, 255, 255, 0.15), -4px -4px 6px 0 rgba(116, 125, 136, 0.2),
+    inset -4px -4px 6px 0 rgba(255, 255, 255, 0.2), inset 4px 4px 6px 0 rgba(0, 0, 0, 0.2);
+}
 
 .button-text {
   display: flex;
@@ -184,23 +202,28 @@ footer {
   gap: 0.5em;
 }
 
+.disabled {
+  opacity: 0;
+  cursor: not-allowed;
+}
+
 #header {
   display: flex;
-  flex-direction: row;
   align-items: center;
   gap: 1rem;
   width: 100%;
   margin-bottom: 1rem;
   justify-content: center;
+  justify-self: center;
 }
 
-#header p {
-  position: relative;
-  color: var(--White, #fbfbfb);
+#difficulty {
+  position: absolute;
+  left: 50%;
+  transform: translate(-50%);
   text-align: center;
   font-family: AeonikRegular;
-  font-size: var(--resultFontSizeVerySmall);
-  margin-bottom: 0;
+  font-size: var(--fontSizeSmall);
 }
 
 #difficulty-text {
@@ -211,6 +234,6 @@ footer {
 @media only screen and (max-width: 600px) {
   .header {
     font-size: 3em;
-    margin-top: 40px;
+    margin-top: 5px;
   }
 }
