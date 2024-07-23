@@ -6,8 +6,12 @@
   </div>
   <div class="score-and-time-container">
     @if (hasCorrectGuess) {
-    <p class="seconds-used">{{ secondsUsed }}s</p>
+    <p class="seconds-used">
+      {{ 'GUESSED_AT' | translate }} {{ secondsUsed }} {{ 'TIME_ABBREVIATION_SECONDS' | translate }}
+    </p>
+    } @else {
+    <p class="seconds-used">{{ 'TIME_OUT' | translate }}</p>
     }
-    <p [class]="['round-score-text', greenScoreStyle()]">+{{ roundScore }}p</p>
+    <p [class]="['round-score-text', pointsColorStyle()]">{{ getRoundScoreText() }}p</p>
   </div>
 </div>

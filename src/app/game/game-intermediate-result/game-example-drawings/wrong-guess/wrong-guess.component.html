@@ -1,0 +1,48 @@
+<div class="drawing-container">
+  @if(guessedDrawings.length !== 0){
+  <app-speech-bubble
+    class="speech-bubble"
+    class="left-bubble"
+    [pointerSide]="PointerSide.Right"
+    [arrowAlignment]="ArrowAlignment.Center"
+    [isFlipped]="true"
+    [textColor]="CustomColorsIO.white"
+    [bubbleColor]="CustomColorsIO.oColor"
+    [bubbleSize]="'small'"
+    [hidePointer]="true"
+  >
+    <p slot="body-alt" class="speech-bubble-text">
+      {{ 'EXAMPLE_DRAWINGS_FAILED_B1' | translate }}
+      <span class="label">{{ guess }}</span>
+    </p>
+    <ul slot="body-alt" class="example-drawings-list">
+      @for (guessedDrawing of guessedDrawings; track guessedDrawing) {
+      <li class="example-drawing-li">
+        <img class="example-drawing-img" [src]="guessedDrawing" alt="example drawing of {{ guess }}" />
+      </li>
+      }
+    </ul>
+  </app-speech-bubble>
+  }
+  <app-speech-bubble
+    class="speech-bubble"
+    [pointerSide]="PointerSide.Right"
+    [arrowAlignment]="ArrowAlignment.Top"
+    [isFlipped]="true"
+    [textColor]="CustomColorsIO.white"
+    [bubbleColor]="CustomColorsIO.oColor"
+    [bubbleSize]="'small'"
+  >
+    <p slot="body-alt" class="speech-bubble-text">
+      {{ 'EXAMPLE_DRAWINGS_FAILED_B2' | translate }} <span class="label">{{ label }}</span>
+    </p>
+    <ul slot="body-alt" class="example-drawings-list">
+      @for (exampleDrawing of exampleDrawings; track exampleDrawing) {
+      <li class="example-drawing-li">
+        <img class="example-drawing-img" [src]="exampleDrawing" alt="example drawing of {{ label }}" />
+      </li>
+      }
+    </ul>
+  </app-speech-bubble>
+  <app-o-avatar class="o-avatar" [height]="150" [width]="150" [color]="CustomColorsIO.white"></app-o-avatar>
+</div>
