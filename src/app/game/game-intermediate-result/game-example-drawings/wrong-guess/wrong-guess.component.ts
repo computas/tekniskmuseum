@@ -1,13 +1,13 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { SpeechBubbleComponent } from '@/app/game/speech-bubble/speech-bubble.component';
 import { OAvatarComponent } from '@/assets/avatars/o-avatar/o-avatar.component';
-import { ArrowAlignment, PLAYERNR, PointerSide } from '@/app/shared/models/interfaces';
+import { ArrowAlignment, PointerSide } from '@/app/shared/models/interfaces';
 import { CustomColorsIO } from '@/app/shared/customColors';
 import { TranslatePipe } from '@/app/core/translation.pipe';
 import { ExampleDrawingService } from '@/app/game/services/example-drawing.service';
 import { DrawingService } from '@/app/game/services/drawing.service';
 import { TranslationService } from '@/app/core/translation.service';
-import { map, Observable, Subscription, take } from 'rxjs';
+import { map, Subscription, take } from 'rxjs';
 import { GameStateService } from '@/app/game/services/game-state-service';
 import { MultiplayerService } from '@/app/game/services/multiplayer.service';
 

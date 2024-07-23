@@ -1,14 +1,7 @@
-import { Component, OnInit, OnDestroy } from '@angular/core';
-import { ExampleDrawingService } from '../../services/example-drawing.service';
+import { Component, OnInit } from '@angular/core';
 import { SpeechBubbleComponent } from '../../speech-bubble/speech-bubble.component';
-import { ArrowAlignment, PointerSide, SupportedLanguages } from '@/app/shared/models/interfaces';
-import { CustomColorsIO } from '@/app/shared/customColors';
 import { TranslatePipe } from '@/app/core/translation.pipe';
 import { DrawingService } from '../../services/drawing.service';
-import { TranslationService } from '@/app/core/translation.service';
-import { Subscription } from 'rxjs';
-import { GameStateService } from '../../services/game-state-service';
-import { MultiplayerService } from '../../services/multiplayer.service';
 import { OAvatarComponent } from '@/assets/avatars/o-avatar/o-avatar.component';
 import { CorrectGuessComponent } from './correct-guess/correct-guess.component';
 import { WrongGuessComponent } from './wrong-guess/wrong-guess.component';
@@ -21,7 +14,7 @@ import { WrongGuessComponent } from './wrong-guess/wrong-guess.component';
   styleUrl: './game-example-drawings.component.scss',
 })
 export class GameExampleDrawingsComponent implements OnInit {
-  hasCorrectGuess: boolean = false;
+  hasCorrectGuess = false;
   constructor(private drawingService: DrawingService) {}
   ngOnInit(): void {
     this.hasCorrectGuess = this.drawingService.lastResult.hasWon;

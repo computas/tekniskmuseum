@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { WebSocketService } from './web-socket.service';
 import { BehaviorSubject, Observable, ReplaySubject } from 'rxjs';
-import { first, map, take, tap } from 'rxjs/operators';
+import { map, take, tap } from 'rxjs/operators';
 import { SocketEndpoints } from '@/app/shared/models/websocketEndpoints';
 import { PairingService } from './pairing.service';
 import {
@@ -152,7 +152,7 @@ export class MultiplayerService {
   }
 
   getExampleDrawings(imagesPerPlayer: number): string[] {
-    let firstHalfEnding = imagesPerPlayer;
+    const firstHalfEnding = imagesPerPlayer;
     if (this.stateInfo.player_nr === PLAYERNR.player1) {
       return this.exampleDrawings.slice(0, firstHalfEnding);
     }
