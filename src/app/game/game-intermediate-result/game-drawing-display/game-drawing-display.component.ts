@@ -12,7 +12,7 @@ import { DrawingService } from '../../services/drawing.service';
 export class GameDrawingDisplayComponent implements OnInit {
   @Input() hasCorrectGuess: boolean | undefined;
   @Input() drawingURL: string | undefined;
-  @Input() roundScore: number | undefined;
+  @Input() roundScore!: number;
   secondsUsed = 0;
 
   constructor(private drawingService: DrawingService) {}
@@ -27,6 +27,13 @@ export class GameDrawingDisplayComponent implements OnInit {
   correctClassName = 'correct';
   incorrectClassName = 'incorrect';
 
+  getRoundScoreText(): string {
+    if (this.roundScore > 0) {
+      return `+${this.roundScore}`;
+    }
+    return this.roundScore.toString();
+  }
+
   getFeedbackStyle(): string {
     switch (this.hasCorrectGuess) {
       case this.correctGuess:
@@ -38,11 +45,11 @@ export class GameDrawingDisplayComponent implements OnInit {
     }
   }
 
-  greenScoreStyle(): string {
+  pointsColorStyle(): string {
     // returns a css style class on correct guess
     if (this.hasCorrectGuess) {
       return 'green-text';
     }
-    return '';
+    return 'red-text';
   }
 }

@@ -82,5 +82,9 @@
 
   "OF": "av",
   "EXAMPLE_DRAWINGS_FAILED_B1": "Jeg trodde du tegnet",
-  "EXAMPLE_DRAWINGS_FAILED_B2": "For jeg har lært at dette er"
+  "EXAMPLE_DRAWINGS_FAILED_B2": "For jeg har lært at dette er",
+
+  "GUESSED_AT": "Gjettet på",
+  "TIME_ABBREVIATION_SECONDS": "sek",
+  "TIME_OUT": "Tiden gikk ut.."
 }
