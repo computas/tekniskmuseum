@@ -1,4 +1,13 @@
-<div [class]="['user-drawing-board', getFeedbackStyle()]">
-  <img class="user-drawing" [src]="drawingURL" alt="the user's drawing" />
+<div class="container">
+  <div [class]="['user-drawing-board', getFeedbackStyle()]">
+    <div class="frame">
+      <img class="user-drawing" [src]="drawingURL" alt="the user's drawing" />
+    </div>
+  </div>
+  <div class="score-and-time-container">
+    @if (hasCorrectGuess) {
+    <p class="seconds-used">{{ secondsUsed }}s</p>
+    }
+    <p [class]="['round-score-text', greenScoreStyle()]">+{{ roundScore }}p</p>
+  </div>
 </div>
-<p class="round-score-text">+ {{ roundScore }} {{ 'POINTS' | translate }}</p>

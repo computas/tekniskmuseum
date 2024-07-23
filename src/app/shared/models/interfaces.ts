@@ -22,10 +22,15 @@ export enum GAMESTATE {
   showWord = 'SHOWWORD',
 }
 
+export enum PLAYERNR {
+  player1 = 'player_1',
+  player2 = 'player_2',
+}
+
 export type Difficulty = 1 | 2 | 3 | 4; // 4 for multiplayer
 
 export interface GameState {
-  player_nr: string | undefined;
+  player_nr: PLAYERNR | undefined;
   player_id: string | undefined;
   game_id: string | undefined;
   ready: boolean | undefined;
@@ -84,6 +89,7 @@ export interface GameLevelConfig {
   minimumTimeBetweenClassify: number;
   minimumDrawnThreshold: number;
   pixelsPerClassify: number;
+  intervalDuration: number; // How often to decrement score
 }
 export interface ImageScoreConfig {
   maxScore: number;

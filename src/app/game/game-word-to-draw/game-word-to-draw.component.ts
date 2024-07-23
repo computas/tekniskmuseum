@@ -12,6 +12,7 @@ import { TranslationService } from '@/app/core/translation.service';
 import { TranslatePipe } from '@/app/core/translation.pipe';
 import { GAMESTATE } from '@/app/shared/models/interfaces';
 import { GameStateService } from '../services/game-state-service';
+import { ExampleDrawingService } from '../services/example-drawing.service';
 import { Router } from '@angular/router';
 import { IAvatarComponent } from '@/assets/avatars/i-avatar/i-avatar.component';
 import { SpeechBubbleComponent } from '../speech-bubble/speech-bubble.component';
@@ -46,7 +47,7 @@ export class GameWordToDrawComponent implements OnInit, OnDestroy {
   loading = true;
   difficulty = 0;
 
-  word = '';
+  label = '';
 
   subscriptions = new Subscription();
   timerSubscription: Subscription | undefined;
@@ -61,6 +62,7 @@ export class GameWordToDrawComponent implements OnInit, OnDestroy {
     private drawingService: DrawingService,
     private multiplayerService: MultiplayerService,
     private translationService: TranslationService,
+    private exampleDrawingService: ExampleDrawingService,
     private router: Router
   ) {}
 
@@ -75,7 +77,7 @@ export class GameWordToDrawComponent implements OnInit, OnDestroy {
       if (this.drawingService.gameHasStarted) {
         this.subscriptions.add(
           this.drawingService.getLabel().subscribe((res) => {
-            this.word = res.label;
+            this.label = res.label;
             this.loading = false;
           })
         );
@@ -88,7 +90,7 @@ export class GameWordToDrawComponent implements OnInit, OnDestroy {
         this.subscriptions.add(
           this.drawingService.startGame().subscribe(() => {
             this.loading = false;
-            this.word = this.drawingService.label;
+            this.label = this.drawingService.label;
             this.drawingService.gameHasStarted = true;
           })
         );
@@ -110,7 +112,7 @@ export class GameWordToDrawComponent implements OnInit, OnDestroy {
               ...this.multiplayerService.stateInfo,
               label,
             };
-            this.word = label;
+            this.label = label;
             this.loading = false;
             this.subscriptions.add(this.startTimer().subscribe());
           }
@@ -120,6 +122,12 @@ export class GameWordToDrawComponent implements OnInit, OnDestroy {
   }
 
   toDrawingBoard() {
+    if (this.gameStateService.isSingleplayer()) {
+      this.exampleDrawingService.preLoadExampleDrawings(3, this.label, this.translationService.getCurrentLang());
+    } else {
+      // 6 images because we want the players to have different examples: 2 players x 3 imgs = 6 imgs
+      this.multiplayerService.preLoadExampleDrawings(6, this.label, this.translationService.getCurrentLang());
+    }
     this.gameStateService.goToPage(GAMESTATE.drawingBoard);
   }
 

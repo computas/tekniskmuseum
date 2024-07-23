@@ -29,6 +29,7 @@ export class DrawingService {
   gameHasStarted = false;
   classificationDone = false;
   guess = '';
+  secondsUsedOnLastRound = 0;
 
   private readonly _guessUsed = new BehaviorSubject<number>(1);
   private readonly _gameOver = new BehaviorSubject<boolean>(false);
@@ -177,6 +178,7 @@ export class DrawingService {
     this.guessUsed = 1;
     this.gameOver = false;
     this.guessDone = false;
+    this.hasAddedSingleplayerResult = false;
     this.results = [];
   }
 
@@ -218,5 +220,17 @@ export class DrawingService {
 
   set gameOver(val: boolean) {
     this._gameOver.next(val);
+  }
+
+  resetSecondsUsed() {
+    this.setSecondsUsed(0);
+  }
+
+  getSecondsUsed(): number {
+    return this.secondsUsedOnLastRound;
+  }
+
+  setSecondsUsed(time: number) {
+    this.secondsUsedOnLastRound = time;
   }
 }
