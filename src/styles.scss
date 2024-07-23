@@ -76,3 +76,95 @@ button,
 .avatar-name {
   font-family: ICTHofmannRegular;
 }
+
+
+@mixin button($gradient: false){
+  height: 4.5rem;
+  border-radius: 5rem;
+  background: $button_background_color;
+  color: $button_content_color;
+  box-shadow: 0 8px 16px 0 rgba(0, 0, 0, 0.1), 0 6px 20px 0 rgba(0, 0, 0, 0.15);
+
+  font-size: var(--fontSizeSmall);
+  min-width: 16rem;
+  max-width: 20rem;
+
+  @if $gradient{
+    background: linear-gradient(90deg, rgba(0, 194, 255, 1) 0%, rgba(253, 187, 45, 1) 100%);
+    color: white;
+    border-radius: 50px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+  }
+}
+
+@mixin icon($gradient: false, $back: false){
+  min-height: var(--fontSizeMedium);
+  max-height: var(--fontSizeMedium);
+  min-width: var(--fontSizeLarge);
+  max-width: var(--fontSizeLarge);
+
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+
+  color: $button_content_color;
+
+  @if $gradient {
+    font-size: var(--fontSizeMedium);
+    background: linear-gradient(to top, #2514d1 0%, #f14a64 50%, #de7d6e 90%);
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
+  }
+  @if $back{
+    margin-top: 1rem;
+  }
+}
+
+.button-text {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  gap: 1rem;
+}
+
+.button-icon {
+  @include icon;
+}
+
+.back-button-icon{
+  @include icon(false, true)
+}
+
+.button-icon-gradient {
+  @include icon(true);
+}
+
+.two-button-container {
+  margin-top: 0;
+  display: inline-flex;
+  align-items: center;
+  gap: 3rem;
+  margin-bottom: 50px;
+}
+
+.back-button {
+  @include button;
+
+  font-size: var(--fontSizeMedium);
+  height: 3.5rem;
+}
+
+.select-mode-button {
+  @include button;
+
+  font-size: var(--fontSizeMedium);
+  background: $button_background_color;
+}
+
+.forward-action-button {
+  @include button(true);
+}

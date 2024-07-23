@@ -2,9 +2,10 @@
   <div id="lobbyContent">
     <div id="topContent">
       <img class="logo" src="assets/logo/IO-logo-inverted_transparent-bg.png" alt="logo" />
-      <button mat-raised-button id="homeButton" routerLink="/welcome" routerLinkActive="active">
-        <span class="buttonText">
-          <mat-icon class="buttonIcon" aria-label="Home icon" alt="Go back button">home</mat-icon>
+      <button class="back-button" routerLink="/welcome" routerLinkActive="active" alt="Go back button" aria-label="Return button">
+        <span class="button-text">
+          <!-- <mat-icon class="button-icon" aria-label="Example home icon">arrow_back_ios</mat-icon> -->
+          <img class="back-button-icon" src="../assets/icons/arrow4-svgrepo-com.svg" />
           {{ 'BACK_BUTTON' | translate }}
         </span>
       </button>

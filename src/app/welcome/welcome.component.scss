@@ -130,39 +130,3 @@ header {
   line-height: 38px;
   font-family: AeonikRegular;
 }
-
-.button-container {
-  margin-top: 0;
-  display: inline-flex;
-  align-items: center;
-  gap: 75px;
-  margin-bottom: 50px;
-}
-
-.play-game-button {
-  box-shadow: 0 8px 16px 0 rgba(0, 0, 0, 0.1), 0 6px 20px 0 rgba(0, 0, 0, 0.15);
-  font-size: 36px;
-  border-radius: 50px;
-  height: 70px;
-  margin-top: 10px;
-  min-width: 200px;
-  max-width: 400px;
-  background: $button_background_color;
-}
-
-.button-text {
-  display: flex;
-  flex-direction: row;
-  justify-content: center;
-  align-items: center;
-  color: $button_content_color;
-}
-.button-icon {
-  margin-right: 16px;
-  font-size: 40px;
-  background: linear-gradient(to top, #2514d1 0%, #f14a64 50%, #de7d6e 90%);
-  background-clip: text;
-  -webkit-text-fill-color: transparent;
-  height: 100%;
-  width: 40px;
-}

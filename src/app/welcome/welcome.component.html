@@ -102,31 +102,29 @@
         </div>
       </div>
     </div>
-    <div class="button-container" [@makeVisible]="stateButtons">
+    <div class="two-button-container" [@makeVisible]="stateButtons">
       <button
-        mat-raised-button
-        [disabled]="!buttonIsVisible"
+        [disabled]="!buttonIsVisible"s
         routerLink="/playgame/singleplayer"
         routerLinkActive="active"
         (click)="setSingleplayer()"
-        class="play-game-button"
+        class="select-mode-button"
       >
         <div class="button-text">
-          <mat-icon class="button-icon" aria-label="player one icon">person</mat-icon
-          >{{ 'PLAYER_MODE_SINGLE' | translate }}
+          <mat-icon class="button-icon-gradient" aria-label="player one icon">person</mat-icon>
+          {{ 'PLAYER_MODE_SINGLE' | translate }}
         </div>
       </button>
       <button
-        mat-raised-button
         [disabled]="!buttonIsVisible"
         routerLink="/playgame/multiplayer"
         routerLinkActive="active"
         (click)="setMultiplayer()"
-        class="play-game-button"
+        class="select-mode-button"
       >
         <div class="button-text">
-          <mat-icon class="button-icon" aria-label="player two icon">group</mat-icon
-          >{{ 'PLAYER_MODE_MULTI' | translate }}
+          <mat-icon class="button-icon-gradient" aria-label="player two icon">group</mat-icon>
+          {{ 'PLAYER_MODE_MULTI' | translate }}
         </div>
       </button>
     </div>
