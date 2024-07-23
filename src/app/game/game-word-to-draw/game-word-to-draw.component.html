@@ -34,9 +34,9 @@
             <div>
               <mat-spinner class="white-spinner" id="white"></mat-spinner>
             </div>
-            } @if (word) {
+            } @if (label) {
             <div>
-              <h1 class="word-to-guess header">{{ word | uppercase }}</h1>
+              <h1 class="word-to-guess header">{{ label | uppercase }}</h1>
               @if (isMultiPlayer) {
               <div class="timer header">
                 <span>{{ timeLeft }}</span>
