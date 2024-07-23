@@ -68,6 +68,7 @@ export class GameDrawComponent implements OnInit, OnDestroy {
   scoreValues = this.gameConfigService.getScoreSettings();
   score = this.scoreValues.maxScore;
   scoreDecrement = this.scoreValues.scoreDecrement;
+  gameConfigParams = this.gameConfigService.getConfig;
 
   drawnPixels = 0;
   drawnPixelsAtLastGuess = 0;
@@ -273,7 +274,7 @@ export class GameDrawComponent implements OnInit, OnDestroy {
   private createDrawingTimer() {
     return new Observable((observer) => {
       let color = 'red';
-      const intervalDuration = 100;
+      const intervalDuration = this.gameConfigParams.intervalDuration;
 
       const sub = interval(intervalDuration)
         .pipe(take(10 * this.config.secondsPerRound))
@@ -294,7 +295,8 @@ export class GameDrawComponent implements OnInit, OnDestroy {
             }
             if (this.timeLeft <= 5) {
               this.countDown.nativeElement.style.color = color;
-              this.timerIcon.nativeElement.style.color = color;
+              this.timerIcon.nativeElement.style.fill = color;
+              this.timerIcon.nativeElement.style.stroke = color;
               color = color === 'white' ? 'red' : 'white';
               this.soundService.playTickSound();
               this.soundService.playTick = true;

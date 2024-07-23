@@ -1,5 +1,11 @@
 @import '../../../variables.scss';
 
+* {
+  --resultFontSizeVerySmall: 24px;
+  --resultFontSizeMediumSmall: 32px;
+  --resultFontSizeLarge: 44px;
+}
+
 .result-container-background {
   position: relative;
   display: flex;
@@ -25,44 +31,128 @@
   gap: 0.5rem;
   margin: auto 0;
 }
+
 .logo {
   position: absolute;
   top: 0;
-  left: 0;
-  margin: 35px;
+  right: 0;
+  margin: 20px;
   height: 44px;
   width: 70px;
+  cursor: pointer;
+
+  img {
+    width: 100%;
+  }
 }
+
+#header {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  gap: 1rem;
+  width: 100%;
+  margin-bottom: 1rem;
+}
+
+#header p {
+  position: relative;
+  margin-right: auto;
+  left: 2rem;
+  color: var(--White, #fbfbfb);
+  text-align: center;
+  font-family: AeonikRegular;
+  font-size: var(--resultFontSizeVerySmall);
+  margin-bottom: 0;
+}
+
+#highscore-section {
+  position: absolute;
+  display: flex;
+  flex-direction: row;
+  flex-grow: 1;
+  margin: 0 auto;
+  justify-content: center;
+  left: 50%;
+  transform: translateX(-50%);
+}
+
+#header-text {
+  color: $text_primary_color;
+  font-family: 'AeonikRegular';
+  font-size: var(--fontSizeSmall);
+  margin-bottom: 0;
+}
+
+#difficulty-text {
+  font-family: AeonikMedium;
+  font-style: italic;
+}
+
+#highscore-points {
+  color: #fbfbfb;
+  font-family: AeonikBold;
+  font-size: var(--fontSizeSmall);
+  font-style: italic;
+  line-height: normal;
+}
+
+#highscore-number {
+  text-align: center;
+  -webkit-text-stroke-width: 2;
+  -webkit-text-stroke-color: #000;
+  font-family: AeonikBold;
+  font-size: var(--resultFontSizeLarge);
+  font-style: italic;
+  line-height: normal;
+  background: linear-gradient(90deg, #b06ef5 0%, #ff8386 0%, #e8d5b0 66.5%);
+  background-clip: text;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  padding: 0 0.5rem;
+}
+
+#i-text-box-container {
+  display: flex;
+  gap: 2rem;
+  margin: 0 auto;
+  margin-bottom: 1.2rem;
+}
+
 #result-card-container {
   display: flex;
-  gap: 5rem;
+  gap: 2rem;
   margin: 0 auto;
 }
 
-#not-highscore-section {
-  display: flex;
-  flex-direction: row;
+app-speech-bubble h1 {
+  font-size: var(--fontSizeMedium);
+  margin-bottom: 0.8rem;
+  color: var(--I-text-color, #fbfbfb);
+  font-family: AeonikRegular;
+  line-height: 40px;
 }
 
-#highscore-text {
-  color: $text_primary_color;
-  font-family: 'AeonikRegular';
-  font-size: 24px;
-}
-#highscore-number {
-  color: $text_secondary_color;
-  font-family: 'AeonikBlack';
-  font-size: 36px;
-  font-style: italic;
-  margin-left: 10px;
+app-speech-bubble p {
+  font-size: var(--resultFontSizeVerySmall);
+  font-family: AeonikLight;
 }
 
-.btn {
-  display: inline-flex;
-  box-shadow: 0 8px 16px 0 rgba(0, 0, 0, 0.1), 0 6px 20px 0 rgba(0, 0, 0, 0.15);
-  border-radius: 50px;
-  margin-top: 10px;
-  padding: 2rem 3rem;
+#points {
+  color: var(--White, #fbfbfb);
+  font-family: AeonikBold;
+  font-size: var(--resultFontSizeLarge);
+  line-height: 40px;
+}
+
+#result-card {
+  background: rgba(12, 14, 43, 0.38);
+  border-radius: 20px;
+}
+
+.game-result-img {
+  width: 19rem;
+  height: 14rem;
 }
 
 .card-won {
@@ -78,25 +168,60 @@
   display: flex;
   justify-content: space-between;
   align-items: center;
-
-  font-style: normal;
-  font-weight: 500;
-  font-size: 30px;
-  line-height: 43px;
+  padding: 0 0.5rem;
+  margin-bottom: 0.4rem;
 }
 
-.icon {
-  margin-right: 16px;
-  font-size: 36px;
-  background: linear-gradient(to top, #2514d1 0%, #f14a64 50%, #de7d6e 90%);
-  background-clip: text;
-  -webkit-text-fill-color: transparent;
-  height: 100%;
-  width: 40px;
+.score {
+  color: var(--White, #fbfbfb);
+  font-family: AeonikMedium;
+  font-size: 24px;
+  font-style: italic;
+  line-height: normal;
 }
-.game-result-img {
-  width: 16rem;
-  height: 12rem;
+
+.loss {
+  color: #de1f1f;
+}
+
+.win {
+  color: #68d466;
+}
+
+#o-text-box-container {
+  display: flex;
+  flex-direction: row;
+  margin: 0 auto;
+  gap: 2rem;
+  margin-bottom: 1.5rem;
+  justify-content: flex-end;
+  width: 100%;
+}
+
+#o-avatar {
+  font-family: ICTHofmannRegular;
+}
+
+app-o-avatar {
+  position: absolute;
+  right: -5rem;
+}
+
+app-i-avatar {
+  position: absolute;
+  left: -4rem;
+}
+
+#o-speech-bubble {
+  position: relative;
+  width: auto;
+  right: 5rem;
+}
+
+#o-speech-bubble h1 {
+  font-size: var(--resultFontSizeMediumSmall);
+  font-family: AeonikRegular;
+  margin: 0.5rem 0;
 }
 
 .result-header-multi {
@@ -106,29 +231,16 @@
   margin: 0;
   padding: 0 24px;
 }
-
-.score {
-  color: var(--White, #fbfbfb);
-  font-family: AeonikLight;
-  font-size: 24px;
-  font-style: italic;
-  font-weight: 300;
-  line-height: normal;
-}
 .result-word {
   color: var(--White, #fbfbfb);
   text-align: center;
-  font-family: AeonikLight;
-  font-size: 24px;
-  font-style: normal;
-  font-weight: 700;
-  line-height: normal;
+  font-family: AeonikRegular;
+  font-size: var(--resultFontSizeVerySmall);
 }
 .result-section {
   align-items: center;
   display: flex;
   flex-direction: column;
-  margin: 1rem 0;
 }
 @media (max-width: 600px) {
   #result-header {
@@ -139,19 +251,6 @@
   }
 }
 
-#i-text-box-container {
-  display: flex;
-  gap: 2rem;
-  margin: 0 auto;
-}
-
-#o-text-box-container {
-  display: flex;
-  flex-direction: row;
-  margin: 0 auto;
-  gap: 2rem;
-}
-
 #summary-buttons-container {
   display: flex;
   flex-direction: row;
@@ -159,43 +258,45 @@
   margin: 0 auto;
 }
 
-#text-box-points {
-  color: $text_secondary_color;
-  font-style: italic;
-  font-weight: 400;
+.btn {
+  display: flex;
+  padding: 0.625rem 2.1875rem;
+  justify-content: center;
+  align-items: center;
+  gap: 0.3125rem;
+  border-radius: 35px;
+  border: 5px solid var(--Icon-gradient, #ebaea5);
+  background: var(--White, #fbfbfb);
+  box-shadow: 0px 4px 4px 0px rgba(0, 0, 0, 0.25);
+}
+
+.btn:hover {
+  opacity: 0.95;
+}
+.btn:active {
+  box-shadow: 4px 4px 6px 0 rgba(255, 255, 255, 0.15), -4px -4px 6px 0 rgba(116, 125, 136, 0.2),
+    inset -4px -4px 6px 0 rgba(255, 255, 255, 0.2), inset 4px 4px 6px 0 rgba(0, 0, 0, 0.2);
+}
+
+.btn-secondary {
+  border-radius: 2.1875rem;
+  border: 3px solid rgba(239, 239, 239, 0.54);
+
+  background: var(--Black, #030303);
+  box-shadow: 0px 4px 4px 0px rgba(0, 0, 0, 0.25);
 }
 
 .btn-text {
   display: flex;
-  flex-direction: row;
+  padding: 0px 5px;
   justify-content: center;
   align-items: center;
-  font-size: 28px;
-  font-style: normal;
-  font-weight: 700;
-  line-height: normal;
-  font-family: AeonikLight;
+  gap: 10px;
+  color: var(--Cobalt-blue, #151cdb);
+  font-family: AeonikRegular;
+  font-size: var(--resultFontSizeMediumSmall);
 }
 
-#o-avatar {
-  background: var(--Icon-gradient-2, linear-gradient(180deg, #fd595d 0%, #e4a969 50%, #1bc0d2 100%));
-  background-clip: text;
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-  font-family: ICTHofmannRegular;
-  font-size: 48px;
-  font-style: normal;
-  font-weight: 400;
-  line-height: normal;
-}
-
-app-speech-bubble h1 {
-  font-size: 28px;
-  font-family: AeonikBold;
-  margin-bottom: 4px;
-}
-
-app-speech-bubble p {
-  font-size: 24px;
-  font-family: AeonikLight;
+.btn-text-secondary {
+  color: var(--White, #fbfbfb);
 }

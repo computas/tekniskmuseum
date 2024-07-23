@@ -91,6 +91,7 @@ export interface GameLevelConfig {
   minimumTimeBetweenClassify: number;
   minimumDrawnThreshold: number;
   pixelsPerClassify: number;
+  intervalDuration: number; // How often to decrement score
 }
 export interface ImageScoreConfig {
   maxScore: number;
