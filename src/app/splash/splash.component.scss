@@ -17,9 +17,8 @@
 
 .logo {
   position: absolute;
-  top: 0;
-  left: 0;
-  margin: 20px;
+  top: 2rem;
+  right: 1.5rem;
   height: 44px;
   width: 70px;
   cursor: pointer;
@@ -41,6 +40,7 @@
   height: auto;
   margin-top: 20px;
   margin-bottom: 130px;
+  max-width: 60%;
 }
 
 @keyframes pulse {
@@ -62,7 +62,6 @@
   font-size: 25px;
   line-height: 25px;
   text-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
-  //font-style: italic;
   margin-top: 20px;
   margin-bottom: 60px;
   position: absolute;
@@ -77,33 +76,5 @@
   @media (min-width: 1024px) {
     font-size: 50px;
     line-height: 50px;
-  }
-}
-
-@media (min-width: 600px) {
-  .container-background {
-    padding: 40px;
-  }
-
-  .logo {
-    margin: 35px;
-  }
-
-  .teaching-image {
-    max-width: 70%;
-  }
-}
-
-@media (min-width: 1024px) {
-  .container-background {
-    padding: 60px;
-  }
-
-  .logo {
-    margin: 35px;
-  }
-
-  .teaching-image {
-    max-width: 60%;
   }
 }
