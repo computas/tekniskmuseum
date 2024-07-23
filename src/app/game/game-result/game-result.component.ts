@@ -116,6 +116,7 @@ export class GameResultComponent implements OnInit, OnDestroy {
         });
     } else {
       this.score = this.drawingService.totalScore;
+      this.difficulty = this.gameStateService.getDifficulty();
       this.postHighscoreSubscription = this.drawingService.postScore().subscribe();
       this.getHighscoreSubscription = this.drawingService.getHighscore().subscribe({
         next: (data) => {

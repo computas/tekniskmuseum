@@ -32,7 +32,7 @@
 }
 
 .avatar-feedback {
-  grid-column: 2 / 8;
+  grid-column: 1 / 8;
   justify-self: start;
 }
 
@@ -58,6 +58,7 @@
 
 .example-drawings {
   margin-top: 2em;
+  margin-right: 3em;
   grid-row: 3 / -1;
-  grid-column: 1 / -2;
+  grid-column: 1 / -1;
 }
