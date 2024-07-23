@@ -24,6 +24,7 @@
   "PLAYER_MODE_SINGLE": "1 player",
   "PLAYER_MODE_MULTI": "2 players",
   "WAITING_FOR_PLAYER": "Waiting",
+  "WAITING_FOR_OPPONENT": "Waiting for opponent",
   "ADMIN_ARIA_LABEL": "Go to admin page",
 
   "HOW_TO_PLAY_SINGLE": "How to play:",
