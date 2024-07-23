@@ -1,40 +1,66 @@
 <div class="word-container-background">
   <div class="word-container">
-    <div id="topContent">
-      <button class="home-btn" (click)="goToWelcomePage()">
-        <img class="home-icon" src="assets/house.svg" alt="a house icon with round edges" />
-        {{ 'END_GAME_BUTTON' | translate }}
-      </button>
+    <button class="home-btn" (click)="goToWelcomePage()">
+      <img class="home-icon" src="../../../../assets/house.svg" alt="a house icon with round edges" />
+      {{ 'END_GAME_BUTTON' | translate }}
+    </button>
+
+    <div class="logo-container">
       <img class="logo" src="assets/logo/IO-logo-inverted_transparent-bg.png" alt="logo" />
     </div>
-    <div class="round-info">{{ 'ROUND_LABEL' | translate }} {{ currentRound }} av {{ totalRounds }}</div>
-    <div class="speech-bubble-container">
-      <app-speech-bubble
-        class="speech-bubble"
-        [textColor]="CustomColorsIO.white"
-        [bubbleColor]="CustomColorsIO.indigo"
-        [pointerSide]="PointerSide.Left"
-        [arrowAlignment]="ArrowAlignment.Bottom"
-        [bubbleSize]="'large'"
-      >
-        <ng-container slot="body-alt">
-          <p class="word-draw">{{ 'DRAW_LABEL' | translate }}</p>
-          @if (loading) {
-            <mat-spinner class="white-spinner" id="white"></mat-spinner>
-          } @else {
-            <h1 class="word-to-guess">{{ word | uppercase }}</h1>
-          }
-        </ng-container>
-      </app-speech-bubble>
-    </div>
-    <div class="word-footer">
-      <app-i-avatar class="avatar" [color]="CustomColorsIO.white" [width]="39" [height]="192"></app-i-avatar>
-      @if (!loading) {
-        <button mat-raised-button class="draw-word-button" (click)="toDrawingBoard()">
-          {{ 'DRAW_BUTTON' | translate }}
-          <mat-icon class="button-icon play_arrow" aria-label="play_arrow">arrow_forward_ios</mat-icon>
-        </button>
+
+    @if (isMultiPlayer) {
+    <h1 class="playernr">{{ 'PLAYER_LABEL' | translate }} {{ playernr }}</h1>
+    }
+
+    <div class="word-text">
+      <div class="words-remaining">{{ guessUsed }}/{{ totalRounds }}</div>
+      <p class="word-draw">{{ 'DRAW_LABEL' | translate }}</p>
+      @if (loading) {
+      <div>
+        <mat-spinner class="white-spinner" id="white"></mat-spinner>
+      </div>
+      } @if (word) {
+      <div>
+        <h1 class="word-to-guess header">{{ word | uppercase }}</h1>
+        @if (isMultiPlayer) {
+        <div class="timer header">
+          <span>{{ timeLeft }}</span>
+        </div>
+        }
+      </div>
       }
     </div>
+
+    <footer>
+      <div class="footer-content">
+        <div id="header">
+          <p id="header-text">
+            {{ 'DIFFICULTY' | translate }}:
+            <span id="difficulty-text">
+              @switch (difficulty) { @case (1) {
+              {{ 'EASY_BUTTON' | translate }}
+              } @case (2) {
+              {{ 'MEDIUM_BUTTON' | translate }}
+              } @case (3) {
+              {{ 'HARD_BUTTON' | translate }}
+              } @default {
+              {{ 'EASY_BUTTON' | translate }}
+              } }
+            </span>
+          </p>
+        </div>
+        @if (!loading) {
+        <div class="button-container" tabindex="0" (keydown)="toDrawingBoard()" (click)="toDrawingBoard()">
+          <button class="next-page-button">
+            <div class="button-text">
+              {{ 'DRAW_BUTTON' | translate }}
+              <mat-icon class="button-icon play_arrow" aria-label="play_arrow">arrow_forward_ios</mat-icon>
+            </div>
+          </button>
+        </div>
+        }
+      </div>
+    </footer>
   </div>
 </div>
