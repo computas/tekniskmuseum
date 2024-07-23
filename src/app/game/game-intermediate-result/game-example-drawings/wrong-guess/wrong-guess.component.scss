@@ -1,0 +1,52 @@
+.drawing-container {
+  display: flex;
+  gap: 1em;
+  justify-content: end;
+}
+
+.label {
+  display: block;
+  font-family: 'AeonikMedium';
+  text-transform: uppercase;
+}
+
+.example-drawings-list {
+  display: flex;
+  list-style: none;
+  gap: 2em;
+  margin-top: 2em;
+}
+
+.example-drawing-li {
+  background: white;
+  height: 150px;
+  width: 180px;
+  border-radius: 1em;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.example-drawing-img {
+  height: 100%;
+  max-width: 100%;
+}
+
+.left-bubble {
+  margin-right: 1em;
+}
+
+.speech-bubble-text {
+  margin: 0;
+  font-family: AeonikLight;
+  font-size: var(--fontSizeSpeechBubble);
+  line-height: var(--fontSizeSpeechBubble);
+}
+
+.o-avatar {
+  margin-top: 2em;
+}
+
+.hideImg {
+  display: none;
+}

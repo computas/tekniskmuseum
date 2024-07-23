@@ -1,0 +1,24 @@
+<div class="drawing-container">
+  <app-speech-bubble
+    class="speech-bubble"
+    [pointerSide]="PointerSide.Right"
+    [arrowAlignment]="ArrowAlignment.Center"
+    [isFlipped]="true"
+    [textColor]="CustomColorsIO.white"
+    [bubbleColor]="CustomColorsIO.oColor"
+    [bubbleSize]="'medium'"
+  >
+    <p slot="body-alt" class="speech-bubble-text">
+      {{ 'EXAMPLE_DRAWINGS_FB_CORRECT_P1' | translate }} <span class="label">{{ label }}</span>
+      {{ 'EXAMPLE_DRAWINGS_FB_P2' | translate }}
+    </p>
+    <ul slot="body-alt" class="example-drawings-list">
+      @for (exampleDrawing of exampleDrawings; track exampleDrawing) {
+      <li class="example-drawing-li">
+        <img class="example-drawing-img" [src]="exampleDrawing" alt="example drawing of {{ label }}" />
+      </li>
+      }
+    </ul>
+  </app-speech-bubble>
+  <app-o-avatar class="o-avatar" [height]="150" [width]="150" [color]="CustomColorsIO.white"></app-o-avatar>
+</div>

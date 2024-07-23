@@ -27,6 +27,15 @@ export class GameDrawingDisplayComponent implements OnInit {
   correctClassName = 'correct';
   incorrectClassName = 'incorrect';
 
+  getRoundScoreText(): string {
+    if (!this.roundScore) return '0';
+
+    if (this.roundScore > 0) {
+      return `+${this.roundScore}`;
+    }
+    return this.roundScore.toString();
+  }
+
   getFeedbackStyle(): string {
     switch (this.hasCorrectGuess) {
       case this.correctGuess:
@@ -38,11 +47,11 @@ export class GameDrawingDisplayComponent implements OnInit {
     }
   }
 
-  greenScoreStyle(): string {
+  pointsColorStyle(): string {
     // returns a css style class on correct guess
     if (this.hasCorrectGuess) {
       return 'green-text';
     }
-    return '';
+    return 'red-text';
   }
 }

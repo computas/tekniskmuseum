@@ -1,41 +1,87 @@
 <div class="container-background">
   <div class="word-container">
-    <div><img class="logo" src="assets/logo/IO-logo-inverted_transparent-bg.png" alt="logo" /></div>
-    @if (isMultiPlayer) {
-    <h1 class="playernr">{{ 'PLAYER_LABEL' | translate }} {{ playernr }}</h1>
-    }
-    <div class="word-text">
+    <div>
+      <button class="home-btn" (click)="goToWelcomePage()">
+        <img class="home-icon" src="../../../../assets/house.svg" alt="a house icon with round edges" />
+        {{ 'END_GAME_BUTTON' | translate }}
+      </button>
+
       <div class="words-remaining">{{ guessUsed }}/{{ totalRounds }}</div>
-      <p class="word-draw">{{ 'DRAW_LABEL' | translate }}</p>
-      @if (loading) {
-      <div>
-        <mat-spinner class="white-spinner" id="white"></mat-spinner>
+
+      <div class="logo-container">
+        <img class="logo" src="assets/logo/IO-logo-inverted_transparent-bg.png" alt="logo" />
       </div>
-      } @if (label) {
-      <div>
-        <h1 class="word-to-guess header">{{ label | uppercase }}</h1>
-        @if (isMultiPlayer) {
-        <div class="timer header">
-          <span>{{ timeLeft }}</span>
+
+      @if (isMultiPlayer) {
+      <h1 class="playernr">{{ 'PLAYER_LABEL' | translate }} {{ playernr }}</h1>
+      }
+
+      <div class="i-container">
+        <app-i-avatar class="i-avatar" [color]="CustomColorsIO.white" [width]="50" [height]="200"></app-i-avatar>
+      </div>
+
+      <app-speech-bubble
+        [textColor]="CustomColorsIO.white"
+        [bubbleColor]="CustomColorsIO.indigo"
+        [pointerSide]="PointerSide.Left"
+        [arrowAlignment]="ArrowAlignment.Center"
+        [bubbleSize]="'large'"
+      >
+        <ng-container slot="body-alt">
+          <div class="word-text">
+            <p class="word-draw">{{ 'DRAW_LABEL' | translate }}</p>
+            @if (loading) {
+            <div>
+              <mat-spinner class="white-spinner" id="white"></mat-spinner>
+            </div>
+            } @if (label) {
+            <div>
+              <h1 class="word-to-guess header">{{ label | uppercase }}</h1>
+              @if (isMultiPlayer) {
+              <div class="timer header">
+                <span>{{ timeLeft }}</span>
+              </div>
+              }
+            </div>
+            }
+          </div>
+        </ng-container>
+      </app-speech-bubble>
+    </div>
+    <footer>
+      <div class="footer-content">
+        <p id="difficulty">
+          {{ 'DIFFICULTY' | translate }}:
+          <span id="difficulty-text">
+            @switch (difficulty) { @case (1) {
+            {{ 'EASY_BUTTON' | translate }}
+            } @case (2) {
+            {{ 'MEDIUM_BUTTON' | translate }}
+            } @case (3) {
+            {{ 'HARD_BUTTON' | translate }}
+            } @default {
+            {{ 'EASY_BUTTON' | translate }}
+            } }
+          </span>
+        </p>
+
+        <div
+          tabindex="0"
+          role="button"
+          class="button-container"
+          aria-disabled="false"
+          (keydown)="toDrawingBoard()"
+          (click)="toDrawingBoard()"
+          [class]="buttonStyle()"
+        >
+          <button class="next-page-button" [disabled]="loading && !isSinglePlayer">
+            <div class="button-text">
+              {{ 'DRAW_BUTTON' | translate }}
+              <mat-icon class="button-icon play_arrow" aria-label="play_arrow">arrow_forward_ios</mat-icon>
+            </div>
+          </button>
         </div>
-        }
       </div>
-      }
-    </div>
-    <div class="word-footer">
-      <div class="avatar">
-        <img class="avatar-image" src="assets/illustrations/IO_Illustrasjoner-1_1360x939.png" alt="avatar" />
-      </div>
-      @if (!loading) {
-      <div>
-        @if (isSinglePlayer) {
-        <button mat-raised-button class="draw-word-button" (click)="toDrawingBoard()">
-          {{ 'DRAW_BUTTON' | translate }}
-          <mat-icon class="button-icon play_arrow" aria-label="play_arrow">arrow_forward_ios</mat-icon>
-        </button>
-        }
-      </div>
-      }
-    </div>
+    </footer>
   </div>
 </div>
