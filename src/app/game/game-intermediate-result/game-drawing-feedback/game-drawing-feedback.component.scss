@@ -13,25 +13,24 @@
 
 .feedback-title,
 .feedback-desc {
-  font-family: AeonikLight;
-  font-size: var(--fontSizeSpeechBubble);
-  line-height: 1em;
   text-align: left;
   margin: 0;
   padding: 0;
 }
 
 .feedback-title {
-  padding-top: 0.1em;
+  font-family: AeonikBlack;
+  font-size: var(--fontSizeMedium);
+}
+
+.feedback-desc {
+  margin-top: 0.4em;
+  font-family: AeonikLight;
+  font-size: var(--fontSizeSpeechBubble);
 }
 
 .o-text {
   font-family: 'ICTHofmannRegular';
-}
-
-.feedback-desc {
-  margin-top: 0.2em;
-  font-family: AeonikLight;
 }
 
 .label {

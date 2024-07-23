@@ -13,7 +13,7 @@
 .example-drawings-list {
   display: flex;
   list-style: none;
-  gap: 3em;
+  gap: 2em;
   margin-top: 2em;
 }
 
@@ -32,6 +32,10 @@
   max-width: 100%;
 }
 
+.left-bubble {
+  margin-right: 1em;
+}
+
 .speech-bubble-text {
   margin: 0;
   font-family: AeonikLight;
@@ -40,6 +44,5 @@
 }
 
 .o-avatar {
-  margin-left: 1em;
   margin-top: 2em;
 }

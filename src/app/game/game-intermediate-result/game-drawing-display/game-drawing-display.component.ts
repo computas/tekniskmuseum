@@ -12,7 +12,7 @@ import { DrawingService } from '../../services/drawing.service';
 export class GameDrawingDisplayComponent implements OnInit {
   @Input() hasCorrectGuess: boolean | undefined;
   @Input() drawingURL: string | undefined;
-  @Input() roundScore!: number;
+  @Input() roundScore: number | undefined;
   secondsUsed = 0;
 
   constructor(private drawingService: DrawingService) {}
@@ -28,6 +28,8 @@ export class GameDrawingDisplayComponent implements OnInit {
   incorrectClassName = 'incorrect';
 
   getRoundScoreText(): string {
+    if (!this.roundScore) return '0';
+
     if (this.roundScore > 0) {
       return `+${this.roundScore}`;
     }

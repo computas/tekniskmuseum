@@ -12,6 +12,6 @@
     } @else {
     <p class="seconds-used">{{ 'TIME_OUT' | translate }}</p>
     }
-    <p [class]="['round-score-text', pointsColorStyle()]">+{{ roundScore }}p</p>
+    <p [class]="['round-score-text', pointsColorStyle()]">{{ getRoundScoreText() }}p</p>
   </div>
 </div>
