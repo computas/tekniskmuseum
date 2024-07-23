@@ -17,7 +17,12 @@
     <ul slot="body-alt" class="example-drawings-list">
       @for (guessedDrawing of guessedDrawings; track guessedDrawing) {
       <li class="example-drawing-li">
-        <img class="example-drawing-img" [src]="guessedDrawing" alt="example drawing of {{ label }}" />
+        <img
+          [class]="['example-drawing-img', hideImg()]"
+          onerror="hideImg()"
+          [src]="guessedDrawing"
+          alt="example drawing of {{ guess }}"
+        />
       </li>
       }
     </ul>
@@ -37,7 +42,12 @@
     <ul slot="body-alt" class="example-drawings-list">
       @for (exampleDrawing of exampleDrawings; track exampleDrawing) {
       <li class="example-drawing-li">
-        <img class="example-drawing-img" [src]="exampleDrawing" alt="example drawing of {{ label }}" />
+        <img
+          [class]="['example-drawing-img', hideImg()]"
+          onerror="hideImg()"
+          [src]="exampleDrawing"
+          alt="example drawing of {{ label }}"
+        />
       </li>
       }
     </ul>

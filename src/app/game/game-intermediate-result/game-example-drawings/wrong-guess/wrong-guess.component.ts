@@ -24,7 +24,7 @@ export class WrongGuessComponent implements OnInit, OnDestroy {
   CustomColorsIO = CustomColorsIO;
   label: string | undefined = '';
   guess = '';
-  exampleDrawings: string[] = [];
+  exampleDrawings: string[] = ['empty', 'empty'];
   guessedDrawings: string[] = ['empty', 'empty'];
   aiGuessSubscription: Subscription = new Subscription();
 
@@ -78,5 +78,9 @@ export class WrongGuessComponent implements OnInit, OnDestroy {
           this.guessedDrawings = res;
         })
     );
+  }
+
+  hideImg() {
+    return 'hideImg';
   }
 }
