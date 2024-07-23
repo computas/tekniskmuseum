@@ -6,6 +6,8 @@
         {{ 'END_GAME_BUTTON' | translate }}
       </button>
 
+      <div class="words-remaining">{{ guessUsed }}/{{ totalRounds }}</div>
+
       <div class="logo-container">
         <img class="logo" src="assets/logo/IO-logo-inverted_transparent-bg.png" alt="logo" />
       </div>
@@ -20,9 +22,9 @@
 
       <app-speech-bubble
         [textColor]="CustomColorsIO.white"
-        [bubbleColor]="CustomColorsIO.pastelBlue"
+        [bubbleColor]="CustomColorsIO.indigo"
         [pointerSide]="PointerSide.Left"
-        [arrowAlignment]="ArrowAlignment.Top"
+        [arrowAlignment]="ArrowAlignment.Center"
         [bubbleSize]="'large'"
       >
         <ng-container slot="body-alt">

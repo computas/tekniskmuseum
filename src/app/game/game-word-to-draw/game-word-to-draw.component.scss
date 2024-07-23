@@ -38,6 +38,13 @@
   width: 70px;
 }
 
+.words-remaining {
+  text-align: center;
+  font-size: 2em;
+  font-style: italic;
+  margin-bottom: 32px;
+}
+
 .home-btn {
   position: absolute;
   top: 0;
@@ -81,12 +88,13 @@
   flex-direction: column;
   justify-content: center;
   align-items: center;
+  padding: 5rem;
 }
 
 .i-container {
   position: absolute;
-  bottom: 20px;
-  left: 20px;
+  bottom: 200px;
+  left: 350px;
 }
 
 .i-avatar {
