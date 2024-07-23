@@ -1,19 +1,5 @@
 @import '../../../variables.scss';
 
-.container-background {
-  position: relative;
-}
-.container-background:before {
-  content: '';
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  position: absolute;
-  background-image: url('../../../assets/background/io_rutemoenster-inverted.png');
-  background-size: cover;
-  background-color: black;
-}
 .container {
   position: relative;
   display: flex;
