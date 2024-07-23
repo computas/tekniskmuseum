@@ -169,7 +169,7 @@ footer {
 .button-container {
   justify-self: end;
   padding: 0.7em;
-  border-radius: 1em;
+  border-radius: 5em;
   background: linear-gradient(90deg, #151cdb 0%, #6b2eac 25%, #fd595d 50%, #bea97e 75%, #1bc0d2 100%);
   margin-right: 1rem;
 }
@@ -180,7 +180,7 @@ footer {
   color: $text_primary_color;
   font-weight: bold;
   font-size: 1.45rem;
-  border-radius: 0.3em;
+  border-radius: 5em;
   letter-spacing: 0.05em;
 }
 .button-container:hover {
