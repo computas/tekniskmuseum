@@ -127,6 +127,8 @@ app-speech-bubble p {
 .game-result-img {
   width: 19rem;
   height: 14rem;
+  object-fit: contain;
+  background-color: white;
 }
 
 .card-won {
