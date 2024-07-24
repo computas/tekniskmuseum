@@ -32,8 +32,8 @@
   --bbMaxWidth: 70vw;
 }
 .small {
-  --bbFontSize: 28px;
-  --bbLineHeight: 28px;
+  --bbFontSize: 50px;
+  --bbLineHeight: 50px;
   --bbPadding: 1rem;
   --bbMaxWidth: 50vw;
 }
@@ -44,8 +44,8 @@
 }
 
 .speech-bubble {
-  --bbColor: white;
-  --bbTextColor: black;
+  --bbColor: $white_color;
+  --bbTextColor: $black_color;
   --bbArrowSize: 2rem;
   --bbBorderRadius: 1rem;
   --bbPaddingX: 2rem;

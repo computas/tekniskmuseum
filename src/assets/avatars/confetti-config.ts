@@ -6,7 +6,7 @@ export const confettiSettings = {
   startVelocity: 80,
   particleCount: 300,
   spread: 50,
-  colors: [CustomColorsIO.cobaltBlue, CustomColorsIO.hotPink, CustomColorsIO.turquoise, CustomColorsIO.gold],
+  colors: [CustomColorsIO.purple, CustomColorsIO.pink, CustomColorsIO.turquoise, CustomColorsIO.yellow],
 };
 
 export const iConfettiFigure = confetti.shapeFromPath({

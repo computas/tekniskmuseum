@@ -22,10 +22,10 @@ import { trigger, state, style, animate, transition } from '@angular/animations'
   ],
 })
 export class SplashComponent implements OnInit, OnDestroy {
-  textColor: CustomColorsIO = CustomColorsIO.black;
   PointerSide = PointerSide;
   ArrowAlignment = ArrowAlignment;
   CustomColorsIO = CustomColorsIO;
+  textColor: CustomColorsIO = CustomColorsIO.white;
   interval: ReturnType<typeof setInterval> | null = null;
   currentBubbleIndex = 0;
   animating = false;
@@ -88,9 +88,7 @@ export class SplashComponent implements OnInit, OnDestroy {
   }
 
   get currentBubbleColor(): CustomColorsIO {
-    return this.currentBubbleIndex === 1 || this.currentBubbleIndex === 3
-      ? CustomColorsIO.indigo
-      : CustomColorsIO.cobaltBlue;
+    return this.currentBubbleIndex === 1 || this.currentBubbleIndex === 3 ? CustomColorsIO.blue : CustomColorsIO.purple;
   }
 
   get currentBubbleTextColor(): CustomColorsIO {
