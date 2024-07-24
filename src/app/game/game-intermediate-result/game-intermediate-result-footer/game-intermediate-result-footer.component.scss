@@ -32,19 +32,11 @@ footer {
   text-decoration: none;
   color: $white_color;
 }
-.button-container:before {
-  position: absolute;
-  content: '';
-  display: inline-block;
-  top: -180px;
-  left: 0;
-  width: 30px;
-  height: 100%;
-  animation: shiny-btn1 3s ease-in-out infinite;
-}
+
 .button-container:hover {
   opacity: 0.9;
 }
+
 .button-container:active {
   box-shadow: 4px 4px 6px 0 rgba(255, 255, 255, 0.15), -4px -4px 6px 0 rgba(116, 125, 136, 0.2),
     inset -4px -4px 6px 0 rgba(255, 255, 255, 0.2), inset 4px 4px 6px 0 rgba(0, 0, 0, 0.2);
@@ -59,5 +51,5 @@ footer {
 }
 
 .button-icon {
-  height: 40px;
+  height: 36px;
 }
