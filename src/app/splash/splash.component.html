@@ -1,24 +1,26 @@
 <div class="container-background" (click)="navigateToWelcome()" (keypress)="navigateToWelcome()" tabindex="0">
-  <button class="logo">
-    <img src="assets/logo/IO-logo-inverted_transparent-bg.png" alt="logo" />
-  </button>
+  <div class="splash-container container">
+    <button class="logo">
+      <img src="assets/logo/IO-logo-inverted_transparent-bg.png" alt="logo" />
+    </button>
 
-  @if (!animating) {
-  <div class="speech-bubble-container" [@fadeInOut]>
-    <app-speech-bubble
-      class="speech-bubble-adjusted"
-      [textColor]="currentBubbleTextColor"
-      [bubbleColor]="currentBubbleColor"
-      [bodyText]="currentBubbleText"
-      [pointerSide]="currentPointerSide"
-      [arrowAlignment]="currentArrowAlignment"
-      [bubbleSize]="'medium'"
-    >
-    </app-speech-bubble>
+    @if (!animating) {
+    <div class="speech-bubble-container" [@fadeInOut]>
+      <app-speech-bubble
+        class="speech-bubble-adjusted"
+        [textColor]="currentBubbleTextColor"
+        [bubbleColor]="currentBubbleColor"
+        [bodyText]="currentBubbleText"
+        [pointerSide]="currentPointerSide"
+        [arrowAlignment]="currentArrowAlignment"
+        [bubbleSize]="'medium'"
+      >
+      </app-speech-bubble>
+    </div>
+
+    <img class="teaching-image" [@fadeInOut] [src]="currentSvg" alt="Teaching Image" />
+    }
+
+    <div class="play-text">{{ pressToPlayText }}</div>
   </div>
-
-  <img class="teaching-image" [@fadeInOut] [src]="currentSvg" alt="Teaching Image" />
-  }
-
-  <div class="play-text">{{ pressToPlayText }}</div>
 </div>
