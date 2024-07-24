@@ -161,7 +161,7 @@
 }
 .player-mode > .material-icons {
   margin-right: 5px;
-  background: linear-gradient(to top, #2514d1 0%, #f14a64 55%, #de7d6e 90%);
+  background: $icon_gradient;
   background-clip: text;
   -webkit-text-fill-color: transparent;
 }

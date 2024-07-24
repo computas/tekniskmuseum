@@ -12,7 +12,7 @@
   position: absolute;
   background-image: url('../../../assets/background/io_rutemoenster-inverted.png');
   background-size: cover;
-  background-color: black;
+  background-color: $black_color;
 }
 .container {
   position: relative;
@@ -107,7 +107,7 @@
   margin-top: 10px;
   min-width: 200px;
   max-width: 400px;
-  background: $button_background_color;
+  background: $white_color;
 }
 .button:hover {
   opacity: 0.95;
@@ -130,12 +130,12 @@
   flex-direction: row;
   justify-content: center;
   align-items: center;
-  color: $button_content_color;
+  color: $dark_blue_color;
 }
 .button-icon {
   margin-left: 16px;
   font-size: 36px;
-  background: linear-gradient(to top, #2514d1 0%, #f14a64 50%, #de7d6e 90%);
+  background: $icon_gradient;
   background-clip: text;
   -webkit-text-fill-color: transparent;
   height: 100%;

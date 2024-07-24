@@ -22,7 +22,7 @@
   position: absolute;
   background-image: url('../../../assets/background/io_rutemoenster-inverted.png');
   background-size: cover;
-  background-color: black;
+  background-color: $black_color;
 }
 .result-container {
   position: relative;
@@ -59,7 +59,7 @@
   position: relative;
   margin-right: auto;
   left: 2rem;
-  color: var(--White, #fbfbfb);
+  color: $white_color;
   text-align: center;
   font-family: AeonikRegular;
   font-size: var(--resultFontSizeVerySmall);
@@ -78,7 +78,7 @@
 }
 
 #header-text {
-  color: $text_primary_color;
+  color: $white_color;
   font-family: 'AeonikRegular';
   font-size: var(--fontSizeSmall);
   margin-bottom: 0;
@@ -90,7 +90,7 @@
 }
 
 #highscore-points {
-  color: #fbfbfb;
+  color: $white_color;
   font-family: AeonikBold;
   font-size: var(--fontSizeSmall);
   font-style: italic;
@@ -99,8 +99,6 @@
 
 #highscore-number {
   text-align: center;
-  -webkit-text-stroke-width: 2;
-  -webkit-text-stroke-color: #000;
   font-family: AeonikBold;
   font-size: var(--resultFontSizeLarge);
   font-style: italic;
@@ -128,7 +126,7 @@
 app-speech-bubble h1 {
   font-size: var(--fontSizeMedium);
   margin-bottom: 0.8rem;
-  color: var(--I-text-color, #fbfbfb);
+  color: $white_color;
   font-family: AeonikRegular;
   line-height: 40px;
 }
@@ -139,7 +137,7 @@ app-speech-bubble p {
 }
 
 #points {
-  color: var(--White, #fbfbfb);
+  color: $white_color;
   font-family: AeonikBold;
   font-size: var(--resultFontSizeLarge);
   line-height: 40px;
@@ -156,11 +154,11 @@ app-speech-bubble p {
 }
 
 .card-won {
-  border: 4px solid #68d466;
+  border: 4px solid $green_color;
   border-radius: 16px;
 }
 .card-loss {
-  border: 4px solid #de1f1f;
+  border: 4px solid $red_color;
   border-radius: 16px;
 }
 
@@ -173,7 +171,7 @@ app-speech-bubble p {
 }
 
 .score {
-  color: var(--White, #fbfbfb);
+  color: $white_color;
   font-family: AeonikMedium;
   font-size: 24px;
   font-style: italic;
@@ -181,11 +179,11 @@ app-speech-bubble p {
 }
 
 .loss {
-  color: #de1f1f;
+  color: $red_color;
 }
 
 .win {
-  color: #68d466;
+  color: $green_color;
 }
 
 #o-text-box-container {
@@ -226,13 +224,13 @@ app-i-avatar {
 
 .result-header-multi {
   text-align: center;
-  color: #195272;
+  color: $dark_purple_color;
   font-size: 48px;
   margin: 0;
   padding: 0 24px;
 }
 .result-word {
-  color: var(--White, #fbfbfb);
+  color: $white_color;
   text-align: center;
   font-family: AeonikRegular;
   font-size: var(--resultFontSizeVerySmall);
@@ -265,8 +263,8 @@ app-i-avatar {
   align-items: center;
   gap: 0.3125rem;
   border-radius: 35px;
-  border: 5px solid var(--Icon-gradient, #ebaea5);
-  background: var(--White, #fbfbfb);
+  border: 5px solid $dark_purple_color;
+  background: $white_color;
   box-shadow: 0px 4px 4px 0px rgba(0, 0, 0, 0.25);
 }
 
@@ -282,7 +280,7 @@ app-i-avatar {
   border-radius: 2.1875rem;
   border: 3px solid rgba(239, 239, 239, 0.54);
 
-  background: var(--Black, #030303);
+  background: $black_color;
   box-shadow: 0px 4px 4px 0px rgba(0, 0, 0, 0.25);
 }
 
@@ -292,11 +290,11 @@ app-i-avatar {
   justify-content: center;
   align-items: center;
   gap: 10px;
-  color: var(--Cobalt-blue, #151cdb);
+  color: $dark_blue_color;
   font-family: AeonikRegular;
   font-size: var(--resultFontSizeMediumSmall);
 }
 
 .btn-text-secondary {
-  color: var(--White, #fbfbfb);
+  color: $white_color;
 }

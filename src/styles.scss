@@ -54,7 +54,7 @@ body {
   -moz-user-select: none; /* Old versions of Firefox */
   -ms-user-select: none; /* Internet Explorer/Edge */
   user-select: none; /* Non-prefixed version, currently supported by Chrome, Edge, Opera and Firefox */
-  background-color: black;
+  background-color: $black_color;
   overflow: hidden;
 }
 div,
@@ -71,7 +71,7 @@ button,
 }
 .mat-progress-spinner circle,
 .mat-spinner circle {
-  stroke: $text_secondary_color;
+  stroke: $dark_blue_color;
 }
 .avatar-name {
   font-family: ICTHofmannRegular;

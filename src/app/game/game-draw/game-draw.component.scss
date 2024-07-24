@@ -36,7 +36,7 @@ span {
 
 #timerContainer {
   position: absolute;
-  color: $text_darker_grey;
+  color: $darker_grey_color;
 
   right: 5vw;
   margin-top: 3vh;
@@ -106,8 +106,8 @@ span {
   padding-right: 20px;
   border-radius: 50px;
 
-  background-color: #ffd6d6;
-  color: $negative_feedback_color_bright;
+  background-color: $light_red_color;
+  color: $red_color;
 
   #buttonContent {
     display: flex;
