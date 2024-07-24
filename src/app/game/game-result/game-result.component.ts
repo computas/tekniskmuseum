@@ -98,7 +98,7 @@ export class GameResultComponent implements OnInit, OnDestroy {
         }
       });
       if (this.hasWon) {
-        this.blowConfetti();
+        setTimeout(this.shootConfetti, 1000);
       }
 
       this.difficulty = this.gameStateService.getDifficulty();
@@ -126,7 +126,7 @@ export class GameResultComponent implements OnInit, OnDestroy {
           }
           if (this.drawingService.totalScore >= this.todaysHighscore) {
             this.newHighscore = true;
-            this.blowConfetti();
+            setTimeout(this.shootConfetti, 1000);
           }
         },
         error: (error) => console.error("Error fetching today's highscore", error),
@@ -148,29 +148,24 @@ export class GameResultComponent implements OnInit, OnDestroy {
     this.startAnimation();
     this.translationService.loadTranslations(this.translationService.getCurrentLang()).subscribe();
   }
-  blowConfetti(): void {
-    const confettiEndTime = Date.now() + this.confettiDuration;
-    (function frame() {
-      confetti({
-        ...confettiSettings,
-        scalar: 4,
-        angle: 60,
-        origin: { x: 0, y: 0.8 },
-        shapes: [iConfettiFigure],
-      });
-      confetti({
-        ...confettiSettings,
-        scalar: 3,
-        angle: 120,
-        origin: { x: 1, y: 0.8 },
-        shapes: [oConfettiFigure],
-      });
-      if (Date.now() < confettiEndTime) {
-        requestAnimationFrame(frame);
-      }
-    })();
+  shootConfetti(): void {
+    confetti({
+      ...confettiSettings,
+      scalar: 5,
+      angle: 60,
+      origin: { x: 0, y: 0.8 },
+      shapes: [iConfettiFigure],
+    });
+    confetti({
+      ...confettiSettings,
+      scalar: 3,
+      angle: 120,
+      origin: { x: 1, y: 0.8 },
+      shapes: [oConfettiFigure],
+    });
   }
   ngOnDestroy(): void {
+    confetti.reset();
     this.getHighscoreSubscription?.unsubscribe();
     this.postHighscoreSubscription?.unsubscribe();
     this.multiplayerService.clearState();

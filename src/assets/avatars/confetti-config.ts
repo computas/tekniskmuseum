@@ -4,7 +4,7 @@ import confetti from 'canvas-confetti';
 export const confettiDuration = 2 * 1000;
 export const confettiSettings = {
   startVelocity: 80,
-  particleCount: 8,
+  particleCount: 300,
   spread: 50,
   colors: [CustomColorsIO.cobaltBlue, CustomColorsIO.hotPink, CustomColorsIO.turquoise, CustomColorsIO.gold],
 };
