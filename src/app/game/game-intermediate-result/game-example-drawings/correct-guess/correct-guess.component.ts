@@ -34,8 +34,8 @@ export class CorrectGuessComponent implements OnInit {
     this.label = this.drawingService.label;
     if (this.gameStateService.isSingleplayer()) {
       this.exampleDrawings = this.exampleDrawingService.getExampleDrawings(3);
-      return;
+    } else {
+      this.exampleDrawings = this.multiplayerService.getExampleDrawings(3);
     }
-    this.exampleDrawings = this.multiplayerService.getExampleDrawings(3);
   }
 }

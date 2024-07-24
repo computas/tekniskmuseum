@@ -23,7 +23,7 @@ export class GameIntermediateResultFooterComponent implements OnInit {
 
     if (this.gameStateService.isSingleplayer()) return;
 
-    this.isWaitingForPlayer = true;
+    this.isWaitingForPlayer = true; // default in multiplayer set to true
     this.multiplayerService.stateInfo$.subscribe((res) => {
       if (res.ready) {
         this.isWaitingForPlayer = false;
