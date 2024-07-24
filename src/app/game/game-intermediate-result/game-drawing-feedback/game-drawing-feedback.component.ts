@@ -1,6 +1,6 @@
 import { TranslatePipe } from '@/app/core/translation.pipe';
 import { SpeechBubbleComponent } from '../../speech-bubble/speech-bubble.component';
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { ArrowAlignment, PointerSide } from '@/app/shared/models/interfaces';
 import { CustomColorsIO } from '../../../shared/customColors';
 import { IAvatarComponent } from '@/assets/avatars/i-avatar/i-avatar.component';

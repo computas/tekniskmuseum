@@ -26,6 +26,7 @@ import { GameStateService } from '../services/game-state-service';
   ],
 })
 export class GameIntermediateResultComponent implements OnInit, OnDestroy {
+  result: Result | undefined;
   constructor(
     private gameStateService: GameStateService,
     private drawingService: DrawingService,
@@ -34,6 +35,7 @@ export class GameIntermediateResultComponent implements OnInit, OnDestroy {
   ) {}
 
   ngOnInit(): void {
+    this.result = this.drawingService.lastResult;
     this.gameStateService.savePageToLocalStorage(GAMESTATE.intermediateResult);
     this.translationService.loadTranslations(this.translationService.getCurrentLang()).subscribe();
 

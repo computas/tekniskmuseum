@@ -10,8 +10,9 @@ import { DrawingService } from '../../services/drawing.service';
   styleUrl: './game-drawing-display.component.scss',
 })
 export class GameDrawingDisplayComponent implements OnInit {
+  @Input() drawingURL: string | undefined;
+  results = this.drawingService.lastResult;
   secondsUsed = 0;
-  drawingURL = '';
   hasCorrectGuess = false;
   roundScore = 0;
 
@@ -19,9 +20,8 @@ export class GameDrawingDisplayComponent implements OnInit {
 
   ngOnInit(): void {
     this.secondsUsed = this.drawingService.getSecondsUsed();
-    this.drawingURL = this.drawingService.lastResult.imageData;
-    this.hasCorrectGuess = this.drawingService.lastResult.hasWon;
-    this.roundScore = this.drawingService.lastResult.score;
+    this.hasCorrectGuess = this.results.hasWon;
+    this.roundScore = this.results.score;
 
     this.drawingService.resetSecondsUsed();
   }

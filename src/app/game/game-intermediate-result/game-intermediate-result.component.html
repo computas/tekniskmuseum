@@ -2,7 +2,10 @@
   <div id="intermediate-container">
     <app-game-intermediate-result-header class="result-header"></app-game-intermediate-result-header>
     <app-game-drawing-feedback class="avatar-feedback"></app-game-drawing-feedback>
-    <app-game-drawing-display class="user-drawing-and-score"></app-game-drawing-display>
+    <app-game-drawing-display
+      [drawingURL]="result?.imageData"
+      class="user-drawing-and-score"
+    ></app-game-drawing-display>
     <app-game-example-drawings class="example-drawings"></app-game-example-drawings>
     <app-game-intermediate-result-footer class="footer"></app-game-intermediate-result-footer>
   </div>
