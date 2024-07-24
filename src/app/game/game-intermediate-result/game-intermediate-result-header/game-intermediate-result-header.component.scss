@@ -18,9 +18,9 @@
   justify-content: center;
   align-items: center;
   padding: 0.2em 0.8em;
-  border: 1px solid white;
-  background: black;
-  color: white;
+  border: 1px solid $white_color;
+  background: $black_color;
+  color: $white_color;
   font-family: 'AeonikLight';
   font-size: var(--fontSizeSmall);
   border-radius: 5rem;
@@ -29,12 +29,12 @@
 
 .home-btn:hover {
   background: #eee;
-  color: black;
+  color: $black_color;
 }
 
 .home-btn:active {
   background: #ddd;
-  color: black;
+  color: $black_color;
 }
 
 .home-icon {

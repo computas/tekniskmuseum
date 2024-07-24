@@ -38,15 +38,15 @@
   height: 3.5rem;
   margin-bottom: 1rem;
   width: 20rem;
-  background: $button_background_color;
+  background: $white_color;
 }
 
 .idleButton :focus {
-  background-color: $button_background_color;
+  background-color: $white_color;
 }
 
 #homeButtonText {
-  color: $button_content_color;
+  color: $dark_blue_color;
   display: flex;
   flex-direction: row;
   align-items: baseline;
@@ -54,7 +54,7 @@
 }
 
 #idleButtonIcon {
-  color: $button_content_color;
+  color: $dark_blue_color;
   margin-right: 1rem;
   height: var(--fontSizeSmall);
 }
