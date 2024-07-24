@@ -41,8 +41,8 @@ export class LobbyComponent implements OnInit, OnDestroy {
 
   //Setting the colors of I
   colorOfI = CustomColorsIO.white;
-  bubbleColorI = CustomColorsIO.pastelBlue;
-  textColorI = CustomColorsIO.black;
+  bubbleColorI = CustomColorsIO.purple;
+  textColorI = CustomColorsIO.white;
 
   constructor(
     private gameStateService: GameStateService,

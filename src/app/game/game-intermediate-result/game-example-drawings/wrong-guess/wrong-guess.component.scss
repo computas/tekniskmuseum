@@ -1,3 +1,4 @@
+@import './../../../../../variables.scss';
 .drawing-container {
   display: flex;
   gap: 1em;
@@ -8,13 +9,14 @@
   display: block;
   font-family: 'AeonikMedium';
   text-transform: uppercase;
+  line-height: normal;
 }
 
 .example-drawings-list {
   display: flex;
   list-style: none;
-  gap: 2em;
-  margin-top: 2em;
+  gap: 1.5em;
+  margin-top: 1em;
 }
 
 .example-drawing-li {

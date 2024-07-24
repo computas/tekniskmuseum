@@ -13,7 +13,7 @@ export class GameConfigService {
     timeToStartClassify: 27,
     defaultTimeBetweenClassify: 3,
     minimumTimeBetweenClassify: 2,
-    minimumDrawnThreshold: 2500,
+    minimumDrawnThreshold: 500,
     pixelsPerClassify: 2000,
     intervalDuration: 100,
   }); // Easy mode as default
@@ -29,7 +29,7 @@ export class GameConfigService {
           timeToStartClassify: 27,
           defaultTimeBetweenClassify: 3,
           minimumTimeBetweenClassify: 2,
-          minimumDrawnThreshold: 2500,
+          minimumDrawnThreshold: 500,
           pixelsPerClassify: 2000,
           intervalDuration: 100,
         };
@@ -42,7 +42,7 @@ export class GameConfigService {
           timeToStartClassify: 17,
           defaultTimeBetweenClassify: 3,
           minimumTimeBetweenClassify: 2,
-          minimumDrawnThreshold: 3500,
+          minimumDrawnThreshold: 500,
           pixelsPerClassify: 2000,
           intervalDuration: 100,
         };
@@ -55,7 +55,7 @@ export class GameConfigService {
           timeToStartClassify: 17,
           defaultTimeBetweenClassify: 3,
           minimumTimeBetweenClassify: 2,
-          minimumDrawnThreshold: 3500,
+          minimumDrawnThreshold: 500,
           pixelsPerClassify: 2000,
           intervalDuration: 100,
         };
