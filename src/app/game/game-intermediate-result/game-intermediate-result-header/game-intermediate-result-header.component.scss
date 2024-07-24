@@ -5,13 +5,6 @@
   grid-template-columns: repeat(8, 1fr);
 }
 
-.logo {
-  justify-self: end;
-  grid-column: 7 / -1;
-  height: 44px;
-  width: 70px;
-}
-
 .game-progress-bar {
   grid-column: 4 / 6;
   align-self: center;

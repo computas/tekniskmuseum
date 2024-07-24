@@ -1,21 +1,5 @@
 @import '../../../variables.scss';
 
-.intermediate-container-background {
-  position: relative;
-}
-
-.intermediate-container-background:before {
-  content: '';
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  position: absolute;
-  background-image: url('../../../assets/background/io_rutemoenster-inverted.png');
-  background-size: cover;
-  background-color: $black_color;
-}
-
 #intermediate-container {
   display: grid;
   grid-template-rows: 10vh 44vh 34vh 12vh;

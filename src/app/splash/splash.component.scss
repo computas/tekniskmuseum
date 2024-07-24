@@ -2,30 +2,16 @@
 
 .container-background {
   position: relative;
-  width: 100%;
-  height: 100vh;
-  background-image: url('../../assets/background/io_rutemoenster-inverted.png');
-  background-size: cover;
-  background-color: $black_color;
+}
+
+.splash-container {
+  position: relative;
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
   padding: 20px;
   box-sizing: border-box;
-}
-
-.logo {
-  position: absolute;
-  top: 2rem;
-  right: 1.5rem;
-  height: 44px;
-  width: 70px;
-  cursor: pointer;
-
-  img {
-    width: 100%;
-  }
 }
 
 .speech-bubble-container {

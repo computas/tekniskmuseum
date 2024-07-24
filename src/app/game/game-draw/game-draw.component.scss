@@ -38,7 +38,7 @@ span {
   position: absolute;
   color: $darker_grey_color;
 
-  right: 5vw;
+  right: 2vw;
   margin-top: 3vh;
 }
 
@@ -73,6 +73,7 @@ span {
 }
 
 #drawingSurface {
+  position: relative;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -87,12 +88,13 @@ span {
 
   width: calc(94vw);
   height: calc(76vh);
+  z-index: 999;
 }
 
 #deleteButton {
   position: absolute;
   margin-top: 2vh;
-  left: 4.5vw;
+  left: 2vw;
 
   display: flex;
   flex-direction: column;

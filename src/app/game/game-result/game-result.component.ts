@@ -88,7 +88,7 @@ export class GameResultComponent implements OnInit, OnDestroy {
       this.ismultiplayer = true;
       this.multiplayerService.opponentScore.subscribe((val) => {
         if (val) {
-          if (this.multiplayerService.stateInfo.score) {
+          if (this.multiplayerService.stateInfo.score !== undefined) {
             this.opponentScore = val.score;
             this.hasWon = this.multiplayerService.stateInfo.score >= val.score;
             this.score = this.multiplayerService.stateInfo.score;
@@ -116,6 +116,7 @@ export class GameResultComponent implements OnInit, OnDestroy {
         });
     } else {
       this.score = this.drawingService.totalScore;
+      this.difficulty = this.gameStateService.getDifficulty();
       this.postHighscoreSubscription = this.drawingService.postScore().subscribe();
       this.getHighscoreSubscription = this.drawingService.getHighscore().subscribe({
         next: (data) => {
@@ -123,7 +124,7 @@ export class GameResultComponent implements OnInit, OnDestroy {
           if (Math.max(...todaysScores) > 0) {
             this.todaysHighscore = Math.max(...todaysScores);
           }
-          if (this.drawingService.totalScore >= this.todaysHighscore) {
+          if (this.drawingService.totalScore >= this.todaysHighscore && this.score > 0) {
             this.newHighscore = true;
             this.blowConfetti();
           }
