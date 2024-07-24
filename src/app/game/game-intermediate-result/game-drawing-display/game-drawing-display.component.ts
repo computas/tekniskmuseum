@@ -19,6 +19,7 @@ export class GameDrawingDisplayComponent implements OnInit {
 
   ngOnInit(): void {
     this.secondsUsed = this.drawingService.getSecondsUsed();
+
     this.drawingService.resetSecondsUsed();
   }
 
