@@ -20,10 +20,8 @@
   "HARD_BUTTON": "Vanskelig",
   "MULTIPLAYER": "Flerspiller",
 
-  "HELP_ME_LEARN": "Kan du hjelpe meg å lære?",
   "PLAYER_MODE_SINGLE": "1 spiller",
   "PLAYER_MODE_MULTI": "2 spillere",
-  "ADMIN_ARIA_LABEL": "Gå til admin side",
   "WAITING_FOR_PLAYER": "Venter",
 
   "HOW_TO_PLAY_SINGLE": "Slik spiller du:",
@@ -68,7 +66,6 @@
   "ROUND_NUMBER": "Runde",
   "ROUND_FEEDBACK_FAILED_TITLE": "Oisann!",
   "ROUND_FEEDBACK_FAILED_DESC_1": "klarte ikke å gjette at du tegnet:",
-  "ROUND_FEEDBACK_FAILED_DESC_2": "Jeg kan være litt dum noen ganger..",
 
   "ROUND_FEEDBACK_CORRECT_TITLE": "Bra tegnet!",
   "ROUND_FEEDBACK_CORRECT_DESC_1": "klarte å gjette at du tegnet:",
