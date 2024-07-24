@@ -34,6 +34,7 @@
             >
             </app-speech-bubble>
             <div class="button-container" [@show]="stateButtons">
+              <!-- 
               <button [disabled]="buttonsAreDisabled" class="button" id="easy-button" (click)="startDrawing('easy')">
                 <img
                   src="../../../assets/icons/icon_difficulty_easy.svg"
@@ -68,8 +69,55 @@
                 <div class="button-text">
                   {{ 'HARD_BUTTON' | translate }}
                 </div>
-              </button>
-            </div>
+              </button> -->
+            
+
+              <app-custom-button
+                [disabled]="buttonsAreDisabled"
+                [buttonStyle]="buttonStyleClass"
+                [buttonText]=" 'EASY_BUTTON' | translate "
+                (click)="startDrawing('easy')"
+                alt="" 
+                aria-label=""
+              >
+              <img
+                  slot="custom-mat-icon" class="button-icon-gradient"
+                  src="../../../assets/icons/icon_difficulty_easy.svg"
+                  alt="Easy difficulty icon"
+                  class="difficulty-icon"
+                  />
+              </app-custom-button>
+              <app-custom-button
+                [disabled]="buttonsAreDisabled"
+                [buttonStyle]="buttonStyleClass"
+                [buttonText]=" 'MEDIUM_BUTTON' | translate "
+                (click)="startDrawing('medium')"
+                alt="" 
+                aria-label=""
+              >
+              <img
+                  slot="custom-mat-icon" class="button-icon-gradient"
+                  src="../../../assets/icons/icon_difficulty_medium.svg"
+                  alt="Easy difficulty icon"
+                  class="difficulty-icon"
+                  />
+              </app-custom-button>
+              <app-custom-button
+                [disabled]="buttonsAreDisabled"
+                [buttonStyle]="buttonStyleClass"
+                [buttonText]=" 'HARD_BUTTON' | translate "
+                (click)="startDrawing('hard')"
+                alt="" 
+                aria-label=""
+              >
+              <img
+                  slot="custom-mat-icon" class="button-icon-gradient"
+                  src="../../../assets/icons/icon_difficulty_hard.svg"
+                  alt="Easy difficulty icon"
+                  class="difficulty-icon"
+                  />
+              </app-custom-button>
+            </div> 
           </div>
         </div>
         <div class="O-figure" [@show]="stateFigureO">

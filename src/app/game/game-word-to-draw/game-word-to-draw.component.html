@@ -1,10 +1,16 @@
 <div class="word-container-background">
   <div class="word-container">
     <div>
-      <button class="home-btn" (click)="goToWelcomePage()">
-        <img class="home-icon" src="../../../../assets/house.svg" alt="a house icon with round edges" />
-        {{ 'END_GAME_BUTTON' | translate }}
-      </button>
+      <app-custom-button
+        [buttonStyle]="homeButtonStyleClass"
+        [buttonText]=" 'END_GAME_BUTTON' | translate "
+        iconSrc="../../../../assets/house.svg"
+        (click)="goToWelcomePage()"
+        alt="Go home button" 
+        aria-label="Home button"
+
+        id="home-btn"
+      />
 
       <div class="words-remaining">{{ guessUsed }}/{{ totalRounds }}</div>
 
@@ -65,22 +71,17 @@
           </span>
         </p>
 
-        <div
-          tabindex="0"
-          role="button"
-          class="button-container"
-          aria-disabled="false"
+        <app-custom-button
+          [disabled]="loading && !isSinglePlayer"
+          [buttonStyle]="forwardButtonStyleClass"
+          [buttonText]=" 'DRAW_BUTTON' | translate "
           (keydown)="toDrawingBoard()"
           (click)="toDrawingBoard()"
-          [class]="buttonStyle()"
+
+          id="draw-btn"
         >
-          <button class="next-page-button" [disabled]="loading && !isSinglePlayer">
-            <div class="button-text">
-              {{ 'DRAW_BUTTON' | translate }}
-              <mat-icon class="button-icon play_arrow" aria-label="play_arrow">arrow_forward_ios</mat-icon>
-            </div>
-          </button>
-        </div>
+            <mat-icon slot="custom-mat-icon" class="button-icon-gradient" aria-label="play_arrow">arrow_forward_ios</mat-icon>
+        </app-custom-button>
       </div>
     </footer>
   </div>

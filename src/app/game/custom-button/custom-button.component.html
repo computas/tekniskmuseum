@@ -1,0 +1,47 @@
+@if (getStyle === 'select-mode-button' || getStyle === 'select-mode-button-large' || getStyle === 'forward-button') {
+    <button
+        [disabled]="disabled"
+        [class]="buttonStyle"
+    >
+        @if (buttonStyle === 'forward-button') {
+            <div [class]="'full-gradient-inner'"> 
+                <div class="button-text">
+                    {{ buttonText }}
+                        <mat-icon class="back-button-icon" aria-label="play_arrow">arrow_forward_ios</mat-icon>
+                </div>
+            </div>
+        }   
+        @else {
+            <div [class]="'non-gradient-inner'"> 
+                <div class="button-text">
+                    <ng-content select="[slot='custom-mat-icon']"></ng-content>
+                    @if (getStyle === 'select-mode-button-large' ){ 
+                        <span class="large-text">{{ buttonText }}</span>
+                    } @else {
+                        {{ buttonText }}
+                    }
+                </div>
+            </div>
+        }
+    </button>
+} @else {
+    <button
+        [disabled]="disabled"
+        [class]="buttonStyle"
+    >
+        <div class="button-text">
+            @if (iconSrc) {
+                @if (getStyle === 'back-button'){
+                    <img class="back-button-icon" [src]="iconSrc" [alt]="alt">
+                } @else if (getStyle === 'home-button') {
+                    <img class="button-icon" [src]="iconSrc" [alt]="alt">
+                } @else {
+                    <img class="default" [src]="iconSrc" [alt]="alt">
+                }
+            }
+            {{ buttonText }}
+        </div>
+    </button>
+}
+
+

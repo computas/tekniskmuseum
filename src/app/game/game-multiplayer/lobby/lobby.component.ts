@@ -12,6 +12,8 @@ import { SpeechBubbleComponent } from '../../speech-bubble/speech-bubble.compone
 import { CustomColorsIO } from '@/app/shared/customColors';
 import { PointerSide, ArrowAlignment } from '@/app/shared/models/interfaces';
 import { IAvatarComponent } from '@/assets/avatars/i-avatar/i-avatar.component';
+import { CustomButton } from '../../custom-button/custom-button.component';
+import { ButtonStyleClass } from '@/app/shared/buttonStyles';
 
 @Component({
   selector: 'app-lobby',
@@ -27,6 +29,7 @@ import { IAvatarComponent } from '@/assets/avatars/i-avatar/i-avatar.component';
     TranslatePipe,
     SpeechBubbleComponent,
     IAvatarComponent,
+    CustomButton
   ],
 })
 export class LobbyComponent implements OnInit, OnDestroy {
@@ -39,10 +42,13 @@ export class LobbyComponent implements OnInit, OnDestroy {
   PointerSide = PointerSide;
   ArrowAlignment = ArrowAlignment;
 
-  //Setting the colors of I
+  // Setting the colors of I
   colorOfI = CustomColorsIO.white;
   bubbleColorI = CustomColorsIO.pastelBlue;
   textColorI = CustomColorsIO.black;
+
+  // Setting button style
+  buttonStyleClass = ButtonStyleClass.back;
 
   constructor(
     private gameStateService: GameStateService,

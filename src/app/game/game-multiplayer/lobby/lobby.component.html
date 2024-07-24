@@ -2,13 +2,17 @@
   <div id="lobbyContent">
     <div id="topContent">
       <img class="logo" src="assets/logo/IO-logo-inverted_transparent-bg.png" alt="logo" />
-      <button class="back-button" routerLink="/welcome" routerLinkActive="active" alt="Go back button" aria-label="Return button">
-        <span class="button-text">
-          <!-- <mat-icon class="button-icon" aria-label="Example home icon">arrow_back_ios</mat-icon> -->
-          <img class="back-button-icon" src="../assets/icons/arrow4-svgrepo-com.svg" />
-          {{ 'BACK_BUTTON' | translate }}
-        </span>
-      </button>
+      <app-custom-button
+        [buttonStyle]="buttonStyleClass"
+        [buttonText]=" 'BACK_BUTTON' | translate "
+        iconSrc="../assets/icons/arrow4-svgrepo-com.svg"
+        routerLink="/welcome" 
+        routerLinkActive="active" 
+        alt="Go back button" 
+        aria-label="Return button"
+      >
+        <mat-icon slot="custom-mat-icon" class="button-icon-gradient" aria-label="player two icon">group</mat-icon>
+      </app-custom-button>
     </div>
 
     <div id="waitingForPlayerInfo">

@@ -103,30 +103,26 @@
       </div>
     </div>
     <div class="two-button-container" [@makeVisible]="stateButtons">
-      <button
-        [disabled]="!buttonIsVisible"s
+      <app-custom-button
+        [buttonStyle]="buttonStyleClass"
+        [buttonText]=" 'PLAYER_MODE_SINGLE' | translate "
+        [disabled]="!buttonIsVisible"
         routerLink="/playgame/singleplayer"
         routerLinkActive="active"
         (click)="setSingleplayer()"
-        class="select-mode-button"
       >
-        <div class="button-text">
-          <mat-icon class="button-icon-gradient" aria-label="player one icon">person</mat-icon>
-          {{ 'PLAYER_MODE_SINGLE' | translate }}
-        </div>
-      </button>
-      <button
+        <mat-icon slot="custom-mat-icon" class="button-icon-gradient" aria-label="player one icon">person</mat-icon>
+      </app-custom-button>
+      <app-custom-button
+        [buttonStyle]="buttonStyleClass"
+        [buttonText]=" 'PLAYER_MODE_MULTI' | translate "
         [disabled]="!buttonIsVisible"
         routerLink="/playgame/multiplayer"
         routerLinkActive="active"
         (click)="setMultiplayer()"
-        class="select-mode-button"
       >
-        <div class="button-text">
-          <mat-icon class="button-icon-gradient" aria-label="player two icon">group</mat-icon>
-          {{ 'PLAYER_MODE_MULTI' | translate }}
-        </div>
-      </button>
+        <mat-icon slot="custom-mat-icon" class="button-icon-gradient" aria-label="player two icon">group</mat-icon>
+      </app-custom-button>
     </div>
   </div>
 </div>

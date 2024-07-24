@@ -18,6 +18,8 @@ import { IAvatarComponent } from '@/assets/avatars/i-avatar/i-avatar.component';
 import { SpeechBubbleComponent } from '../speech-bubble/speech-bubble.component';
 import { CustomColorsIO } from '@/app/shared/customColors';
 import { PointerSide, ArrowAlignment } from '@/app/shared/models/interfaces';
+import { CustomButton } from '../custom-button/custom-button.component';
+import { ButtonStyleClass } from '@/app/shared/buttonStyles';
 
 @Component({
   selector: 'app-game-word-to-draw',
@@ -32,6 +34,7 @@ import { PointerSide, ArrowAlignment } from '@/app/shared/models/interfaces';
     TranslatePipe,
     IAvatarComponent,
     SpeechBubbleComponent,
+    CustomButton
   ],
 })
 export class GameWordToDrawComponent implements OnInit, OnDestroy {
@@ -55,6 +58,9 @@ export class GameWordToDrawComponent implements OnInit, OnDestroy {
   CustomColorsIO = CustomColorsIO;
   PointerSide = PointerSide;
   ArrowAlignment = ArrowAlignment;
+
+  homeButtonStyleClass = ButtonStyleClass.home;
+  forwardButtonStyleClass = ButtonStyleClass.forward;
 
   constructor(
     private gameConfigService: GameConfigService,
