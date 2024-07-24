@@ -124,7 +124,7 @@ export class GameResultComponent implements OnInit, OnDestroy {
           if (Math.max(...todaysScores) > 0) {
             this.todaysHighscore = Math.max(...todaysScores);
           }
-          if (this.drawingService.totalScore >= this.todaysHighscore) {
+          if (this.drawingService.totalScore >= this.todaysHighscore && this.score > 0) {
             this.newHighscore = true;
             this.blowConfetti();
           }
