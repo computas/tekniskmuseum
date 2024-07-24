@@ -7,6 +7,7 @@ import { Component, inject, ViewEncapsulation } from '@angular/core';
 import { MatButton } from '@angular/material/button';
 import { MatDialogActions, MatDialogContent, MatDialogRef } from '@angular/material/dialog';
 import { MatIcon } from '@angular/material/icon';
+import { DrawingService } from '@/app/game/services/drawing.service';
 
 @Component({
   selector: 'app-confirm-exit-dialog',
@@ -20,7 +21,8 @@ export class ConfirmExitDialogComponent {
   constructor(
     private router: Router,
     private gameStateService: GameStateService,
-    private multiplayerService: MultiplayerService
+    private multiplayerService: MultiplayerService,
+    private drawingService: DrawingService
   ) {}
 
   readonly dialogRef = inject(MatDialogRef<ConfirmExitDialogComponent>);
@@ -36,6 +38,7 @@ export class ConfirmExitDialogComponent {
   goToWelcomePage() {
     this.dialogRef.close();
     this.gameStateService.clearState();
+    this.drawingService.clearState();
 
     if (this.gameStateService.isMultiplayer()) {
       this.multiplayerService.clearState();

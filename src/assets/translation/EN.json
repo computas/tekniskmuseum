@@ -20,10 +20,10 @@
   "HARD_BUTTON": "Hard",
   "MULTIPLAYER": "Multiplayer",
 
-  "HELP_ME_LEARN": "Can you help me learn?",
   "PLAYER_MODE_SINGLE": "1 player",
   "PLAYER_MODE_MULTI": "2 players",
   "ADMIN_ARIA_LABEL": "Go to admin page",
+  "WAITING": "Waiting",
   "WAITING_FOR_PLAYER": "Waiting for player 2",
 
   "HOW_TO_PLAY_SINGLE": "How to play:",
@@ -68,7 +68,6 @@
   "ROUND_NUMBER": "Round",
   "ROUND_FEEDBACK_FAILED_TITLE": "Oooops!",
   "ROUND_FEEDBACK_FAILED_DESC_1": "couldn't guess that you drew:",
-  "ROUND_FEEDBACK_FAILED_DESC_2": "I can be a bit slow sometimes.. I'll do better next time!",
 
   "ROUND_FEEDBACK_CORRECT_TITLE": "Well drawn!",
   "ROUND_FEEDBACK_CORRECT_DESC_1": "guessed that you drew:",
@@ -97,7 +96,7 @@
   "EXAMPLE_DRAWINGS_FAILED_B1": "I thought you drew",
   "EXAMPLE_DRAWINGS_FAILED_B2": "I have learned that this is",
 
-  "GUESSED_AT": "Guessed on",
+  "GUESSED_AT": "Guessed in",
   "TIME_ABBREVIATION_SECONDS": "s",
   "TIME_OUT": "Out of time.."
 }
