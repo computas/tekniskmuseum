@@ -88,7 +88,7 @@ export class GameResultComponent implements OnInit, OnDestroy {
       this.ismultiplayer = true;
       this.multiplayerService.opponentScore.subscribe((val) => {
         if (val) {
-          if (this.multiplayerService.stateInfo.score) {
+          if (this.multiplayerService.stateInfo.score !== undefined) {
             this.opponentScore = val.score;
             this.hasWon = this.multiplayerService.stateInfo.score >= val.score;
             this.score = this.multiplayerService.stateInfo.score;
