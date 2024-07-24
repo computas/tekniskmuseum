@@ -13,7 +13,7 @@ import { GameStateService } from '../../services/game-state-service';
 })
 export class GameIntermediateResultFooterComponent implements OnInit {
   buttonTextKey = '';
-  waitingForPlayerState = 'WAITING_FOR_PLAYER';
+  waitingForPlayerState = 'WAITING';
   isWaitingForPlayer = false;
 
   constructor(private gameStateService: GameStateService, private multiplayerService: MultiplayerService) {}
