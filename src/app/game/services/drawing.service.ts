@@ -9,7 +9,7 @@ import {
   PredictionData,
   Score,
 } from '@/app/shared/models/backend-interfaces';
-import { Result } from '@/app/shared/models/interfaces';
+import { Certainty, Result } from '@/app/shared/models/interfaces';
 import { ResultsMock } from '@/app/shared/mocks/results.mock';
 import { endpoints } from '@/app/shared/models/endpoints';
 import { TranslationService } from '@/app/core/translation.service';
@@ -30,6 +30,7 @@ export class DrawingService {
   classificationDone = false;
   guess = '';
   secondsUsedOnLastRound = 0;
+  sortedCertainty: Certainty[] = [];
 
   private readonly _guessUsed = new BehaviorSubject<number>(1);
   private readonly _gameOver = new BehaviorSubject<boolean>(false);
