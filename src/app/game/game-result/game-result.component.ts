@@ -73,7 +73,6 @@ export class GameResultComponent implements OnInit, OnDestroy {
   CustomColorsIO = CustomColorsIO;
   PointerSide = PointerSide;
   ArrowAlignment = ArrowAlignment;
-  titleText = 'Bra jobba! Du og O er et bra team';
 
   constructor(
     private gameStateService: GameStateService,
