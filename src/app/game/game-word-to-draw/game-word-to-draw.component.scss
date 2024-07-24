@@ -11,10 +11,14 @@
 }
 
 .words-remaining {
+  font-style: AeonikMedium;
   text-align: center;
   font-size: 2em;
-  font-style: italic;
   margin-bottom: 32px;
+}
+
+.white-spinner {
+  margin-top: 2rem;
 }
 
 .home-btn {
@@ -55,17 +59,36 @@
   font-size: 2em;
 }
 
+.word-draw {
+  font-family: AeonikRegular;
+  font-size: --var(fontSizeMedium);
+}
+
 .word-text {
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  padding: 5rem;
+  margin: 2rem 0rem;
+  padding: 2rem;
+  min-width: 47vw;
+}
+
+.word-to-guess {
+  margin-top: 1.5rem;
+  font-size: 64px;
+  font-family: AeonikMedium;
+}
+
+.timer {
+  font-family: AeonikMedium;
+  font-size: var(--fontSizeLarge);
+  margin-top: 1.5rem;
 }
 
 .i-container {
   position: absolute;
-  bottom: 150px;
+  bottom: 170px;
   left: 170px;
 }
 
