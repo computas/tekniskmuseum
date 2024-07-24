@@ -12,7 +12,7 @@ footer {
   padding: 0.5em;
   border-radius: var(--buttonBorderRadius);
   border: 3px solid white;
-  background: linear-gradient(90deg, #151cdb 0%, #6b2eac 25%, #fd595d 50%, #bea97e 75%, #1bc0d2 100%);
+  background: $full_gradient;
 }
 
 .disabled {
@@ -24,27 +24,19 @@ footer {
   cursor: inherit;
   padding: 0.1em 0.5em;
   background-color: rgba(0, 0, 0, 0.3);
-  color: $text_primary_color;
+  color: $white_color;
   font-size: var(--fontSizeSmall);
   border-radius: var(--buttonBorderRadius);
 }
 .button-container:hover {
   text-decoration: none;
-  color: #fff;
+  color: $white_color;
 }
-.button-container:before {
-  position: absolute;
-  content: '';
-  display: inline-block;
-  top: -180px;
-  left: 0;
-  width: 30px;
-  height: 100%;
-  animation: shiny-btn1 3s ease-in-out infinite;
-}
+
 .button-container:hover {
   opacity: 0.9;
 }
+
 .button-container:active {
   box-shadow: 4px 4px 6px 0 rgba(255, 255, 255, 0.15), -4px -4px 6px 0 rgba(116, 125, 136, 0.2),
     inset -4px -4px 6px 0 rgba(255, 255, 255, 0.2), inset 4px 4px 6px 0 rgba(0, 0, 0, 0.2);
@@ -59,5 +51,5 @@ footer {
 }
 
 .button-icon {
-  height: 40px;
+  height: 36px;
 }

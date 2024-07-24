@@ -7,7 +7,7 @@
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  color: $text_primary_color;
+  color: $white_color;
 }
 
 .words-remaining {
@@ -30,8 +30,8 @@
   justify-content: center;
   align-items: center;
   padding: 0.5em 1em;
-  background: white;
-  color: black;
+  background: $white_color;
+  color: $black_color;
   font-size: 1.25rem;
   border-radius: 5rem;
   gap: 0.5rem;
@@ -140,7 +140,7 @@ p {
   top: 0px;
   position: absolute;
   padding: 35px;
-  color: $text_primary_color;
+  color: $white_color;
   font-weight: 500;
 }
 
@@ -165,14 +165,14 @@ footer {
   justify-self: end;
   padding: 0.7em;
   border-radius: 5em;
-  background: linear-gradient(90deg, #151cdb 0%, #6b2eac 25%, #fd595d 50%, #bea97e 75%, #1bc0d2 100%);
+  background: $full_gradient;
   margin-right: 1rem;
 }
 
 .next-page-button {
   padding: 0.6em 0.8em;
   background-color: rgba(0, 0, 0, 0.3);
-  color: $text_primary_color;
+  color: $white_color;
   font-weight: bold;
   font-size: 1.45rem;
   border-radius: 5em;
@@ -180,7 +180,7 @@ footer {
 }
 .button-container:hover {
   text-decoration: none;
-  color: #fff;
+  color: $white_color;
 }
 .button-container:before {
   position: absolute;

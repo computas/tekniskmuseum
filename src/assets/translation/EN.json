@@ -3,7 +3,7 @@
   "I_TEACHING_O_1": "This is what an APPLE looks like!",
   "I_TEACHING_O_2": "I thought this was an APPLE...",
   "I_TEACHING_O_3": "Yes, they are both APPLES!",
-  "I_TEACHING_O_4": "Ah, teach me image recognition!",
+  "I_TEACHING_O_4": "Ah, I will remember that!",
 
   "INTRO_MESSAGE": "Hi, I am ",
   "INTRO_MESSAGE_2": "And I am ",
@@ -20,11 +20,11 @@
   "HARD_BUTTON": "Hard",
   "MULTIPLAYER": "Multiplayer",
 
-  "HELP_ME_LEARN": "Can you help me learn?",
   "PLAYER_MODE_SINGLE": "1 player",
   "PLAYER_MODE_MULTI": "2 players",
-  "WAITING_FOR_PLAYER": "Waiting",
   "ADMIN_ARIA_LABEL": "Go to admin page",
+  "WAITING": "Waiting",
+  "WAITING_FOR_PLAYER": "Waiting for player 2",
 
   "HOW_TO_PLAY_SINGLE": "How to play:",
   "HOW_TO_PLAY_MULTI": "How to play:",
@@ -40,7 +40,7 @@
   "DRAW_BUTTON": "Draw",
   "CLEAR_BUTTON": "Clear",
   "AI_THINKING_LABEL": "Hmm... ",
-  "AI_GUESS_LABEL": "could it be ",
+  "AI_GUESS_LABEL": "could it be",
 
   "WON_SENTENCE": "Hurrah, I guessed that you drew ",
   "LOST_SENTENCE": "Sorry, I couldn't guess what you drew",
@@ -68,7 +68,6 @@
   "ROUND_NUMBER": "Round",
   "ROUND_FEEDBACK_FAILED_TITLE": "Oooops!",
   "ROUND_FEEDBACK_FAILED_DESC_1": "couldn't guess that you drew:",
-  "ROUND_FEEDBACK_FAILED_DESC_2": "I can be a bit slow sometimes.. I'll do better next time!",
 
   "ROUND_FEEDBACK_CORRECT_TITLE": "Well drawn!",
   "ROUND_FEEDBACK_CORRECT_DESC_1": "guessed that you drew:",
@@ -86,7 +85,7 @@
   "SUMMARY_I_NO_POINTS_3": "0 points",
   "SUMMARY_O_NO_POINTS": "Press Play again, and we can try again!",
 
-  "SUMMARY_I_MULTIPLAYER_WIN_1": "Fantastic, you won! You got",
+  "SUMMARY_I_MULTIPLAYER_WIN": "Fantastic, you won! You got",
   "SUMMARY_I_MULTIPLAYER_LOSS": "You lost! You got",
   "SUMMARY_I_MULTIPLAYER_DRAW": "It's a draw! You got",
 
@@ -97,7 +96,7 @@
   "EXAMPLE_DRAWINGS_FAILED_B1": "I thought you drew",
   "EXAMPLE_DRAWINGS_FAILED_B2": "I have learned that this is",
 
-  "GUESSED_AT": "Guessed on",
+  "GUESSED_AT": "Guessed in",
   "TIME_ABBREVIATION_SECONDS": "s",
   "TIME_OUT": "Out of time.."
 }
