@@ -8,7 +8,7 @@
 }
 
 .user-drawing-board {
-  border-radius: 0.6em;
+  border-radius: 1em;
   padding: 0.4em; // this is what controls the width of the border
   background-color: white;
   width: 390px;
@@ -19,7 +19,7 @@
   height: 100%;
   width: 100%;
   background: white;
-  border-radius: 0.3em;
+  border-radius: 1em;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -31,11 +31,11 @@
 }
 
 .correct {
-  background-color: $positive_feedback_color;
+  background-color: $green_color;
 }
 
 .incorrect {
-  background-color: $negative_feedback_color;
+  background-color: $red_color;
 }
 
 .score-and-time-container {
@@ -50,14 +50,14 @@
 
 .round-score-text {
   margin-left: auto; // this pushes points to right when the second counter isn't displayed
-  font-family: 'AeonikBold';
+  font-family: 'AeonikMedium';
   font-size: var(--fontSizeMedium);
 }
 
 .green-text {
-  color: $positive_feedback_color;
+  color: $green_color;
 }
 
 .red-text {
-  color: $negative_feedback_color;
+  color: $red_color;
 }
