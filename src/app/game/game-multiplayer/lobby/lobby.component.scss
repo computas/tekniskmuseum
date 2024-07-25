@@ -29,34 +29,11 @@
   }
 }
 
-#homeButton {
-  background: $white_color;
-  color: $dark_blue_color;
-  box-shadow: 0 8px 16px 0 rgba(0, 0, 0, 0.1), 0 6px 20px 0 rgba(0, 0, 0, 0.15);
-  font-size: var(--fontSizeSmall);
-  border-radius: 5rem;
-  height: var(--fontSizeLarge);
-  min-width: 14rem;
-  max-width: 20rem;
-}
-
-.buttonText {
-  display: flex;
-  flex-direction: row;
-  justify-content: center;
-  align-items: center;
-}
-
-.buttonIcon {
-  color: $dark_blue_color;
-  margin-right: 1rem;
-  font-size: var(--fontSizeSmall);
-}
-
 #waitingForPlayerInfo {
   display: flex;
   flex-direction: row;
   align-items: center;
+  color: $text_primary_color;
 
   app-i-avatar {
     margin-bottom: 5rem;
@@ -82,7 +59,7 @@
   aspect-ratio: 2;
   position: relative;
   top: 0.15rem;
-  --dot-gradient: no-repeat radial-gradient(circle closest-side, #000000 90%, transparent); // Color of the second parameter == I's text color
+  --dot-gradient: no-repeat radial-gradient(circle closest-side, #ffffff 90%, transparent); // Color of the second parameter == I's text color
   background: var(--dot-gradient) 0% 50%, var(--dot-gradient) 50% 50%, var(--dot-gradient) 100% 50%;
   background-size: calc(100% / 3) 40%;
   animation: l3 1s infinite linear;

@@ -1,7 +1,12 @@
 <header class="header">
-  <button class="home-btn" (click)="openDialog()">
-    {{ 'END_GAME_BUTTON' | translate }}
-  </button>
+  <app-custom-button
+    [buttonStyle]="homeButtonStyleClass"
+    [buttonText]="'END_GAME_BUTTON' | translate"
+    iconSrc="../../../../assets/house.svg"
+    (click)="openDialog()"
+    alt="Go home button"
+    aria-label="Home button"
+  />
   <app-game-progress-bar class="game-progress-bar"></app-game-progress-bar>
   <img class="logo" src="assets/logo/IO-logo-inverted_transparent-bg.png" alt="logo" />
 </header>

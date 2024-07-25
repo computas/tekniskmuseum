@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { Router } from '@angular/router';
+import { Router, RouterLink, RouterLinkActive } from '@angular/router';
 import { routes } from '../../shared/models/routes';
 import { MatButton } from '@angular/material/button';
 import { MatIcon } from '@angular/material/icon';
@@ -13,13 +13,24 @@ import { SpeechBubbleComponent } from '../../game/speech-bubble/speech-bubble.co
 import { CustomColorsIO } from '../../shared/customColors';
 import { ArrowAlignment, PointerSide } from '@/app/shared/models/interfaces';
 import { trigger, state, style, animate, transition } from '@angular/animations';
+import { ButtonStyleClass } from '@/app/shared/buttonStyles';
+import { CustomButtonComponent } from '../custom-button/custom-button.component';
 
 @Component({
   selector: 'app-game-pick-difficulty',
   templateUrl: './game-pick-difficulty.component.html',
   styleUrl: './game-pick-difficulty.component.scss',
   standalone: true,
-  imports: [NgIf, MatIcon, MatButton, TranslatePipe, SpeechBubbleComponent],
+  imports: [
+    NgIf,
+    MatIcon,
+    MatButton,
+    TranslatePipe,
+    SpeechBubbleComponent,
+    RouterLink,
+    RouterLinkActive,
+    CustomButtonComponent,
+  ],
   animations: [
     trigger('show', [
       state('hidden', style({ opacity: 0 })),
@@ -36,12 +47,16 @@ export class GamePickDifficultyComponent implements OnInit {
   ArrowAlignment = ArrowAlignment;
   CustomColorsIO = CustomColorsIO;
 
+  buttonStyleClass = ButtonStyleClass.select;
+
   stateFigureI = 'hidden';
   stateFigureO = 'hidden';
   stateFirstBubbleI = 'hidden';
   stateFirstBubbleO = 'hidden';
   stateButtons = 'hidden';
   buttonsAreDisabled = true;
+
+  homeButtonStyleClass = ButtonStyleClass.back;
 
   constructor(
     private gameConfigService: GameConfigService,

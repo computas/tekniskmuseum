@@ -4,12 +4,17 @@
   </button>
   <div id="lobbyContent">
     <div id="topContent">
-      <button mat-raised-button id="homeButton" routerLink="/welcome" routerLinkActive="active">
-        <span class="buttonText">
-          <mat-icon class="buttonIcon" aria-label="Home icon" alt="Go back button">home</mat-icon>
-          {{ 'BACK_BUTTON' | translate }}
-        </span>
-      </button>
+      <app-custom-button
+        [buttonStyle]="buttonStyleClass"
+        [buttonText]="'BACK_BUTTON' | translate"
+        iconSrc="../assets/icons/arrow4-svgrepo-com.svg"
+        routerLink="/welcome"
+        routerLinkActive="active"
+        alt="Go back button"
+        aria-label="Return button"
+      >
+        <mat-icon slot="custom-mat-icon" class="button-icon-gradient" aria-label="player two icon">group</mat-icon>
+      </app-custom-button>
     </div>
 
     <div id="waitingForPlayerInfo">

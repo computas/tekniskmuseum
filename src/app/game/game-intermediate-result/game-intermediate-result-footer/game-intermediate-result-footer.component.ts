@@ -4,10 +4,12 @@ import { MatIcon } from '@angular/material/icon';
 import { GAMESTATE } from '@/app/shared/models/interfaces';
 import { MultiplayerService } from '../../services/multiplayer.service';
 import { GameStateService } from '../../services/game-state-service';
+import { CustomButtonComponent } from '../../custom-button/custom-button.component';
+import { ButtonStyleClass } from '@/app/shared/buttonStyles';
 @Component({
   selector: 'app-game-intermediate-result-footer',
   standalone: true,
-  imports: [TranslatePipe, MatIcon],
+  imports: [TranslatePipe, MatIcon, CustomButtonComponent],
   templateUrl: './game-intermediate-result-footer.component.html',
   styleUrl: './game-intermediate-result-footer.component.scss',
 })
@@ -15,6 +17,8 @@ export class GameIntermediateResultFooterComponent implements OnInit {
   buttonTextKey = '';
   waitingForPlayerState = 'WAITING';
   isWaitingForPlayer = false;
+
+  buttonStyleClass = ButtonStyleClass.forward;
 
   constructor(private gameStateService: GameStateService, private multiplayerService: MultiplayerService) {}
 

@@ -1,8 +1,13 @@
 @import './../../../../variables.scss';
 
 footer {
-  display: grid;
-  grid-template-columns: repeat(8, 1fr);
+  display: flex;
+  flex-direction: row-reverse;
+}
+
+.disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
 }
 
 .button-container,
@@ -14,20 +19,7 @@ footer {
   border: 3px solid white;
   background: $full_gradient;
 }
-
-.disabled {
-  opacity: 0.6;
-  cursor: not-allowed;
-}
-
-.next-page-button {
-  cursor: inherit;
-  padding: 0.1em 0.5em;
-  background-color: rgba(0, 0, 0, 0.3);
-  color: $white_color;
-  font-size: var(--fontSizeSmall);
-  border-radius: var(--buttonBorderRadius);
-}
+/* 
 .button-container:hover {
   text-decoration: none;
   color: $white_color;
@@ -40,16 +32,4 @@ footer {
 .button-container:active {
   box-shadow: 4px 4px 6px 0 rgba(255, 255, 255, 0.15), -4px -4px 6px 0 rgba(116, 125, 136, 0.2),
     inset -4px -4px 6px 0 rgba(255, 255, 255, 0.2), inset 4px 4px 6px 0 rgba(0, 0, 0, 0.2);
-}
-
-.button-text {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  gap: 0.3em;
-  font-family: AeonikRegular;
-}
-
-.button-icon {
-  height: 36px;
-}
+} */

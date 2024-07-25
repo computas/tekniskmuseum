@@ -77,6 +77,55 @@ button,
   font-family: ICTHofmannRegular;
 }
 
+@mixin icon($gradient: false, $back: false, $home: false) {
+  min-height: var(--fontSizeMedium);
+  max-height: var(--fontSizeMedium);
+  min-width: var(--fontSizeLarge);
+  max-width: var(--fontSizeLarge);
+
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+
+  color: $button_content_color;
+
+  @if $gradient {
+    font-size: var(--fontSizeMedium);
+    background: linear-gradient(0deg, #1f60de 0%, #681fde 14%, #ec526d 71%, #edba86 100%);
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
+  } @else if $back {
+    margin-top: 1rem;
+    color: $text_primary_color;
+  } @else if $home {
+    color: $text_primary_color;
+  }
+}
+
+.button-icon {
+  @include icon;
+}
+
+.back-button-icon {
+  @include icon(false, true);
+}
+
+.home-button-icon {
+  @include icon(false, false, true);
+}
+
+.button-icon-gradient {
+  @include icon(true);
+}
+
+.two-button-container {
+  margin-top: 0;
+  display: inline-flex;
+  align-items: center;
+  gap: 3rem;
+  margin-bottom: 50px;
+}
+
 .logo {
   position: absolute;
   top: 0;

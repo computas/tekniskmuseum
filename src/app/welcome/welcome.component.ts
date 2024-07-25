@@ -15,13 +15,24 @@ import { ArrowAlignment, PointerSide } from '@/app/shared/models/interfaces';
 import { trigger, state, style, animate, transition } from '@angular/animations';
 import { SpeechBubbleComponent } from '../game/speech-bubble/speech-bubble.component';
 import { CustomColorsIO } from '../shared/customColors';
+import { CustomButtonComponent } from '../game/custom-button/custom-button.component';
+import { ButtonStyleClass } from '@/app/shared/buttonStyles';
 
 @Component({
   selector: 'app-welcome',
   templateUrl: './welcome.component.html',
   styleUrls: ['./welcome.component.scss'],
   standalone: true,
-  imports: [RouterLink, RouterLinkActive, MatButton, MatIcon, TranslatePipe, CommonModule, SpeechBubbleComponent],
+  imports: [
+    RouterLink,
+    RouterLinkActive,
+    MatButton,
+    MatIcon,
+    TranslatePipe,
+    CommonModule,
+    SpeechBubbleComponent,
+    CustomButtonComponent,
+  ],
 
   animations: [
     trigger('moveFigure', [
@@ -63,6 +74,8 @@ export class WelcomeComponent implements OnInit, OnDestroy {
   PointerSide = PointerSide;
   ArrowAlignment = ArrowAlignment;
   CustomColorsIO = CustomColorsIO;
+
+  buttonStyleClass = ButtonStyleClass.selectLarge;
 
   constructor(
     private multiplayerService: MultiplayerService,

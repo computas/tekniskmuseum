@@ -26,6 +26,8 @@ import confetti from 'canvas-confetti';
 import { confettiSettings, iConfettiFigure, oConfettiFigure } from '@/assets/avatars/confetti-config';
 import { IAvatarComponent } from '@/assets/avatars/i-avatar/i-avatar.component';
 import { OAvatarComponent } from '@/assets/avatars/o-avatar/o-avatar.component';
+import { ButtonStyleClass } from '@/app/shared/buttonStyles';
+import { CustomButtonComponent } from '../custom-button/custom-button.component';
 
 @Component({
   selector: 'app-game-result',
@@ -41,6 +43,7 @@ import { OAvatarComponent } from '@/assets/avatars/o-avatar/o-avatar.component';
     SpeechBubbleComponent,
     IAvatarComponent,
     OAvatarComponent,
+    CustomButtonComponent,
   ],
   animations: [
     trigger('fadeIn', [
@@ -73,6 +76,9 @@ export class GameResultComponent implements OnInit, OnDestroy {
   CustomColorsIO = CustomColorsIO;
   PointerSide = PointerSide;
   ArrowAlignment = ArrowAlignment;
+
+  homeButtonStyleClass = ButtonStyleClass.home;
+  playAgainButtonStyleClass = ButtonStyleClass.select;
 
   constructor(
     private gameStateService: GameStateService,

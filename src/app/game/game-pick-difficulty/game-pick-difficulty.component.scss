@@ -27,7 +27,7 @@
 .text-content {
   display: flex;
   justify-content: start;
-  width: 1100px;
+  width: 70ww;
 }
 
 .speech-bubbles {
@@ -47,10 +47,10 @@
 }
 
 .I-figure {
-  min-width: 100px;
+  min-width: 50px;
   display: flex;
   justify-content: flex-end;
-  margin-top: 220px;
+  margin-top: 10rem;
 }
 
 .O-figure {
@@ -64,54 +64,13 @@
   margin: 20px;
   display: inline-flex;
   align-items: center;
-  gap: 40px;
+  gap: 1.5rem;
   margin-left: 60px;
   margin-right: 20px;
 }
 
-.button {
-  display: inline-flex;
-  justify-content: center;
-  align-items: center;
-  gap: 10px;
-  box-shadow: 0 8px 16px 0 rgba(0, 0, 0, 0.1), 0 6px 20px 0 rgba(0, 0, 0, 0.15);
-  font-size: 30px;
-  border-radius: 50px;
-  height: 60px;
-  margin-top: 10px;
-  min-width: 200px;
-  max-width: 400px;
-  background: $white_color;
-}
-.button:hover {
-  opacity: 0.95;
-}
-.button:active {
-  box-shadow: 4px 4px 6px 0 rgba(255, 255, 255, 0.15), -4px -4px 6px 0 rgba(116, 125, 136, 0.2),
-    inset -4px -4px 6px 0 rgba(255, 255, 255, 0.2), inset 4px 4px 6px 0 rgba(0, 0, 0, 0.2);
-}
-.difficulty-icon {
-  display: flex;
-  padding: 2px 0px;
-  align-items: flex-end;
-  gap: 2px;
-  align-self: stretch;
-  width: 25px;
-}
-
-.button-text {
-  display: flex;
-  flex-direction: row;
-  justify-content: center;
-  align-items: center;
-  color: $dark_blue_color;
-}
-.button-icon {
-  margin-left: 16px;
-  font-size: 36px;
-  background: $icon_gradient;
-  background-clip: text;
-  -webkit-text-fill-color: transparent;
-  height: 100%;
-  width: 40px;
+#back-btn {
+  position: absolute;
+  top: 2rem;
+  left: 2rem;
 }

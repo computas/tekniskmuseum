@@ -98,5 +98,7 @@
 
   "GUESSED_AT": "Guessed in",
   "TIME_ABBREVIATION_SECONDS": "s",
-  "TIME_OUT": "Out of time.."
+  "TIME_OUT": "Out of time..",
+
+  "HOME": "Home"
 }
