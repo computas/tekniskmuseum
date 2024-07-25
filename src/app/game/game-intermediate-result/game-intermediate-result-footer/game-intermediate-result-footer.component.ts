@@ -4,12 +4,12 @@ import { MatIcon } from '@angular/material/icon';
 import { GAMESTATE } from '@/app/shared/models/interfaces';
 import { MultiplayerService } from '../../services/multiplayer.service';
 import { GameStateService } from '../../services/game-state-service';
-import { CustomButton } from '../../custom-button/custom-button.component';
+import { CustomButtonComponent } from '../../custom-button/custom-button.component';
 import { ButtonStyleClass } from '@/app/shared/buttonStyles';
 @Component({
   selector: 'app-game-intermediate-result-footer',
   standalone: true,
-  imports: [TranslatePipe, MatIcon, CustomButton],
+  imports: [TranslatePipe, MatIcon, CustomButtonComponent],
   templateUrl: './game-intermediate-result-footer.component.html',
   styleUrl: './game-intermediate-result-footer.component.scss',
 })

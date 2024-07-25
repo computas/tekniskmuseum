@@ -12,7 +12,7 @@ import { SpeechBubbleComponent } from '../../speech-bubble/speech-bubble.compone
 import { CustomColorsIO } from '@/app/shared/customColors';
 import { PointerSide, ArrowAlignment } from '@/app/shared/models/interfaces';
 import { IAvatarComponent } from '@/assets/avatars/i-avatar/i-avatar.component';
-import { CustomButton } from '../../custom-button/custom-button.component';
+import { CustomButtonComponent } from '../../custom-button/custom-button.component';
 import { ButtonStyleClass } from '@/app/shared/buttonStyles';
 
 @Component({
@@ -29,7 +29,7 @@ import { ButtonStyleClass } from '@/app/shared/buttonStyles';
     TranslatePipe,
     SpeechBubbleComponent,
     IAvatarComponent,
-    CustomButton
+    CustomButtonComponent,
   ],
 })
 export class LobbyComponent implements OnInit, OnDestroy {
