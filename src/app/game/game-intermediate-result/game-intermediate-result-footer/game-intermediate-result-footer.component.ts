@@ -15,7 +15,7 @@ import { ButtonStyleClass } from '@/app/shared/buttonStyles';
 })
 export class GameIntermediateResultFooterComponent implements OnInit {
   buttonTextKey = '';
-  waitingForPlayerState = 'WAITING_FOR_PLAYER';
+  waitingForPlayerState = 'WAITING';
   isWaitingForPlayer = false;
 
   buttonStyleClass = ButtonStyleClass.forward;
@@ -27,7 +27,7 @@ export class GameIntermediateResultFooterComponent implements OnInit {
 
     if (this.gameStateService.isSingleplayer()) return;
 
-    this.isWaitingForPlayer = true;
+    this.isWaitingForPlayer = true; // default in multiplayer set to true
     this.multiplayerService.stateInfo$.subscribe((res) => {
       if (res.ready) {
         this.isWaitingForPlayer = false;

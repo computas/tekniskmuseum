@@ -1,19 +1,5 @@
 @import '../../../variables.scss';
 
-.game-info-container-background {
-  position: relative;
-}
-.game-info-container-background:before {
-  content: '';
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  position: absolute;
-  background-image: url('../../../assets/background/io_rutemoenster-inverted.png');
-  background-size: cover;
-  background-color: black;
-}
 .game-info-container {
   position: relative;
 }
@@ -22,7 +8,7 @@
 }
 .game-info-text-header {
   font-family: AeonikBlack;
-  color: $text_primary_color;
+  color: $white_color;
   text-align: center;
   font-size: 34px;
   font-weight: 500;
@@ -75,7 +61,7 @@
   }
 }
 .game-info-text-list {
-  color: $text_primary_color;
+  color: $white_color;
 }
 .game-info-text-list > li {
   font-size: 24px;
@@ -99,14 +85,6 @@
 .avatar-image {
   height: 250px;
 }
-.logo {
-  position: absolute;
-  top: 0;
-  left: 0;
-  margin: 35px;
-  height: 44px;
-  width: 70px;
-}
 
 .button {
   box-shadow: 0 8px 16px 0 rgba(0, 0, 0, 0.1), 0 6px 20px 0 rgba(0, 0, 0, 0.15);
@@ -125,8 +103,8 @@
   }
 }
 #get-word-button {
-  background: $button_background_color;
-  color: $button_content_color;
+  background: $white_color;
+  color: $dark_blue_color;
   float: right;
 }
 @media (min-width: 600px) {
@@ -135,8 +113,8 @@
   }
 }
 #back-button {
-  background: $button_background_color;
-  color: $button_content_color;
+  background: $white_color;
+  color: $dark_blue_color;
 }
 .button-text {
   display: flex;
@@ -145,7 +123,7 @@
   align-items: center;
 }
 .button-icon {
-  color: $button_content_color;
+  color: $dark_blue_color;
   margin-right: 16px;
   font-size: 36px !important;
   height: 36px;
@@ -157,16 +135,16 @@
   display: flex;
   align-items: center;
   font-weight: 500;
-  color: $text_primary_color;
+  color: $white_color;
 }
 .player-mode > .material-icons {
   margin-right: 5px;
-  background: linear-gradient(to top, #2514d1 0%, #f14a64 55%, #de7d6e 90%);
+  background: $icon_gradient;
   background-clip: text;
   -webkit-text-fill-color: transparent;
 }
 .play_arrow {
-  color: $button_content_color;
+  color: $dark_blue_color;
   margin-right: 0px;
   margin-left: 45px;
 }

@@ -1,7 +1,7 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { SpeechBubbleComponent } from '@/app/game/speech-bubble/speech-bubble.component';
 import { OAvatarComponent } from '@/assets/avatars/o-avatar/o-avatar.component';
-import { ArrowAlignment, PointerSide } from '@/app/shared/models/interfaces';
+import { ArrowAlignment, Certainty, PointerSide } from '@/app/shared/models/interfaces';
 import { CustomColorsIO } from '@/app/shared/customColors';
 import { TranslatePipe } from '@/app/core/translation.pipe';
 import { ExampleDrawingService } from '@/app/game/services/example-drawing.service';
@@ -39,7 +39,7 @@ export class WrongGuessComponent implements OnInit, OnDestroy {
 
   ngOnInit(): void {
     this.label = this.drawingService.lastResult.word;
-    this.guess = this.drawingService.lastResult.guess;
+    this.updateAiGuess(this.drawingService.sortedCertainty);
 
     if (this.gameStateService.isSingleplayer()) {
       this.exampleDrawings = this.exampleDrawingService.getExampleDrawings(2);
@@ -79,5 +79,11 @@ export class WrongGuessComponent implements OnInit, OnDestroy {
           this.guessedDrawings = res;
         })
     );
+  }
+  updateAiGuess(sortedCertaintyArr: Certainty[]) {
+    if (sortedCertaintyArr && sortedCertaintyArr.length > 1) {
+      const bestGuess = sortedCertaintyArr[0].label;
+      this.guess = bestGuess === this.label ? sortedCertaintyArr[1].label : bestGuess;
+    }
   }
 }

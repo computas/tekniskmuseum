@@ -145,6 +145,7 @@ export class GameDrawComponent implements OnInit, OnDestroy {
       this.prediction = prediction;
       const sortedCertaintyArr = this.sortOnCertainty(prediction);
       this.updateAiGuess(sortedCertaintyArr);
+      this.drawingService.sortedCertainty = sortedCertaintyArr;
       if (this.prediction && this.prediction.hasWon && !this.hasAddedResult) {
         this.soundService.playResultSound(this.prediction.hasWon);
         this.updateResult(true);
@@ -348,7 +349,7 @@ export class GameDrawComponent implements OnInit, OnDestroy {
       this.updateAiGuess(sortedCertaintyArr);
       if (this.drawingService.roundIsDone(res.hasWon, res.gameState)) {
         this.gameStateService.goToPage(GAMESTATE.intermediateResult);
-
+        this.drawingService.sortedCertainty = sortedCertaintyArr;
         this.soundService.playResultSound(res.hasWon);
         const score = this.score > 0 ? this.score : 0;
         this.drawingService.lastResult.score = Math.round(score);

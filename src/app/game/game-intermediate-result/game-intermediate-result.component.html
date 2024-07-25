@@ -1,12 +1,10 @@
-<div class="intermediate-container-background">
+<div class="container-background">
   <div id="intermediate-container">
     <app-game-intermediate-result-header class="result-header"></app-game-intermediate-result-header>
-    <app-game-drawing-feedback class="avatar-feedback" [hasCorrectGuess]="result?.hasWon"></app-game-drawing-feedback>
+    <app-game-drawing-feedback class="avatar-feedback"></app-game-drawing-feedback>
     <app-game-drawing-display
-      class="user-drawing-and-score"
       [drawingURL]="result?.imageData"
-      [hasCorrectGuess]="result?.hasWon"
-      [roundScore]="result?.score"
+      class="user-drawing-and-score"
     ></app-game-drawing-display>
     <app-game-example-drawings class="example-drawings"></app-game-example-drawings>
     <app-game-intermediate-result-footer class="footer"></app-game-intermediate-result-footer>

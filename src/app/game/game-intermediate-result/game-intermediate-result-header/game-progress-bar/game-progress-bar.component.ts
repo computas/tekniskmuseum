@@ -11,7 +11,6 @@ import { GameStateService } from '@/app/game/services/game-state-service';
   styleUrl: './game-progress-bar.component.scss',
 })
 export class GameProgressBarComponent implements OnInit {
-  roundNumberProgress = '';
   currentRoundNumber = 0;
   totalRounds = 0;
 

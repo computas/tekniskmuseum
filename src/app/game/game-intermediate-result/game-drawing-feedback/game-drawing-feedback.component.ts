@@ -1,6 +1,6 @@
 import { TranslatePipe } from '@/app/core/translation.pipe';
 import { SpeechBubbleComponent } from '../../speech-bubble/speech-bubble.component';
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { ArrowAlignment, PointerSide } from '@/app/shared/models/interfaces';
 import { CustomColorsIO } from '../../../shared/customColors';
 import { IAvatarComponent } from '@/assets/avatars/i-avatar/i-avatar.component';
@@ -14,7 +14,7 @@ import { DrawingService } from '../../services/drawing.service';
   styleUrl: './game-drawing-feedback.component.scss',
 })
 export class GameDrawingFeedbackComponent implements OnInit {
-  @Input() hasCorrectGuess: boolean | undefined; // TODO check if it is possible to disregard undefined type for later
+  hasCorrectGuess = false;
   feedbackTitleKey = '';
   feedbackDescriptionKey = '';
   correctGuess = true;
@@ -27,6 +27,7 @@ export class GameDrawingFeedbackComponent implements OnInit {
   constructor(private drawingService: DrawingService) {}
 
   ngOnInit(): void {
+    this.hasCorrectGuess = this.drawingService.lastResult.hasWon;
     this.setFeedbackText();
     this.label = this.drawingService.label;
   }

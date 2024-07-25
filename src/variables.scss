@@ -1,7 +1,7 @@
 //Buttons
 $button_background_color: #fff;
 $button_background_secondary_color: #fae6e6;
-$button_content_color: #1F60DE;
+$button_content_color: #1f60de;
 
 //Text
 $text_primary_color: #ffffff;
@@ -15,14 +15,47 @@ $chat_bubble_o_bg_color: #d9d9d9;
 $chat_bubble_bg_color_pastelBlue: #bce1e6;
 $chat_bubble_color_i: #35399f;
 $chat_bubble_color_o: #673b9f;
+//Background and text
+$black_color: #030303;
+$white_color: #fbfbfb;
 
 //Feedback colors
-$negative_feedback_color: #fd595d;
-$negative_feedback_color_bright: #de0d0d;
-$positive_feedback_color: #00d83c;
+$red_color: #f52147;
+$light_red_color: #ffd6d6;
+$green_color: #2df85a;
+
+//Accent colors
+$dark_blue_color: #2438c2;
+$dark_purple_color: #24115a;
+$light_grey_color: #b5b5b5;
+$darker_grey_color: #707070;
+
+//Gradient colors
+$pink_color: #ec526d;
+$yellow_color: #eec589;
+$tame_yellow_color: #edba86;
+$turquoise_color: #1cceda;
+$blue_color: #1f60de;
+$purple_color: #681fde;
+
+$icon_gradient: linear-gradient(
+  0deg,
+  $blue_color 0%,
+  $purple_color 13.17%,
+  $pink_color 69.27%,
+  $tame_yellow_color 97.56%
+);
+$full_gradient: linear-gradient(
+  90deg,
+  $blue_color -5.18%,
+  $purple_color 19.82%,
+  $pink_color 44.82%,
+  $yellow_color 69.82%,
+  $turquoise_color 94.82%
+);
 
 * {
-  --fontSizeSmall: 28px;
+  --fontSizeSmall: 32px;
   --fontSizeMedium: 36px;
   --fontSizeLarge: 48px;
 

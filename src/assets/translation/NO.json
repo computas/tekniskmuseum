@@ -8,7 +8,7 @@
   "INTRO_MESSAGE": "Hei, jeg er ",
   "INTRO_MESSAGE_2": "Og jeg er ",
   "INTRO_EXPLANATION": " har vist meg mange tegninger.",
-  "INTRO_EXPLANATION_2": "Sånn har jeg lært hvordan ting ser ut.",
+  "INTRO_EXPLANATION_2": "Slik har jeg lært hvordan ting ser ut.",
   "INTRO_CALL_TO_ACTION": "Tegn selv og se hva",
   "INTRO_CALL_TO_ACTION_2": " har lært",
 
@@ -20,12 +20,11 @@
   "HARD_BUTTON": "Vanskelig",
   "MULTIPLAYER": "Flerspiller",
 
-  "HELP_ME_LEARN": "Kan du hjelpe meg å lære?",
   "PLAYER_MODE_SINGLE": "1 spiller",
   "PLAYER_MODE_MULTI": "2 spillere",
   "ADMIN_ARIA_LABEL": "Gå til admin side",
-  "WAITING_FOR_PLAYER": "Venter",
-  "WAITING_FOR_OPPONENT": "Venter på motstander",
+  "WAITING": "Venter",
+  "WAITING_FOR_PLAYER": "Venter på spiller 2",
 
   "HOW_TO_PLAY_SINGLE": "Slik spiller du:",
   "HOW_TO_PLAY_MULTI": "Slik spiller dere:",
@@ -69,7 +68,6 @@
   "ROUND_NUMBER": "Runde",
   "ROUND_FEEDBACK_FAILED_TITLE": "Oisann!",
   "ROUND_FEEDBACK_FAILED_DESC_1": "klarte ikke å gjette at du tegnet:",
-  "ROUND_FEEDBACK_FAILED_DESC_2": "Jeg kan være litt dum noen ganger..",
 
   "ROUND_FEEDBACK_CORRECT_TITLE": "Bra tegnet!",
   "ROUND_FEEDBACK_CORRECT_DESC_1": "klarte å gjette at du tegnet:",
@@ -92,7 +90,7 @@
   "SUMMARY_I_MULTIPLAYER_DRAW": "Uavgjort! Du fikk",
 
   "EXAMPLE_DRAWINGS_FB_CORRECT_P1": "Jeg har lært at",
-  "EXAMPLE_DRAWINGS_FB_P2": "ser sånn ut:",
+  "EXAMPLE_DRAWINGS_FB_P2": "ser slik ut:",
 
   "OF": "av",
   "EXAMPLE_DRAWINGS_FAILED_B1": "Jeg trodde du tegnet",

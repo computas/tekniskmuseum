@@ -1,14 +1,17 @@
-<div id="lobbyBackground">
+<div class="container-background">
+  <button class="logo">
+    <img src="assets/logo/IO-logo-inverted_transparent-bg.png" alt="logo" aria-label="logo" />
+  </button>
   <div id="lobbyContent">
     <div id="topContent">
       <img class="logo" src="assets/logo/IO-logo-inverted_transparent-bg.png" alt="logo" />
       <app-custom-button
         [buttonStyle]="buttonStyleClass"
-        [buttonText]=" 'BACK_BUTTON' | translate "
+        [buttonText]="'BACK_BUTTON' | translate"
         iconSrc="../assets/icons/arrow4-svgrepo-com.svg"
-        routerLink="/welcome" 
-        routerLinkActive="active" 
-        alt="Go back button" 
+        routerLink="/welcome"
+        routerLinkActive="active"
+        alt="Go back button"
         aria-label="Return button"
       >
         <mat-icon slot="custom-mat-icon" class="button-icon-gradient" aria-label="player two icon">group</mat-icon>

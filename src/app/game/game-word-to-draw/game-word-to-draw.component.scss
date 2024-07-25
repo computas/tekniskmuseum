@@ -1,21 +1,5 @@
 @import '../../../variables.scss';
 
-.word-container-background {
-  position: relative;
-}
-
-.word-container-background:before {
-  content: '';
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  position: absolute;
-  background-image: url('../../../assets/background/io_rutemoenster-inverted.png');
-  background-size: cover;
-  background-color: black;
-}
-
 .word-container {
   position: relative;
   min-height: 100vh;
@@ -23,26 +7,22 @@
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  color: $text_primary_color;
-}
-
-.logo-container {
-  position: absolute;
-  top: 0;
-  right: 0;
-  margin: 35px;
-}
-
-.logo {
-  height: 44px;
-  width: 70px;
+  color: $white_color;
 }
 
 .words-remaining {
+  font-style: AeonikMedium;
   text-align: center;
   font-size: 2em;
-  font-style: italic;
   margin-bottom: 32px;
+}
+
+.white-spinner {
+  margin-top: 2rem;
+}
+
+.white-spinner {
+  margin-top: 2rem;
 }
 
 #home-btn {
@@ -59,14 +39,21 @@
   background: #ddd;
 } */
 
-
 .words-remaining {
   position: absolute;
   top: 0;
   left: 50%;
   transform: translateX(-50%);
-  padding: 35px;
+  padding: 1rem;
   font-size: 2em;
+  font-family: 'AeonikMedium';
+  font-size: var(--fontSizeSmall);
+  margin: 0;
+}
+
+.word-draw {
+  font-family: AeonikRegular;
+  font-size: --var(fontSizeMedium);
 }
 
 .word-text {
@@ -74,19 +61,32 @@
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  padding: 5rem;
+  margin: 2rem 0rem;
+  padding: 2rem;
+  min-width: 47vw;
+}
+
+.word-to-guess {
+  margin-top: 1.5rem;
+  font-size: 64px;
+  font-family: AeonikMedium;
+}
+
+.timer {
+  font-family: AeonikMedium;
+  font-size: var(--fontSizeLarge);
+  margin-top: 1.5rem;
 }
 
 .i-container {
   position: absolute;
-  bottom: 150px;
-  left: 170px;
+  bottom: 170px;
+  left: 200px;
 }
 
 .i-avatar {
   height: 150px;
 }
-
 
 .next-page-button .mat-icon {
   font-size: 1.5rem;
@@ -117,7 +117,7 @@ p {
   top: 0px;
   position: absolute;
   padding: 35px;
-  color: $text_primary_color;
+  color: $white_color;
   font-weight: 500;
 }
 
@@ -138,10 +138,9 @@ footer {
   width: 100%;
 }
 
-
 .button-container:hover {
   text-decoration: none;
-  color: #fff;
+  color: $white_color;
 }
 .button-container:before {
   position: absolute;

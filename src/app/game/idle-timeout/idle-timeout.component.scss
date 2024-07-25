@@ -20,7 +20,7 @@
   justify-content: center;
   width: 60vw;
   height: 10vh;
-  font-size: var(--fontSizeSmall); 
+  font-size: var(--fontSizeSmall);
 }
 
 #actions {
@@ -36,22 +36,22 @@
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  
+
   box-shadow: 0 8px 16px 0 rgba(0, 0, 0, 0.1), 0 6px 20px 0 rgba(0, 0, 0, 0.15);
   font-size: var(--fontSizeSmall);
   border-radius: 10rem;
   height: 3.5rem;
   margin-bottom: 1rem;
   width: 20rem;
-  background: $button_background_color;
+  background: $white_color;
 }
 
 .idleButton :focus {
-  background-color: $button_background_color;
+  background-color: $white_color;
 }
 
 #homeButtonText {
-  color: $button_content_color;
+  color: $dark_blue_color;
   display: flex;
   flex-direction: row;
   align-items: baseline;

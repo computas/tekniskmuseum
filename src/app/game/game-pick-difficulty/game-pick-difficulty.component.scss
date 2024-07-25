@@ -1,19 +1,5 @@
 @import '../../../variables.scss';
 
-.container-background {
-  position: relative;
-}
-.container-background:before {
-  content: '';
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  position: absolute;
-  background-image: url('../../../assets/background/io_rutemoenster-inverted.png');
-  background-size: cover;
-  background-color: black;
-}
 .container {
   position: relative;
   display: flex;
@@ -28,18 +14,6 @@
   justify-content: flex-end;
   padding-top: 1rem;
   padding-right: 1.5rem;
-}
-
-.logo {
-  margin-top: 1rem;
-  margin-left: 35px;
-  height: 44px;
-  width: 70px;
-  cursor: default;
-
-  img {
-    width: 100%;
-  }
 }
 
 .main-content {
@@ -107,7 +81,7 @@
   margin-top: 10px;
   min-width: 200px;
   max-width: 400px;
-  background: $button_background_color;
+  background: $white_color;
 }
 .button:hover {
   opacity: 0.95;
@@ -130,12 +104,12 @@
   flex-direction: row;
   justify-content: center;
   align-items: center;
-  color: $button_content_color;
+  color: $dark_blue_color;
 }
 .button-icon {
   margin-left: 16px;
   font-size: 36px;
-  background: linear-gradient(to top, #2514d1 0%, #f14a64 50%, #de7d6e 90%);
+  background: $icon_gradient;
   background-clip: text;
   -webkit-text-fill-color: transparent;
   height: 100%;

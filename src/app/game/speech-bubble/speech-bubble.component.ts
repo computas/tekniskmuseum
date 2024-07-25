@@ -9,8 +9,8 @@ import { Component, Input } from '@angular/core';
   standalone: true,
 })
 export class SpeechBubbleComponent {
-  @Input() textColor: CustomColorsIO = CustomColorsIO.black; // Default color
-  @Input() bubbleColor: CustomColorsIO = CustomColorsIO.pastelBlue; // Default color
+  @Input() textColor: CustomColorsIO = CustomColorsIO.white; // Default color
+  @Input() bubbleColor: CustomColorsIO = CustomColorsIO.purple; // Default color
   @Input() titleText: string | undefined;
   @Input() bodyText: string | undefined;
 

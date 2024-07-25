@@ -1,4 +1,4 @@
-<div class="word-container-background">
+<div class="container-background">
   <div class="word-container">
     <div>
       <app-custom-button
@@ -12,15 +12,13 @@
         id="home-btn"
       />
 
-      <div class="words-remaining">{{ guessUsed }}/{{ totalRounds }}</div>
+      <div class="words-remaining">
+        {{ 'ROUND_NUMBER' | translate }} {{ guessUsed }} {{ 'OF' | translate }} {{ totalRounds }}
+      </div>
 
       <div class="logo-container">
         <img class="logo" src="assets/logo/IO-logo-inverted_transparent-bg.png" alt="logo" />
       </div>
-
-      @if (isMultiPlayer) {
-      <h1 class="playernr">{{ 'PLAYER_LABEL' | translate }} {{ playernr }}</h1>
-      }
 
       <div class="i-container">
         <app-i-avatar class="i-avatar" [color]="CustomColorsIO.white" [width]="50" [height]="200"></app-i-avatar>
@@ -28,23 +26,23 @@
 
       <app-speech-bubble
         [textColor]="CustomColorsIO.white"
-        [bubbleColor]="CustomColorsIO.indigo"
+        [bubbleColor]="CustomColorsIO.purple"
         [pointerSide]="PointerSide.Left"
         [arrowAlignment]="ArrowAlignment.Center"
-        [bubbleSize]="'large'"
+        [bubbleSize]="'medium'"
       >
-        <ng-container slot="body-alt">
+        <ng-container slot="body-alt" class="speech-bubble-text">
           <div class="word-text">
             <p class="word-draw">{{ 'DRAW_LABEL' | translate }}</p>
             @if (loading) {
             <div>
-              <mat-spinner class="white-spinner" id="white"></mat-spinner>
+              <mat-spinner class="white-spinner" [diameter]="56" id="white"></mat-spinner>
             </div>
             } @if (label) {
             <div>
-              <h1 class="word-to-guess header">{{ label | uppercase }}</h1>
+              <h1 class="word-to-guess">{{ label | uppercase }}</h1>
               @if (isMultiPlayer) {
-              <div class="timer header">
+              <div class="timer">
                 <span>{{ timeLeft }}</span>
               </div>
               }
@@ -57,6 +55,7 @@
     <footer>
       <div class="footer-content">
         <p id="difficulty">
+          @if (isSinglePlayer) {
           {{ 'DIFFICULTY' | translate }}:
           <span id="difficulty-text">
             @switch (difficulty) { @case (1) {
@@ -69,6 +68,9 @@
             {{ 'EASY_BUTTON' | translate }}
             } }
           </span>
+          } @else {
+          {{ 'MULTIPLAYER' | translate }}
+          }
         </p>
 
         <app-custom-button
