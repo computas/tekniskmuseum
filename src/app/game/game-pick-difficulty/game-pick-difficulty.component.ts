@@ -14,14 +14,14 @@ import { CustomColorsIO } from '../../shared/customColors';
 import { ArrowAlignment, PointerSide } from '@/app/shared/models/interfaces';
 import { trigger, state, style, animate, transition } from '@angular/animations';
 import { ButtonStyleClass } from '@/app/shared/buttonStyles';
-import { CustomButton } from '../custom-button/custom-button.component';
+import { CustomButtonComponent } from '../custom-button/custom-button.component';
 
 @Component({
   selector: 'app-game-pick-difficulty',
   templateUrl: './game-pick-difficulty.component.html',
   styleUrl: './game-pick-difficulty.component.scss',
   standalone: true,
-  imports: [NgIf, MatIcon, MatButton, TranslatePipe, SpeechBubbleComponent, CustomButton],
+  imports: [NgIf, MatIcon, MatButton, TranslatePipe, SpeechBubbleComponent, CustomButtonComponent],
   animations: [
     trigger('show', [
       state('hidden', style({ opacity: 0 })),

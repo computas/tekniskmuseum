@@ -3,12 +3,11 @@
     <div>
       <app-custom-button
         [buttonStyle]="homeButtonStyleClass"
-        [buttonText]=" 'END_GAME_BUTTON' | translate "
+        [buttonText]="'END_GAME_BUTTON' | translate"
         iconSrc="../../../../assets/house.svg"
         (click)="goToWelcomePage()"
-        alt="Go home button" 
+        alt="Go home button"
         aria-label="Home button"
-
         id="home-btn"
       />
 
@@ -76,13 +75,14 @@
         <app-custom-button
           [disabled]="loading && !isSinglePlayer"
           [buttonStyle]="forwardButtonStyleClass"
-          [buttonText]=" 'DRAW_BUTTON' | translate "
+          [buttonText]="'DRAW_BUTTON' | translate"
           (keydown)="toDrawingBoard()"
           (click)="toDrawingBoard()"
-
           id="draw-btn"
         >
-            <mat-icon slot="custom-mat-icon" class="button-icon-gradient" aria-label="play_arrow">arrow_forward_ios</mat-icon>
+          <mat-icon slot="custom-mat-icon" class="button-icon-gradient" aria-label="play_arrow"
+            >arrow_forward_ios</mat-icon
+          >
         </app-custom-button>
       </div>
     </footer>

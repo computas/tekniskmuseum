@@ -18,7 +18,7 @@ import { IAvatarComponent } from '@/assets/avatars/i-avatar/i-avatar.component';
 import { SpeechBubbleComponent } from '../speech-bubble/speech-bubble.component';
 import { CustomColorsIO } from '@/app/shared/customColors';
 import { PointerSide, ArrowAlignment } from '@/app/shared/models/interfaces';
-import { CustomButton } from '../custom-button/custom-button.component';
+import { CustomButtonComponent } from '../custom-button/custom-button.component';
 import { ButtonStyleClass } from '@/app/shared/buttonStyles';
 
 @Component({
@@ -34,7 +34,7 @@ import { ButtonStyleClass } from '@/app/shared/buttonStyles';
     TranslatePipe,
     IAvatarComponent,
     SpeechBubbleComponent,
-    CustomButton
+    CustomButtonComponent,
   ],
 })
 export class GameWordToDrawComponent implements OnInit, OnDestroy {

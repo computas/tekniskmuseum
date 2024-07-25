@@ -4,7 +4,6 @@
   </button>
   <div id="lobbyContent">
     <div id="topContent">
-      <img class="logo" src="assets/logo/IO-logo-inverted_transparent-bg.png" alt="logo" />
       <app-custom-button
         [buttonStyle]="buttonStyleClass"
         [buttonText]="'BACK_BUTTON' | translate"
@@ -30,7 +29,7 @@
       >
         <div slot="body-alt" id="speechBubbleContent">
           <p id="waitingText">
-            {{ 'WAITING_FOR_OPPONENT' | translate }}
+            {{ 'WAITING_FOR_PLAYER' | translate }}
           </p>
 
           @if (waitingForOtherPlayer) {

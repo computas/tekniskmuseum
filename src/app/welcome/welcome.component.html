@@ -105,7 +105,7 @@
     <div class="two-button-container" [@makeVisible]="stateButtons">
       <app-custom-button
         [buttonStyle]="buttonStyleClass"
-        [buttonText]=" 'PLAYER_MODE_SINGLE' | translate "
+        [buttonText]="'PLAYER_MODE_SINGLE' | translate"
         [disabled]="!buttonIsVisible"
         routerLink="/playgame/singleplayer"
         routerLinkActive="active"
@@ -115,7 +115,7 @@
       </app-custom-button>
       <app-custom-button
         [buttonStyle]="buttonStyleClass"
-        [buttonText]=" 'PLAYER_MODE_MULTI' | translate "
+        [buttonText]="'PLAYER_MODE_MULTI' | translate"
         [disabled]="!buttonIsVisible"
         routerLink="/playgame/multiplayer"
         routerLinkActive="active"

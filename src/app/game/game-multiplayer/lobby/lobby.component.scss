@@ -59,7 +59,7 @@
   aspect-ratio: 2;
   position: relative;
   top: 0.15rem;
-  --dot-gradient: no-repeat radial-gradient(circle closest-side, #000000 90%, transparent); // Color of the second parameter == I's text color
+  --dot-gradient: no-repeat radial-gradient(circle closest-side, #ffffff 90%, transparent); // Color of the second parameter == I's text color
   background: var(--dot-gradient) 0% 50%, var(--dot-gradient) 50% 50%, var(--dot-gradient) 100% 50%;
   background-size: calc(100% / 3) 40%;
   animation: l3 1s infinite linear;
