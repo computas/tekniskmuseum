@@ -133,8 +133,4 @@ export class GamePickDifficultyComponent implements OnInit {
   goToLanding() {
     this.router.navigate([routes.LANDING]);
   }
-
-  goToWelcomePage() {
-    this.router.navigate(['/welcome']);
-  }
 }
