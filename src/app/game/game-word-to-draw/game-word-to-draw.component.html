@@ -71,6 +71,7 @@
           {{ 'MULTIPLAYER' | translate }}
           }
         </p>
+        @if(isSinglePlayer) {
 
         <app-custom-button
           [disabled]="loading && !isSinglePlayer"
@@ -84,6 +85,7 @@
             >arrow_forward_ios</mat-icon
           >
         </app-custom-button>
+        }
       </div>
     </footer>
   </div>

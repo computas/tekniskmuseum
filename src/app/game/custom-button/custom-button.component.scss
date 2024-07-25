@@ -97,3 +97,12 @@
 .forward-button {
   @include button(true);
 }
+
+.disabled {
+  grid-column: 7 / -1;
+  justify-self: end;
+  padding: 0.5em;
+  border-radius: var(--buttonBorderRadius);
+  border: 3px solid white;
+  background: $full_gradient;
+}
