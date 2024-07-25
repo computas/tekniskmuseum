@@ -5,9 +5,8 @@
     </button>
 
     @if (!animating) {
-    <div class="speech-bubble-container" [@fadeInOut]>
+    <div class="speech-bubble-container" [@fadeInOut] [ngClass]="currentBubblePosition">
       <app-speech-bubble
-        class="speech-bubble-adjusted"
         [textColor]="currentBubbleTextColor"
         [bubbleColor]="currentBubbleColor"
         [bodyText]="currentBubbleText"

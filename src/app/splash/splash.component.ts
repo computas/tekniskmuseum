@@ -102,4 +102,8 @@ export class SplashComponent implements OnInit, OnDestroy {
   get currentArrowAlignment(): ArrowAlignment {
     return this.currentBubbleIndex === 1 || this.currentBubbleIndex === 3 ? ArrowAlignment.Right : ArrowAlignment.Left;
   }
+
+  get currentBubblePosition(): string {
+    return this.currentBubbleIndex % 2 === 0 ? 'left' : 'right';
+  }
 }
