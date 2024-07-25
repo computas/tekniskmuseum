@@ -74,7 +74,7 @@
         @if(isSinglePlayer) {
 
         <app-custom-button
-          [disabled]="loading && !isSinglePlayer"
+          [disabled]="loading"
           [buttonStyle]="forwardButtonStyleClass"
           [buttonText]="'DRAW_BUTTON' | translate"
           (keydown)="toDrawingBoard()"
