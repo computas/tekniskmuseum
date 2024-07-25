@@ -1,5 +1,15 @@
 <div class="container-background">
   <div class="container" (click)="skipAnimation()" (keypress)="skipAnimation()" tabindex="0">
+    <app-custom-button
+      [buttonStyle]="homeButtonStyleClass"
+      [buttonText]="'BACK_BUTTON' | translate"
+      iconSrc="../assets/icons/arrow4-svgrepo-com.svg"
+      routerLink="/welcome"
+      routerLinkActive="active"
+      alt="Go back button"
+      aria-label="Return button"
+      id="back-btn"
+    />
     <header class="header">
       <button class="logo">
         <img src="assets/logo/IO-logo-inverted_transparent-bg.png" alt="logo" aria-label="Gå til admin side" />
@@ -37,49 +47,52 @@
               <app-custom-button
                 [disabled]="buttonsAreDisabled"
                 [buttonStyle]="buttonStyleClass"
-                [buttonText]=" 'EASY_BUTTON' | translate "
+                [buttonText]="'EASY_BUTTON' | translate"
                 (click)="startDrawing('easy')"
-                alt="" 
+                alt=""
                 aria-label=""
               >
-              <img
-                  slot="custom-mat-icon" class="button-icon-gradient"
+                <img
+                  slot="custom-mat-icon"
+                  class="button-icon-gradient"
                   src="../../../assets/icons/icon_difficulty_easy.svg"
                   alt="Easy difficulty icon"
                   class="difficulty-icon"
-                  />
+                />
               </app-custom-button>
               <app-custom-button
                 [disabled]="buttonsAreDisabled"
                 [buttonStyle]="buttonStyleClass"
-                [buttonText]=" 'MEDIUM_BUTTON' | translate "
+                [buttonText]="'MEDIUM_BUTTON' | translate"
                 (click)="startDrawing('medium')"
-                alt="" 
+                alt=""
                 aria-label=""
               >
-              <img
-                  slot="custom-mat-icon" class="button-icon-gradient"
+                <img
+                  slot="custom-mat-icon"
+                  class="button-icon-gradient"
                   src="../../../assets/icons/icon_difficulty_medium.svg"
                   alt="Easy difficulty icon"
                   class="difficulty-icon"
-                  />
+                />
               </app-custom-button>
               <app-custom-button
                 [disabled]="buttonsAreDisabled"
                 [buttonStyle]="buttonStyleClass"
-                [buttonText]=" 'HARD_BUTTON' | translate "
+                [buttonText]="'HARD_BUTTON' | translate"
                 (click)="startDrawing('hard')"
-                alt="" 
+                alt=""
                 aria-label=""
               >
-              <img
-                  slot="custom-mat-icon" class="button-icon-gradient"
+                <img
+                  slot="custom-mat-icon"
+                  class="button-icon-gradient"
                   src="../../../assets/icons/icon_difficulty_hard.svg"
                   alt="Easy difficulty icon"
                   class="difficulty-icon"
-                  />
+                />
               </app-custom-button>
-            </div> 
+            </div>
           </div>
         </div>
         <div class="O-figure" [@show]="stateFigureO">

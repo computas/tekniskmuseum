@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { Router } from '@angular/router';
+import { Router, RouterLink, RouterLinkActive } from '@angular/router';
 import { routes } from '../../shared/models/routes';
 import { MatButton } from '@angular/material/button';
 import { MatIcon } from '@angular/material/icon';
@@ -21,7 +21,7 @@ import { CustomButton } from '../custom-button/custom-button.component';
   templateUrl: './game-pick-difficulty.component.html',
   styleUrl: './game-pick-difficulty.component.scss',
   standalone: true,
-  imports: [NgIf, MatIcon, MatButton, TranslatePipe, SpeechBubbleComponent, CustomButton],
+  imports: [NgIf, MatIcon, MatButton, TranslatePipe, SpeechBubbleComponent, CustomButton, RouterLink, RouterLinkActive],
   animations: [
     trigger('show', [
       state('hidden', style({ opacity: 0 })),
@@ -46,6 +46,8 @@ export class GamePickDifficultyComponent implements OnInit {
   stateFirstBubbleO = 'hidden';
   stateButtons = 'hidden';
   buttonsAreDisabled = true;
+
+  homeButtonStyleClass = ButtonStyleClass.back;
 
   constructor(
     private gameConfigService: GameConfigService,
@@ -121,5 +123,9 @@ export class GamePickDifficultyComponent implements OnInit {
 
   goToLanding() {
     this.router.navigate([routes.LANDING]);
+  }
+
+  goToWelcomePage() {
+    this.router.navigate(['/welcome']);
   }
 }

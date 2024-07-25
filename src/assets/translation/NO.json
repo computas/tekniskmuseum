@@ -98,5 +98,7 @@
 
   "GUESSED_AT": "Gjettet på",
   "TIME_ABBREVIATION_SECONDS": "sek",
-  "TIME_OUT": "Tiden gikk ut.."
+  "TIME_OUT": "Tiden gikk ut..",
+
+  "HOME": "Hjem"
 }

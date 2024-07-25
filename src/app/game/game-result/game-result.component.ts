@@ -26,6 +26,8 @@ import confetti from 'canvas-confetti';
 import { confettiSettings, iConfettiFigure, oConfettiFigure } from '@/assets/avatars/confetti-config';
 import { IAvatarComponent } from '@/assets/avatars/i-avatar/i-avatar.component';
 import { OAvatarComponent } from '@/assets/avatars/o-avatar/o-avatar.component';
+import { CustomButton } from '../custom-button/custom-button.component';
+import { ButtonStyleClass } from '@/app/shared/buttonStyles';
 
 @Component({
   selector: 'app-game-result',
@@ -41,6 +43,7 @@ import { OAvatarComponent } from '@/assets/avatars/o-avatar/o-avatar.component';
     SpeechBubbleComponent,
     IAvatarComponent,
     OAvatarComponent,
+    CustomButton,
   ],
   animations: [
     trigger('fadeIn', [
@@ -74,6 +77,9 @@ export class GameResultComponent implements OnInit, OnDestroy {
   PointerSide = PointerSide;
   ArrowAlignment = ArrowAlignment;
   titleText = 'Bra jobba! Du og O er et bra team';
+
+  homeButtonStyleClass = ButtonStyleClass.home;
+  playAgainButtonStyleClass = ButtonStyleClass.select;
 
   constructor(
     private gameStateService: GameStateService,
