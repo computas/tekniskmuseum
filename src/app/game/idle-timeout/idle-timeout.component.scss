@@ -10,15 +10,15 @@
   padding-left: var(--boxPaddingX);
   padding-right: var(--boxPaddingX);
 
-  width: 60vw;
-  height: 25vh;
+  width: 40vw;
+  height: 30vh;
 }
 
 #countdownText {
   display: flex;
   align-items: center;
   justify-content: center;
-  width: 60vw;
+  width: inherit;
   height: 10vh;
   font-size: var(--fontSizeSmall);
 }
@@ -36,6 +36,7 @@
   flex-direction: column;
   align-items: center;
   justify-content: center;
+  vertical-align: middle;
 
   box-shadow: 0 8px 16px 0 rgba(0, 0, 0, 0.1), 0 6px 20px 0 rgba(0, 0, 0, 0.15);
   font-size: var(--fontSizeSmall);
@@ -51,7 +52,7 @@
 }
 
 #homeButtonText {
-  color: $dark_blue_color;
+  color: $white_color;
   display: flex;
   flex-direction: row;
   align-items: baseline;
@@ -59,6 +60,11 @@
 }
 
 #idleButtonIcon {
-  color: $button_content_color;
   height: var(--fontSizeSmall);
+  color: $white_color;
 }
+
+#homeButton {
+  background-color: $red_color;
+}
+

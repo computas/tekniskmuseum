@@ -20,7 +20,7 @@ export class IdleTimeoutComponent implements OnInit, OnDestroy {
   constructor(
     private router: Router,
     private dialogRef: MatDialogRef<IdleTimeoutComponent>,
-    private translationService: TranslationService
+    private translationService: TranslationService,
   ) {}
 
   startTime = 15;
