@@ -19,8 +19,9 @@ import { DrawingService } from '@/app/game/services/drawing.service';
 export class ConfirmExitDialogComponent implements OnInit, OnDestroy{
   readonly dialogRef = inject(MatDialogRef<ConfirmExitDialogComponent>);
 
-  timer: number = 10;
-  countdownInterval: any;
+  timer = 0;
+  startTime = 10;
+  countdownInterval = 0;
 
   constructor(
     private router: Router,
@@ -38,7 +39,8 @@ export class ConfirmExitDialogComponent implements OnInit, OnDestroy{
   }
 
   startCountdown(): void {
-    this.countdownInterval = setInterval(() => {
+    this.timer = this.startTime;
+    this.countdownInterval = window.setInterval(() => {
       this.timer -= 1;
       if (this.timer === 0) {
         this.goToWelcomePage();
@@ -49,6 +51,7 @@ export class ConfirmExitDialogComponent implements OnInit, OnDestroy{
   clearCountdown(): void {
     if (this.countdownInterval) {
       clearInterval(this.countdownInterval);
+      this.timer = this.startTime;
     }
   }
 
