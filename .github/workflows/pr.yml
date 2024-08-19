@@ -1,13 +1,13 @@
 # This workflow will do a clean install of node dependencies, build the source code, perform lint checks and run tests across different versions of node.
-# This workflow will only be run for pull requests to either master or develop branch provided there are no merge conflicts. 
+# This workflow will only be run for pull requests to either master or develop branch provided there are no merge conflicts.
 # For more information see: https://help.github.com/actions/language-and-framework-guides/using-nodejs-with-github-actions
-# TODO: check if types: [opened, reopened] is necessary. Add a step for performing bun test. 
+# TODO: check if types: [opened, edited, reopened] is necessary. Add a step for performing bun test.
 name: Lint & Build
 
 on:
   pull_request:
     branches: [ "master", "develop"]
-    types: [opened, reopened]
+    types: [opened, edited, reopened]
 
 jobs:
   build:
