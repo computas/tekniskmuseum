@@ -31,6 +31,7 @@ yarn-error.log
 /libpeerconnection.log
 testem.log
 /typings
+tekniskmuseum.code-workspace
 
 # System files
 .DS_Store
