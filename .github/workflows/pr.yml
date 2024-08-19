@@ -6,8 +6,7 @@ name: Lint & Build
 
 on:
   pull_request:
-    branches: [ "master", "develop"]
-    types: [opened, edited, reopened]
+    branches: ["master", "develop"]
 
 jobs:
   build:
