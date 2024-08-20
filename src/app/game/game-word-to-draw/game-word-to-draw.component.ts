@@ -143,10 +143,6 @@ export class GameWordToDrawComponent implements OnInit, OnDestroy {
     this.gameStateService.goToPage(GAMESTATE.drawingBoard);
   }
 
-  //goToWelcomePage() {
-  //  this.router.navigate(['/welcome']);
-  //}
-
   openDialog(): void {
     this.dialog.open(ConfirmExitDialogComponent);
   }
