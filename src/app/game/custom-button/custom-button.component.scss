@@ -84,7 +84,8 @@
 .back-button,
 .home-button {
   @include button(false, false, true);
-  height: 3.5rem;
+  height: 4rem;
+  width: 18rem;
 }
 
 .select-mode-button {
