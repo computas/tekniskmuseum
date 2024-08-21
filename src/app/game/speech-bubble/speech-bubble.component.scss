@@ -53,9 +53,7 @@
   background: var(--bbColor);
   color: var(--bbTextColor);
   border-radius: var(--bbBorderRadius);
-  padding: var(--bbPadding);
-  padding-left: var(--bbPaddingX);
-  padding-right: var(--bbPaddingX);
+  padding: var(--bbPadding) var(--bbPaddingX);
   max-width: var(--bbMaxWidth);
   position: relative;
 }

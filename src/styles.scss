@@ -39,11 +39,12 @@
 
 html,
 body {
-  touch-action: pan-x pan-y;
-  -ms-touch-action: pan-x pan-y;
+  touch-action: none;
+  -ms-touch-action: none;
   overflow: hidden;
   width: 100%;
   height: 100%;
+  overscroll-behavior: none; /* Disables all overscroll behavior */
 }
 
 body {

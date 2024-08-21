@@ -48,6 +48,11 @@ export class GameStateService {
     this._currentPage.next(GAMESTATE.showWord);
   }
 
+  replayGame() {
+    this._currentRound.next(1);
+    this._currentPage.next(GAMESTATE.difficultyPicker);
+  }
+
   endGame() {
     this._currentRound.next(0);
     this._currentPage.next(GAMESTATE.lobby);
@@ -78,7 +83,7 @@ export class GameStateService {
   setMultiplayer() {
     this._gameMode.next(GAMEMODE.multiplayer);
     this.saveGameModeToLocalStorage(GAMEMODE.multiplayer);
-    this.gameConfigService.setDifficultyLevel('medium');
+    this.gameConfigService.setDifficultyLevel('medium'); 
   }
 
   restartGame() {
@@ -87,7 +92,7 @@ export class GameStateService {
     this.clearState();
     if (mode === GAMEMODE.singleplayer) {
       this.setSingleplayer();
-      this.startGame();
+      this.replayGame();
     } else if (mode === GAMEMODE.multiplayer) {
       this.setMultiplayer();
     }

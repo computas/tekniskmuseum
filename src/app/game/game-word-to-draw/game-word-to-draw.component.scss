@@ -21,23 +21,11 @@
   margin-top: 2rem;
 }
 
-.white-spinner {
-  margin-top: 2rem;
-}
-
 #home-btn {
   position: absolute;
   top: 4vh;
   left: 4vh;
 }
-
-/* .home-btn:hover {
-  background: #eee;
-}
-
-.home-btn:active {
-  background: #ddd;
-} */
 
 .words-remaining {
   position: absolute;
@@ -53,7 +41,7 @@
 
 .word-draw {
   font-family: AeonikRegular;
-  font-size: --var(fontSizeMedium);
+  font-size: var(--fontSizeMedium);
 }
 
 .word-text {

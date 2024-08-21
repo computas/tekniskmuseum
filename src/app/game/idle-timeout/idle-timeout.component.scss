@@ -9,6 +9,7 @@
   overflow: hidden;
   padding-left: var(--boxPaddingX);
   padding-right: var(--boxPaddingX);
+
   width: auto;
   height: auto; 
   min-height: 3vh;
@@ -45,7 +46,6 @@
   align-items: center;
   justify-content: center;
   vertical-align: middle;
-
   padding: 0.5rem 1rem; 
   font-size: var(--fontSizeSmall);
   border-radius: 10rem;
