@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
-import { HttpClient, HttpHeaders } from '@angular/common/http';
-import { Observable, BehaviorSubject } from 'rxjs';
-import { tap, switchMap } from 'rxjs/operators';
+import { HttpClient, HttpHeaders, HttpErrorResponse } from '@angular/common/http';
+import { Observable, BehaviorSubject, throwError  } from 'rxjs';
+import { tap, switchMap, catchError } from 'rxjs/operators';
 import {
   StartGamePlayerId,
   GameLabel,
@@ -132,6 +132,9 @@ export class DrawingService {
         switchMap((res) => {
           this.playerid = res.player_id;
           return this.getLabel();
+        }),
+        catchError((error) => {
+          return throwError(() => error);
         })
       );
   }
@@ -140,9 +143,13 @@ export class DrawingService {
     const currentLang = this.translationService.getCurrentLang();
     return this.http
       .post<GameLabel>(`${this.baseUrl}/${endpoints.GETLABEL}?player_id=${this.playerid}&lang=${currentLang}`, {})
-      .pipe(tap((res) => (this.label = res.label)));
+      .pipe(tap((res) => (this.label = res.label)),
+      catchError((error) => {
+      return throwError(() => error);
+      })
+    );
   }
-
+  
   getHighscore(): Observable<HighscoreData> {
     const difficultyId = this.config.difficultyId;
     const headers = new HttpHeaders();
