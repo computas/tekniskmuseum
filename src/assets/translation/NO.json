@@ -60,7 +60,7 @@
 
   "AUTO_END_MESSAGE": "Spillet vil automatisk avslutte om ",
   "SECONDS": "sekunder",
-  "STAY_BUTTON": "Bli værende",
+  "RESUME_BUTTON": "Bli værende",
   "END_NOW_BUTTON": "Avslutt nå",
 
   "CONFIRM_EXIT_MESSAGE": "Er du sikker på at du vil avslutte spillet?",
