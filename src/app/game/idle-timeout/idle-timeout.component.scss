@@ -9,9 +9,10 @@
   overflow: hidden;
   padding-left: var(--boxPaddingX);
   padding-right: var(--boxPaddingX);
-
-  width: 40vw;
-  height: 30vh;
+  width: auto;
+  height: auto; 
+  min-height: 3vh;
+  min-width: 5vw;
 }
 
 #countdownText {
@@ -21,10 +22,14 @@
   width: inherit;
   height: 10vh;
   font-size: var(--fontSizeSmall);
+  padding: 1rem;
+  text-align: center;
+  word-wrap: break-word;
+  margin: 1vh;
 }
 
 #actions {
-  width: inherit;
+  width: 100%;
   display: flex;
   flex-direction: row;
   align-items: center;
@@ -33,18 +38,22 @@
 
 .idleButton {
   display: flex;
+  flex-grow: 1;
+  flex-shrink: 1; 
+  flex-basis: 0;
   flex-direction: column;
   align-items: center;
   justify-content: center;
   vertical-align: middle;
 
-  box-shadow: 0 8px 16px 0 rgba(0, 0, 0, 0.1), 0 6px 20px 0 rgba(0, 0, 0, 0.15);
+  padding: 0.5rem 1rem; 
   font-size: var(--fontSizeSmall);
   border-radius: 10rem;
-  height: 3.5rem;
   margin-bottom: 1rem;
-  width: 20rem;
+  margin-inline: 1rem;
+
   background: $white_color;
+  box-shadow: 0 8px 16px 0 rgba(0, 0, 0, 0.1), 0 6px 20px 0 rgba(0, 0, 0, 0.15);
 }
 
 .idleButton :focus {
