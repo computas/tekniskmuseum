@@ -13,7 +13,7 @@
   "INTRO_CALL_TO_ACTION_2": " har lært!",
 
   "DIFFICULTY": "Nivå",
-  "DIFFICULTY_MOTIVATION": "Så gøy at du blir med og tegner! :DDDD",
+  "DIFFICULTY_MOTIVATION": "Så gøy at du blir med og tegner!",
   "DIFFICULTY_QUESTION": "Hvor vanskelige ord vil du tegne?",
   "EASY_BUTTON": "Lett",
   "MEDIUM_BUTTON": "Middels",
@@ -60,7 +60,7 @@
 
   "AUTO_END_MESSAGE": "Spillet vil automatisk avslutte om ",
   "SECONDS": "sekunder",
-  "STAY_BUTTON": "Bli værende",
+  "RESUME_BUTTON": "Bli værende",
   "END_NOW_BUTTON": "Avslutt nå",
 
   "CONFIRM_EXIT_MESSAGE": "Er du sikker på at du vil avslutte spillet?",
