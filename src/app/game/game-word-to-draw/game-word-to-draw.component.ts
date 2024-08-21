@@ -1,4 +1,4 @@
-import { Component, OnInit, OnDestroy } from '@angular/core';
+import { Component, OnInit, OnDestroy, inject } from '@angular/core';
 import { interval, Subscription } from 'rxjs';
 import { take, tap } from 'rxjs/operators';
 import { DrawingService } from '../services/drawing.service';
@@ -6,6 +6,7 @@ import { MultiplayerService } from '../services/multiplayer.service';
 import { MatIcon } from '@angular/material/icon';
 import { MatButton } from '@angular/material/button';
 import { MatProgressSpinner } from '@angular/material/progress-spinner';
+import { MatDialog } from '@angular/material/dialog';
 import { UpperCasePipe } from '@angular/common';
 import { GameConfigService } from '../services/game-config.service';
 import { TranslationService } from '@/app/core/translation.service';
@@ -20,6 +21,7 @@ import { CustomColorsIO } from '@/app/shared/customColors';
 import { PointerSide, ArrowAlignment } from '@/app/shared/models/interfaces';
 import { CustomButtonComponent } from '../custom-button/custom-button.component';
 import { ButtonStyleClass } from '@/app/shared/buttonStyles';
+import { ConfirmExitDialogComponent } from '../game-intermediate-result/game-intermediate-result-header/confirm-exit-dialog/confirm-exit-dialog.component';
 
 @Component({
   selector: 'app-game-word-to-draw',
@@ -61,6 +63,10 @@ export class GameWordToDrawComponent implements OnInit, OnDestroy {
 
   homeButtonStyleClass = ButtonStyleClass.home;
   forwardButtonStyleClass = ButtonStyleClass.forward;
+
+  //To prompt when wanting to quit game after a round. Earlier it did not prompt at all. 
+  readonly dialog = inject(MatDialog);
+  
 
   constructor(
     private gameConfigService: GameConfigService,
@@ -137,8 +143,8 @@ export class GameWordToDrawComponent implements OnInit, OnDestroy {
     this.gameStateService.goToPage(GAMESTATE.drawingBoard);
   }
 
-  goToWelcomePage() {
-    this.router.navigate(['/welcome']);
+  openDialog(): void {
+    this.dialog.open(ConfirmExitDialogComponent);
   }
 
   startTimer() {

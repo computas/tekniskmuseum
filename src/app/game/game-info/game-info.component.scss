@@ -17,7 +17,6 @@
 @media (min-width: 600px) {
   .game-info-text-header {
     font-size: 48px;
-    font-weight: 500;
   }
 }
 .game-info-seconds {
@@ -55,7 +54,6 @@
 }
 @media (min-width: 600px) {
   .game-info-footer {
-    width: 80%;
     margin-bottom: 75px;
     justify-content: space-between;
   }
@@ -107,11 +105,7 @@
   color: $dark_blue_color;
   float: right;
 }
-@media (min-width: 600px) {
-  #get-word-button {
-    float: right;
-  }
-}
+
 #back-button {
   background: $white_color;
   color: $dark_blue_color;
