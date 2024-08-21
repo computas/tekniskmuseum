@@ -1,8 +1,8 @@
 @import '../../../variables.scss';
 
 @mixin button($gradient-border: false, $full-gradient: false, $back: false, $large: false) {
-  height: 4rem;
-  min-width: 14rem;
+  height: 5rem;
+  min-width: 16rem;
   max-width: 22rem;
 
   border-radius: 5rem;
@@ -84,7 +84,8 @@
 .back-button,
 .home-button {
   @include button(false, false, true);
-  height: 3.5rem;
+  height: 4rem;
+  width: 18rem;
 }
 
 .select-mode-button {
