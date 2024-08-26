@@ -135,6 +135,7 @@ export class DrawingService {
         }),
         catchError((error) => {
           return throwError(() => error);
+          // Add logging to this step
         })
       );
   }
@@ -145,7 +146,8 @@ export class DrawingService {
       .post<GameLabel>(`${this.baseUrl}/${endpoints.GETLABEL}?player_id=${this.playerid}&lang=${currentLang}`, {})
       .pipe(tap((res) => (this.label = res.label)),
       catchError((error) => {
-      return throwError(() => error);
+        return throwError(() => error);
+        // Add logging to this
       })
     );
   }

@@ -68,7 +68,6 @@ export class GameWordToDrawComponent implements OnInit, OnDestroy {
 
   //To prompt when wanting to quit game after a round. Earlier it did not prompt at all. 
   readonly dialog = inject(MatDialog);
-  
 
   constructor(
     private gameConfigService: GameConfigService,
