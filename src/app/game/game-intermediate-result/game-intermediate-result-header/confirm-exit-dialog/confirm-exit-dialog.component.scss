@@ -23,7 +23,9 @@
   font-size: var(--fontSizeSmall); // make to variable
 }
 
-
+#exitGameText p {
+  line-height: 1.10;
+}
 
 #exitGameActions {
   width: inherit;
