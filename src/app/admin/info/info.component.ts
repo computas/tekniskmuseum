@@ -5,7 +5,7 @@ import { MatSnackBar } from '@angular/material/snack-bar';
 import { InfoDialogComponent } from './../info-dialog/info-dialog.component';
 import { PairingService } from '../../game/services/pairing.service';
 import { MatButton } from '@angular/material/button';
-import { StatusData } from '@/app/shared/models/backend-interfaces';
+import { LogData, StatusData } from '@/app/shared/models/backend-interfaces';
 
 @Component({
   selector: 'app-info',
@@ -39,7 +39,7 @@ export class InfoComponent {
       this.resetDatasetValues();
       this.loginService.revertDataset().subscribe(
         () => {
-          this.openSnackBar('Suksess! treningssett tilbakestilles (dette kan ta noen minutter)');
+          this.openSnackBar('Suksess! Treningssett tilbakestilles (dette kan ta noen minutter)');
         },
         () => {
           msg = this.errorMsg;
@@ -158,6 +158,17 @@ export class InfoComponent {
         this.openSnackBar(this.errorMsg);
       }
     );
+  }
+
+  getLogger() {
+    this.loginService.getLogger().subscribe(
+      (res: LogData) => {
+        this._dialog.openErrorLog(res.time, res.name, res.message);
+      },
+      (error) => {
+        this.openSnackBar(error);
+      }
+    )
   }
 
   openSnackBar(msg = 'suksess!') {

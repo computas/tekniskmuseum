@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { DialogTemplateComponent } from './../dialog-template/dialog-template.component';
+import { ErrorLogDialogComponent } from '../error-dialog/error-dialog.component';
 
 @Component({
   selector: 'app-info-dialog',
@@ -17,6 +18,17 @@ export class InfoDialogComponent {
         iterationName: iterName,
         timeCreated: time,
         imageCount: imgCount,
+      },
+    });
+  }
+
+  openErrorLog(recordedTime: string, logName: string, msg: string) {
+    console.log(logName)
+    this.dialog.open(ErrorLogDialogComponent, {
+      data: {
+        time: recordedTime,
+        name: logName,
+        message: msg
       },
     });
   }
