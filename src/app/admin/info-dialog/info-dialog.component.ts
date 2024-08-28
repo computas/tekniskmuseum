@@ -1,6 +1,8 @@
 import { Component } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { DialogTemplateComponent } from './../dialog-template/dialog-template.component';
+import { ErrorLogDialogComponent } from '../error-dialog/error-dialog.component';
+import { LogData } from '@/app/shared/models/backend-interfaces';
 
 @Component({
   selector: 'app-info-dialog',
@@ -18,6 +20,13 @@ export class InfoDialogComponent {
         timeCreated: time,
         imageCount: imgCount,
       },
+    });
+  }
+
+  openErrorLog(logDataArray: LogData[]) {
+    
+    this.dialog.open(ErrorLogDialogComponent, {
+      data: logDataArray,
     });
   }
 }

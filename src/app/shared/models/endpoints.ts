@@ -16,4 +16,5 @@ export const endpoints = {
   GETSTATUS: 'status',
   LOGOUT: 'logout',
   GETEXAMPLEDRAWINGS: 'getExampleDrawings',
+  LOGGER: 'logging'
 };
