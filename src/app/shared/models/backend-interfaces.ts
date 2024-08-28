@@ -70,7 +70,8 @@ export interface MultiplayerClassifyParams {
 }
 
 export interface LogData {
+  date: string,
   time: string,
-  name: string,
+  level: string,
   message: string,
 }

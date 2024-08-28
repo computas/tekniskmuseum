@@ -1,9 +1,9 @@
 <div mat-dialog-content class="content">
-  <p>{{data.time}}</p>
-  <p>{{data.name}}</p>
-  <p>{{data.message}}</p>
-  <p></p>
-
+  <div id="logMessage"> @for (log of logs; track log.time) {
+    <p>{{log.date}} {{log.time}} {{ log.level }} {{log.message}}</p>
+    <br>
+    }</div>
+    <p></p>
   <button mat-button mat-dialog-close>Close</button>
 </div>
 

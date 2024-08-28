@@ -95,7 +95,7 @@ export class LoginService {
   }
 
   getLogger() {
-    return this.http.get<LogData>(
+    return this.http.get<LogData[]>(
       `${endpoints.TEKNISKBACKEND}/${endpoints.ADMIN}/${endpoints.LOGGER}`,
       {
         withCredentials: true,

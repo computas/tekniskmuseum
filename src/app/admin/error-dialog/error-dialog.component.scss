@@ -2,10 +2,31 @@
   .mat-dialog-container {
     border-radius: 56px;
     width: 698px;
-    height: 246px;
+    height: 546px;
   
     display: flex;
     align-items: center;
     justify-content: center;
+    overflow-y: auto;
   }
   
+  #logMessage {
+    margin-bottom: 16px; // Add some space below the log messages
+    p {
+      font-size: 16px; 
+      margin: 4px 0; 
+      padding: 4px; 
+      background-color: #ffffff; 
+      border-left: 4px solid #2196F3; 
+    }
+  }
+
+  button {
+    margin-top: 16px; 
+    background-color: #2196F3; 
+    color: white; 
+    &:hover {
+      background-color: #1976D2; 
+    }
+  }
+

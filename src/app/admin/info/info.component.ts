@@ -162,14 +162,14 @@ export class InfoComponent {
 
   getLogger() {
     this.loginService.getLogger().subscribe(
-      (res: LogData) => {
-        this._dialog.openErrorLog(res.time, res.name, res.message);
+      (res: LogData[]) => { 
+        this._dialog.openErrorLog(res)
       },
       (error) => {
         this.openSnackBar(error);
       }
-    )
-  }
+    );
+  } 
 
   openSnackBar(msg = 'suksess!') {
     this._snackBar.open(msg, 'Lukk', {
