@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { MatDialog} from '@angular/material/dialog';
+import { MatDialog } from '@angular/material/dialog';
 import { DialogTemplateComponent } from './../dialog-template/dialog-template.component';
 import { ErrorLogDialogComponent } from '../error-dialog/error-dialog.component';
 import { LogData } from '@/app/shared/models/backend-interfaces';
