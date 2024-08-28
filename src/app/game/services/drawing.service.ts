@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
-import { Observable, BehaviorSubject } from 'rxjs';
+import { Observable, BehaviorSubject, catchError, EMPTY } from 'rxjs';
 import { tap, switchMap } from 'rxjs/operators';
 import {
   StartGamePlayerId,
@@ -14,6 +14,7 @@ import { ResultsMock } from '@/app/shared/mocks/results.mock';
 import { endpoints } from '@/app/shared/models/endpoints';
 import { TranslationService } from '@/app/core/translation.service';
 import { GameConfigService } from './game-config.service';
+import { LoggingService } from './logging.service';
 
 @Injectable({
   providedIn: 'root',
@@ -50,7 +51,8 @@ export class DrawingService {
   constructor(
     private http: HttpClient,
     private translationService: TranslationService,
-    private gameConfigService: GameConfigService
+    private gameConfigService: GameConfigService,
+    private loggingService: LoggingService
   ) {
     this.gameConfigService.difficultyLevel$.subscribe((updatedConfig) => {
       this.config = updatedConfig;
@@ -132,7 +134,11 @@ export class DrawingService {
         switchMap((res) => {
           this.playerid = res.player_id;
           return this.getLabel();
-        })
+        }),
+        catchError((error) => {
+          this.loggingService.error("Error occurred in endpoind /startgame: " + error.message);
+          return EMPTY;
+        }),
       );
   }
 
@@ -140,7 +146,14 @@ export class DrawingService {
     const currentLang = this.translationService.getCurrentLang();
     return this.http
       .post<GameLabel>(`${this.baseUrl}/${endpoints.GETLABEL}?player_id=${this.playerid}&lang=${currentLang}`, {})
-      .pipe(tap((res) => (this.label = res.label)));
+      .pipe(
+        tap((res) => (this.label = res.label)),
+        catchError((error) => {
+          this.loggingService.error("Error occurred in endpoind /getlabel: " + error.message);
+          return EMPTY;
+        }),
+    
+    );
   }
 
   getHighscore(): Observable<HighscoreData> {
@@ -167,7 +180,14 @@ export class DrawingService {
     };
     const headers = new HttpHeaders();
     headers.set('Access-Control-Allow-Origin', '*');
-    return this.http.post(`${this.baseUrl}/${endpoints.POSTSCORE}`, body, { headers: headers });
+    return this.http.post(`${this.baseUrl}/${endpoints.POSTSCORE}`, body, { headers: headers })
+      .pipe(
+        catchError((error) => {
+          this.loggingService.error("Error occurred in endpoind /postscore: " + error.message);
+          return EMPTY;
+        }),
+      )
+    ;
   }
 
   addResult(result: Result) {
