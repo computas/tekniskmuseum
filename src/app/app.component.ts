@@ -26,15 +26,29 @@ export class AppComponent implements OnInit {
 
   isDialogOpen = false;
   inactivityTime = environment.inactivityTime;
+  hasResetForIntermediateResult = false; //Idle timer should reset only once when entering intermediateResult page.
 
   constructor(private gameStateService: GameStateService, private router: Router, public dialog: MatDialog) {}
 
   ngOnInit(): void {
     this.setDialogTimeout();
-    this.userInactive.subscribe(() => {
+    this.gameStateService.currentPage$.subscribe(currentPage => {
+      if (currentPage !== GAMESTATE.intermediateResult && this.hasResetForIntermediateResult) {
+        this.hasResetForIntermediateResult = false;
+      }
+
+    })
+    this.userInactive.subscribe(() => { 
       if (this.gameStateService.getCurrentPage() === GAMESTATE.drawingBoard) {
         clearTimeout(this.userActivity);
         this.setDialogTimeout();
+        return;
+      }
+      
+      if (this.gameStateService.getCurrentPage() === GAMESTATE.intermediateResult && !this.hasResetForIntermediateResult) {
+        clearTimeout(this.userActivity);
+        this.setDialogTimeout();
+        this.hasResetForIntermediateResult = true;
         return;
       }
 
