@@ -6,6 +6,7 @@ import { InfoDialogComponent } from './../info-dialog/info-dialog.component';
 import { PairingService } from '../../game/services/pairing.service';
 import { MatButton } from '@angular/material/button';
 import { LogData, StatusData } from '@/app/shared/models/backend-interfaces';
+import { LoggingService } from '../../game/services/logging.service';
 
 @Component({
   selector: 'app-info',
@@ -30,7 +31,8 @@ export class InfoComponent {
     private loginService: LoginService,
     private _snackBar: MatSnackBar,
     private _dialog: InfoDialogComponent,
-    private pairing: PairingService
+    private pairing: PairingService,
+    private loggingService: LoggingService
   ) {}
 
   revertDataset() {
@@ -169,6 +171,20 @@ export class InfoComponent {
         this.openSnackBar(error);
       }
     );
+  } 
+
+  //Refactor when a generic format is defined
+  getLoggerFrontend() {
+    let frontend_logs = this.loggingService.get_logs()
+    const formatted_logs: LogData[] = frontend_logs.map(str => ({
+      date: str.slice(8,19),
+      time: str.slice(24,30),
+      level: str.slice(0,8),
+      message: str.slice(80,115),
+    }))
+    
+    this._dialog.openErrorLog(formatted_logs)
+     
   } 
 
   openSnackBar(msg = 'suksess!') {

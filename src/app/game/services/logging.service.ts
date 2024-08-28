@@ -26,8 +26,7 @@ export class LoggingService {
         try { 
             const storeLogs = localStorage.getItem(this.location);
             if (storeLogs){
-                values = JSON.parse(storeLogs) as string[];
-                
+                values = JSON.parse(storeLogs) as string[]; 
             }
             values.unshift(logDetails)
 
@@ -41,7 +40,6 @@ export class LoggingService {
             console.log(ex);
         }
     }
-
 
     debug(msg: string) {
         this.log(msg, LogLevel.Debug);
@@ -62,5 +60,14 @@ export class LoggingService {
     fatal(msg: string) {
         this.log(msg, LogLevel.Fatal);
     }
+
+    get_logs(): string[]{
+        const storeLogs = localStorage.getItem(this.location);
+            if (storeLogs){
+                return JSON.parse(storeLogs) as string[]; 
+            }
+            return []
+    }
+
     
 }
