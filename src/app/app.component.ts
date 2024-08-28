@@ -3,7 +3,6 @@ import { Subject } from 'rxjs';
 import { Router } from '@angular/router';
 import { MatDialog } from '@angular/material/dialog';
 import { RouterOutlet } from '@angular/router';
-
 import { IdleTimeoutComponent } from './game/idle-timeout/idle-timeout.component';
 import { routeTransitionAnimations } from './route-transition-animations';
 import { environment } from '../environments/environment';
@@ -20,21 +19,19 @@ import { GAMESTATE } from './shared/models/interfaces';
 })
 export class AppComponent implements OnInit {
   title = 'Teknisk Museum';
-
   userActivity = 0;
   userInactive = new Subject<boolean | undefined>();
-
   isDialogOpen = false;
   inactivityTime = environment.inactivityTime;
-  hasResetForIntermediateResult = false; //Idle timer should reset only once when entering intermediateResult page.
+  hasResetInIntermediateResultPage = false; //Reset idle-timer only once on intermediate resultpage. 
 
   constructor(private gameStateService: GameStateService, private router: Router, public dialog: MatDialog) {}
 
   ngOnInit(): void {
     this.setDialogTimeout();
     this.gameStateService.currentPage$.subscribe(currentPage => {
-      if (currentPage !== GAMESTATE.intermediateResult && this.hasResetForIntermediateResult) {
-        this.hasResetForIntermediateResult = false;
+      if (currentPage !== GAMESTATE.intermediateResult && this.hasResetInIntermediateResultPage) {
+        this.hasResetInIntermediateResultPage = false;
       }
 
     })
@@ -45,10 +42,10 @@ export class AppComponent implements OnInit {
         return;
       }
       
-      if (this.gameStateService.getCurrentPage() === GAMESTATE.intermediateResult && !this.hasResetForIntermediateResult) {
+      if (this.gameStateService.getCurrentPage() === GAMESTATE.intermediateResult && !this.hasResetInIntermediateResultPage) {
         clearTimeout(this.userActivity);
         this.setDialogTimeout();
-        this.hasResetForIntermediateResult = true;
+        this.hasResetInIntermediateResultPage = true;
         return;
       }
 
