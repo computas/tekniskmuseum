@@ -92,12 +92,14 @@ export class WelcomeComponent implements OnInit, OnDestroy {
     this.drawingService.clearState();
     this.gameStateService.clearState();
 
-    this.translationService
-      .loadTranslations('NO')
+    this.currentLang$.subscribe(value => {
+      this.translationService
+      .loadTranslations(value as SupportedLanguages)
       .pipe(takeUntil(this.destroy$))
       .subscribe(() => {
-        this.translationService.setLanguage('NO');
+        this.translationService.setLanguage(value as SupportedLanguages);
       });
+    })
 
     this.startAnimation();
   }
