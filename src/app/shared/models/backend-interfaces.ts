@@ -68,3 +68,10 @@ export interface MultiplayerClassifyParams {
   time_left: number;
   lang: SupportedLanguages;
 }
+
+export interface LogData {
+  date: string,
+  time: string,
+  level: string,
+  message: string,
+}
