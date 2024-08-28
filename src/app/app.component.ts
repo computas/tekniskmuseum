@@ -54,7 +54,7 @@ export class AppComponent implements OnInit {
 
       if (this.router.url === '/welcome') {
         this.router.navigate(['/']);
-      } else if (this.router.url !== '/' && this.router.url !== '/admin') {
+      } else if (this.router.url !== '/' && !this.router.url.startsWith('/admin')) {
         this.openDialog();
       }
     });
