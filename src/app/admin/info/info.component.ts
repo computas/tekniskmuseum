@@ -175,7 +175,7 @@ export class InfoComponent {
 
   //Refactor when a generic format is defined
   getLoggerFrontend() {
-    let frontend_logs = this.loggingService.get_logs()
+    const frontend_logs = this.loggingService.get_logs()
     const formatted_logs: LogData[] = frontend_logs.map(str => ({
       date: str.slice(8,19),
       time: str.slice(24,30),

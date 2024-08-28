@@ -16,12 +16,12 @@ export class LoggingService {
     private location = "logging"
 
 
-    log(msg: any, level: LogLevel ) {
+    log(msg: string, level: LogLevel ) {
         const levelName = LogLevel[level];
         const logDetails = "[" + levelName + "] " + new Date() + ": " + JSON.stringify(msg)
         console.log(logDetails);
 
-        let values: String[] = [];
+        let values: string[] = [];
 
         try { 
             const storeLogs = localStorage.getItem(this.location);
