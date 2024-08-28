@@ -159,3 +159,7 @@ button,
 .container {
   min-height: 100vh;
 }
+
+.cdk-global-scrollblock { //DialogueModal follows a overflow-y: scroll as default with global-scrollblock. Change rule to hidden. 
+  overflow-y: hidden !important;
+}

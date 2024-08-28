@@ -2,10 +2,9 @@
 
 .cdk-overlay-container .cdk-overlay-pane {
   border-radius: 1.5rem;
-  overflow: hidden;
   padding-left: var(--boxPaddingX);
   padding-right: var(--boxPaddingX);
-
+  overflow: hidden;
   width: 40vw;
   height: 30vh;
 }
@@ -20,8 +19,11 @@
 #exitGameText {
   justify-content: center;
   width: inherit;
-  height: 10vh;
   font-size: var(--fontSizeSmall); // make to variable
+}
+
+#exitGameText p {
+  line-height: 1.10;
 }
 
 #exitGameActions {
