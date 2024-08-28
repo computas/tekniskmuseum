@@ -26,7 +26,7 @@ export class InfoDialogComponent {
   openErrorLog(logDataArray: LogData[]) {
     
     this.dialog.open(ErrorLogDialogComponent, {
-      data: logDataArray,  // Pass the entire array as data
+      data: logDataArray,
     });
   }
 }
