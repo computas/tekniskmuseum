@@ -6,47 +6,61 @@
 }
 
 .wrapper {
-  text-align: center;
+  display: flex;
+  justify-content: center; 
+  align-items: center; 
+  min-height: 100vh; 
 }
 
 .login {
-  width: 382px;
+  width: 50vw;
   overflow: hidden;
   margin: auto;
-  margin: 20 0 0 450px;
   padding: 80px;
-  background: linear-gradient(0.5deg, #195272 -0.56%, #05a3c7 138.78%);
+  background: linear-gradient(0.5deg, #9f68b5 -0.56%, #c78bde 138.78%);
   border-radius: 15px;
-  display: inline-block;
+  display: flex;
+  flex-direction: column;
+  align-items: left;
+}
+
+#login {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  justify-content: center;
 }
 
 h2 {
   text-align: center;
   color: black;
   padding: 20px;
+  font-family: AeonikMedium;
 }
 
 label {
   color: black;
-  font-size: 17px;
-  float: left;
-  padding-left: 36px;
+  font-size: 20px;
+  margin: 1rem;
+  text-align: left;
+  width: 100%;
 }
 
-#Uname {
-  width: 300px;
+label b {
+  font-family: AeonikMedium;
+}
+
+input {
+  font-family: AeonikMedium;
+}
+
+#Uname, #Pass {
+  width: 100%;
   height: 30px;
   border: none;
   border-radius: 3px;
   padding-left: 8px;
-}
-
-#Pass {
-  width: 300px;
-  height: 30px;
-  border: none;
-  border-radius: 3px;
-  padding-left: 8px;
+  margin-bottom: 1rem;
 }
 
 span {
@@ -60,41 +74,46 @@ a {
 }
 
 .login-button {
-  background: #fa852f;
+  background: #38176d;
   color: #f4f4f4;
   box-shadow: 0 8px 16px 0 rgba(0, 0, 0, 0.1), 0 6px 20px 0 rgba(0, 0, 0, 0.15);
   margin-top: 30px;
   font-size: 20px;
   border-radius: 50px;
   height: 40px;
-  min-width: 240px;
-  max-width: 400px;
+  width: 40%;
   border: none;
   cursor: pointer;
+  font-family: AeonikMedium;
 }
+
 .login-button:hover {
   border-color: #f4f4f4;
   border: 1px solid #f4f4f4;
+  background-color: #195272;
 }
 
 .back-button {
-  background: #fa852f;
+  background: #71ada1;
   color: #f4f4f4;
   box-shadow: 0 8px 16px 0 rgba(0, 0, 0, 0.1), 0 6px 20px 0 rgba(0, 0, 0, 0.15);
   margin-top: 30px;
   font-size: 16px;
   border-radius: 50px;
   height: 35px;
-  min-width: 140px;
-  max-width: 300px;
+  width: 30%;
   border: none;
   cursor: pointer;
+  font-family: AeonikMedium;
+  justify-content: left;
 }
 
 .back-button:hover {
   border-color: #f4f4f4;
   border: 1px solid #f4f4f4;
+  background-color: #195272;
 }
+
 @media (min-width: 600px) {
   .login-button {
     font-size: 32px;

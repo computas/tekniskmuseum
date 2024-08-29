@@ -1,10 +1,13 @@
 <div mat-dialog-content class="content">
-  <div id="logMessage"> @for (log of logs; track log.time) {
-    <p>{{log.date}} {{log.time}} {{ log.level }} {{log.message}}</p>
-    <br>
+  <div id="logMessages">
+    <div class="log-entry"> @for (log of logs; track log.time) {
+      <p class="log-text">
+        <span class="log-date">{{log.date}}</span>
+        <span class="log-time">{{log.time}}</span>
+        <span class="log-level">{{ log.level }}</span>
+        <span class="log-message"> {{log.message}}</span>
+      </p>
+      <p> </p>
     }</div>
-    <p></p>
-  <button mat-button mat-dialog-close>Close</button>
+  <button mat-button mat-dialog-close (click)="closeDialog()">Lukk</button></div>
 </div>
-
-
