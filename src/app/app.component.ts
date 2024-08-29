@@ -3,7 +3,6 @@ import { Subject } from 'rxjs';
 import { Router } from '@angular/router';
 import { MatDialog } from '@angular/material/dialog';
 import { RouterOutlet } from '@angular/router';
-
 import { IdleTimeoutComponent } from './game/idle-timeout/idle-timeout.component';
 import { routeTransitionAnimations } from './route-transition-animations';
 import { environment } from '../environments/environment';
@@ -20,27 +19,39 @@ import { GAMESTATE } from './shared/models/interfaces';
 })
 export class AppComponent implements OnInit {
   title = 'Teknisk Museum';
-
   userActivity = 0;
   userInactive = new Subject<boolean | undefined>();
-
   isDialogOpen = false;
   inactivityTime = environment.inactivityTime;
+  hasResetInIntermediateResultPage = false; //Reset idle-timer only once on intermediate resultpage. 
 
   constructor(private gameStateService: GameStateService, private router: Router, public dialog: MatDialog) {}
 
   ngOnInit(): void {
     this.setDialogTimeout();
-    this.userInactive.subscribe(() => {
+    this.gameStateService.currentPage$.subscribe(currentPage => {
+      if (currentPage !== GAMESTATE.intermediateResult && this.hasResetInIntermediateResultPage) {
+        this.hasResetInIntermediateResultPage = false;
+      }
+
+    })
+    this.userInactive.subscribe(() => { 
       if (this.gameStateService.getCurrentPage() === GAMESTATE.drawingBoard) {
         clearTimeout(this.userActivity);
         this.setDialogTimeout();
         return;
       }
+      
+      if (this.gameStateService.getCurrentPage() === GAMESTATE.intermediateResult && !this.hasResetInIntermediateResultPage) {
+        clearTimeout(this.userActivity);
+        this.setDialogTimeout();
+        this.hasResetInIntermediateResultPage = true;
+        return;
+      }
 
       if (this.router.url === '/welcome') {
         this.router.navigate(['/']);
-      } else if (this.router.url !== '/' && this.router.url !== '/admin') {
+      } else if (this.router.url !== '/' && !this.router.url.startsWith('/admin')) {
         this.openDialog();
       }
     });
