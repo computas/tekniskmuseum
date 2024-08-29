@@ -47,7 +47,7 @@ export class GamePickDifficultyComponent implements OnInit {
   ArrowAlignment = ArrowAlignment;
   CustomColorsIO = CustomColorsIO;
 
-  buttonStyleClass = ButtonStyleClass.select;
+  buttonStyleClass = ButtonStyleClass.selectLarge;
 
   stateFigureI = 'hidden';
   stateFigureO = 'hidden';
