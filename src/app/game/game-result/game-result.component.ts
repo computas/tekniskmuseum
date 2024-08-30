@@ -78,7 +78,7 @@ export class GameResultComponent implements OnInit, OnDestroy {
   ArrowAlignment = ArrowAlignment;
 
   homeButtonStyleClass = ButtonStyleClass.home;
-  playAgainButtonStyleClass = ButtonStyleClass.select;
+  playAgainButtonStyleClass = ButtonStyleClass.playAgain;
 
   constructor(
     private gameStateService: GameStateService,
