@@ -21,32 +21,20 @@ export class AppComponent implements OnInit {
   title = 'Teknisk Museum';
   userActivity = 0;
   userInactive = new Subject<boolean | undefined>();
-  isDialogOpen = false;
   inactivityTime = environment.inactivityTime;
-  hasResetInIntermediateResultPage = false; //Reset idle-timer only once on intermediate resultpage. 
 
   constructor(private gameStateService: GameStateService, private router: Router, public dialog: MatDialog) {}
 
   ngOnInit(): void {
     this.setDialogTimeout();
-    this.gameStateService.currentPage$.subscribe(currentPage => {
-      if (currentPage !== GAMESTATE.intermediateResult && this.hasResetInIntermediateResultPage) {
-        this.hasResetInIntermediateResultPage = false;
-      }
-
+    this.gameStateService.currentPage$.subscribe(() => {
+      this.setDialogTimeout();
+      this.closeDialog();
     })
+
     this.userInactive.subscribe(() => { 
       if (this.gameStateService.getCurrentPage() === GAMESTATE.drawingBoard) {
-        clearTimeout(this.userActivity);
         this.setDialogTimeout();
-        return;
-      }
-      
-      if (this.gameStateService.getCurrentPage() === GAMESTATE.intermediateResult && !this.hasResetInIntermediateResultPage) {
-        clearTimeout(this.userActivity);
-        this.setDialogTimeout();
-        this.hasResetInIntermediateResultPage = true;
-        return;
       }
 
       if (this.router.url === '/welcome') {
@@ -58,18 +46,20 @@ export class AppComponent implements OnInit {
   }
 
   openDialog() {
-    if (!this.isDialogOpen) {
+    if (this.dialog.openDialogs.length < 1) {
       this.dialog
         .open(IdleTimeoutComponent)
-        .afterClosed()
-        .subscribe(() => {
-          this.isDialogOpen = false;
-        });
-      this.isDialogOpen = true;
+    }
+  }
+
+  closeDialog() {
+    if (this.dialog.openDialogs.length > 0) {
+      this.dialog.closeAll();
     }
   }
 
   setDialogTimeout() {
+    clearTimeout(this.userActivity);
     this.userActivity = window.setTimeout(() => this.userInactive.next(undefined), this.inactivityTime);
   }
 
@@ -81,7 +71,6 @@ export class AppComponent implements OnInit {
   @HostListener('window:mousemove')
   @HostListener('document:touchmove')
   refreshUserState() {
-    clearTimeout(this.userActivity);
     this.setDialogTimeout();
   }
 
