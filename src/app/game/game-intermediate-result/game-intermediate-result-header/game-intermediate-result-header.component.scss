@@ -11,9 +11,11 @@
   justify-self: center;
 }
 
-.home-btn {
+app-custom-button {
   grid-column: 1 / 3;
-  justify-self: start;
+}
+
+.home-btn {
   display: flex;
   justify-content: center;
   align-items: center;
@@ -24,7 +26,6 @@
   font-family: 'AeonikLight';
   font-size: var(--fontSizeSmall);
   border-radius: 5rem;
-  gap: 0.5rem;
 }
 
 .home-btn:hover {
