@@ -85,11 +85,16 @@
 .home-button {
   @include button(false, false, true);
   height: 4rem;
-  width: 18rem;
+  width: 15rem;
 }
 
 .select-mode-button {
   @include button(false, true);
+}
+
+.play-again-button {
+  @include button(false, true);
+  width: 15rem;
 }
 
 .select-mode-button-large {
