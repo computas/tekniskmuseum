@@ -27,12 +27,17 @@ export class AppComponent implements OnInit {
 
   ngOnInit(): void {
     this.setDialogTimeout();
+    
+    //Whenever currentPage changes, reset inactivity timer. 
     this.gameStateService.currentPage$.subscribe(() => {
       this.setDialogTimeout();
+      //If an inactivity prompt is open, close it. Important for multiplayer mode! 
       this.closeDialog();
     })
 
+    //Whenever user become inactive (25sec) -> open prompt. 
     this.userInactive.subscribe(() => { 
+      //Never open prompt on drawing page. 
       if (this.gameStateService.getCurrentPage() === GAMESTATE.drawingBoard) {
         this.setDialogTimeout();
       }
