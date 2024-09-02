@@ -4,7 +4,11 @@
 name: Azure Deploy to Production environment
 
 on:
+  pull_request:
+    branches:
+      - master
   workflow_dispatch:
+
 
 jobs:
   build_and_deploy_job:
