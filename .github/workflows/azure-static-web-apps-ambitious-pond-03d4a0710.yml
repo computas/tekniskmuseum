@@ -1,7 +1,12 @@
 name: Deploy to teknisk museum Production(ambitious-pond)
 
 on:
+  pull_request:
+    branches:
+      - master
+      - release/tekniskmuseum
   workflow_dispatch:
+
 
 jobs:
   build_and_deploy_job:
