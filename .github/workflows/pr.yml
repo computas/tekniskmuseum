@@ -31,4 +31,4 @@ jobs:
         run: bun run lint
 
       - name: Build 🛠️
-        run: bun run build
+        run: bun run build --configuration ComputasProd
