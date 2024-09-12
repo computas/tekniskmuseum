@@ -1,10 +1,9 @@
 @import '../../../variables.scss';
 
-@mixin button($gradient-border: false, $full-gradient: false, $back: false, $large: false) {
+@mixin button($gradient-border: false, $full-gradient: false, $back: false, $large: false, $custom-width: false) {
   height: 4rem;
-  min-width: 13rem;
+  width: if($custom-width, $custom-width, 15rem);
   max-width: 22rem;
-
   border-radius: 5rem;
 
   display: flex;
@@ -47,12 +46,7 @@
   flex-direction: row;
   justify-content: center;
   align-items: center;
-
-  @if $full-gradient {
-    background-color: rgba(0, 0, 0, 0.3);
-  } @else {
-    background-color: $button_background_color;
-  }
+  background-color: if($full-gradient, rgba(0, 0, 0, 0.3), $button_background_color);
 }
 
 .button-text {
@@ -84,17 +78,15 @@
 .back-button,
 .home-button {
   @include button(false, false, true);
-  height: 4rem;
-  width: 15rem;
 }
 
+
 .select-mode-button {
-  @include button(false, true);
+  @include button(false, true, false, false, 13rem);
 }
 
 .play-again-button {
   @include button(false, true);
-  width: 15rem;
 }
 
 .select-mode-button-large {
@@ -102,7 +94,7 @@
 }
 
 .forward-button {
-  @include button(true);
+  @include button(true, false, false, false, 14rem);
 }
 
 .disabled {
