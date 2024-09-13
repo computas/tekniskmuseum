@@ -6,6 +6,7 @@ export enum ButtonStyleClass {
   forward = 'forward-button',
   select = 'select-mode-button',
   selectLarge = 'select-mode-button-large',
+  playAgain = 'play-again-button',
 }
 
 export enum ButtonIconStyleClass {

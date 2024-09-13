@@ -61,16 +61,16 @@
             "scripts": []
           },
           "configurations": {
-            "production": {
+            "ComputasProd": {
               "budgets": [
                 {
                   "type": "initial",
-                  "maximumWarning": "500kB",
+                  "maximumWarning": "2MB",
                   "maximumError": "5MB"
                 },
                 {
                   "type": "anyComponentStyle",
-                  "maximumWarning": "2kB",
+                  "maximumWarning": "6kB",
                   "maximumError": "1MB"
                 }
               ],
@@ -78,7 +78,7 @@
               "fileReplacements": [
                 {
                   "replace": "src/environments/environment.ts",
-                  "with": "src/environments/environment.tekniskmuseumprod.ts"
+                  "with": "src/environments/environment.computas.ts"
                 }
               ],
               "serviceWorker": "ngsw-config.json"
@@ -91,6 +91,29 @@
                 {
                   "replace": "src/environments/environment.ts",
                   "with": "src/environments/environment.dev.ts"
+                }
+              ],
+              "serviceWorker": "ngsw-config.json"
+            },
+            "TekniskMuseumProd": {
+              "fileReplacements": [
+                {
+                  "replace": "src/environments/environment.ts",
+                  "with": "src/environments/environment.tekniskmuseumprod.ts"
+                }
+              ],
+              "optimization": true,
+              "outputHashing": "all",
+              "budgets": [
+                {
+                  "type": "initial",
+                  "maximumWarning": "2mb",
+                  "maximumError": "5mb"
+                },
+                {
+                  "type": "anyComponentStyle",
+                  "maximumWarning": "6kb",
+                  "maximumError": "10kb"
                 }
               ],
               "serviceWorker": "ngsw-config.json"

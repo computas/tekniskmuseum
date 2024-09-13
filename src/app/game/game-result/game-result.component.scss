@@ -95,7 +95,7 @@
 
 #result-card-container {
   display: flex;
-  gap: 2rem;
+  gap: 1.8rem;
   margin: 0 auto;
 }
 
@@ -132,11 +132,11 @@ app-speech-bubble p {
 }
 
 .card-won {
-  border: 4px solid $green_color;
+  border: 6px solid $green_color;
   border-radius: 16px;
 }
 .card-loss {
-  border: 4px solid $red_color;
+  border: 6px solid $red_color;
   border-radius: 16px;
 }
 
