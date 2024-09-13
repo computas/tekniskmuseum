@@ -1,8 +1,9 @@
 @import '../../../variables.scss';
 
-@mixin button($gradient-border: false, $full-gradient: false, $back: false, $large: false, $custom-width: false) {
-  height: 4rem;
-  width: if($custom-width, $custom-width, 15rem);
+@mixin button($gradient-border: false, $full-gradient: false, $back: false, $custom-width: 15rem, $custom-height: 4rem) {
+  height: $custom-height;
+  width: $custom-width;
+  min-width: 13rem;
   max-width: 22rem;
   border-radius: 5rem;
 
@@ -11,6 +12,7 @@
   align-items: center;
   justify-content: center;
 
+  font-size: var(--fontSizeSmall);
   background-color: $button_background_color;
   box-shadow: 0 8px 16px 0 rgba(0, 0, 0, 0.1), 0 6px 20px 0 rgba(0, 0, 0, 0.15);
 
@@ -19,7 +21,6 @@
     border-color: white;
     border: 0.2rem solid;
     color: $text_primary_color;
-    font-size: var(--fontSizeSmall);
   }
   @if $gradient-border {
     background: linear-gradient(90deg, #1f60de 0%, #681fde 25%, #ec526d 50%, #eec589 75%, #1cceda 100%);
@@ -28,10 +29,6 @@
   @if $full-gradient {
     background: linear-gradient(0deg, #1f60de 0%, #681fde 14%, #ec526d 71%, #edba86 100%);
     color: $button_content_color;
-  }
-  @if $large {
-    height: 4.5rem;
-    min-width: 18rem;
   }
 }
 
@@ -55,7 +52,6 @@
   justify-content: center;
   align-items: center;
   gap: 1rem;
-
   font-size: var(--fontSizeSmall);
 }
 
@@ -82,7 +78,7 @@
 
 
 .select-mode-button {
-  @include button(false, true, false, false, 13rem);
+  @include button(false, true, false, 13rem);
 }
 
 .play-again-button {
@@ -90,11 +86,11 @@
 }
 
 .select-mode-button-large {
-  @include button(false, true, false, true);
+  @include button(false, true, false, 18rem, 4.5rem);
 }
 
 .forward-button {
-  @include button(true, false, false, false, 14rem);
+  @include button(true, false, false, 14rem);
 }
 
 .disabled {
