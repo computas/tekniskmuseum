@@ -1,6 +1,6 @@
 import { Component, OnInit, OnDestroy, inject } from '@angular/core';
 import { interval, Subscription } from 'rxjs';
-import { take, tap } from 'rxjs/operators';
+import { delay, take, tap } from 'rxjs/operators';
 import { DrawingService } from '../services/drawing.service';
 import { MultiplayerService } from '../services/multiplayer.service';
 import { MatIcon } from '@angular/material/icon';
@@ -118,11 +118,13 @@ export class GameWordToDrawComponent implements OnInit, OnDestroy {
           },
           error: (error) => {
             console.error("An error occurred while starting the game:", error);
-            this.snackBar.open('A gateway error occurred. Please try again later.', 'Close', {
-              duration: 5000,
+            this.snackBar.open('Oops, noe gikk galt. Vennligst prøv igjen senere.', 'Close', {
+              duration: 8000,
             });
-            this.loading = false;
-            this.goHome();
+            setTimeout(() => {
+              this.loading = false;
+              this.goHome();
+            }, 4000);
           },
         })
 );
