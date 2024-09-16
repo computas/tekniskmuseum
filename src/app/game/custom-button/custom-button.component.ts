@@ -2,13 +2,14 @@ import { Component, Input } from '@angular/core';
 import { ButtonStyleClass } from '@/app/shared/buttonStyles';
 import { RouterLink, RouterLinkActive } from '@angular/router';
 import { MatIcon } from '@angular/material/icon';
+import { CommonModule } from '@angular/common';
 
 @Component({
   selector: 'app-custom-button',
   templateUrl: './custom-button.component.html',
   styleUrls: ['./custom-button.component.scss'],
   standalone: true,
-  imports: [RouterLink, RouterLinkActive, MatIcon],
+  imports: [RouterLink, RouterLinkActive, MatIcon, CommonModule],
 })
 export class CustomButtonComponent {
   @Input() buttonStyle: ButtonStyleClass = ButtonStyleClass.default;
