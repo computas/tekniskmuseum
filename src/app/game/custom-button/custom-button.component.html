@@ -1,8 +1,7 @@
 <!-- For buttonstyles to advance in the game -->
-<button *ngIf="getStyle === 'select-mode-button' || getStyle === 'select-mode-button-large' || getStyle === 'forward-button' || getStyle === 'play-again-button'"
+<button *ngIf="buttonStyle === 'select-mode-button' || buttonStyle === 'select-mode-button-large' || buttonStyle === 'forward-button' || buttonStyle === 'play-again-button'"
   [disabled] = "disabled"
   [class] = "buttonStyle">
-
   <div *ngIf="buttonStyle === 'forward-button'" class="full-gradient-inner">
     <div class="button-text">
         {{buttonText}}
@@ -16,16 +15,14 @@
     </div>
   </div>
 </button>
-<!-- For ButtonStyles that go bo back or home -->
-<button *ngIf="getStyle === 'back-button' || getStyle === 'home-button' || getStyle === 'default-button'"
+<!-- For ButtonStyles that go back or home, and default -->
+<button *ngIf="buttonStyle === 'back-button' || buttonStyle === 'home-button' || buttonStyle === 'default-button'"
   [disabled]="disabled"
   [class]="buttonStyle">
   <div class="button-text">
-
-    <img *ngIf="iconSrc && (getStyle === 'back-button')" class="back-button-icon" [src]="iconSrc" [alt]="alt"/>
-    <img *ngIf="iconSrc && (getStyle === 'home-button')" class="button-icon" [src]="iconSrc" [alt]="alt"/> 
-    <img *ngIf="iconSrc && (getStyle === 'default-button')"  class="default" [src]="iconSrc" [alt]="alt"/>
-    
+    <img *ngIf="iconSrc && (buttonStyle === 'back-button')" class="back-button-icon" [src]="iconSrc" [alt]="alt"/>
+    <img *ngIf="iconSrc && (buttonStyle === 'home-button')" class="button-icon" [src]="iconSrc" [alt]="alt"/> 
+    <img *ngIf="iconSrc && (buttonStyle === 'default-button')"  class="default" [src]="iconSrc" [alt]="alt"/>
     {{ buttonText }}
   </div>
 </button>

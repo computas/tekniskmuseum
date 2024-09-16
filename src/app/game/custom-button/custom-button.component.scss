@@ -46,16 +46,6 @@
   background-color: if($full-gradient, rgba(0, 0, 0, 0.3), $button_background_color);
 }
 
-.button-text {
-  display: flex;
-  flex-direction: row;
-  justify-content: center;
-  align-items: center;
-  gap: 1rem;
-}
-
-
-
 .full-gradient-inner {
   @include rainbowContent(true);
 }
@@ -98,4 +88,12 @@
   border-radius: var(--buttonBorderRadius);
   border: 3px solid white;
   background: $full_gradient;
+}
+
+.button-text {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  gap: 1rem;
 }
