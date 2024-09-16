@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
-import { Observable, BehaviorSubject, catchError, EMPTY } from 'rxjs';
+import { Observable, BehaviorSubject, catchError, EMPTY, throwError } from 'rxjs';
 import { tap, switchMap } from 'rxjs/operators';
 import {
   StartGamePlayerId,
@@ -137,7 +137,7 @@ export class DrawingService {
         }),
         catchError((error) => {
           this.loggingService.error("Error occurred in endpoind /startgame: " + error.message);
-          return EMPTY;
+          return throwError(() => new Error("Error occurred in /startgame"));
         }),
       );
   }
@@ -150,12 +150,12 @@ export class DrawingService {
         tap((res) => (this.label = res.label)),
         catchError((error) => {
           this.loggingService.error("Error occurred in endpoind /getlabel: " + error.message);
-          return EMPTY;
+          return throwError(() => new Error("Error occurred in /getlabel"));
         }),
     
     );
   }
-
+  
   getHighscore(): Observable<HighscoreData> {
     const difficultyId = this.config.difficultyId;
     const headers = new HttpHeaders();
