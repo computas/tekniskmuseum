@@ -111,17 +111,18 @@
         class="end-game-button"
         [buttonStyle]="homeButtonStyleClass"
         [buttonText]="'HOME' | translate"
+        iconSrc="../../../assets/house.svg"
         (click)="endGame()"
         alt="Go home button"
         aria-label="Home button"
       />
       <app-custom-button
-        [buttonStyle]="playAgainButtonStyleClass"
-        [buttonText]="'PLAY_AGAIN_BUTTON' | translate"
-        (click)="playAgain()"
-        alt="Play again button"
-        aria-label="Replay button"
-      />
+      [buttonStyle]="playAgainButtonStyleClass"
+      [buttonText]="'PLAY_AGAIN_BUTTON' | translate"
+      (click)="playAgain()"
+      alt="Play again button"
+      aria-label="Replay button"
+    />
     </div>
   </div>
 </div>
