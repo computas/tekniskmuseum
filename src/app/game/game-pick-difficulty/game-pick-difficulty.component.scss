@@ -9,18 +9,8 @@
   padding: .8em 1.2em;
 }
 
-// .header {
-//   width: 100%;
-//   display: flex;
-//   justify-content: flex-end;
-//   padding-top: 1rem;
-//   padding-right: 1.5rem;
-// }
-
-.header {
+app-custom-header {
   grid-row: 1;
-  display: grid;
-  grid-template-columns: repeat(8, 1fr);
 }
 
 #back-btn {

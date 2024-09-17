@@ -1,24 +1,10 @@
 <div class="container-background">
   <div class="container" (click)="skipAnimation()" (keypress)="skipAnimation()" tabindex="0">
-    <!-- <header class="header">
-        <app-custom-button
-        [buttonStyle]="homeButtonStyleClass"
-        [buttonText]="'BACK_BUTTON' | translate"
-        iconSrc="../assets/icons/arrow4-svgrepo-com.svg"
-        routerLink="/welcome"
-        routerLinkActive="active"
-        alt="Go back button"
-        aria-label="Return button"
-        id="back-btn"
-      />
-      <img class='logo' src="assets/logo/IO-logo-inverted_transparent-bg.png" alt="logo" />
-    </header> -->
     <app-custom-header 
       [buttonStyle]="homeButtonStyleClass"
       [buttonText]="'BACK_BUTTON' | translate"
       iconSrc="../assets/icons/arrow4-svgrepo-com.svg"
       [showProgressBar]="false"
-    
     />
     <div class="main-content">
       <div class="text-content">
