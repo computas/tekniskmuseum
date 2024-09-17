@@ -7,6 +7,7 @@ import { MatIcon } from '@angular/material/icon';
 import { MatButton } from '@angular/material/button';
 import { MatProgressSpinner } from '@angular/material/progress-spinner';
 import { MatDialog } from '@angular/material/dialog';
+import { MatSnackBar } from '@angular/material/snack-bar';
 import { UpperCasePipe } from '@angular/common';
 import { GameConfigService } from '../services/game-config.service';
 import { TranslationService } from '@/app/core/translation.service';
@@ -22,6 +23,7 @@ import { PointerSide, ArrowAlignment } from '@/app/shared/models/interfaces';
 import { CustomButtonComponent } from '../custom-button/custom-button.component';
 import { ButtonStyleClass } from '@/app/shared/buttonStyles';
 import { ConfirmExitDialogComponent } from '../game-intermediate-result/game-intermediate-result-header/confirm-exit-dialog/confirm-exit-dialog.component';
+import { routes } from '../../shared/models/routes';
 
 @Component({
   selector: 'app-game-word-to-draw',
@@ -66,7 +68,6 @@ export class GameWordToDrawComponent implements OnInit, OnDestroy {
 
   //To prompt when wanting to quit game after a round. Earlier it did not prompt at all. 
   readonly dialog = inject(MatDialog);
-  
 
   constructor(
     private gameConfigService: GameConfigService,
@@ -75,7 +76,8 @@ export class GameWordToDrawComponent implements OnInit, OnDestroy {
     private multiplayerService: MultiplayerService,
     private translationService: TranslationService,
     private exampleDrawingService: ExampleDrawingService,
-    private router: Router
+    private router: Router,
+    private snackBar: MatSnackBar
   ) {}
 
   ngOnInit(): void {
@@ -88,28 +90,43 @@ export class GameWordToDrawComponent implements OnInit, OnDestroy {
     if (this.isSinglePlayer) {
       if (this.drawingService.gameHasStarted) {
         this.subscriptions.add(
-          this.drawingService.getLabel().subscribe((res) => {
-            this.label = res.label;
-            this.loading = false;
+          this.drawingService.getLabel().subscribe({
+            next: (res) => {
+              this.label = res.label;
+              this.loading = false;
+            },
+            error: (error) => {
+              console.error("An error occurred while fetching the label:", error.message);
+              this.loading = false;
+            },
           })
         );
+
         this.subscriptions.add(
           this.drawingService.guessUsed$.subscribe((res) => {
             this.guessUsed = res;
           })
         );
-      } else {
+      }
+      else {
         this.subscriptions.add(
-          this.drawingService.startGame().subscribe(() => {
+        this.drawingService.startGame().subscribe({
+          next: () => {
             this.loading = false;
             this.label = this.drawingService.label;
             this.drawingService.gameHasStarted = true;
-          })
-        );
-        this.subscriptions.add(
-          this.drawingService.guessUsed$.subscribe((res) => {
-            this.guessUsed = res;
-          })
+          },
+          error: (error) => {
+            console.error("An error occurred while starting the game:", error);
+            this.snackBar.open('Oops, noe gikk galt. Vennligst prøv igjen senere.', 'Close', {
+              duration: 6000,
+            });
+            setTimeout(() => {
+              this.loading = false;
+              this.goHome();
+            }, 3000);
+          },
+        })
         );
       }
     }
@@ -132,6 +149,7 @@ export class GameWordToDrawComponent implements OnInit, OnDestroy {
       );
     }
   }
+
 
   toDrawingBoard() {
     if (this.gameStateService.isSingleplayer()) {
@@ -163,6 +181,10 @@ export class GameWordToDrawComponent implements OnInit, OnDestroy {
 
   ngOnDestroy() {
     this.subscriptions.unsubscribe();
+  }
+
+  goHome() {
+    this.router.navigate([routes.LANDING]);
   }
 
   buttonStyle(): string {

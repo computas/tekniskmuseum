@@ -64,13 +64,15 @@
   color: $white_color;
   display: flex;
   flex-direction: row;
-  align-items: baseline;
+  align-items: center;
   gap: 1rem;
 }
 
 #idleButtonIcon {
-  height: var(--fontSizeSmall);
+  height: auto;
+  width: auto;
   color: $white_color;
+  font-size: 50px;
 }
 
 #homeButton {
