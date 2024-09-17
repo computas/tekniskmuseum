@@ -33,10 +33,12 @@
 }
 
 #confirmExitHomeButtonText {
+  display: flex;
   color: $white_color;
   flex-direction: row;
   align-items: center;
   justify-content: center;
+  gap: 0.7rem;
 }
 
 .confirmExitIdleButton {
@@ -48,6 +50,9 @@
   margin-bottom: 1rem;
   width: 13rem;
   background: $white_color;
+  align-items: center;
+  justify-content: center;
+  display: flex;
 }
 
 .confirmExitIdleButton :focus {
@@ -55,8 +60,10 @@
 }
 #confirmExitIdleButtonIcon {
   color: $white_color;
-  margin-right: 0.5rem;
-  }
+  font-size: 50px;
+  height: auto;
+  width: auto;
+}
 
 #confirmExitHomeButton {
   background-color: $red_color;
