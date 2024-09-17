@@ -1,1 +1,8 @@
-<p>custom-header works!</p>
+<header class="header">
+    <app-custom-button
+        [buttonStyle]="buttonStyle"
+        [buttonText]="buttonText | translate"
+    />
+    <app-game-progress-bar *ngif="showProgressBar"/>
+    <img class="logo" src="assets/logo/IO-logo-inverted_transparent-bg.png" alt="logo" /> 
+</header>
