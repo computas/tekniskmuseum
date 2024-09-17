@@ -15,6 +15,7 @@ import { ArrowAlignment, PointerSide } from '@/app/shared/models/interfaces';
 import { trigger, state, style, animate, transition } from '@angular/animations';
 import { ButtonStyleClass } from '@/app/shared/buttonStyles';
 import { CustomButtonComponent } from '../custom-button/custom-button.component';
+import { CustomHeaderComponent } from '../custom-header/custom-header.component';
 
 @Component({
   selector: 'app-game-pick-difficulty',
@@ -30,6 +31,7 @@ import { CustomButtonComponent } from '../custom-button/custom-button.component'
     RouterLink,
     RouterLinkActive,
     CustomButtonComponent,
+    CustomHeaderComponent
   ],
   animations: [
     trigger('show', [
