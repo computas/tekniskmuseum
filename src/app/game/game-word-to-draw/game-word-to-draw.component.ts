@@ -108,7 +108,7 @@ export class GameWordToDrawComponent implements OnInit, OnDestroy {
           })
         );
       }
-       else {
+      else {
         this.subscriptions.add(
         this.drawingService.startGame().subscribe({
           next: () => {
@@ -127,8 +127,8 @@ export class GameWordToDrawComponent implements OnInit, OnDestroy {
             }, 3000);
           },
         })
-);
-
+        );
+      }
     }
     if (this.isMultiPlayer) {
       const player = this.multiplayerService.stateInfo.player_nr;
@@ -149,7 +149,7 @@ export class GameWordToDrawComponent implements OnInit, OnDestroy {
       );
     }
   }
-}
+
 
   toDrawingBoard() {
     if (this.gameStateService.isSingleplayer()) {
