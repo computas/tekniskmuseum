@@ -1,8 +1,10 @@
-import { Component, Input } from '@angular/core';
+import { Component, inject, Input } from '@angular/core';
 import { ButtonStyleClass } from '@/app/shared/buttonStyles';
-import { RouterLink, RouterLinkActive } from '@angular/router';
+import { Router, RouterLink, RouterLinkActive } from '@angular/router';
 import { MatIcon } from '@angular/material/icon';
 import { CommonModule } from '@angular/common';
+import { MatDialog } from '@angular/material/dialog';
+import { ConfirmExitDialogComponent } from '../game-intermediate-result/game-intermediate-result-header/confirm-exit-dialog/confirm-exit-dialog.component';
 
 @Component({
   selector: 'app-custom-button',
@@ -19,4 +21,24 @@ export class CustomButtonComponent {
   @Input() alt = '';
   @Input() iconSrc?: string;
   @Input() innerBackgroundStyle: 'full-gradient-inner' | 'non-gradient-inner' = 'non-gradient-inner';
+
+
+  readonly dialog = inject(MatDialog);
+  readonly router = inject(Router);
+
+  openDialog(): void {
+    this.dialog.open(ConfirmExitDialogComponent);
+  }
+  clickHandler(): void {
+    if (this.disabled) {
+      return; 
+    }
+    if (this.buttonStyle === 'back-button') {
+      this.router.navigate(['/welcome']); 
+    } 
+    else if (this.buttonStyle === 'home-button') {
+      this.openDialog();  
+    }
+  }
+
 }

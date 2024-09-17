@@ -16,7 +16,8 @@
   </div>
 </button>
 <!-- For ButtonStyles that go back or home, and default -->
-<button *ngIf="buttonStyle === 'back-button' || buttonStyle === 'home-button' || buttonStyle === 'default-button'"
+<button  *ngIf="buttonStyle === 'back-button' || buttonStyle === 'home-button' || buttonStyle === 'default-button'"                                  
+  (click)="clickHandler()"  
   [disabled]="disabled"
   [class]="buttonStyle">
   <div class="button-text">
