@@ -2,7 +2,8 @@
     <app-custom-button
         [buttonStyle]="buttonStyle"
         [buttonText]="buttonText | translate"
-    />
-    <app-game-progress-bar *ngif="showProgressBar"/>
+        [iconSrc]="iconSrc"
+    ></app-custom-button>
+    <app-game-progress-bar *ngIf="showProgressBar"></app-game-progress-bar>
     <img class="logo" src="assets/logo/IO-logo-inverted_transparent-bg.png" alt="logo" /> 
 </header>

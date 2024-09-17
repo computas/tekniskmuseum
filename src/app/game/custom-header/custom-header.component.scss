@@ -1,0 +1,14 @@
+.header {
+    display: grid;
+    grid-template-columns: repeat(8, 1fr);
+  }
+
+app-custom-button {
+    grid-column: 1/3;
+}
+
+app-game-progress-bar {
+    grid-column: 4 / 6;
+    align-self: center;
+    justify-self: center;
+  }
