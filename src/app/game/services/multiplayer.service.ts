@@ -211,7 +211,6 @@ export class MultiplayerService {
 
   clearState() {
     this.stateInfo = this.initialState;
-    //this.webSocketService.disconnect();
   }
 
   changestate(gameState: GAMESTATE) {

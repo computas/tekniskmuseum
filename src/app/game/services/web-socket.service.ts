@@ -13,8 +13,8 @@ import { GameStateService } from '../services/game-state-service';
 export class WebSocketService {
   socket: Socket | undefined;
   private retryAttempts = 0;
-  private maxRetries = 5;  // Maximum number of retry attempts
-  private retryDelay = 3000; // Delay between retries in milliseconds
+  private maxRetries = 5;
+  private retryDelay = 3000;
 
   playerDisconnectedData: PlayerDisconnectedData | undefined;
 
@@ -83,12 +83,12 @@ export class WebSocketService {
       this.socket = undefined;
       this.isConnected = false;
       this.isRetrying = false;
-      console.log("Websocket closed properly maybe")
+      console.log("Websocket closed properly")
       this.retryAttempts = 0;
     } else if (this.socket) {
       this.socket.removeAllListeners();
       this.socket.disconnect();
-      console.log("THis did not work as wished")
+      console.log("Websocket closed properly without ever being connected")
     }
   }
 
@@ -120,15 +120,15 @@ export class WebSocketService {
     if (this.retryAttempts <= this.maxRetries) {
       console.warn(`Retrying connection... Attempt ${this.retryAttempts}/${this.maxRetries}`);
       setTimeout(() => {
-        this.startSockets();  // Retry connection after delay
+        this.startSockets();
       }, this.retryDelay);
     } else {
-      console.error('Max retry attempts reached. Redirecting to error page.');
-      this.redirectToErrorPage();
+      console.error('Max retry attempts reached. Redirecting to welcome page.');
+      this.redirectToWelcomePage();
     }
   }
 
-  redirectToErrorPage() {
+  redirectToWelcomePage() {
     this.disconnect();
     this.router.navigate(['/welcome'])
   }
