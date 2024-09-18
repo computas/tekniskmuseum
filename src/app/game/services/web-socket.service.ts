@@ -55,6 +55,8 @@ export class WebSocketService {
       this.handleConnectionError();
     });
 
+    // Disable any type check for only this one because the spread parameter will take parameters of different types
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
     this.socket.on('disconnect', (reason: any) => {
       console.warn('disconnected', reason);
       this.isConnected = false;
