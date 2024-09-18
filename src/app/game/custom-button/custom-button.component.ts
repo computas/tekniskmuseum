@@ -2,7 +2,6 @@ import { Component, inject, Input } from '@angular/core';
 import { ButtonStyleClass } from '@/app/shared/buttonStyles';
 import { Router, RouterLink, RouterLinkActive } from '@angular/router';
 import { MatIcon } from '@angular/material/icon';
-import { CommonModule } from '@angular/common';
 import { MatDialog } from '@angular/material/dialog';
 import { ConfirmExitDialogComponent } from '../game-intermediate-result/game-intermediate-result-header/confirm-exit-dialog/confirm-exit-dialog.component';
 
@@ -11,7 +10,7 @@ import { ConfirmExitDialogComponent } from '../game-intermediate-result/game-int
   templateUrl: './custom-button.component.html',
   styleUrls: ['./custom-button.component.scss'],
   standalone: true,
-  imports: [RouterLink, RouterLinkActive, MatIcon, CommonModule],
+  imports: [RouterLink, RouterLinkActive, MatIcon],
 })
 export class CustomButtonComponent {
   @Input() buttonStyle: ButtonStyleClass = ButtonStyleClass.default;
