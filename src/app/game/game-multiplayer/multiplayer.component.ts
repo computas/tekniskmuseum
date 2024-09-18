@@ -1,7 +1,6 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
 import { trigger, style, animate, transition } from '@angular/animations';
 import { Router } from '@angular/router';
-
 import { MultiplayerService } from '../services/multiplayer.service';
 import { WebSocketService } from '../services/web-socket.service';
 import { Subscription } from 'rxjs';
@@ -103,7 +102,7 @@ export class MultiplayerComponent implements OnInit, OnDestroy {
 
   ngOnDestroy(): void {
     this.webSocketService.disconnect();
-    this.multiplayerService.resetStateInfo();
+    this.multiplayerService.clearState();
     this.subs.unsubscribe();
   }
 }

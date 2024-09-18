@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 import { Observable, BehaviorSubject } from 'rxjs';
 import { io, Socket } from 'socket.io-client';
+import { Router } from '@angular/router';
 import { environment } from '@/environments/environment';
 import { SocketEndpoints } from '@/app/shared/models/websocketEndpoints';
 import { PlayerDisconnectedData } from '@/app/shared/models/interfaces';
@@ -11,27 +12,55 @@ import { GameStateService } from '../services/game-state-service';
 })
 export class WebSocketService {
   socket: Socket | undefined;
+  private retryAttempts = 0;
+  private maxRetries = 5;  // Maximum number of retry attempts
+  private retryDelay = 3000; // Delay between retries in milliseconds
 
   playerDisconnectedData: PlayerDisconnectedData | undefined;
 
   private readonly _playerDisconnected = new BehaviorSubject<boolean>(false);
   readonly playerDisconnected$ = this._playerDisconnected.asObservable();
+  private isConnected = false;
+  private isRetrying = false;
 
-  constructor(private gameStateService: GameStateService) {}
+
+  constructor(private gameStateService: GameStateService, private router: Router) {}
 
   startSockets() {
-    this.socket = io(environment.WS_ENDPOINT);
+    if (this.socket && this.socket.connected) {
+      console.warn('Socket already connected');
+      return;
+    } 
+
+    if (this.isRetrying) {
+      console.warn('Currently retrying connection; will not start a new connection.');
+      return;
+    }
+
+    this.isRetrying = true;
+    this.socket = io(environment.TEKNISKBACKEND_ENDPOINT);
+
+    this.socket.on('connect', () => {
+      this.isConnected = true;
+    })
 
     this.socket.on('connect_failed', () => {
       console.error('connect_failed');
+      this.handleConnectionError();
+
     });
 
     this.socket.on('connect_error', (error) => {
       console.error(error);
+      this.handleConnectionError();
     });
 
-    this.socket.on('disconnect', (reason) => {
+    this.socket.on('disconnect', (reason: any) => {
       console.warn('disconnected', reason);
+      this.isConnected = false;
+      if (reason !== "io client disconnect") {
+        this.handleConnectionError();
+      }
     });
     this.socket.on('error', (reason) => {
       console.error('error', reason);
@@ -47,10 +76,19 @@ export class WebSocketService {
   }
 
   disconnect() {
-    if (this.socket && !this.socket.disconnected) {
+    if (this.socket && ! this.socket.disconnected) {
       console.warn('socket disconnecting and removing listener');
       this.socket.removeAllListeners();
       this.socket.disconnect();
+      this.socket = undefined;
+      this.isConnected = false;
+      this.isRetrying = false;
+      console.log("Websocket closed properly maybe")
+      this.retryAttempts = 0;
+    } else if (this.socket) {
+      this.socket.removeAllListeners();
+      this.socket.disconnect();
+      console.log("THis did not work as wished")
     }
   }
 
@@ -75,4 +113,24 @@ export class WebSocketService {
   set playerDisconnected(val: boolean) {
     this._playerDisconnected.next(val);
   }
+
+  handleConnectionError() {
+    this.retryAttempts++;
+
+    if (this.retryAttempts <= this.maxRetries) {
+      console.warn(`Retrying connection... Attempt ${this.retryAttempts}/${this.maxRetries}`);
+      setTimeout(() => {
+        this.startSockets();  // Retry connection after delay
+      }, this.retryDelay);
+    } else {
+      console.error('Max retry attempts reached. Redirecting to error page.');
+      this.redirectToErrorPage();
+    }
+  }
+
+  redirectToErrorPage() {
+    this.disconnect();
+    this.router.navigate(['/welcome'])
+  }
 }
+
