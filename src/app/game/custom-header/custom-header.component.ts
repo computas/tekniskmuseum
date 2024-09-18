@@ -2,8 +2,6 @@ import { Component, inject, input, Input } from '@angular/core';
 import { GameProgressBarComponent } from '../game-intermediate-result/game-intermediate-result-header/game-progress-bar/game-progress-bar.component';
 import { TranslatePipe } from '@/app/core/translation.pipe';
 import { CustomButtonComponent } from '../custom-button/custom-button.component';
-import { MatDialog } from '@angular/material/dialog';
-import { ConfirmExitDialogComponent } from '../game-intermediate-result/game-intermediate-result-header/confirm-exit-dialog/confirm-exit-dialog.component';
 import { ButtonStyleClass } from '@/app/shared/buttonStyles';
 import { CommonModule } from '@angular/common';
 

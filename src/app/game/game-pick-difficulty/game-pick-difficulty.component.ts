@@ -3,7 +3,6 @@ import { Router, RouterLink, RouterLinkActive } from '@angular/router';
 import { routes } from '../../shared/models/routes';
 import { MatButton } from '@angular/material/button';
 import { MatIcon } from '@angular/material/icon';
-import { NgIf } from '@angular/common';
 import { GameConfigService } from '../services/game-config.service';
 import { TranslationService } from '@/app/core/translation.service';
 import { TranslatePipe } from '@/app/core/translation.pipe';
@@ -23,7 +22,6 @@ import { CustomHeaderComponent } from '../custom-header/custom-header.component'
   styleUrl: './game-pick-difficulty.component.scss',
   standalone: true,
   imports: [
-    NgIf,
     MatIcon,
     MatButton,
     TranslatePipe,
