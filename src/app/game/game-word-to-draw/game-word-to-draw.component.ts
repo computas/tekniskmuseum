@@ -24,6 +24,7 @@ import { CustomButtonComponent } from '../custom-button/custom-button.component'
 import { ButtonStyleClass } from '@/app/shared/buttonStyles';
 import { ConfirmExitDialogComponent } from '../game-intermediate-result/game-intermediate-result-header/confirm-exit-dialog/confirm-exit-dialog.component';
 import { routes } from '../../shared/models/routes';
+import { CustomHeaderComponent } from '../custom-header/custom-header.component';
 
 @Component({
   selector: 'app-game-word-to-draw',
@@ -39,6 +40,7 @@ import { routes } from '../../shared/models/routes';
     IAvatarComponent,
     SpeechBubbleComponent,
     CustomButtonComponent,
+    CustomHeaderComponent
   ],
 })
 export class GameWordToDrawComponent implements OnInit, OnDestroy {

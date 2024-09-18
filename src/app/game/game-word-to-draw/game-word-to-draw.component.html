@@ -1,28 +1,15 @@
 <div class="container-background">
   <div class="word-container">
-    <div>
-      <app-custom-button
-        [buttonStyle]="homeButtonStyleClass"
-        [buttonText]="'END_GAME_BUTTON' | translate"
-        iconSrc="../../../../assets/house.svg"
-        (click)="openDialog()"
-        alt="Go home button"
-        aria-label="Home button"
-        id="home-btn"
-      />
-
-      <div class="words-remaining">
-        {{ 'ROUND_NUMBER' | translate }} {{ guessUsed }} {{ 'OF' | translate }} {{ totalRounds }}
-      </div>
-
-      <div class="logo-container">
-        <img class="logo" src="assets/logo/IO-logo-inverted_transparent-bg.png" alt="logo" />
-      </div>
-
+    <app-custom-header 
+    [buttonStyle]="homeButtonStyleClass"
+    [buttonText]="'END_GAME_BUTTON' | translate"
+    iconSrc="../../../../assets/house.svg"
+    [showProgressBar]="true"
+    />
+    <div class="main-content">
       <div class="i-container">
         <app-i-avatar class="i-avatar" [color]="CustomColorsIO.white" [width]="50" [height]="200"></app-i-avatar>
       </div>
-
       <app-speech-bubble
         [textColor]="CustomColorsIO.white"
         [bubbleColor]="CustomColorsIO.purple"

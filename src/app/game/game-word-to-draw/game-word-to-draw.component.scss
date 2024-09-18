@@ -1,42 +1,44 @@
 @import '../../../variables.scss';
 
+
+
 .word-container {
   position: relative;
+  display: grid;
+  grid-template-rows: 10vh auto 1fr; 
+  grid-template-columns: 1fr; 
   min-height: 100vh;
-  display: flex;
-  flex-direction: column;
   align-items: center;
   justify-content: center;
   color: $white_color;
+  padding: 1em 1.5em;
 }
 
-.words-remaining {
-  font-style: AeonikMedium;
-  text-align: center;
-  font-size: 2em;
-  margin-bottom: 32px;
+app-custom-header {
+  grid-row: 1;
+}
+
+.main-content {
+  grid-row: 2;
+  display: flex;
+  gap: 3rem;
+}
+
+.i-container {
+  margin-left: 10rem;
+  margin-top: 16rem;
+}
+
+.i-avatar {
+  height: 200px;
+}
+
+app-speech-bubble {
+  margin-top: 8rem;
 }
 
 .white-spinner {
   margin-top: 2rem;
-}
-
-#home-btn {
-  position: absolute;
-  top: 4vh;
-  left: 4vh;
-}
-
-.words-remaining {
-  position: absolute;
-  top: 0;
-  left: 50%;
-  transform: translateX(-50%);
-  padding: 1rem;
-  font-size: 2em;
-  font-family: 'AeonikMedium';
-  font-size: var(--fontSizeSmall);
-  margin: 0;
 }
 
 .word-draw {
@@ -66,15 +68,7 @@
   margin-top: 1.5rem;
 }
 
-.i-container {
-  position: absolute;
-  bottom: 170px;
-  left: 200px;
-}
 
-.i-avatar {
-  height: 150px;
-}
 
 .next-page-button .mat-icon {
   font-size: 1.5rem;
@@ -91,12 +85,6 @@
   height: 150px;
 }
 
-.header {
-  font-size: 5rem;
-  font-family: 'AeonikMedium';
-  margin-top: 60px;
-}
-
 p {
   font-size: 2em;
 }
@@ -111,8 +99,8 @@ p {
 
 footer {
   width: 100%;
-  position: absolute;
-  bottom: 1rem;
+  height: 100%;
+  grid-row: 3;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -121,9 +109,11 @@ footer {
 
 .footer-content {
   display: flex;
-  align-items: center;
+  align-items: flex-end;
   justify-content: flex-end;
+  gap: 17rem;
   width: 100%;
+  height: 100%;
 }
 
 .button-container:hover {
@@ -159,19 +149,8 @@ footer {
   cursor: not-allowed;
 }
 
-#header {
-  display: flex;
-  align-items: center;
-  gap: 1rem;
-  width: 100%;
-  margin-bottom: 1rem;
-  justify-content: center;
-  justify-self: center;
-}
-
 #difficulty {
-  position: absolute;
-  left: 50%;
+  margin-bottom: 1.2rem;
   transform: translate(-50%);
   text-align: center;
   font-family: AeonikRegular;
@@ -183,10 +162,6 @@ footer {
   font-style: italic;
 }
 
-#draw-btn {
-  margin-right: 1rem;
-  margin-bottom: 0.6rem;
-}
 
 @media only screen and (max-width: 600px) {
   .header {
