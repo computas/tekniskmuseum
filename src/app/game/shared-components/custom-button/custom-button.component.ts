@@ -18,7 +18,6 @@ export class CustomButtonComponent {
   @Input() disabled = false;
   @Input() ariaLabel = '';
   @Input() alt = '';
-  @Input() iconSrc?: string;
   @Input() innerBackgroundStyle: 'full-gradient-inner' | 'non-gradient-inner' = 'non-gradient-inner';
 
 
