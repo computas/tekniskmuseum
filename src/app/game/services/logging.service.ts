@@ -53,7 +53,7 @@ export class LoggingService {
         this.log(msg, LogLevel.Warn);
     }
     
-    error(msg: string, p0: { message: any; status: any; url: any; error: any; headers: any; }) {
+    error(msg: string) {
         this.log(msg, LogLevel.Error);
     }
     

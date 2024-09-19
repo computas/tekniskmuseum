@@ -15,8 +15,5 @@ import { CommonModule } from '@angular/common';
 export class CustomHeaderComponent {
   @Input() buttonStyle: ButtonStyleClass = ButtonStyleClass.default; // Allows customization of the button style
   @Input() buttonText: string = 'Button'; // Default button text
-  @Input() iconSrc = ""; //remove this and put this as a constant logic in custom button, since every back button has same logo, and and home button has same logo. 
   @Input() showProgressBar: boolean = false;
-
-
 }

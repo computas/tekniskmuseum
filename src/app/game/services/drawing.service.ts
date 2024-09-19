@@ -124,65 +124,38 @@ export class DrawingService {
   }
 
   startGame(): Observable<GameLabel> {
-  const headers = new HttpHeaders().set('Access-Control-Allow-Origin', '*');
-  console.log(headers);
-  this.loggingService.info("Starting game request with difficulty_id: " + this.config.difficultyId);
-
-  return this.http
-    .get<StartGamePlayerId>(`${this.baseUrl}/${endpoints.STARTGAME}?difficulty_id=${this.config.difficultyId}`, {
-      headers: headers,
-    })
-    .pipe(
-      switchMap((res) => {
-        // Log the response from the startGame API
-        this.loggingService.info("Received response from /startgame: player_id = " + res.player_id);
-        this.playerid = res.player_id;
-
-        // Log when transitioning to the getLabel() request
-        this.loggingService.info("Requesting game label for player_id: " + this.playerid);
-        return this.getLabel();
-      }),
-      catchError((error) => {
-        // Log the entire error object for more details
-        this.loggingService.error("Error occurred in /startgame endpoint", {
-          message: error.message,
-          status: error.status,  // HTTP status code
-          url: error.url,        // URL that caused the error
-          error: error.error,    // Backend error message
-          headers: error.headers // Error headers
-        });
-        return EMPTY;
+    const headers = new HttpHeaders();
+    headers.set('Access-Control-Allow-Origin', '*');
+    return this.http
+      .get<StartGamePlayerId>(`${this.baseUrl}/${endpoints.STARTGAME}?difficulty_id=${this.config.difficultyId}`, {
+        headers: headers,
       })
-    );
-}
+      .pipe(
+        switchMap((res) => {
+          this.playerid = res.player_id;
+          return this.getLabel();
+        }),
+        catchError((error) => {
+          this.loggingService.error("Error occurred in endpoind /startgame: " + error.message);
+          return throwError(() => new Error("Error occurred in /startgame"));
+        }),
+      );
+  }
+
 
   
 
   getLabel(): Observable<GameLabel> {
     const currentLang = this.translationService.getCurrentLang();
-    console.log(this.playerid);
-    const requestUrl = `${this.baseUrl}/${endpoints.GETLABEL}?player_id=${this.playerid}&lang=${currentLang}`;
-    this.loggingService.info(`Requesting label with URL: ${requestUrl}`);
-
     return this.http
-    .post<GameLabel>(requestUrl, {})
-    .pipe(
-      tap((res) => {
-          this.label = res.label;
-      }),
-      catchError((error) => {
-        // Log the entire error object for more details
-        this.loggingService.error("Error occurred in /getlabel endpoint", {
-          message: error.message,
-          status: error.status,  // HTTP status code
-          url: error.url,        // URL that caused the error
-          error: error.error,    // Backend error message
-          headers: error.headers // Error headers
-        });
-        return EMPTY;
-      })
+      .post<GameLabel>(`${this.baseUrl}/${endpoints.GETLABEL}?player_id=${this.playerid}&lang=${currentLang}`, {})
+      .pipe(
+        tap((res) => (this.label = res.label)),
+        catchError((error) => {
+          this.loggingService.error("Error occurred in endpoind /getlabel: " + error.message);
+          return throwError(() => new Error("Error occurred in /getlabel"));
+        }),  
     );
-  
   }
   
   getHighscore(): Observable<HighscoreData> {
@@ -212,14 +185,7 @@ export class DrawingService {
     return this.http.post(`${this.baseUrl}/${endpoints.POSTSCORE}`, body, { headers: headers })
       .pipe(
         catchError((error) => {
-          // Log the entire error object for more details
-          this.loggingService.error("Error occurred in /startgame endpoint", {
-            message: error.message,
-            status: error.status,  // HTTP status code
-            url: error.url,        // URL that caused the error
-            error: error.error,    // Backend error message
-            headers: error.headers // Error headers
-          });
+          this.loggingService.error("Error occurred in endpoind /postscore: " + error.message);
           return EMPTY;
         }),
       )

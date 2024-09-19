@@ -31,17 +31,12 @@
   [disabled]="disabled"
   [class]="buttonStyle">
     <div class="button-text">
-      @if (iconSrc) {
-        @switch (buttonStyle) {
-          @case ('back-button') {
-            <img class="back-button-icon" [src]="iconSrc" [alt]="alt" />
-          }
-          @case ('home-button') {
-            <img class="button-icon" [src]="iconSrc" [alt]="alt" />
-          }
-          @default {
-            <img class="default" [src]="iconSrc" [alt]="alt" />
-          }
+      @switch (buttonStyle) {
+        @case ('back-button') {
+          <img class="back-button-icon" src="../../../../assets/icons/arrow4-svgrepo-com.svg" [alt]="alt" />
+        }
+        @case ('home-button') {
+          <img class="button-icon" src="../../../../assets/house.svg" [alt]="alt" />
         }
       }
       {{buttonText}}
