@@ -27,7 +27,7 @@ import { confettiSettings, iConfettiFigure, oConfettiFigure } from '@/assets/ava
 import { IAvatarComponent } from '@/assets/avatars/i-avatar/i-avatar.component';
 import { OAvatarComponent } from '@/assets/avatars/o-avatar/o-avatar.component';
 import { ButtonStyleClass } from '@/app/shared/buttonStyles';
-import { CustomButtonComponent } from '../custom-button/custom-button.component';
+import { CustomButtonComponent } from '../shared-components/custom-button/custom-button.component';
 
 @Component({
   selector: 'app-game-result',

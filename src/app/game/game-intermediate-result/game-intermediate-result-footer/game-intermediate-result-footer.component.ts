@@ -4,7 +4,7 @@ import { MatIcon } from '@angular/material/icon';
 import { GAMESTATE } from '@/app/shared/models/interfaces';
 import { MultiplayerService } from '../../services/multiplayer.service';
 import { GameStateService } from '../../services/game-state-service';
-import { CustomButtonComponent } from '../../custom-button/custom-button.component';
+import { CustomButtonComponent } from '../../shared-components/custom-button/custom-button.component';
 import { ButtonStyleClass } from '@/app/shared/buttonStyles';
 @Component({
   selector: 'app-game-intermediate-result-footer',

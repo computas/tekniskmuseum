@@ -3,7 +3,7 @@ import { ButtonStyleClass } from '@/app/shared/buttonStyles';
 import { Router, RouterLink, RouterLinkActive } from '@angular/router';
 import { MatIcon } from '@angular/material/icon';
 import { MatDialog } from '@angular/material/dialog';
-import { ConfirmExitDialogComponent } from '../game-intermediate-result/game-intermediate-result-header/confirm-exit-dialog/confirm-exit-dialog.component';
+import { ConfirmExitDialogComponent } from '../confirm-exit-dialog/confirm-exit-dialog.component';
 
 @Component({
   selector: 'app-custom-button',

@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { DrawingService } from '../../../services/drawing.service';
+import { DrawingService } from '../../services/drawing.service';
 import { TranslatePipe } from '@/app/core/translation.pipe';
 import { GameStateService } from '@/app/game/services/game-state-service';
 
