@@ -57,10 +57,6 @@ export class MultiplayerService {
     private translationService: TranslationService
   ) {}
 
-  resetStateInfo() {
-    this.stateInfo = this.initialState;
-  }
-
   joinGame(difficulty_id: number) {
     this.webSocketService.emit(
       SocketEndpoints.JOIN_GAME,
@@ -215,7 +211,6 @@ export class MultiplayerService {
 
   clearState() {
     this.stateInfo = this.initialState;
-    this.webSocketService.disconnect();
   }
 
   changestate(gameState: GAMESTATE) {

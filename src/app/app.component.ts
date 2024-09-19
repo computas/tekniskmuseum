@@ -37,14 +37,11 @@ export class AppComponent implements OnInit {
 
     //Whenever user become inactive (25sec) -> open prompt. 
     this.userInactive.subscribe(() => { 
-      //Never open prompt on drawing page. 
-      if (this.gameStateService.getCurrentPage() === GAMESTATE.drawingBoard) {
-        this.setDialogTimeout();
-      }
-
       if (this.router.url === '/welcome') {
         this.router.navigate(['/']);
-      } else if (this.router.url !== '/' && !this.router.url.startsWith('/admin')) {
+
+        //avoids opening idle timeout box on initial page, admin page and while drawing
+      } else if (this.router.url !== '/' && !this.router.url.startsWith('/admin') && this.gameStateService.getCurrentPage() !== GAMESTATE.drawingBoard) {
         this.openDialog();
       }
     });
