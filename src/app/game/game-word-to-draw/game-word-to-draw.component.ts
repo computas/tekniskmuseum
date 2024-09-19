@@ -20,11 +20,11 @@ import { IAvatarComponent } from '@/assets/avatars/i-avatar/i-avatar.component';
 import { SpeechBubbleComponent } from '../speech-bubble/speech-bubble.component';
 import { CustomColorsIO } from '@/app/shared/customColors';
 import { PointerSide, ArrowAlignment } from '@/app/shared/models/interfaces';
-import { CustomButtonComponent } from '../custom-button/custom-button.component';
+import { CustomButtonComponent } from '../shared-components/custom-button/custom-button.component';
 import { ButtonStyleClass } from '@/app/shared/buttonStyles';
-import { ConfirmExitDialogComponent } from '../game-intermediate-result/game-intermediate-result-header/confirm-exit-dialog/confirm-exit-dialog.component';
+import { ConfirmExitDialogComponent } from '../shared-components/confirm-exit-dialog/confirm-exit-dialog.component';
 import { routes } from '../../shared/models/routes';
-import { CustomHeaderComponent } from '../custom-header/custom-header.component';
+import { CustomHeaderComponent } from '../shared-components/custom-header/custom-header.component';
 
 @Component({
   selector: 'app-game-word-to-draw',
@@ -88,7 +88,6 @@ export class GameWordToDrawComponent implements OnInit, OnDestroy {
     this.isSinglePlayer = this.gameStateService.isSingleplayer();
     this.isMultiPlayer = this.gameStateService.isMultiplayer();
     this.difficulty = this.gameStateService.getDifficulty();
-
     if (this.isSinglePlayer) {
       if (this.drawingService.gameHasStarted) {
         this.subscriptions.add(

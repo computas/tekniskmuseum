@@ -2,17 +2,17 @@
 
 #intermediate-container {
   display: grid;
-  grid-template-rows: 10vh 44vh 34vh 12vh;
+  grid-template-rows: 10vh 44vh 34vh auto;
   grid-template-columns: repeat(12, 1fr);
   position: relative;
   color: $white_color;
-  padding: 0.8em 1.2em;
+  padding: 1em 1.5em 0;
   min-height: 100vh;
 }
 
-.result-header {
+app-custom-header {
+  grid-row: 1;
   grid-column: 1 / -1;
-  grid-row: 1 / 2;
 }
 
 .avatar-feedback {
@@ -23,26 +23,20 @@
 .user-drawing-and-score {
   grid-column: 9 / 12;
   justify-self: end;
+  margin-top: 0.2rem;
 }
 
-.footer {
-  grid-row: 4 / -1;
-  grid-column: 1 / -1;
-}
-
-.result-img > img {
-  width: 256px;
-  height: 256px;
-}
-
-.guessed-word {
-  font-family: AeonikBlack;
-  color: $white_color;
-}
 
 .example-drawings {
   margin-top: 2em;
   margin-right: 3em;
   grid-row: 3 / -1;
   grid-column: 1 / -1;
+}
+
+.footer {
+  grid-row: 3 / -1;
+  grid-column: 1 / -1;
+  align-self: flex-end;
+  padding-bottom: 1em;
 }

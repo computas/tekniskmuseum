@@ -6,10 +6,11 @@ import { TranslationService } from '@/app/core/translation.service';
 import { TranslatePipe } from '@/app/core/translation.pipe';
 import { GameDrawingFeedbackComponent } from './game-drawing-feedback/game-drawing-feedback.component';
 import { GameDrawingDisplayComponent } from './game-drawing-display/game-drawing-display.component';
-import { GameIntermediateResultHeaderComponent } from './game-intermediate-result-header/game-intermediate-result-header.component';
 import { GameExampleDrawingsComponent } from './game-example-drawings/game-example-drawings.component';
 import { GameIntermediateResultFooterComponent } from './game-intermediate-result-footer/game-intermediate-result-footer.component';
 import { GameStateService } from '../services/game-state-service';
+import { CustomHeaderComponent } from '../shared-components/custom-header/custom-header.component';
+import { ButtonStyleClass } from '@/app/shared/buttonStyles';
 @Component({
   selector: 'app-game-intermediate-result',
   templateUrl: './game-intermediate-result.component.html',
@@ -20,13 +21,14 @@ import { GameStateService } from '../services/game-state-service';
     GameDrawingFeedbackComponent,
     GameDrawingDisplayComponent,
     GameIntermediateResultComponent,
-    GameIntermediateResultHeaderComponent,
     GameExampleDrawingsComponent,
     GameIntermediateResultFooterComponent,
+    CustomHeaderComponent
   ],
 })
 export class GameIntermediateResultComponent implements OnInit, OnDestroy {
   result: Result | undefined;
+  homeButtonStyleClass = ButtonStyleClass.home;
   constructor(
     private gameStateService: GameStateService,
     private drawingService: DrawingService,
