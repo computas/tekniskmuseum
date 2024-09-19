@@ -13,6 +13,6 @@ import { ButtonStyleClass } from '@/app/shared/buttonStyles';
 })
 export class CustomHeaderComponent {
   @Input() buttonStyle: ButtonStyleClass = ButtonStyleClass.default; 
-  @Input() buttonText: string = 'Button'; 
-  @Input() showProgressBar: boolean = false;
+  @Input() buttonText = 'Button'; 
+  @Input() showProgressBar = false;
 }
