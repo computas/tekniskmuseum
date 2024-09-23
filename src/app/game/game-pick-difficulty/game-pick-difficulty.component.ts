@@ -3,7 +3,6 @@ import { Router, RouterLink, RouterLinkActive } from '@angular/router';
 import { routes } from '../../shared/models/routes';
 import { MatButton } from '@angular/material/button';
 import { MatIcon } from '@angular/material/icon';
-import { NgIf } from '@angular/common';
 import { GameConfigService } from '../services/game-config.service';
 import { TranslationService } from '@/app/core/translation.service';
 import { TranslatePipe } from '@/app/core/translation.pipe';
@@ -14,7 +13,8 @@ import { CustomColorsIO } from '../../shared/customColors';
 import { ArrowAlignment, PointerSide } from '@/app/shared/models/interfaces';
 import { trigger, state, style, animate, transition } from '@angular/animations';
 import { ButtonStyleClass } from '@/app/shared/buttonStyles';
-import { CustomButtonComponent } from '../custom-button/custom-button.component';
+import { CustomButtonComponent } from '../shared-components/custom-button/custom-button.component';
+import { CustomHeaderComponent } from '../shared-components/custom-header/custom-header.component';
 
 @Component({
   selector: 'app-game-pick-difficulty',
@@ -22,7 +22,6 @@ import { CustomButtonComponent } from '../custom-button/custom-button.component'
   styleUrl: './game-pick-difficulty.component.scss',
   standalone: true,
   imports: [
-    NgIf,
     MatIcon,
     MatButton,
     TranslatePipe,
@@ -30,6 +29,7 @@ import { CustomButtonComponent } from '../custom-button/custom-button.component'
     RouterLink,
     RouterLinkActive,
     CustomButtonComponent,
+    CustomHeaderComponent
   ],
   animations: [
     trigger('show', [

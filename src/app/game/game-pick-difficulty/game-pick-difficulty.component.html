@@ -1,20 +1,10 @@
 <div class="container-background">
   <div class="container" (click)="skipAnimation()" (keypress)="skipAnimation()" tabindex="0">
-    <app-custom-button
+    <app-custom-header 
       [buttonStyle]="homeButtonStyleClass"
       [buttonText]="'BACK_BUTTON' | translate"
-      iconSrc="../assets/icons/arrow4-svgrepo-com.svg"
-      routerLink="/welcome"
-      routerLinkActive="active"
-      alt="Go back button"
-      aria-label="Return button"
-      id="back-btn"
+      [showProgressBar]="false"
     />
-    <header class="header">
-      <button class="logo">
-        <img src="assets/logo/IO-logo-inverted_transparent-bg.png" alt="logo" aria-label="Gå til admin side" />
-      </button>
-    </header>
     <div class="main-content">
       <div class="text-content">
         <div class="I-figure" [@show]="stateFigureI">

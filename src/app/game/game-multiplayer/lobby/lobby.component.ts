@@ -12,7 +12,7 @@ import { SpeechBubbleComponent } from '../../speech-bubble/speech-bubble.compone
 import { CustomColorsIO } from '@/app/shared/customColors';
 import { PointerSide, ArrowAlignment } from '@/app/shared/models/interfaces';
 import { IAvatarComponent } from '@/assets/avatars/i-avatar/i-avatar.component';
-import { CustomButtonComponent } from '../../custom-button/custom-button.component';
+import { CustomButtonComponent } from '../../shared-components/custom-button/custom-button.component';
 import { ButtonStyleClass } from '@/app/shared/buttonStyles';
 
 @Component({

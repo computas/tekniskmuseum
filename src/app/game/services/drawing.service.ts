@@ -142,6 +142,9 @@ export class DrawingService {
       );
   }
 
+
+  
+
   getLabel(): Observable<GameLabel> {
     const currentLang = this.translationService.getCurrentLang();
     return this.http
@@ -151,8 +154,7 @@ export class DrawingService {
         catchError((error) => {
           this.loggingService.error("Error occurred in endpoind /getlabel: " + error.message);
           return throwError(() => new Error("Error occurred in /getlabel"));
-        }),
-    
+        }),  
     );
   }
   

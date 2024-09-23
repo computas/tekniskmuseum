@@ -1,30 +1,29 @@
 @import '../../../variables.scss';
 
 .container {
+  display: grid;
+  grid-template-rows: 10vh auto 1fr; 
+  grid-template-columns: 1fr; 
+  min-height: 100vh;
   position: relative;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  height: 100vh;
+  padding: 1em 1.5em;
 }
 
-.header {
-  width: 100%;
-  display: flex;
-  justify-content: flex-end;
-  padding-top: 1rem;
-  padding-right: 1.5rem;
+app-custom-header {
+  grid-row: 1;
 }
 
 .main-content {
-  flex: 1;
+  grid-row: 2;
   display: flex;
   justify-content: center;
   align-items: center;
   margin-bottom: 50px;
+  margin-top: 2rem;
 }
 
 .text-content {
+  margin-top: 2rem;
   display: flex;
   justify-content: start;
   width: 70ww;
@@ -61,15 +60,10 @@
 }
 
 .button-container {
-  margin: 20px;
   display: inline-flex;
   align-items: center;
   gap: 1.5rem;
-  margin: 15vh 20px 0 60px;
+  margin: 15vh 0 0 60px;
 }
 
-#back-btn {
-  position: absolute;
-  top: 2rem;
-  left: 2rem;
-}
+

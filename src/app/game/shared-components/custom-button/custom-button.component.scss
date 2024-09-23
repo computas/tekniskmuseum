@@ -1,4 +1,4 @@
-@import '../../../variables.scss';
+@import '../../../../variables.scss';
 
 @mixin button($gradient-border: false, $full-gradient: false, $back: false, $custom-width: 15rem, $custom-height: 4rem) {
   height: $custom-height;
