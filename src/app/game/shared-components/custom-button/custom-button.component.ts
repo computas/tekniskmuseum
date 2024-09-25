@@ -5,7 +5,6 @@ import { MatIcon } from '@angular/material/icon';
 import { MatDialog } from '@angular/material/dialog';
 import { ConfirmExitDialogComponent } from '../confirm-exit-dialog/confirm-exit-dialog.component';
 import { trigger, state, style, transition, animate } from '@angular/animations';
-
 @Component({
   selector: 'app-custom-button',
   templateUrl: './custom-button.component.html',
@@ -35,6 +34,7 @@ export class CustomButtonComponent {
 
   readonly dialog = inject(MatDialog);
   readonly router = inject(Router);
+
 
   openDialog(): void {
     this.dialog.open(ConfirmExitDialogComponent);

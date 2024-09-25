@@ -3,6 +3,7 @@ export enum ButtonStyleClass {
   idle = 'idle-button',
   back = 'back-button',
   home = 'home-button',
+  end = 'end-button',
   forward = 'forward-button',
   select = 'select-mode-button',
   selectLarge = 'select-mode-button-large',
