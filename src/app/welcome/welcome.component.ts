@@ -1,4 +1,4 @@
-import { Component, OnInit, OnDestroy } from '@angular/core';
+import { Component, OnInit, OnDestroy, inject } from '@angular/core';
 import { MultiplayerService } from '../game/services/multiplayer.service';
 import { DrawingService } from '../game/services/drawing.service';
 import { Router, RouterLink, RouterLinkActive } from '@angular/router';
@@ -194,13 +194,20 @@ export class WelcomeComponent implements OnInit, OnDestroy {
     this.destroy$.complete();
   }
 
+
+  readonly singleplayerRouter = inject(Router);
+  readonly multiplayerRouter = inject(Router);
+
   setSingleplayer() {
     this.gameStateService.setSingleplayer();
     this.gameStateService.goToPage(GAMESTATE.difficultyPicker);
+    this.singleplayerRouter.navigate(["/playgame/singleplayer"])
+
   }
 
   setMultiplayer() {
     this.gameStateService.setMultiplayer();
     this.gameStateService.goToPage(GAMESTATE.lobby);
+    this.multiplayerRouter.navigate(["/playgame/multiplayer"]);
   }
 }

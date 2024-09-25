@@ -3,7 +3,9 @@
 @if (buttonStyle === 'select-mode-button' || buttonStyle === 'select-mode-button-large' || buttonStyle === 'forward-button' || buttonStyle === 'play-again-button') {
   <button 
   [disabled]="disabled" 
-  [class]="buttonStyle">
+  [class]="buttonStyle"
+  [@buttonClickEffect]="buttonState"
+  (click)="onButtonClick()"> 
 
   @if (buttonStyle === 'forward-button') {
     <div [class]="'full-gradient-inner'">
@@ -27,9 +29,10 @@
 @else {
 <!-- For ButtonStyles that go back or home, and default -->
   <button 
-  (click)="clickHandler()"  
   [disabled]="disabled"
-  [class]="buttonStyle">
+  [class]="buttonStyle"
+  [@buttonClickEffect]="buttonState"
+  (click)="onButtonClick()">
     <div class="button-text">
       @switch (buttonStyle) {
         @case ('back-button') {

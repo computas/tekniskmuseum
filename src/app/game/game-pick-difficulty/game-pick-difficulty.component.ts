@@ -99,11 +99,16 @@ export class GamePickDifficultyComponent implements OnInit {
       {
         delay: 350,
         action: () => {
-          this.stateButtons = 'visible';
-          this.buttonsAreDisabled = false;
           this.stateFirstBubbleI = 'visible';
         },
       },
+      {
+        delay: 450,
+        action: () => {
+          this.stateButtons = 'visible';
+          this.buttonsAreDisabled = false;
+        }
+      } 
     ];
     let totalDelay = 0;
     steps.forEach((step) => {
