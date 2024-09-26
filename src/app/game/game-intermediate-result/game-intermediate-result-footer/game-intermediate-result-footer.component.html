@@ -1,10 +1,13 @@
 <footer>
-  <app-custom-button
-    aria-disabled="true"
-    [buttonStyle]="buttonStyleClass"
-    [buttonText]="buttonTextKey | translate"
-    (keydown)="nextPage()"
-    (buttonClicked)="nextPage()"
-  >
-  </app-custom-button>
+  <div [@makeVisible] = 'progressionButton'>
+    <app-custom-button
+      [disabled] = "buttonsAreDisabled"
+      aria-disabled="true"
+      [buttonStyle]="buttonStyleClass"
+      [buttonText]="buttonTextKey | translate"
+      (keydown)="nextPage()"
+      (buttonClicked)="nextPage()"
+    >
+    </app-custom-button>
+</div>
 </footer>
