@@ -17,7 +17,7 @@ import { animate, state, style, transition, trigger } from '@angular/animations'
     trigger('makeVisible', [
       state('hidden', style({ opacity: 0 })),
       state('visible', style({ opacity: 1 })),
-      transition('hidden => visible', animate('1s 0.8s')),
+      transition('hidden => visible', animate('1s')),
     ]),
   ]
 })
@@ -34,11 +34,10 @@ export class GameIntermediateResultFooterComponent implements OnInit {
   ngOnInit(): void {
     this.buttonTextKey = this.getButtonTextKey();
 
+    this.startAnimation();
+
+
     if (this.gameStateService.isSingleplayer()) {
-      setTimeout(() => {
-        this.progressionButton = 'visible';
-        this.buttonsAreDisabled = false;
-      }, 0);
       return;
     }
     this.isWaitingForPlayer = true; // default in multiplayer set to true
@@ -86,4 +85,11 @@ export class GameIntermediateResultFooterComponent implements OnInit {
     }
     return 'button-container';
   }
+
+  startAnimation() {
+    setTimeout(() => {
+      this.progressionButton = 'visible';
+      this.buttonsAreDisabled = false;
+    }, 800);
+  };
 }

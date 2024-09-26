@@ -72,6 +72,8 @@ export class GameResultComponent implements OnInit, OnDestroy {
 
   IState = 'hidden';
   OState = 'hidden';
+  buttonState = 'hidden';
+  buttonsAreDisabled = true;
 
   CustomColorsIO = CustomColorsIO;
   PointerSide = PointerSide;
@@ -200,5 +202,9 @@ export class GameResultComponent implements OnInit, OnDestroy {
     setTimeout(() => {
       this.OState = 'visible';
     }, 1500);
+    setTimeout(() => {
+      this.buttonState = 'visible';
+      this.buttonsAreDisabled = false;
+    }, 3000);
   }
 }
