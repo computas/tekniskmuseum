@@ -2,7 +2,7 @@ import { Component, OnInit, OnDestroy } from '@angular/core';
 import { Router } from '@angular/router';
 import { CommonModule } from '@angular/common';
 import { HttpClient } from '@angular/common/http';
-import { SpeechBubbleComponent } from '../game/speech-bubble/speech-bubble.component';
+import { SpeechBubbleComponent } from '../game/shared-components/speech-bubble/speech-bubble.component';
 import { CustomColorsIO } from '../shared/customColors';
 import { ArrowAlignment, PointerSide } from '../shared/models/interfaces';
 import { trigger, state, style, animate, transition } from '@angular/animations';

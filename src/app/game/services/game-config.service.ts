@@ -25,7 +25,7 @@ export class GameConfigService {
         this._setConfig = {
           difficultyId: 1,
           rounds: 3,
-          secondsPerRound: 30,
+          secondsPerRound: 1,
           timeToStartClassify: 27,
           defaultTimeBetweenClassify: 3,
           minimumTimeBetweenClassify: 2,
@@ -38,7 +38,7 @@ export class GameConfigService {
         this._setConfig = {
           difficultyId: 2,
           rounds: 3,
-          secondsPerRound: 20,
+          secondsPerRound: 1,
           timeToStartClassify: 17,
           defaultTimeBetweenClassify: 3,
           minimumTimeBetweenClassify: 2,
@@ -51,7 +51,7 @@ export class GameConfigService {
         this._setConfig = {
           difficultyId: 3,
           rounds: 3,
-          secondsPerRound: 20,
+          secondsPerRound: 1,
           timeToStartClassify: 17,
           defaultTimeBetweenClassify: 3,
           minimumTimeBetweenClassify: 2,

@@ -18,7 +18,7 @@ import {
   // ...
 } from '@angular/animations';
 import { HighscoreData } from '@/app/shared/models/backend-interfaces';
-import { SpeechBubbleComponent } from '../speech-bubble/speech-bubble.component';
+import { SpeechBubbleComponent } from '../shared-components/speech-bubble/speech-bubble.component';
 import { CustomColorsIO } from '@/app/shared/customColors';
 import { MatIcon } from '@angular/material/icon';
 import { GameStateService } from '../services/game-state-service';

@@ -13,7 +13,7 @@ import { GameStateService } from '../game/services/game-state-service';
 import { SupportedLanguages } from '../shared/models/interfaces';
 import { ArrowAlignment, PointerSide } from '@/app/shared/models/interfaces';
 import { trigger, state, style, animate, transition } from '@angular/animations';
-import { SpeechBubbleComponent } from '../game/speech-bubble/speech-bubble.component';
+import { SpeechBubbleComponent } from '../game/shared-components/speech-bubble/speech-bubble.component';
 import { CustomColorsIO } from '../shared/customColors';
 import { CustomButtonComponent } from '../game/shared-components/custom-button/custom-button.component';
 import { ButtonStyleClass } from '@/app/shared/buttonStyles';
