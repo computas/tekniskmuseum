@@ -45,7 +45,7 @@ export class GameIntermediateResultComponent implements OnInit, OnDestroy {
 
     this.multiplayerService.getLabel(false).subscribe((res) => {
       if (res) {
-        this.gameStateService.nextRound();
+        this.gameStateService.goToPage(GAMESTATE.showWord);
       }
     });
 
