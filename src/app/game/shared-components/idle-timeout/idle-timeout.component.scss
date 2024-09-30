@@ -1,0 +1,81 @@
+@import '../../../../variables.scss';
+
+.cdk-overlay-backdrop.cdk-overlay-dark-backdrop.cdk-overlay-backdrop-showing {
+  background: rgba(20, 33, 61, 0.8);
+}
+
+.cdk-overlay-container .cdk-overlay-pane {
+  border-radius: 1.5rem;
+  overflow: hidden;
+  padding-left: var(--boxPaddingX);
+  padding-right: var(--boxPaddingX);
+
+  width: auto;
+  height: auto; 
+  min-height: 3vh;
+  min-width: 5vw;
+}
+
+#countdownText {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: inherit;
+  height: 10vh;
+  font-size: var(--fontSizeSmall);
+  padding: 1rem;
+  text-align: center;
+  word-wrap: break-word;
+  margin: 1vh;
+}
+
+#actions {
+  width: 100%;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-around;
+}
+
+.idleButton {
+  display: flex;
+  flex-grow: 1;
+  flex-shrink: 1; 
+  flex-basis: 0;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  vertical-align: middle;
+  padding: 0.5rem 1rem; 
+  font-size: var(--fontSizeSmall);
+  border-radius: 10rem;
+  margin-bottom: 1rem;
+  margin-inline: 1rem;
+
+  background: $white_color;
+  box-shadow: 0 8px 16px 0 rgba(0, 0, 0, 0.1), 0 6px 20px 0 rgba(0, 0, 0, 0.15);
+}
+
+.idleButton :focus {
+  background-color: $white_color;
+}
+
+#homeButtonText {
+  color: $white_color;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  gap: 1rem;
+}
+
+#idleButtonIcon {
+  height: auto;
+  width: auto;
+  color: $white_color;
+  font-size: 50px;
+}
+
+#homeButton {
+  background-color: $red_color;
+}
+
