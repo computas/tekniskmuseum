@@ -1,19 +1,21 @@
-<!-- <div *ngIf="showHowToPlay" [@inOutAnimation]> -->
-<div *ngIf="showHowToPlay" [@enterAnimation]>
-  <app-game-info (getDrawWord)="getDrawWord()"></app-game-info>
+@switch (currentPage) { @case (GAMESTATE.howToPlay) {
+<div [@enterAnimation]><app-game-info></app-game-info></div>
+} @case (GAMESTATE.difficultyPicker) {
+<div [@enterAnimation]><app-game-pick-difficulty></app-game-pick-difficulty></div>
+} @case (GAMESTATE.showWord) {
+<div [@enterAnimation]><app-game-word-to-draw></app-game-word-to-draw></div>
+} @case (GAMESTATE.drawingBoard) {
+<div [@enterAnimation]><app-drawing></app-drawing></div>
+} @case (GAMESTATE.intermediateResult) {
+<div [@enterAnimation]>
+  <app-game-intermediate-result></app-game-intermediate-result>
 </div>
-<div *ngIf="newGame && !showIntermediateResult" [@enterAnimation]>
-  <app-drawing></app-drawing>
-</div>
-<div *ngIf="showIntermediateResult" [@enterAnimation]>
-  <app-game-intermediate-result
-    (nextGuess)="nextGuess($event)"
-    (finalResult)="finalResult($event)"
-  ></app-game-intermediate-result>
-</div>
-<div *ngIf="showFinalResult" [@enterAnimation]>
+} @case (GAMESTATE.showResult) {
+<div [@enterAnimation]>
   <app-game-result></app-game-result>
 </div>
-<div *ngIf="showWordToDraw" [@enterAnimation]>
-  <app-game-word-to-draw (drawWord)="startGame()"></app-game-word-to-draw>
+} @case (GAMESTATE.lobby) {
+<div [@enterAnimation]>
+  <app-welcome></app-welcome>
 </div>
+} }

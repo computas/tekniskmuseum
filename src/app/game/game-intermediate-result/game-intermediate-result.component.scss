@@ -1,104 +1,42 @@
-.won {
-  border: 8px solid #68d466;
-}
-.loss {
-  border: 8px solid #de1f1f;
-  display: flex;
-  justify-content: center;
-}
-.result-img > img {
-  width: 256px;
-  height: 256px;
-}
+@import '../../../variables.scss';
+
 #intermediate-container {
+  display: grid;
+  grid-template-rows: 10vh 44vh 34vh auto;
+  grid-template-columns: repeat(12, 1fr);
+  position: relative;
+  color: $white_color;
+  padding: 1em 1.5em 0;
   min-height: 100vh;
-  background: linear-gradient(0.5deg, #195272 -0.56%, #05a3c7 138.78%);
-  color: white;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  flex-direction: column;
 }
-.intermediate-container {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  flex-direction: column;
-  margin-top: 40px;
+
+app-custom-header {
+  grid-row: 1;
+  grid-column: 1 / -1;
 }
-@media (min-width: 600px) {
-  .intermediate-container {
-    margin-top: 0px;
-  }
+
+.avatar-feedback {
+  grid-column: 1 / 8;
+  justify-self: start;
 }
-.intermediate-content {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  flex-direction: column;
+
+.user-drawing-and-score {
+  grid-column: 9 / 12;
+  justify-self: end;
+  margin-top: 0.2rem;
 }
-@media (min-width: 600px) {
-  .intermediate-content {
-    flex-direction: row;
-  }
+
+
+.example-drawings {
+  margin-top: 2em;
+  margin-right: 3em;
+  grid-row: 3 / -1;
+  grid-column: 1 / -1;
 }
-.avatar-container {
-  width: 155px;
-  display: none;
-  margin-right: 20px;
-}
-@media (min-width: 600px) {
-  .avatar-container {
-    display: block;
-  }
-}
-.avatar-container-spacer {
-  width: 155px;
-  display: none;
-}
-@media (min-width: 600px) {
-  .avatar-container-spacer {
-    display: block;
-  }
-}
-.next-word-button {
-  background: #ffffff;
-  color: #264d56;
-  box-shadow: 0 8px 16px 0 rgba(0, 0, 0, 0.1), 0 6px 20px 0 rgba(0, 0, 0, 0.15);
-  margin-top: 30px;
-  font-size: 20px;
-  border-radius: 50px;
-  height: 40px;
-  min-width: 240px;
-  max-width: 400px;
-}
-.waiting {
-  margin-top: 30px;
-}
-@media (min-width: 600px) {
-  .next-word-button {
-    font-size: 36px;
-    height: 60px;
-    position: absolute;
-    bottom: 65px;
-    right: 65px;
-  }
-  .waiting {
-    font-size: 36px;
-    height: 60px;
-    position: absolute;
-    bottom: 65px;
-    right: 65px;
-  }
-}
-.word-text {
-  text-align: center;
-}
-.words-remaining {
-  position: absolute;
-  top: 0;
-  left: 0;
-  margin: 35px;
-  font-size: 2em;
-  font-style: italic;
+
+.footer {
+  grid-row: 3 / -1;
+  grid-column: 1 / -1;
+  align-self: flex-end;
+  padding-bottom: 1em;
 }

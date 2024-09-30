@@ -1,0 +1,12 @@
+<div [class]="computedClasses()" [style.--bbColor]="bubbleColor" [style.--bbTextColor]="textColor">
+  @if (titleText) {
+  <ng-content select="[slot='title']">
+    <h1 class="title">{{ titleText }}</h1>
+  </ng-content>
+  } @if (bodyText) {
+  <ng-content select="[slot='body']">
+    <p class="body">{{ bodyText }}</p>
+  </ng-content>
+  }
+  <ng-content select="[slot='body-alt']"></ng-content>
+</div>

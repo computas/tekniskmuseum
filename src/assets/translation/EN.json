@@ -1,0 +1,104 @@
+{
+  "PRESS_TO_PLAY": "PRESS TO PLAY",
+  "I_TEACHING_O_1": "This is what an APPLE looks like!",
+  "I_TEACHING_O_2": "I thought this was an APPLE...",
+  "I_TEACHING_O_3": "Yes, they are both APPLES!",
+  "I_TEACHING_O_4": "Ah, I will remember that!",
+
+  "INTRO_MESSAGE": "Hi, I am ",
+  "INTRO_MESSAGE_2": "And I am ",
+  "INTRO_EXPLANATION": " has shown me many drawings.",
+  "INTRO_EXPLANATION_2": "That's how I learned what things look like",
+  "INTRO_CALL_TO_ACTION": "Draw and see what ",
+  "INTRO_CALL_TO_ACTION_2": " has learned",
+
+  "DIFFICULTY": "Difficulty",
+  "DIFFICULTY_MOTIVATION": "Let's draw!",
+  "DIFFICULTY_QUESTION": "What difficulty level do you prefer?",
+  "EASY_BUTTON": "Easy",
+  "MEDIUM_BUTTON": "Medium",
+  "HARD_BUTTON": "Hard",
+  "MULTIPLAYER": "Multiplayer",
+
+  "PLAYER_MODE_SINGLE": "1 player",
+  "PLAYER_MODE_MULTI": "2 players",
+  "ADMIN_ARIA_LABEL": "Go to admin page",
+  "WAITING": "Waiting",
+  "WAITING_FOR_PLAYER": "Waiting for player 2",
+
+  "HOW_TO_PLAY_SINGLE": "How to play:",
+  "HOW_TO_PLAY_MULTI": "How to play:",
+  "DRAW_WORD": "Draw a word",
+  "IO_GUESSES": "IO guesses",
+  "NUMBER_OF_ROUNDS": "Three rounds",
+  "BEST_OF_THREE": "Best of three wins!",
+  "BACK_BUTTON": "Back",
+  "NEXT_BUTTON": "Next",
+
+  "PLAYER_LABEL": "Player",
+  "DRAW_LABEL": "Draw: ",
+  "DRAW_BUTTON": "Draw",
+  "CLEAR_BUTTON": "Clear",
+  "AI_THINKING_LABEL": "Hmm... ",
+  "AI_GUESS_LABEL": "could it be",
+
+  "WON_SENTENCE": "Hurrah, I guessed that you drew ",
+  "LOST_SENTENCE": "Sorry, I couldn't guess what you drew",
+  "WINNER_TEXT": "You won!",
+  "POINTS_INFO_TEXT": "You got: ",
+  "POINTS": "points",
+  "TOTAL_POINTS": "Total points:",
+  "LOSER_TEXT": "You lost",
+  "RESULT_TEXT": "Your result:",
+  "PLAY_AGAIN_BUTTON": "Play again",
+  "END_GAME_BUTTON": "End game",
+  "NEW_HIGHSCORE_TEXT": "NEW HIGHSCORE!",
+  "TODAYS_HIGHSCORE_TEXT": "Today's highscore: ",
+
+  "SUMMARY_BUTTON": "Result",
+  "NEXT_WORD_BUTTON": "Next",
+
+  "AUTO_END_MESSAGE": "The game will automatically end in ",
+  "SECONDS": "seconds",
+  "RESUME_BUTTON": "Resume",
+  "END_NOW_BUTTON": "End game",
+
+  "CONFIRM_EXIT_MESSAGE": "Are you sure you want to exit the game?",
+
+  "ROUND_NUMBER": "Round",
+  "ROUND_FEEDBACK_FAILED_TITLE": "Oooops!",
+  "ROUND_FEEDBACK_FAILED_DESC_1": "couldn't guess that you drew:",
+
+  "ROUND_FEEDBACK_CORRECT_TITLE": "Well drawn!",
+  "ROUND_FEEDBACK_CORRECT_DESC_1": "guessed that you drew:",
+
+  "SUMMARY_I_1": "Fantastic! You and",
+  "SUMMARY_I_2": "got",
+  "SUMMARY_I_3": "points",
+  "SUMMARY_O": "I will have an easier time guessing next time!",
+
+  "SUMMARY_I_NEW_HIGHSCORE_1": "Fantastic",
+  "SUMMARY_I_NEW_HIGHSCORE_2": "points!",
+
+  "SUMMARY_I_NO_POINTS_1": "Oh no! You and",
+  "SUMMARY_I_NO_POINTS_2": "got",
+  "SUMMARY_I_NO_POINTS_3": "0 points",
+  "SUMMARY_O_NO_POINTS": "Press Play again, and we can try again!",
+
+  "SUMMARY_I_MULTIPLAYER_WIN": "Fantastic, you won! You got",
+  "SUMMARY_I_MULTIPLAYER_LOSS": "You lost! You got",
+  "SUMMARY_I_MULTIPLAYER_DRAW": "It's a draw! You got",
+
+  "EXAMPLE_DRAWINGS_FB_CORRECT_P1": "I have learned that",
+  "EXAMPLE_DRAWINGS_FB_P2": "looks like this:",
+
+  "OF": "of",
+  "EXAMPLE_DRAWINGS_FAILED_B1": "I thought you drew",
+  "EXAMPLE_DRAWINGS_FAILED_B2": "I have learned that this is",
+
+  "GUESSED_AT": "Guessed in",
+  "TIME_ABBREVIATION_SECONDS": "s",
+  "TIME_OUT": "Out of time..",
+
+  "HOME": "Home"
+}

@@ -1,16 +1,46 @@
-<div class="container">
-  <div class="waiting-text">
-    Venter på spiller 2
+<div class="container-background">
+  <button class="logo">
+    <img src="assets/logo/IO-logo-inverted_transparent-bg.png" alt="logo" aria-label="logo" />
+  </button>
+  <div id="lobbyContent">
+    <div id="topContent">
+      <app-custom-button
+        [buttonStyle]="buttonStyleClass"
+        [buttonText]="'BACK_BUTTON' | translate"
+        iconSrc="../assets/icons/arrow4-svgrepo-com.svg"
+        routerLink="/welcome"
+        routerLinkActive="active"
+        alt="Go back button"
+        aria-label="Return button"
+      >
+        <mat-icon slot="custom-mat-icon" class="button-icon-gradient" aria-label="player two icon">group</mat-icon>
+      </app-custom-button>
+    </div>
+
+    <div id="waitingForPlayerInfo">
+      <app-i-avatar [height]="200" [width]="100" [color]="colorOfI" />
+      <app-speech-bubble
+        [pointerSide]="PointerSide.Left"
+        [arrowAlignment]="ArrowAlignment.Top"
+        [isFlipped]="false"
+        [textColor]="textColorI"
+        [bubbleColor]="bubbleColorI"
+        [bubbleSize]="'large'"
+      >
+        <div slot="body-alt" id="speechBubbleContent">
+          <p id="waitingText">
+            {{ 'WAITING_FOR_PLAYER' | translate }}
+          </p>
+
+          @if (waitingForOtherPlayer) {
+          <div id="loader"></div>
+          } @if (!waitingForOtherPlayer) {
+          <span>
+            <mat-icon class="checkIcon" aria-label="Checkmark icon"> done </mat-icon>
+          </span>
+          }
+        </div>
+      </app-speech-bubble>
+    </div>
   </div>
-  <div *ngIf="waitingForOtherPlayer">
-    <mat-spinner></mat-spinner>
-  </div>
-  <div *ngIf="!waitingForOtherPlayer">
-    <mat-icon class="check-icon" aria-label="Example home icon">done</mat-icon>
-  </div>
-  <a routerLink="/" routerLinkActive="active">
-    <button mat-raised-button class="home-button">
-      <div class="button-text"><mat-icon class="button-icon" aria-label="Example home icon">home</mat-icon>Tilbake</div>
-    </button>
-  </a>
 </div>

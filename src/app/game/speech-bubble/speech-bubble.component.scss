@@ -1,0 +1,181 @@
+@import '../../../variables.scss';
+
+* {
+  text-align: center;
+  text-shadow: none;
+}
+
+.title,
+.body {
+  font-size: var(--bbFontSize);
+  line-height: var(--bbLineHeight);
+}
+
+.title {
+  font-family: AeonikBold;
+}
+
+.body {
+  font-family: AeonikRegular;
+}
+
+.large {
+  --bbFontSize: 48px;
+  --bbLineHeight: 48px;
+  --bbPadding: 2rem;
+  --bbMaxWidth: 80vw;
+}
+.medium {
+  --bbFontSize: 40px;
+  --bbLineHeight: 40px;
+  --bbPadding: 1rem;
+  --bbMaxWidth: 70vw;
+}
+.small {
+  --bbFontSize: 50px;
+  --bbLineHeight: 50px;
+  --bbPadding: 1rem;
+  --bbMaxWidth: 50vw;
+}
+
+.speech-bubble,
+.speech-bubble * {
+  box-sizing: border-box;
+}
+
+.speech-bubble {
+  --bbColor: $white_color;
+  --bbTextColor: $black_color;
+  --bbArrowSize: 2rem;
+  --bbBorderRadius: 1rem;
+  --bbPaddingX: 2rem;
+
+  background: var(--bbColor);
+  color: var(--bbTextColor);
+  border-radius: var(--bbBorderRadius);
+  padding: var(--bbPadding) var(--bbPaddingX);
+  max-width: var(--bbMaxWidth);
+  position: relative;
+}
+
+.speech-bubble::before {
+  content: '';
+  position: absolute;
+  background: var(--bbColor);
+}
+
+.speech-bubble.pbottom {
+  margin-bottom: var(--bbArrowSize);
+}
+
+.speech-bubble.ptop {
+  margin-top: var(--bbArrowSize);
+}
+
+.speech-bubble.pleft {
+  margin-left: var(--bbArrowSize);
+}
+
+.speech-bubble.pright {
+  margin-right: var(--bbArrowSize);
+}
+
+.speech-bubble.pbottom::before,
+.speech-bubble.ptop::before {
+  --width: calc(var(--bbArrowSize) / 2 * 3);
+  height: var(--bbArrowSize);
+  width: var(--width);
+}
+
+.speech-bubble.pbottom::before {
+  top: calc(100% - 2px);
+}
+
+.speech-bubble.pbottom.aleft::before {
+  left: 1rem;
+  clip-path: polygon(25% 0, 100% 0, 0% 100%);
+}
+
+.speech-bubble.pbottom.acenter::before {
+  left: calc(50% - var(--width) / 2);
+  clip-path: polygon(12.5% 0, 87.5% 0, 50% 100%);
+}
+
+.speech-bubble.pbottom.aright::before {
+  right: 1rem;
+  clip-path: polygon(0 0, 75% 0, 100% 100%);
+}
+
+.speech-bubble.ptop::before {
+  bottom: calc(100% - 2px);
+}
+
+.speech-bubble.ptop.aleft::before {
+  left: var(--bbPadding);
+  clip-path: polygon(0 0, 100% 100%, 25% 100%);
+}
+
+.speech-bubble.ptop.acenter::before {
+  left: calc(50% - var(--width) / 2);
+  clip-path: polygon(12.5% 100%, 50% 0, 87.5% 100%);
+}
+
+.speech-bubble.ptop.aright::before {
+  right: var(--bbPadding);
+  clip-path: polygon(0 100%, 100% 0, 75% 100%);
+}
+
+.speech-bubble.pleft::before,
+.speech-bubble.pright::before {
+  --height: calc(var(--bbArrowSize) / 2 * 3);
+  width: var(--bbArrowSize);
+  height: var(--height);
+}
+
+.speech-bubble.pright::before {
+  left: calc(100% - 2px);
+}
+
+.speech-bubble.pright.atop::before {
+  top: var(--bbPadding);
+  clip-path: polygon(100% 0, 0 100%, 0 25%);
+}
+
+.speech-bubble.pright.acenter::before {
+  top: calc(50% - var(--height) / 2);
+  clip-path: polygon(0 12.5%, 100% 50%, 0 87.5%);
+}
+
+.speech-bubble.pright.abottom::before {
+  bottom: var(--bbPadding);
+  clip-path: polygon(0 0, 100% 100%, 0 75%);
+}
+
+.speech-bubble.pleft::before {
+  right: calc(100% - 2px);
+}
+
+.speech-bubble.pleft.atop::before {
+  top: var(--bbPadding);
+  clip-path: polygon(0 0, 100% 25%, 100% 100%);
+}
+
+.speech-bubble.pleft.acenter::before {
+  top: calc(50% - var(--height) / 2);
+  clip-path: polygon(0 50%, 100% 12.5%, 100% 87.5%);
+}
+
+.speech-bubble.pleft.abottom::before {
+  bottom: var(--bbPadding);
+  clip-path: polygon(0 100%, 100% 0, 100% 75%);
+}
+
+.speech-bubble.pbottom.flip::before,
+.speech-bubble.ptop.flip::before {
+  transform: scaleX(-1);
+}
+
+.speech-bubble.pleft.flip::before,
+.speech-bubble.pright.flip::before {
+  transform: scaleY(-1);
+}

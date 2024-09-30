@@ -1,99 +1,170 @@
+@import '../../../variables.scss';
+
+
+
 .word-container {
-  background: linear-gradient(0.5deg, #195272 -0.56%, #05a3c7 138.78%);
+  position: relative;
+  display: grid;
+  grid-template-rows: 10vh auto 1fr; 
+  grid-template-columns: 1fr; 
   min-height: 100vh;
-  justify-content: center;
-  display: flex;
-  flex-direction: column;
   align-items: center;
-  color: white;
+  justify-content: center;
+  color: $white_color;
+  padding: 1em 1.5em;
 }
-.words-remaining {
-  position: absolute;
-  top: 0;
-  left: 0;
-  margin: 35px;
-  font-size: 2em;
-  font-style: italic;
+
+app-custom-header {
+  grid-row: 1;
 }
+
+.main-content {
+  grid-row: 2;
+  display: flex;
+  gap: 3rem;
+}
+
+.i-container {
+  margin-left: 10rem;
+  margin-top: 16rem;
+}
+
+.i-avatar {
+  height: 200px;
+}
+
+app-speech-bubble {
+  margin-top: 8rem;
+}
+
+.white-spinner {
+  margin-top: 2rem;
+}
+
+.word-draw {
+  font-family: AeonikRegular;
+  font-size: var(--fontSizeMedium);
+}
+
 .word-text {
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
+  margin: 2rem 0rem;
+  padding: 2rem;
+  min-width: 47vw;
 }
-.word-draw {
-  text-align: center;
-  font-size: 24px;
-}
-@media (min-width: 600px) {
-  .word-draw {
-    font-size: 34px;
-  }
-}
+
 .word-to-guess {
-  color: #fa852f;
-  font-size: 34px;
+  margin-top: 1.5rem;
+  font-size: 64px;
+  font-family: AeonikMedium;
 }
-@media (min-width: 600px) {
-  .word-to-guess {
-    font-size: 52px;
-  }
-}
-.draw-word-button {
-  background: #ffffff;
-  color: #264d56;
-  box-shadow: 0 8px 16px 0 rgba(0, 0, 0, 0.1), 0 6px 20px 0 rgba(0, 0, 0, 0.15);
-  margin-top: 30px;
-  font-size: 20px;
-  border-radius: 50px;
-  height: 40px;
-  min-width: 240px;
-  max-width: 400px;
-}
-@media (min-width: 600px) {
-  .draw-word-button {
-    font-size: 36px;
-    height: 60px;
-    position: absolute;
-    bottom: 65px;
-    right: 65px;
-  }
-}
+
 .timer {
-  margin-top: 16px;
-  text-align: center;
+  font-family: AeonikMedium;
+  font-size: var(--fontSizeLarge);
+  margin-top: 1.5rem;
 }
+
+
+
+.next-page-button .mat-icon {
+  font-size: 1.5rem;
+}
+
 .avatar {
-  display: none;
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  margin: 65px;
 }
-@media (min-width: 600px) {
-  .avatar {
-    display: block;
-    margin-right: 10px;
-    bottom: 0;
-    position: absolute;
-    left: 0;
-    margin: 65px;
-  }
+
+.avatar-image {
+  height: 150px;
 }
-.header {
-  font-size: 5em;
-  margin-top: 60px;
-}
+
 p {
   font-size: 2em;
 }
+
 .playernr {
   top: 0px;
   position: absolute;
   padding: 35px;
-  color: #fee500;
+  color: $white_color;
   font-weight: 500;
 }
+
+footer {
+  width: 100%;
+  height: 100%;
+  grid-row: 3;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.footer-content {
+  display: flex;
+  align-items: flex-end;
+  justify-content: flex-end;
+  gap: 17rem;
+  width: 100%;
+  height: 100%;
+}
+
+.button-container:hover {
+  text-decoration: none;
+  color: $white_color;
+}
+.button-container:before {
+  position: absolute;
+  content: '';
+  display: inline-block;
+  top: -180px;
+  left: 5px;
+  width: 30px;
+  height: 100%;
+  animation: shiny-btn1 3s ease-in-out infinite;
+}
+.button-container:hover {
+  opacity: 0.9;
+}
+.button-container:active {
+  box-shadow: 4px 4px 6px 0 rgba(255, 255, 255, 0.15), -4px -4px 6px 0 rgba(116, 125, 136, 0.2),
+    inset -4px -4px 6px 0 rgba(255, 255, 255, 0.2), inset 4px 4px 6px 0 rgba(0, 0, 0, 0.2);
+}
+
+.button-text {
+  display: flex;
+  align-items: center;
+  gap: 0.5em;
+}
+
+.disabled {
+  opacity: 0;
+  cursor: not-allowed;
+}
+
+#difficulty {
+  margin-bottom: 1.2rem;
+  transform: translate(-50%);
+  text-align: center;
+  font-family: AeonikRegular;
+  font-size: var(--fontSizeSmall);
+}
+
+#difficulty-text {
+  font-family: AeonikMedium;
+  font-style: italic;
+}
+
 
 @media only screen and (max-width: 600px) {
   .header {
     font-size: 3em;
-    margin-top: 40px;
+    margin-top: 5px;
   }
 }

@@ -7,12 +7,10 @@
         <b>Brukernavn</b>
       </label>
       <input #username type="text" name="Uname" id="Uname" placeholder="Brukernavn" />
-      <br /><br />
-      <label>
+      <label for="Pass">
         <b>Passord</b>
       </label>
       <input #password type="Password" name="Pass" id="Pass" placeholder="Passord" />
-      <br /><br />
       <input
         type="button"
         class="login-button"
@@ -23,13 +21,6 @@
       />
       <br />
     </form>
-    <input
-    type="button"
-      class="back-button"
-      (click)="goBack()"
-      name="log"
-      id="back"
-      value="Tilbake"
-    /><br />
+    <input type="button" class="back-button" (click)="goBack()" name="log" id="back" value="Tilbake" /><br />
   </div>
 </div>

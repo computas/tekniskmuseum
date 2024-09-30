@@ -1,8 +1,14 @@
+@import '../../../variables.scss';
+
+.game-info-container {
+  position: relative;
+}
 .material-icons {
   color: #195272;
 }
 .game-info-text-header {
-  color: #fa852f;
+  font-family: AeonikBlack;
+  color: $white_color;
   text-align: center;
   font-size: 34px;
   font-weight: 500;
@@ -11,16 +17,17 @@
 @media (min-width: 600px) {
   .game-info-text-header {
     font-size: 48px;
-    font-weight: 500;
   }
 }
 .game-info-seconds {
   display: flex;
   align-items: center;
+
+  span {
+    margin-right: 10px;
+  }
 }
-.game-info-seconds > span {
-  margin-right: 10px;
-}
+
 .game-info-text-content {
   display: flex;
   flex-direction: column;
@@ -40,19 +47,19 @@
 .game-info-footer {
   display: flex;
   width: 80%;
-  margin-bottom: 75px;
+  max-width: 1000px;
+  margin-bottom: 175px;
   justify-content: center;
   flex-wrap: wrap;
 }
 @media (min-width: 600px) {
   .game-info-footer {
-    width: 80%;
     margin-bottom: 75px;
     justify-content: space-between;
   }
 }
 .game-info-text-list {
-  color: #195272;
+  color: $white_color;
 }
 .game-info-text-list > li {
   font-size: 24px;
@@ -73,15 +80,20 @@
     margin-right: 10px;
   }
 }
+.avatar-image {
+  height: 250px;
+}
+
 .button {
   box-shadow: 0 8px 16px 0 rgba(0, 0, 0, 0.1), 0 6px 20px 0 rgba(0, 0, 0, 0.15);
   font-size: 20px;
-  border-radius: 50px;
+  border-radius: var(--buttonBorderRadius);
   height: 40px;
   margin-top: 10px;
   min-width: 240px;
   max-width: 400px;
 }
+
 @media (min-width: 600px) {
   .button {
     font-size: 30px;
@@ -89,18 +101,14 @@
   }
 }
 #get-word-button {
-  background: #fa852f;
-  color: #ffffff;
+  background: $white_color;
+  color: $dark_blue_color;
   float: right;
 }
-@media (min-width: 600px) {
-  #get-word-button {
-    float: right;
-  }
-}
+
 #back-button {
-  background: #f4f4f4;
-  color: #14213d;
+  background: $white_color;
+  color: $dark_blue_color;
 }
 .button-text {
   display: flex;
@@ -109,7 +117,7 @@
   align-items: center;
 }
 .button-icon {
-  color: #14213d;
+  color: $dark_blue_color;
   margin-right: 16px;
   font-size: 36px !important;
   height: 36px;
@@ -121,13 +129,16 @@
   display: flex;
   align-items: center;
   font-weight: 500;
-  color: #05a3c7;
+  color: $white_color;
 }
 .player-mode > .material-icons {
-  color: #05a3c7;
   margin-right: 5px;
+  background: $icon_gradient;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
 }
 .play_arrow {
-  color: white;
-  margin-right: 12px;
+  color: $dark_blue_color;
+  margin-right: 0px;
+  margin-left: 45px;
 }

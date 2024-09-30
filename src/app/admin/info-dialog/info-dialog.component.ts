@@ -1,17 +1,14 @@
 import { Component } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { DialogTemplateComponent } from './../dialog-template/dialog-template.component';
-
-export interface DialogData {
-  iterationName: string;
-  timeCreated: string;
-  imageCount: string;
-}
+import { ErrorLogDialogComponent } from '../error-dialog/error-dialog.component';
+import { LogData } from '@/app/shared/models/backend-interfaces';
 
 @Component({
   selector: 'app-info-dialog',
   templateUrl: './info-dialog.component.html',
   styleUrls: ['./info-dialog.component.scss'],
+  standalone: true,
 })
 export class InfoDialogComponent {
   constructor(public dialog: MatDialog) {}
@@ -23,6 +20,13 @@ export class InfoDialogComponent {
         timeCreated: time,
         imageCount: imgCount,
       },
+    });
+  }
+
+  openErrorLog(logDataArray: LogData[]) {
+    
+    this.dialog.open(ErrorLogDialogComponent, {
+      data: logDataArray,
     });
   }
 }

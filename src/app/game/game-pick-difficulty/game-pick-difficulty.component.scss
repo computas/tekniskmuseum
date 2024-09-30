@@ -1,0 +1,69 @@
+@import '../../../variables.scss';
+
+.container {
+  display: grid;
+  grid-template-rows: 10vh auto 1fr; 
+  grid-template-columns: 1fr; 
+  min-height: 100vh;
+  position: relative;
+  padding: 1em 1.5em;
+}
+
+app-custom-header {
+  grid-row: 1;
+}
+
+.main-content {
+  grid-row: 2;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-bottom: 50px;
+  margin-top: 2rem;
+}
+
+.text-content {
+  margin-top: 2rem;
+  display: flex;
+  justify-content: start;
+  width: 70ww;
+}
+
+.speech-bubbles {
+  flex: 5;
+  display: inline-flex;
+  gap: 80px;
+  flex-direction: column;
+  align-items: center;
+}
+
+.speech-bubble.left {
+  align-self: flex-start;
+}
+
+.speech-bubble.right {
+  align-self: flex-end;
+}
+
+.I-figure {
+  min-width: 50px;
+  display: flex;
+  justify-content: flex-end;
+  margin-top: 10rem;
+}
+
+.O-figure {
+  display: flex;
+  justify-content: flex-end;
+  min-width: 190px;
+  margin-top: 60px;
+}
+
+.button-container {
+  display: inline-flex;
+  align-items: center;
+  gap: 1.5rem;
+  margin: 15vh 0 0 60px;
+}
+
+

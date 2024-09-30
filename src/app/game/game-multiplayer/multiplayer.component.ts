@@ -1,11 +1,17 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
 import { trigger, style, animate, transition } from '@angular/animations';
 import { Router } from '@angular/router';
-
-import { MultiplayerService, GAMELEVEL } from './services/multiplayer.service';
-import { WebSocketService } from './services/web-socket.service';
-import { routes } from '../../shared/models/routes';
+import { MultiplayerService } from '../services/multiplayer.service';
+import { WebSocketService } from '../services/web-socket.service';
 import { Subscription } from 'rxjs';
+import { LobbyComponent } from './lobby/lobby.component';
+import { GameResultComponent } from '../game-result/game-result.component';
+import { GameIntermediateResultComponent } from '../game-intermediate-result/game-intermediate-result.component';
+import { GameDrawComponent } from '../game-draw/game-draw.component';
+import { GameWordToDrawComponent } from '../game-word-to-draw/game-word-to-draw.component';
+import { GameInfoComponent } from '../game-info/game-info.component';
+import { GAMESTATE } from '@/app/shared/models/interfaces';
+import { GameStateService } from '../services/game-state-service';
 
 @Component({
   selector: 'app-multiplayer',
@@ -36,33 +42,46 @@ import { Subscription } from 'rxjs';
       ]),
     ]),
   ],
+  standalone: true,
+  imports: [
+    GameInfoComponent,
+    GameWordToDrawComponent,
+    GameDrawComponent,
+    GameIntermediateResultComponent,
+    GameResultComponent,
+    LobbyComponent,
+  ],
 })
 export class MultiplayerComponent implements OnInit, OnDestroy {
-  gameLevel: string | undefined;
-  GAMELEVEL = GAMELEVEL;
+  gameState: string | undefined;
+  GAMESTATE = GAMESTATE;
   constructor(
+    private gameStateService: GameStateService,
     private multiplayerService: MultiplayerService,
     private webSocketService: WebSocketService,
     private router: Router
-  ) {}
+  ) {
+    this.initializeComponent = this.initializeComponent.bind(this);
+  }
   destination = '/';
   otherPlayer = undefined;
   subs = new Subscription();
 
   ngOnInit(): void {
-    if (this.router.url === `/${routes.MULTIPLAYER}`) {
-      this.multiplayerService.isMultiplayer = true;
-    }
+    this.initializeComponent();
+  }
+
+  initializeComponent(): void {
     this.webSocketService.startSockets();
-    this.gameLevel = this.multiplayerService.stateInfo.gameLevel;
+    this.gameState = this.multiplayerService.stateInfo.gameState;
     this.subs.add(
-      this.multiplayerService.roundOverListener().subscribe((roundOver: any) => {
-        this.multiplayerService.stateInfo = { ...this.multiplayerService.stateInfo, ready: true };
+      this.gameStateService.currentPage$.subscribe((page) => {
+        this.gameState = page;
       })
     );
     this.subs.add(
-      this.multiplayerService.stateInfo$.subscribe((data) => {
-        this.gameLevel = data.gameLevel;
+      this.multiplayerService.roundOverListener().subscribe(() => {
+        this.multiplayerService.stateInfo = { ...this.multiplayerService.stateInfo, ready: true };
       })
     );
     this.subs.add(
@@ -76,14 +95,14 @@ export class MultiplayerComponent implements OnInit, OnDestroy {
     this.subs.add(
       this.multiplayerService.endGameListener().subscribe((data: string) => {
         const otherplayer = JSON.parse(data);
-        this.multiplayerService._opponentScore.next(otherplayer);
+        this.multiplayerService.opponentScore.next(otherplayer);
       })
     );
   }
 
   ngOnDestroy(): void {
     this.webSocketService.disconnect();
-    this.multiplayerService.resetStateInfo();
+    this.multiplayerService.clearState();
     this.subs.unsubscribe();
   }
 }

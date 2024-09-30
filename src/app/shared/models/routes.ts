@@ -1,4 +1,5 @@
-import { environment } from 'src/environments/environment';
+import { environment } from '@/environments/environment';
+
 export const routes = {
   LANDING: '',
   SINGLEPLAYER: 'playgame/singleplayer',
@@ -6,4 +7,5 @@ export const routes = {
   RESULT: 'result',
   TEKNISKBACKEND: environment.TEKNISKBACKEND_ENDPOINT,
   DRAWING: 'drawing',
+  WELCOME: 'welcome',
 };

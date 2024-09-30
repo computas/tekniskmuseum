@@ -3,15 +3,13 @@
 <p align="center">Før du utfører en administrativ handling, vær helt sikker på at du vil gjøre den.</p>
 <p align="center">Hvis en handling først gjennomføres, vil du IKKE være i stand til å gjøre om på den.</p>
 <div class="btn-group" align="center">
-  <button class="btn btn-lg btn-outline-primary" (click)="getInformation()">
-    Vis informasjon
-  </button>
-  <p></p>
-  <button (click)="revertDataset()">{{ this.datasetString }}</button>
-  <p></p>
-  <button (click)="retrain()">{{ this.retrainString }}</button>
+  <button class="btn btn-lg btn-outline-primary" (click)="getInformation()">Vis informasjon</button>
   <p></p>
   <button (click)="clearHighScore()">{{ this.highScoreString }}</button>
+  <p></p>
+  <button (click)="getLogger()">Hent feilmeldingsloggen (backend)</button>
+  <p></p>
+  <button (click)="getLoggerFrontend()">Hent feilmeldingsloggen (frontend)</button>
 </div>
 <br />
 <div class="pairing" align="center">
@@ -19,16 +17,9 @@
     <label for="pairid">
       <b>Pair ID</b>
     </label>
-    <input #pairid type="text" name="pairid" id="pairid" (placeholder)="getPairID()" />
+    <input #pairid type="text" name="pairid" id="pairid" maxlength="30" (placeholder)="getPairID()" />
     <br /><br />
-    <input
-      type="button"
-      class="pair-button"
-      (click)="pair(pairid.value)"
-      name="log"
-      id="log"
-      value="Sett ID"
-    />
+    <input type="button" class="pair-button" (click)="pair(pairid.value)" name="log" id="log" value="Sett ID" />
     <br /><br />
   </form>
 </div>

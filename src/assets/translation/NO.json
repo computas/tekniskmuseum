@@ -1,0 +1,104 @@
+{
+  "PRESS_TO_PLAY": "TRYKK FOR Å SPILLE",
+  "I_TEACHING_O_1": "Slik ser et EPLE ut",
+  "I_TEACHING_O_2": "Jeg trodde dette var et EPLE...",
+  "I_TEACHING_O_3": "Ja, de er begge EPLER!",
+  "I_TEACHING_O_4": "Ah, det skal jeg huske!",
+
+  "INTRO_MESSAGE": "Hei, jeg er ",
+  "INTRO_MESSAGE_2": "Og jeg er ",
+  "INTRO_EXPLANATION": " har vist meg mange tegninger.",
+  "INTRO_EXPLANATION_2": "Slik har jeg lært hvordan ting ser ut.",
+  "INTRO_CALL_TO_ACTION": "Tegn selv og se hva",
+  "INTRO_CALL_TO_ACTION_2": " har lært!",
+
+  "DIFFICULTY": "Nivå",
+  "DIFFICULTY_MOTIVATION": "Så gøy at du blir med og tegner!",
+  "DIFFICULTY_QUESTION": "Hvor vanskelige ord vil du tegne?",
+  "EASY_BUTTON": "Lett",
+  "MEDIUM_BUTTON": "Middels",
+  "HARD_BUTTON": "Vanskelig",
+  "MULTIPLAYER": "Flerspiller",
+
+  "PLAYER_MODE_SINGLE": "1 spiller",
+  "PLAYER_MODE_MULTI": "2 spillere",
+  "ADMIN_ARIA_LABEL": "Gå til admin side",
+  "WAITING": "Venter",
+  "WAITING_FOR_PLAYER": "Venter på spiller 2",
+
+  "HOW_TO_PLAY_SINGLE": "Slik spiller du:",
+  "HOW_TO_PLAY_MULTI": "Slik spiller dere:",
+  "DRAW_WORD": "Tegn ord",
+  "IO_GUESSES": "IO gjetter",
+  "NUMBER_OF_ROUNDS": "Tre runder",
+  "BEST_OF_THREE": "Best av tre vinner!",
+  "BACK_BUTTON": "Tilbake",
+  "NEXT_BUTTON": "Neste",
+
+  "PLAYER_LABEL": "Spiller",
+  "DRAW_LABEL": "Tegn: ",
+  "DRAW_BUTTON": "Tegn",
+  "CLEAR_BUTTON": "Tøm",
+  "AI_THINKING_LABEL": "Hmm... ",
+  "AI_GUESS_LABEL": "kan det være",
+
+  "WON_SENTENCE": "Hurra, jeg klarte å gjette at du tegnet ",
+  "LOST_SENTENCE": "Beklager, jeg klarte ikke å gjette hva du tegnet",
+  "WINNER_TEXT": "Du vant!",
+  "POINTS_INFO_TEXT": "Du fikk: ",
+  "POINTS": "poeng",
+  "TOTAL_POINTS": "Poengsum:",
+  "LOSER_TEXT": "Du tapte",
+  "RESULT_TEXT": "Ditt resultat:",
+  "PLAY_AGAIN_BUTTON": "Spill igjen",
+  "END_GAME_BUTTON": "Avslutt",
+  "NEW_HIGHSCORE_TEXT": "NY HIGHSCORE!",
+  "TODAYS_HIGHSCORE_TEXT": "Dagens highscore: ",
+
+  "SUMMARY_BUTTON": "Resultat",
+  "NEXT_WORD_BUTTON": "Neste",
+
+  "AUTO_END_MESSAGE": "Spillet vil automatisk avslutte om ",
+  "SECONDS": "sekunder",
+  "RESUME_BUTTON": "Bli værende",
+  "END_NOW_BUTTON": "Avslutt",
+
+  "CONFIRM_EXIT_MESSAGE": "Er du sikker på at du vil avslutte spillet?",
+
+  "ROUND_NUMBER": "Runde",
+  "ROUND_FEEDBACK_FAILED_TITLE": "Oisann!",
+  "ROUND_FEEDBACK_FAILED_DESC_1": "klarte ikke å gjette at du tegnet:",
+
+  "ROUND_FEEDBACK_CORRECT_TITLE": "Bra tegnet!",
+  "ROUND_FEEDBACK_CORRECT_DESC_1": "klarte å gjette at du tegnet:",
+
+  "SUMMARY_I_1": "Fantastisk! Du og",
+  "SUMMARY_I_2": "fikk",
+  "SUMMARY_I_3": "poeng",
+  "SUMMARY_O": "Takk for tegningene, de skal jeg lære av til neste gang!",
+
+  "SUMMARY_I_NEW_HIGHSCORE_1": "Fantastisk, ny highscore på",
+  "SUMMARY_I_NEW_HIGHSCORE_2": "poeng!",
+
+  "SUMMARY_I_NO_POINTS_1": "Uff da! Du og",
+  "SUMMARY_I_NO_POINTS_2": "fikk",
+  "SUMMARY_I_NO_POINTS_3": "0 poeng",
+  "SUMMARY_O_NO_POINTS": "Trykk på spill igjen, så kan vi prøve på nytt!",
+
+  "SUMMARY_I_MULTIPLAYER_WIN": "Fantastisk, du vant! Du fikk",
+  "SUMMARY_I_MULTIPLAYER_LOSS": "Du tapte! Du fikk",
+  "SUMMARY_I_MULTIPLAYER_DRAW": "Uavgjort! Du fikk",
+
+  "EXAMPLE_DRAWINGS_FB_CORRECT_P1": "Jeg har lært at",
+  "EXAMPLE_DRAWINGS_FB_P2": "ser slik ut:",
+
+  "OF": "av",
+  "EXAMPLE_DRAWINGS_FAILED_B1": "Jeg trodde du tegnet",
+  "EXAMPLE_DRAWINGS_FAILED_B2": "For jeg har lært at dette er",
+
+  "GUESSED_AT": "Gjettet på",
+  "TIME_ABBREVIATION_SECONDS": "sek",
+  "TIME_OUT": "Tiden gikk ut..",
+
+  "HOME": "Hjem"
+}

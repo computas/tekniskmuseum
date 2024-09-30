@@ -1,32 +1,128 @@
-<div class="container">
-  <div class="play-container">
-    <div class="text-container">
-      <div class="avatar">
-        <img class="avatar-image" src="../../../assets/avatar-welcome.svg" alt="avatar" (click)="goToAdmin()" />
+<div class="container-background">
+  <div class="container">
+    <header>
+      <div class="language-button-container">
+        <button
+          class="language-button"
+          (click)="changeLanguage('EN')"
+          [class.selected]="(currentLang$ | async) === 'EN'"
+        >
+          <img src="assets/UK.svg" alt="UK flag" />
+          ENG
+        </button>
+        <button
+          class="language-button"
+          (click)="changeLanguage('NO')"
+          [class.selected]="(currentLang$ | async) === 'NO'"
+        >
+          <img src="assets/Norway.svg" alt="Norway flag" />
+          NO
+        </button>
       </div>
-      <div class="info-text">
-        <span>
-          Hei, jeg heter<span style="color: #fa852f; font-weight: 700;"> Kunstig Jens</span>. <br />
-          Kan du hjelpe meg å lære?
-        </span>
+      <button class="logo">
+        <img src="assets/logo/IO-logo-inverted_transparent-bg.png" alt="logo" aria-label="Gå til admin side" />
+      </button>
+    </header>
 
-        <div class="button-container">
-          <a routerLink="/playgame/singleplayer" routerLinkActive="active">
-            <button mat-raised-button class="play-game-button">
-              <div class="button-text">
-                <mat-icon class="button-icon" aria-label="player one icon">person</mat-icon>1 spiller
-              </div>
-            </button>
-          </a>
-          <!-- <a routerLink="/playgame/multiplayer" routerLinkActive="active">
-            <button mat-raised-button class="play-game-button">
-              <div class="button-text">
-                <mat-icon class="button-icon" aria-label="player two icon">group</mat-icon>2 spillere
-              </div>
-            </button>
-          </a> -->
+    <div class="main-content" (click)="skipAnimation()" (keypress)="skipAnimation()" tabindex="0">
+      <div class="text-content">
+        <div class="I-figure">
+          <img
+            src="assets/I-figure.svg"
+            alt="I-figure"
+            height="170px"
+            [@moveFigure]="{ value: stateFigureI, params: { y: moveDistanceI, breakY: moveDistanceI + 20 } }"
+          />
+        </div>
+        <div class="speech-bubbles">
+          <app-speech-bubble
+            [@makeVisible]="stateFirstBubbleO"
+            class="speech-bubble right"
+            [pointerSide]="PointerSide.Bottom"
+            [arrowAlignment]="ArrowAlignment.Right"
+            [isFlipped]="false"
+            [textColor]="CustomColorsIO.white"
+            [bubbleColor]="CustomColorsIO.blue"
+            [bubbleSize]="'medium'"
+          >
+            <div slot="body-alt" class="speech-bubble-text">
+              {{ 'INTRO_MESSAGE' | translate }}<span slot="body-alt" class="avatar-name"> O</span>
+            </div>
+          </app-speech-bubble>
+
+          <app-speech-bubble
+            [@makeVisible]="stateFirstBubbleI"
+            class="speech-bubble left"
+            [pointerSide]="PointerSide.Bottom"
+            [arrowAlignment]="ArrowAlignment.Left"
+            [isFlipped]="false"
+            [bubbleSize]="'medium'"
+          >
+            <div slot="body-alt" class="speech-bubble-text">
+              {{ 'INTRO_MESSAGE_2' | translate }}<span class="avatar-name"> I</span>
+            </div>
+          </app-speech-bubble>
+
+          <app-speech-bubble
+            [@makeVisible]="stateSecondBubbleO"
+            class="speech-bubble right"
+            [pointerSide]="PointerSide.Bottom"
+            [arrowAlignment]="ArrowAlignment.Right"
+            [isFlipped]="false"
+            [textColor]="CustomColorsIO.white"
+            [bubbleColor]="CustomColorsIO.blue"
+            [bubbleSize]="'medium'"
+          >
+            <div slot="body-alt" class="speech-bubble-text">
+              <span class="avatar-name"> I</span>{{ 'INTRO_EXPLANATION' | translate }} <br />
+              {{ 'INTRO_EXPLANATION_2' | translate }} <br />
+            </div>
+          </app-speech-bubble>
+          <app-speech-bubble
+            [@makeVisible]="stateSecondBubbleI"
+            class="speech-bubble left"
+            [pointerSide]="PointerSide.Top"
+            [arrowAlignment]="ArrowAlignment.Left"
+            [isFlipped]="false"
+            [bubbleSize]="'medium'"
+          >
+            <div slot="body-alt" class="speech-bubble-text">
+              {{ 'INTRO_CALL_TO_ACTION' | translate }}<span class="avatar-name"> O</span
+              >{{ 'INTRO_CALL_TO_ACTION_2' | translate }} <br />
+            </div>
+          </app-speech-bubble>
+        </div>
+        <div class="O-figure" #figureO>
+          <img
+            src="assets/O-figure.svg"
+            alt="O-figure"
+            height="170px"
+            [@moveFigure]="{ value: stateFigureO, params: { y: moveDistanceO, breakY: moveDistanceO + 20 } }"
+          />
         </div>
       </div>
+    </div>
+    <div class="two-button-container" [@makeVisible]="stateButtons">
+      <app-custom-button
+        [buttonStyle]="buttonStyleClass"
+        [buttonText]="'PLAYER_MODE_SINGLE' | translate"
+        [disabled]="!buttonIsVisible"
+        routerLink="/playgame/singleplayer"
+        routerLinkActive="active"
+        (click)="setSingleplayer()"
+      >
+        <mat-icon slot="custom-mat-icon" class="button-icon-gradient" aria-label="player one icon">person</mat-icon>
+      </app-custom-button>
+      <app-custom-button
+        [buttonStyle]="buttonStyleClass"
+        [buttonText]="'PLAYER_MODE_MULTI' | translate"
+        [disabled]="!buttonIsVisible"
+        routerLink="/playgame/multiplayer"
+        routerLinkActive="active"
+        (click)="setMultiplayer()"
+      >
+        <mat-icon slot="custom-mat-icon" class="button-icon-gradient" aria-label="player two icon">group</mat-icon>
+      </app-custom-button>
     </div>
   </div>
 </div>

@@ -6,4 +6,9 @@ export const SocketEndpoints = {
   GET_LABEL: 'getLabel',
   JOIN_GAME: 'joinGame',
   PLAYER_DISCONNECTED: 'playerDisconnected',
+  POST_SCORE: 'postScore',
+  VIEW_HIGHSORE: 'viewHighScore',
+  GET_EXAMPLE_DRAWINGS: 'getExampleDrawings',
+  GET_EXAMPLE_DRAWINGS_P1: 'getExampleDrawingsP1',
+  GET_EXAMPLE_DRAWINGS_P2: 'getExampleDrawingsP2',
 };

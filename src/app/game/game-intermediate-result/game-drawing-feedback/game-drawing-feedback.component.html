@@ -1,0 +1,16 @@
+<div class="feedback-container">
+  <app-i-avatar class="i-avatar" [height]="170" [width]="35" [color]="CustomColorsIO.white"></app-i-avatar>
+  <app-speech-bubble
+    class="speech-bubble"
+    [pointerSide]="PointerSide.Left"
+    [arrowAlignment]="ArrowAlignment.Center"
+    [isFlipped]="false"
+    [textColor]="CustomColorsIO.white"
+    [bubbleColor]="CustomColorsIO.purple"
+    [bubbleSize]="'small'"
+  >
+    <h2 slot="body-alt" class="feedback-title">{{ feedbackTitleKey | translate }}</h2>
+    <p slot="body-alt" class="feedback-desc"><span class="o-text">O</span> {{ feedbackDescriptionKey | translate }}</p>
+    <p slot="body-alt" class="label">{{ label | translate }}</p>
+  </app-speech-bubble>
+</div>

@@ -1,7 +1,9 @@
-import { environment } from 'src/environments/environment';
+import { environment } from '@/environments/environment';
+
 export const endpoints = {
   TEKNISKBACKEND: environment.TEKNISKBACKEND_ENDPOINT,
-  ENDGAME: 'endGame',
+  POSTSCORE: 'postScore',
+  HIGHSCORE: 'viewHighScore',
   CLASSIFY: 'classify',
   GETLABEL: 'getLabel',
   STARTGAME: 'startGame',
@@ -13,4 +15,6 @@ export const endpoints = {
   PING: 'ping',
   GETSTATUS: 'status',
   LOGOUT: 'logout',
+  GETEXAMPLEDRAWINGS: 'getExampleDrawings',
+  LOGGER: 'logging'
 };

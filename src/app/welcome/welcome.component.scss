@@ -1,138 +1,107 @@
-// .ng-star-inserted {
-//   height: 100px !important;
-// }
+@import '../../variables.scss';
+
 .container {
+  position: relative;
   display: flex;
   flex-direction: column;
-  justify-content: space-evenly;
   align-items: center;
   height: 100vh;
-  background: linear-gradient(0.5deg, #195272 -0.56%, #05a3c7 138.78%);
 }
-.play-container {
-  display: flex;
-  flex-direction: column;
-  justify-content: space-evenly;
-  align-items: center;
-  margin-top: 50px;
-  @media (min-width: 600px) {
-    .play-container {
-      margin-top: 200px;
-    }
-  }
-}
-.text-container {
+
+header {
   display: flex;
   flex-direction: row;
+  justify-content: space-between;
+  width: 100%;
+  padding-top: 1rem;
+  padding-left: 1.5rem;
+  padding-right: 1.5rem;
 }
-.avatar {
-  display: none;
+
+.language-button-container {
+  display: inline-flex;
+  align-items: flex-start;
+  gap: 1em;
+  margin-right: 35px;
 }
-@media (min-width: 600px) {
-  .avatar {
-    display: block;
-    margin-right: 25px;
-  }
-}
-.avatar-image {
-  height: 300px;
-}
-a {
-  text-decoration: none;
-}
-.info-text {
+
+.language-button {
   display: flex;
+  padding: 8px 12px;
   flex-direction: column;
+  justify-content: center;
   align-items: center;
-  text-align: center;
-  margin-top: 30px;
-  color: #ffffff;
+  gap: 10px;
+  border-radius: 20px;
+  border: 1px solid $white_color;
+  background: $black_color;
+  box-shadow: 0px 4px 4px 0px rgba(0, 0, 0, 0.25);
+  color: $white_color;
+  font-family: AeonikMedium;
   font-size: 24px;
-  font-weight: 300;
-  line-height: 30px;
-  text-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+  font-style: normal;
+  line-height: normal;
 }
-@media (min-width: 600px) {
-  .info-text {
-    align-items: flex-start;
-    text-align: left;
-    justify-content: center;
-    font-size: 40px;
-    font-weight: 300;
-    line-height: 60px;
-  }
+
+.language-button.selected {
+  background: $white_color;
+  color: $dark_blue_color;
 }
-.button-container {
+
+.main-content {
+  flex: 1;
   display: flex;
-  flex-wrap: wrap;
-  justify-content: center;
-  width: 100%;
-}
-@media (min-width: 600px) {
-  .button-container {
-    justify-content: space-between;
-    margin-top: 20px;
-  }
-}
-.game-mode-text {
-  display: flex;
-  justify-content: center;
-  width: 100%;
-  font-size: 22px;
-  margin-top: 50px;
-}
-@media (min-width: 600px) {
-  .game-mode-text {
-    font-size: 32px;
-  }
-}
-.play-game-button {
-  background: #fa852f;
-  color: #ffffff;
-  box-shadow: 0 8px 16px 0 rgba(0, 0, 0, 0.1), 0 6px 20px 0 rgba(0, 0, 0, 0.15);
-  margin-top: 20px;
-  font-size: 20px;
-  border-radius: 50px;
-  height: 40px;
-  min-width: 240px;
-  max-width: 400px;
-}
-@media (min-width: 600px) {
-  .play-game-button {
-    font-size: 32px;
-    height: 60px;
-    min-width: 230px;
-    max-width: 400px;
-  }
-}
-.learn-button {
-  top: 0;
-  position: absolute;
-  left: 0;
-  margin: 24px;
-  margin-top: 30px;
-  box-shadow: 0 8px 16px 0 rgba(0, 0, 0, 0.1), 0 6px 20px 0 rgba(0, 0, 0, 0.15);
-  font-size: 20px;
-  border-radius: 50px;
-  height: 40px;
-  min-width: 200px;
-  max-width: 400px;
-}
-@media (min-width: 600px) {
-  .learn-button {
-    font-size: 24px;
-    height: 50px;
-  }
-}
-.button-text {
-  display: flex;
-  flex-direction: row;
   justify-content: center;
   align-items: center;
 }
-.button-icon {
-  color: #ffffff;
-  margin-right: 20px;
-  font-size: 36px;
-  margin-bottom: 12px;
+
+.text-content {
+  display: flex;
+  justify-content: start;
+  width: 1200px;
+  padding-bottom: 50px;
+}
+
+.speech-bubbles {
+  flex: 5;
+  display: inline-flex;
+  flex-direction: column;
+}
+
+.speech-bubbles > :nth-child(1) {
+  margin-bottom: -50px;
+}
+
+.speech-bubbles > :nth-child(3) {
+  margin-top: 1rem;
+  margin-bottom: -1rem;
+}
+
+.speech-bubble.left {
+  align-self: flex-start;
+}
+
+.speech-bubble.right {
+  align-self: flex-end;
+}
+
+.I-figure {
+  min-width: 100px;
+  display: flex;
+  justify-content: flex-end;
+  margin-right: 30px;
+  margin-top: 150px;
+}
+
+.O-figure {
+  display: flex;
+  justify-content: flex-end;
+  min-width: 190px;
+  margin-top: 60px;
+}
+
+.speech-bubble-text {
+  font-size: 38px;
+  line-height: 38px;
+  font-family: AeonikRegular;
 }

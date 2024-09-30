@@ -1,0 +1,17 @@
+<div class="container">
+  <div [class]="['user-drawing-board', getFeedbackStyle()]">
+    <div class="frame">
+      <img class="user-drawing" [src]="drawingURL" alt="the user's drawing" />
+    </div>
+  </div>
+  <div class="score-and-time-container">
+    @if (hasCorrectGuess) {
+    <p class="seconds-used">
+      {{ 'GUESSED_AT' | translate }} {{ secondsUsed }} {{ 'TIME_ABBREVIATION_SECONDS' | translate }}
+    </p>
+    } @else {
+    <p class="seconds-used">{{ 'TIME_OUT' | translate }}</p>
+    }
+    <p [class]="['round-score-text', pointsColorStyle()]">{{ getRoundScoreText() }}p</p>
+  </div>
+</div>

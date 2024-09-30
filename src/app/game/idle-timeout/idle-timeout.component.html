@@ -1,0 +1,13 @@
+<div mat-dialog-content id="countdownText">
+  <p>
+    {{ 'AUTO_END_MESSAGE' | translate }} <strong>{{ timer }}</strong> {{ 'SECONDS' | translate }}
+  </p>
+</div>
+<div mat-dialog-actions id="actions">
+  <button class="idleButton" id="homeButton" (click)="goHome()">
+    <span id="homeButtonText"><mat-icon id="idleButtonIcon">home</mat-icon>{{ 'END_NOW_BUTTON' | translate }}</span>
+  </button>
+  <button class="idleButton" id="stayButton" (click)="closeDialog()">
+    {{ 'RESUME_BUTTON' | translate }}
+  </button>
+</div>

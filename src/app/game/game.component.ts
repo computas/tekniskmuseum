@@ -1,7 +1,15 @@
-import { Component, OnInit, OnDestroy } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { trigger, style, animate, transition } from '@angular/animations';
-
-import { DrawingService } from './game-draw/services/drawing.service';
+import { GAMESTATE } from '../shared/models/interfaces';
+import { GameWordToDrawComponent } from './game-word-to-draw/game-word-to-draw.component';
+import { GameResultComponent } from './game-result/game-result.component';
+import { GameIntermediateResultComponent } from './game-intermediate-result/game-intermediate-result.component';
+import { GameDrawComponent } from './game-draw/game-draw.component';
+import { GameInfoComponent } from './game-info/game-info.component';
+import { GamePickDifficultyComponent } from './game-pick-difficulty/game-pick-difficulty.component';
+import { GameStateService } from './services/game-state-service';
+import { LobbyComponent } from './game-multiplayer/lobby/lobby.component';
+import { WelcomeComponent } from '../welcome/welcome.component';
 
 @Component({
   selector: 'app-game',
@@ -32,56 +40,39 @@ import { DrawingService } from './game-draw/services/drawing.service';
       ]),
     ]),
   ],
+  standalone: true,
+  imports: [
+    GameInfoComponent,
+    GamePickDifficultyComponent,
+    GameDrawComponent,
+    GameIntermediateResultComponent,
+    GameResultComponent,
+    GameWordToDrawComponent,
+    LobbyComponent,
+    WelcomeComponent,
+  ],
 })
-export class GameComponent implements OnInit, OnDestroy {
-  newGame = false;
-  guessDone = false;
-  showHowToPlay = true;
-  showIntermediateResult = false;
-  showFinalResult = false;
-  showWordToDraw = false;
+export class GameComponent implements OnInit {
+  currentPage = '';
+  GAMESTATE = GAMESTATE;
 
-  constructor(private drawingService: DrawingService) {}
+  constructor(private gameStateService: GameStateService) {}
 
-  ngOnDestroy(): void {
-    this.clearGameState();
-    this.drawingService.endGame();
-  }
   ngOnInit(): void {
-    this.drawingService.totalGuess = 3;
-    this.drawingService.guessUsed = 1;
-    this.drawingService.guessDone$.subscribe({
-      next: (value) => {
-        this.showIntermediateResult = value;
+    this.currentPage = this.gameStateService.getCurrentPage();
+    this.listenToPageChanges();
+  }
+
+  listenToPageChanges() {
+    this.gameStateService.currentPage$.subscribe({
+      next: (newPage) => {
+        this.currentPage = newPage;
+        this.updatePage(this.currentPage);
       },
     });
   }
 
-  getDrawWord() {
-    this.showWordToDraw = true;
-    this.showHowToPlay = false;
-  }
-
-  startGame() {
-    this.showHowToPlay = false;
-    this.showWordToDraw = false;
-    this.newGame = true;
-  }
-
-  nextGuess(event) {
-    this.clearGameState();
-    this.showWordToDraw = true;
-  }
-
-  finalResult(event) {
-    this.clearGameState();
-    this.showFinalResult = this.drawingService.gameOver;
-  }
-
-  clearGameState() {
-    this.newGame = false;
-    this.showIntermediateResult = false;
-    this.showFinalResult = false;
-    this.guessDone = false;
+  updatePage(newPage: string) {
+    this.currentPage = newPage;
   }
 }

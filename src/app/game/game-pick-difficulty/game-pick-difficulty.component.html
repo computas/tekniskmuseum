@@ -1,0 +1,94 @@
+<div class="container-background">
+  <div class="container" (click)="skipAnimation()" (keypress)="skipAnimation()" tabindex="0">
+    <app-custom-header 
+      [buttonStyle]="homeButtonStyleClass"
+      [buttonText]="'BACK_BUTTON' | translate"
+      [showProgressBar]="false"
+    />
+    <div class="main-content">
+      <div class="text-content">
+        <div class="I-figure" [@show]="stateFigureI">
+          <img src="assets/I-figure.svg" alt="I-figure" height="170px" />
+        </div>
+        <div class="speech-bubbles">
+          <app-speech-bubble
+            [@show]="stateFirstBubbleO"
+            class="speech-bubble right"
+            [pointerSide]="PointerSide.Bottom"
+            [arrowAlignment]="ArrowAlignment.Right"
+            [isFlipped]="false"
+            [textColor]="CustomColorsIO.white"
+            [bubbleColor]="CustomColorsIO.blue"
+            [bubbleSize]="'medium'"
+            [bodyText]="'DIFFICULTY_MOTIVATION' | translate"
+          >
+          </app-speech-bubble>
+          <div class="speech-bubble-buttons">
+            <app-speech-bubble
+              [@show]="stateFirstBubbleI"
+              [pointerSide]="PointerSide.Left"
+              [arrowAlignment]="ArrowAlignment.Center"
+              [isFlipped]="false"
+              [bubbleSize]="'medium'"
+              [bodyText]="'DIFFICULTY_QUESTION' | translate"
+            >
+            </app-speech-bubble>
+            <div class="button-container" [@show]="stateButtons">
+              <app-custom-button
+                [disabled]="buttonsAreDisabled"
+                [buttonStyle]="buttonStyleClass"
+                [buttonText]="'EASY_BUTTON' | translate"
+                (click)="startDrawing('easy')"
+                alt=""
+                aria-label=""
+              >
+                <img
+                  slot="custom-mat-icon"
+                  class="button-icon-gradient"
+                  src="../../../assets/icons/icon_difficulty_easy.svg"
+                  alt="Easy difficulty icon"
+                  class="difficulty-icon"
+                />
+              </app-custom-button>
+              <app-custom-button
+                [disabled]="buttonsAreDisabled"
+                [buttonStyle]="buttonStyleClass"
+                [buttonText]="'MEDIUM_BUTTON' | translate"
+                (click)="startDrawing('medium')"
+                alt=""
+                aria-label=""
+              >
+                <img
+                  slot="custom-mat-icon"
+                  class="button-icon-gradient"
+                  src="../../../assets/icons/icon_difficulty_medium.svg"
+                  alt="Easy difficulty icon"
+                  class="difficulty-icon"
+                />
+              </app-custom-button>
+              <app-custom-button
+                [disabled]="buttonsAreDisabled"
+                [buttonStyle]="buttonStyleClass"
+                [buttonText]="'HARD_BUTTON' | translate"
+                (click)="startDrawing('hard')"
+                alt=""
+                aria-label=""
+              >
+                <img
+                  slot="custom-mat-icon"
+                  class="button-icon-gradient"
+                  src="../../../assets/icons/icon_difficulty_hard.svg"
+                  alt="Easy difficulty icon"
+                  class="difficulty-icon"
+                />
+              </app-custom-button>
+            </div>
+          </div>
+        </div>
+        <div class="O-figure" [@show]="stateFigureO">
+          <img src="assets/O-figure.svg" alt="O-figure" height="170px" />
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

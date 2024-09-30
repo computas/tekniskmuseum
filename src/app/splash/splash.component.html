@@ -1,0 +1,25 @@
+<div class="container-background" (click)="navigateToWelcome()" (keypress)="navigateToWelcome()" tabindex="0">
+  <div class="splash-container container">
+    <button class="logo">
+      <img src="assets/logo/IO-logo-inverted_transparent-bg.png" alt="logo" />
+    </button>
+
+    @if (!animating) {
+    <div class="speech-bubble-container" [@fadeInOut] [ngClass]="currentBubblePosition">
+      <app-speech-bubble
+        [textColor]="currentBubbleTextColor"
+        [bubbleColor]="currentBubbleColor"
+        [bodyText]="currentBubbleText"
+        [pointerSide]="currentPointerSide"
+        [arrowAlignment]="currentArrowAlignment"
+        [bubbleSize]="'medium'"
+      >
+      </app-speech-bubble>
+    </div>
+
+    <img class="teaching-image" [@fadeInOut] [src]="currentSvg" alt="Teaching Image" />
+    }
+
+    <div class="play-text">{{ pressToPlayText }}</div>
+  </div>
+</div>

@@ -1,6 +1,8 @@
 import { endpoints } from '../shared/models/endpoints';
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
+import { AuthStatus, LogData, StatusData } from '../shared/models/backend-interfaces';
+import { Observable } from 'rxjs';
 
 @Injectable({
   providedIn: 'root',
@@ -10,7 +12,7 @@ export class LoginService {
   private _loggedIn = false;
   constructor(private http: HttpClient) {}
 
-  login(username, password) {
+  login(username: string, password: string) {
     const formData = new FormData();
     formData.append('password', password);
     formData.append('username', username);
@@ -46,8 +48,8 @@ export class LoginService {
     );
   }
 
-  attemptLogin(formData) {
-    return this.http.post(`${endpoints.TEKNISKBACKEND}/${endpoints.AUTH}`, formData, {
+  attemptLogin(formData: FormData): Observable<AuthStatus> {
+    return this.http.post<AuthStatus>(`${endpoints.TEKNISKBACKEND}/${endpoints.AUTH}`, formData, {
       withCredentials: true,
     });
   }
@@ -83,9 +85,18 @@ export class LoginService {
   }
 
   getStatus() {
-    return this.http.post(
+    return this.http.post<StatusData>(
       `${endpoints.TEKNISKBACKEND}/${endpoints.ADMIN}/${endpoints.GETSTATUS}`,
       {},
+      {
+        withCredentials: true,
+      }
+    );
+  }
+
+  getLogger() {
+    return this.http.get<LogData[]>(
+      `${endpoints.TEKNISKBACKEND}/${endpoints.ADMIN}/${endpoints.LOGGER}`,
       {
         withCredentials: true,
       }

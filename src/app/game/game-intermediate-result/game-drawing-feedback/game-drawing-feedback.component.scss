@@ -1,0 +1,42 @@
+@import './../../../../variables.scss';
+.feedback-container {
+  display: flex;
+  gap: 1em;
+  height: 100%;
+  margin-top: 3em;
+  margin-left: 4em;
+}
+
+.i-avatar {
+  margin-top: 3em;
+}
+
+.feedback-title,
+.feedback-desc,
+.label {
+  text-align: left;
+  margin: 0;
+  padding: 0;
+}
+
+.feedback-title {
+  font-family: AeonikBold;
+  font-size: var(--fontSizeMedium);
+}
+
+.feedback-desc {
+  margin-top: 0.4em;
+  font-family: AeonikLight;
+  font-size: var(--fontSizeSpeechBubble);
+}
+
+.o-text {
+  font-family: 'ICTHofmannRegular';
+}
+
+.label {
+  text-transform: uppercase;
+  margin-top: 0.5em;
+  font-family: AeonikMedium;
+  font-size: var(--fontSizeSpeechBubble);
+}

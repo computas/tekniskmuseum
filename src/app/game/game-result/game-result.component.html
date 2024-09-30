@@ -1,52 +1,128 @@
-<div class="result-container">
-  <div *ngIf="ismultiplayer && hasWon" id="result-header" class="result-header-multi">
-    <img src="../../../assets/happy-blue.svg" alt="Avatar won" class="winner-img" />
-    <h1 class="result-header-multi">
-      <span class="winner">Du vant!</span>
-      <span class="winner-points">&nbsp;Du fikk: {{ score }} poeng</span>
-    </h1>
-    <img src="../../../assets/happy-blue.svg" alt="Avatar won" class="winner-img" />
-  </div>
-  <div *ngIf="ismultiplayer && !hasWon" id="result-header" class="result-header-multi">
-    <img src="../../../assets/sad-blue.svg" alt="Avatar lost" class="loser-img" />
-    <h1 class="result-header-multi">
-      <span class="loser">Du tapte</span>
-      <span class="loser-points">&nbsp;Du fikk: {{ score }} poeng</span>
-    </h1>
-    <img src="../../../assets/sad-blue.svg" alt="Avatar lost" class="loser-img" />
-  </div>
-  <h1 *ngIf="!ismultiplayer" id="result-header">Ditt resultat:</h1>
-  <div class="result-section">
-    <div id="result-card-container">
-      <div id="result-card" *ngFor="let result of results">
-        <img
-          mat-card-image
-          [src]="result.imageData"
-          [className]="result.hasWon ? 'game-result-img card-won' : 'game-result-img card-loss'"
-        />
-        <p id="result-subtitile">
-          <span *ngIf="result.hasWon" class="material-icons" id="won">
-            done
-          </span>
-          <span *ngIf="!result.hasWon" class="material-icons" id="loss">
-            clear
-          </span>
-          <span *ngIf="result.word" class="result-word"
-            >{{ result.word | titlecase }}
-            <span *ngIf="ismultiplayer" class="multiplayer-score"> {{ result.score }} p</span></span
+<div class="result-container-background container-background">
+  <button class="logo">
+    <img src="assets/logo/IO-logo-inverted_transparent-bg.png" alt="logo" aria-label="Gå til admin side" />
+  </button>
+  <div class="result-container">
+    <div class="result-section">
+      <div id="header">
+        <p id="header-text">
+          @if (!ismultiplayer) {
+          {{ 'DIFFICULTY' | translate }}:
+          <span id="difficulty-text">
+            @switch (difficulty) { @case (1){
+            {{ 'EASY_BUTTON' | translate }}
+            } @case(2) {
+            {{ 'MEDIUM_BUTTON' | translate }}
+            } @case(3) {
+            {{ 'HARD_BUTTON' | translate }}
+            } @default {
+            {{ 'EASY_BUTTON' | translate }}
+            } }</span
           >
+          }
         </p>
+        <div id="highscore-section">
+          @if (newHighscore) {
+          <h2 id="highscore-number">{{ 'NEW_HIGHSCORE_TEXT' | translate }}</h2>
+          } @else {
+          <h2 id="header-text">
+            {{ 'TODAYS_HIGHSCORE_TEXT' | translate }}
+            <span id="highscore-points"> {{ todaysHighscore.toString() }} {{ 'POINTS' | translate }}</span>
+          </h2>
+          }
+        </div>
       </div>
     </div>
-  </div>
-  <div class="button-footer">
-    <a href="/" class="link-float"
-      ><button mat-raised-button class="btn btn-again">
-        <span class="material-icons icon">
-          refresh
-        </span>
-        Spill igjen
-      </button></a
-    >
+    <div [@fadeIn]="IState" id="i-text-box-container">
+      <app-i-avatar [height]="190" [width]="38" [color]="CustomColorsIO.white" />
+      <app-speech-bubble
+        [pointerSide]="PointerSide.Left"
+        [arrowAlignment]="ArrowAlignment.Top"
+        [titleText]="''"
+        [bodyText]="''"
+        [textColor]="CustomColorsIO.white"
+        [bubbleColor]="CustomColorsIO.purple"
+        [bubbleSize]="'large'"
+      >
+        <ng-content slot="body-alt">
+          <h1>
+            @if (ismultiplayer && score > opponentScore && score > 0) {
+            {{ 'SUMMARY_I_MULTIPLAYER_WIN' | translate }}
+            <span id="points">{{ score }} {{ 'POINTS' | translate }} </span>
+            }@else if (ismultiplayer && score === opponentScore) {
+            {{ 'SUMMARY_I_MULTIPLAYER_DRAW' | translate }}
+            <span id="points">{{ score }} {{ 'POINTS' | translate }}</span>
+            } @else if (ismultiplayer && score < opponentScore) {
+            {{ 'SUMMARY_I_MULTIPLAYER_LOSS' | translate }}
+            <span id="points"> {{ score }} {{ 'POINTS' | translate }} </span>
+            } @else if (score === 0) { {{ 'SUMMARY_I_NO_POINTS_1' | translate }} <span id="o-avatar">O</span>
+            {{ 'SUMMARY_I_NO_POINTS_2' | translate }} <span id="points">{{ 'SUMMARY_I_NO_POINTS_3' | translate }}</span>
+            } @else {
+            {{ 'SUMMARY_I_1' | translate }} <span id="o-avatar">O</span> {{ 'SUMMARY_I_2' | translate }}
+            <span id="points"> {{ score }} {{ 'SUMMARY_I_3' | translate }}</span>
+            }
+          </h1>
+          <div id="result-card-container">
+            @for (result of results; track result) {
+            <div id="result-card">
+              <img
+                mat-card-image
+                [src]="result.imageData"
+                [className]="result.hasWon ? 'game-result-img card-won' : 'game-result-img card-loss'"
+                alt=""
+              />
+              <p id="result-subtitle">
+                @if (result.word) {
+                <span class="result-word">{{ result.word | titlecase }} </span>
+                <span [className]="result.hasWon ? 'score win' : 'score loss'"> {{ result.score }} p</span>
+                }
+              </p>
+            </div>
+            }
+          </div>
+        </ng-content></app-speech-bubble
+      >
+    </div>
+
+    <div [@fadeIn]="OState" id="o-text-box-container">
+      <app-speech-bubble
+        id="o-speech-bubble"
+        [pointerSide]="PointerSide.Right"
+        [arrowAlignment]="ArrowAlignment.Center"
+        [textColor]="CustomColorsIO.white"
+        [bubbleColor]="CustomColorsIO.blue"
+        [bubbleSize]="'medium'"
+      >
+        <ng-content slot="body-alt">
+          <h1>
+            @if (score === 0) {
+            {{ 'SUMMARY_O_NO_POINTS' | translate }}
+            } @else {
+            {{ 'SUMMARY_O' | translate }}
+            }
+          </h1>
+        </ng-content>
+      </app-speech-bubble>
+      <app-o-avatar [height]="130" [width]="130" [color]="CustomColorsIO.white" />
+    </div>
+
+    <div id="summary-buttons-container">
+      <app-custom-button
+        class="end-game-button"
+        [buttonStyle]="homeButtonStyleClass"
+        [buttonText]="'HOME' | translate"
+        iconSrc="../../../assets/house.svg"
+        (click)="endGame()"
+        alt="Go home button"
+        aria-label="Home button"
+      />
+      <app-custom-button
+      [buttonStyle]="playAgainButtonStyleClass"
+      [buttonText]="'PLAY_AGAIN_BUTTON' | translate"
+      (click)="playAgain()"
+      alt="Play again button"
+      aria-label="Replay button"
+    />
+    </div>
   </div>
 </div>

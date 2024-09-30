@@ -1,24 +1,78 @@
-<div class="word-container">
-  <div class="words-remaining">{{ guessUsed }}/3</div>
-  <h1 class="playernr" *ngIf="isMultiPlayer">Spiller {{ playernr }}</h1>
-  <div class="word-text">
-    <p class="word-draw">Tegn:</p>
-    <div *ngIf="loading">
-      <mat-spinner class="white-spinner" id="white"></mat-spinner>
-    </div>
-    <div *ngIf="word">
-      <h1 class="word-to-guess header">{{ word | uppercase }}</h1>
-      <div *ngIf="isMultiPlayer" class="timer header">
-        <span>{{ timeLeft }}</span>
+<div class="container-background">
+  <div class="word-container">
+    <app-custom-header 
+    [buttonStyle]="homeButtonStyleClass"
+    [buttonText]="'END_GAME_BUTTON' | translate"
+    [showProgressBar]="true"
+    />
+    <div class="main-content">
+      <div class="i-container">
+        <app-i-avatar class="i-avatar" [color]="CustomColorsIO.white" [width]="50" [height]="200"></app-i-avatar>
       </div>
+      <app-speech-bubble
+        [textColor]="CustomColorsIO.white"
+        [bubbleColor]="CustomColorsIO.purple"
+        [pointerSide]="PointerSide.Left"
+        [arrowAlignment]="ArrowAlignment.Center"
+        [bubbleSize]="'medium'"
+      >
+        <ng-container slot="body-alt" class="speech-bubble-text">
+          <div class="word-text">
+            <p class="word-draw">{{ 'DRAW_LABEL' | translate }}</p>
+            @if (loading) {
+            <div>
+              <mat-spinner class="white-spinner" [diameter]="56" id="white"></mat-spinner>
+            </div>
+            } @if (label) {
+            <div>
+              <h1 class="word-to-guess">{{ label | uppercase }}</h1>
+              @if (isMultiPlayer) {
+              <div class="timer">
+                <span>{{ timeLeft }}</span>
+              </div>
+              }
+            </div>
+            }
+          </div>
+        </ng-container>
+      </app-speech-bubble>
     </div>
-  </div>
-  <div class="word-footer">
-    <div class="avatar"><img src="../../../assets/avatar-hide.svg" alt="avatar" /></div>
-    <div *ngIf="!loading">
-      <button *ngIf="isSinglePlayer" mat-raised-button class="draw-word-button" (click)="drawWord.emit(true)">
-        Tegn
-      </button>
-    </div>
+    <footer>
+      <div class="footer-content">
+        <p id="difficulty">
+          @if (isSinglePlayer) {
+          {{ 'DIFFICULTY' | translate }}:
+          <span id="difficulty-text">
+            @switch (difficulty) { @case (1) {
+            {{ 'EASY_BUTTON' | translate }}
+            } @case (2) {
+            {{ 'MEDIUM_BUTTON' | translate }}
+            } @case (3) {
+            {{ 'HARD_BUTTON' | translate }}
+            } @default {
+            {{ 'EASY_BUTTON' | translate }}
+            } }
+          </span>
+          } @else {
+          {{ 'MULTIPLAYER' | translate }}
+          }
+        </p>
+        @if(isSinglePlayer) {
+
+        <app-custom-button
+          [disabled]="loading"
+          [buttonStyle]="forwardButtonStyleClass"
+          [buttonText]="'DRAW_BUTTON' | translate"
+          (keydown)="toDrawingBoard()"
+          (click)="toDrawingBoard()"
+          id="draw-btn"
+        >
+          <mat-icon slot="custom-mat-icon" class="button-icon-gradient" aria-label="play_arrow"
+            >arrow_forward_ios</mat-icon
+          >
+        </app-custom-button>
+        }
+      </div>
+    </footer>
   </div>
 </div>

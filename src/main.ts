@@ -1,13 +1,29 @@
-import { enableProdMode } from '@angular/core';
-import { platformBrowserDynamic } from '@angular/platform-browser-dynamic';
-
-import { AppModule } from './app/app.module';
+import { enableProdMode, importProvidersFrom } from '@angular/core';
 import { environment } from './environments/environment';
+import { AppComponent } from './app/app.component';
+import { provideAnimations } from '@angular/platform-browser/animations';
+import { ServiceWorkerModule } from '@angular/service-worker';
+import { routes } from './app/routes';
+import { bootstrapApplication } from '@angular/platform-browser';
+import { InfoDialogComponent } from './app/admin/info-dialog/info-dialog.component';
+import { withInterceptorsFromDi, provideHttpClient, HttpClient } from '@angular/common/http';
+import { provideRouter } from '@angular/router';
+import { TranslationService } from './app/core/translation.service';
+import { SplashComponent } from './app/splash/splash.component';
 
 if (environment.production) {
   enableProdMode();
 }
 
-platformBrowserDynamic()
-  .bootstrapModule(AppModule)
-  .catch((err) => console.error(err));
+bootstrapApplication(AppComponent, {
+  providers: [
+    importProvidersFrom(ServiceWorkerModule.register('ngsw-worker.js', { enabled: environment.production })),
+    InfoDialogComponent,
+    provideHttpClient(withInterceptorsFromDi()),
+    provideRouter(routes),
+    provideAnimations(),
+    importProvidersFrom(HttpClient),
+    TranslationService,
+    SplashComponent,
+  ],
+}).catch((err) => console.error(err));

@@ -1,0 +1,99 @@
+@import '../../../../variables.scss';
+
+@mixin button($gradient-border: false, $full-gradient: false, $back: false, $custom-width: 15rem, $custom-height: 4rem) {
+  height: $custom-height;
+  width: $custom-width;
+  min-width: 13rem;
+  max-width: 22rem;
+  border-radius: 5rem;
+
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+
+  font-size: var(--fontSizeSmall);
+  background-color: $button_background_color;
+  box-shadow: 0 8px 16px 0 rgba(0, 0, 0, 0.1), 0 6px 20px 0 rgba(0, 0, 0, 0.15);
+
+  @if $back {
+    background-color: black;
+    border-color: white;
+    border: 0.2rem solid;
+    color: $text_primary_color;
+  }
+  @if $gradient-border {
+    background: linear-gradient(90deg, #1f60de 0%, #681fde 25%, #ec526d 50%, #eec589 75%, #1cceda 100%);
+    color: $text_primary_color;
+  }
+  @if $full-gradient {
+    background: linear-gradient(0deg, #1f60de 0%, #681fde 14%, #ec526d 71%, #edba86 100%);
+    color: $button_content_color;
+  }
+}
+
+@mixin rainbowContent($full-gradient: true) {
+  width: 95%;
+  height: 80%;
+  border-radius: 5em;
+
+  padding: 0 1rem 0 1rem;
+
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  background-color: if($full-gradient, rgba(0, 0, 0, 0.3), $button_background_color);
+}
+
+.full-gradient-inner {
+  @include rainbowContent(true);
+}
+
+.non-gradient-inner {
+  @include rainbowContent(false);
+}
+
+.default-button {
+  @include button;
+}
+
+.back-button,
+.home-button {
+  @include button(false, false, true);
+}
+
+
+.select-mode-button { //Not is use, but tag exist if needed. 
+  @include button(false, true, false, 13rem);
+}
+
+.play-again-button {
+  @include button(false, true);
+}
+
+.select-mode-button-large {
+  @include button(false, true, false, 18rem, 4.5rem);
+  font-size: var(--fontSizeMedium);
+}
+
+.forward-button {
+  @include button(true, false, false, 14rem);
+}
+
+.disabled {
+  grid-column: 7 / -1;
+  justify-self: end;
+  padding: 0.5em;
+  border-radius: var(--buttonBorderRadius);
+  border: 3px solid white;
+  background: $full_gradient;
+}
+
+.button-text {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  gap: 1rem;
+}

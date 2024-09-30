@@ -1,0 +1,63 @@
+@import './../../../../variables.scss';
+
+.container {
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: start;
+}
+
+.user-drawing-board {
+  border-radius: 1em;
+  padding: 0.4em; // this is what controls the width of the border
+  background-color: white;
+  width: 390px;
+  height: 280px;
+}
+
+.frame {
+  height: 100%;
+  width: 100%;
+  background: white;
+  border-radius: 1em;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.user-drawing {
+  height: 100%;
+  max-width: 100%;
+}
+
+.correct {
+  background-color: $green_color;
+}
+
+.incorrect {
+  background-color: $red_color;
+}
+
+.score-and-time-container {
+  margin: 0.8em 0 0;
+  display: flex;
+  justify-content: space-between;
+}
+
+.seconds-used {
+  font-size: var(--fontSizeSmall);
+}
+
+.round-score-text {
+  margin-left: auto; // this pushes points to right when the second counter isn't displayed
+  font-family: 'AeonikMedium';
+  font-size: var(--fontSizeMedium);
+}
+
+.green-text {
+  color: $green_color;
+}
+
+.red-text {
+  color: $red_color;
+}
