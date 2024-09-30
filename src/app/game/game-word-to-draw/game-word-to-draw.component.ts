@@ -132,6 +132,7 @@ export class GameWordToDrawComponent implements OnInit, OnDestroy {
       }
     }
     if (this.isMultiPlayer) {
+      this.gameStateService.updateRoundNumber();
       const player = this.multiplayerService.stateInfo.player_nr;
       this.playernr = player === 'player_1' ? '1' : '2';
       this.guessUsed = this.drawingService.guessUsed;
