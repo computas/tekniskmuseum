@@ -55,6 +55,10 @@ export class WrongGuessComponent implements OnInit, OnDestroy {
   }
 
   getSingleplayerExamples() {
+    if (this.guess === "") {
+      console.log("helo")
+      return
+    }
     this.aiGuessSubscription.add(
       this.exampleDrawingService
         .getExampleDrawingsFromLabel(2, this.guess, this.translationService.getCurrentLang())
