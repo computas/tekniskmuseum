@@ -25,7 +25,6 @@ export class DrawingService {
   config = this.gameConfigService.getConfig;
 
   playerid = '';
-  labels = [];
   label = '';
   gameHasStarted = false;
   classificationDone = false;
@@ -141,9 +140,6 @@ export class DrawingService {
         }),
       );
   }
-
-
-  
 
   getLabel(): Observable<GameLabel> {
     const currentLang = this.translationService.getCurrentLang();
