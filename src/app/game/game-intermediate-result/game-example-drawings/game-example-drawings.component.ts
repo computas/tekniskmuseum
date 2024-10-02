@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { SpeechBubbleComponent } from '../../speech-bubble/speech-bubble.component';
+import { SpeechBubbleComponent } from '../../shared-components/speech-bubble/speech-bubble.component';
 import { TranslatePipe } from '@/app/core/translation.pipe';
 import { DrawingService } from '../../services/drawing.service';
 import { OAvatarComponent } from '@/assets/avatars/o-avatar/o-avatar.component';

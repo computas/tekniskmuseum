@@ -2,7 +2,7 @@ import { Component, OnInit, OnDestroy } from '@angular/core';
 import { Router } from '@angular/router';
 import { MatDialogRef, MatDialogContent, MatDialogActions } from '@angular/material/dialog';
 import { ViewEncapsulation } from '@angular/core';
-import { routes } from '../../shared/models/routes';
+import { routes } from '../../../shared/models/routes';
 import { MatIcon } from '@angular/material/icon';
 import { MatButton } from '@angular/material/button';
 import { CdkScrollable } from '@angular/cdk/scrolling';
