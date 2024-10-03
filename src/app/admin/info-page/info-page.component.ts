@@ -2,7 +2,7 @@ import { Component } from '@angular/core';
 import { Router } from '@angular/router';
 import { LoginService } from '../login.service';
 import { MatSnackBar } from '@angular/material/snack-bar';
-import { InfoDialogComponent } from './../info-dialog/info-dialog.component';
+import { InfoDialogComponent } from '../info-dialog/info-dialog.component';
 import { PairingService } from '../../game/services/pairing.service';
 import { MatButton } from '@angular/material/button';
 import { LogData, StatusData } from '@/app/shared/models/backend-interfaces';
@@ -10,12 +10,12 @@ import { LoggingService } from '../../game/services/logging.service';
 
 @Component({
   selector: 'app-info',
-  templateUrl: './info.component.html',
-  styleUrls: ['./info.component.scss'],
+  templateUrl: './info-page.component.html',
+  styleUrls: ['./info-page.component.scss'],
   standalone: true,
   imports: [MatButton],
 })
-export class InfoComponent {
+export class InfoPageComponent {
   datasetString = 'Nullstill treningssett til originalen';
   datasetBool = false;
   retrainString = 'Tren maskinlæringsmodellen';
@@ -34,49 +34,7 @@ export class InfoComponent {
     private pairing: PairingService,
     private loggingService: LoggingService
   ) {}
-
-  revertDataset() {
-    let msg = '';
-    if (this.datasetBool) {
-      this.resetDatasetValues();
-      this.loginService.revertDataset().subscribe(
-        () => {
-          this.openSnackBar('Suksess! Treningssett tilbakestilles (dette kan ta noen minutter)');
-        },
-        () => {
-          msg = this.errorMsg;
-          this.openSnackBar(msg);
-        }
-      );
-      this.resetDatasetValues();
-    } else {
-      this.resetHighScoreValues();
-      this.resetRetrainValues();
-      this.setDatasetValues();
-    }
-  }
-
-  retrain() {
-    let msg = '';
-    if (this.retrainBool) {
-      this.resetDatasetValues();
-      this.loginService.retrain().subscribe(
-        () => {
-          this.openSnackBar('Suksess! Modellen blir trent (dette kan ta noen minutter)');
-        },
-        () => {
-          msg = this.errorMsg;
-          this.openSnackBar(msg);
-        }
-      );
-      this.resetRetrainValues();
-    } else {
-      this.resetDatasetValues();
-      this.resetHighScoreValues();
-      this.setRetrainValues();
-    }
-  }
-
+  
   clearHighScore() {
     let msg = '';
     if (this.highScoreBool) {
@@ -93,7 +51,6 @@ export class InfoComponent {
       this.resetHighScoreValues();
     } else {
       this.resetDatasetValues();
-      this.resetRetrainValues();
       this.setHighScoreValues();
     }
   }
@@ -103,35 +60,14 @@ export class InfoComponent {
     this.highScoreBool = false;
   }
 
-  resetRetrainValues() {
-    this.retrainString = 'Tren maskinlæringsmodellen';
-    this.retrainBool = false;
-  }
-
   resetDatasetValues() {
     this.datasetString = 'Nullstill treningssett til originalen';
     this.datasetBool = false;
   }
 
-  resetAll() {
-    this.resetHighScoreValues();
-    this.resetRetrainValues();
-    this.resetDatasetValues();
-  }
-
   setHighScoreValues() {
     this.highScoreString = this.secondMsg;
     this.highScoreBool = true;
-  }
-
-  setRetrainValues() {
-    this.retrainString = this.secondMsg;
-    this.retrainBool = true;
-  }
-
-  setDatasetValues() {
-    this.datasetString = this.secondMsg;
-    this.datasetBool = true;
   }
 
   signOut() {
@@ -148,7 +84,6 @@ export class InfoComponent {
   }
 
   getInformation() {
-    this.resetAll();
     this.loginService.getStatus().subscribe(
       (res: StatusData) => {
         const name = res.CV_iteration_name;
@@ -191,13 +126,5 @@ export class InfoComponent {
     this._snackBar.open(msg, 'Lukk', {
       duration: 6000,
     });
-  }
-
-  pair(id: string) {
-    this.pairing.setPairID(id);
-  }
-
-  getPairID() {
-    return this.pairing.getPairID();
   }
 }
