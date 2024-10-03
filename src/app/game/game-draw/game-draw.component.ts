@@ -22,7 +22,7 @@ import { TranslationService } from '@/app/core/translation.service';
 import { TranslatePipe } from '@/app/core/translation.pipe';
 import { GameStateService } from '../services/game-state-service';
 import { CustomColorsIO } from '@/app/shared/customColors';
-import { SpeechBubbleComponent } from '../speech-bubble/speech-bubble.component';
+import { SpeechBubbleComponent } from '../shared-components/speech-bubble/speech-bubble.component';
 import { OAvatarComponent } from '@/assets/avatars/o-avatar/o-avatar.component';
 import { IAvatarComponent } from '@/assets/avatars/i-avatar/i-avatar.component';
 import { ViewChild } from '@angular/core';

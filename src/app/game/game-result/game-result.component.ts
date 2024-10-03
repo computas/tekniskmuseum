@@ -18,7 +18,7 @@ import {
   // ...
 } from '@angular/animations';
 import { HighscoreData } from '@/app/shared/models/backend-interfaces';
-import { SpeechBubbleComponent } from '../speech-bubble/speech-bubble.component';
+import { SpeechBubbleComponent } from '../shared-components/speech-bubble/speech-bubble.component';
 import { CustomColorsIO } from '@/app/shared/customColors';
 import { MatIcon } from '@angular/material/icon';
 import { GameStateService } from '../services/game-state-service';
@@ -72,12 +72,14 @@ export class GameResultComponent implements OnInit, OnDestroy {
 
   IState = 'hidden';
   OState = 'hidden';
+  buttonState = 'hidden';
+  buttonsAreDisabled = true;
 
   CustomColorsIO = CustomColorsIO;
   PointerSide = PointerSide;
   ArrowAlignment = ArrowAlignment;
 
-  homeButtonStyleClass = ButtonStyleClass.home;
+  homeButtonStyleClass = ButtonStyleClass.end;
   playAgainButtonStyleClass = ButtonStyleClass.playAgain;
 
   constructor(
@@ -202,5 +204,9 @@ export class GameResultComponent implements OnInit, OnDestroy {
     setTimeout(() => {
       this.OState = 'visible';
     }, 1500);
+    setTimeout(() => {
+      this.buttonState = 'visible';
+      this.buttonsAreDisabled = false;
+    }, 3000);
   }
 }

@@ -59,7 +59,8 @@
 }
 
 .back-button,
-.home-button {
+.home-button,
+.end-button {
   @include button(false, false, true);
 }
 
