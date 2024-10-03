@@ -13,7 +13,7 @@ import { GameStateService } from '../services/game-state-service';
 export class WebSocketService {
   socket: Socket | undefined;
   private retryAttempts = 0;
-  private maxRetries = 5;
+  private maxRetries = 2;
   private retryDelay = 3000;
 
   playerDisconnectedData: PlayerDisconnectedData | undefined;
@@ -78,19 +78,14 @@ export class WebSocketService {
   }
 
   disconnect() {
-    if (this.socket && ! this.socket.disconnected) {
-      console.warn('socket disconnecting and removing listener');
+    if (this.socket) {
       this.socket.removeAllListeners();
       this.socket.disconnect();
       this.socket = undefined;
       this.isConnected = false;
       this.isRetrying = false;
-      console.log("Websocket closed properly")
       this.retryAttempts = 0;
-    } else if (this.socket) {
-      this.socket.removeAllListeners();
-      this.socket.disconnect();
-      console.log("Websocket closed properly without ever being connected")
+      console.log("Websocket closed properly");
     }
   }
 
