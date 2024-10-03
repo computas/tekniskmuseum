@@ -44,12 +44,16 @@ export class GameStateService {
   }
 
   startGame() {
-    this._currentRound.next(1);
+    if (this.isSingleplayer()) {
+      this._currentRound.next(1);
+    }
     this._currentPage.next(GAMESTATE.showWord);
   }
 
   replayGame() {
-    this._currentRound.next(1);
+    if (this.isSingleplayer()) {
+      this._currentRound.next(1);
+    }
     this._currentPage.next(GAMESTATE.difficultyPicker);
   }
 
