@@ -1,0 +1,43 @@
+.year-selection-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    padding: 20px;
+  }
+  
+  h4 {
+    font-size: 1.4rem;
+    margin-bottom: 15px;
+    color: #333;
+  }
+  
+  .year-selection-field {
+    width: 100%;
+    max-width: 300px;
+  }
+  
+  mat-form-field {
+    width: 100%;
+    margin: 0 auto;
+  }
+  
+  mat-select {
+    width: 100%;
+    background-color: #fff;
+  }
+  
+  mat-option {
+    font-size: 1rem;
+  }
+  
+  .mat-select-panel {
+    max-height: 200px; /* Set a limit for dropdown height */
+  }
+  
+  h2 {
+    font-size: 1.5rem;
+    margin-bottom: 20px;
+    color: #333;
+  }
+  

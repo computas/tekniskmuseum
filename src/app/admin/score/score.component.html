@@ -1,0 +1,46 @@
+<div mat-dialog-content class="statistics">
+  <div class="statistics-content">
+      <!-- Toggle component to switch between month and year -->
+      <app-toggle (toggleChanged)="onToggleChanged($event)"></app-toggle>
+
+      <div class="form-section">
+          <!-- Month/Year Selection Section -->
+          @if(selected === "month") {
+          <h2>Velg måned og år</h2>
+          <mat-form-field>
+              <mat-label>Måned og år</mat-label>
+              <input matInput [matDatepicker]="dp" [formControl]="date">
+              <mat-hint>MM/YYYY</mat-hint>
+              <mat-datepicker-toggle matIconSuffix [for]="dp"></mat-datepicker-toggle>
+              <mat-datepicker #dp startView="multi-year" (monthSelected)="setMonthAndYear2($event, dp)"
+                  panelClass="month-picker">
+              </mat-datepicker>
+          </mat-form-field>
+          }
+          <!-- Year Selection Section -->
+          @else {
+          <select-component (valueSelected)="onYearSelected($event)"></select-component>
+          }
+      </div>
+
+      <!-- Confirm Button -->
+      <button mat-button class="confirm-btn" (click)="confirmSelection()">Hent statistikk</button>
+
+      <!-- Display Fetched Data -->
+      @if (dataFetched()) {
+      <div class="statistics-result">
+          <br>
+          @if (selected == "month") {
+          <h2>Statistikk for {{ display_month }} {{ year }}</h2>
+          }
+          @else {
+          <h2>Statistikk for {{ selectedYear }}</h2>
+          }
+          <p>Totalt antall spill: {{ scoreCount }}</p>
+      </div>
+      }
+
+      <!-- Close Button -->
+      <button mat-button mat-dialog-close class="close-btn" (click)="closeStatistics()">Lukk</button>
+  </div>
+</div>

@@ -32,7 +32,7 @@ export class InfoComponent {
     private _snackBar: MatSnackBar,
     private _dialog: InfoDialogComponent,
     private pairing: PairingService,
-    private loggingService: LoggingService
+    private loggingService: LoggingService,
   ) {}
 
   revertDataset() {
@@ -160,6 +160,10 @@ export class InfoComponent {
         this.openSnackBar(this.errorMsg);
       }
     );
+  }
+
+  getStatistics() {
+    this._dialog.openStatistics();
   }
 
   getLogger() {
