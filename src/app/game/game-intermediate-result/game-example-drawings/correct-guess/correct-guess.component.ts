@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { SpeechBubbleComponent } from '@/app/game/speech-bubble/speech-bubble.component';
+import { SpeechBubbleComponent } from '@/app/game/shared-components/speech-bubble/speech-bubble.component';
 import { OAvatarComponent } from '@/assets/avatars/o-avatar/o-avatar.component';
 import { ArrowAlignment, PointerSide } from '@/app/shared/models/interfaces';
 import { CustomColorsIO } from '@/app/shared/customColors';

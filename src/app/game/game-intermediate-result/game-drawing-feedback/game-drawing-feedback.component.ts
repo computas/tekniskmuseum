@@ -1,5 +1,5 @@
 import { TranslatePipe } from '@/app/core/translation.pipe';
-import { SpeechBubbleComponent } from '../../speech-bubble/speech-bubble.component';
+import { SpeechBubbleComponent } from '../../shared-components/speech-bubble/speech-bubble.component';
 import { Component, OnInit } from '@angular/core';
 import { ArrowAlignment, PointerSide } from '@/app/shared/models/interfaces';
 import { CustomColorsIO } from '../../../shared/customColors';

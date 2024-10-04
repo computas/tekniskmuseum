@@ -107,9 +107,7 @@
         [buttonStyle]="buttonStyleClass"
         [buttonText]="'PLAYER_MODE_SINGLE' | translate"
         [disabled]="!buttonIsVisible"
-        routerLink="/playgame/singleplayer"
-        routerLinkActive="active"
-        (click)="setSingleplayer()"
+        (buttonClicked)="setSingleplayer()"
       >
         <mat-icon slot="custom-mat-icon" class="button-icon-gradient" aria-label="player one icon">person</mat-icon>
       </app-custom-button>
@@ -117,9 +115,7 @@
         [buttonStyle]="buttonStyleClass"
         [buttonText]="'PLAYER_MODE_MULTI' | translate"
         [disabled]="!buttonIsVisible"
-        routerLink="/playgame/multiplayer"
-        routerLinkActive="active"
-        (click)="setMultiplayer()"
+        (buttonClicked)="setMultiplayer()"
       >
         <mat-icon slot="custom-mat-icon" class="button-icon-gradient" aria-label="player two icon">group</mat-icon>
       </app-custom-button>

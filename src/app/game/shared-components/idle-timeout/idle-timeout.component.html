@@ -4,10 +4,10 @@
   </p>
 </div>
 <div mat-dialog-actions id="actions">
-  <button class="idleButton" id="homeButton" (click)="goHome()">
+  <button class="idleButton" id="homeButton" (click)="goHome()" [@buttonClickEffect]="buttonStateHome">
     <span id="homeButtonText"><mat-icon id="idleButtonIcon">home</mat-icon>{{ 'END_NOW_BUTTON' | translate }}</span>
   </button>
-  <button class="idleButton" id="stayButton" (click)="closeDialog()">
+  <button class="idleButton" id="stayButton" (click)="closeDialog()" [@buttonClickEffect]="buttonStateCancel">
     {{ 'RESUME_BUTTON' | translate }}
   </button>
 </div>
