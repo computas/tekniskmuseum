@@ -1,5 +1,5 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
-import { SpeechBubbleComponent } from '@/app/game/speech-bubble/speech-bubble.component';
+import { SpeechBubbleComponent } from '@/app/game/shared-components/speech-bubble/speech-bubble.component';
 import { OAvatarComponent } from '@/assets/avatars/o-avatar/o-avatar.component';
 import { ArrowAlignment, Certainty, PointerSide } from '@/app/shared/models/interfaces';
 import { CustomColorsIO } from '@/app/shared/customColors';
@@ -40,7 +40,6 @@ export class WrongGuessComponent implements OnInit, OnDestroy {
   ngOnInit(): void {
     this.label = this.drawingService.lastResult.word;
     this.updateAiGuess(this.drawingService.sortedCertainty);
-
     if (this.gameStateService.isSingleplayer()) {
       this.exampleDrawings = this.exampleDrawingService.getExampleDrawings(2);
       this.getSingleplayerExamples();
@@ -55,6 +54,9 @@ export class WrongGuessComponent implements OnInit, OnDestroy {
   }
 
   getSingleplayerExamples() {
+    if (this.guess === "") {
+      return
+    }
     this.aiGuessSubscription.add(
       this.exampleDrawingService
         .getExampleDrawingsFromLabel(2, this.guess, this.translationService.getCurrentLang())

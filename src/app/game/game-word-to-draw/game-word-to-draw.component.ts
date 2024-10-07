@@ -17,7 +17,7 @@ import { GameStateService } from '../services/game-state-service';
 import { ExampleDrawingService } from '../services/example-drawing.service';
 import { Router } from '@angular/router';
 import { IAvatarComponent } from '@/assets/avatars/i-avatar/i-avatar.component';
-import { SpeechBubbleComponent } from '../speech-bubble/speech-bubble.component';
+import { SpeechBubbleComponent } from '../shared-components/speech-bubble/speech-bubble.component';
 import { CustomColorsIO } from '@/app/shared/customColors';
 import { PointerSide, ArrowAlignment } from '@/app/shared/models/interfaces';
 import { CustomButtonComponent } from '../shared-components/custom-button/custom-button.component';
@@ -92,8 +92,8 @@ export class GameWordToDrawComponent implements OnInit, OnDestroy {
       if (this.drawingService.gameHasStarted) {
         this.subscriptions.add(
           this.drawingService.getLabel().subscribe({
-            next: (res) => {
-              this.label = res.label;
+            next: () => {
+              this.label = this.drawingService.label;
               this.loading = false;
             },
             error: (error) => {

@@ -109,8 +109,7 @@ footer {
 .footer-content {
   display: flex;
   align-items: flex-end;
-  justify-content: flex-end;
-  gap: 17rem;
+  justify-content: space-between;
   width: 100%;
   height: 100%;
 }
@@ -150,7 +149,7 @@ footer {
 
 #difficulty {
   margin-bottom: 1.2rem;
-  transform: translate(-50%);
+  margin-left: 35rem;
   text-align: center;
   font-family: AeonikRegular;
   font-size: var(--fontSizeSmall);

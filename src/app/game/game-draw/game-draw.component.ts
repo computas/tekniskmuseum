@@ -22,7 +22,7 @@ import { TranslationService } from '@/app/core/translation.service';
 import { TranslatePipe } from '@/app/core/translation.pipe';
 import { GameStateService } from '../services/game-state-service';
 import { CustomColorsIO } from '@/app/shared/customColors';
-import { SpeechBubbleComponent } from '../speech-bubble/speech-bubble.component';
+import { SpeechBubbleComponent } from '../shared-components/speech-bubble/speech-bubble.component';
 import { OAvatarComponent } from '@/assets/avatars/o-avatar/o-avatar.component';
 import { IAvatarComponent } from '@/assets/avatars/i-avatar/i-avatar.component';
 import { ViewChild } from '@angular/core';
@@ -250,6 +250,11 @@ export class GameDrawComponent implements OnInit, OnDestroy {
           if (this.gameStateService.isSingleplayer() && !this.drawingService.hasAddedSingleplayerResult) {
             let res;
             let hasWon = false;
+
+            if (this.isBlankImage) {
+              return;
+            } 
+
             if (!this.drawingService.pred) {
               res = this.drawingService.createDefaultResult();
             } else {
@@ -338,12 +343,13 @@ export class GameDrawComponent implements OnInit, OnDestroy {
     if (sortedCertaintyArr && sortedCertaintyArr.length > 1) {
       const guess = sortedCertaintyArr[0].label;
       this.AI_GUESS = guess === this.guessWord ? sortedCertaintyArr[1].label : guess;
+    } else if (sortedCertaintyArr[0].label === "blank") {
+      this.AI_GUESS = "";
     }
   }
 
   handleSinglePlayerClassification(dataUrl: string, croppedCoordinates: number[]) {
     const formData: FormData = this.createFormData(dataUrl);
-
     this.drawingService.classify(formData).subscribe((res) => {
       const sortedCertaintyArr = this.sortOnCertainty(res);
       this.updateAiGuess(sortedCertaintyArr);
@@ -375,7 +381,6 @@ export class GameDrawComponent implements OnInit, OnDestroy {
   }
 
   classify(isMultiplayer = false) {
-    //TODO: rename?
     this.drawnPixelsAtLastGuess = this.drawnPixels;
     const b64Image = this.canvas.nativeElement.toDataURL('image/png');
     const croppedCoordinates: number[] = this.imageService.crop(
