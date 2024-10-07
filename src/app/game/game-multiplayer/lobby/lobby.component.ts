@@ -8,7 +8,7 @@ import { MatProgressSpinner } from '@angular/material/progress-spinner';
 import { TranslationService } from '@/app/core/translation.service';
 import { TranslatePipe } from '@/app/core/translation.pipe';
 import { GameStateService } from '../../services/game-state-service';
-import { SpeechBubbleComponent } from '../../speech-bubble/speech-bubble.component';
+import { SpeechBubbleComponent } from '../../shared-components/speech-bubble/speech-bubble.component';
 import { CustomColorsIO } from '@/app/shared/customColors';
 import { PointerSide, ArrowAlignment } from '@/app/shared/models/interfaces';
 import { IAvatarComponent } from '@/assets/avatars/i-avatar/i-avatar.component';

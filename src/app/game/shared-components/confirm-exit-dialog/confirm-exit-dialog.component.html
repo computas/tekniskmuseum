@@ -4,12 +4,12 @@
   </p>
 </mat-dialog-content>
 <mat-dialog-actions id="exitGameActions">
-  <button class="confirmExitIdleButton" id="confirmExitHomeButton" (click)="goToWelcomePage()">
+  <button class="confirmExitIdleButton" id="confirmExitHomeButton" (click)="goToWelcomePage()" [@buttonClickEffect]="buttonStateHome">
     <span id="confirmExitHomeButtonText"
       ><mat-icon id="confirmExitIdleButtonIcon">home</mat-icon>{{ 'END_NOW_BUTTON' | translate }}</span
     >
   </button>
-  <button class="confirmExitIdleButton" (click)="closeDialog()">
+  <button class="confirmExitIdleButton" (click)="closeDialog()" [@buttonClickEffect]="buttonStateCancel">
     {{ 'RESUME_BUTTON' | translate }}
   </button>
 </mat-dialog-actions>

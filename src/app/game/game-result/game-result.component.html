@@ -106,20 +106,21 @@
       <app-o-avatar [height]="130" [width]="130" [color]="CustomColorsIO.white" />
     </div>
 
-    <div id="summary-buttons-container">
+    <div id="summary-buttons-container" [@fadeIn] = "buttonState">
       <app-custom-button
+        [disabled] = "buttonsAreDisabled"
         class="end-game-button"
         [buttonStyle]="homeButtonStyleClass"
         [buttonText]="'HOME' | translate"
-        iconSrc="../../../assets/house.svg"
-        (click)="endGame()"
+        (buttonClicked)="endGame()"
         alt="Go home button"
         aria-label="Home button"
       />
       <app-custom-button
+      [disabled] = "buttonsAreDisabled"
       [buttonStyle]="playAgainButtonStyleClass"
       [buttonText]="'PLAY_AGAIN_BUTTON' | translate"
-      (click)="playAgain()"
+      (buttonClicked)="playAgain()"
       alt="Play again button"
       aria-label="Replay button"
     />
