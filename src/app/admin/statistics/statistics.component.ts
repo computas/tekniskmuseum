@@ -1,17 +1,13 @@
 import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
 import { Component, Inject, signal, ViewEncapsulation } from '@angular/core';
-import { FormControl, FormsModule, ReactiveFormsModule } from '@angular/forms';
-import { provideMomentDateAdapter } from '@angular/material-moment-adapter';
-import { MatDatepicker, MatDatepickerModule } from '@angular/material/datepicker';
 import { MatButtonToggleModule } from '@angular/material/button-toggle';
 import { ToggleComponent } from '../toggle/toggle.component';
+import { SelectMonthComponent } from '../select-month/select-month.component';
 import * as _moment from 'moment';
 // tslint:disable-next-line:no-duplicate-imports
 import { default as _rollupMoment, Moment } from 'moment';
-import { MatInputModule } from '@angular/material/input';
-import { MatFormFieldModule } from '@angular/material/form-field';
 import { LoginService } from '../login.service';
-import { SelectComponent } from '../select/select.component';
+import { SelectYearComponent } from '../select-year/select-year.component';
 
 const moment = _rollupMoment || _moment;
 export const MY_FORMATS = {
@@ -28,28 +24,20 @@ export const MY_FORMATS = {
 
 @Component({
     selector: 'app-score',
-    templateUrl: './score.component.html',
-    styleUrls: ['./score.component.scss'],
-    providers: [
-        provideMomentDateAdapter(MY_FORMATS),
-    ],
+    templateUrl: './statistics.component.html',
+    styleUrls: ['./statistics.component.scss'],
     encapsulation: ViewEncapsulation.None,
     standalone: true,
     imports: [
-        MatFormFieldModule,
-        MatInputModule,
-        MatDatepickerModule,
-        FormsModule,
-        ReactiveFormsModule,
         MatButtonToggleModule,
         ToggleComponent,
-        SelectComponent
+        SelectYearComponent, 
+        SelectMonthComponent
     ],
 })
 
-export class ScoreComponent {
+export class StatisticsComponent {
     scoreCount: number | null = null; 
-    date = new FormControl();
     dataFetched = signal<boolean>(false);
     display_month: string = "";
     month: string = "";
@@ -58,27 +46,12 @@ export class ScoreComponent {
     selectedYear: string = "";
 
     constructor(
-        public dialogRef: MatDialogRef<ScoreComponent>,
+        public dialogRef: MatDialogRef<StatisticsComponent>,
         private loginService: LoginService,
         @Inject(MAT_DIALOG_DATA) public data: string) { }
 
-
-    setMonthAndYear2(normalizedMonthAndYear: Moment, datepicker: MatDatepicker<Moment>) {
-        const ctrlValue = this.date.value ?? moment();
-        ctrlValue.month(normalizedMonthAndYear.month());
-        ctrlValue.year(normalizedMonthAndYear.year());
-        this.date.setValue(ctrlValue);
-
-        datepicker.close();
-    }
-
     confirmSelection() {
         if (this.selected === "month") {
-            const ctrlValue = this.date.value;  
-            this.month = ctrlValue.format("MM");  
-            this.display_month = ctrlValue.format("MMMM");
-            this.year = ctrlValue.format('YYYY');  
-
             this.loginService.getStatisticsPerMonth(this.month, this.year).subscribe({
                 next: (res) => {
                     this.dataFetched.set(true);
@@ -110,12 +83,15 @@ export class ScoreComponent {
     onToggleChanged(value: string) {
         this.selected = value;
         this.dataFetched.set(false);
-
       }
 
     onYearSelected(year: string) {
         this.selectedYear = year;
     }
-    
 
+    onMonthSelected(date: string[]) {
+        this.month = date[0];
+        this.display_month = date[1]
+        this.year = date[2];
+    }
 }

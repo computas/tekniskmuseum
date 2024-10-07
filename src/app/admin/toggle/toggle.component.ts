@@ -1,4 +1,4 @@
-import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
+import { Component, EventEmitter, OnInit, Output } from '@angular/core';
 import {MatButtonToggleModule} from '@angular/material/button-toggle';
 import { FormControl, FormsModule, ReactiveFormsModule } from '@angular/forms';
 
@@ -20,7 +20,6 @@ export class ToggleComponent implements OnInit {
   ngOnInit(): void {
     this.toggleControl.valueChanges.subscribe((value) => {
       const safeValue = value ?? 'month';
-      console.log('Toggle changed:', value); 
       this.toggleChanged.emit(safeValue); 
 
     });

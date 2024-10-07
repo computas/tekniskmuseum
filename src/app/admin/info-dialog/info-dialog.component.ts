@@ -3,7 +3,7 @@ import { MatDialog } from '@angular/material/dialog';
 import { DialogTemplateComponent } from './../dialog-template/dialog-template.component';
 import { ErrorLogDialogComponent } from '../error-dialog/error-dialog.component';
 import { LogData } from '@/app/shared/models/backend-interfaces';
-import { ScoreComponent } from '../score/score.component';
+import { StatisticsComponent } from '../statistics/statistics.component';
 
 @Component({
   selector: 'app-info-dialog',
@@ -31,7 +31,7 @@ export class InfoDialogComponent {
   }
 
   openStatistics() {
-    this.dialog.open(ScoreComponent, {
+    this.dialog.open(StatisticsComponent, {
       data: String,
     });
   }

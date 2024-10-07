@@ -15,12 +15,12 @@ interface Year {
  * @title Basic select
  */
 @Component({
-    selector: 'select-component',
-    templateUrl: 'select.component.html',
+    selector: 'select-year-component',
+    templateUrl: 'select-year.component.html',
     standalone: true,
     imports: [MatFormFieldModule, MatSelectModule, MatInputModule, FormsModule],
 })
-export class SelectComponent implements OnInit {
+export class SelectYearComponent implements OnInit {
     constructor(private http: HttpClient) {}
     years: Year[] = [];
     selectedValue: string = "";
@@ -33,7 +33,6 @@ export class SelectComponent implements OnInit {
                 this.years = yearList.map(year => ({
                     value: year.toString()
                 }));
-                console.log(this.years)
             },
             error: (err) => {
                 console.error('Failed to get available years', err);
