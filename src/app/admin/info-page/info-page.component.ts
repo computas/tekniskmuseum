@@ -7,13 +7,14 @@ import { PairingService } from '../../game/services/pairing.service';
 import { MatButton } from '@angular/material/button';
 import { LogData, StatusData } from '@/app/shared/models/backend-interfaces';
 import { LoggingService } from '../../game/services/logging.service';
+import { GraphComponent } from '../graph/graph.component';
 
 @Component({
   selector: 'app-info',
   templateUrl: './info-page.component.html',
   styleUrls: ['./info-page.component.scss'],
   standalone: true,
-  imports: [MatButton],
+  imports: [MatButton, GraphComponent],
 })
 export class InfoPageComponent {
   datasetString = 'Nullstill treningssett til originalen';
