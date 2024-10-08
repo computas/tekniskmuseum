@@ -8,6 +8,7 @@ import { MatButton } from '@angular/material/button';
 import { MatDialogActions, MatDialogContent, MatDialogRef } from '@angular/material/dialog';
 import { MatIcon } from '@angular/material/icon';
 import { DrawingService } from '@/app/game/services/drawing.service';
+import { animate, state, style, transition, trigger } from '@angular/animations';
 @Component({
   selector: 'app-confirm-exit-dialog',
   templateUrl: './confirm-exit-dialog.component.html',
@@ -15,6 +16,14 @@ import { DrawingService } from '@/app/game/services/drawing.service';
   encapsulation: ViewEncapsulation.None,
   standalone: true,
   imports: [MatDialogActions, MatDialogContent, MatButton, MatIcon, TranslatePipe],
+  animations: [
+    trigger('buttonClickEffect', [
+      state('normal', style({transform: 'scale(1)',})),
+      state('clicked', style({transform: 'scale(1.1)',})),
+      transition('normal => clicked', [animate('0.1s ease-out')]),
+      transition('clicked => normal', [animate('0.1s ease-in')]),
+    ])
+  ]
 })
 export class ConfirmExitDialogComponent implements OnInit, OnDestroy{
   readonly dialogRef = inject(MatDialogRef<ConfirmExitDialogComponent>);
@@ -22,6 +31,8 @@ export class ConfirmExitDialogComponent implements OnInit, OnDestroy{
   timer = 0;
   startTime = 10;
   countdownInterval = 0;
+  buttonStateHome = 'normal';
+  buttonStateCancel = "normal";
 
   constructor(
     private router: Router,
@@ -61,21 +72,30 @@ export class ConfirmExitDialogComponent implements OnInit, OnDestroy{
   }
 
   closeDialog() {
-    this.dialogRef.close();
+    this.buttonStateCancel = "clicked";
+
+    setTimeout(() => {
+      this.buttonStateCancel = "normal";
+      setTimeout(() => {
+        this.dialogRef.close();
+      }, 100)
+    }, 100);
   }
 
   goToWelcomePage() {
-    this.clearCountdown();
-    this.dialogRef.close();
-    this.gameStateService.clearState();
-    this.drawingService.clearState();
-
-    if (this.gameStateService.isMultiplayer()) {
-      this.multiplayerService.clearState();
-    }
-
+    this.buttonStateHome = "clicked";
+    setTimeout(() => {
+      this.buttonStateHome = "normal";
+      setTimeout(() => {
+        this.clearCountdown();
+        this.dialogRef.close();
+        this.gameStateService.clearState();
+        this.drawingService.clearState();
+        if (this.gameStateService.isMultiplayer()) {
+          this.multiplayerService.clearState();
+        }
     this.router.navigate([routes.WELCOME]);
+      }, 100)
+    }, 100);
   }
-
-
 }

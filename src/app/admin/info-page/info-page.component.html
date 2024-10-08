@@ -1,0 +1,20 @@
+<h1 align="center" class="info-title">Administrative handlinger</h1>
+<br/>
+<div class="btn-group" align="center">
+  <button class="btn btn-lg btn-outline-primary" (click)="getInformation()">Vis informasjon</button>
+  <p></p>
+  <button (click)="getStatistics()">Vis statistikk</button>
+  <p></p>
+  <button (click)="clearHighScore()">{{ this.highScoreString }}</button>
+  <p></p>
+  <button (click)="getLogger()">Hent feilmeldingsloggen (backend)</button>
+  <p></p>
+  <button (click)="getLoggerFrontend()">Hent feilmeldingsloggen (frontend)</button>
+
+  <graph-component></graph-component>
+</div>
+<br />
+
+<div align="center">
+  <button mat-button class="sign-out-btn" (click)="signOut()">Logg ut</button>
+</div>

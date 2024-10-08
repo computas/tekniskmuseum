@@ -3,7 +3,9 @@
 @if (buttonStyle === 'select-mode-button' || buttonStyle === 'select-mode-button-large' || buttonStyle === 'forward-button' || buttonStyle === 'play-again-button') {
   <button 
   [disabled]="disabled" 
-  [class]="buttonStyle">
+  [class]="buttonStyle"
+  [@buttonClickEffect]="buttonState"
+  (click)="onButtonClick()"> 
 
   @if (buttonStyle === 'forward-button') {
     <div [class]="'full-gradient-inner'">
@@ -27,17 +29,17 @@
 @else {
 <!-- For ButtonStyles that go back or home, and default -->
   <button 
-  (click)="clickHandler()"  
   [disabled]="disabled"
-  [class]="buttonStyle">
+  [class]="buttonStyle"
+  [@buttonClickEffect]="buttonState"
+  (click)="onButtonClick()">
     <div class="button-text">
-      @switch (buttonStyle) {
-        @case ('back-button') {
-          <img class="back-button-icon" src="../../../../assets/icons/arrow4-svgrepo-com.svg" [alt]="alt" />
-        }
-        @case ('home-button') {
-          <img class="button-icon" src="../../../../assets/house.svg" [alt]="alt" />
-        }
+      @if (buttonStyle === 'home-button' || buttonStyle === 'end-button') {
+        <img class="button-icon" src="../../../../assets/house.svg" [alt]="alt" />
+      }
+      <!-- Display back icon for back button -->
+      @else if (buttonStyle === 'back-button') {
+        <img class="back-button-icon" src="../../../../assets/icons/arrow4-svgrepo-com.svg" [alt]="alt" />
       }
       {{buttonText}}
     </div>

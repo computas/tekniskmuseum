@@ -38,7 +38,7 @@
                 [disabled]="buttonsAreDisabled"
                 [buttonStyle]="buttonStyleClass"
                 [buttonText]="'EASY_BUTTON' | translate"
-                (click)="startDrawing('easy')"
+                (buttonClicked)="startDrawing('easy')"
                 alt=""
                 aria-label=""
               >
@@ -54,7 +54,7 @@
                 [disabled]="buttonsAreDisabled"
                 [buttonStyle]="buttonStyleClass"
                 [buttonText]="'MEDIUM_BUTTON' | translate"
-                (click)="startDrawing('medium')"
+                (buttonClicked)="startDrawing('medium')"
                 alt=""
                 aria-label=""
               >
@@ -70,7 +70,7 @@
                 [disabled]="buttonsAreDisabled"
                 [buttonStyle]="buttonStyleClass"
                 [buttonText]="'HARD_BUTTON' | translate"
-                (click)="startDrawing('hard')"
+                (buttonClicked)="startDrawing('hard')"
                 alt=""
                 aria-label=""
               >

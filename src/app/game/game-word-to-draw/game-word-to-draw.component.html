@@ -64,7 +64,7 @@
           [buttonStyle]="forwardButtonStyleClass"
           [buttonText]="'DRAW_BUTTON' | translate"
           (keydown)="toDrawingBoard()"
-          (click)="toDrawingBoard()"
+          (buttonClicked)="toDrawingBoard()"
           id="draw-btn"
         >
           <mat-icon slot="custom-mat-icon" class="button-icon-gradient" aria-label="play_arrow"

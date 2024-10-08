@@ -8,7 +8,7 @@ import { TranslationService } from '@/app/core/translation.service';
 import { TranslatePipe } from '@/app/core/translation.pipe';
 import { GameLevelConfig, GAMESTATE } from '@/app/shared/models/interfaces';
 import { GameStateService } from '../services/game-state-service';
-import { SpeechBubbleComponent } from '../../game/speech-bubble/speech-bubble.component';
+import { SpeechBubbleComponent } from '../shared-components/speech-bubble/speech-bubble.component';
 import { CustomColorsIO } from '../../shared/customColors';
 import { ArrowAlignment, PointerSide } from '@/app/shared/models/interfaces';
 import { trigger, state, style, animate, transition } from '@angular/animations';
@@ -99,11 +99,16 @@ export class GamePickDifficultyComponent implements OnInit {
       {
         delay: 350,
         action: () => {
-          this.stateButtons = 'visible';
-          this.buttonsAreDisabled = false;
           this.stateFirstBubbleI = 'visible';
         },
       },
+      {
+        delay: 450,
+        action: () => {
+          this.stateButtons = 'visible';
+          this.buttonsAreDisabled = false;
+        }
+      } 
     ];
     let totalDelay = 0;
     steps.forEach((step) => {
