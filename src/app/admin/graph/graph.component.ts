@@ -45,14 +45,13 @@ export class GraphComponent implements OnChanges, OnDestroy, AfterViewInit {
       type: "line",
       name: "Antall spill",
       showInLegend: true,
-      dataPoints: [] // Initialize with empty dataPoints
+      dataPoints: []
     }]
   };
 
   constructor(private http: HttpClient, private el: ElementRef, private renderer: Renderer2) {}
 
   ngOnChanges() {
-    // Triggered when the input property `year` changes
     if (this.year) {
       this.getDataList().subscribe({
         next: (res) => {
@@ -69,19 +68,15 @@ export class GraphComponent implements OnChanges, OnDestroy, AfterViewInit {
 
   updateChartData() {
 	const dataPoints = Object.entries(this.data).map(([month, scoreCount]) => ({
-		x: new Date(+this.year, Number(month) - 1, 1), // Month is zero-based in JavaScript dates
+		x: new Date(+this.year, Number(month) - 1, 1), 
 		y: scoreCount
 	  }));
 
-	// Update chart options with new dataPoints
 	this.chartOptions.data[0].dataPoints = dataPoints;
-
-	console.log('Updated Chart Options:', this.chartOptions.data[0].dataPoints);
 	
   }
 
   getDataList(): Observable<any> {
-    // Fetch data based on the selected year
     return this.http.get<any>(
       `${endpoints.TEKNISKBACKEND}/${endpoints.ADMIN}/${endpoints.GETSCORESPERMONTH}?year=${this.year}`
     );
