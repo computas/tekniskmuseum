@@ -4,6 +4,7 @@
     margin: 20px 0; /* Add some vertical margin */
     width: 100%; /* Full width */
     display: flex;
+    height: 500px;
 }
 
 .canvasjs-chart {
@@ -18,4 +19,4 @@
     }
 }
 
-.canvasjs-chart-container>canvas:first-of-type { position: relative !important; }
+.canvasjs-chart>canvas:first-of-type { position: relative !important; }

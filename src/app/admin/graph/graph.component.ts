@@ -1,4 +1,4 @@
-import { Component, Input, OnChanges, OnDestroy } from '@angular/core';
+import { AfterViewInit, Component, ElementRef, Input, OnChanges, OnDestroy, Renderer2 } from '@angular/core';
 import { CanvasJSAngularChartsModule } from '@canvasjs/angular-charts';
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
@@ -13,7 +13,7 @@ import { CommonModule } from '@angular/common';
   templateUrl: './graph.component.html',
   styleUrls: ['./graph.component.scss'],
 })
-export class GraphComponent implements OnChanges, OnDestroy {
+export class GraphComponent implements OnChanges, OnDestroy, AfterViewInit {
   @Input() year: string = ''; 
   data: any;
   render: boolean = false;
@@ -49,7 +49,7 @@ export class GraphComponent implements OnChanges, OnDestroy {
     }]
   };
 
-  constructor(private http: HttpClient) {}
+  constructor(private http: HttpClient, private el: ElementRef, private renderer: Renderer2) {}
 
   ngOnChanges() {
     // Triggered when the input property `year` changes
@@ -89,6 +89,14 @@ export class GraphComponent implements OnChanges, OnDestroy {
 
   ngOnDestroy(): void {
 	this.render = false;
+  }
+
+  ngAfterViewInit(): void {
+    const canvasChart = this.el.nativeElement.querySelector('canvasjs-chart');
+    if (canvasChart) {
+      this.renderer.setStyle(canvasChart, 'width', '100%');
+      this.renderer.setStyle(canvasChart, 'height', '400px');
+    }
   }
 
 

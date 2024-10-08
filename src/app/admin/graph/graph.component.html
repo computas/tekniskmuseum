@@ -1,5 +1,5 @@
 <div class="chart-container">
     @if (render) {
-        <canvasjs-chart [options]="chartOptions" class="canvasjs-chart"></canvasjs-chart>    
+        <canvasjs-chart [options]="chartOptions" [ngStyle]="{'width': '100%', 'height': '400px'}"></canvasjs-chart>
     }
 </div>    
