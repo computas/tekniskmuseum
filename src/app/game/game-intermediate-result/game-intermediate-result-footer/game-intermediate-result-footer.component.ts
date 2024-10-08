@@ -6,18 +6,27 @@ import { MultiplayerService } from '../../services/multiplayer.service';
 import { GameStateService } from '../../services/game-state-service';
 import { CustomButtonComponent } from '../../shared-components/custom-button/custom-button.component';
 import { ButtonStyleClass } from '@/app/shared/buttonStyles';
+import { animate, state, style, transition, trigger } from '@angular/animations';
 @Component({
   selector: 'app-game-intermediate-result-footer',
   standalone: true,
   imports: [TranslatePipe, MatIcon, CustomButtonComponent],
   templateUrl: './game-intermediate-result-footer.component.html',
   styleUrl: './game-intermediate-result-footer.component.scss',
+  animations: [
+    trigger('makeVisible', [
+      state('hidden', style({ opacity: 0 })),
+      state('visible', style({ opacity: 1 })),
+      transition('hidden => visible', animate('1s')),
+    ]),
+  ]
 })
 export class GameIntermediateResultFooterComponent implements OnInit {
   buttonTextKey = '';
   waitingForPlayerState = 'WAITING';
   isWaitingForPlayer = false;
-
+  progressionButton = 'hidden';
+  buttonsAreDisabled = true;
   buttonStyleClass = ButtonStyleClass.forward;
 
   constructor(private gameStateService: GameStateService, private multiplayerService: MultiplayerService) {}
@@ -25,8 +34,12 @@ export class GameIntermediateResultFooterComponent implements OnInit {
   ngOnInit(): void {
     this.buttonTextKey = this.getButtonTextKey();
 
-    if (this.gameStateService.isSingleplayer()) return;
+    this.startAnimation();
 
+
+    if (this.gameStateService.isSingleplayer()) {
+      return;
+    }
     this.isWaitingForPlayer = true; // default in multiplayer set to true
     this.multiplayerService.stateInfo$.subscribe((res) => {
       if (res.ready) {
@@ -72,4 +85,11 @@ export class GameIntermediateResultFooterComponent implements OnInit {
     }
     return 'button-container';
   }
+
+  startAnimation() {
+    setTimeout(() => {
+      this.progressionButton = 'visible';
+      this.buttonsAreDisabled = false;
+    }, 800);
+  };
 }

@@ -6,7 +6,7 @@ import { routes as r } from './shared/models/routes';
 import { GameResultComponent } from './game/game-result/game-result.component';
 import { GameDrawComponent } from './game/game-draw/game-draw.component';
 import { AdminComponent } from './admin/admin.component';
-import { InfoComponent } from './admin/info/info.component';
+import { InfoPageComponent } from './admin/info-page/info-page.component';
 import { authGuard } from './admin/auth-guard';
 import { MultiplayerComponent } from './game/game-multiplayer/multiplayer.component';
 
@@ -48,7 +48,7 @@ export const routes: Routes = [
   },
   {
     path: 'admin/info',
-    component: InfoComponent,
+    component: InfoPageComponent,
     canActivate: [authGuard],
   },
 ];

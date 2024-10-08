@@ -92,8 +92,8 @@ export class GameWordToDrawComponent implements OnInit, OnDestroy {
       if (this.drawingService.gameHasStarted) {
         this.subscriptions.add(
           this.drawingService.getLabel().subscribe({
-            next: (res) => {
-              this.label = res.label;
+            next: () => {
+              this.label = this.drawingService.label;
               this.loading = false;
             },
             error: (error) => {
