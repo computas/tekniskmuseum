@@ -1,3 +1,5 @@
-<div>
-    <canvasjs-chart [options]="chartOptions" [styles]="{width: '60%', height:'200px'}"></canvasjs-chart>    
+<div class="chart-container">
+    @if (render) {
+        <canvasjs-chart [options]="chartOptions" class="canvasjs-chart"></canvasjs-chart>    
+    }
 </div>    

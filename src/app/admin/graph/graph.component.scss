@@ -1,4 +1,21 @@
-.canvasjs-chart-credit
-{
-    display: none !important;
+.chart-container {
+    justify-content: center; /* Center horizontally */
+    align-items: center; /* Center vertically */
+    margin: 20px 0; /* Add some vertical margin */
+    width: 100%; /* Full width */
+    display: flex;
 }
+
+.canvasjs-chart {
+    width: 90%; /* Default to 60% width */
+    height: 100px; /* Set height */
+    position: relative;
+}
+
+@media (max-width: 768px) {
+    .canvasjs-chart {
+        width: 90%; /* Increase width on smaller screens */
+    }
+}
+
+.canvasjs-chart-container>canvas:first-of-type { position: relative !important; }

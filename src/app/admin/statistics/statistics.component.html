@@ -28,6 +28,9 @@
           <h2>Statistikk for {{ selectedYear }}</h2>
           }
           <p>Totalt antall spill: {{ scoreCount }}</p>
+
+          <graph-component [year]="selectedYear"></graph-component>
+
       </div>
       }
 

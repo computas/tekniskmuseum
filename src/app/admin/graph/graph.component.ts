@@ -1,66 +1,95 @@
-/* app.component.ts */
-import { Component } from '@angular/core';
+import { Component, Input, OnChanges, OnDestroy } from '@angular/core';
+import { CanvasJSAngularChartsModule } from '@canvasjs/angular-charts';
+import { HttpClient } from '@angular/common/http';
+import { Observable } from 'rxjs';
+import { endpoints } from '@/app/shared/models/endpoints';
 import { RouterOutlet } from '@angular/router';
 import { CommonModule } from '@angular/common';
-import { CanvasJSAngularChartsModule } from '@canvasjs/angular-charts';
- 
+
 @Component({
   selector: 'graph-component',
   standalone: true,
   imports: [RouterOutlet, CommonModule, CanvasJSAngularChartsModule],
   templateUrl: './graph.component.html',
-  styleUrl: './graph.component.scss',
+  styleUrls: ['./graph.component.scss'],
 })
-export class GraphComponent {
-  chartOptions = {
-		animationEnabled: true,
-		theme: "light2",
-		title: {
-			text: "Antall spilte spill"
-		},
-		axisX: {
-			valueFormatString: "MMM",
-			intervalType: "month",
-			interval: 1
-		},
-		axisY: {
-			title: "Antall spilte spill",
-		  suffix: ""
-		},
-		toolTip: {
-			shared: true
-		},
-		legend: {
-			cursor: "pointer",
-			itemclick: function(e: any){
-				if (typeof(e.dataSeries.visible) === "undefined" || e.dataSeries.visible) {
-					e.dataSeries.visible = false;
-				} else{
-					e.dataSeries.visible = true;
-				}
-				e.chart.render();
-			}
-		},
-		data: [
-		{
-			type: "line",
-			name: "Maximum",
-			showInLegend: true,
-			yValueFormatString: "#,###°F",
-			dataPoints: [
-				{ x: new Date(2021, 0, 1), y: 40 },
-				{ x: new Date(2021, 1, 1), y: 42 },
-				{ x: new Date(2021, 2, 1), y: 50 },
-				{ x: new Date(2021, 3, 1), y: 62 },
-				{ x: new Date(2021, 4, 1), y: 72 },
-				{ x: new Date(2021, 5, 1), y: 80 },
-				{ x: new Date(2021, 6, 1), y: 85 },
-				{ x: new Date(2021, 7, 1), y: 84 },
-				{ x: new Date(2021, 8, 1), y: 76 },
-				{ x: new Date(2021, 9, 1), y: 64 },
-				{ x: new Date(2021, 10, 1), y: 54 },
-				{ x: new Date(2021, 11, 1), y: 44 }
-			]
-		}]
-	}	
-}     
+export class GraphComponent implements OnChanges, OnDestroy {
+  @Input() year: string = ''; 
+  data: any;
+  render: boolean = false;
+  chartOptions: any = {
+    animationEnabled: true,
+    theme: "light2",
+    title: {
+      text: "Antall spilte spill"
+    },
+    axisX: {
+      valueFormatString: "MMM",
+      intervalType: "month",
+      interval: 1
+    },
+    axisY: {
+      title: "Antall spilte spill",
+      suffix: ""
+    },
+    toolTip: {
+      shared: true
+    },
+    legend: {
+      cursor: "pointer",
+      itemclick: function (e: any) {
+        e.dataSeries.visible = typeof e.dataSeries.visible === "undefined" || e.dataSeries.visible ? false : true;
+      }
+    },
+    data: [{
+      type: "line",
+      name: "Antall spill",
+      showInLegend: true,
+      dataPoints: [] // Initialize with empty dataPoints
+    }]
+  };
+
+  constructor(private http: HttpClient) {}
+
+  ngOnChanges() {
+    // Triggered when the input property `year` changes
+    if (this.year) {
+      this.getDataList().subscribe({
+        next: (res) => {
+          this.data = res;
+          this.updateChartData();
+		  this.render = true;
+        },
+        error: (err) => {
+          console.error('Failed to get data from backend', err);
+        }
+      });
+    }
+  }
+
+  updateChartData() {
+	const dataPoints = Object.entries(this.data).map(([month, scoreCount]) => ({
+		x: new Date(+this.year, Number(month) - 1, 1), // Month is zero-based in JavaScript dates
+		y: scoreCount
+	  }));
+
+	// Update chart options with new dataPoints
+	this.chartOptions.data[0].dataPoints = dataPoints;
+
+	console.log('Updated Chart Options:', this.chartOptions.data[0].dataPoints);
+	
+  }
+
+  getDataList(): Observable<any> {
+    // Fetch data based on the selected year
+    return this.http.get<any>(
+      `${endpoints.TEKNISKBACKEND}/${endpoints.ADMIN}/${endpoints.GETSCORESPERMONTH}?year=${this.year}`
+    );
+  }
+
+  ngOnDestroy(): void {
+	this.render = false;
+  }
+
+
+}

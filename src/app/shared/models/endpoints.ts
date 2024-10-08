@@ -19,5 +19,6 @@ export const endpoints = {
   LOGGER: 'logging',
   GETSTATISTICSMONTH: 'getStatisticsPerMonth',
   GETSTATISTICSYEAR: 'getStatisticsPerYear',
-  GETYEARS: 'getAvailableYears'
+  GETYEARS: 'getAvailableYears',
+  GETSCORESPERMONTH: 'getScoresPerMonth'
 };

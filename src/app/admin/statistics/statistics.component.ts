@@ -3,6 +3,7 @@ import { Component, Inject, signal, ViewEncapsulation } from '@angular/core';
 import { MatButtonToggleModule } from '@angular/material/button-toggle';
 import { ToggleComponent } from '../toggle/toggle.component';
 import { SelectMonthComponent } from '../select-month/select-month.component';
+import { GraphComponent } from '../graph/graph.component';
 import * as _moment from 'moment';
 // tslint:disable-next-line:no-duplicate-imports
 import { default as _rollupMoment, Moment } from 'moment';
@@ -32,7 +33,8 @@ export const MY_FORMATS = {
         MatButtonToggleModule,
         ToggleComponent,
         SelectYearComponent, 
-        SelectMonthComponent
+        SelectMonthComponent,
+        GraphComponent
     ],
 })
 
