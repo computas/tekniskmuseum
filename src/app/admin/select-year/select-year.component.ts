@@ -15,7 +15,7 @@ interface Year {
  * @title Basic select
  */
 @Component({
-    selector: 'select-year-component',
+    selector: 'app-select-year-component',
     templateUrl: 'select-year.component.html',
     standalone: true,
     imports: [MatFormFieldModule, MatSelectModule, MatInputModule, FormsModule],
@@ -23,7 +23,7 @@ interface Year {
 export class SelectYearComponent implements OnInit {
     constructor(private http: HttpClient) {}
     years: Year[] = [];
-    selectedValue: string = "";
+    selectedValue = "";
 
     @Output() valueSelected: EventEmitter<string> = new EventEmitter<string>(); 
 

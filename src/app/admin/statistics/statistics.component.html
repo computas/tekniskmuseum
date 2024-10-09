@@ -6,11 +6,11 @@
       <div class="form-section">
           <!-- Month/Year Selection Section -->
           @if(selected === "month") {
-            <select-month-component (valueSelected)="onMonthSelected($event)"></select-month-component>
+            <app-select-month-component (valueSelected)="onMonthSelected($event)"></app-select-month-component>
           }
           <!-- Year Selection Section -->
           @else {
-          <select-year-component (valueSelected)="onYearSelected($event)"></select-year-component>
+          <app-select-year-component (valueSelected)="onYearSelected($event)"></app-select-year-component>
           }
       </div>
 
@@ -21,15 +21,18 @@
       @if (dataFetched()) {
       <div class="statistics-result">
           <br>
-          @if (selected == "month") {
+          @if (selected === "month") {
           <h2>Statistikk for {{ display_month }} {{ year }}</h2>
           }
           @else {
           <h2>Statistikk for {{ selectedYear }}</h2>
           }
           <p>Totalt antall spill: {{ scoreCount }}</p>
+          <p></p>
 
-          <graph-component [year]="selectedYear"></graph-component>
+          @if (selected === "year") {
+            <app-graph-component [year]="selectedYear"></app-graph-component>
+          }
 
       </div>
       }

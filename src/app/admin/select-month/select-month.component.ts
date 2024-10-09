@@ -22,7 +22,7 @@ export const MY_FORMATS = {
 };
 
 @Component({
-    selector: 'select-month-component',
+    selector: 'app-select-month-component',
     templateUrl: './select-month.component.html',
     styleUrls: ['./select-month.component.scss'],
     providers: [
@@ -43,20 +43,19 @@ export class SelectMonthComponent implements OnInit {
     scoreCount: number | null = null; 
     date = new FormControl();
     dataFetched = signal<boolean>(false);
-    display_month: string = "";
-    month: string = "";
-    year: string = "";
-    selected: string = "month";
-    selectedYear: string = "";
+    display_month = "";
+    month = "";
+    year = "";
+    selected = "month";
+    selectedYear = "";
 
     @Output() valueSelected: EventEmitter<string[]> = new EventEmitter<string[]>(); 
 
     constructor(
-        // public dialogRef: MatDialogRef<ScoreComponent>,
         @Inject(MAT_DIALOG_DATA) public data: string) { }
 
     ngOnInit(): void {
-        this.date.valueChanges.subscribe(selectedDate => {
+        this.date.valueChanges.subscribe(() => {
             this.handleDateChange();
         })
     }
@@ -78,7 +77,6 @@ export class SelectMonthComponent implements OnInit {
 
         this.valueSelected.emit([this.month, this.display_month, this.year]);
 
-        console.log(this.month, this.year)
     }
 
 }
