@@ -40,7 +40,6 @@ export class WrongGuessComponent implements OnInit, OnDestroy {
   ngOnInit(): void {
     this.label = this.drawingService.lastResult.word;
     this.updateAiGuess(this.drawingService.sortedCertainty);
-
     if (this.gameStateService.isSingleplayer()) {
       this.exampleDrawings = this.exampleDrawingService.getExampleDrawings(2);
       this.getSingleplayerExamples();
@@ -56,7 +55,6 @@ export class WrongGuessComponent implements OnInit, OnDestroy {
 
   getSingleplayerExamples() {
     if (this.guess === "") {
-      console.log("helo")
       return
     }
     this.aiGuessSubscription.add(
