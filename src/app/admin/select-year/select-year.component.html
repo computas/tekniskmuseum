@@ -1,0 +1,11 @@
+<div class="year-selection-container">
+  <h2>Velg år</h2>
+  <mat-form-field class="year-selection-field">
+      <mat-label>År</mat-label>
+      <mat-select [(ngModel)]="selectedValue" (selectionChange)="onSelectionChange()">
+          @for (year of years; track year) {
+          <mat-option [value]="year.value">{{year.value}}</mat-option>
+          }
+      </mat-select>
+  </mat-form-field>
+</div>

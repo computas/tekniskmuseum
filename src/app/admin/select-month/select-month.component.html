@@ -1,0 +1,13 @@
+<!-- Month/Year Selection Section -->
+<div class="year-selection-container">
+    <h2>Velg måned og år</h2>
+    <mat-form-field>
+        <mat-label>Måned og år</mat-label>
+        <input matInput [matDatepicker]="dp" [formControl]="date">
+        <mat-hint>MM/YYYY</mat-hint>
+        <mat-datepicker-toggle matIconSuffix [for]="dp"></mat-datepicker-toggle>
+        <mat-datepicker #dp startView="multi-year" (monthSelected)="setMonthAndYear($event, dp)"
+            panelClass="month-picker">
+        </mat-datepicker>
+    </mat-form-field>
+</div>

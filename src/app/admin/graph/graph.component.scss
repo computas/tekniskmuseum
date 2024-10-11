@@ -1,0 +1,22 @@
+.chart-container {
+    justify-content: center; /* Center horizontally */
+    align-items: center; /* Center vertically */
+    margin: 20px 0; /* Add some vertical margin */
+    width: 100%; /* Full width */
+    display: flex;
+    height: 500px;
+}
+
+.canvasjs-chart {
+    width: 90%; /* Default to 60% width */
+    height: 100px; /* Set height */
+    position: relative;
+}
+
+@media (max-width: 768px) {
+    .canvasjs-chart {
+        width: 90%; /* Increase width on smaller screens */
+    }
+}
+
+.canvasjs-chart>canvas:first-of-type { position: relative !important; }

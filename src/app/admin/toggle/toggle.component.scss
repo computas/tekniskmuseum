@@ -1,0 +1,35 @@
+.toggle-container {
+  display: flex;
+  justify-content: center;
+  padding: 20px;
+  margin-bottom: 20px;
+}
+
+mat-button-toggle-group {
+  display: flex;
+  gap: 10px; /* Adds space between the toggle buttons */
+}
+
+mat-button-toggle {
+  background-color: #f5f5f5;
+  color: #333;
+  padding: 8px 16px;
+  font-size: 1rem;
+  border-radius: 5px;
+  transition: background-color 0.3s ease, color 0.3s ease;
+  border: 1px solid #ccc;
+}
+
+mat-button-toggle:hover {
+  background-color: #e0e0e0;
+}
+
+mat-button-toggle.mat-button-toggle-checked {
+  background-color: #1976d2; /* Active background */
+  color: white; /* Active text color */
+  border-color: #1976d2; /* Active border color */
+}
+
+.mat-button-toggle-group-appearance-legacy .mat-button-toggle {
+  margin: 0;
+}
