@@ -102,4 +102,22 @@ export class LoginService {
       }
     );
   }
+
+  getStatisticsPerMonth(month: string, year: string): Observable<number> {
+    return this.http.get<number>(
+      `${endpoints.TEKNISKBACKEND}/${endpoints.ADMIN}/${endpoints.GETSTATISTICSMONTH}?month=${month}&year=${year}`,
+      {
+        withCredentials: true,
+      }
+    );
+    }
+
+  getStatisticsPerYear(year: string): Observable<number> {
+    return this.http.get<number>(
+      `${endpoints.TEKNISKBACKEND}/${endpoints.ADMIN}/${endpoints.GETSTATISTICSYEAR}?year=${year}`,
+      {
+        withCredentials: true,
+      }
+    );
+    }
 }

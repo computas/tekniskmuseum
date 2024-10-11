@@ -3,6 +3,7 @@ import { MatDialog } from '@angular/material/dialog';
 import { DialogComponent } from '../dialog/dialog.component';
 import { ErrorLogDialogComponent } from '../error-dialog/error-dialog.component';
 import { LogData } from '@/app/shared/models/backend-interfaces';
+import { StatisticsComponent } from '../statistics/statistics.component';
 
 @Component({
   selector: 'app-info-dialog',
@@ -23,12 +24,13 @@ export class InfoDialogComponent {
     });
   }
 
-openErrorLog(logDataArray: LogData[]) {
-    
-  this.dialog.open(ErrorLogDialogComponent, {
-    data: logDataArray,
-  });
-}
-  
-}
+  openErrorLog(logDataArray: LogData[]) {
+    this.dialog.open(ErrorLogDialogComponent, {
+      data: logDataArray,
+    });
+  }
 
+  openStatistics() {
+    this.dialog.open(StatisticsComponent);
+  }
+}

@@ -2,18 +2,21 @@ import { Component } from '@angular/core';
 import { Router } from '@angular/router';
 import { LoginService } from '../login.service';
 import { MatSnackBar } from '@angular/material/snack-bar';
-import { InfoDialogComponent } from '../info-dialog/info-dialog.component';
-import { PairingService } from '../../game/services/pairing.service';
 import { MatButton } from '@angular/material/button';
 import { LogData, StatusData } from '@/app/shared/models/backend-interfaces';
 import { LoggingService } from '../../game/services/logging.service';
+import { GraphComponent } from '../graph/graph.component';
+import { StatisticsComponent } from '../statistics/statistics.component';
+import { MatDialog } from '@angular/material/dialog';
+import { DialogComponent } from '../dialog/dialog.component';
+import { ErrorLogDialogComponent } from '../error-dialog/error-dialog.component';
 
 @Component({
   selector: 'app-info',
   templateUrl: './info-page.component.html',
   styleUrls: ['./info-page.component.scss'],
   standalone: true,
-  imports: [MatButton],
+  imports: [MatButton, GraphComponent],
 })
 export class InfoPageComponent {
   datasetString = 'Nullstill treningssett til originalen';
@@ -30,10 +33,10 @@ export class InfoPageComponent {
     private router: Router,
     private loginService: LoginService,
     private _snackBar: MatSnackBar,
-    private _dialog: InfoDialogComponent,
-    private pairing: PairingService,
-    private loggingService: LoggingService
+    private dialog: MatDialog, 
+    private loggingService: LoggingService,
   ) {}
+
   
   clearHighScore() {
     let msg = '';
@@ -89,7 +92,9 @@ export class InfoPageComponent {
         const name = res.CV_iteration_name;
         const time = res.CV_time_created;
         const count = res.BLOB_image_count;
-        this._dialog.openDialog(name, time, count.toString());
+        this.dialog.open(DialogComponent, {
+          data: { iterationName: name, timeCreated: time, imageCount: count.toString() },
+        });
       },
       () => {
         this.openSnackBar(this.errorMsg);
@@ -97,10 +102,14 @@ export class InfoPageComponent {
     );
   }
 
+  getStatistics() {
+    this.dialog.open(StatisticsComponent);
+  }
+
   getLogger() {
     this.loginService.getLogger().subscribe(
       (res: LogData[]) => { 
-        this._dialog.openErrorLog(res)
+        this.dialog.open(ErrorLogDialogComponent, {data: res});
       },
       (error) => {
         this.openSnackBar(error);
@@ -118,7 +127,7 @@ export class InfoPageComponent {
       message: str.slice(80,115),
     }))
     
-    this._dialog.openErrorLog(formatted_logs)
+    this.dialog.open(ErrorLogDialogComponent, {data: formatted_logs});
      
   } 
 
