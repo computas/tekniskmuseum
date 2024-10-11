@@ -1,4 +1,4 @@
-<div mat-dialog-content class="statistics">
+<div mat-dialog-content class="content">
   <div class="statistics-content">
       <!-- Toggle component to switch between month and year -->
       <app-toggle (toggleChanged)="onToggleChanged($event)"></app-toggle>
@@ -12,10 +12,13 @@
           @else {
           <app-select-year-component (valueSelected)="onYearSelected($event)"></app-select-year-component>
           }
+
+
+          <button mat-button class="confirm-btn" (click)="confirmSelection()">Hent statistikk</button>
+
       </div>
 
       <!-- Confirm Button -->
-      <button mat-button class="confirm-btn" (click)="confirmSelection()">Hent statistikk</button>
 
       <!-- Display Fetched Data -->
       @if (dataFetched()) {
@@ -28,7 +31,7 @@
           <h2>Statistikk for {{ selectedYear }}</h2>
           }
           <p>Totalt antall spill: {{ scoreCount }}</p>
-          <p></p>
+          <br>
 
           @if (selected === "year") {
             <app-graph-component [year]="selectedYear"></app-graph-component>
@@ -38,6 +41,6 @@
       }
 
       <!-- Close Button -->
-      <button mat-button mat-dialog-close class="close-btn" (click)="closeStatistics()">Lukk</button>
+      <!-- <button mat-button mat-dialog-close class="close-btn" (click)="closeStatistics()">Lukk</button> -->
   </div>
 </div>

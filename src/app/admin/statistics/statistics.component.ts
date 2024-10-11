@@ -1,5 +1,5 @@
-import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
-import { Component, Inject, signal, ViewEncapsulation } from '@angular/core';
+import { MAT_DIALOG_DATA, MatDialogModule, MatDialogRef } from '@angular/material/dialog';
+import { Component, Inject, OnDestroy, signal } from '@angular/core';
 import { MatButtonToggleModule } from '@angular/material/button-toggle';
 import { ToggleComponent } from '../toggle/toggle.component';
 import { SelectMonthComponent } from '../select-month/select-month.component';
@@ -9,22 +9,23 @@ import { GraphComponent } from '../graph/graph.component';
 import { LoginService } from '../login.service';
 import { SelectYearComponent } from '../select-year/select-year.component';
 
+
 @Component({
     selector: 'app-score',
     templateUrl: './statistics.component.html',
     styleUrls: ['./statistics.component.scss'],
-    encapsulation: ViewEncapsulation.None,
     standalone: true,
     imports: [
         MatButtonToggleModule,
         ToggleComponent,
         SelectYearComponent, 
         SelectMonthComponent,
-        GraphComponent
+        GraphComponent,
+        MatDialogModule
     ],
 })
 
-export class StatisticsComponent {
+export class StatisticsComponent implements OnDestroy {
     scoreCount: number | null = null; 
     dataFetched = signal<boolean>(false);
     display_month = "";
@@ -37,6 +38,7 @@ export class StatisticsComponent {
         public dialogRef: MatDialogRef<StatisticsComponent>,
         private loginService: LoginService,
         @Inject(MAT_DIALOG_DATA) public data: string) { }
+    
 
     confirmSelection() {
         if (this.selected === "month") {
@@ -64,7 +66,7 @@ export class StatisticsComponent {
         }
       }
 
-    closeStatistics(): void {
+    closeDialog(): void {
         this.dialogRef.close();
     }
 
@@ -83,4 +85,9 @@ export class StatisticsComponent {
         this.display_month = date[1]
         this.year = date[2];
     }
+
+    ngOnDestroy(): void {
+        this.dialogRef.close();
+    }
+    
 }

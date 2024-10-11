@@ -31,8 +31,6 @@ export class InfoDialogComponent {
   }
 
   openStatistics() {
-    this.dialog.open(StatisticsComponent, {
-      data: String,
-    });
+    this.dialog.open(StatisticsComponent);
   }
 }
