@@ -1,27 +1,27 @@
 import { Component, OnInit, OnDestroy, inject } from '@angular/core';
-import { MultiplayerService } from '../game/services/multiplayer.service';
-import { DrawingService } from '../game/services/drawing.service';
+import { MultiplayerService } from '../services/multiplayer.service';
+import { DrawingService } from '../services/drawing.service';
 import { Router, RouterLink, RouterLinkActive } from '@angular/router';
 import { MatIcon } from '@angular/material/icon';
 import { MatButton } from '@angular/material/button';
-import { TranslationService } from '../core/translation.service';
-import { TranslatePipe } from '../core/translation.pipe';
+import { TranslationService } from '../../core/translation.service';
+import { TranslatePipe } from '../../core/translation.pipe';
 import { Observable, Subject, takeUntil } from 'rxjs';
 import { CommonModule } from '@angular/common';
-import { GAMESTATE } from '../shared/models/interfaces';
-import { GameStateService } from '../game/services/game-state-service';
-import { SupportedLanguages } from '../shared/models/interfaces';
+import { GAMESTATE } from '../../shared/models/interfaces';
+import { GameStateService } from '../services/game-state-service';
+import { SupportedLanguages } from '../../shared/models/interfaces';
 import { ArrowAlignment, PointerSide } from '@/app/shared/models/interfaces';
 import { trigger, state, style, animate, transition } from '@angular/animations';
-import { SpeechBubbleComponent } from '../game/shared-components/speech-bubble/speech-bubble.component';
-import { CustomColorsIO } from '../shared/customColors';
-import { CustomButtonComponent } from '../game/shared-components/custom-button/custom-button.component';
+import { SpeechBubbleComponent } from '../shared-components/speech-bubble/speech-bubble.component';
+import { CustomColorsIO } from '../../shared/customColors';
+import { CustomButtonComponent } from '../shared-components/custom-button/custom-button.component';
 import { ButtonStyleClass } from '@/app/shared/buttonStyles';
 
 @Component({
-  selector: 'app-welcome',
-  templateUrl: './welcome.component.html',
-  styleUrls: ['./welcome.component.scss'],
+  selector: 'app-game-welcome',
+  templateUrl: './game-welcome.component.html',
+  styleUrls: ['./game-welcome.component.scss'],
   standalone: true,
   imports: [
     RouterLink,
@@ -53,7 +53,7 @@ import { ButtonStyleClass } from '@/app/shared/buttonStyles';
     ]),
   ],
 })
-export class WelcomeComponent implements OnInit, OnDestroy {
+export class GameWelcomeComponent implements OnInit, OnDestroy {
   currentLang$: Observable<string>;
   private destroy$ = new Subject<void>();
   private animationTimeouts: NodeJS.Timeout[] = [];
