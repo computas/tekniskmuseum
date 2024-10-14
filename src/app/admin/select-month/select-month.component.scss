@@ -1,0 +1,21 @@
+.example-picker .mat-calendar-period-button {
+    pointer-events: none;
+}
+
+.example-picker .mat-calendar-arrow {
+    display: none;
+}
+
+mat-form-field {
+    width: 100%;
+    max-width: 300px;
+    margin: 0 auto;
+}
+
+.form-section {
+    width: 100%;
+    margin-bottom: 20px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}

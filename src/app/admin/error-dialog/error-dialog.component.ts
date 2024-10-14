@@ -13,8 +13,4 @@ export class ErrorLogDialogComponent {
 
   logs = this.data
 
-  closeDialog(): void {
-    this.dialogRef.close();
-  }
-
 }
