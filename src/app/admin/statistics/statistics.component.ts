@@ -33,6 +33,7 @@ export class StatisticsComponent implements OnDestroy {
     year= "";
     selected = "month";
     selectedYear = "";
+    errorMessage = "";
 
     constructor(
         public dialogRef: MatDialogRef<StatisticsComponent>,
@@ -40,31 +41,40 @@ export class StatisticsComponent implements OnDestroy {
         @Inject(MAT_DIALOG_DATA) public data: string) { }
     
 
-    confirmSelection() {
-        if (this.selected === "month") {
-            this.loginService.getStatisticsPerMonth(this.month, this.year).subscribe({
-                next: (res) => {
-                    this.dataFetched.set(true);
-                    this.scoreCount = res;
+        confirmSelection() {
+            this.errorMessage = ""; // Reset error message
             
-                },
-                error: (err) => {
-                console.error('Failed to fetch statistics', err);
+            if (this.selected === "month" && this.month !== "") {
+                this.loginService.getStatisticsPerMonth(this.month, this.year).subscribe({
+                    next: (res) => {
+                        this.dataFetched.set(true);
+                        this.scoreCount = res;
+                        this.month = "";    
+                        this.year = "";
+                    },
+                    error: (err) => {
+                        console.error('Failed to fetch statistics', err);
+                    }
+                });
+
+            } else if (this.selected  === "year" && this.selectedYear !== "") {
+                this.loginService.getStatisticsPerYear(this.selectedYear).subscribe({
+                    next: (res) => {
+                        this.dataFetched.set(true);
+                        this.scoreCount = res;
+                        },
+                    error: (err) => {
+                        console.error('Failed to fetch statistics', err);
+                    }
+                }); 
+            } else {
+                if (this.selected === "month") {
+                    this.errorMessage = "Vennligst velg en dato";
+                } else if (this.selected === "year") {
+                    this.errorMessage = "Vennligst velg et år";
                 }
-            });
-        } else {
-            this.loginService.getStatisticsPerYear(this.selectedYear).subscribe({
-                next: (res) => {
-                    this.dataFetched.set(true);
-                    this.scoreCount = res;
-            
-                },
-                error: (err) => {
-                console.error('Failed to fetch statistics', err);
-                }
-            });
+            }
         }
-      }
 
     closeDialog(): void {
         this.dialogRef.close();
@@ -73,6 +83,7 @@ export class StatisticsComponent implements OnDestroy {
     onToggleChanged(value: string) {
         this.selected = value;
         this.dataFetched.set(false);
+        this.errorMessage = "";
       }
 
     onYearSelected(year: string) {
@@ -84,7 +95,7 @@ export class StatisticsComponent implements OnDestroy {
         this.month = date[0];
         this.display_month = date[1]
         this.year = date[2];
-    }
+  }
 
     ngOnDestroy(): void {
         this.dialogRef.close();

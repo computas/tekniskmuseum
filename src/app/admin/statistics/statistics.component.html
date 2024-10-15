@@ -13,12 +13,15 @@
           <app-select-year-component (valueSelected)="onYearSelected($event)"></app-select-year-component>
           }
 
-
+          <!-- Confirm Button -->
           <button mat-button class="confirm-btn" (click)="confirmSelection()">Hent statistikk</button>
 
-      </div>
+          <div> @if (errorMessage) {
+            <br>
+            <p>{{errorMessage}}</p>
+          }</div>
 
-      <!-- Confirm Button -->
+      </div>
 
       <!-- Display Fetched Data -->
       @if (dataFetched()) {
@@ -39,8 +42,5 @@
 
       </div>
       }
-
-      <!-- Close Button -->
-      <!-- <button mat-button mat-dialog-close class="close-btn" (click)="closeStatistics()">Lukk</button> -->
   </div>
 </div>
