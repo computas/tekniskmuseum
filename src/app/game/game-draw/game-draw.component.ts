@@ -26,6 +26,9 @@ import { SpeechBubbleComponent } from '../shared-components/speech-bubble/speech
 import { OAvatarComponent } from '@/assets/avatars/o-avatar/o-avatar.component';
 import { IAvatarComponent } from '@/assets/avatars/i-avatar/i-avatar.component';
 import { ViewChild } from '@angular/core';
+import { Router } from '@angular/router';
+import { routes } from '../../shared/models/routes';
+import { MatSnackBar } from '@angular/material/snack-bar';
 
 @Component({
   selector: 'app-drawing',
@@ -105,7 +108,9 @@ export class GameDrawComponent implements OnInit, OnDestroy {
     private drawingService: DrawingService,
     private imageService: ImageService,
     private soundService: SoundService,
-    private translationService: TranslationService
+    private translationService: TranslationService,
+    private router: Router,
+    private snackBar: MatSnackBar
   ) {}
 
   ngOnInit(): void {
@@ -319,6 +324,10 @@ export class GameDrawComponent implements OnInit, OnDestroy {
     });
   }
 
+  goHome() {
+    this.router.navigate([routes.LANDING]);
+  }
+
   addTimeUsed() {
     this.secondsUsed++;
     this.drawingService.setSecondsUsed(this.secondsUsed);
@@ -350,34 +359,57 @@ export class GameDrawComponent implements OnInit, OnDestroy {
 
   handleSinglePlayerClassification(dataUrl: string, croppedCoordinates: number[]) {
     const formData: FormData = this.createFormData(dataUrl);
-    this.drawingService.classify(formData).subscribe((res) => {
-      const sortedCertaintyArr = this.sortOnCertainty(res);
-      this.updateAiGuess(sortedCertaintyArr);
-      if (this.drawingService.roundIsDone(res.hasWon, res.gameState)) {
-        this.gameStateService.goToPage(GAMESTATE.intermediateResult);
-        this.drawingService.sortedCertainty = sortedCertaintyArr;
-        this.soundService.playResultSound(res.hasWon);
-        const score = this.score > 0 ? this.score : 0;
-        this.drawingService.lastResult.score = Math.round(score);
-        this.imageService
-          .resize(this.canvas.nativeElement.toDataURL('image/png'), croppedCoordinates, this.resultImageSize)
-          .subscribe({
-            next: (dataUrlHighRes) => {
-              this.drawingService.lastResult.imageData = dataUrlHighRes;
-            },
-          });
-      } else {
-        this.imageService
-          .resize(this.canvas.nativeElement.toDataURL('image/png'), croppedCoordinates, this.resultImageSize)
-          .subscribe({
-            next: (dataUrlHighRes) => {
-              if (this.result) {
-                this.result.imageData = dataUrlHighRes;
-              }
-            },
-          });
-      }
+    this.drawingService.classify(formData).subscribe({
+      next: (res) => {
+        const sortedCertaintyArr = this.sortOnCertainty(res);
+        this.updateAiGuess(sortedCertaintyArr);
+    
+        if (this.drawingService.roundIsDone(res.hasWon, res.gameState)) {
+          this.gameStateService.goToPage(GAMESTATE.intermediateResult);
+          this.drawingService.sortedCertainty = sortedCertaintyArr;
+          this.soundService.playResultSound(res.hasWon);
+          const score = this.score > 0 ? this.score : 0;
+          this.drawingService.lastResult.score = Math.round(score);
+          this.imageService
+            .resize(this.canvas.nativeElement.toDataURL('image/png'), croppedCoordinates, this.resultImageSize)
+            .subscribe({
+              next: (dataUrlHighRes) => {
+                this.drawingService.lastResult.imageData = dataUrlHighRes;
+              },
+            });
+        } else {
+          this.imageService
+            .resize(this.canvas.nativeElement.toDataURL('image/png'), croppedCoordinates, this.resultImageSize)
+            .subscribe({
+              next: (dataUrlHighRes) => {
+                if (this.result) {
+                  this.result.imageData = dataUrlHighRes;
+                }
+              },
+              error: (error) => {
+                console.log("error");
+                console.error("An error occurred while classifying the image:", error);
+                this.snackBar.open('Oops, noe gikk galt. Vennligst prøv igjen senere.', 'Close', {
+                  duration: 3000,
+                });
+                setTimeout(() => {
+                  this.goHome();
+                }, 5000);
+              },
+            });
+        }
+      },
+      error: (err) => {
+        console.log("Error subscribing to classify:", err);  // Log the error when subscribing fails
+        this.snackBar.open('Oops, noe gikk galt. Vennligst prøv igjen senere.', 'Close', {
+          duration: 3000,
+        });
+        setTimeout(() => {
+          this.goHome();
+        }, 5000);
+      },
     });
+    
   }
 
   classify(isMultiplayer = false) {
